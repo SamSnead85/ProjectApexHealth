@@ -64,6 +64,9 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'documents', label: 'Document AI', icon: <Brain size={20} />, path: '/admin/document-intelligence' },
                 { id: 'member360', label: 'Member 360°', icon: <Users size={20} />, path: '/admin/member-360' },
                 { id: 'regulatory', label: 'Regulatory Hub', icon: <Landmark size={20} />, path: '/admin/regulatory-hub' },
+                { id: 'claims-prediction', label: 'Claims Prediction', icon: <Activity size={20} />, path: '/admin/claims-prediction' },
+                { id: 'fraud-detection', label: 'Fraud Detection', icon: <Shield size={20} />, path: '/admin/fraud-detection' },
+                { id: 'benefit-calc', label: 'Benefit Calculator', icon: <CreditCard size={20} />, path: '/admin/benefit-calculator' },
             ]
         },
         {

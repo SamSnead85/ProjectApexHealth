@@ -95,6 +95,9 @@ import FiduciaryDashboard from './pages/FiduciaryDashboard'
 import ClaimsPrediction from './pages/ClaimsPrediction'
 import FraudDetection from './pages/FraudDetection'
 import BenefitCalculator from './pages/BenefitCalculator'
+// Analytics Modules
+import ValueBasedCare from './pages/ValueBasedCare'
+import ProviderPerformance from './pages/ProviderPerformance'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -161,6 +164,13 @@ function App() {
         }
         if (activePath.includes('/benefit-calculator') || activePath.includes('/cost-calc') || activePath.includes('/estimator')) {
             return <BenefitCalculator />
+        }
+        // Analytics Modules
+        if (activePath.includes('/value-based-care') || activePath.includes('/vbc') || activePath.includes('/quality-measures')) {
+            return <ValueBasedCare />
+        }
+        if (activePath.includes('/provider-performance') || activePath.includes('/provider-scorecard') || activePath.includes('/provider-analytics')) {
+            return <ProviderPerformance />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
