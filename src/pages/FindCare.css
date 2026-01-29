@@ -1,0 +1,257 @@
+.find-care {
+    padding: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.find-care__header {
+    margin-bottom: var(--space-xl);
+}
+
+.find-care__title {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.find-care__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Search Section */
+.find-care__search-section {
+    margin-bottom: var(--space-xl);
+}
+
+.find-care__search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-md);
+}
+
+.find-care__search-input,
+.find-care__location-input {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--apex-steel);
+}
+
+.find-care__search-input {
+    flex: 1;
+}
+
+.find-care__search-input input,
+.find-care__location-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.find-care__search-input input::placeholder {
+    color: var(--apex-steel);
+}
+
+.find-care__search-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--glass-border);
+}
+
+.find-care__location-input {
+    min-width: 150px;
+}
+
+/* Filter Chips */
+.find-care__filters {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.find-care__filter-chip {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.find-care__filter-chip:hover {
+    color: var(--apex-silver);
+    border-color: var(--glass-border-hover);
+}
+
+.find-care__filter-chip--active {
+    color: var(--apex-obsidian);
+    background: var(--apex-teal);
+    border-color: var(--apex-teal);
+}
+
+/* Provider List */
+.find-care__providers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Provider Card */
+.find-care__provider {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.find-care__provider:hover {
+    border-color: var(--glass-border-hover);
+    background: var(--apex-obsidian-elevated);
+}
+
+/* Favorite Button */
+.find-care__favorite {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--apex-obsidian-elevated);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.find-care__favorite:hover {
+    border-color: var(--apex-teal-border);
+    color: var(--apex-teal);
+}
+
+.find-care__favorite--active {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+/* Provider Info */
+.find-care__provider-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.find-care__provider-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xs);
+}
+
+.find-care__provider-name {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.find-care__provider-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #FBBF24;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.find-care__review-count {
+    color: var(--apex-steel);
+    font-weight: 400;
+}
+
+.find-care__provider-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: var(--space-sm);
+}
+
+.find-care__specialty {
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+}
+
+.find-care__practice {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.find-care__provider-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.find-care__distance,
+.find-care__availability {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Provider Actions */
+.find-care__provider-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .find-care__search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .find-care__search-divider {
+        display: none;
+    }
+
+    .find-care__location-input {
+        min-width: auto;
+    }
+
+    .find-care__provider {
+        flex-direction: column;
+    }
+
+    .find-care__provider-actions {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .find-care__provider-actions button {
+        flex: 1;
+    }
+}

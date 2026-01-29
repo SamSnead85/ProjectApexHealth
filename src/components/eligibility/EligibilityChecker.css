@@ -1,0 +1,376 @@
+.eligibility-checker {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.eligibility-checker__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.eligibility-checker__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.eligibility-checker__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Search Card */
+.eligibility-checker__search-card {
+    margin-bottom: var(--space-xl);
+}
+
+.eligibility-checker__search-row {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.eligibility-checker__search-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.eligibility-checker__search-icon {
+    position: absolute;
+    left: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--apex-steel);
+}
+
+.eligibility-checker__search-input {
+    width: 100%;
+    padding: var(--space-md) var(--space-md) var(--space-md) 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    transition: all var(--transition-fast);
+}
+
+.eligibility-checker__search-input:focus {
+    outline: none;
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 3px rgba(0, 210, 190, 0.15);
+}
+
+.eligibility-checker__search-input::placeholder {
+    color: var(--apex-steel);
+}
+
+.eligibility-checker__search-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Loading State */
+.eligibility-checker__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-2xl);
+    color: var(--apex-steel);
+}
+
+.eligibility-checker__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--apex-teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Results */
+.eligibility-checker__results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Member Card */
+.eligibility-checker__member-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.eligibility-checker__member-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.eligibility-checker__member-avatar {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-purple) 100%);
+    border-radius: var(--radius-lg);
+    color: var(--apex-white);
+}
+
+.eligibility-checker__member-info {
+    flex: 1;
+}
+
+.eligibility-checker__member-info h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.eligibility-checker__member-id {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+/* Member Details */
+.eligibility-checker__member-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.eligibility-checker__detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.eligibility-checker__detail-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.eligibility-checker__detail-value {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.eligibility-checker__detail-row--warning .eligibility-checker__detail-value {
+    color: var(--apex-critical);
+}
+
+/* Transaction Info */
+.eligibility-checker__transaction-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.eligibility-checker__transaction-info button {
+    margin-left: auto;
+}
+
+/* Coverage Section */
+.eligibility-checker__coverage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.eligibility-checker__coverage-header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.eligibility-checker__coverage-header p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Category Tabs */
+.eligibility-checker__category-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-xs);
+    background: var(--apex-obsidian-glass);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.eligibility-checker__category-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.eligibility-checker__category-tab:hover {
+    color: var(--apex-silver);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.eligibility-checker__category-tab.active {
+    color: var(--apex-white);
+    background: var(--apex-teal);
+}
+
+/* Coverage Grid */
+.eligibility-checker__coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+.eligibility-checker__network-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.eligibility-checker__network-card h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.eligibility-checker__network-card--in h4 {
+    color: var(--apex-success);
+}
+
+.eligibility-checker__network-card--out h4 {
+    color: var(--apex-warning);
+}
+
+/* Benefit Bars */
+.eligibility-checker__benefit-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.eligibility-checker__benefit-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.eligibility-checker__progress-track {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.eligibility-checker__progress-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.eligibility-checker__progress-fill--teal {
+    background: linear-gradient(90deg, var(--apex-teal) 0%, var(--apex-teal-bright) 100%);
+}
+
+.eligibility-checker__progress-fill--purple {
+    background: linear-gradient(90deg, var(--apex-purple) 0%, var(--apex-purple-bright) 100%);
+}
+
+.eligibility-checker__progress-fill--orange {
+    background: linear-gradient(90deg, var(--apex-warning) 0%, #FFB347 100%);
+}
+
+.eligibility-checker__progress-fill--red {
+    background: linear-gradient(90deg, var(--apex-critical) 0%, #FF6B6B 100%);
+}
+
+/* Benefit Details */
+.eligibility-checker__benefit-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.eligibility-checker__benefit-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.eligibility-checker__benefit-value {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .eligibility-checker__coverage-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eligibility-checker__member-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .eligibility-checker__search-row {
+        flex-direction: column;
+    }
+
+    .eligibility-checker__search-row button {
+        width: 100%;
+    }
+
+    .eligibility-checker__category-tabs {
+        flex-wrap: wrap;
+    }
+
+    .eligibility-checker__transaction-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

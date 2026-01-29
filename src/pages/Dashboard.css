@@ -1,0 +1,744 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Header */
+.dashboard__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-lg);
+}
+
+.dashboard__header-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.dashboard__title {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.dashboard__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.dashboard__header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* Metrics Grid */
+.dashboard__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+/* Main Grid */
+.dashboard__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+/* Cards */
+.dashboard__card {
+    min-height: 320px;
+}
+
+.dashboard__card--insights,
+.dashboard__card--activity {
+    grid-column: span 1;
+}
+
+.dashboard__card--stats {
+    grid-column: span 2;
+}
+
+.dashboard__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.dashboard__card-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.dashboard__card-meta {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Insights */
+.dashboard__insights {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.dashboard__insight {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+    cursor: pointer;
+}
+
+.dashboard__insight:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dashboard__insight-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.dashboard__insight-icon--warning {
+    background: var(--apex-warning-soft);
+    color: var(--apex-warning);
+}
+
+.dashboard__insight-icon--success {
+    background: var(--apex-success-soft);
+    color: var(--apex-success);
+}
+
+.dashboard__insight-icon--info {
+    background: var(--apex-info-soft);
+    color: var(--apex-info);
+}
+
+.dashboard__insight-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.dashboard__insight-title {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    line-height: 1.4;
+}
+
+.dashboard__insight-action {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    font-weight: 500;
+}
+
+/* Activity */
+.dashboard__activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dashboard__activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+}
+
+.dashboard__activity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.dashboard__activity-dot--success {
+    background: var(--apex-success);
+}
+
+.dashboard__activity-dot--warning {
+    background: var(--apex-warning);
+}
+
+.dashboard__activity-dot--info {
+    background: var(--apex-info);
+}
+
+.dashboard__activity-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dashboard__activity-action {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.dashboard__activity-meta {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Stats Bars */
+.dashboard__stats-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.dashboard__stat-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dashboard__stat-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.dashboard__stat-bar-track {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.dashboard__stat-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.dashboard__stat-bar-fill--success {
+    background: var(--apex-success);
+}
+
+.dashboard__stat-bar-fill--warning {
+    background: var(--apex-warning);
+}
+
+.dashboard__stat-bar-fill--critical {
+    background: var(--apex-critical);
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+    .dashboard__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .dashboard__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard__card--stats {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard__header {
+        flex-direction: column;
+    }
+
+    .dashboard__metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   PREMIUM DASHBOARD ENHANCEMENTS
+   Sprint 3+ Feature Enrichment
+   ================================ */
+
+/* Enhanced Insight Cards with Glow */
+.dashboard__insight {
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.dashboard__insight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.dashboard__insight:hover::before {
+    opacity: 1;
+}
+
+.dashboard__insight:hover {
+    transform: translateX(4px);
+}
+
+/* Animated Progress Bars */
+.dashboard__stat-bar-fill {
+    position: relative;
+    overflow: hidden;
+    transition: width 0.5s ease-out;
+}
+
+.dashboard__stat-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    animation: statBarShimmer 2s infinite ease-in-out;
+}
+
+@keyframes statBarShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Premium Activity Item Hover */
+.dashboard__activity-item {
+    position: relative;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.dashboard__activity-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.dashboard__activity-dot {
+    position: relative;
+}
+
+.dashboard__activity-item:hover .dashboard__activity-dot {
+    box-shadow: 0 0 8px currentColor;
+}
+
+/* Premium Card Hover Effects */
+.dashboard__card {
+    transition: all var(--transition-base);
+}
+
+.dashboard__card:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--card-3d-glow);
+}
+
+/* Metric Card Enhancement */
+.dashboard__metrics .card {
+    transition: all var(--transition-base);
+}
+
+.dashboard__metrics .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-3d-lift);
+}
+
+/* Dashboard Header Animation */
+.dashboard__title {
+    background: linear-gradient(90deg, var(--apex-white), var(--apex-silver));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Quick Action Buttons */
+.dashboard__header-right .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard__header-right .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.dashboard__header-right .btn:hover::before {
+    transform: translateX(100%);
+}
+
+/* Stat Value Counter Animation */
+.metric-card__value {
+    transition: transform var(--transition-fast);
+}
+
+.metric-card:hover .metric-card__value {
+    transform: scale(1.02);
+}
+
+/* Premium Grid Layout */
+@media (min-width: 1400px) {
+    .dashboard__metrics {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .dashboard__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Dashboard Empty State */
+.dashboard__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    text-align: center;
+    padding: var(--space-2xl);
+}
+
+.dashboard__empty-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--apex-steel);
+    margin-bottom: var(--space-md);
+    opacity: 0.5;
+}
+
+.dashboard__empty-text {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    max-width: 240px;
+}
+
+/* Loading Skeleton for Dashboard */
+.dashboard__skeleton {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+.dashboard__skeleton-card {
+    height: 120px;
+    background: linear-gradient(90deg,
+            var(--apex-obsidian-glass) 25%,
+            var(--apex-obsidian-elevated) 50%,
+            var(--apex-obsidian-glass) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite ease-in-out;
+    border-radius: var(--radius-xl);
+}
+
+/* ============================================
+   AI-NATIVE DASHBOARD ENHANCEMENTS
+   Sprint 6: Predictive Intelligence Layer
+============================================ */
+
+/* Title Row with AI Status */
+.dashboard__title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* AI Forecast Banner */
+.dashboard__forecast-banner {
+    background: linear-gradient(135deg,
+            rgba(13, 148, 136, 0.12) 0%,
+            rgba(10, 15, 26, 0.8) 100%);
+    border: 1px solid rgba(13, 148, 136, 0.25);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard__forecast-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(13, 148, 136, 0.5),
+            transparent);
+}
+
+.dashboard__forecast-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.dashboard__forecast-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0D9488, #0891B2);
+    border-radius: var(--radius-lg);
+    color: var(--apex-white);
+    flex-shrink: 0;
+}
+
+.dashboard__forecast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.dashboard__forecast-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: #0D9488;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dashboard__forecast-value {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+/* Sparkline */
+.dashboard__sparkline {
+    flex-shrink: 0;
+}
+
+/* Confidence Ring */
+.dashboard__confidence-ring {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.dashboard__confidence-value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard__confidence-value>span:first-child {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: #0D9488;
+}
+
+.dashboard__confidence-label {
+    font-size: 8px;
+    font-weight: 500;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Smart Actions Panel */
+.dashboard__card--actions {
+    grid-column: span 1;
+}
+
+.dashboard__actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dashboard__action-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.dashboard__action-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(4px);
+}
+
+.dashboard__action-item--high {
+    border-left-color: var(--apex-critical);
+}
+
+.dashboard__action-item--medium {
+    border-left-color: var(--apex-warning);
+}
+
+.dashboard__action-item--low {
+    border-left-color: var(--apex-info);
+}
+
+.dashboard__action-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-silver);
+    flex-shrink: 0;
+}
+
+.dashboard__action-item--high .dashboard__action-icon {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+.dashboard__action-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.dashboard__action-title {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard__action-impact {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.dashboard__action-arrow {
+    color: var(--apex-steel);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all var(--transition-fast);
+}
+
+.dashboard__action-item:hover .dashboard__action-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: #0D9488;
+}
+
+/* KPI Grid */
+.dashboard__kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dashboard__kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.dashboard__kpi-value {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: #0D9488;
+}
+
+.dashboard__kpi-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Spin Animation for Refresh */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Enhanced Grid Layout */
+.dashboard__grid--enhanced {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Responsive Adjustments for New Components */
+@media (max-width: 1024px) {
+    .dashboard__forecast-content {
+        flex-wrap: wrap;
+    }
+
+    .dashboard__kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard__grid--enhanced {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard__forecast-banner {
+        padding: var(--space-md);
+    }
+
+    .dashboard__forecast-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+
+    .dashboard__confidence-ring {
+        display: none;
+    }
+}

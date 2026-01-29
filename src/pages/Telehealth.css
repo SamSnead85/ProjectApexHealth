@@ -1,0 +1,536 @@
+.telehealth-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.telehealth__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.telehealth__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.telehealth__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Quick Stats */
+.telehealth__quick-stats {
+    display: flex;
+    gap: var(--space-xl);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.quick-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.quick-stat svg {
+    color: var(--apex-teal);
+}
+
+.quick-stat strong {
+    color: var(--apex-white);
+}
+
+/* Upcoming Visits */
+.telehealth__upcoming {
+    margin-bottom: var(--space-xl);
+}
+
+.telehealth__upcoming h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.upcoming-visits__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.upcoming-visit {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(0, 210, 190, 0.1);
+    border: 1px solid rgba(0, 210, 190, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.upcoming-visit__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-obsidian);
+}
+
+.upcoming-visit__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.upcoming-visit__provider {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.upcoming-visit__specialty {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.upcoming-visit__datetime {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+}
+
+.upcoming-visit__date,
+.upcoming-visit__time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Tabs */
+.telehealth__tabs {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
+
+.telehealth__tab {
+    flex: 1;
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.telehealth__tab:hover {
+    color: var(--apex-silver);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.telehealth__tab.active {
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+}
+
+/* Visit Types */
+.visit-types {
+    margin-bottom: var(--space-xl);
+}
+
+.visit-types h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.visit-types__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.visit-type-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.visit-type-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--apex-teal);
+}
+
+.visit-type-card.selected {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+}
+
+.visit-type-card__badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+}
+
+.visit-type-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-white);
+}
+
+.visit-type-card h4 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.visit-type-card p {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    line-height: 1.4;
+}
+
+.visit-type-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.visit-type-card__duration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.visit-type-card__copay {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-teal);
+}
+
+/* Available Providers */
+.available-providers h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.providers__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.provider-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.provider-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.provider-card__avatar {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--apex-obsidian-elevated) 0%, var(--apex-obsidian-soft) 100%);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-silver);
+}
+
+.online-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: var(--apex-success);
+    border: 2px solid var(--apex-obsidian);
+}
+
+.provider-card__info {
+    flex: 1;
+}
+
+.provider-card__info h4 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.provider-card__specialty {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.provider-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-warning);
+}
+
+.provider-card__availability {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.provider-card__next {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.provider-card__next.available {
+    color: var(--apex-success);
+}
+
+.provider-card__languages {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Schedule Form */
+.schedule-card h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.schedule-card__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xl);
+}
+
+.schedule-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.schedule-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.schedule-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.schedule-form__field label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.schedule-form__field select,
+.schedule-form__field input,
+.schedule-form__field textarea {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.schedule-form__field select:focus,
+.schedule-form__field input:focus,
+.schedule-form__field textarea:focus {
+    border-color: var(--apex-teal);
+}
+
+.schedule-form__field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* History */
+.history-card h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-3xl);
+    color: var(--apex-steel);
+}
+
+.history-empty svg {
+    opacity: 0.3;
+}
+
+/* How It Works */
+.telehealth__how-it-works {
+    margin-top: var(--space-xl);
+}
+
+.telehealth__how-it-works h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xl);
+}
+
+.how-it-works__steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.how-it-works__step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+}
+
+.how-it-works__number {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.how-it-works__step h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.how-it-works__step p {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.how-it-works__arrow {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .visit-types__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .telehealth__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .telehealth__quick-stats {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .visit-types__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .provider-card {
+        flex-wrap: wrap;
+    }
+
+    .schedule-form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .how-it-works__steps {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .how-it-works__arrow {
+        transform: rotate(90deg);
+    }
+}

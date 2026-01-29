@@ -1,0 +1,212 @@
+.workflow-canvas {
+    width: 100%;
+    height: 100%;
+    background: var(--apex-obsidian);
+}
+
+/* Toolbar */
+.workflow-canvas__toolbar {
+    margin-top: var(--space-md);
+}
+
+.workflow-canvas__toolbar-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+}
+
+.workflow-canvas__toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.workflow-canvas__toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--glass-border);
+    margin: 0 var(--space-xs);
+}
+
+/* Controls Override */
+.workflow-canvas__controls {
+    background: var(--apex-obsidian-glass) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden;
+}
+
+.workflow-canvas__controls button {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    color: var(--apex-silver) !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.workflow-canvas__controls button:last-child {
+    border-bottom: none !important;
+}
+
+.workflow-canvas__controls button:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--apex-white) !important;
+}
+
+.workflow-canvas__controls button svg {
+    fill: currentColor !important;
+}
+
+/* MiniMap Override */
+.workflow-canvas__minimap {
+    background: var(--apex-obsidian-glass) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden;
+}
+
+/* Status Badge */
+.workflow-canvas__status {
+    margin-top: var(--space-md);
+    margin-right: var(--space-md);
+}
+
+.workflow-canvas__status-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+}
+
+.workflow-canvas__status-badge--running {
+    background: var(--apex-info-soft);
+    color: var(--apex-info);
+    border: 1px solid var(--apex-info);
+}
+
+.workflow-canvas__status-badge--paused {
+    background: var(--apex-warning-soft);
+    color: var(--apex-warning);
+    border: 1px solid var(--apex-warning);
+}
+
+.workflow-canvas__status-badge--completed {
+    background: var(--apex-success-soft);
+    color: var(--apex-success);
+    border: 1px solid var(--apex-success);
+}
+
+.workflow-canvas__status-badge--error {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+    border: 1px solid var(--apex-critical);
+}
+
+.workflow-canvas__status-badge--waiting_hitl {
+    background: var(--apex-warning-soft);
+    color: var(--apex-warning);
+    border: 1px solid var(--apex-warning);
+}
+
+.workflow-canvas__status-dot {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: var(--radius-full);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* Empty State */
+.workflow-canvas__empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.workflow-canvas__empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 320px;
+    padding: var(--space-2xl);
+    pointer-events: all;
+}
+
+.workflow-canvas__empty-icon {
+    color: var(--apex-steel);
+    margin-bottom: var(--space-lg);
+}
+
+.workflow-canvas__empty-content h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-sm);
+}
+
+.workflow-canvas__empty-content p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
+/* React Flow Globals */
+.react-flow__pane {
+    cursor: grab;
+}
+
+.react-flow__pane:active {
+    cursor: grabbing;
+}
+
+.react-flow__edge-path {
+    stroke: var(--glass-border);
+    stroke-width: 2;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+    stroke: var(--apex-teal);
+    stroke-width: 3;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+    stroke: var(--apex-teal);
+}
+
+.react-flow__connection-line {
+    stroke: var(--apex-teal);
+    stroke-width: 2;
+}
+
+.react-flow__background pattern line {
+    stroke: rgba(6, 182, 212, 0.05);
+}

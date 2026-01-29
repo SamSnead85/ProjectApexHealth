@@ -1,0 +1,193 @@
+.contract-negotiation-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.negotiation__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.negotiation__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.negotiation__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Stats */
+.negotiation__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+}
+
+.stat-card svg {
+    color: var(--apex-teal);
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Filters */
+.negotiation__filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.status-filters {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.filter-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.search-box svg {
+    color: var(--apex-steel);
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    outline: none;
+}
+
+/* Table */
+.contracts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contracts-table th {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.contracts-table td {
+    padding: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    border-bottom: 1px solid var(--glass-border);
+    vertical-align: middle;
+}
+
+.contracts-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.payer-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.payer-info svg {
+    color: var(--apex-teal);
+}
+
+.payer-info span {
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.rate-cell {
+    font-family: var(--font-mono);
+}
+
+.rate-cell.proposed {
+    font-weight: 600;
+    color: var(--apex-teal);
+}
+
+.rate-change {
+    font-weight: 600;
+}
+
+.rate-change.positive {
+    color: var(--apex-success);
+}
+
+.rate-change.negative {
+    color: var(--apex-critical);
+}
+
+.table-actions {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+@media (max-width: 1100px) {
+    .negotiation__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .contracts-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

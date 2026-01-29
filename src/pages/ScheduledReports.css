@@ -1,0 +1,131 @@
+.scheduled-reports-page {
+    padding: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.scheduled__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.scheduled__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.scheduled__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Stats */
+.scheduled__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+}
+
+.stat-card svg {
+    color: var(--apex-teal);
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Reports List */
+.reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.report-card {
+    padding: var(--space-lg);
+}
+
+.report-card__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.report-card__header>svg {
+    color: var(--apex-teal);
+    margin-top: 2px;
+}
+
+.report-card__title {
+    flex: 1;
+}
+
+.report-card__title h4 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.report-card__title p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.report-card__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.detail-item svg {
+    color: var(--apex-teal);
+}
+
+.report-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    .scheduled__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .report-card__details {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+}

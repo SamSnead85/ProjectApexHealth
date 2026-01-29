@@ -1,0 +1,101 @@
+/* ================================
+   EMPTY STATE COMPONENT
+   Elegant illustration + messaging
+   ================================ */
+
+.empty-state {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-4xl) var(--space-xl);
+    text-align: center;
+    min-height: 300px;
+}
+
+.empty-state__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    background: linear-gradient(135deg, var(--apex-teal-glow), var(--apex-purple-glow));
+    border: 1px solid var(--apex-teal-border);
+    border-radius: var(--radius-2xl);
+    color: var(--apex-teal);
+}
+
+.empty-state__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 360px;
+}
+
+.empty-state__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.empty-state__description {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Decorative Background */
+.empty-state__bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+            rgba(6, 182, 212, 0.05) 0%,
+            transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Hover animation on icon */
+.empty-state:hover .empty-state__icon {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(6, 182, 212, 0.2);
+    transition: all var(--transition-smooth);
+}
+
+/* Light Theme */
+[data-theme="light"] .empty-state__title {
+    color: var(--apex-obsidian);
+}
+
+[data-theme="light"] .empty-state__description {
+    color: var(--apex-steel);
+}
+
+[data-theme="light"] .empty-state__icon {
+    background: linear-gradient(135deg, var(--apex-teal-glow), var(--apex-info-soft));
+}
+
+/* Compact variant */
+.empty-state--compact {
+    padding: var(--space-xl);
+    min-height: 200px;
+}
+
+.empty-state--compact .empty-state__icon {
+    width: 64px;
+    height: 64px;
+}
+
+.empty-state--compact .empty-state__icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.empty-state--compact .empty-state__title {
+    font-size: var(--text-lg);
+}

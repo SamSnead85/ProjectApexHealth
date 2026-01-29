@@ -1,0 +1,251 @@
+.workflow-node {
+    min-width: 200px;
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    position: relative;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.workflow-node::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--node-color, var(--apex-teal));
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.workflow-node:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow);
+}
+
+.workflow-node--selected {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 2px var(--apex-teal-glow), var(--glass-shadow-hover);
+}
+
+/* Status States */
+.workflow-node--running {
+    border-color: var(--apex-info);
+    animation: nodePulse 1.5s ease-in-out infinite;
+}
+
+.workflow-node--completed {
+    border-color: var(--apex-success);
+}
+
+.workflow-node--error {
+    border-color: var(--apex-critical);
+}
+
+.workflow-node--paused {
+    border-color: var(--apex-warning);
+}
+
+@keyframes nodePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    }
+}
+
+/* Header */
+.workflow-node__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.workflow-node__icon {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.workflow-node__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.workflow-node__label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.workflow-node__type {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--apex-steel);
+}
+
+/* Status Indicator */
+.workflow-node__status {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--apex-white);
+    border: 2px solid var(--apex-obsidian);
+}
+
+.workflow-node__status--running {
+    background: var(--apex-info);
+}
+
+.workflow-node__status--completed {
+    background: var(--apex-success);
+}
+
+.workflow-node__status--error {
+    background: var(--apex-critical);
+}
+
+.workflow-node__status--paused {
+    background: var(--apex-warning);
+}
+
+.workflow-node__spinner {
+    width: 10px;
+    height: 10px;
+    border: 2px solid transparent;
+    border-top-color: var(--apex-white);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Confidence Score */
+.workflow-node__confidence {
+    margin-top: var(--space-sm);
+    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.workflow-node__confidence-bar {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.workflow-node__confidence-label {
+    position: absolute;
+    right: 0;
+    top: -16px;
+    font-size: 9px;
+    color: var(--apex-steel);
+}
+
+/* Handles */
+.workflow-node__handle {
+    width: 12px !important;
+    height: 12px !important;
+    background: var(--apex-obsidian-elevated) !important;
+    border: 2px solid var(--glass-border) !important;
+    transition: all var(--transition-fast);
+}
+
+.workflow-node__handle:hover {
+    border-color: var(--apex-teal) !important;
+    transform: scale(1.2);
+}
+
+.workflow-node__handle--source {
+    right: -6px !important;
+}
+
+.workflow-node__handle--target {
+    left: -6px !important;
+}
+
+.workflow-node__handle--true {
+    border-color: var(--apex-success) !important;
+}
+
+.workflow-node__handle--true::after {
+    content: '✓';
+    position: absolute;
+    right: 16px;
+    font-size: 10px;
+    color: var(--apex-success);
+}
+
+.workflow-node__handle--false {
+    border-color: var(--apex-critical) !important;
+}
+
+.workflow-node__handle--false::after {
+    content: '✕';
+    position: absolute;
+    right: 16px;
+    font-size: 10px;
+    color: var(--apex-critical);
+}
+
+/* React Flow Overrides */
+.react-flow__node {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.react-flow__edge-path {
+    stroke: var(--glass-border);
+    stroke-width: 2;
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+    stroke: var(--apex-teal);
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 5;
+    animation: flowDash 0.5s linear infinite;
+}
+
+@keyframes flowDash {
+    to {
+        stroke-dashoffset: -10;
+    }
+}

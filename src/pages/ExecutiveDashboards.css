@@ -1,0 +1,240 @@
+.executive-dashboards-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.executive__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.executive__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.executive__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.period-selector {
+    display: flex;
+    gap: var(--space-xs);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 4px;
+}
+
+.period-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.period-btn.active {
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+}
+
+/* KPI Grid */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.kpi-card {
+    padding: var(--space-lg);
+}
+
+.kpi-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.kpi-name {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.kpi-card__value {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin-bottom: var(--space-md);
+}
+
+.kpi-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.kpi-change.positive {
+    color: var(--apex-success);
+}
+
+.kpi-change.negative {
+    color: var(--apex-critical);
+}
+
+.kpi-target {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.kpi-target svg {
+    color: var(--apex-teal);
+}
+
+/* Charts Row */
+.charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.chart-card {
+    padding: var(--space-lg);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.chart-header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.chart-header svg {
+    color: var(--apex-teal);
+}
+
+.chart-placeholder {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-steel);
+}
+
+.chart-placeholder svg {
+    opacity: 0.3;
+    margin-bottom: var(--space-sm);
+}
+
+.chart-placeholder span {
+    font-size: var(--text-sm);
+}
+
+/* Bottom Row */
+.bottom-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+.summary-card {
+    padding: var(--space-lg);
+}
+
+.summary-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.summary-header svg {
+    color: var(--apex-teal);
+}
+
+.summary-header h4 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.summary-item.highlight {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+    font-weight: 600;
+}
+
+.summary-item .value {
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+}
+
+.summary-item .value.positive {
+    color: var(--apex-success);
+}
+
+@media (max-width: 1100px) {
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,245 @@
+.execution-logs {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--apex-obsidian);
+}
+
+/* Header */
+.execution-logs__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.execution-logs__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.execution-logs__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Stats */
+.execution-logs__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.execution-logs__stat {
+    text-align: center;
+}
+
+.execution-logs__stat-value {
+    display: block;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.execution-logs__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.execution-logs__stat--success .execution-logs__stat-value {
+    color: var(--apex-success);
+}
+
+.execution-logs__stat--error .execution-logs__stat-value {
+    color: var(--apex-critical);
+}
+
+/* Filters */
+.execution-logs__filters {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.execution-logs__search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+}
+
+.execution-logs__search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.execution-logs__search input::placeholder {
+    color: var(--apex-steel);
+}
+
+.execution-logs__filter-select {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    cursor: pointer;
+    outline: none;
+}
+
+/* List */
+.execution-logs__list {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md) var(--space-xl);
+}
+
+/* Item */
+.execution-logs__item {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+}
+
+.execution-logs__item--completed {
+    border-left: 3px solid var(--apex-success);
+}
+
+.execution-logs__item--error {
+    border-left: 3px solid var(--apex-critical);
+}
+
+.execution-logs__item--running {
+    border-left: 3px solid var(--apex-info);
+}
+
+.execution-logs__item--paused {
+    border-left: 3px solid var(--apex-warning);
+}
+
+.execution-logs__item-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.execution-logs__item-header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.execution-logs__item-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.execution-logs__item-status {
+    display: flex;
+    align-items: center;
+}
+
+.execution-logs__item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.execution-logs__item-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.execution-logs__item-time {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.execution-logs__item-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.execution-logs__item-duration {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--apex-steel);
+}
+
+/* Details */
+.execution-logs__item-details {
+    padding: 0 var(--space-md) var(--space-md);
+    overflow: hidden;
+}
+
+.execution-logs__detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.execution-logs__detail-section h5 {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.execution-logs__code {
+    background: var(--apex-obsidian);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--apex-teal);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    max-height: 120px;
+}
+
+.execution-logs__error {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-md);
+    background: var(--apex-critical-soft);
+    border: 1px solid var(--apex-critical);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-critical);
+}

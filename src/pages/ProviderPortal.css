@@ -1,0 +1,438 @@
+.provider-portal-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.provider-portal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.provider-portal__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.provider-portal__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.provider-portal__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Stats */
+.provider-portal__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+/* Grid */
+.provider-portal__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+/* Eligibility Check */
+.eligibility-check__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.eligibility-check__header svg {
+    color: var(--apex-teal);
+}
+
+.eligibility-check__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.eligibility-check__form {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.form-group input {
+    width: 100%;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus {
+    border-color: var(--apex-teal);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-group input::placeholder {
+    color: var(--apex-steel);
+}
+
+/* Eligibility Result */
+.eligibility-result {
+    padding: var(--space-lg);
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md);
+}
+
+.eligibility-result__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+}
+
+.eligibility-result__header h4 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.eligibility-result__header span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.eligibility-result__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+}
+
+.detail-row span:first-child {
+    color: var(--apex-steel);
+}
+
+.detail-row span:last-child {
+    color: var(--apex-white);
+}
+
+.deductible-progress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.deductible-progress__fill {
+    height: 100%;
+    background: var(--apex-success);
+    border-radius: var(--radius-full);
+}
+
+/* Quick Actions */
+.quick-actions h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.quick-actions__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.quick-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.quick-action:hover {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal-border);
+}
+
+.quick-action span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Recent Claims */
+.recent-claims__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.recent-claims__header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.claims-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.claims-table th {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.claims-table td {
+    padding: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.claims-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.claim-id {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.patient-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.patient-name {
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.member-id {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.claims-table code {
+    padding: 2px 6px;
+    background: var(--apex-purple-glow);
+    color: var(--apex-purple);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+}
+
+.claims-table .amount {
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .provider-portal__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .provider-portal__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .provider-portal__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .provider-portal__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .eligibility-check__form {
+        flex-direction: column;
+    }
+
+    .claims-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* ================================
+   PREMIUM PROVIDER PORTAL ENHANCEMENTS
+   Sprint 3+ Feature Enrichment
+   ================================ */
+
+/* Quick Action Card Lift */
+.quick-action {
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% -20%, var(--apex-teal-glow) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.quick-action:hover::before {
+    opacity: 1;
+}
+
+.quick-action:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-3d-glow);
+}
+
+/* Eligibility Check Result Animation */
+.eligibility-result {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progress Bar Animation */
+.deductible-progress__fill {
+    position: relative;
+    transition: width 0.8s ease-out;
+}
+
+.deductible-progress__fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* Table Row Enhancement */
+.claims-table tr {
+    position: relative;
+    transition: all var(--transition-fast);
+}
+
+.claims-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.claims-table tr::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--apex-teal);
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all var(--transition-fast);
+}
+
+.claims-table tr:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* Stat Card Hover */
+.provider-portal__stats .card {
+    transition: all var(--transition-base);
+}
+
+.provider-portal__stats .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--card-3d-lift);
+}
+
+/* Form Input Focus Enhancement */
+.form-group input {
+    position: relative;
+}
+
+.form-group input:focus {
+    box-shadow: 0 0 0 3px var(--apex-teal-glow);
+}
+
+/* Premium Header Title */
+.provider-portal__title {
+    background: linear-gradient(90deg, var(--apex-white), var(--apex-silver));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Loading State for Eligibility */
+.eligibility-check--loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.eligibility-check--loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}

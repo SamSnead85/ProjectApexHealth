@@ -1,0 +1,112 @@
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
+}
+
+/* Variants */
+.glass-card--default {
+    background: var(--glass-bg);
+}
+
+.glass-card--elevated {
+    background: var(--apex-obsidian-glass);
+    box-shadow:
+        var(--glass-shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.glass-card--subtle {
+    background: rgba(10, 10, 15, 0.5);
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.glass-card--accent {
+    background: var(--glass-bg);
+    border-color: var(--apex-teal-border);
+    box-shadow:
+        var(--glass-shadow),
+        0 0 20px var(--apex-teal-glow);
+}
+
+/* Padding */
+.glass-card--p-sm {
+    padding: var(--space-sm);
+}
+
+.glass-card--p-md {
+    padding: var(--space-md);
+}
+
+.glass-card--p-lg {
+    padding: var(--space-lg);
+}
+
+.glass-card--p-xl {
+    padding: var(--space-xl);
+}
+
+/* Hoverable */
+.glass-card--hoverable {
+    cursor: pointer;
+}
+
+.glass-card--hoverable:hover {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover);
+}
+
+.glass-card--hoverable:active {
+    transform: translateY(0);
+}
+
+/* Glow on Hover */
+.glass-card--glow:hover {
+    border-color: var(--apex-teal-border);
+    box-shadow:
+        var(--glass-shadow-hover),
+        0 0 30px var(--apex-teal-glow);
+}
+
+/* Header Pattern */
+.glass-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.glass-card__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: var(--space-xs);
+}
+
+/* Footer Pattern */
+.glass-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}

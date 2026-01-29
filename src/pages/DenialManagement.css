@@ -1,0 +1,226 @@
+.denial-management-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.denial__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.denial__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.denial__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.denial__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+}
+
+.stat-icon {
+    color: var(--apex-teal);
+}
+
+.stat-icon.critical {
+    color: var(--apex-critical);
+}
+
+.stat-icon.info {
+    color: var(--apex-info);
+}
+
+.stat-icon.success {
+    color: var(--apex-success);
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.denial__filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.status-filters {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.filter-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.search-box svg {
+    color: var(--apex-steel);
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    outline: none;
+}
+
+.denials-list {
+    padding: 0;
+}
+
+.denial-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all var(--transition-fast);
+}
+
+.denial-item:last-child {
+    border-bottom: none;
+}
+
+.denial-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.denial-item__content {
+    flex: 1;
+}
+
+.denial-item__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.claim-id {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-teal);
+}
+
+.denial-code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--apex-critical);
+    padding: 2px 6px;
+    background: var(--apex-critical-soft);
+    border-radius: var(--radius-sm);
+}
+
+.denial-item__details {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.patient-name {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.payer {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.denial-reason {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    line-height: 1.4;
+}
+
+.denial-item__amount {
+    text-align: right;
+    min-width: 100px;
+}
+
+.amount {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-critical);
+    margin-bottom: 2px;
+}
+
+.date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.denial-item__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+@media (max-width: 1100px) {
+    .denial__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .denial-item {
+        flex-wrap: wrap;
+    }
+}

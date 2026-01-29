@@ -1,0 +1,351 @@
+.payment-processing-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.payment-processing__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.payment-processing__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.payment-processing__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.payment-processing__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Overview */
+.payment-processing__overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+/* Tabs */
+.payment-processing__tabs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.payment-processing__tab {
+    padding: var(--space-md) var(--space-lg);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.payment-processing__tab:hover {
+    color: var(--apex-silver);
+}
+
+.payment-processing__tab.active {
+    color: var(--apex-teal);
+    border-bottom-color: var(--apex-teal);
+}
+
+/* Payment Queue */
+.payment-queue__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.payment-queue__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.payment-queue__filters {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.payment-queue__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.payment-queue__search svg {
+    color: var(--apex-steel);
+}
+
+.payment-queue__search input {
+    background: none;
+    border: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    outline: none;
+    width: 200px;
+}
+
+.payment-queue__search input::placeholder {
+    color: var(--apex-steel);
+}
+
+/* Payment Item */
+.payment-queue__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.payment-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.payment-item__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-item__info {
+    flex: 1;
+}
+
+.payment-item__payee {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.payment-item__meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.payment-item__id {
+    font-family: var(--font-mono);
+}
+
+.payment-item__amount {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+/* Transactions List */
+.transactions-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.transactions-list__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.transactions-list__items {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction-item__icon.credit {
+    background: var(--apex-success-soft);
+    color: var(--apex-success);
+}
+
+.transaction-item__icon.debit {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+.transaction-item__info {
+    flex: 1;
+}
+
+.transaction-item__desc {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.transaction-item__meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.transaction-item__amount {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.transaction-item__amount.credit {
+    color: var(--apex-success);
+}
+
+.transaction-item__amount.debit {
+    color: var(--apex-critical);
+}
+
+/* Bank Accounts */
+.bank-accounts {
+    margin-top: var(--space-xl);
+}
+
+.bank-accounts h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.bank-accounts__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.bank-account {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+}
+
+.bank-account__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bank-account__info {
+    flex: 1;
+}
+
+.bank-account__name {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.bank-account__number {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.bank-account__balance {
+    text-align: right;
+}
+
+.bank-account__balance-label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.bank-account__balance-value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-success);
+    font-family: var(--font-mono);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .payment-processing__overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .payment-processing__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .payment-processing__overview {
+        grid-template-columns: 1fr;
+    }
+
+    .bank-accounts__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-item {
+        flex-wrap: wrap;
+    }
+}

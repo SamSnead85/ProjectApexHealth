@@ -1,0 +1,157 @@
+.kpi-tracking-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.kpi__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.kpi__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.kpi__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.kpi__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+}
+
+.stat-card svg {
+    color: var(--apex-teal);
+}
+
+.stat-card.success svg {
+    color: var(--apex-success);
+}
+
+.stat-card.warning svg {
+    color: var(--apex-warning);
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.kpi__filters {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.filter-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-btn.active {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+}
+
+.kpi-card {
+    padding: var(--space-lg);
+}
+
+.kpi-card__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.kpi-card__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-md);
+}
+
+.kpi-card__value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.kpi-card__value .current {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.kpi-card__value .change {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.kpi-card__value .change.up {
+    color: var(--apex-success);
+}
+
+.kpi-card__value .change.down {
+    color: var(--apex-teal);
+}
+
+.kpi-card__progress .progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-xs);
+}
+
+.kpi-card__progress .progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}

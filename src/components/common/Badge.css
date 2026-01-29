@@ -1,0 +1,115 @@
+.apex-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+/* Sizes */
+.apex-badge--sm {
+    height: 20px;
+    padding: 0 var(--space-sm);
+    font-size: 10px;
+}
+
+.apex-badge--md {
+    height: 24px;
+    padding: 0 var(--space-md);
+    font-size: var(--text-xs);
+}
+
+/* Variants */
+.apex-badge--default {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.apex-badge--success {
+    background: var(--apex-success-soft);
+    color: var(--apex-success);
+}
+
+.apex-badge--warning {
+    background: var(--apex-warning-soft);
+    color: var(--apex-warning);
+}
+
+.apex-badge--critical {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+.apex-badge--info {
+    background: var(--apex-info-soft);
+    color: var(--apex-info);
+}
+
+.apex-badge--teal {
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+}
+
+.apex-badge--purple {
+    background: var(--apex-purple-glow);
+    color: var(--apex-purple);
+}
+
+.apex-badge--error {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+/* Dot Indicator */
+.apex-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.apex-badge--pulse .apex-badge__dot {
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+}
+
+/* Icon */
+.apex-badge__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.apex-badge__icon svg {
+    width: 12px;
+    height: 12px;
+}
+
+.apex-badge--sm .apex-badge__icon svg {
+    width: 10px;
+    height: 10px;
+}
+
+/* Text */
+.apex-badge__text {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

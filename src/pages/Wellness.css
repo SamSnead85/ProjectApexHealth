@@ -1,0 +1,392 @@
+.wellness-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.wellness__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.wellness__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.wellness__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.wellness__points {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.2) 0%, rgba(138, 43, 226, 0.2) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+}
+
+.wellness__points-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.wellness__points-value {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.wellness__points-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Progress Card */
+.wellness__progress-card {
+    margin-bottom: var(--space-xl);
+}
+
+.wellness__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.wellness__progress-header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.wellness__progress-bar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+}
+
+.wellness__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    border-radius: var(--radius-full);
+}
+
+.wellness__progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Section Title */
+.wellness__section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+/* Daily Goals */
+.daily-goals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.goal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.goal-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goal-card__name {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.goal-card__progress {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.goal-card__current {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.goal-card__target {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.goal-card__ring {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.goal-card__ring svg {
+    width: 100%;
+    height: 100%;
+}
+
+.goal-card__percent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.goal-card__streak {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    padding: 4px 8px;
+    background: var(--apex-teal-glow);
+    border-radius: var(--radius-sm);
+}
+
+/* Wellness Programs */
+.wellness-programs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.program-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.program-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.program-card.completed {
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.program-card__status {
+    flex-shrink: 0;
+}
+
+.program-card__check {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.program-card__progress-ring {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.program-card__progress-ring svg {
+    width: 100%;
+    height: 100%;
+}
+
+.program-card__progress-ring span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--apex-teal);
+}
+
+.program-card__info {
+    flex: 1;
+}
+
+.program-card__info h4 {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.program-card__info p {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.program-card__reward {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-warning);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+/* Health Score */
+.health-score-card {
+    padding: var(--space-xl);
+}
+
+.health-score__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.health-score__header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.health-score__display {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.health-score__circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.health-score__circle svg {
+    width: 100%;
+    height: 100%;
+}
+
+.health-score__value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.health-score__number {
+    display: block;
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.health-score__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.health-score__breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.health-score__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.health-score__item-label {
+    width: 80px;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.health-score__item-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.health-score__item-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    border-radius: var(--radius-full);
+}
+
+.health-score__item-value {
+    width: 30px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .daily-goals {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .wellness__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .daily-goals {
+        grid-template-columns: 1fr;
+    }
+
+    .health-score__display {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}

@@ -1,0 +1,513 @@
+.eob-viewer {
+    padding: var(--space-xl);
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+.eob-viewer__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.eob-viewer__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.eob-viewer__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.eob-viewer__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.eob-viewer__toggle label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.eob-viewer__toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--apex-teal);
+}
+
+/* Grid */
+.eob-viewer__grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: var(--space-xl);
+}
+
+/* EOB List */
+.eob-viewer__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* EOB Card */
+.eob-card {
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.eob-card.selected {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 1px var(--apex-teal), var(--card-glow-teal);
+}
+
+.eob-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.eob-card__icon {
+    color: var(--apex-teal);
+}
+
+.eob-card__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.eob-card__id {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.eob-card__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.eob-card__provider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.eob-card__provider svg {
+    color: var(--apex-steel);
+}
+
+.eob-card__amounts {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.eob-card__amount {
+    display: flex;
+    flex-direction: column;
+}
+
+.eob-card__amount-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.eob-card__amount-value {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.eob-card__amount-value--plan {
+    color: var(--apex-success);
+}
+
+.eob-card__amount-value--patient {
+    color: var(--apex-warning);
+}
+
+/* EOB Detail */
+.eob-detail__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.eob-detail__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.eob-detail__id {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--apex-teal);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--apex-obsidian);
+    margin-bottom: var(--space-sm);
+}
+
+.eob-detail__header h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.eob-detail__date {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.eob-detail__actions-top {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+/* Plain Language */
+.eob-detail__plain-language {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.1) 0%, rgba(175, 82, 222, 0.1) 100%);
+    border: 1px solid rgba(0, 210, 190, 0.3);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.eob-detail__plain-language-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    color: var(--apex-teal);
+    font-weight: 600;
+    font-size: var(--text-sm);
+}
+
+.eob-detail__plain-language p {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    line-height: 1.7;
+}
+
+/* Info Grid */
+.eob-detail__info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.eob-detail__info-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+}
+
+.eob-detail__info-section h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+}
+
+.eob-detail__info-section h4 svg {
+    color: var(--apex-teal);
+}
+
+.eob-detail__info-section p {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.eob-detail__info-section span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+/* Line Items */
+.eob-detail__line-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.eob-detail__line-items h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+}
+
+.eob-line-item {
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.eob-line-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.eob-line-item__header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.eob-line-item__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.eob-line-item__code {
+    padding: 2px 6px;
+    background: var(--apex-teal);
+    border-radius: var(--radius-xs);
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--apex-obsidian);
+}
+
+.eob-line-item__desc {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.eob-line-item__amounts {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.eob-line-item__charged {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    text-decoration: line-through;
+}
+
+.eob-line-item__you-owe {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-warning);
+}
+
+.eob-line-item__expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+/* Line Item Details */
+.eob-line-item__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+.eob-line-item__detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    padding: var(--space-xs) 0;
+}
+
+.eob-line-item__detail-row--savings {
+    color: var(--apex-success);
+}
+
+.eob-line-item__detail-row--plan {
+    color: var(--apex-success);
+}
+
+.eob-line-item__detail-row--patient {
+    color: var(--apex-warning);
+    font-weight: 500;
+}
+
+/* Adjustment Codes */
+.eob-line-item__codes {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px dashed var(--glass-border);
+}
+
+.eob-line-item__codes-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.eob-line-item__codes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.eob-line-item__codes li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    margin-bottom: var(--space-xs);
+}
+
+/* Totals */
+.eob-detail__totals {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+}
+
+.eob-detail__totals h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+}
+
+.eob-detail__total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    padding: var(--space-xs) 0;
+}
+
+.eob-detail__total-row span:first-child {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.eob-detail__total-row--deductible {
+    color: var(--apex-warning);
+}
+
+.eob-detail__total-row--plan {
+    color: var(--apex-success);
+}
+
+.eob-detail__total-row--final {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+    font-weight: 600;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+}
+
+.eob-detail__total-row--final span:last-child {
+    color: var(--apex-warning);
+    font-size: var(--text-xl);
+    font-family: var(--font-mono);
+}
+
+/* Help */
+.eob-detail__help {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.eob-detail__help h4 {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.eob-detail__help p {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* No Selection */
+.eob-viewer__no-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-2xl);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .eob-viewer__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .eob-viewer__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .eob-detail__info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eob-line-item__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+
+    .eob-line-item__amounts {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

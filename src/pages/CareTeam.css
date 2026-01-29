@@ -1,0 +1,337 @@
+.care-team-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.care-team__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.care-team__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.care-team__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Primary Provider Card */
+.primary-provider-card {
+    position: relative;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-xl);
+}
+
+.primary-provider-card__badge {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+}
+
+.primary-provider-card__content {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.primary-provider-card__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-white);
+}
+
+.primary-provider-card__info h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 4px;
+}
+
+.primary-provider-card__specialty {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    margin-bottom: 2px;
+}
+
+.primary-provider-card__practice {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.primary-provider-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-warning);
+}
+
+.primary-provider-card__contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    text-decoration: none;
+}
+
+.contact-item:hover {
+    color: var(--apex-teal);
+}
+
+.primary-provider-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.primary-provider-card__next-apt {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+}
+
+/* Section Title */
+.care-team__section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+/* Specialists Grid */
+.specialists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.provider-card {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.provider-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--apex-teal);
+}
+
+.provider-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+}
+
+.provider-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-teal);
+}
+
+.provider-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.provider-card__info h4 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.provider-card__specialty {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    margin-bottom: 2px;
+}
+
+.provider-card__practice {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.provider-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: var(--space-sm) 0;
+    font-size: var(--text-xs);
+    color: var(--apex-warning);
+}
+
+.provider-card__contact {
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    margin-bottom: var(--space-sm);
+}
+
+.provider-card__contact span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.provider-card__last-visit {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-md);
+}
+
+.provider-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Add Provider Card */
+.add-provider-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background: transparent;
+    border: 2px dashed var(--glass-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--apex-steel);
+}
+
+.add-provider-card:hover {
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+    background: rgba(0, 210, 190, 0.05);
+}
+
+.add-provider-card span {
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+/* Care Reminders */
+.care-reminders h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.care-reminders__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.care-reminder {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+}
+
+.care-reminder__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.care-reminder__icon--warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+}
+
+.care-reminder__icon--success {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.care-reminder__info {
+    flex: 1;
+}
+
+.care-reminder__title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.care-reminder__desc {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .primary-provider-card__content {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .primary-provider-card__actions {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 768px) {
+    .care-team__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .specialists-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,185 @@
+.apex-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.apex-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Sizes */
+.apex-btn--sm {
+    height: 32px;
+    padding: 0 var(--space-md);
+    font-size: var(--text-xs);
+}
+
+.apex-btn--md {
+    height: 40px;
+    padding: 0 var(--space-lg);
+    font-size: var(--text-sm);
+}
+
+.apex-btn--lg {
+    height: 48px;
+    padding: 0 var(--space-xl);
+    font-size: var(--text-base);
+}
+
+/* Full Width */
+.apex-btn--full {
+    width: 100%;
+}
+
+/* Primary Variant */
+.apex-btn--primary {
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+    border-color: var(--apex-teal);
+}
+
+.apex-btn--primary:hover:not(:disabled) {
+    background: var(--apex-teal-soft);
+    border-color: var(--apex-teal-soft);
+    box-shadow: 0 4px 20px var(--apex-teal-glow);
+}
+
+.apex-btn--primary:active:not(:disabled) {
+    background: var(--apex-teal-muted);
+}
+
+/* Secondary Variant */
+.apex-btn--secondary {
+    background: var(--glass-bg);
+    color: var(--apex-teal);
+    border-color: var(--apex-teal-border);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.apex-btn--secondary:hover:not(:disabled) {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--apex-teal);
+}
+
+/* Ghost Variant */
+.apex-btn--ghost {
+    background: transparent;
+    color: var(--apex-silver);
+    border-color: transparent;
+}
+
+.apex-btn--ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+/* Danger Variant */
+.apex-btn--danger {
+    background: var(--apex-critical);
+    color: var(--apex-white);
+    border-color: var(--apex-critical);
+}
+
+.apex-btn--danger:hover:not(:disabled) {
+    background: #DC2626;
+    box-shadow: 0 4px 20px var(--apex-critical-soft);
+}
+
+/* Success Variant */
+.apex-btn--success {
+    background: var(--apex-success);
+    color: var(--apex-obsidian);
+    border-color: var(--apex-success);
+}
+
+.apex-btn--success:hover:not(:disabled) {
+    background: #34D399;
+    box-shadow: 0 4px 20px var(--apex-success-soft);
+}
+
+/* Glass Variant - Premium Glassmorphism */
+.apex-btn--glass {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-silver);
+    border-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+.apex-btn--glass:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--apex-white);
+}
+
+/* Icon */
+.apex-btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.apex-btn__icon svg {
+    width: 1em;
+    height: 1em;
+}
+
+.apex-btn--sm .apex-btn__icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.apex-btn--lg .apex-btn__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Loading Spinner */
+.apex-btn--loading {
+    pointer-events: none;
+}
+
+.apex-btn__spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.apex-btn__spinner svg {
+    width: 1.2em;
+    height: 1.2em;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Text */
+.apex-btn__text {
+    display: flex;
+    align-items: center;
+}

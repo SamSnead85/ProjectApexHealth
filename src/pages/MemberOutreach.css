@@ -1,0 +1,324 @@
+.member-outreach-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.outreach__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.outreach__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.outreach__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.outreach__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Stats */
+.outreach__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+/* Tabs */
+.outreach__tabs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.outreach__tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.outreach__tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-silver);
+}
+
+.outreach__tab.active {
+    background: var(--apex-teal-glow);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+/* Outreach Queue */
+.outreach-queue__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.outreach-queue__header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.outreach-queue__filters {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.outreach-queue__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.outreach-queue__search svg {
+    color: var(--apex-steel);
+}
+
+.outreach-queue__search input {
+    background: none;
+    border: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    outline: none;
+    width: 180px;
+}
+
+.outreach-queue__search input::placeholder {
+    color: var(--apex-steel);
+}
+
+/* Outreach Tasks */
+.outreach-queue__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.outreach-task {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.outreach-task:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.outreach-task__member {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 160px;
+}
+
+.member-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-name {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.member-id {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.outreach-task__reason {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.outreach-task__channel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.outreach-task__attempts {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Campaigns Grid */
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.campaign-card {
+    padding: var(--space-lg);
+}
+
+.campaign-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+}
+
+.campaign-card__info h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 4px;
+}
+
+.campaign-type {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: capitalize;
+}
+
+.campaign-card__stats {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.campaign-stat {
+    flex: 1;
+    text-align: center;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+}
+
+.stat-label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Progress */
+.campaign-card__progress {
+    margin-bottom: var(--space-md);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: var(--gradient-aurora);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-smooth);
+}
+
+.campaign-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.campaign-channel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.campaign-channel svg {
+    color: var(--apex-teal);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .outreach__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .campaigns-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .outreach__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .outreach__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .outreach-task {
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,475 @@
+.hsa-wallet {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.hsa-wallet__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.hsa-wallet__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.hsa-wallet__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.hsa-wallet__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Balance Card */
+.balance-card__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.balance-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.balance-card__label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.balance-card__amount {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-teal) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.balance-card__breakdown {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.balance-card__cash,
+.balance-card__invested {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.balance-card__invested {
+    color: var(--apex-success);
+}
+
+/* Virtual Card */
+.virtual-card {
+    width: 280px;
+    height: 170px;
+    background: linear-gradient(135deg, var(--apex-obsidian-elevated) 0%, var(--apex-obsidian-soft) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.virtual-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--apex-teal) 0%, transparent 70%);
+    opacity: 0.1;
+    transform: translate(50%, -50%);
+}
+
+.virtual-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.virtual-card__type {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-teal);
+    letter-spacing: 1px;
+}
+
+.virtual-card__header svg {
+    color: var(--apex-silver);
+}
+
+.virtual-card__number {
+    font-size: var(--text-lg);
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+    letter-spacing: 2px;
+}
+
+.virtual-card__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Metrics */
+.hsa-wallet__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+}
+
+/* Contribution Progress */
+.hsa-wallet__contribution-progress {
+    margin-bottom: var(--space-xl);
+}
+
+.contribution-progress__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.contribution-progress__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.contribution-progress__bar-container {
+    margin-bottom: var(--space-md);
+}
+
+.contribution-progress__bar {
+    height: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.contribution-progress__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--apex-teal) 0%, var(--apex-success) 100%);
+    border-radius: var(--radius-full);
+    position: relative;
+    z-index: 1;
+}
+
+.contribution-progress__employer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--apex-electric-purple);
+    opacity: 0.5;
+    border-radius: var(--radius-full);
+}
+
+.contribution-progress__labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+    margin-top: var(--space-sm);
+}
+
+.contribution-progress__legend {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.contribution-progress__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+}
+
+.legend-dot--employee {
+    background: var(--apex-teal);
+}
+
+.legend-dot--employer {
+    background: var(--apex-electric-purple);
+}
+
+/* Transactions */
+.hsa-wallet__transactions {
+    margin-bottom: var(--space-xl);
+}
+
+.transactions__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.transactions__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.transactions__tabs {
+    display: flex;
+    gap: var(--space-xs);
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.transactions__tab {
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-xs);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.transactions__tab:hover {
+    color: var(--apex-silver);
+}
+
+.transactions__tab.active {
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+}
+
+.transactions__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.transaction-item--flagged {
+    border-left: 3px solid var(--apex-warning);
+}
+
+.transaction-item__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.transaction-item__icon--medical {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.transaction-item__icon--rx {
+    background: rgba(168, 85, 247, 0.2);
+    color: #a855f7;
+}
+
+.transaction-item__icon--vision {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.transaction-item__icon--dental {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.transaction-item__icon--contribution {
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+}
+
+.transaction-item__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.transaction-item__description {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.transaction-item__merchant {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.transaction-item__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.transaction-item__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.transaction-item__amount {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    min-width: 80px;
+    text-align: right;
+}
+
+.transaction-item__amount.positive {
+    color: var(--apex-success);
+}
+
+.transaction-item__amount.negative {
+    color: var(--apex-silver);
+}
+
+.transaction-item__arrow {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.transactions__footer {
+    display: flex;
+    justify-content: center;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+    margin-top: var(--space-md);
+}
+
+/* Eligible Expenses */
+.hsa-wallet__eligible-info h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.eligible-expenses__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.eligible-expense {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+    transition: all var(--transition-fast);
+}
+
+.eligible-expense:hover {
+    background: rgba(0, 210, 190, 0.1);
+}
+
+.eligible-expense span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.eligible-expenses__note {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-align: center;
+    padding: var(--space-md);
+    background: rgba(255, 149, 0, 0.1);
+    border-radius: var(--radius-md);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .hsa-wallet__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .eligible-expenses__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .balance-card__main {
+        flex-direction: column;
+    }
+
+    .virtual-card {
+        width: 100%;
+    }
+
+    .hsa-wallet__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .eligible-expenses__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .transactions__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+}

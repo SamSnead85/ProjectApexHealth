@@ -1,0 +1,1 @@
+export { DigitalIDCard } from './DigitalIDCard'

@@ -1,0 +1,192 @@
+.sms-notifications-page {
+    padding: var(--space-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sms__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+}
+
+.sms__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.sms__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Phone Card */
+.phone-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.phone-card__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.phone-card__info svg {
+    color: var(--apex-teal);
+}
+
+.phone-number {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.phone-status {
+    font-size: var(--text-xs);
+    color: var(--apex-success);
+}
+
+/* Preferences */
+.preferences-card {
+    margin-bottom: var(--space-xl);
+}
+
+.preferences-header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.preferences-header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.preferences-list {
+    padding: var(--space-md);
+}
+
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.preference-item:last-child {
+    border-bottom: none;
+}
+
+.preference-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.preference-category {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.preference-desc {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.toggle-btn.enabled {
+    color: var(--apex-teal);
+}
+
+/* History */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.history-header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.history-list {
+    padding: var(--space-md);
+}
+
+.history-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal-glow);
+    color: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-meta {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.history-type {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.history-phone {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+.history-message {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin-bottom: var(--space-xs);
+}
+
+.history-date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}

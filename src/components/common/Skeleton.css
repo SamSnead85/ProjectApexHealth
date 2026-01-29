@@ -1,0 +1,122 @@
+/* ================================
+   SKELETON LOADING COMPONENTS
+   Premium shimmer animation
+   ================================ */
+
+.skeleton {
+    background: linear-gradient(90deg,
+            var(--apex-obsidian-glass) 0%,
+            var(--apex-obsidian-elevated) 50%,
+            var(--apex-obsidian-glass) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Variants */
+.skeleton--text {
+    border-radius: var(--radius-xs);
+}
+
+.skeleton--circular {
+    border-radius: 50%;
+}
+
+.skeleton--rectangular,
+.skeleton--card,
+.skeleton--metric {
+    border-radius: var(--radius-md);
+}
+
+/* Dashboard Skeleton */
+.skeleton-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: var(--space-md);
+}
+
+.skeleton-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.skeleton-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+.skeleton-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+/* Table Skeleton */
+.skeleton-table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+}
+
+.skeleton-table-header,
+.skeleton-table-row {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+}
+
+.skeleton-table-header {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.skeleton-table-row {
+    padding: var(--space-sm) var(--space-md);
+}
+
+/* Card Grid Skeleton */
+.skeleton-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* Light Theme */
+[data-theme="light"] .skeleton {
+    background: linear-gradient(90deg,
+            var(--apex-obsidian-glass) 0%,
+            var(--apex-obsidian-elevated) 50%,
+            var(--apex-obsidian-glass) 100%);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .skeleton-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skeleton-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .skeleton-metrics {
+        grid-template-columns: 1fr;
+    }
+}

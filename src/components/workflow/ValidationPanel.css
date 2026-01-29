@@ -1,0 +1,141 @@
+/* ============================================
+   VALIDATION PANEL - Workflow Error Display
+   ============================================ */
+
+.validation-panel {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    min-width: 200px;
+    max-width: 400px;
+    background: var(--glass-bg-solid);
+    backdrop-filter: blur(var(--glass-blur-strong));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow-hover);
+    overflow: hidden;
+}
+
+.validation-panel--valid {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--apex-success);
+    font-size: var(--text-sm);
+}
+
+.validation-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--apex-white);
+    transition: background var(--transition-fast);
+}
+
+.validation-panel__header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.validation-panel__summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.validation-panel__count {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.validation-panel__count--error {
+    color: var(--apex-critical);
+}
+
+.validation-panel__count--warning {
+    color: var(--apex-warning);
+}
+
+.validation-panel__list {
+    border-top: 1px solid var(--glass-border);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.validation-panel__issue {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    transition: background var(--transition-fast);
+}
+
+.validation-panel__issue:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.validation-panel__issue--error {
+    color: var(--apex-critical);
+}
+
+.validation-panel__issue--error svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.validation-panel__issue--warning {
+    color: var(--apex-warning);
+}
+
+.validation-panel__issue--warning svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.validation-panel__issue span:first-of-type {
+    flex: 1;
+    color: var(--apex-silver);
+}
+
+.validation-panel__node-link {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    color: var(--apex-teal) !important;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.validation-panel__issue:hover .validation-panel__node-link {
+    opacity: 1;
+}
+
+/* Scrollbar */
+.validation-panel__list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.validation-panel__list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.validation-panel__list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}

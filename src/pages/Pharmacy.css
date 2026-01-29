@@ -1,0 +1,449 @@
+.pharmacy-page {
+    padding: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.pharmacy__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.pharmacy__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.pharmacy__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.pharmacy__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Metrics */
+.pharmacy__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+/* Tabs */
+.pharmacy__tabs {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
+
+.pharmacy__tab {
+    flex: 1;
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.pharmacy__tab:hover {
+    color: var(--apex-silver);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pharmacy__tab.active {
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+}
+
+/* Prescriptions */
+.prescriptions__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.prescription-card {
+    padding: var(--space-lg);
+}
+
+.prescription-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.prescription-card__drug {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.prescription-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-electric-purple) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-white);
+}
+
+.prescription-card__drug h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.prescription-card__generic {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.prescription-card__details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.prescription-card__detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.prescription-card__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prescription-card__value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.prescription-card__copay {
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+.prescription-card__meta {
+    display: flex;
+    gap: var(--space-lg);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-md);
+}
+
+.prescription-card__tier {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.prescription-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.prescription-card__refill-info {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.prescription-card__pending {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--apex-warning);
+}
+
+.prescription-card__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.ml-2 {
+    margin-left: var(--space-sm);
+}
+
+/* Pharmacies */
+.pharmacies__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+}
+
+.pharmacies__search svg {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.pharmacies__search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.pharmacies__search input::placeholder {
+    color: var(--apex-steel);
+}
+
+.pharmacies__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.pharmacy-card {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.pharmacy-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pharmacy-card__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.pharmacy-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--apex-teal-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+.pharmacy-card__info {
+    flex: 1;
+}
+
+.pharmacy-card__info h3 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.pharmacy-card__address {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.pharmacy-card__badges {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.pharmacy-card__details {
+    display: flex;
+    gap: var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin-bottom: var(--space-md);
+}
+
+.pharmacy-card__distance,
+.pharmacy-card__hours,
+.pharmacy-card__phone {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pharmacy-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Drug Search */
+.drug-search-card h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.drug-search-card__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xl);
+}
+
+.drug-search__input {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
+
+.drug-search__input svg {
+    color: var(--apex-steel);
+    margin-left: var(--space-sm);
+}
+
+.drug-search__input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+    padding: var(--space-sm);
+}
+
+.drug-search__input input::placeholder {
+    color: var(--apex-steel);
+}
+
+.drug-tiers h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-lg);
+}
+
+.drug-tiers__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.drug-tier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.drug-tier__number {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drug-tier__name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.drug-tier__cost {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .pharmacy__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prescription-card__details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .drug-tiers__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pharmacy__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .pharmacy__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .prescription-card__details {
+        grid-template-columns: 1fr;
+    }
+
+    .prescription-card__footer {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: flex-start;
+    }
+
+    .pharmacy-card__details {
+        flex-wrap: wrap;
+    }
+
+    .drug-tiers__grid {
+        grid-template-columns: 1fr;
+    }
+}

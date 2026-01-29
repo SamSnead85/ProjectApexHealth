@@ -1,0 +1,480 @@
+.prior-auth {
+    padding: var(--space-xl);
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Header */
+.prior-auth__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.prior-auth__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.prior-auth__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.prior-auth__header-actions {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+/* Metrics */
+.prior-auth__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+/* Grid */
+.prior-auth__grid {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: var(--space-xl);
+}
+
+/* List Section */
+.prior-auth__list-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Filters */
+.prior-auth__filters {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.prior-auth__search-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.prior-auth__search-wrapper svg {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.prior-auth__search-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.prior-auth__search-wrapper input::placeholder {
+    color: var(--apex-steel);
+}
+
+.prior-auth__status-filters {
+    display: flex;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.prior-auth__filter-btn {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-steel);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: capitalize;
+}
+
+.prior-auth__filter-btn:hover {
+    color: var(--apex-silver);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.prior-auth__filter-btn.active {
+    color: var(--apex-white);
+    background: var(--apex-teal);
+}
+
+/* Request List */
+.prior-auth__request-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Request Card */
+.prior-auth__request-card {
+    position: relative;
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.prior-auth__request-card.selected {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 1px var(--apex-teal), var(--card-glow-teal);
+}
+
+.prior-auth__request-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+}
+
+.prior-auth__request-id {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.prior-auth__request-id span:first-child {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.prior-auth__request-procedure {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.prior-auth__procedure-code {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+.prior-auth__procedure-desc {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.prior-auth__request-meta {
+    display: flex;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.prior-auth__request-meta span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.prior-auth__deadline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.prior-auth__deadline.critical {
+    color: var(--apex-warning);
+}
+
+.prior-auth__chevron {
+    position: absolute;
+    right: var(--space-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--apex-steel);
+}
+
+/* Detail Section */
+.prior-auth__detail-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: sticky;
+    top: var(--space-xl);
+}
+
+.prior-auth__detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.prior-auth__detail-header h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.prior-auth__submitted-date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.prior-auth__detail-badges {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* SLA Timer */
+.prior-auth__sla-timer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: linear-gradient(135deg, rgba(255, 149, 0, 0.1) 0%, rgba(255, 59, 48, 0.1) 100%);
+    border: 1px solid rgba(255, 149, 0, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--apex-warning);
+}
+
+.prior-auth__sla-timer svg {
+    flex-shrink: 0;
+}
+
+.prior-auth__sla-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.prior-auth__sla-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prior-auth__sla-time {
+    font-size: var(--text-lg);
+    font-weight: 600;
+}
+
+.prior-auth__sla-progress {
+    width: 100px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.prior-auth__sla-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--apex-warning) 0%, var(--apex-critical) 100%);
+    border-radius: var(--radius-full);
+}
+
+/* Sections */
+.prior-auth__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.prior-auth__section h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Procedure Detail */
+.prior-auth__procedure-detail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.prior-auth__procedure-code-large {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+.prior-auth__procedure-name {
+    display: block;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+}
+
+.prior-auth__diagnosis {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+/* Detail Grid */
+.prior-auth__detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.prior-auth__detail-item {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.prior-auth__detail-item svg {
+    color: var(--apex-teal);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.prior-auth__detail-item>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.prior-auth__detail-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prior-auth__detail-value {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.prior-auth__detail-sub {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-family: var(--font-mono);
+}
+
+/* Clinical Notes */
+.prior-auth__clinical-notes {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    line-height: 1.6;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+}
+
+/* Documents */
+.prior-auth__documents {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.prior-auth__doc {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+}
+
+.prior-auth__doc.received {
+    background: rgba(52, 199, 89, 0.1);
+    color: var(--apex-success);
+}
+
+.prior-auth__doc.missing {
+    background: rgba(255, 149, 0, 0.1);
+    color: var(--apex-warning);
+}
+
+/* Reviewer Notes */
+.prior-auth__reviewer-notes {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(0, 210, 190, 0.1);
+    border: 1px solid rgba(0, 210, 190, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.prior-auth__reviewer-notes svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.prior-auth__reviewer-notes p {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+}
+
+/* Actions */
+.prior-auth__actions {
+    display: flex;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* No Selection */
+.prior-auth__no-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-2xl);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .prior-auth__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prior-auth__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .prior-auth__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .prior-auth__filters {
+        flex-direction: column;
+    }
+
+    .prior-auth__status-filters {
+        flex-wrap: wrap;
+    }
+}

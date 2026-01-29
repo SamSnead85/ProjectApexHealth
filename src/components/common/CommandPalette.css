@@ -1,0 +1,262 @@
+/* ============================================
+   COMMAND PALETTE - Premium Spotlight Search
+   ============================================ */
+
+.command-palette__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 9998;
+}
+
+.command-palette {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 640px;
+    background: var(--apex-obsidian-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 80px rgba(6, 182, 212, 0.1);
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Header / Search Input */
+.command-palette__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.command-palette__search-icon {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.command-palette__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--apex-white);
+    caret-color: var(--apex-teal);
+}
+
+.command-palette__input::placeholder {
+    color: var(--apex-steel);
+}
+
+.command-palette__shortcut {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    font-size: 11px;
+    font-family: var(--font-mono);
+}
+
+.command-palette__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.command-palette__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* Results */
+.command-palette__results {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: var(--space-sm);
+}
+
+.command-palette__empty {
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+}
+
+.command-palette__section {
+    margin-bottom: var(--space-sm);
+}
+
+.command-palette__section:last-child {
+    margin-bottom: 0;
+}
+
+.command-palette__section-title {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--apex-steel);
+}
+
+/* Command Item */
+.command-palette__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.command-palette__item:hover,
+.command-palette__item--selected {
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.command-palette__item--selected {
+    background: rgba(6, 182, 212, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.3);
+}
+
+.command-palette__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+.command-palette__item-icon--action {
+    background: linear-gradient(135deg, var(--apex-teal-glow), var(--apex-purple-glow));
+    border-color: var(--apex-teal-border);
+}
+
+.command-palette__item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.command-palette__item-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.command-palette__item-description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.command-palette__item-arrow {
+    color: var(--apex-steel);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all var(--transition-fast);
+}
+
+.command-palette__item:hover .command-palette__item-arrow,
+.command-palette__item--selected .command-palette__item-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--apex-teal);
+}
+
+/* Footer */
+.command-palette__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-sm) var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.command-palette__footer span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 11px;
+    color: var(--apex-steel);
+}
+
+.command-palette__footer kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xs);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--apex-silver);
+}
+
+/* Light Theme */
+[data-theme="light"] .command-palette {
+    background: var(--apex-obsidian);
+    border-color: var(--glass-border);
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .command-palette__backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar */
+.command-palette__results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.command-palette__results::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.command-palette__results::-webkit-scrollbar-thumb {
+    background: var(--apex-obsidian-elevated);
+    border-radius: var(--radius-full);
+}
+
+.command-palette__results::-webkit-scrollbar-thumb:hover {
+    background: var(--apex-steel);
+}

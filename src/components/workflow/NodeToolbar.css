@@ -1,0 +1,142 @@
+/* ============================================
+   NODE TOOLBAR - Hover Quick Actions
+   n8n-inspired floating toolbar
+   ============================================ */
+
+.node-toolbar {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    background: var(--glass-bg-solid);
+    backdrop-filter: blur(var(--glass-blur-strong));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow-hover);
+    pointer-events: auto;
+}
+
+.node-toolbar__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.node-toolbar__btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--apex-white);
+}
+
+.node-toolbar__btn:active {
+    transform: scale(0.95);
+}
+
+/* Run button */
+.node-toolbar__btn--run {
+    color: var(--apex-teal);
+}
+
+.node-toolbar__btn--run:hover {
+    background: var(--apex-teal-soft);
+    color: var(--apex-teal);
+}
+
+/* Delete button */
+.node-toolbar__btn--delete:hover {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+.node-toolbar__btn--confirm {
+    background: var(--apex-critical) !important;
+    color: var(--apex-white) !important;
+    animation: pulseDelete 0.5s ease infinite;
+}
+
+@keyframes pulseDelete {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+    }
+}
+
+/* Divider */
+.node-toolbar__divider {
+    width: 1px;
+    height: 16px;
+    background: var(--glass-border);
+    margin: 0 var(--space-xs);
+}
+
+/* Status indicator */
+.node-toolbar__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    margin-right: var(--space-xs);
+}
+
+.node-toolbar__status--running {
+    background: var(--apex-teal-soft);
+    color: var(--apex-teal);
+}
+
+.node-toolbar__status--completed {
+    background: var(--apex-success-soft);
+    color: var(--apex-success);
+}
+
+.node-toolbar__status--error {
+    background: var(--apex-critical-soft);
+    color: var(--apex-critical);
+}
+
+.node-toolbar__status--pending {
+    background: var(--apex-warning-soft);
+    color: var(--apex-warning);
+}
+
+/* Status icons */
+.node-toolbar__status-icon--running {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.node-toolbar__status-icon--success {
+    color: var(--apex-success);
+}
+
+.node-toolbar__status-icon--error {
+    color: var(--apex-critical);
+}
+
+.node-toolbar__status-icon--pending {
+    color: var(--apex-warning);
+}

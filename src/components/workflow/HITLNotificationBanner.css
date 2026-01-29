@@ -1,0 +1,325 @@
+/* ============================================
+   HITL NOTIFICATION BANNER
+   ============================================ */
+
+.hitl-banner {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    min-width: 400px;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.hitl-banner--expanded {
+    max-height: 80vh;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.hitl-banner__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.hitl-banner__header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.hitl-banner__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(249, 115, 22, 0.15);
+    border-radius: 8px;
+    color: #F97316;
+}
+
+.hitl-banner__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    background: #EF4444;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.hitl-banner__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.hitl-banner__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hitl-banner__subtitle {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.hitl-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hitl-banner__expand,
+.hitl-banner__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hitl-banner__expand:hover,
+.hitl-banner__dismiss:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.hitl-banner__chevron--open {
+    transform: rotate(90deg);
+}
+
+/* ============================================
+   CONTENT
+   ============================================ */
+
+.hitl-banner__content {
+    border-top: 1px solid var(--glass-border);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ============================================
+   HITL ITEM
+   ============================================ */
+
+.hitl-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+}
+
+.hitl-item:last-child {
+    border-bottom: none;
+}
+
+.hitl-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--text-tertiary);
+}
+
+.hitl-item.hitl-priority--high::before {
+    background: #EF4444;
+}
+
+.hitl-item.hitl-priority--medium::before {
+    background: #F59E0B;
+}
+
+.hitl-item.hitl-priority--low::before {
+    background: #10B981;
+}
+
+.hitl-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.hitl-item__workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.hitl-item__workflow-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hitl-item__node {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.hitl-item__priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hitl-priority--high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.hitl-priority--medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.hitl-priority--low {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.hitl-item__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.hitl-item__claim {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hitl-item__claim-id {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-family: 'SF Mono', Monaco, monospace;
+}
+
+.hitl-item__claim-amount {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hitl-item__ai {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hitl-rec {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 600;
+}
+
+.hitl-rec--approve {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+}
+
+.hitl-rec--deny {
+    background: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+}
+
+.hitl-rec--review {
+    background: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+}
+
+.hitl-item__confidence {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+.hitl-item__reason {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 0.75rem 0;
+}
+
+.hitl-item__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hitl-item__deadline {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.hitl-item__deadline svg {
+    color: var(--text-tertiary);
+}
+
+.hitl-item__review-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.4);
+    border-radius: 6px;
+    color: #F97316;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hitl-item__review-btn:hover {
+    background: rgba(249, 115, 22, 0.25);
+    border-color: rgba(249, 115, 22, 0.6);
+}

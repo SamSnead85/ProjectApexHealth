@@ -1,0 +1,472 @@
+/* Employer Portal Dashboard Styles */
+
+.employer-portal {
+    padding: var(--space-2xl);
+    min-height: 100vh;
+    background: var(--apex-obsidian);
+}
+
+.employer-portal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-2xl);
+}
+
+.employer-portal__title-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.employer-portal__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.employer-portal__subtitle {
+    font-size: var(--text-base);
+    color: var(--apex-steel);
+}
+
+.employer-portal__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Metrics Grid */
+.employer-portal__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+/* Dashboard Grid */
+.employer-portal__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+}
+
+.employer-portal__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.employer-portal__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Enrollment Tracker */
+.enrollment-tracker {
+    background: var(--apex-obsidian-elevated);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.enrollment-tracker__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.enrollment-tracker__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.enrollment-tracker__progress {
+    margin-bottom: var(--space-xl);
+}
+
+.enrollment-tracker__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.enrollment-tracker__progress-label {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.enrollment-tracker__progress-value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.enrollment-tracker__progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.enrollment-tracker__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--apex-teal), #10B981);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease-out;
+}
+
+.enrollment-tracker__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.enrollment-stat {
+    text-align: center;
+}
+
+.enrollment-stat__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.enrollment-stat__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.enrollment-stat--pending .enrollment-stat__value {
+    color: #F59E0B;
+}
+
+.enrollment-stat--complete .enrollment-stat__value {
+    color: #10B981;
+}
+
+/* Plan Summary */
+.plan-summary {
+    background: var(--apex-obsidian-elevated);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.plan-summary__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.plan-summary__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.plan-summary__list {
+    padding: var(--space-md);
+}
+
+.plan-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+}
+
+.plan-item:hover {
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.plan-item__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+}
+
+.plan-item__icon--medical {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.plan-item__icon--dental {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+}
+
+.plan-item__icon--vision {
+    background: rgba(99, 102, 241, 0.15);
+    color: #6366F1;
+}
+
+.plan-item__icon--life {
+    background: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+}
+
+.plan-item__details {
+    flex: 1;
+}
+
+.plan-item__name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.plan-item__carrier {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.plan-item__enrolled {
+    text-align: right;
+}
+
+.plan-item__enrolled-count {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.plan-item__enrolled-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Billing Card */
+.billing-card {
+    background: var(--apex-obsidian-elevated);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.billing-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.billing-card__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.billing-card__amount {
+    text-align: center;
+    padding: var(--space-xl);
+    background: rgba(6, 182, 212, 0.05);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.billing-card__amount-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+}
+
+.billing-card__amount-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.billing-card__due {
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    margin-top: var(--space-xs);
+}
+
+.billing-card__history {
+    border-top: 1px solid var(--glass-border);
+    padding-top: var(--space-lg);
+}
+
+.billing-card__history-title {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+}
+
+.billing-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+}
+
+.billing-history-item__date {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.billing-history-item__amount {
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+}
+
+.billing-history-item__status {
+    font-size: var(--text-xs);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.billing-history-item__status--paid {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+}
+
+/* Census Widget */
+.census-widget {
+    background: var(--apex-obsidian-elevated);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.census-widget__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.census-widget__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.census-widget__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.census-stat {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.census-stat__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.census-stat__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.census-widget__recent {
+    border-top: 1px solid var(--glass-border);
+    padding-top: var(--space-lg);
+}
+
+.census-widget__recent-title {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+}
+
+.census-change {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) 0;
+}
+
+.census-change__icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+}
+
+.census-change__icon--add {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+}
+
+.census-change__icon--remove {
+    background: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+}
+
+.census-change__text {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.census-change__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .employer-portal__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .employer-portal__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .employer-portal {
+        padding: var(--space-lg);
+    }
+
+    .employer-portal__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .enrollment-tracker__stats {
+        grid-template-columns: 1fr;
+    }
+}
