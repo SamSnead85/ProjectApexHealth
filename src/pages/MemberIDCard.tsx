@@ -4,7 +4,7 @@ import {
     CreditCard,
     Download,
     Share2,
-    QrCode,
+    Grid3X3,
     Copy,
     CheckCircle2,
     ArrowLeft
@@ -129,7 +129,7 @@ export function MemberIDCard() {
 
                         {/* QR Code */}
                         <div className="id-card-3d__qr">
-                            <QrCode size={56} strokeWidth={1.5} />
+                            <Grid3X3 size={36} strokeWidth={1.5} />
                         </div>
                     </div>
 

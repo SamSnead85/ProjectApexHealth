@@ -1,12 +1,27 @@
 /* ============================================
-   PREMIUM MEMBER ID CARD - 3D Glassmorphism
-   Inspired by Kaleido Health's design
+   PREMIUM MEMBER ID CARD - Ultra Premium
+   3D Glassmorphism with Teal Gradient Glow
    ============================================ */
 
 .id-card-page {
     min-height: 100vh;
-    background: var(--apex-obsidian);
+    background: #070a0d;
     padding: var(--space-xl);
+    position: relative;
+}
+
+/* Subtle ambient glow in background */
+.id-card-page::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(13, 148, 136, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(60px);
 }
 
 /* Header */
@@ -16,6 +31,8 @@
     justify-content: space-between;
     max-width: 600px;
     margin: 0 auto var(--space-3xl);
+    position: relative;
+    z-index: 1;
 }
 
 .id-card-page__header-left {
@@ -62,26 +79,28 @@
 }
 
 /* ============================================
-   3D CARD CONTAINER
+   3D CARD CONTAINER - Enhanced Perspective
    ============================================ */
 
 .id-card-3d-container {
     display: flex;
     justify-content: center;
-    perspective: 1200px;
+    perspective: 1500px;
     margin-bottom: var(--space-2xl);
+    position: relative;
+    z-index: 1;
 }
 
 .id-card-3d-wrapper {
     position: relative;
-    width: 420px;
-    height: 260px;
+    width: 480px;
+    height: 290px;
     cursor: pointer;
     transform-style: preserve-3d;
 }
 
 /* ============================================
-   3D CARD - Premium Glassmorphism
+   3D CARD - Ultra Premium Glassmorphism
    ============================================ */
 
 .id-card-3d {
@@ -91,63 +110,98 @@
     overflow: hidden;
     backface-visibility: hidden;
 
-    /* 3D Shadow Effect */
-    box-shadow:
-        0 50px 100px -20px rgba(0, 0, 0, 0.5),
-        0 30px 60px -30px rgba(0, 0, 0, 0.6),
-        0 -2px 6px rgba(255, 255, 255, 0.05) inset,
-        0 2px 6px rgba(0, 0, 0, 0.3) inset;
+    /* Premium Glow Border */
+    border: 1px solid rgba(20, 184, 166, 0.35);
 
-    /* Subtle 3D transform for depth */
-    transform: rotateX(5deg) rotateY(-2deg);
-    transition: transform 0.3s ease;
+    /* Multi-layer Shadow for 3D depth */
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        /* Teal Glow */
+        0 0 60px rgba(13, 148, 136, 0.15),
+        0 0 120px rgba(13, 148, 136, 0.08),
+        /* Inner highlight */
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    /* Subtle 3D transform */
+    transform: rotateX(6deg) rotateY(-3deg);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .id-card-3d-wrapper:hover .id-card-3d--front {
-    transform: rotateX(2deg) rotateY(0deg) translateY(-8px);
+    transform: rotateX(2deg) rotateY(0deg) translateY(-12px) scale(1.02);
     box-shadow:
-        0 60px 120px -20px rgba(0, 0, 0, 0.6),
-        0 40px 80px -30px rgba(0, 0, 0, 0.7),
-        0 -2px 6px rgba(255, 255, 255, 0.08) inset;
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 50px 100px rgba(0, 0, 0, 0.6),
+        /* Enhanced Teal Glow on hover */
+        0 0 80px rgba(13, 148, 136, 0.25),
+        0 0 160px rgba(13, 148, 136, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Front of Card */
+/* ============================================
+   FRONT OF CARD - Premium Teal Gradient
+   ============================================ */
+
 .id-card-3d--front {
-    background: linear-gradient(145deg,
+    background:
+        /* Noise texture overlay */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"),
+        /* Main gradient */
+        linear-gradient(155deg,
             #0d9488 0%,
-            #0f766e 40%,
-            #115e59 70%,
-            #134e4a 100%);
+            #0f766e 25%,
+            #115e59 50%,
+            #134e4a 75%,
+            #0f3d3e 100%);
+    background-blend-mode: overlay, normal;
 }
 
 /* Back of Card */
 .id-card-3d--back {
-    background: linear-gradient(145deg,
-            #115e59 0%,
-            #0f766e 50%,
+    background:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"),
+        linear-gradient(155deg,
+            #0f3d3e 0%,
+            #115e59 30%,
+            #0f766e 60%,
             #0d9488 100%);
-    transform: rotateY(180deg) rotateX(5deg);
+    background-blend-mode: overlay, normal;
+    transform: rotateY(180deg) rotateX(6deg);
 }
 
-/* Gradient Overlay for depth */
+/* Gradient Overlay for premium lighting */
 .id-card-3d__gradient {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 50% at 20% 20%,
-            rgba(255, 255, 255, 0.15) 0%,
+        /* Top-left bright highlight */
+        radial-gradient(ellipse 100% 80% at 15% 10%,
+            rgba(255, 255, 255, 0.18) 0%,
+            transparent 45%),
+        /* Bottom-right shadow */
+        radial-gradient(ellipse 80% 60% at 85% 90%,
+            rgba(0, 0, 0, 0.25) 0%,
             transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 80%,
-            rgba(0, 0, 0, 0.2) 0%,
-            transparent 50%);
+        /* Center subtle glow */
+        radial-gradient(ellipse 60% 40% at 50% 50%,
+            rgba(20, 184, 166, 0.1) 0%,
+            transparent 70%);
     pointer-events: none;
 }
 
-/* Card Content */
+/* ============================================
+   CARD CONTENT - Typography & Layout
+   ============================================ */
+
 .id-card-3d__content {
     position: relative;
     height: 100%;
-    padding: 24px 28px;
+    padding: 28px 32px;
     display: flex;
     flex-direction: column;
     z-index: 1;
@@ -158,18 +212,22 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .id-card-3d__carrier-badge {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-size: 11px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(94, 234, 212, 0.95);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+}
+
+.id-card-3d__carrier-badge svg {
+    opacity: 0.9;
 }
 
 .id-card-3d__plan-info {
@@ -180,52 +238,55 @@
     display: block;
     font-size: 10px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
 }
 
 .id-card-3d__plan-name {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(94, 234, 212, 0.9);
 }
 
 /* Carrier Name */
 .id-card-3d__carrier-name {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
     color: #ffffff;
-    margin: 0 0 20px 0;
-    letter-spacing: -0.3px;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Member Section */
 .id-card-3d__member-section {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .id-card-3d__label {
     display: block;
     font-size: 10px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     margin-bottom: 4px;
 }
 
 .id-card-3d__member-name {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     color: #ffffff;
+    letter-spacing: -0.2px;
 }
 
 /* IDs Row */
 .id-card-3d__ids-row {
     display: flex;
-    gap: 40px;
+    gap: 48px;
     margin-bottom: auto;
 }
 
@@ -235,9 +296,9 @@
 }
 
 .id-card-3d__id-value {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
-    font-family: var(--font-mono);
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     color: #ffffff;
     letter-spacing: 0.5px;
 }
@@ -249,38 +310,55 @@
 
 .id-card-3d__tap-hint {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.45);
-}
-
-/* QR Code */
-.id-card-3d__qr {
-    position: absolute;
-    bottom: 24px;
-    right: 28px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 8px;
-    border-radius: 8px;
-    backdrop-filter: blur(4px);
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 400;
 }
 
 /* ============================================
-   BACK OF CARD
+   QR CODE - Premium Glassmorphism Style
+   ============================================ */
+
+.id-card-3d__qr {
+    position: absolute;
+    bottom: 28px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.id-card-3d__qr:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   BACK OF CARD - Pharmacy Benefits
    ============================================ */
 
 .id-card-3d__back-title {
     font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 16px 0;
+    color: rgba(94, 234, 212, 0.95);
+    margin: 0 0 20px 0;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 .id-card-3d__rx-grid {
     display: flex;
-    gap: 32px;
-    margin-bottom: 24px;
+    gap: 40px;
+    margin-bottom: 28px;
 }
 
 .id-card-3d__rx-item {
@@ -289,10 +367,11 @@
 }
 
 .id-card-3d__rx-value {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    font-family: var(--font-mono);
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .id-card-3d__contact {
@@ -300,83 +379,93 @@
 }
 
 .id-card-3d__contact h4 {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    margin: 0 0 10px 0;
 }
 
 .id-card-3d__contact p {
-    font-size: 14px;
+    font-size: 15px;
     color: #ffffff;
-    margin: 0 0 4px 0;
+    margin: 0 0 6px 0;
+    font-weight: 400;
 }
 
 /* ============================================
-   QUICK ACTION CARDS
+   QUICK ACTION CARDS - Dark Glass Style
    ============================================ */
 
 .id-card-page__quick-actions {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    max-width: 420px;
+    max-width: 480px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .id-card-quick-action {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     width: 100%;
-    padding: var(--space-md) var(--space-lg);
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-xl);
+    background: rgba(15, 23, 30, 0.7);
+    border: 1px solid rgba(20, 184, 166, 0.15);
+    border-radius: 16px;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s ease;
     text-align: left;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .id-card-quick-action:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: var(--glass-border-hover);
+    background: rgba(20, 184, 166, 0.08);
+    border-color: rgba(20, 184, 166, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .id-card-quick-action__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: rgba(6, 182, 212, 0.15);
-    border-radius: var(--radius-md);
-    color: var(--apex-teal);
+    width: 48px;
+    height: 48px;
+    background: rgba(20, 184, 166, 0.12);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    border-radius: 12px;
+    color: #14b8a6;
     flex-shrink: 0;
 }
 
 .id-card-quick-action__icon--success {
-    background: rgba(16, 185, 129, 0.15);
-    color: var(--apex-success);
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
 }
 
 .id-card-quick-action__text {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
 .id-card-quick-action__title {
-    font-size: var(--text-sm);
+    font-size: 15px;
     font-weight: 600;
     color: var(--apex-white);
 }
 
 .id-card-quick-action__subtitle {
-    font-size: var(--text-xs);
-    color: var(--apex-steel);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
 }
 
 .id-card-quick-action--status {
@@ -384,12 +473,14 @@
 }
 
 .id-card-quick-action--status:hover {
-    background: var(--apex-obsidian-glass);
-    border-color: var(--glass-border);
+    background: rgba(15, 23, 30, 0.7);
+    border-color: rgba(20, 184, 166, 0.15);
+    transform: none;
+    box-shadow: none;
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE - Mobile Optimization
    ============================================ */
 
 @media (max-width: 768px) {
@@ -405,24 +496,44 @@
 
     .id-card-3d-wrapper {
         width: 100%;
-        max-width: 380px;
-        height: 240px;
+        max-width: 420px;
+        height: 260px;
     }
 
     .id-card-3d {
-        transform: none;
+        transform: rotateX(4deg);
     }
 
     .id-card-3d-wrapper:hover .id-card-3d--front {
-        transform: translateY(-4px);
+        transform: rotateX(2deg) translateY(-8px) scale(1.01);
     }
 
     .id-card-3d__content {
-        padding: 20px;
+        padding: 22px 24px;
     }
 
     .id-card-3d__carrier-name {
-        font-size: 18px;
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    .id-card-3d__member-name {
+        font-size: 17px;
+    }
+
+    .id-card-3d__ids-row {
+        gap: 32px;
+    }
+
+    .id-card-3d__id-value {
+        font-size: 14px;
+    }
+
+    .id-card-3d__qr {
+        width: 60px;
+        height: 60px;
+        bottom: 22px;
+        right: 24px;
     }
 
     .id-card-page__actions {
@@ -432,25 +543,28 @@
     .id-card-page__actions button {
         flex: 1;
     }
+
+    .id-card-page__quick-actions {
+        max-width: 100%;
+    }
 }
 
 /* ============================================
-   LIGHT THEME ADJUSTMENTS
+   LIGHT THEME - Keep dark for premium feel
    ============================================ */
 
 [data-theme="light"] .id-card-page {
-    background: var(--apex-obsidian);
+    background: #070a0d;
 }
 
 [data-theme="light"] .id-card-quick-action {
-    background: rgba(255, 255, 255, 0.8);
-    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(15, 23, 30, 0.7);
 }
 
 [data-theme="light"] .id-card-quick-action__title {
-    color: var(--apex-obsidian);
+    color: var(--apex-white);
 }
 
 [data-theme="light"] .id-card-quick-action__subtitle {
-    color: var(--apex-steel);
+    color: rgba(255, 255, 255, 0.5);
 }
