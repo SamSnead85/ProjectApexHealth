@@ -1,0 +1,410 @@
+/* ============================================================
+   APEX CLARITY - Light Mode Component Overrides
+   Premium Healthcare Light Theme
+   ============================================================ */
+
+/* --------------------------------
+   ATMOSPHERIC BACKGROUND - Light Mode
+   Subtle teal glow maintained for tech-forward feel
+   -------------------------------- */
+[data-theme="light"] .apex-atmosphere {
+    background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(8, 145, 178, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+        linear-gradient(180deg, #F5F7FA 0%, #EEF1F5 50%, #E8ECF1 100%);
+}
+
+[data-theme="light"] .apex-atmosphere::before {
+    opacity: 0.015;
+}
+
+/* --------------------------------
+   NETFLIX-STYLE CARDS - Light Mode
+   Premium shadows and subtle borders
+   -------------------------------- */
+[data-theme="light"] .netflix-card {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .netflix-card:hover {
+    border-color: rgba(8, 145, 178, 0.2);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* --------------------------------
+   GLASS CARD COMPONENT
+   -------------------------------- */
+[data-theme="light"] .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .glass-card:hover {
+    border-color: rgba(8, 145, 178, 0.2);
+}
+
+/* --------------------------------
+   METRIC CARDS
+   -------------------------------- */
+[data-theme="light"] .metric-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .metric-card__icon {
+    background: rgba(8, 145, 178, 0.1);
+}
+
+/* --------------------------------
+   SIDEBAR / SHELL NAVIGATION
+   -------------------------------- */
+[data-theme="light"] .shell__sidebar {
+    background: rgba(255, 255, 255, 0.98);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .shell__nav-item {
+    color: #475569;
+}
+
+[data-theme="light"] .shell__nav-item:hover {
+    background: rgba(8, 145, 178, 0.06);
+    color: #0891B2;
+}
+
+[data-theme="light"] .shell__nav-item.active {
+    background: rgba(8, 145, 178, 0.1);
+    color: #0891B2;
+}
+
+[data-theme="light"] .shell__header {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------
+   BUTTONS - Light Mode Variants
+   -------------------------------- */
+[data-theme="light"] .button--primary {
+    background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
+    color: #FFFFFF;
+}
+
+[data-theme="light"] .button--primary:hover {
+    background: linear-gradient(135deg, #0E7490 0%, #155E75 100%);
+}
+
+[data-theme="light"] .button--secondary {
+    background: rgba(8, 145, 178, 0.08);
+    border: 1px solid rgba(8, 145, 178, 0.25);
+    color: #0891B2;
+}
+
+[data-theme="light"] .button--secondary:hover {
+    background: rgba(8, 145, 178, 0.15);
+}
+
+[data-theme="light"] .button--ghost {
+    color: #475569;
+}
+
+[data-theme="light"] .button--ghost:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1E293B;
+}
+
+/* --------------------------------
+   BADGES
+   -------------------------------- */
+[data-theme="light"] .badge--success {
+    background: rgba(5, 150, 105, 0.12);
+    color: #059669;
+}
+
+[data-theme="light"] .badge--warning {
+    background: rgba(217, 119, 6, 0.12);
+    color: #D97706;
+}
+
+[data-theme="light"] .badge--critical {
+    background: rgba(220, 38, 38, 0.12);
+    color: #DC2626;
+}
+
+[data-theme="light"] .badge--info {
+    background: rgba(37, 99, 235, 0.12);
+    color: #2563EB;
+}
+
+[data-theme="light"] .badge--teal {
+    background: rgba(8, 145, 178, 0.12);
+    color: #0891B2;
+}
+
+/* --------------------------------
+   FORM INPUTS
+   -------------------------------- */
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] input[type="password"],
+[data-theme="light"] input[type="search"],
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1E293B;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+    color: #94A3B8;
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] select:focus {
+    border-color: #0891B2;
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+}
+
+/* --------------------------------
+   TABLES
+   -------------------------------- */
+[data-theme="light"] table {
+    background: #FFFFFF;
+}
+
+[data-theme="light"] th {
+    background: #F5F7FA;
+    color: #475569;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #334155;
+}
+
+[data-theme="light"] tr:hover td {
+    background: rgba(8, 145, 178, 0.04);
+}
+
+/* --------------------------------
+   MODAL OVERLAYS
+   -------------------------------- */
+[data-theme="light"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .modal-content {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+}
+
+/* --------------------------------
+   SCROLLBAR - Light Mode
+   -------------------------------- */
+[data-theme="light"] ::-webkit-scrollbar-track {
+    background: #F5F7FA;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* --------------------------------
+   CHARTS (Recharts)
+   -------------------------------- */
+[data-theme="light"] .recharts-cartesian-grid line {
+    stroke: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .recharts-text {
+    fill: #64748B;
+}
+
+[data-theme="light"] .recharts-tooltip-wrapper .recharts-default-tooltip {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --------------------------------
+   WORKFLOW BUILDER - Light Mode
+   -------------------------------- */
+[data-theme="light"] .workflow-canvas {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(8, 145, 178, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #F5F7FA 0%, #EEF1F5 100%);
+}
+
+[data-theme="light"] .workflow-node {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .node-palette {
+    background: rgba(255, 255, 255, 0.98);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .node-palette__item {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .node-palette__item:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
+}
+
+/* --------------------------------
+   MEMBER ID CARD - Premium Light Mode
+   The card should look stunning in both themes
+   -------------------------------- */
+[data-theme="light"] .id-card-page {
+    background: linear-gradient(180deg, #F5F7FA 0%, #E8ECF1 100%);
+}
+
+[data-theme="light"] .id-card-page::before {
+    background: radial-gradient(ellipse, rgba(8, 145, 178, 0.08) 0%, transparent 60%);
+}
+
+[data-theme="light"] .id-card-page__header h1 {
+    color: #1E293B;
+}
+
+[data-theme="light"] .id-card-page__header p {
+    color: #64748B;
+}
+
+[data-theme="light"] .id-card-page__back:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1E293B;
+}
+
+/* The 3D card itself maintains dark gradient for premium look */
+[data-theme="light"] .id-card-3d {
+    /* Keep the card itself with a premium gradient - not inverted */
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* --------------------------------
+   PHARMACY PAGE - Light Mode
+   -------------------------------- */
+[data-theme="light"] .pharmacy-page {
+    background: #F5F7FA;
+}
+
+[data-theme="light"] .pharmacy__tab {
+    background: transparent;
+    color: #64748B;
+}
+
+[data-theme="light"] .pharmacy__tab:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1E293B;
+}
+
+[data-theme="light"] .pharmacy__tab.active {
+    background: #0891B2;
+    color: #FFFFFF;
+}
+
+[data-theme="light"] .prescription-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .prescription-card__icon {
+    background: linear-gradient(135deg, #0891B2 0%, #7C3AED 100%);
+}
+
+[data-theme="light"] .pharmacy-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .pharmacy__modal {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .pharmacy__modal-header {
+    background: #F5F7FA;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .pharmacy__modal-header h3 {
+    color: #1E293B;
+}
+
+/* --------------------------------
+   DASHBOARD - Light Mode
+   -------------------------------- */
+[data-theme="light"] .dashboard-page {
+    background: #F5F7FA;
+}
+
+/* --------------------------------
+   LANDING PAGE - Light Mode
+   Keep hero sections impactful
+   -------------------------------- */
+[data-theme="light"] .landing-hero {
+    background: linear-gradient(180deg, #F5F7FA 0%, #E8ECF1 100%);
+}
+
+/* --------------------------------
+   QUICK ACTIONS / MEMBER HOME
+   -------------------------------- */
+[data-theme="light"] .quick-action {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .quick-action:hover {
+    border-color: rgba(8, 145, 178, 0.25);
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .quick-action__icon {
+    background: rgba(8, 145, 178, 0.1);
+    color: #0891B2;
+}
+
+/* --------------------------------
+   TABS GENERIC
+   -------------------------------- */
+[data-theme="light"] .tabs__tab {
+    color: #64748B;
+}
+
+[data-theme="light"] .tabs__tab:hover {
+    color: #1E293B;
+}
+
+[data-theme="light"] .tabs__tab.active {
+    color: #0891B2;
+    border-color: #0891B2;
+}
+
+/* --------------------------------
+   SELECTION
+   -------------------------------- */
+[data-theme="light"] ::selection {
+    background: #0891B2;
+    color: #FFFFFF;
+}

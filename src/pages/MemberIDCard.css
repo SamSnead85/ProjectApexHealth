@@ -512,7 +512,76 @@
     }
 }
 
-/* Keep dark in light mode */
+/* ============================================
+   LIGHT MODE - Premium ID Card Page
+   The ID card itself stays with premium gradient 
+   ============================================ */
+
 [data-theme="light"] .id-card-page {
-    background: #080b0e;
+    background: linear-gradient(180deg, #F5F7FA 0%, #E8ECF1 100%);
+}
+
+[data-theme="light"] .id-card-page::before {
+    background: radial-gradient(ellipse, rgba(8, 145, 178, 0.08) 0%, transparent 60%);
+    filter: blur(80px);
+}
+
+[data-theme="light"] .id-card-page__header h1 {
+    color: #1E293B;
+}
+
+[data-theme="light"] .id-card-page__header p {
+    color: #64748B;
+}
+
+[data-theme="light"] .id-card-page__back {
+    color: #64748B;
+}
+
+[data-theme="light"] .id-card-page__back:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1E293B;
+}
+
+/* The 3D card itself keeps premium dark gradient - looks stunning in both modes */
+[data-theme="light"] .id-card-3d {
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.25),
+        0 12px 24px rgba(0, 0, 0, 0.15),
+        0 0 40px rgba(8, 145, 178, 0.15);
+}
+
+[data-theme="light"] .id-card-3d:hover {
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.3),
+        0 16px 32px rgba(0, 0, 0, 0.2),
+        0 0 60px rgba(8, 145, 178, 0.2);
+}
+
+/* Quick actions in light mode */
+[data-theme="light"] .id-card-page__quick-actions h3 {
+    color: #1E293B;
+}
+
+[data-theme="light"] .quick-action-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .quick-action-card:hover {
+    border-color: rgba(8, 145, 178, 0.25);
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .quick-action-card__icon {
+    background: rgba(8, 145, 178, 0.1);
+    color: #0891B2;
+}
+
+[data-theme="light"] .quick-action-card__title {
+    color: #1E293B;
+}
+
+[data-theme="light"] .quick-action-card__description {
+    color: #64748B;
 }

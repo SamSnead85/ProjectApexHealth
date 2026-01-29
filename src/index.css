@@ -125,73 +125,83 @@
 }
 
 /* ================================
-   LIGHT THEME - Professional Healthcare Mode
-   Inspired by CMS.gov, healthcare.gov, and enterprise health platforms
+   APEX CLARITY - Premium Healthcare Light Mode
+   A sophisticated, tech-forward light theme for healthcare
    ================================ */
 [data-theme="light"] {
-  /* Foundation Colors - Clean Clinical White */
-  --apex-obsidian: #FFFFFF;
-  --apex-obsidian-soft: #F8FAFC;
-  --apex-obsidian-glass: #F1F5F9;
-  --apex-obsidian-elevated: #E2E8F0;
+  /* Foundation Colors - Warm Gray Base (NOT pure white) */
+  --apex-obsidian: #F5F7FA;
+  --apex-obsidian-soft: #EEF1F5;
+  --apex-obsidian-glass: #E8ECF1;
+  --apex-obsidian-elevated: #DFE4EB;
   --apex-obsidian-card: #FFFFFF;
 
-  /* Professional Healthcare Teal - CMS/Medicare Inspired */
+  /* Professional Healthcare Teal - Deeper for light surfaces */
   --apex-teal: #0891B2;
-  --apex-teal-soft: #06B6D4;
+  --apex-teal-soft: #22D3EE;
   --apex-teal-muted: #0E7490;
-  --apex-teal-glow: rgba(8, 145, 178, 0.12);
-  --apex-teal-border: rgba(8, 145, 178, 0.3);
+  --apex-teal-glow: rgba(8, 145, 178, 0.15);
+  --apex-teal-border: rgba(8, 145, 178, 0.35);
 
-  /* Accent Colors - More subdued for professional feel */
+  /* Accent Colors - Rich but professional */
   --apex-purple: #7C3AED;
-  --apex-purple-glow: rgba(124, 58, 237, 0.08);
+  --apex-purple-glow: rgba(124, 58, 237, 0.1);
   --apex-blue: #2563EB;
   --apex-cyan: #0891B2;
+  --apex-electric-purple: #8B5CF6;
 
-  /* Semantic Colors - WCAG AA compliant */
+  /* Semantic Colors - WCAG AA+ compliant for light backgrounds */
   --apex-success: #059669;
-  --apex-success-soft: rgba(5, 150, 105, 0.1);
+  --apex-success-soft: rgba(5, 150, 105, 0.12);
   --apex-warning: #D97706;
-  --apex-warning-soft: rgba(217, 119, 6, 0.1);
+  --apex-warning-soft: rgba(217, 119, 6, 0.12);
   --apex-critical: #DC2626;
-  --apex-critical-soft: rgba(220, 38, 38, 0.1);
+  --apex-critical-soft: rgba(220, 38, 38, 0.12);
   --apex-info: #2563EB;
-  --apex-info-soft: rgba(37, 99, 235, 0.1);
+  --apex-info-soft: rgba(37, 99, 235, 0.12);
 
-  /* Typography Colors - High contrast for accessibility */
-  --apex-white: #0F172A;
-  --apex-white-soft: rgba(15, 23, 42, 0.95);
-  --apex-silver: #334155;
+  /* Typography Colors - Deep slate for readability */
+  --apex-white: #1E293B;
+  --apex-white-soft: rgba(30, 41, 59, 0.95);
+  --apex-silver: #475569;
   --apex-steel: #64748B;
   --apex-muted: #94A3B8;
 
-  /* Light Glassmorphism */
-  --glass-blur: 12px;
-  --glass-blur-strong: 24px;
-  --glass-bg: rgba(255, 255, 255, 0.95);
-  --glass-bg-light: rgba(248, 250, 252, 0.9);
-  --glass-bg-card: rgba(255, 255, 255, 0.98);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --glass-border-hover: rgba(0, 0, 0, 0.15);
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+  /* Light Mode Glassmorphism - Subtle, sophisticated */
+  --glass-blur: 16px;
+  --glass-blur-strong: 32px;
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-bg-light: rgba(255, 255, 255, 0.8);
+  --glass-bg-card: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-border-hover: rgba(8, 145, 178, 0.25);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06);
 
-  /* Light 3D Card Effects */
-  --card-3d-depth: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --card-3d-lift: 0 12px 32px rgba(0, 0, 0, 0.1);
-  --card-3d-glow: 0 0 20px rgba(8, 145, 178, 0.1);
+  /* Premium 3D Card Effects for Light Mode */
+  --card-3d-depth: 0 4px 24px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.03);
+  --card-3d-lift: 0 20px 48px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.05);
+  --card-3d-glow: 0 0 32px rgba(8, 145, 178, 0.12);
 
-  /* Light Gradients */
-  --gradient-premium: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
-  --gradient-card: linear-gradient(145deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(8, 145, 178, 0.08) 0%, transparent 70%);
+  /* Premium Light Mode Gradients */
+  --gradient-premium: linear-gradient(135deg, rgba(8, 145, 178, 0.06) 0%, rgba(124, 58, 237, 0.03) 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(8, 145, 178, 0.1) 0%, transparent 70%);
   --gradient-aurora: linear-gradient(135deg, #0891B2 0%, #7C3AED 50%, #2563EB 100%);
+  --gradient-page: linear-gradient(180deg, #F5F7FA 0%, #EEF1F5 50%, #E8ECF1 100%);
 
   /* Healthcare Professional Accents */
   --apex-hipaa-green: #059669;
   --apex-cms-blue: #2563EB;
-  --apex-regulatory-indigo: #4f46e5;
+  --apex-regulatory-indigo: #4F46E5;
+
+  /* Light Mode Specific - For components with hardcoded backgrounds */
+  --light-card-bg: #FFFFFF;
+  --light-card-border: rgba(0, 0, 0, 0.06);
+  --light-input-bg: #FFFFFF;
+  --light-sidebar-bg: rgba(255, 255, 255, 0.95);
+  --light-hover-bg: rgba(8, 145, 178, 0.06);
+  --light-active-bg: rgba(8, 145, 178, 0.1);
 }
 
 /* --------------------------------
