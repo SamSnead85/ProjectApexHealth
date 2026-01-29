@@ -102,6 +102,9 @@ import ProviderPerformance from './pages/ProviderPerformance'
 import SSOConfiguration from './pages/SSOConfiguration'
 import BrandingSettings from './pages/BrandingSettings'
 import ClinicalDecisionSupport from './pages/ClinicalDecisionSupport'
+import APIManagement from './pages/APIManagement'
+import AuditDashboard from './pages/AuditDashboard'
+import CareManagement from './pages/CareManagement'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -185,6 +188,15 @@ function App() {
         }
         if (activePath.includes('/clinical-decision') || activePath.includes('/cds') || activePath.includes('/care-gaps')) {
             return <ClinicalDecisionSupport />
+        }
+        if (activePath.includes('/api-management') || activePath.includes('/developer') || activePath.includes('/api-keys')) {
+            return <APIManagement />
+        }
+        if (activePath.includes('/audit') || activePath.includes('/security-log') || activePath.includes('/activity-log')) {
+            return <AuditDashboard />
+        }
+        if (activePath.includes('/care-management') || activePath.includes('/care-coordination') || activePath.includes('/patient-care')) {
+            return <CareManagement />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
