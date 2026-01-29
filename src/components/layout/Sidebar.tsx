@@ -15,7 +15,8 @@ import {
     FileText,
     CreditCard,
     Shield,
-    LogOut
+    LogOut,
+    Activity
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -46,6 +47,7 @@ const portalNavigation: Record<string, NavGroup[]> = {
             title: 'Core',
             items: [
                 { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/admin' },
+                { id: 'sir', label: 'SIR Analytics', icon: <Activity size={20} />, path: '/admin/sir' },
                 { id: 'workflows', label: 'Workflow Builder', icon: <GitBranch size={20} />, path: '/admin/workflows' },
                 { id: 'insights', label: 'Analytics', icon: <BarChart3 size={20} />, path: '/admin/insights' },
             ]

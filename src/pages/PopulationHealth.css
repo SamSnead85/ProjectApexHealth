@@ -1,0 +1,509 @@
+/* Population Health & Quality Styles */
+/* Premium HEDIS measures dashboard with star ratings and risk stratification */
+
+.population-health-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Header */
+.population-health-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.population-health-page__header-content h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.population-health-page__header-content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: var(--space-1) 0 0;
+}
+
+.population-health-page__header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.population-health-page__star-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.1));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--radius-xl);
+    color: #F59E0B;
+    font-size: 0.875rem;
+}
+
+.population-health-page__star-badge strong {
+    color: #D97706;
+}
+
+/* Star Ratings Section */
+.population-health-page__stars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+@media (max-width: 1200px) {
+    .population-health-page__stars {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .population-health-page__stars {
+        grid-template-columns: 1fr;
+    }
+}
+
+.star-rating-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    transition: all 0.3s ease;
+}
+
+.star-rating-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.star-rating-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+}
+
+.star-rating-card__category {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.star-rating-card__weight {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.star-rating-card__stars {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-bottom: var(--space-2);
+}
+
+.star-rating-card__stars svg {
+    color: #D1D5DB;
+}
+
+.star-rating-card__stars svg.filled {
+    color: #F59E0B;
+    fill: #F59E0B;
+}
+
+.star-rating-card__stars svg.half {
+    color: #F59E0B;
+}
+
+.star-rating-card__value {
+    margin-left: var(--space-2);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.star-rating-card__measures {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Main Grid */
+.population-health-page__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.population-health-page__card--measures {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 1024px) {
+    .population-health-page__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.population-health-page__card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+}
+
+.population-health-page__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.population-health-page__card-header h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.population-health-page__card-header h3 svg {
+    color: var(--accent-primary);
+}
+
+.population-health-page__filters {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.population-health-page__filters select {
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.population-health-page__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.population-health-page__search input {
+    background: transparent;
+    border: none;
+    font-size: 0.813rem;
+    color: var(--text-primary);
+    outline: none;
+    width: 150px;
+}
+
+.population-health-page__search svg {
+    color: var(--text-tertiary);
+}
+
+.population-health-page__total-pop {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* HEDIS Measures Grid */
+.population-health-page__measures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-3);
+}
+
+.hedis-measure-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: all 0.2s ease;
+}
+
+.hedis-measure-card:hover {
+    background: var(--bg-tertiary);
+}
+
+.hedis-measure-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-3);
+}
+
+.hedis-measure-card__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hedis-measure-card__abbr {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+}
+
+.hedis-measure-card__name {
+    font-size: 0.813rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.hedis-measure-card__performance {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.hedis-measure-card__gauge {
+    flex: 1;
+}
+
+.hedis-measure-card__gauge-track {
+    height: 8px;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    position: relative;
+    overflow: visible;
+}
+
+.hedis-measure-card__gauge-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+}
+
+.hedis-measure-card__benchmark,
+.hedis-measure-card__target {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    width: 2px;
+}
+
+.hedis-measure-card__benchmark {
+    background: var(--text-tertiary);
+}
+
+.hedis-measure-card__target {
+    background: #F59E0B;
+}
+
+.hedis-measure-card__gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-1);
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.hedis-measure-card__value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    min-width: 60px;
+    text-align: right;
+}
+
+.hedis-measure-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hedis-measure-card__trend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.hedis-measure-card__trend.up {
+    color: #10B981;
+}
+
+.hedis-measure-card__trend.down {
+    color: #EF4444;
+}
+
+.hedis-measure-card__gaps {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Risk Pyramid */
+.risk-pyramid {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .risk-pyramid {
+        flex-direction: column;
+    }
+}
+
+.risk-pyramid__chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+}
+
+.risk-pyramid__segment {
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.risk-pyramid__segment-label {
+    opacity: 0.9;
+}
+
+.risk-pyramid__segment-count {
+    font-weight: 700;
+}
+
+.risk-pyramid__legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.risk-pyramid__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.813rem;
+}
+
+.risk-pyramid__legend-color {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-sm);
+}
+
+.risk-pyramid__legend-name {
+    flex: 1;
+    color: var(--text-primary);
+    min-width: 80px;
+}
+
+.risk-pyramid__legend-pct {
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 40px;
+}
+
+.risk-pyramid__legend-risk {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+/* Care Gaps */
+.population-health-page__gaps-header,
+.care-gap-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr 0.8fr 0.8fr 0.5fr;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    align-items: center;
+}
+
+.population-health-page__gaps-header {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.care-gap-row {
+    font-size: 0.813rem;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.2s ease;
+}
+
+.care-gap-row:hover {
+    background: var(--bg-secondary);
+}
+
+.care-gap-row__member {
+    display: flex;
+    flex-direction: column;
+}
+
+.care-gap-row__name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.care-gap-row__id {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.care-gap-row__measure {
+    color: var(--text-secondary);
+}
+
+.care-gap-row__due {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.population-health-page__view-all {
+    margin-top: var(--space-3);
+    width: 100%;
+    justify-content: center;
+}
+
+/* Dark mode */
+[data-theme="dark"] .star-rating-card,
+[data-theme="dark"] .population-health-page__card {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .hedis-measure-card {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .hedis-measure-card:hover {
+    background: rgba(30, 41, 59, 0.8);
+}

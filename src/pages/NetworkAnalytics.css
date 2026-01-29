@@ -1,0 +1,421 @@
+/* Network Analytics Styles */
+/* Premium provider network analytics with adequacy and coverage tracking */
+
+.network-analytics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Header */
+.network-analytics__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.network-analytics__header-content h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.network-analytics__header-content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: var(--space-1) 0 0;
+}
+
+.network-analytics__header-actions {
+    display: flex;
+    gap: var(--space-3);
+}
+
+/* Metrics */
+.network-analytics__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+@media (max-width: 1200px) {
+    .network-analytics__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .network-analytics__metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+.network-metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+
+.network-metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.network-metric-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.network-metric-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.network-metric-card__trend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+}
+
+.network-metric-card__trend--up {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.network-metric-card__trend--down {
+    color: #8B5CF6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.network-metric-card__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.network-metric-card__label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+
+/* Main Grid */
+.network-analytics__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.network-analytics__card--providers {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 1024px) {
+    .network-analytics__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.network-analytics__card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+}
+
+.network-analytics__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.network-analytics__card-header h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.network-analytics__card-header h3 svg {
+    color: var(--accent-primary);
+}
+
+/* Filters */
+.network-analytics__filters {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.network-analytics__filters select {
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.network-analytics__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.network-analytics__search input {
+    background: transparent;
+    border: none;
+    font-size: 0.813rem;
+    color: var(--text-primary);
+    outline: none;
+    width: 150px;
+}
+
+.network-analytics__search svg {
+    color: var(--text-tertiary);
+}
+
+/* Provider Table */
+.network-analytics__provider-header,
+.provider-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 0.8fr 0.8fr 0.5fr;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    align-items: center;
+}
+
+.network-analytics__provider-header {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.provider-row {
+    font-size: 0.813rem;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.2s ease;
+}
+
+.provider-row:hover {
+    background: var(--bg-secondary);
+}
+
+.provider-row__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.provider-row__name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.provider-row__id {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.provider-row__specialty {
+    color: var(--text-secondary);
+}
+
+.provider-row__quality {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.provider-row__cost {
+    font-weight: 600;
+}
+
+.provider-row__cost.low {
+    color: #10B981;
+}
+
+.provider-row__cost.high {
+    color: #EF4444;
+}
+
+.provider-row__patients {
+    color: var(--text-secondary);
+}
+
+/* Specialty Grid */
+.network-analytics__specialty-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+    .network-analytics__specialty-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.specialty-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: all 0.2s ease;
+}
+
+.specialty-card:hover {
+    background: var(--bg-tertiary);
+}
+
+.specialty-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.specialty-card__name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.specialty-card__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+}
+
+.specialty-card__stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.specialty-card__stat span {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.specialty-card__stat strong {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+/* Coverage Table */
+.network-analytics__coverage-header,
+.coverage-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 0.8fr;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    align-items: center;
+}
+
+.network-analytics__coverage-header {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.coverage-row {
+    font-size: 0.813rem;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.2s ease;
+}
+
+.coverage-row:hover {
+    background: var(--bg-secondary);
+}
+
+.coverage-row__region {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.coverage-row__region svg {
+    color: var(--accent-primary);
+}
+
+.coverage-row__providers,
+.coverage-row__members {
+    color: var(--text-secondary);
+}
+
+.coverage-row__ratio {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.coverage-row__ratio-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.coverage-row__ratio-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.coverage-row__ratio span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    min-width: 40px;
+}
+
+/* Dark mode */
+[data-theme="dark"] .network-metric-card,
+[data-theme="dark"] .network-analytics__card {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .specialty-card {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .specialty-card:hover {
+    background: rgba(30, 41, 59, 0.8);
+}

@@ -1,0 +1,556 @@
+/* Pharmacy & PBM Analytics Styles */
+/* Premium pharmaceutical spend analysis with sophisticated data visualization */
+
+.pbm-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Header */
+.pbm-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.pbm-page__header-content h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.pbm-page__header-content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: var(--space-1) 0 0;
+}
+
+.pbm-page__header-actions {
+    display: flex;
+    gap: var(--space-3);
+}
+
+/* Metrics Grid */
+.pbm-page__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+@media (max-width: 1200px) {
+    .pbm-page__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .pbm-page__metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pbm-metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+
+.pbm-metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pbm-metric-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.pbm-metric-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pbm-metric-card__trend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+}
+
+.pbm-metric-card__trend--up {
+    color: #EF4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.pbm-metric-card__trend--down {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.pbm-metric-card__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.pbm-metric-card__label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+
+/* Main Grid */
+.pbm-page__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-4);
+}
+
+@media (max-width: 1024px) {
+    .pbm-page__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pbm-page__card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+}
+
+.pbm-page__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.pbm-page__card-header h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.pbm-page__card-header h3 svg {
+    color: var(--accent-primary);
+}
+
+/* Search */
+.pbm-page__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.pbm-page__search input {
+    background: transparent;
+    border: none;
+    font-size: 0.813rem;
+    color: var(--text-primary);
+    outline: none;
+    width: 150px;
+}
+
+.pbm-page__search svg {
+    color: var(--text-tertiary);
+}
+
+/* Drug Table */
+.pbm-drug-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.pbm-drug-table__header,
+.pbm-drug-table__row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 0.8fr 1fr 0.8fr;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    align-items: center;
+}
+
+.pbm-drug-table__header {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.pbm-drug-table__row {
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.2s ease;
+}
+
+.pbm-drug-table__row:hover {
+    background: var(--bg-secondary);
+}
+
+.pbm-drug-table__name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.pbm-drug-table__class {
+    color: var(--text-secondary);
+}
+
+.pbm-drug-table__spend {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.pbm-drug-table__claims {
+    color: var(--text-secondary);
+}
+
+.pbm-drug-table__trend {
+    font-weight: 500;
+}
+
+.pbm-drug-table__trend.up {
+    color: #EF4444;
+}
+
+.pbm-drug-table__trend.down {
+    color: #10B981;
+}
+
+/* Donut Chart */
+.pbm-donut {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .pbm-donut {
+        flex-direction: column;
+    }
+}
+
+.pbm-donut__chart {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+}
+
+.pbm-donut__chart svg {
+    width: 100%;
+    height: 100%;
+}
+
+.pbm-donut__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.pbm-donut__total {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pbm-donut__label {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
+
+.pbm-donut__legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.pbm-donut__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.813rem;
+}
+
+.pbm-donut__legend-color {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.pbm-donut__legend-name {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.pbm-donut__legend-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 40px;
+    text-align: right;
+}
+
+.pbm-donut__legend-trend {
+    font-size: 0.75rem;
+    min-width: 50px;
+    text-align: right;
+}
+
+.pbm-donut__legend-trend.up {
+    color: #EF4444;
+}
+
+.pbm-donut__legend-trend.down {
+    color: #10B981;
+}
+
+/* Rebate Analysis */
+.pbm-rebate__summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+}
+
+.pbm-rebate__summary-item {
+    text-align: center;
+}
+
+.pbm-rebate__summary-item span {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+}
+
+.pbm-rebate__summary-item strong {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.pbm-rebate__summary-item--rebate strong {
+    color: #10B981;
+}
+
+.pbm-rebate__summary-item--net strong {
+    color: var(--accent-primary);
+}
+
+.pbm-rebate__summary-arrow {
+    color: var(--text-tertiary);
+    font-size: 1.25rem;
+}
+
+.pbm-rebate__breakdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.pbm-rebate__row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 0.5fr;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    font-size: 0.813rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.pbm-rebate__category {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.pbm-rebate__gross {
+    color: var(--text-secondary);
+}
+
+.pbm-rebate__amount {
+    color: #10B981;
+    font-weight: 500;
+}
+
+.pbm-rebate__net {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.pbm-rebate__rate {
+    color: var(--text-tertiary);
+    text-align: right;
+}
+
+/* Biosimilar Opportunities */
+.pbm-biosimilar__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1));
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    color: #10B981;
+}
+
+.pbm-biosimilar__header strong {
+    color: #059669;
+}
+
+.pbm-biosimilar__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.pbm-biosimilar__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+}
+
+.pbm-biosimilar__brands {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+}
+
+.pbm-biosimilar__brand {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.pbm-biosimilar__alt {
+    color: #10B981;
+    font-weight: 500;
+}
+
+.pbm-biosimilar__metrics {
+    display: flex;
+    gap: var(--space-4);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.pbm-biosimilar__savings {
+    color: #10B981;
+    font-weight: 600;
+}
+
+/* Insights */
+.pbm-page__insights {
+    padding: var(--space-5);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+}
+
+.pbm-page__insights-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.pbm-page__insights-header svg {
+    color: var(--text-tertiary);
+}
+
+.pbm-page__insights-header h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.pbm-page__insights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.pbm-page__insights-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+    padding: var(--space-2);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.pbm-page__insights-list li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.pbm-page__insights-list li svg.warning {
+    color: #F59E0B;
+}
+
+.pbm-page__insights-list li svg.success {
+    color: #10B981;
+}
+
+.pbm-page__insights-list li svg.info {
+    color: #3B82F6;
+}
+
+/* Dark mode */
+[data-theme="dark"] .pbm-metric-card,
+[data-theme="dark"] .pbm-page__card,
+[data-theme="dark"] .pbm-page__insights {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255, 255, 255, 0.08);
+}

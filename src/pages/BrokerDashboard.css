@@ -1,0 +1,627 @@
+/* Broker Command Center - Institutional Enterprise Styling */
+/* Boardroom Purity + Anti-Vibe-Coding Standards */
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+
+.broker-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-6);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.broker-dashboard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.broker-dashboard__header-content h1 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.broker-dashboard__header-content p {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin: var(--space-1) 0 0;
+}
+
+.broker-dashboard__header-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+/* ============================================================
+   METRIC CARDS
+   ============================================================ */
+
+.broker-dashboard__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+}
+
+@media (max-width: 1200px) {
+    .broker-dashboard__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .broker-dashboard__metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+.broker-metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.broker-metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.broker-metric-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.broker-metric-card:hover::before {
+    opacity: 1;
+}
+
+.broker-metric-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+}
+
+.broker-metric-card__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.broker-metric-card__trend {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+.broker-metric-card__trend--up {
+    color: #059669;
+    background: rgba(5, 150, 105, 0.08);
+}
+
+.broker-metric-card__trend--down {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.broker-metric-card__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    font-feature-settings: 'tnum' 1;
+    line-height: 1.1;
+}
+
+.broker-metric-card__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+}
+
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+
+.broker-dashboard__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.broker-dashboard__card--pipeline {
+    grid-row: span 2;
+}
+
+@media (max-width: 1024px) {
+    .broker-dashboard__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .broker-dashboard__card--pipeline {
+        grid-row: auto;
+    }
+}
+
+/* Panel Base */
+.broker-dashboard__card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.broker-dashboard__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+}
+
+.broker-dashboard__card-header h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.broker-dashboard__card-header h3 svg {
+    color: var(--text-tertiary);
+}
+
+.broker-dashboard__card-stats,
+.broker-dashboard__ytd {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.broker-dashboard__card-stats strong,
+.broker-dashboard__ytd strong {
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   FILTERS
+   ============================================================ */
+
+.broker-dashboard__filters {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+    background: var(--bg-secondary);
+}
+
+.broker-dashboard__filters select {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.broker-dashboard__filters select:hover {
+    border-color: var(--accent-primary);
+}
+
+.broker-dashboard__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: all 0.15s ease;
+}
+
+.broker-dashboard__search:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
+}
+
+.broker-dashboard__search svg {
+    color: var(--text-tertiary);
+}
+
+.broker-dashboard__search input {
+    background: transparent;
+    border: none;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    outline: none;
+    width: 120px;
+}
+
+.broker-dashboard__search input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   PIPELINE LIST
+   ============================================================ */
+
+.broker-dashboard__pipeline-list {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-height: 520px;
+    overflow-y: auto;
+}
+
+.pipeline-card {
+    padding: var(--space-3);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.pipeline-card:hover {
+    background: var(--bg-tertiary);
+}
+
+.pipeline-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+}
+
+.pipeline-card__company {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.pipeline-card__company svg {
+    color: var(--text-tertiary);
+}
+
+.pipeline-card__details {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+}
+
+.pipeline-card__details span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.pipeline-card__details svg {
+    opacity: 0.6;
+}
+
+.pipeline-card__probability {
+    margin-bottom: var(--space-2);
+}
+
+.pipeline-card__probability-bar {
+    height: 4px;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-1);
+}
+
+.pipeline-card__probability-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.4s ease;
+}
+
+.pipeline-card__probability span {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.pipeline-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-hairline);
+}
+
+.pipeline-card__action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+}
+
+.pipeline-card__action svg {
+    color: var(--text-tertiary);
+}
+
+.pipeline-card__date {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   COMMISSION CHART
+   ============================================================ */
+
+.commission-chart {
+    padding: var(--space-4);
+}
+
+.commission-chart__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-4);
+    height: 160px;
+    padding-bottom: var(--space-3);
+}
+
+.commission-chart__bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.commission-chart__bar {
+    width: 100%;
+    max-width: 24px;
+    border-radius: 3px 3px 0 0;
+    transition: opacity 0.15s ease;
+}
+
+.commission-chart__bar--new {
+    background: #2563eb;
+}
+
+.commission-chart__bar--renewal {
+    background: #059669;
+}
+
+.commission-chart__bar--bonus {
+    background: #f59e0b;
+}
+
+.commission-chart__bar:hover {
+    opacity: 0.85;
+}
+
+.commission-chart__labels {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--border-hairline);
+    padding-top: var(--space-2);
+}
+
+.commission-chart__legend {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-3);
+}
+
+.commission-chart__legend span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+.commission-chart__legend .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+.commission-chart__legend .dot.new {
+    background: #2563eb;
+}
+
+.commission-chart__legend .dot.renewal {
+    background: #059669;
+}
+
+.commission-chart__legend .dot.bonus {
+    background: #f59e0b;
+}
+
+/* ============================================================
+   CLIENT HEALTH TABLE
+   ============================================================ */
+
+.broker-dashboard__clients-header {
+    display: grid;
+    grid-template-columns: 1.5fr 0.7fr 0.9fr 0.8fr 1fr 0.6fr 0.5fr;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-secondary);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.broker-dashboard__clients-list {
+    padding: var(--space-2) 0;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.client-health-row {
+    display: grid;
+    grid-template-columns: 1.5fr 0.7fr 0.9fr 0.8fr 1fr 0.6fr 0.5fr;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    align-items: center;
+    transition: background 0.15s ease;
+}
+
+.client-health-row:hover {
+    background: var(--bg-hover);
+}
+
+.client-health-row__company {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-health-row__name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.client-health-row__id {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.client-health-row__employees,
+.client-health-row__premium,
+.client-health-row__renewal {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.client-health-row__premium {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.client-health-row__score {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.client-health-row__score-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.client-health-row__score-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.client-health-row__score span {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 24px;
+    text-align: right;
+    font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+[data-theme="dark"] .broker-metric-card,
+[data-theme="dark"] .broker-dashboard__card {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .broker-dashboard__filters,
+[data-theme="dark"] .broker-dashboard__clients-header {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme="dark"] .pipeline-card {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .pipeline-card:hover {
+    background: rgba(30, 41, 59, 0.7);
+}
+
+[data-theme="dark"] .broker-dashboard__filters select,
+[data-theme="dark"] .broker-dashboard__search {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+.broker-dashboard__pipeline-list::-webkit-scrollbar,
+.broker-dashboard__clients-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.broker-dashboard__pipeline-list::-webkit-scrollbar-track,
+.broker-dashboard__clients-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.broker-dashboard__pipeline-list::-webkit-scrollbar-thumb,
+.broker-dashboard__clients-list::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 2px;
+}

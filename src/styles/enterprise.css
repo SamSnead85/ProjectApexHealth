@@ -1,0 +1,922 @@
+/* Enterprise Healthcare Platform - Institutional Design System */
+/* Premium "Boardroom Purity" + "Anti-Vibe-Coding" Standards */
+/* Eliminates AI-generated aesthetic in favor of institutional gravitas */
+
+/* ============================================================
+   FOUNDATION LAYER - Deep Institutional Foundations
+   ============================================================ */
+
+:root {
+    /* Institutional Color Tokens - Deep Noir Palette */
+    --enterprise-obsidian: #0a0f1a;
+    --enterprise-slate-900: #0f172a;
+    --enterprise-slate-800: #1e293b;
+    --enterprise-slate-700: #334155;
+    --enterprise-slate-600: #475569;
+    --enterprise-slate-500: #64748b;
+    --enterprise-slate-400: #94a3b8;
+    --enterprise-slate-300: #cbd5e1;
+    --enterprise-slate-200: #e2e8f0;
+
+    /* Institutional Accent - Muted, Professional */
+    --enterprise-primary: #2563eb;
+    --enterprise-primary-muted: #1d4ed8;
+    --enterprise-primary-subtle: rgba(37, 99, 235, 0.08);
+
+    /* Healthcare Status Colors - Clinical Precision */
+    --clinical-critical: #dc2626;
+    --clinical-critical-bg: rgba(220, 38, 38, 0.06);
+    --clinical-warning: #d97706;
+    --clinical-warning-bg: rgba(217, 119, 6, 0.06);
+    --clinical-success: #059669;
+    --clinical-success-bg: rgba(5, 150, 105, 0.06);
+    --clinical-info: #0891b2;
+    --clinical-info-bg: rgba(8, 145, 178, 0.06);
+
+    /* Typography Scale - Institutional Precision */
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+    /* Z-Index Scale - Enterprise Layering */
+    --z-base: 0;
+    --z-elevated: 10;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 300;
+    --z-overlay: 400;
+    --z-top: 500;
+
+    /* Shadow Scale - Institutional Depth (Subtle, Not Flashy) */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.03);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.04);
+    --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+
+    /* Border Tokens - Minimal, Institutional */
+    --border-hairline: 1px solid rgba(0, 0, 0, 0.06);
+    --border-subtle: 1px solid rgba(0, 0, 0, 0.08);
+    --border-defined: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Mode Enterprise Tokens */
+[data-theme="dark"] {
+    --border-hairline: 1px solid rgba(255, 255, 255, 0.04);
+    --border-subtle: 1px solid rgba(255, 255, 255, 0.06);
+    --border-defined: 1px solid rgba(255, 255, 255, 0.10);
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   ENTERPRISE DATA GRID SYSTEM
+   Professional data tables with clinical precision
+   ============================================================ */
+
+.enterprise-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.enterprise-grid__header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+}
+
+.enterprise-grid__header-row {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-secondary);
+    border-bottom: var(--border-defined);
+}
+
+.enterprise-grid__header-cell {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.enterprise-grid__header-cell--sortable {
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.enterprise-grid__header-cell--sortable:hover {
+    color: var(--text-primary);
+}
+
+.enterprise-grid__body-row {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-hairline);
+    transition: background 0.15s ease;
+    align-items: center;
+}
+
+.enterprise-grid__body-row:hover {
+    background: var(--bg-hover);
+}
+
+.enterprise-grid__body-row:last-child {
+    border-bottom: none;
+}
+
+.enterprise-grid__cell {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    min-width: 0;
+}
+
+.enterprise-grid__cell--primary {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.enterprise-grid__cell--numeric {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-align: right;
+}
+
+.enterprise-grid__cell--currency {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-align: right;
+    color: var(--text-primary);
+}
+
+.enterprise-grid__cell--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ============================================================
+   ENTERPRISE METRIC CARDS
+   Institutional KPI cards with gravitas
+   ============================================================ */
+
+.enterprise-kpi {
+    position: relative;
+    background: var(--bg-card);
+    border: var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+/* Subtle top accent - NOT gradient, NOT flashy */
+.enterprise-kpi::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--enterprise-primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.enterprise-kpi:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.enterprise-kpi:hover::before {
+    opacity: 1;
+}
+
+.enterprise-kpi__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-3);
+}
+
+.enterprise-kpi__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.enterprise-kpi__change {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+.enterprise-kpi__change--positive {
+    color: var(--clinical-success);
+    background: var(--clinical-success-bg);
+}
+
+.enterprise-kpi__change--negative {
+    color: var(--clinical-critical);
+    background: var(--clinical-critical-bg);
+}
+
+.enterprise-kpi__change--neutral {
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+}
+
+.enterprise-kpi__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: var(--space-1);
+    font-feature-settings: 'tnum' 1, 'ss01' 1;
+}
+
+.enterprise-kpi__label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+}
+
+.enterprise-kpi__sublabel {
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   ENTERPRISE PANEL SYSTEM
+   Professional, contained panels with institutional depth
+   ============================================================ */
+
+.enterprise-panel {
+    background: var(--bg-card);
+    border: var(--border-subtle);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.enterprise-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: var(--border-hairline);
+}
+
+.enterprise-panel__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+}
+
+.enterprise-panel__title-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-tertiary);
+}
+
+.enterprise-panel__title-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.enterprise-panel__title-badge {
+    font-size: 0.625rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.enterprise-panel__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.enterprise-panel__body {
+    padding: var(--space-5);
+}
+
+.enterprise-panel__body--flush {
+    padding: 0;
+}
+
+.enterprise-panel__footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+    border-top: var(--border-hairline);
+}
+
+/* ============================================================
+   ENTERPRISE STATUS INDICATORS
+   Clinical-grade status badges and indicators
+   ============================================================ */
+
+.enterprise-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.enterprise-status--critical {
+    color: var(--clinical-critical);
+    background: var(--clinical-critical-bg);
+}
+
+.enterprise-status--warning {
+    color: var(--clinical-warning);
+    background: var(--clinical-warning-bg);
+}
+
+.enterprise-status--success {
+    color: var(--clinical-success);
+    background: var(--clinical-success-bg);
+}
+
+.enterprise-status--info {
+    color: var(--clinical-info);
+    background: var(--clinical-info-bg);
+}
+
+.enterprise-status--neutral {
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+}
+
+/* Status Dot - Minimal Indicator */
+.enterprise-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.enterprise-status-dot--critical {
+    background: var(--clinical-critical);
+}
+
+.enterprise-status-dot--warning {
+    background: var(--clinical-warning);
+}
+
+.enterprise-status-dot--success {
+    background: var(--clinical-success);
+}
+
+.enterprise-status-dot--info {
+    background: var(--clinical-info);
+}
+
+.enterprise-status-dot--neutral {
+    background: var(--text-tertiary);
+}
+
+/* Pulsing dot for live status */
+.enterprise-status-dot--live {
+    animation: enterprise-pulse 2s ease-in-out infinite;
+}
+
+@keyframes enterprise-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ============================================================
+   ENTERPRISE PROGRESS INDICATORS  
+   Sophisticated gauge and progress systems
+   ============================================================ */
+
+.enterprise-gauge {
+    position: relative;
+    width: 100%;
+}
+
+.enterprise-gauge__track {
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.enterprise-gauge__fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enterprise-gauge__fill--gradient {
+    background: linear-gradient(90deg,
+            var(--clinical-success) 0%,
+            var(--clinical-warning) 70%,
+            var(--clinical-critical) 100%);
+}
+
+.enterprise-gauge__markers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-1);
+}
+
+.enterprise-gauge__marker {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.enterprise-gauge__marker--accent {
+    font-weight: 600;
+    color: var(--enterprise-primary);
+}
+
+/* Circular Gauge */
+.enterprise-gauge-circular {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.enterprise-gauge-circular__svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.enterprise-gauge-circular__track {
+    fill: none;
+    stroke: var(--bg-secondary);
+    stroke-width: 4;
+}
+
+.enterprise-gauge-circular__fill {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enterprise-gauge-circular__value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   ENTERPRISE CHART SYSTEMS
+   Professional data visualization patterns
+   ============================================================ */
+
+.enterprise-chart {
+    position: relative;
+}
+
+.enterprise-chart__grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.enterprise-chart__grid-line {
+    stroke: var(--border-hairline);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+}
+
+.enterprise-chart__axis {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.enterprise-chart__legend {
+    display: flex;
+    gap: var(--space-4);
+    padding-top: var(--space-3);
+}
+
+.enterprise-chart__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+}
+
+.enterprise-chart__legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+/* Bar Chart */
+.enterprise-bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 100%;
+    padding-bottom: var(--space-6);
+}
+
+.enterprise-bar-chart__bar {
+    flex: 1;
+    min-width: 8px;
+    max-width: 32px;
+    border-radius: 2px 2px 0 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.enterprise-bar-chart__bar:hover {
+    opacity: 0.85;
+}
+
+.enterprise-bar-chart__bar::after {
+    content: attr(data-value);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    padding-bottom: 2px;
+}
+
+.enterprise-bar-chart__bar:hover::after {
+    opacity: 1;
+}
+
+/* ============================================================
+   ENTERPRISE TABS / SEGMENTED CONTROL
+   Professional navigation patterns
+   ============================================================ */
+
+.enterprise-tabs {
+    display: flex;
+    background: var(--bg-secondary);
+    padding: 3px;
+    border-radius: var(--radius-md);
+    gap: 2px;
+}
+
+.enterprise-tabs__item {
+    flex: 1;
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+}
+
+.enterprise-tabs__item:hover {
+    color: var(--text-secondary);
+}
+
+.enterprise-tabs__item--active {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   ENTERPRISE SEARCH / FILTER
+   Professional search and filtering patterns
+   ============================================================ */
+
+.enterprise-search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: all 0.15s ease;
+}
+
+.enterprise-search:focus-within {
+    border-color: var(--enterprise-primary);
+    box-shadow: 0 0 0 2px var(--enterprise-primary-subtle);
+}
+
+.enterprise-search__icon {
+    width: 14px;
+    height: 14px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+}
+
+.enterprise-search__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+    outline: none;
+}
+
+.enterprise-search__input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.enterprise-search__kbd {
+    font-size: 0.625rem;
+    padding: 2px 4px;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+.enterprise-filter-dropdown {
+    position: relative;
+}
+
+.enterprise-filter-dropdown__trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: var(--border-subtle);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.enterprise-filter-dropdown__trigger:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   ENTERPRISE TOOLTIP / POPOVER
+   Clean, professional information overlays
+   ============================================================ */
+
+.enterprise-tooltip {
+    position: absolute;
+    z-index: var(--z-dropdown);
+    padding: var(--space-2) var(--space-3);
+    background: var(--enterprise-slate-800);
+    color: var(--enterprise-slate-200);
+    font-size: 0.75rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: all 0.15s ease;
+}
+
+.enterprise-tooltip--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.enterprise-tooltip__arrow {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--enterprise-slate-800);
+    transform: rotate(45deg);
+}
+
+/* ============================================================
+   PAGE HEADER PATTERN
+   Consistent institutional page headers
+   ============================================================ */
+
+.enterprise-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.enterprise-page-header__content {
+    flex: 1;
+}
+
+.enterprise-page-header__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.enterprise-page-header__subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-1);
+}
+
+.enterprise-page-header__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-2);
+}
+
+.enterprise-page-header__breadcrumb-sep {
+    color: var(--border-defined);
+}
+
+.enterprise-page-header__actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+/* ============================================================
+   ENTERPRISE BUTTON SYSTEM
+   Institutional button patterns - no gradients, no flashiness
+   ============================================================ */
+
+.enterprise-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.enterprise-btn--primary {
+    background: var(--enterprise-primary);
+    color: white;
+}
+
+.enterprise-btn--primary:hover {
+    background: var(--enterprise-primary-muted);
+}
+
+.enterprise-btn--secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: var(--border-subtle);
+}
+
+.enterprise-btn--secondary:hover {
+    background: var(--bg-tertiary);
+}
+
+.enterprise-btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.enterprise-btn--ghost:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.enterprise-btn--sm {
+    padding: var(--space-1) var(--space-2);
+    font-size: 0.75rem;
+}
+
+.enterprise-btn--icon-only {
+    padding: var(--space-2);
+}
+
+/* ============================================================
+   ENTERPRISE DIVIDERS
+   Subtle section separators
+   ============================================================ */
+
+.enterprise-divider {
+    height: 1px;
+    background: var(--border-hairline);
+    margin: var(--space-4) 0;
+}
+
+.enterprise-divider--thick {
+    height: 2px;
+}
+
+.enterprise-divider--vertical {
+    width: 1px;
+    height: auto;
+    align-self: stretch;
+    margin: 0 var(--space-4);
+}
+
+/* ============================================================
+   DARK MODE COMPREHENSIVE OVERRIDES
+   Maintains institutional quality in dark context
+   ============================================================ */
+
+[data-theme="dark"] .enterprise-panel {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .enterprise-kpi {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .enterprise-grid__header-row {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+[data-theme="dark"] .enterprise-grid__body-row:hover {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] .enterprise-tabs {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme="dark"] .enterprise-tabs__item--active {
+    background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] .enterprise-search {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .enterprise-btn--secondary {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .enterprise-btn--secondary:hover {
+    background: rgba(51, 65, 85, 0.6);
+}

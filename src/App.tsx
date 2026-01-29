@@ -77,6 +77,13 @@ import ScheduledReports from './pages/ScheduledReports'
 import ExecutiveDashboards from './pages/ExecutiveDashboards'
 import DataExports from './pages/DataExports'
 import KPITracking from './pages/KPITracking'
+import SIRDashboard from './pages/SIRDashboard'
+import IBNRActuarial from './pages/IBNRActuarial'
+import PharmacyAnalytics from './pages/PharmacyAnalytics'
+import PopulationHealth from './pages/PopulationHealth'
+import BrokerDashboard from './pages/BrokerDashboard'
+import EmployerAdmin from './pages/EmployerAdmin'
+import NetworkAnalytics from './pages/NetworkAnalytics'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -115,6 +122,22 @@ function App() {
 
     // Determine which page to render based on path
     const renderPage = () => {
+        // SIR Analytics Command Center
+        if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
+            return <SIRDashboard />
+        }
+        // IBNR & Actuarial Engine
+        if (activePath.includes('/ibnr') || activePath.includes('/actuarial') || activePath.includes('/reserves')) {
+            return <IBNRActuarial />
+        }
+        // Pharmacy & PBM Analytics
+        if (activePath.includes('/pharmacy-analytics') || activePath.includes('/pbm') || activePath.includes('/drug-spend')) {
+            return <PharmacyAnalytics />
+        }
+        // Population Health & Quality
+        if (activePath.includes('/population-health') || activePath.includes('/hedis') || activePath.includes('/quality')) {
+            return <PopulationHealth />
+        }
         // Workflow builder paths
         if (activePath.includes('/workflows')) {
             return <WorkflowBuilder />
@@ -139,6 +162,10 @@ function App() {
         if (activePath.includes('/providers') || activePath.includes('/find-care') || activePath.includes('/findcare')) {
             return <ProviderDirectory />
         }
+        // Network Analytics & Optimization
+        if (activePath.includes('/network-analytics') || activePath.includes('/network-optimization') || activePath.includes('/network-adequacy')) {
+            return <NetworkAnalytics />
+        }
         // Cost Estimator
         if (activePath.includes('/cost-estimator') || activePath.includes('/pricing')) {
             return <CostEstimator />
@@ -155,6 +182,10 @@ function App() {
         if (activePath.includes('/quoting') || activePath.includes('/quotes')) {
             return <Quoting />
         }
+        // Broker Command Center
+        if (activePath === '/broker' || activePath.includes('/broker-dashboard')) {
+            return <BrokerDashboard />
+        }
         // Agency Portal
         if (activePath.includes('/agency')) {
             return <AgencyPortal />
@@ -170,6 +201,10 @@ function App() {
         // Enrollment (Employer)
         if (activePath.includes('/enrollment')) {
             return <Enrollment />
+        }
+        // Employer Benefits Administration
+        if (activePath === '/employer' || activePath.includes('/employer-admin') || activePath.includes('/benefits-admin')) {
+            return <EmployerAdmin />
         }
         // Billing (Employer)
         if (activePath.includes('/billing')) {

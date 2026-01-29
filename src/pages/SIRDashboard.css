@@ -1,0 +1,1039 @@
+/* SIR Analytics Command Center - Institutional Enterprise Styling */
+/* Boardroom Purity + Anti-Vibe-Coding Standards */
+/* NO gradients, NO flashy effects, NO AI-generated aesthetic */
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+
+.sir-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-6);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* ============================================================
+   PAGE HEADER - Institutional
+   ============================================================ */
+
+.sir-dashboard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.sir-dashboard__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-1);
+}
+
+.sir-dashboard__breadcrumb svg {
+    opacity: 0.4;
+}
+
+.sir-dashboard__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.sir-dashboard__subtitle {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin: var(--space-1) 0 0;
+}
+
+.sir-dashboard__header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.sir-dashboard__period-tabs {
+    display: flex;
+    background: var(--bg-secondary);
+    padding: 2px;
+    border-radius: var(--radius-md);
+    gap: 1px;
+}
+
+.sir-dashboard__period-tab {
+    padding: var(--space-1) var(--space-3);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sir-dashboard__period-tab:hover {
+    color: var(--text-secondary);
+}
+
+.sir-dashboard__period-tab.active {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sir-dashboard__actions-group {
+    display: flex;
+    gap: var(--space-2);
+}
+
+/* ============================================================
+   KPI CARDS - Institutional Metrics
+   ============================================================ */
+
+.sir-dashboard__kpis {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-3);
+}
+
+@media (max-width: 1400px) {
+    .sir-dashboard__kpis {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .sir-dashboard__kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sir-dashboard__kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sir-kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* Subtle top accent line - appears on hover only */
+.sir-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.sir-kpi-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.sir-kpi-card:hover::before {
+    opacity: 1;
+}
+
+.sir-kpi-card--primary::before {
+    background: #2563eb;
+}
+
+.sir-kpi-card--secondary::before {
+    background: #64748b;
+}
+
+.sir-kpi-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-2);
+}
+
+.sir-kpi-card__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+}
+
+.sir-kpi-card__variance {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: var(--radius-sm);
+}
+
+.sir-kpi-card__variance--favorable {
+    color: #059669;
+    background: rgba(5, 150, 105, 0.08);
+}
+
+.sir-kpi-card__variance--unfavorable {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.sir-kpi-card__variance--neutral {
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+}
+
+.sir-kpi-card__value {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    font-feature-settings: 'tnum' 1;
+    line-height: 1.1;
+}
+
+.sir-kpi-card__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: var(--space-1);
+    line-height: 1.3;
+}
+
+.sir-kpi-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-hairline);
+}
+
+.sir-kpi-card__context,
+.sir-kpi-card__benchmark {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   MAIN GRID LAYOUT
+   ============================================================ */
+
+.sir-dashboard__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-4);
+}
+
+.sir-dashboard__panel--claims {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+.sir-dashboard__panel--trend {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.sir-dashboard__panel--insights {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.sir-dashboard__panel--hcc {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.sir-dashboard__panel--stoploss {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+@media (max-width: 1200px) {
+    .sir-dashboard__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sir-dashboard__panel--claims {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+
+    .sir-dashboard__panel--trend,
+    .sir-dashboard__panel--insights,
+    .sir-dashboard__panel--hcc,
+    .sir-dashboard__panel--stoploss {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .sir-dashboard__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sir-dashboard__panel--claims,
+    .sir-dashboard__panel--trend,
+    .sir-dashboard__panel--insights,
+    .sir-dashboard__panel--hcc,
+    .sir-dashboard__panel--stoploss {
+        grid-column: 1;
+    }
+}
+
+/* ============================================================
+   PANEL COMPONENT - Institutional Container
+   ============================================================ */
+
+.sir-dashboard__panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.sir-dashboard__panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+}
+
+.sir-dashboard__panel-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sir-dashboard__panel-title svg {
+    color: var(--text-tertiary);
+}
+
+.sir-dashboard__panel-badge {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.sir-dashboard__panel-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.sir-dashboard__panel-total {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-dashboard__panel-accuracy {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+/* ============================================================
+   CLAIMS DISTRIBUTION TABLE
+   ============================================================ */
+
+.sir-dashboard__claims-header {
+    display: grid;
+    grid-template-columns: 1.8fr 2fr 0.6fr 0.7fr 0.6fr;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-secondary);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.sir-dashboard__claims-body {
+    padding: var(--space-2) 0;
+}
+
+.sir-claims-row {
+    display: grid;
+    grid-template-columns: 1.8fr 2fr 0.6fr 0.7fr 0.6fr;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    align-items: center;
+    transition: background 0.15s ease;
+}
+
+.sir-claims-row:hover {
+    background: var(--bg-hover);
+}
+
+.sir-claims-row__category {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.sir-claims-row__code {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    min-width: 24px;
+    text-align: center;
+}
+
+.sir-claims-row__name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.sir-claims-row__bar-container {
+    position: relative;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    overflow: visible;
+}
+
+.sir-claims-row__bar {
+    height: 100%;
+    border-radius: var(--radius-full);
+    position: relative;
+}
+
+.sir-claims-row__bar-label {
+    position: absolute;
+    right: 0;
+    top: -16px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-claims-row__percent {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: right;
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-claims-row__variance {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-align: right;
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-claims-row__variance.favorable {
+    color: #059669;
+}
+
+.sir-claims-row__variance.unfavorable {
+    color: #dc2626;
+}
+
+.sir-claims-row__pmpm {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+    font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   MONTHLY TREND CHART
+   ============================================================ */
+
+.sir-trend {
+    padding: var(--space-4);
+}
+
+.sir-trend__chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 140px;
+    padding-bottom: var(--space-4);
+}
+
+.sir-trend__bar-group {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.sir-trend__bar {
+    width: 100%;
+    min-height: 4px;
+    border-radius: 2px 2px 0 0;
+    transition: opacity 0.15s ease;
+    position: relative;
+}
+
+.sir-trend__bar:hover {
+    opacity: 0.85;
+}
+
+.sir-trend__bar::after {
+    content: attr(data-value);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    padding-bottom: 2px;
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-trend__bar:hover::after {
+    opacity: 1;
+}
+
+.sir-trend__budget-marker {
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    height: 1px;
+    background: var(--text-tertiary);
+}
+
+.sir-trend__axis {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.5rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--border-hairline);
+    padding-top: var(--space-2);
+}
+
+.sir-trend__legend {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+    justify-content: center;
+}
+
+.sir-trend__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+.sir-trend__legend-item span:first-child {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+.sir-trend__legend-line {
+    width: 12px;
+    height: 1px;
+    background: var(--text-tertiary);
+}
+
+/* ============================================================
+   AI INSIGHTS LIST
+   ============================================================ */
+
+.sir-dashboard__insights-list {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.sir-insight {
+    padding: var(--space-3);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+}
+
+.sir-insight:hover {
+    background: var(--bg-tertiary);
+}
+
+.sir-insight--critical {
+    border-left-color: #dc2626;
+}
+
+.sir-insight--high {
+    border-left-color: #d97706;
+}
+
+.sir-insight--medium {
+    border-left-color: #2563eb;
+}
+
+.sir-insight--low {
+    border-left-color: #059669;
+}
+
+.sir-insight__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.sir-insight__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sir-insight--critical .sir-insight__icon {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+}
+
+.sir-insight--high .sir-insight__icon {
+    background: rgba(217, 119, 6, 0.1);
+    color: #d97706;
+}
+
+.sir-insight--medium .sir-insight__icon {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.sir-insight--low .sir-insight__icon {
+    background: rgba(5, 150, 105, 0.1);
+    color: #059669;
+}
+
+.sir-insight__meta {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.sir-insight__category {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+}
+
+.sir-insight__confidence {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.sir-insight__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-1);
+    line-height: 1.3;
+}
+
+.sir-insight__summary {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.sir-insight__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-hairline);
+}
+
+.sir-insight__impact {
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+}
+
+.sir-insight__action {
+    font-size: 0.625rem !important;
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* ============================================================
+   HIGH-COST CLAIMANTS LIST
+   ============================================================ */
+
+.sir-dashboard__hcc-list {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.sir-hcc-member {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.sir-hcc-member:hover {
+    background: var(--bg-tertiary);
+}
+
+.sir-hcc-member__risk {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.sir-hcc-member__risk-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.sir-hcc-member__risk-track {
+    fill: none;
+    stroke: var(--bg-card);
+    stroke-width: 3;
+}
+
+.sir-hcc-member__risk-fill {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.sir-hcc-member__risk-score {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-hcc-member__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sir-hcc-member__id-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: 2px;
+}
+
+.sir-hcc-member__id {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sir-hcc-member__conditions {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sir-hcc-member__costs {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.sir-hcc-member__cost {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sir-hcc-member__cost-label {
+    font-size: 0.5rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sir-hcc-member__cost-value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-hcc-member__program {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.625rem;
+    color: var(--text-secondary);
+}
+
+.sir-hcc-member__arrow {
+    color: var(--text-tertiary);
+    transition: transform 0.15s ease;
+}
+
+.sir-hcc-member:hover .sir-hcc-member__arrow {
+    transform: translateX(2px);
+}
+
+/* ============================================================
+   STOP-LOSS POSITION CARDS
+   ============================================================ */
+
+.sir-dashboard__stoploss-list {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.sir-stoploss {
+    padding: var(--space-3);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+}
+
+.sir-stoploss__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-3);
+}
+
+.sir-stoploss__title {
+    display: flex;
+    flex-direction: column;
+}
+
+.sir-stoploss__type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sir-stoploss__attachment {
+    font-size: 0.5625rem;
+    color: var(--text-tertiary);
+}
+
+.sir-stoploss__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+.sir-stoploss__status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.sir-stoploss__gauge {
+    margin-bottom: var(--space-3);
+}
+
+.sir-stoploss__gauge-track {
+    height: 8px;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    overflow: visible;
+    position: relative;
+}
+
+.sir-stoploss__gauge-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.sir-stoploss__gauge-marker {
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    background: var(--text-tertiary);
+    top: -2px;
+    border-radius: 1px;
+}
+
+.sir-stoploss__gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.5rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-1);
+}
+
+.sir-stoploss__gauge-threshold {
+    color: #d97706;
+    font-weight: 600;
+}
+
+.sir-stoploss__metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+}
+
+.sir-stoploss__metric {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-2);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+}
+
+.sir-stoploss__metric-label {
+    font-size: 0.5rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sir-stoploss__metric-value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.sir-stoploss__metric--alert .sir-stoploss__metric-value {
+    color: #d97706;
+}
+
+.sir-stoploss__metric--success .sir-stoploss__metric-value {
+    color: #059669;
+}
+
+/* ============================================================
+   DARK MODE OVERRIDES
+   ============================================================ */
+
+[data-theme="dark"] .sir-kpi-card {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .sir-dashboard__panel {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .sir-dashboard__claims-header {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme="dark"] .sir-insight,
+[data-theme="dark"] .sir-hcc-member,
+[data-theme="dark"] .sir-stoploss {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .sir-insight:hover,
+[data-theme="dark"] .sir-hcc-member:hover {
+    background: rgba(30, 41, 59, 0.7);
+}
+
+[data-theme="dark"] .sir-stoploss__metric,
+[data-theme="dark"] .sir-stoploss__gauge-track,
+[data-theme="dark"] .sir-hcc-member__risk-track {
+    background: rgba(30, 41, 59, 0.6);
+}
+
+/* ============================================================
+   SCROLLBAR STYLING
+   ============================================================ */
+
+.sir-dashboard__insights-list::-webkit-scrollbar,
+.sir-dashboard__hcc-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sir-dashboard__insights-list::-webkit-scrollbar-track,
+.sir-dashboard__hcc-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sir-dashboard__insights-list::-webkit-scrollbar-thumb,
+.sir-dashboard__hcc-list::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 2px;
+}
