@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigation } from '../context/NavigationContext'
 import { motion } from 'framer-motion'
 import {
     Briefcase,
@@ -37,7 +37,7 @@ const renewals = [
 ]
 
 export function BrokerPortal() {
-    const navigate = useNavigate()
+    const { navigate } = useNavigation()
     const [commissionPeriod, setCommissionPeriod] = useState<'mtd' | 'ytd'>('ytd')
     const [selectedEmployer, setSelectedEmployer] = useState<number | null>(null)
     const [showMenu, setShowMenu] = useState<number | null>(null)

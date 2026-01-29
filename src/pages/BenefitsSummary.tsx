@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigation } from '../context/NavigationContext'
 import { motion } from 'framer-motion'
 import {
     Shield,
@@ -94,7 +94,7 @@ const dependents: Dependent[] = [
 ]
 
 export function BenefitsSummary() {
-    const navigate = useNavigate()
+    const { navigate } = useNavigation()
     const [activeCategory, setActiveCategory] = useState('medical')
 
     const planInfo = {

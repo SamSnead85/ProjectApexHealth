@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigation } from '../context/NavigationContext'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileText,
@@ -105,7 +105,7 @@ const documentCategories: DocumentCategory[] = [
 ]
 
 export function Documents() {
-    const navigate = useNavigate()
+    const { navigate } = useNavigation()
     const [documents] = useState<Document[]>(mockDocuments)
     const [selectedCategory, setSelectedCategory] = useState('all')
     const [searchQuery, setSearchQuery] = useState('')
