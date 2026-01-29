@@ -1,0 +1,449 @@
+/* ============================================
+   TESTIMONIAL CAROUSEL - Enterprise Social Proof
+   ============================================ */
+
+.testimonial-section {
+    padding: var(--space-3xl) 0;
+}
+
+/* Section Header */
+.testimonial-section__header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.testimonial-section__title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: var(--space-md) 0;
+    letter-spacing: -0.5px;
+}
+
+.testimonial-section__subtitle {
+    font-size: var(--text-lg);
+    color: var(--apex-steel);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   ANIMATED CLIENT LOGOS - Infinite Scroll
+   ============================================ */
+
+.client-logos {
+    overflow: hidden;
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-lg) 0;
+    mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+}
+
+.client-logos__track {
+    display: flex;
+    gap: var(--space-2xl);
+    animation: scroll 30s linear infinite;
+    width: max-content;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.client-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    color: var(--apex-steel);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* ============================================
+   TESTIMONIAL CAROUSEL
+   ============================================ */
+
+.testimonial-carousel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    max-width: 900px;
+    margin: 0 auto var(--space-xl);
+}
+
+.carousel-content {
+    flex: 1;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.carousel-nav:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--apex-white);
+    transform: scale(1.05);
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    width: 100%;
+}
+
+.testimonial-card__inner {
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.testimonial-card__quote-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(20, 184, 166, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--apex-teal);
+    margin-bottom: var(--space-lg);
+}
+
+.testimonial-card__quote {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--apex-white);
+    line-height: 1.7;
+    margin: 0 0 var(--space-lg) 0;
+    font-style: italic;
+}
+
+.testimonial-card__rating {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: var(--space-lg);
+}
+
+.testimonial-card__author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.testimonial-card__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--apex-teal), #0f766e);
+    border-radius: var(--radius-full);
+    color: white;
+}
+
+.testimonial-card__author-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.testimonial-card__name {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.testimonial-card__title {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.testimonial-card__company {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Metrics Grid */
+.testimonial-card__metrics {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.testimonial-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.testimonial-metric__value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-teal);
+}
+
+.testimonial-metric__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-3xl);
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-dot.active {
+    background: var(--apex-teal);
+    width: 28px;
+}
+
+/* ============================================
+   CASE STUDIES
+   ============================================ */
+
+.case-studies {
+    margin-bottom: var(--space-3xl);
+}
+
+.case-studies__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.case-studies__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+}
+
+.case-study-card {
+    padding: var(--space-lg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.case-study-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.case-study-card__company {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.case-study-card__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.case-study-card__content {
+    flex: 1;
+    margin-bottom: var(--space-md);
+}
+
+.case-study-card__section {
+    margin-bottom: var(--space-md);
+}
+
+.case-study-card__label {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-teal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.case-study-card__section p {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.case-study-card__results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: rgba(20, 184, 166, 0.05);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.case-study-result {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.case-study-result svg {
+    color: var(--apex-success);
+    flex-shrink: 0;
+}
+
+.case-study-result__metric {
+    color: var(--apex-steel);
+}
+
+.case-study-result__value {
+    color: var(--apex-white);
+    font-weight: 600;
+}
+
+.case-study-card__cta {
+    margin-top: auto;
+}
+
+/* ============================================
+   TRUST INDICATORS
+   ============================================ */
+
+.trust-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+}
+
+.trust-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--apex-steel);
+}
+
+.trust-indicator svg {
+    color: var(--apex-teal);
+}
+
+.trust-indicator__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.trust-indicator__value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.trust-indicator__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .testimonial-carousel {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .carousel-nav {
+        display: none;
+    }
+
+    .carousel-content {
+        min-height: auto;
+    }
+
+    .testimonial-card__quote {
+        font-size: var(--text-lg);
+    }
+
+    .testimonial-card__metrics {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+
+    .case-studies__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-indicators {
+        gap: var(--space-xl);
+    }
+
+    .trust-indicator {
+        width: calc(50% - var(--space-lg));
+    }
+}
