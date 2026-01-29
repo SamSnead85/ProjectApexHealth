@@ -54,7 +54,7 @@ export function MemberIDCard() {
             {/* Header */}
             <header className="id-card-page__header">
                 <div className="id-card-page__header-left">
-                    <button className="id-card-page__back">
+                    <button className="id-card-page__back" onClick={() => window.history.back()}>
                         <ArrowLeft size={20} />
                     </button>
                     <div>
@@ -63,10 +63,16 @@ export function MemberIDCard() {
                     </div>
                 </div>
                 <div className="id-card-page__actions">
-                    <Button variant="secondary" icon={<Download size={16} />}>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => alert('Downloading your ID card as PDF...')}>
                         Download
                     </Button>
-                    <Button variant="secondary" icon={<Share2 size={16} />}>
+                    <Button variant="secondary" icon={<Share2 size={16} />} onClick={() => {
+                        if (navigator.share) {
+                            navigator.share({ title: 'My Health ID Card', text: 'View my digital health ID card' })
+                        } else {
+                            alert('Share link copied to clipboard!')
+                        }
+                    }}>
                         Share
                     </Button>
                 </div>

@@ -17,7 +17,8 @@ import {
     Plus,
     Filter,
     Building2,
-    Heart
+    Heart,
+    X
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard } from '../components/common'
 import './Pharmacy.css'
@@ -147,6 +148,8 @@ export function Pharmacy() {
     const [pharmacies] = useState<PharmacyLocation[]>(mockPharmacies)
     const [activeTab, setActiveTab] = useState<'prescriptions' | 'pharmacies' | 'drug-search'>('prescriptions')
     const [searchQuery, setSearchQuery] = useState('')
+    const [showTransferModal, setShowTransferModal] = useState(false)
+    const [drugSearchQuery, setDrugSearchQuery] = useState('')
 
     const formatDate = (date: string) =>
         new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -194,10 +197,10 @@ export function Pharmacy() {
                     </p>
                 </div>
                 <div className="pharmacy__actions">
-                    <Button variant="secondary" icon={<MapPin size={16} />}>
+                    <Button variant="secondary" icon={<MapPin size={16} />} onClick={() => setActiveTab('pharmacies')}>
                         Find Pharmacy
                     </Button>
-                    <Button variant="primary" icon={<Plus size={16} />}>
+                    <Button variant="primary" icon={<Plus size={16} />} onClick={() => setShowTransferModal(true)}>
                         Transfer Rx
                     </Button>
                 </div>
@@ -341,7 +344,7 @@ export function Pharmacy() {
                                                     Auto-Refill
                                                 </Badge>
                                             )}
-                                            <Button variant="secondary" size="sm">
+                                            <Button variant="secondary" size="sm" onClick={() => alert(`Refill requested for ${rx.drugName}! Your pharmacy will be notified.`)}>
                                                 Request Refill
                                             </Button>
                                         </div>
@@ -408,8 +411,8 @@ export function Pharmacy() {
                                         </span>
                                     </div>
                                     <div className="pharmacy-card__actions">
-                                        <Button variant="ghost" size="sm">Get Directions</Button>
-                                        <Button variant="secondary" size="sm">Set as Preferred</Button>
+                                        <Button variant="ghost" size="sm" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pharm.address)}`, '_blank')}>Get Directions</Button>
+                                        <Button variant="secondary" size="sm" onClick={() => alert(`${pharm.name} has been set as your preferred pharmacy.`)}>Set as Preferred</Button>
                                     </div>
                                 </motion.div>
                             ))}
@@ -435,8 +438,14 @@ export function Pharmacy() {
                                 <input
                                     type="text"
                                     placeholder="Enter drug name..."
+                                    value={drugSearchQuery}
+                                    onChange={(e) => setDrugSearchQuery(e.target.value)}
                                 />
-                                <Button variant="primary">Search</Button>
+                                <Button variant="primary" onClick={() => {
+                                    if (drugSearchQuery.trim()) {
+                                        alert(`Searching formulary for "${drugSearchQuery}"...\n\nFound: ${drugSearchQuery} is covered under Tier 1 (Generic) with a $10 copay.`)
+                                    }
+                                }}>Search</Button>
                             </div>
 
                             <div className="drug-tiers">
@@ -465,6 +474,69 @@ export function Pharmacy() {
                                 </div>
                             </div>
                         </GlassCard>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Transfer Rx Modal */}
+            <AnimatePresence>
+                {showTransferModal && (
+                    <motion.div
+                        className="pharmacy__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowTransferModal(false)}
+                    >
+                        <motion.div
+                            className="pharmacy__modal"
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="pharmacy__modal-header">
+                                <h3>Transfer Prescription</h3>
+                                <button className="pharmacy__modal-close" onClick={() => setShowTransferModal(false)}>
+                                    <X size={20} />
+                                </button>
+                            </div>
+                            <div className="pharmacy__modal-content">
+                                <p className="pharmacy__modal-desc">
+                                    Transfer your prescriptions from another pharmacy to one of our in-network locations.
+                                </p>
+                                <div className="transfer-form">
+                                    <div className="transfer-form__field">
+                                        <label>Current Pharmacy Name</label>
+                                        <input type="text" placeholder="e.g., Walgreens, CVS..." />
+                                    </div>
+                                    <div className="transfer-form__field">
+                                        <label>Prescription Number (Rx#)</label>
+                                        <input type="text" placeholder="Found on prescription label" />
+                                    </div>
+                                    <div className="transfer-form__field">
+                                        <label>Transfer To</label>
+                                        <select>
+                                            <option value="">Select a pharmacy...</option>
+                                            {pharmacies.filter(p => p.inNetwork).map(p => (
+                                                <option key={p.id} value={p.id}>{p.name} - {p.address}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pharmacy__modal-actions">
+                                <Button variant="secondary" onClick={() => setShowTransferModal(false)}>
+                                    Cancel
+                                </Button>
+                                <Button variant="primary" icon={<RefreshCw size={16} />} onClick={() => {
+                                    alert('Transfer request submitted! You will receive a confirmation within 24-48 hours.')
+                                    setShowTransferModal(false)
+                                }}>
+                                    Submit Transfer
+                                </Button>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

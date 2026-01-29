@@ -253,7 +253,7 @@ export function MemberHome() {
                 <GlassCard className="member-home__activity">
                     <div className="activity__header">
                         <h2>Recent Activity</h2>
-                        <Button variant="ghost" size="sm">View All</Button>
+                        <Button variant="ghost" size="sm" onClick={() => navigate('/claims')}>View All</Button>
                     </div>
                     <div className="activity__list">
                         {recentActivity.map((item, index) => (
@@ -305,7 +305,7 @@ export function MemberHome() {
                                         <Calendar size={12} /> Due by {formatDate(reminder.dueDate)}
                                     </span>
                                 </div>
-                                <Button variant="secondary" size="sm">Schedule</Button>
+                                <Button variant="secondary" size="sm" onClick={() => alert(`Scheduling ${reminder.title}...`)}>Schedule</Button>
                             </motion.div>
                         ))}
                     </div>
@@ -337,7 +337,7 @@ export function MemberHome() {
                                 </div>
                             </div>
                         </div>
-                        <Button variant="ghost" size="sm" className="id-card__view-full">
+                        <Button variant="ghost" size="sm" className="id-card__view-full" onClick={() => navigate('/id-card')}>
                             View Full Card
                         </Button>
                     </div>
