@@ -1,0 +1,398 @@
+/* ClaimsPrediction.css - AI Claims Prediction Dashboard */
+/* Apex Obsidian v2.5 Design System */
+
+.claims-prediction {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.claims-prediction h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.claims-prediction h1 .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.claims-prediction .page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Prediction Stats */
+.prediction-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.stat-card h4 {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.stat-change {
+    font-size: 0.813rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-change.up {
+    color: #ef4444;
+}
+
+.stat-change.down {
+    color: #22c55e;
+}
+
+/* Prediction Chart */
+.prediction-chart {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.prediction-chart h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chart-container {
+    height: 300px;
+    position: relative;
+}
+
+.chart-legend {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-dot.actual {
+    background: var(--accent-teal);
+}
+
+.legend-dot.predicted {
+    background: #818cf8;
+}
+
+.legend-dot.high-risk {
+    background: #f87171;
+}
+
+/* Risk Distribution */
+.risk-distribution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.risk-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.risk-panel h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.risk-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.risk-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.risk-label {
+    width: 80px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.risk-bar {
+    flex: 1;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.risk-bar-fill {
+    height: 100%;
+    border-radius: 12px;
+    transition: width 0.5s ease;
+}
+
+.risk-bar-fill.low {
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.risk-bar-fill.medium {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.risk-bar-fill.high {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.risk-bar-fill.critical {
+    background: linear-gradient(90deg, #dc2626, #b91c1c);
+}
+
+.risk-value {
+    width: 60px;
+    text-align: right;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* High Risk Members */
+.high-risk-members {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.high-risk-members h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.member-risk-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.member-risk-table th,
+.member-risk-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.member-risk-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.member-risk-table td {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.member-name {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.member-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.risk-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.risk-score.high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.risk-score.medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.intervention-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(20, 184, 166, 0.15);
+    border: 1px solid rgba(20, 184, 166, 0.3);
+    border-radius: 8px;
+    color: var(--accent-teal);
+    font-size: 0.813rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.intervention-btn:hover {
+    background: rgba(20, 184, 166, 0.25);
+}
+
+/* Model Insights */
+.model-insights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.insight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.insight-card h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.insight-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.insight-icon.accuracy {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.insight-icon.features {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+.insight-icon.confidence {
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--accent-teal);
+}
+
+.insight-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.insight-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .risk-distribution {
+        grid-template-columns: 1fr;
+    }
+
+    .model-insights {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .claims-prediction {
+        padding: 1rem;
+    }
+
+    .prediction-stats {
+        grid-template-columns: 1fr;
+    }
+}

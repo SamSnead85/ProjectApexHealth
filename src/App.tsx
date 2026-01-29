@@ -91,6 +91,10 @@ import RegulatoryHub from './pages/RegulatoryHub'
 import StopLossManagement from './pages/StopLossManagement'
 import CarrierVendorPortal from './pages/CarrierVendorPortal'
 import FiduciaryDashboard from './pages/FiduciaryDashboard'
+// AI-Powered Features
+import ClaimsPrediction from './pages/ClaimsPrediction'
+import FraudDetection from './pages/FraudDetection'
+import BenefitCalculator from './pages/BenefitCalculator'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -147,6 +151,16 @@ function App() {
         }
         if (activePath.includes('/fiduciary') || activePath.includes('/erisa') || activePath.includes('/fee-benchmark')) {
             return <FiduciaryDashboard />
+        }
+        // AI-Powered Features
+        if (activePath.includes('/claims-prediction') || activePath.includes('/ai-claims') || activePath.includes('/forecast')) {
+            return <ClaimsPrediction />
+        }
+        if (activePath.includes('/fraud-detection') || activePath.includes('/fraud') || activePath.includes('/anomaly')) {
+            return <FraudDetection />
+        }
+        if (activePath.includes('/benefit-calculator') || activePath.includes('/cost-calc') || activePath.includes('/estimator')) {
+            return <BenefitCalculator />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
