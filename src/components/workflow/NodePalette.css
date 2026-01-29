@@ -326,7 +326,7 @@ button.node-palette__section-header:hover {
 
 /* Instruction Hint at Bottom */
 .node-palette::after {
-    content: '↖ Drag nodes to canvas';
+    content: '↖ Drag or click to add nodes';
     display: block;
     padding: var(--space-md);
     text-align: center;
@@ -334,4 +334,81 @@ button.node-palette__section-header:hover {
     color: var(--apex-steel);
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Quick Start Section */
+.node-palette__quickstart {
+    padding: var(--space-md);
+    margin: 0 var(--space-sm) var(--space-md);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.05));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.node-palette__quickstart-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--apex-silver);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+}
+
+.node-palette__quickstart-btns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.node-palette__quickstart-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--apex-white);
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.node-palette__quickstart-btn:hover {
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.4);
+    transform: translateX(4px);
+}
+
+.node-palette__quickstart-btn svg {
+    color: var(--apex-teal);
+}
+
+/* Add Button on Node Items */
+.node-palette__item-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: var(--radius-sm);
+    color: var(--apex-teal);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.node-palette__item:hover .node-palette__item-add {
+    opacity: 1;
+}
+
+.node-palette__item-add:hover {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: var(--apex-teal);
+    transform: scale(1.1);
 }
