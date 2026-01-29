@@ -98,6 +98,10 @@ import BenefitCalculator from './pages/BenefitCalculator'
 // Analytics Modules
 import ValueBasedCare from './pages/ValueBasedCare'
 import ProviderPerformance from './pages/ProviderPerformance'
+// Enterprise Modules
+import SSOConfiguration from './pages/SSOConfiguration'
+import BrandingSettings from './pages/BrandingSettings'
+import ClinicalDecisionSupport from './pages/ClinicalDecisionSupport'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -171,6 +175,16 @@ function App() {
         }
         if (activePath.includes('/provider-performance') || activePath.includes('/provider-scorecard') || activePath.includes('/provider-analytics')) {
             return <ProviderPerformance />
+        }
+        // Enterprise Modules
+        if (activePath.includes('/sso') || activePath.includes('/identity') || activePath.includes('/authentication')) {
+            return <SSOConfiguration />
+        }
+        if (activePath.includes('/branding') || activePath.includes('/white-label') || activePath.includes('/theming')) {
+            return <BrandingSettings />
+        }
+        if (activePath.includes('/clinical-decision') || activePath.includes('/cds') || activePath.includes('/care-gaps')) {
+            return <ClinicalDecisionSupport />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
