@@ -1,399 +1,647 @@
 /* ============================================================
-   APEX CLARITY - Light Mode Component Overrides
-   Premium Healthcare Light Theme
+   APEX CLARITY - PREMIUM LIGHT MODE
+   Sophisticated Healthcare Aesthetic - NOT a Dark Mode Inversion
+   
+   Design Philosophy:
+   - Warm cream/pearl backgrounds, NOT pure white
+   - Gradient cards with subtle depth
+   - Netflix-style hover effects and shadows
+   - Premium typography with enhanced weights
+   - Accent colors that pop without being clinical
    ============================================================ */
 
-/* --------------------------------
-   ATMOSPHERIC BACKGROUND - Light Mode
-   Subtle teal glow maintained for tech-forward feel
-   -------------------------------- */
-[data-theme="light"] .apex-atmosphere {
+/* ----------------------------------------------------------------
+   ROOT OVERRIDES - Premium Color Palette for Light Mode
+   ---------------------------------------------------------------- */
+[data-theme="light"] {
+    /* Base backgrounds - cream/pearl, NOT pure white */
+    --bg-primary: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 50%, #E2E8F0 100%);
+    --bg-secondary: #F8FAFC;
+    --bg-card: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    --bg-elevated: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+
+    /* Premium text hierarchy */
+    --text-hero: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    --text-primary: #1E293B;
+    --text-secondary: #475569;
+    --text-tertiary: #64748B;
+    --text-muted: #94A3B8;
+
+    /* Accent colors - richer for light mode */
+    --accent-teal: #0891B2;
+    --accent-teal-glow: rgba(8, 145, 178, 0.15);
+    --accent-purple: #7C3AED;
+    --accent-purple-glow: rgba(124, 58, 237, 0.1);
+
+    /* Glass effects - for light mode */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-glow: rgba(8, 145, 178, 0.15);
+
+    /* Shadows - softer, more elegant */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
+    --shadow-teal: 0 8px 32px rgba(8, 145, 178, 0.2);
+}
+
+/* ----------------------------------------------------------------
+   BODY & GLOBAL - Premium Background
+   ---------------------------------------------------------------- */
+[data-theme="light"] body {
+    background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+}
+
+[data-theme="light"] #root {
+    background: transparent;
+}
+
+/* ----------------------------------------------------------------
+   ATMOSPHERIC BACKGROUND - Subtle Gradient Glow
+   ---------------------------------------------------------------- */
+[data-theme="light"] .apex-atmosphere,
+[data-theme="light"] .shell__main {
     background:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(8, 145, 178, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
-        linear-gradient(180deg, #F5F7FA 0%, #EEF1F5 50%, #E8ECF1 100%);
+        radial-gradient(ellipse 100% 60% at 50% -10%, rgba(8, 145, 178, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse 80% 50% at 100% 100%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 0% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 50%, #E8ECF0 100%);
 }
 
-[data-theme="light"] .apex-atmosphere::before {
-    opacity: 0.015;
-}
-
-/* --------------------------------
-   NETFLIX-STYLE CARDS - Light Mode
-   Premium shadows and subtle borders
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   NETFLIX-STYLE GLASS CARDS - Premium Light Version
+   ---------------------------------------------------------------- */
+[data-theme="light"] .glass-card,
+[data-theme="light"] .metric-card,
 [data-theme="light"] .netflix-card {
-    background: rgba(255, 255, 255, 0.98);
-    border-color: rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(248, 250, 252, 0.95) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        0 1px 4px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme="light"] .glass-card:hover,
+[data-theme="light"] .metric-card:hover,
 [data-theme="light"] .netflix-card:hover {
+    transform: translateY(-4px) scale(1.01);
     border-color: rgba(8, 145, 178, 0.2);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.08),
+        0 12px 24px rgba(8, 145, 178, 0.08),
+        0 0 0 1px rgba(8, 145, 178, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
-/* --------------------------------
-   GLASS CARD COMPONENT
-   -------------------------------- */
-[data-theme="light"] .glass-card {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="light"] .glass-card:hover {
-    border-color: rgba(8, 145, 178, 0.2);
-}
-
-/* --------------------------------
-   METRIC CARDS
-   -------------------------------- */
-[data-theme="light"] .metric-card {
-    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
+/* Metric Card Icon - Gradient Background */
 [data-theme="light"] .metric-card__icon {
-    background: rgba(8, 145, 178, 0.1);
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.12) 0%, rgba(124, 58, 237, 0.08) 100%);
+    color: #0891B2;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
 }
 
-/* --------------------------------
-   SIDEBAR / SHELL NAVIGATION
-   -------------------------------- */
+[data-theme="light"] .metric-card__value {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* ----------------------------------------------------------------
+   SIDEBAR / SHELL - Frosted Glass Effect
+   ---------------------------------------------------------------- */
 [data-theme="light"] .shell__sidebar {
-    background: rgba(255, 255, 255, 0.98);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.98) 100%);
     border-right: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(20px);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .shell__logo h2 {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 [data-theme="light"] .shell__nav-item {
     color: #475569;
+    border-radius: 10px;
+    margin: 2px 8px;
+    transition: all 0.3s ease;
 }
 
 [data-theme="light"] .shell__nav-item:hover {
-    background: rgba(8, 145, 178, 0.06);
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0.04) 100%);
     color: #0891B2;
+    transform: translateX(4px);
 }
 
 [data-theme="light"] .shell__nav-item.active {
-    background: rgba(8, 145, 178, 0.1);
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.15) 0%, rgba(8, 145, 178, 0.08) 100%);
     color: #0891B2;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(8, 145, 178, 0.15);
 }
 
+[data-theme="light"] .shell__nav-item.active::before {
+    background: linear-gradient(180deg, #0891B2 0%, #06B6D4 100%);
+}
+
+/* Header Bar - Premium Glass */
 [data-theme="light"] .shell__header {
-    background: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.92) 0%,
+            rgba(248, 250, 252, 0.88) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-/* --------------------------------
-   BUTTONS - Light Mode Variants
-   -------------------------------- */
-[data-theme="light"] .button--primary {
+/* ----------------------------------------------------------------
+   BUTTONS - Rich Gradients & Premium Shadows
+   ---------------------------------------------------------------- */
+[data-theme="light"] .button--primary,
+[data-theme="light"] button.button--primary {
     background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
     color: #FFFFFF;
+    box-shadow:
+        0 4px 16px rgba(8, 145, 178, 0.3),
+        0 2px 4px rgba(8, 145, 178, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: none;
+    font-weight: 600;
 }
 
-[data-theme="light"] .button--primary:hover {
+[data-theme="light"] .button--primary:hover,
+[data-theme="light"] button.button--primary:hover {
     background: linear-gradient(135deg, #0E7490 0%, #155E75 100%);
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 24px rgba(8, 145, 178, 0.35),
+        0 4px 8px rgba(8, 145, 178, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="light"] .button--secondary {
-    background: rgba(8, 145, 178, 0.08);
-    border: 1px solid rgba(8, 145, 178, 0.25);
+[data-theme="light"] .button--secondary,
+[data-theme="light"] button.button--secondary {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0.04) 100%);
+    border: 1px solid rgba(8, 145, 178, 0.3);
     color: #0891B2;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(8, 145, 178, 0.08);
 }
 
-[data-theme="light"] .button--secondary:hover {
-    background: rgba(8, 145, 178, 0.15);
+[data-theme="light"] .button--secondary:hover,
+[data-theme="light"] button.button--secondary:hover {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.15) 0%, rgba(8, 145, 178, 0.08) 100%);
+    border-color: rgba(8, 145, 178, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
 }
 
-[data-theme="light"] .button--ghost {
+[data-theme="light"] .button--ghost,
+[data-theme="light"] button.button--ghost {
     color: #475569;
+    font-weight: 500;
 }
 
-[data-theme="light"] .button--ghost:hover {
-    background: rgba(0, 0, 0, 0.04);
+[data-theme="light"] .button--ghost:hover,
+[data-theme="light"] button.button--ghost:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.02) 100%);
     color: #1E293B;
 }
 
-/* --------------------------------
-   BADGES
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   HEADINGS & TYPOGRAPHY - Premium Gradients
+   ---------------------------------------------------------------- */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] .page-title {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+    color: #1E293B;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------------
+   BADGES - Vibrant with Subtle Glow
+   ---------------------------------------------------------------- */
 [data-theme="light"] .badge--success {
-    background: rgba(5, 150, 105, 0.12);
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(5, 150, 105, 0.08) 100%);
     color: #059669;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
+    font-weight: 600;
 }
 
 [data-theme="light"] .badge--warning {
-    background: rgba(217, 119, 6, 0.12);
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(217, 119, 6, 0.08) 100%);
     color: #D97706;
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+    font-weight: 600;
 }
 
-[data-theme="light"] .badge--critical {
-    background: rgba(220, 38, 38, 0.12);
+[data-theme="light"] .badge--critical,
+[data-theme="light"] .badge--error {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%);
     color: #DC2626;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+    font-weight: 600;
 }
 
 [data-theme="light"] .badge--info {
-    background: rgba(37, 99, 235, 0.12);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
     color: #2563EB;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+    font-weight: 600;
 }
 
 [data-theme="light"] .badge--teal {
-    background: rgba(8, 145, 178, 0.12);
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.15) 0%, rgba(8, 145, 178, 0.08) 100%);
     color: #0891B2;
+    box-shadow: 0 2px 8px rgba(8, 145, 178, 0.2);
+    font-weight: 600;
 }
 
-/* --------------------------------
-   FORM INPUTS
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   FORM INPUTS - Soft with Focus Ring
+   ---------------------------------------------------------------- */
 [data-theme="light"] input[type="text"],
 [data-theme="light"] input[type="email"],
 [data-theme="light"] input[type="password"],
 [data-theme="light"] input[type="search"],
+[data-theme="light"] input[type="number"],
 [data-theme="light"] textarea,
 [data-theme="light"] select {
-    background: #FFFFFF;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
     border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     color: #1E293B;
+    font-weight: 500;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
 }
 
 [data-theme="light"] input::placeholder,
 [data-theme="light"] textarea::placeholder {
     color: #94A3B8;
+    font-weight: 400;
 }
 
 [data-theme="light"] input:focus,
 [data-theme="light"] textarea:focus,
 [data-theme="light"] select:focus {
+    outline: none;
     border-color: #0891B2;
-    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+    box-shadow:
+        0 0 0 4px rgba(8, 145, 178, 0.12),
+        inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-/* --------------------------------
-   TABLES
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   TABLES - Clean with Subtle Stripes
+   ---------------------------------------------------------------- */
 [data-theme="light"] table {
-    background: #FFFFFF;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] th {
-    background: #F5F7FA;
+    background: linear-gradient(180deg, #F1F5F9 0%, #E8ECF0 100%);
     color: #475569;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid rgba(8, 145, 178, 0.2);
 }
 
 [data-theme="light"] td {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     color: #334155;
+    font-weight: 500;
 }
 
 [data-theme="light"] tr:hover td {
-    background: rgba(8, 145, 178, 0.04);
+    background: linear-gradient(90deg, rgba(8, 145, 178, 0.04) 0%, rgba(8, 145, 178, 0.02) 100%);
 }
 
-/* --------------------------------
-   MODAL OVERLAYS
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   MODALS - Premium Glass Overlay
+   ---------------------------------------------------------------- */
 [data-theme="light"] .modal-overlay {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(8px);
 }
 
-[data-theme="light"] .modal-content {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+[data-theme="light"] .modal-content,
+[data-theme="light"] .modal__content {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.2),
+        0 16px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
 }
 
-/* --------------------------------
-   SCROLLBAR - Light Mode
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   SCROLLBAR - Sleek & Minimal
+   ---------------------------------------------------------------- */
+[data-theme="light"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
 [data-theme="light"] ::-webkit-scrollbar-track {
-    background: #F5F7FA;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-    background: #CBD5E1;
-    border-radius: 9999px;
+    background: linear-gradient(180deg, #CBD5E1 0%, #94A3B8 100%);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-    background: #94A3B8;
+    background: linear-gradient(180deg, #94A3B8 0%, #64748B 100%);
 }
 
-/* --------------------------------
-   CHARTS (Recharts)
-   -------------------------------- */
-[data-theme="light"] .recharts-cartesian-grid line {
-    stroke: rgba(0, 0, 0, 0.06);
+/* ----------------------------------------------------------------
+   QUICK ACTIONS - Hover Lift Effect
+   ---------------------------------------------------------------- */
+[data-theme="light"] .quick-action,
+[data-theme="light"] .quick-action-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-[data-theme="light"] .recharts-text {
-    fill: #64748B;
+[data-theme="light"] .quick-action:hover,
+[data-theme="light"] .quick-action-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(8, 145, 178, 0.25);
+    box-shadow:
+        0 20px 40px rgba(8, 145, 178, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(8, 145, 178, 0.1);
 }
 
-[data-theme="light"] .recharts-tooltip-wrapper .recharts-default-tooltip {
-    background: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+[data-theme="light"] .quick-action__icon,
+[data-theme="light"] .quick-action-card__icon {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.12) 0%, rgba(124, 58, 237, 0.08) 100%);
+    color: #0891B2;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
 }
 
-/* --------------------------------
-   WORKFLOW BUILDER - Light Mode
-   -------------------------------- */
-[data-theme="light"] .workflow-canvas {
-    background:
-        radial-gradient(circle at 50% 0%, rgba(8, 145, 178, 0.06) 0%, transparent 50%),
-        linear-gradient(180deg, #F5F7FA 0%, #EEF1F5 100%);
+/* ----------------------------------------------------------------
+   MEMBER HOME - Premium Cards
+   ---------------------------------------------------------------- */
+[data-theme="light"] .member-home {
+    background: transparent;
 }
 
-[data-theme="light"] .workflow-node {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+[data-theme="light"] .member-home__welcome h1 {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-[data-theme="light"] .node-palette {
-    background: rgba(255, 255, 255, 0.98);
-    border-right: 1px solid rgba(0, 0, 0, 0.06);
+[data-theme="light"] .member-home__activity {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
 }
 
-[data-theme="light"] .node-palette__item {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .node-palette__item:hover {
-    border-color: rgba(8, 145, 178, 0.3);
-    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
-}
-
-/* --------------------------------
-   MEMBER ID CARD - Premium Light Mode
-   The card should look stunning in both themes
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   MEMBER ID CARD PAGE - Stunning Light Mode
+   ---------------------------------------------------------------- */
 [data-theme="light"] .id-card-page {
-    background: linear-gradient(180deg, #F5F7FA 0%, #E8ECF1 100%);
-}
-
-[data-theme="light"] .id-card-page::before {
-    background: radial-gradient(ellipse, rgba(8, 145, 178, 0.08) 0%, transparent 60%);
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(8, 145, 178, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #E8ECF0 100%);
 }
 
 [data-theme="light"] .id-card-page__header h1 {
-    color: #1E293B;
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 [data-theme="light"] .id-card-page__header p {
     color: #64748B;
 }
 
-[data-theme="light"] .id-card-page__back:hover {
-    background: rgba(0, 0, 0, 0.04);
-    color: #1E293B;
-}
-
-/* The 3D card itself maintains dark gradient for premium look */
+/* 3D Card keeps premium dark look - stunning contrast */
 [data-theme="light"] .id-card-3d {
-    /* Keep the card itself with a premium gradient - not inverted */
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.2),
-        0 8px 24px rgba(0, 0, 0, 0.15);
+        0 32px 80px rgba(0, 0, 0, 0.25),
+        0 16px 40px rgba(0, 0, 0, 0.15),
+        0 0 60px rgba(8, 145, 178, 0.2);
 }
 
-/* --------------------------------
-   PHARMACY PAGE - Light Mode
-   -------------------------------- */
+[data-theme="light"] .id-card-3d:hover {
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.3),
+        0 20px 50px rgba(0, 0, 0, 0.2),
+        0 0 80px rgba(8, 145, 178, 0.25);
+}
+
+/* ----------------------------------------------------------------
+   PHARMACY PAGE - Clean Gradients
+   ---------------------------------------------------------------- */
 [data-theme="light"] .pharmacy-page {
-    background: #F5F7FA;
+    background:
+        radial-gradient(ellipse at top, rgba(8, 145, 178, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #E8ECF0 100%);
 }
 
+[data-theme="light"] .pharmacy__tabs button,
 [data-theme="light"] .pharmacy__tab {
-    background: transparent;
     color: #64748B;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
+[data-theme="light"] .pharmacy__tabs button:hover,
 [data-theme="light"] .pharmacy__tab:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.02) 100%);
     color: #1E293B;
 }
 
+[data-theme="light"] .pharmacy__tabs button.active,
 [data-theme="light"] .pharmacy__tab.active {
-    background: #0891B2;
+    background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
     color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(8, 145, 178, 0.3);
 }
 
-[data-theme="light"] .prescription-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .prescription-card__icon {
-    background: linear-gradient(135deg, #0891B2 0%, #7C3AED 100%);
-}
-
+[data-theme="light"] .prescription-card,
 [data-theme="light"] .pharmacy-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
-[data-theme="light"] .pharmacy__modal {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+[data-theme="light"] .prescription-card:hover,
+[data-theme="light"] .pharmacy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(8, 145, 178, 0.1);
 }
 
-[data-theme="light"] .pharmacy__modal-header {
-    background: #F5F7FA;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+/* ----------------------------------------------------------------
+   WORKFLOW BUILDER - Premium Canvas
+   ---------------------------------------------------------------- */
+[data-theme="light"] .workflow-builder {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(8, 145, 178, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #E8ECF0 100%);
 }
 
-[data-theme="light"] .pharmacy__modal-header h3 {
-    color: #1E293B;
+[data-theme="light"] .workflow-builder__header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
 }
 
-/* --------------------------------
-   DASHBOARD - Light Mode
-   -------------------------------- */
-[data-theme="light"] .dashboard-page {
-    background: #F5F7FA;
+[data-theme="light"] .workflow-builder__palette,
+[data-theme="light"] .node-palette {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.03);
 }
 
-/* --------------------------------
-   LANDING PAGE - Light Mode
-   Keep hero sections impactful
-   -------------------------------- */
-[data-theme="light"] .landing-hero {
-    background: linear-gradient(180deg, #F5F7FA 0%, #E8ECF1 100%);
+[data-theme="light"] .node-palette__header {
+    background: linear-gradient(180deg, #F1F5F9 0%, #E8ECF0 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* --------------------------------
-   QUICK ACTIONS / MEMBER HOME
-   -------------------------------- */
-[data-theme="light"] .quick-action {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+[data-theme="light"] .node-palette__title {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-[data-theme="light"] .quick-action:hover {
-    border-color: rgba(8, 145, 178, 0.25);
-    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.1);
-}
-
-[data-theme="light"] .quick-action__icon {
-    background: rgba(8, 145, 178, 0.1);
+[data-theme="light"] .node-palette__subtitle {
     color: #0891B2;
 }
 
-/* --------------------------------
-   TABS GENERIC
-   -------------------------------- */
+[data-theme="light"] .node-palette__item {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .node-palette__item:hover {
+    transform: translateX(4px);
+    border-color: rgba(8, 145, 178, 0.3);
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.12);
+}
+
+/* Canvas with dot grid */
+[data-theme="light"] .workflow-canvas,
+[data-theme="light"] .react-flow {
+    background:
+        radial-gradient(ellipse at 50% 30%, rgba(8, 145, 178, 0.04) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #EEF1F5 100%);
+}
+
+[data-theme="light"] .react-flow__pane {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+[data-theme="light"] .react-flow__node {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+}
+
+[data-theme="light"] .react-flow__node.selected {
+    border-color: #0891B2;
+    box-shadow:
+        0 0 0 3px rgba(8, 145, 178, 0.15),
+        0 8px 24px rgba(8, 145, 178, 0.15);
+}
+
+[data-theme="light"] .react-flow__edge path {
+    stroke: #94A3B8;
+}
+
+[data-theme="light"] .react-flow__controls {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+}
+
+[data-theme="light"] .react-flow__controls button {
+    background: transparent;
+    color: #64748B;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .react-flow__controls button:hover {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0.04) 100%);
+    color: #0891B2;
+}
+
+/* ----------------------------------------------------------------
+   CHARTS - Enhanced for Light Mode
+   ---------------------------------------------------------------- */
+[data-theme="light"] .recharts-cartesian-grid line {
+    stroke: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .recharts-text {
+    fill: #64748B;
+    font-weight: 500;
+}
+
+[data-theme="light"] .recharts-tooltip-wrapper .recharts-default-tooltip {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+    border-radius: 12px !important;
+}
+
+/* ----------------------------------------------------------------
+   TABS - Premium Underline Style
+   ---------------------------------------------------------------- */
 [data-theme="light"] .tabs__tab {
     color: #64748B;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 [data-theme="light"] .tabs__tab:hover {
-    color: #1E293B;
+    color: #334155;
 }
 
 [data-theme="light"] .tabs__tab.active {
@@ -401,10 +649,48 @@
     border-color: #0891B2;
 }
 
-/* --------------------------------
-   SELECTION
-   -------------------------------- */
+/* ----------------------------------------------------------------
+   SELECTION HIGHLIGHT
+   ---------------------------------------------------------------- */
 [data-theme="light"] ::selection {
-    background: #0891B2;
-    color: #FFFFFF;
+    background: rgba(8, 145, 178, 0.2);
+    color: #0F172A;
+}
+
+/* ----------------------------------------------------------------
+   LINKS - Teal Accent
+   ---------------------------------------------------------------- */
+[data-theme="light"] a {
+    color: #0891B2;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+[data-theme="light"] a:hover {
+    color: #0E7490;
+}
+
+/* ----------------------------------------------------------------
+   CLAIMS/DASHBOARD PAGE
+   ---------------------------------------------------------------- */
+[data-theme="light"] .claims-page,
+[data-theme="light"] .dashboard-page {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(8, 145, 178, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #F8FAFC 0%, #E8ECF0 100%);
+}
+
+/* ----------------------------------------------------------------
+   PAGE HEADER SECTIONS
+   ---------------------------------------------------------------- */
+[data-theme="light"] .page-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%);
+    backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .page-header h1 {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }

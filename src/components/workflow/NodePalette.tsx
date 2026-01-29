@@ -98,9 +98,10 @@ export function NodePalette({ onClose }: NodePaletteProps) {
 
     return (
         <div className="node-palette">
-            {/* Header */}
+            {/* Enhanced Header */}
             <div className="node-palette__header">
-                <h3 className="node-palette__title">Nodes</h3>
+                <h3 className="node-palette__title">⬇ Add Components</h3>
+                <p className="node-palette__subtitle">Drag nodes onto the canvas to build your workflow</p>
             </div>
 
             {/* Search */}

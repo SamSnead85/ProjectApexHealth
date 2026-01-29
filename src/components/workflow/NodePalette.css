@@ -16,13 +16,21 @@
 }
 
 .node-palette__title {
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     font-weight: 700;
     color: var(--apex-white);
     background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-silver) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin-bottom: 4px;
+}
+
+.node-palette__subtitle {
+    font-size: 11px;
+    color: var(--apex-teal);
+    margin: 0;
+    opacity: 0.9;
 }
 
 /* Premium Search */
