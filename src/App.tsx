@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Shell } from './components/layout'
 import { ThemeProvider } from './context/ThemeContext'
 import { NavigationProvider } from './context/NavigationContext'
@@ -105,6 +105,10 @@ import ClinicalDecisionSupport from './pages/ClinicalDecisionSupport'
 import APIManagement from './pages/APIManagement'
 import AuditDashboard from './pages/AuditDashboard'
 import CareManagement from './pages/CareManagement'
+// Boardroom Ready Features
+import ExecutiveDashboard from './pages/ExecutiveDashboard'
+import BoardReportGenerator from './pages/BoardReportGenerator'
+import CommandPalette from './components/ui/CommandPalette'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -113,6 +117,19 @@ function App() {
     const [appState, setAppState] = useState<AppState>('landing')
     const [activePortal, setActivePortal] = useState<PortalType>('admin')
     const [activePath, setActivePath] = useState('/admin')
+    const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+
+    // Global keyboard shortcut for Command Palette (⌘+K)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault()
+                setCommandPaletteOpen(prev => !prev)
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown)
+        return () => document.removeEventListener('keydown', handleKeyDown)
+    }, [])
 
     const handleLogin = (portal: PortalType) => {
         setActivePortal(portal)
@@ -197,6 +214,13 @@ function App() {
         }
         if (activePath.includes('/care-management') || activePath.includes('/care-coordination') || activePath.includes('/patient-care')) {
             return <CareManagement />
+        }
+        // Boardroom Ready Features
+        if (activePath.includes('/executive') || activePath.includes('/c-suite') || activePath.includes('/exec-dashboard')) {
+            return <ExecutiveDashboard />
+        }
+        if (activePath.includes('/board-report') || activePath.includes('/report-generator') || activePath.includes('/reports')) {
+            return <BoardReportGenerator />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
@@ -492,6 +516,14 @@ function App() {
     // Authenticated App with Shell - always show portal switcher for demo mode
     return (
         <ThemeProvider>
+            <CommandPalette
+                isOpen={commandPaletteOpen}
+                onClose={() => setCommandPaletteOpen(false)}
+                onNavigate={(path) => {
+                    handleNavigate(path)
+                    setCommandPaletteOpen(false)
+                }}
+            />
             <NavigationProvider onNavigate={handleNavigate}>
                 <Shell
                     activePortal={activePortal}
