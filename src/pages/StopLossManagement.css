@@ -1,0 +1,584 @@
+/* StopLossManagement.css - Stop-Loss Management Suite */
+/* Apex Obsidian v2.5 Design System */
+
+.stop-loss-management {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.stop-loss-management h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stop-loss-management .page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Attachment Gauges */
+.attachment-gauges {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.gauge-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.gauge-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.gauge-header h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gauge-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.gauge-badge.healthy {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.gauge-badge.warning {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.gauge-badge.critical {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.gauge-container {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+}
+
+.gauge-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 16;
+    stroke-linecap: round;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke-width: 16;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.gauge-fill.healthy {
+    stroke: url(#gaugeGreen);
+}
+
+.gauge-fill.warning {
+    stroke: url(#gaugeYellow);
+}
+
+.gauge-fill.critical {
+    stroke: url(#gaugeRed);
+}
+
+.gauge-value {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.gauge-percent {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.gauge-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.gauge-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.gauge-detail {
+    text-align: center;
+}
+
+.gauge-detail-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.gauge-detail-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Laser Tracker */
+.laser-tracker {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.laser-tracker h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.laser-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.laser-table th,
+.laser-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.laser-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.laser-table td {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.laser-member {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.laser-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f87171;
+    font-size: 0.813rem;
+    font-weight: 600;
+}
+
+.laser-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.laser-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.laser-progress-fill.healthy {
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.laser-progress-fill.warning {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.laser-progress-fill.critical {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.risk-badge.high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.risk-badge.medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.risk-badge.low {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+/* Renewal Projections */
+.renewal-projections {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.renewal-projections h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.window-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.window-tab {
+    padding: 0.625rem 1.25rem;
+    border: 1px solid var(--border-primary);
+    background: transparent;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.window-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.window-tab.active {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+    color: white;
+}
+
+.projection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.projection-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.projection-card h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.projection-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.projection-value.positive {
+    color: #22c55e;
+}
+
+.projection-value.negative {
+    color: #ef4444;
+}
+
+.projection-change {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Terminal Liability */
+.terminal-liability {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.terminal-liability h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.liability-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.liability-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.liability-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.liability-icon.ibnr {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+.liability-icon.runout {
+    background: rgba(236, 72, 153, 0.15);
+    color: #f472b6;
+}
+
+.liability-icon.total {
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--accent-teal);
+}
+
+.liability-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.liability-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.liability-chart {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+}
+
+/* High-Cost Claimants */
+.high-cost-claimants {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.high-cost-claimants h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.claimant-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.claimant-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.claimant-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f87171;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.claimant-info {
+    flex: 1;
+}
+
+.claimant-info h4 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.claimant-info p {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.claimant-metrics {
+    display: flex;
+    gap: 1.5rem;
+    text-align: right;
+}
+
+.claimant-metric {
+    display: flex;
+    flex-direction: column;
+}
+
+.claimant-metric-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.claimant-metric-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.intervention-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.intervention-badge.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.intervention-badge.pending {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.intervention-badge.needed {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .attachment-gauges {
+        grid-template-columns: 1fr;
+    }
+
+    .projection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .liability-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .stop-loss-management {
+        padding: 1rem;
+    }
+
+    .projection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .window-tabs {
+        flex-wrap: wrap;
+    }
+
+    .claimant-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .claimant-metrics {
+        justify-content: center;
+    }
+}

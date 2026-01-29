@@ -84,6 +84,13 @@ import PopulationHealth from './pages/PopulationHealth'
 import BrokerDashboard from './pages/BrokerDashboard'
 import EmployerAdmin from './pages/EmployerAdmin'
 import NetworkAnalytics from './pages/NetworkAnalytics'
+// Enhancement Modules - Phase 1-6
+import DocumentIntelligence from './pages/DocumentIntelligence'
+import Member360 from './pages/Member360'
+import RegulatoryHub from './pages/RegulatoryHub'
+import StopLossManagement from './pages/StopLossManagement'
+import CarrierVendorPortal from './pages/CarrierVendorPortal'
+import FiduciaryDashboard from './pages/FiduciaryDashboard'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -122,6 +129,25 @@ function App() {
 
     // Determine which page to render based on path
     const renderPage = () => {
+        // Enhancement Modules - Phase 1-6
+        if (activePath.includes('/document-intelligence') || activePath.includes('/ai-documents') || activePath.includes('/ocr')) {
+            return <DocumentIntelligence />
+        }
+        if (activePath.includes('/member-360') || activePath.includes('/member-view') || activePath.includes('/unified-member')) {
+            return <Member360 />
+        }
+        if (activePath.includes('/regulatory-hub') || activePath.includes('/regulatory-command') || activePath.includes('/reg-feed')) {
+            return <RegulatoryHub />
+        }
+        if (activePath.includes('/stop-loss') || activePath.includes('/stoploss') || activePath.includes('/attachment')) {
+            return <StopLossManagement />
+        }
+        if (activePath.includes('/carrier-portal') || activePath.includes('/vendor-portal') || activePath.includes('/edi-monitor')) {
+            return <CarrierVendorPortal />
+        }
+        if (activePath.includes('/fiduciary') || activePath.includes('/erisa') || activePath.includes('/fee-benchmark')) {
+            return <FiduciaryDashboard />
+        }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
             return <SIRDashboard />

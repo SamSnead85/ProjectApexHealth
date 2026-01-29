@@ -1,0 +1,630 @@
+/* Member360.css - Unified Member Intelligence Dashboard */
+/* Apex Obsidian v2.5 Design System */
+
+.member-360 {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.member-360 h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.member-360 .page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Member Search */
+.member-search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.member-search-bar input {
+    flex: 1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 0.875rem 1.25rem;
+    padding-left: 3rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.member-search-bar input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.search-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.search-input-wrapper svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+}
+
+/* Member Profile Header */
+.member-profile-header {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.member-details {
+    flex: 1;
+}
+
+.member-details h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.member-id {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.member-badges {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.member-badge.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.member-badge.plan {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.member-badge.tier {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+}
+
+.member-meta-row {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.member-meta-row span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.member-risk-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    min-width: 140px;
+}
+
+.risk-score-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-teal);
+    line-height: 1;
+}
+
+.risk-score-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Tabs */
+.member-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-secondary);
+    padding: 0.375rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    width: fit-content;
+}
+
+.member-tab {
+    padding: 0.625rem 1.25rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.member-tab:hover {
+    color: var(--text-primary);
+}
+
+.member-tab.active {
+    background: var(--accent-teal);
+    color: white;
+}
+
+/* Eligibility Timeline */
+.eligibility-timeline {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.eligibility-timeline h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-primary);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 3px solid var(--accent-teal);
+    z-index: 1;
+}
+
+.timeline-dot.gap {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.timeline-dot.active {
+    background: var(--accent-teal);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.timeline-desc {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+/* Life Events */
+.life-events-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.life-events-panel h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.life-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.life-event-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.life-event-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.life-event-icon.marriage {
+    background: rgba(236, 72, 153, 0.15);
+    color: #f472b6;
+}
+
+.life-event-icon.birth {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+.life-event-icon.cobra {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.life-event-icon.address {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.life-event-content h4 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.life-event-content p {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.life-event-date {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: 0.5rem;
+}
+
+/* Communication Log */
+.communication-log {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.communication-log h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.comm-log-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comm-log-table th,
+.comm-log-table td {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.comm-log-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.comm-log-table td {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.comm-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.comm-type-badge.email {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.comm-type-badge.letter {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+}
+
+.comm-type-badge.sms {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+/* Dependent Tracker */
+.dependent-tracker {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dependent-tracker h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dependent-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.dependent-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dependent-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(139, 92, 246, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a78bfa;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.dependent-info {
+    flex: 1;
+}
+
+.dependent-info h4 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.dependent-info p {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.dependent-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+}
+
+.verification-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.verification-badge.verified {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.verification-badge.pending {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.verification-badge.expired {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* ACA Status */
+.aca-status-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.aca-status-panel h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.aca-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.aca-metric-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.aca-metric-card h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.aca-metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.aca-metric-label {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .member-profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .member-meta-row {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .member-badges {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .member-360 {
+        padding: 1rem;
+    }
+
+    .member-tabs {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .member-profile-header {
+        padding: 1.5rem;
+    }
+
+    .member-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}

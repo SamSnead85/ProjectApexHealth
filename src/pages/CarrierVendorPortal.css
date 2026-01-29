@@ -1,0 +1,516 @@
+/* CarrierVendorPortal.css - Carrier & Vendor Portal */
+/* Apex Obsidian v2.5 Design System */
+
+.carrier-vendor-portal {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.carrier-vendor-portal h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.carrier-vendor-portal .page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Stats Overview */
+.edi-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.edi-stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.edi-stat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.edi-stat-header span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+
+.edi-stat-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edi-stat-icon.teal {
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--accent-teal);
+}
+
+.edi-stat-icon.green {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.edi-stat-icon.amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.edi-stat-icon.red {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.edi-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.edi-stat-change {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Transaction Monitor */
+.transaction-monitor {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.transaction-monitor h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.transaction-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tx-filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-primary);
+    background: transparent;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.813rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tx-filter-btn:hover,
+.tx-filter-btn.active {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+    color: white;
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-table th,
+.transaction-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.transaction-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.transaction-table td {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.tx-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'SF Mono', monospace;
+}
+
+.tx-type-badge.tx-834 {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+.tx-type-badge.tx-835 {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.tx-type-badge.tx-837 {
+    background: rgba(236, 72, 153, 0.15);
+    color: #f472b6;
+}
+
+.tx-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tx-status-badge.success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.tx-status-badge.pending {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.tx-status-badge.error {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.tx-status-badge.processing {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+/* Rate Reconciliation */
+.rate-reconciliation {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.rate-reconciliation h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reconciliation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.reconciliation-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.reconciliation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.reconciliation-header h4 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.reconciliation-amounts {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.reconciliation-amount {
+    flex: 1;
+}
+
+.reconciliation-amount-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.reconciliation-amount-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.reconciliation-variance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.variance-label {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.variance-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.variance-value.positive {
+    color: #22c55e;
+}
+
+.variance-value.negative {
+    color: #ef4444;
+}
+
+.variance-value.neutral {
+    color: var(--text-primary);
+}
+
+/* SLA Tracker */
+.sla-tracker {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sla-tracker h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sla-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.sla-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sla-carrier-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #818cf8;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.sla-info {
+    flex: 1;
+}
+
+.sla-info h4 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.sla-info p {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.sla-metrics {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.sla-metric {
+    text-align: center;
+}
+
+.sla-metric-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sla-metric-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.sla-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.sla-status.meeting {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.sla-status.at-risk {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.sla-status.breach {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* Vendor Scorecard */
+.vendor-scorecard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.vendor-scorecard h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.scorecard-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.scorecard-card h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.scorecard-score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.scorecard-score.excellent {
+    color: #22c55e;
+}
+
+.scorecard-score.good {
+    color: var(--accent-teal);
+}
+
+.scorecard-score.average {
+    color: #f59e0b;
+}
+
+.scorecard-score.poor {
+    color: #ef4444;
+}
+
+.scorecard-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .edi-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .carrier-vendor-portal {
+        padding: 1rem;
+    }
+
+    .edi-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-filters {
+        flex-wrap: wrap;
+    }
+
+    .sla-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .sla-metrics {
+        justify-content: center;
+    }
+}
