@@ -110,6 +110,10 @@ import ExecutiveDashboard from './pages/ExecutiveDashboard'
 import BoardReportGenerator from './pages/BoardReportGenerator'
 import CommandPalette from './components/ui/CommandPalette'
 import AICopilot from './components/ai/AICopilot'
+// Operational Completeness
+import NotificationCenter from './pages/NotificationCenter'
+import TaskQueue from './pages/TaskQueue'
+import UserManagement from './pages/UserManagement'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -222,6 +226,16 @@ function App() {
         }
         if (activePath.includes('/board-report') || activePath.includes('/report-generator') || activePath.includes('/reports')) {
             return <BoardReportGenerator />
+        }
+        // Operational Completeness
+        if (activePath.includes('/notifications') || activePath.includes('/alerts') || activePath.includes('/notification-center')) {
+            return <NotificationCenter />
+        }
+        if (activePath.includes('/task-queue') || activePath.includes('/work-queue') || activePath.includes('/tasks')) {
+            return <TaskQueue />
+        }
+        if (activePath.includes('/user-management') || activePath.includes('/users') || activePath.includes('/roles')) {
+            return <UserManagement />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
