@@ -10,7 +10,9 @@ import {
     Brain,
     GitBranch,
     Users,
-    Send
+    Send,
+    Plus,
+    MousePointerClick
 } from 'lucide-react'
 import { NODE_REGISTRY, NodeCategory, NodeType } from '../../types/workflow'
 import { useWorkflowStore } from '../../stores/workflowStore'
@@ -32,13 +34,13 @@ const categoryConfig: Record<NodeCategory, { label: string; icon: React.ReactNod
 export function NodePalette({ onClose }: NodePaletteProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [expandedCategories, setExpandedCategories] = useState<Set<NodeCategory>>(
-        new Set(['trigger', 'ai', 'hitl'])
+        new Set(['trigger', 'processing', 'ai', 'control', 'hitl', 'output'])
     )
     const [favorites, setFavorites] = useState<Set<NodeType>>(
         new Set(['claimIntake', 'geminiAnalyzer', 'hitlCheckpoint', 'decisionOutput'])
     )
 
-    const addNode = useWorkflowStore((state) => state.addNode)
+    const { addNode, nodes } = useWorkflowStore()
 
     const toggleCategory = (category: NodeCategory) => {
         setExpandedCategories((prev) => {
@@ -73,6 +75,18 @@ export function NodePalette({ onClose }: NodePaletteProps) {
         []
     )
 
+    // Click-to-add: Add node at center of visible canvas
+    const handleClickToAdd = useCallback(
+        (nodeType: NodeType) => {
+            // Calculate position based on existing nodes
+            const existingNodes = nodes.length
+            const baseX = 100 + (existingNodes % 4) * 280
+            const baseY = 100 + Math.floor(existingNodes / 4) * 150
+            addNode(nodeType, { x: baseX, y: baseY })
+        },
+        [addNode, nodes.length]
+    )
+
     const nodesByCategory = Object.entries(NODE_REGISTRY).reduce(
         (acc, [nodeType, metadata]) => {
             if (!acc[metadata.category]) {
@@ -100,8 +114,10 @@ export function NodePalette({ onClose }: NodePaletteProps) {
         <div className="node-palette">
             {/* Enhanced Header */}
             <div className="node-palette__header">
-                <h3 className="node-palette__title">⬇ Add Components</h3>
-                <p className="node-palette__subtitle">Drag nodes onto the canvas to build your workflow</p>
+                <h3 className="node-palette__title">Workflow Components</h3>
+                <p className="node-palette__subtitle">
+                    <MousePointerClick size={12} /> Click to add • Drag to canvas
+                </p>
             </div>
 
             {/* Search */}
@@ -109,12 +125,42 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                 <Search size={16} className="node-palette__search-icon" />
                 <input
                     type="text"
-                    placeholder="Search nodes..."
+                    placeholder="Search components..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="node-palette__search-input"
                 />
             </div>
+
+            {/* Quick Start Section */}
+            {nodes.length === 0 && !searchQuery && (
+                <div className="node-palette__quickstart">
+                    <p className="node-palette__quickstart-title">Quick Start</p>
+                    <div className="node-palette__quickstart-btns">
+                        <button
+                            className="node-palette__quickstart-btn"
+                            onClick={() => handleClickToAdd('claimIntake')}
+                        >
+                            <Plus size={14} />
+                            <span>Claim Intake</span>
+                        </button>
+                        <button
+                            className="node-palette__quickstart-btn"
+                            onClick={() => handleClickToAdd('webhook')}
+                        >
+                            <Plus size={14} />
+                            <span>Webhook</span>
+                        </button>
+                        <button
+                            className="node-palette__quickstart-btn"
+                            onClick={() => handleClickToAdd('priorAuthRequest')}
+                        >
+                            <Plus size={14} />
+                            <span>Prior Auth</span>
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Node List */}
             <div className="node-palette__content">
@@ -133,6 +179,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                                     isFavorite={favorites.has(type as NodeType)}
                                     onToggleFavorite={(e) => toggleFavorite(type as NodeType, e)}
                                     onDragStart={(e) => handleDragStart(e, type as NodeType)}
+                                    onClick={() => handleClickToAdd(type as NodeType)}
                                 />
                             ))}
                         </div>
@@ -155,6 +202,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                                     isFavorite={true}
                                     onToggleFavorite={(e) => toggleFavorite(node.type, e)}
                                     onDragStart={(e) => handleDragStart(e, node.type)}
+                                    onClick={() => handleClickToAdd(node.type)}
                                 />
                             ))}
                         </div>
@@ -164,7 +212,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                 {/* Categories */}
                 {!searchQuery && (Object.keys(categoryConfig) as NodeCategory[]).map((category) => {
                     const config = categoryConfig[category]
-                    const nodes = nodesByCategory[category] || []
+                    const categoryNodes = nodesByCategory[category] || []
                     const isExpanded = expandedCategories.has(category)
 
                     return (
@@ -180,7 +228,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                                     {config.icon}
                                 </span>
                                 <span className="node-palette__section-label">{config.label}</span>
-                                <span className="node-palette__section-count">{nodes.length}</span>
+                                <span className="node-palette__section-count">{categoryNodes.length}</span>
                                 {isExpanded ? (
                                     <ChevronDown size={14} className="node-palette__section-chevron" />
                                 ) : (
@@ -197,7 +245,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                                         exit={{ height: 0, opacity: 0 }}
                                         transition={{ duration: 0.2 }}
                                     >
-                                        {nodes.map((node) => (
+                                        {categoryNodes.map((node) => (
                                             <NodeItem
                                                 key={node.type}
                                                 type={node.type}
@@ -205,6 +253,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
                                                 isFavorite={favorites.has(node.type)}
                                                 onToggleFavorite={(e) => toggleFavorite(node.type, e)}
                                                 onDragStart={(e) => handleDragStart(e, node.type)}
+                                                onClick={() => handleClickToAdd(node.type)}
                                             />
                                         ))}
                                     </motion.div>
@@ -224,14 +273,16 @@ interface NodeItemProps {
     isFavorite: boolean
     onToggleFavorite: (e: React.MouseEvent) => void
     onDragStart: (e: React.DragEvent) => void
+    onClick: () => void
 }
 
-function NodeItem({ type, metadata, isFavorite, onToggleFavorite, onDragStart }: NodeItemProps) {
+function NodeItem({ type, metadata, isFavorite, onToggleFavorite, onDragStart, onClick }: NodeItemProps) {
     return (
         <div
             className="node-palette__item"
             draggable
             onDragStart={onDragStart}
+            onClick={onClick}
             style={{ '--item-color': metadata.color } as React.CSSProperties}
         >
             <span className="node-palette__item-icon">{metadata.icon}</span>
@@ -239,6 +290,16 @@ function NodeItem({ type, metadata, isFavorite, onToggleFavorite, onDragStart }:
                 <span className="node-palette__item-label">{metadata.label}</span>
                 <span className="node-palette__item-desc">{metadata.description}</span>
             </div>
+            <button
+                className="node-palette__item-add"
+                onClick={(e) => {
+                    e.stopPropagation()
+                    onClick()
+                }}
+                title="Click to add"
+            >
+                <Plus size={14} />
+            </button>
             <button
                 className={`node-palette__item-star ${isFavorite ? 'node-palette__item-star--active' : ''}`}
                 onClick={onToggleFavorite}
