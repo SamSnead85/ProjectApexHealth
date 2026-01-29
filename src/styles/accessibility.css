@@ -1,0 +1,244 @@
+/* ============================================
+   ACCESSIBILITY UTILITIES
+   Premium Focus & Keyboard Navigation
+   ============================================ */
+
+/* Focus Visible - Only show on keyboard navigation */
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--apex-teal);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Skip to content link */
+.skip-to-content {
+    position: absolute;
+    top: -100vh;
+    left: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--apex-teal);
+    color: var(--apex-obsidian);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    z-index: calc(var(--z-modal) + 10);
+    transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+    top: var(--space-md);
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Not sr-only - revert */
+.not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Focus ring variations */
+.focus-ring-teal:focus-visible {
+    outline-color: var(--apex-teal);
+}
+
+.focus-ring-purple:focus-visible {
+    outline-color: var(--apex-purple);
+}
+
+.focus-ring-success:focus-visible {
+    outline-color: var(--apex-success);
+}
+
+.focus-ring-danger:focus-visible {
+    outline-color: var(--apex-danger);
+}
+
+/* Focus within for form groups */
+.focus-within-ring:focus-within {
+    outline: 2px solid var(--apex-teal);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --apex-obsidian: #000000;
+        --apex-white: #ffffff;
+        --apex-steel: #808080;
+        --apex-silver: #c0c0c0;
+    }
+
+    *:focus-visible {
+        outline-width: 3px;
+    }
+
+    .glass-card,
+    .btn,
+    input,
+    select,
+    textarea {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .skeleton--animated {
+        animation: none;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .status-dot.pulse::before {
+        animation: none;
+        display: none;
+    }
+}
+
+/* Keyboard navigation enhancements */
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="tab"]:focus-visible {
+    outline: 2px solid var(--apex-teal);
+    outline-offset: 2px;
+}
+
+/* Focus trap indicator */
+.focus-trap-active::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    border: 3px solid var(--apex-teal);
+    pointer-events: none;
+    z-index: calc(var(--z-modal) + 1);
+}
+
+/* Aria expanded states */
+[aria-expanded="true"]>.expand-icon {
+    transform: rotate(180deg);
+}
+
+/* Aria current page */
+[aria-current="page"] {
+    font-weight: 600;
+    color: var(--apex-teal);
+}
+
+/* Aria invalid */
+[aria-invalid="true"] {
+    border-color: var(--apex-danger) !important;
+}
+
+[aria-invalid="true"]:focus-visible {
+    outline-color: var(--apex-danger);
+}
+
+/* Aria busy loading indicator */
+[aria-busy="true"] {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+/* Disabled states enhancement */
+[disabled],
+[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Live regions styling */
+[aria-live="polite"],
+[aria-live="assertive"] {
+    position: relative;
+}
+
+/* Touch target minimum sizing */
+@media (pointer: coarse) {
+
+    button,
+    [role="button"],
+    a,
+    input[type="checkbox"],
+    input[type="radio"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .btn--sm {
+        min-height: 44px;
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
+    }
+}
+
+/* Color blind safe status indicators - add patterns */
+.status-indicator-pattern--success::before {
+    content: '✓';
+    margin-right: var(--space-xs);
+}
+
+.status-indicator-pattern--warning::before {
+    content: '⚠';
+    margin-right: var(--space-xs);
+}
+
+.status-indicator-pattern--error::before {
+    content: '✕';
+    margin-right: var(--space-xs);
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .glass-card {
+        background: white;
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+}

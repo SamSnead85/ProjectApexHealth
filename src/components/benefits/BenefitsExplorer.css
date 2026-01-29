@@ -1,0 +1,331 @@
+/* ============================================
+   BENEFITS EXPLORER - Coverage Details UI
+   ============================================ */
+
+/* Cost Summary */
+.cost-summary {
+    padding: var(--space-lg);
+}
+
+.cost-summary__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.cost-summary__header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.cost-summary__toggle {
+    display: flex;
+    gap: var(--space-xs);
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+}
+
+.cost-summary__toggle button {
+    padding: var(--space-xs) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cost-summary__toggle button:hover {
+    color: var(--apex-silver);
+}
+
+.cost-summary__toggle button.active {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.cost-summary__meters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Cost Meter */
+.cost-meter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.cost-meter__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cost-meter__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.cost-meter__values {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.cost-meter__bar {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.cost-meter__fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.cost-meter__fill--deductible {
+    background: linear-gradient(90deg, var(--apex-teal), #2dd4bf);
+}
+
+.cost-meter__fill--oop {
+    background: linear-gradient(90deg, var(--apex-purple), #a78bfa);
+}
+
+.cost-meter__remaining {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Benefits Explorer */
+.benefits-explorer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.benefits-explorer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.benefits-explorer__header h2 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.benefits-search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    min-width: 240px;
+}
+
+.benefits-search svg {
+    color: var(--apex-steel);
+}
+
+.benefits-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+}
+
+.benefits-search input::placeholder {
+    color: var(--apex-steel);
+}
+
+.benefits-search input:focus {
+    outline: none;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-md);
+}
+
+/* Benefit Card */
+.benefit-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.benefit-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.benefit-card__header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.benefit-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+.benefit-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.benefit-card__info h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 2px 0;
+}
+
+.benefit-card__info p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+.benefit-card__expand {
+    color: var(--apex-steel);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.benefit-card__expand.rotated {
+    transform: rotate(180deg);
+}
+
+/* Benefit Details */
+.benefit-card__details {
+    padding: var(--space-lg);
+    padding-top: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.coverage-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.coverage-column {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+}
+
+.coverage-column--in {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.coverage-column--out {
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+.coverage-column h4 {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.coverage-column--in h4 {
+    color: var(--apex-success);
+}
+
+.coverage-column--out h4 {
+    color: var(--apex-warning);
+}
+
+.coverage-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.coverage-item:last-child {
+    border-bottom: none;
+}
+
+.coverage-item span {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.coverage-item strong {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Benefit Notes */
+.benefit-notes {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.benefit-notes svg {
+    color: var(--apex-info);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.benefit-notes ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.benefit-notes li {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    padding: 2px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .coverage-comparison {
+        grid-template-columns: 1fr;
+    }
+}

@@ -2,9 +2,30 @@
     width: 100%;
     height: 100%;
     background: var(--apex-obsidian);
+    position: relative;
 }
 
-/* Toolbar */
+/* Premium Gradient Background */
+.workflow-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Selection Glow when node is selected */
+.workflow-canvas.has-selection {
+    box-shadow: inset 0 0 100px rgba(6, 182, 212, 0.03);
+}
+
+/* ============================================
+   PREMIUM TOOLBAR
+   ============================================ */
+
 .workflow-canvas__toolbar {
     margin-top: var(--space-md);
 }
@@ -13,11 +34,14 @@
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-sm);
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-md);
-    backdrop-filter: blur(12px);
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(20px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 
 .workflow-canvas__toolbar-group {
@@ -29,25 +53,30 @@
 .workflow-canvas__toolbar-divider {
     width: 1px;
     height: 24px;
-    background: var(--glass-border);
-    margin: 0 var(--space-xs);
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    margin: 0 var(--space-sm);
 }
 
-/* Controls Override */
+/* ============================================
+   PREMIUM CONTROLS
+   ============================================ */
+
 .workflow-canvas__controls {
-    background: var(--apex-obsidian-glass) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: var(--radius-md) !important;
+    background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-lg) !important;
     overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 .workflow-canvas__controls button {
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid var(--glass-border) !important;
-    color: var(--apex-silver) !important;
-    width: 28px !important;
-    height: 28px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    color: var(--apex-steel) !important;
+    width: 36px !important;
+    height: 36px !important;
+    transition: all 0.2s ease !important;
 }
 
 .workflow-canvas__controls button:last-child {
@@ -55,23 +84,30 @@
 }
 
 .workflow-canvas__controls button:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: var(--apex-white) !important;
+    background: rgba(6, 182, 212, 0.1) !important;
+    color: var(--apex-teal) !important;
 }
 
 .workflow-canvas__controls button svg {
     fill: currentColor !important;
 }
 
-/* MiniMap Override */
+/* ============================================
+   PREMIUM MINIMAP
+   ============================================ */
+
 .workflow-canvas__minimap {
-    background: var(--apex-obsidian-glass) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: var(--radius-md) !important;
+    background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-lg) !important;
     overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Status Badge */
+/* ============================================
+   STATUS BADGES
+   ============================================ */
+
 .workflow-canvas__status {
     margin-top: var(--space-md);
     margin-right: var(--space-md);
@@ -81,41 +117,55 @@
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
     font-size: var(--text-sm);
-    font-weight: 500;
-    border-radius: var(--radius-md);
+    font-weight: 600;
+    border-radius: var(--radius-full);
     backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .workflow-canvas__status-badge--running {
-    background: var(--apex-info-soft);
-    color: var(--apex-info);
-    border: 1px solid var(--apex-info);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1));
+    color: var(--apex-teal);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    animation: glow-pulse 2s infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 20px rgba(6, 182, 212, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 30px rgba(6, 182, 212, 0.4);
+    }
 }
 
 .workflow-canvas__status-badge--paused {
-    background: var(--apex-warning-soft);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
     color: var(--apex-warning);
-    border: 1px solid var(--apex-warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .workflow-canvas__status-badge--completed {
-    background: var(--apex-success-soft);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
     color: var(--apex-success);
-    border: 1px solid var(--apex-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .workflow-canvas__status-badge--error {
-    background: var(--apex-critical-soft);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
     color: var(--apex-critical);
-    border: 1px solid var(--apex-critical);
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .workflow-canvas__status-badge--waiting_hitl {
-    background: var(--apex-warning-soft);
-    color: var(--apex-warning);
-    border: 1px solid var(--apex-warning);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+    color: #A78BFA;
+    border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .workflow-canvas__status-dot {
@@ -140,7 +190,10 @@
     }
 }
 
-/* Empty State */
+/* ============================================
+   PREMIUM EMPTY STATE
+   ============================================ */
+
 .workflow-canvas__empty {
     width: 100%;
     height: 100%;
@@ -155,31 +208,44 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 320px;
-    padding: var(--space-2xl);
+    max-width: 400px;
+    padding: var(--space-3xl);
     pointer-events: all;
+    background: linear-gradient(180deg, rgba(20, 20, 25, 0.6), rgba(12, 12, 16, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
 }
 
 .workflow-canvas__empty-icon {
-    color: var(--apex-steel);
-    margin-bottom: var(--space-lg);
+    color: var(--apex-teal);
+    margin-bottom: var(--space-xl);
+    opacity: 0.6;
 }
 
 .workflow-canvas__empty-content h3 {
-    font-size: var(--text-lg);
-    font-weight: 600;
+    font-size: var(--text-xl);
+    font-weight: 700;
     color: var(--apex-white);
     margin-bottom: var(--space-sm);
+    background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-silver) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .workflow-canvas__empty-content p {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     color: var(--apex-steel);
-    line-height: 1.6;
-    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
 }
 
-/* React Flow Globals */
+/* ============================================
+   REACT FLOW PREMIUM OVERRIDES
+   ============================================ */
+
 .react-flow__pane {
     cursor: grab;
 }
@@ -188,25 +254,170 @@
     cursor: grabbing;
 }
 
+/* Edge Styling */
 .react-flow__edge-path {
-    stroke: var(--glass-border);
+    stroke: rgba(255, 255, 255, 0.15);
     stroke-width: 2;
+    transition: all 0.2s ease;
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
     stroke: var(--apex-teal);
     stroke-width: 3;
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5));
 }
 
 .react-flow__edge:hover .react-flow__edge-path {
     stroke: var(--apex-teal);
+    stroke-width: 2.5;
 }
 
+/* Animated Edges */
+.react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 5;
+    animation: dash 0.5s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
+
+/* Connection Line */
 .react-flow__connection-line {
     stroke: var(--apex-teal);
-    stroke-width: 2;
+    stroke-width: 3;
+    stroke-dasharray: 8 4;
+    filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.6));
 }
 
+/* Premium Grid */
 .react-flow__background pattern line {
-    stroke: rgba(6, 182, 212, 0.05);
+    stroke: rgba(6, 182, 212, 0.04);
+}
+
+.react-flow__background pattern circle {
+    fill: rgba(6, 182, 212, 0.08);
+}
+
+/* Node Selection */
+.react-flow__node.selected {
+    outline: none !important;
+}
+
+.react-flow__node.selected>div {
+    box-shadow:
+        0 0 0 2px var(--apex-teal),
+        0 0 30px rgba(6, 182, 212, 0.3) !important;
+}
+
+/* Dragging State */
+.react-flow__node.dragging {
+    z-index: 1000 !important;
+}
+
+.react-flow__node.dragging>div {
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 2px var(--apex-teal),
+        0 0 40px rgba(6, 182, 212, 0.2) !important;
+    transform: scale(1.02);
+}
+
+/* Handle Styling */
+.react-flow__handle {
+    width: 12px !important;
+    height: 12px !important;
+    background: var(--apex-surface) !important;
+    border: 2px solid var(--apex-steel) !important;
+    transition: all 0.2s ease !important;
+}
+
+.react-flow__handle:hover {
+    background: var(--apex-teal) !important;
+    border-color: var(--apex-teal) !important;
+    transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+}
+
+.react-flow__handle.connecting {
+    background: var(--apex-teal) !important;
+    border-color: var(--apex-teal) !important;
+    animation: handle-pulse 0.5s infinite;
+}
+
+@keyframes handle-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+}
+
+/* Drop Zone Indicator */
+.workflow-canvas.dragging-over::after {
+    content: 'Drop to add node';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--space-lg) var(--space-2xl);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.1));
+    border: 2px dashed rgba(6, 182, 212, 0.4);
+    border-radius: var(--radius-2xl);
+    color: var(--apex-teal);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 100;
+    animation: drop-zone-pulse 1s infinite;
+}
+
+@keyframes drop-zone-pulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.02);
+    }
+}
+
+/* Node Type Visual Hints */
+.react-flow__node[data-type="trigger"]>div {
+    border-left: 3px solid var(--apex-success) !important;
+}
+
+.react-flow__node[data-type="decision"]>div {
+    border-left: 3px solid var(--apex-warning) !important;
+}
+
+.react-flow__node[data-type="action"]>div {
+    border-left: 3px solid var(--apex-teal) !important;
+}
+
+.react-flow__node[data-type="ai"]>div {
+    border-left: 3px solid #A78BFA !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .workflow-canvas__toolbar-inner {
+        padding: var(--space-xs) var(--space-sm);
+        gap: var(--space-xs);
+    }
+
+    .workflow-canvas__empty-content {
+        margin: var(--space-md);
+        padding: var(--space-xl);
+    }
 }

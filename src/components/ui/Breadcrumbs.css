@@ -1,0 +1,87 @@
+/* ============================================
+   BREADCRUMBS - Navigation Trail
+   ============================================ */
+
+.breadcrumbs {
+    padding: var(--space-sm) 0;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.breadcrumbs__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.breadcrumbs__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-teal);
+}
+
+.breadcrumbs__current {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.breadcrumbs__separator {
+    display: flex;
+    align-items: center;
+    color: var(--apex-muted);
+}
+
+.breadcrumbs__icon {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .breadcrumbs__list {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .breadcrumbs__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .breadcrumbs__item {
+        flex-shrink: 0;
+    }
+
+    .breadcrumbs__link,
+    .breadcrumbs__current {
+        padding: var(--space-xs);
+        font-size: var(--text-xs);
+    }
+}

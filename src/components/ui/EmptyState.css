@@ -1,0 +1,181 @@
+/* ============================================
+   EMPTY STATE - Elegant Null States
+   ============================================ */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-4xl) var(--space-xl);
+    min-height: 300px;
+}
+
+/* Illustration */
+.empty-state__illustration {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-xl);
+}
+
+.empty-state__icon-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-2xl);
+    color: var(--apex-teal);
+}
+
+/* Atmospheric rings */
+.empty-state__ring {
+    position: absolute;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+}
+
+.empty-state__ring--1 {
+    width: 140px;
+    height: 140px;
+    animation: ring-pulse 3s ease-in-out infinite;
+}
+
+.empty-state__ring--2 {
+    width: 180px;
+    height: 180px;
+    animation: ring-pulse 3s ease-in-out infinite 0.5s;
+}
+
+.empty-state__ring--3 {
+    width: 220px;
+    height: 220px;
+    animation: ring-pulse 3s ease-in-out infinite 1s;
+}
+
+@keyframes ring-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.1;
+        transform: scale(1.05);
+    }
+}
+
+/* Content */
+.empty-state__content {
+    max-width: 360px;
+    margin-bottom: var(--space-lg);
+}
+
+.empty-state__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.empty-state__description {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Actions */
+.empty-state__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Variant: Search */
+.empty-state--search .empty-state__icon-container {
+    color: var(--apex-info);
+}
+
+.empty-state--search .empty-state__ring {
+    border-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Variant: Error */
+.empty-state--error .empty-state__icon-container {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.15);
+    color: var(--apex-danger);
+}
+
+.empty-state--error .empty-state__ring {
+    border-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Variant: Documents */
+.empty-state--documents .empty-state__icon-container {
+    color: var(--apex-purple);
+}
+
+.empty-state--documents .empty-state__ring {
+    border-color: rgba(139, 92, 246, 0.1);
+}
+
+/* Variant: Appointments */
+.empty-state--appointments .empty-state__icon-container {
+    color: var(--apex-success);
+}
+
+.empty-state--appointments .empty-state__ring {
+    border-color: rgba(16, 185, 129, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .empty-state {
+        padding: var(--space-2xl) var(--space-md);
+        min-height: 250px;
+    }
+
+    .empty-state__icon-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .empty-state__icon-container svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .empty-state__ring--1 {
+        width: 110px;
+        height: 110px;
+    }
+
+    .empty-state__ring--2 {
+        width: 140px;
+        height: 140px;
+    }
+
+    .empty-state__ring--3 {
+        width: 170px;
+        height: 170px;
+    }
+
+    .empty-state__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .empty-state__actions button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,449 @@
+/* ============================================
+   DASHBOARD WIDGETS - Premium Healthcare UI
+   ============================================ */
+
+/* Spending Summary */
+.spending-summary {
+    padding: var(--space-lg);
+}
+
+.spending-summary__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.spending-summary__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.spending-summary__title svg {
+    color: var(--apex-teal);
+}
+
+.spending-summary__title h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.spending-summary__total {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-lg);
+}
+
+.spending-summary__amount {
+    display: block;
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    line-height: 1;
+}
+
+.spending-summary__label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: var(--space-sm);
+    display: block;
+}
+
+.spending-summary__trackers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Tracker */
+.tracker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.tracker__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tracker__label {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.tracker__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.tracker__bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.tracker__fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.tracker__fill--deductible {
+    background: linear-gradient(90deg, var(--apex-teal), #14b8a6);
+}
+
+.tracker__fill--oop {
+    background: linear-gradient(90deg, var(--apex-purple), #a855f7);
+}
+
+.tracker__remaining {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Quick Actions */
+.quick-actions {
+    padding: var(--space-lg);
+}
+
+.quick-actions__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.quick-actions__header svg {
+    color: var(--apex-teal);
+}
+
+.quick-actions__header h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.quick-actions__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.quick-action-btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.quick-action-btn__label {
+    flex: 1;
+    text-align: left;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.quick-action-btn__badge {
+    margin-right: var(--space-sm);
+}
+
+.quick-action-btn__arrow {
+    color: var(--apex-steel);
+    transition: transform 0.2s ease;
+}
+
+.quick-action-btn:hover .quick-action-btn__arrow {
+    transform: translateX(4px);
+    color: var(--apex-teal);
+}
+
+/* Coverage Countdown */
+.coverage-countdown {
+    padding: var(--space-lg);
+}
+
+.coverage-countdown__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.coverage-countdown__header svg {
+    color: var(--apex-teal);
+}
+
+.coverage-countdown__header h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.coverage-countdown__type {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    display: block;
+}
+
+.coverage-countdown__header>.badge {
+    margin-left: auto;
+}
+
+.coverage-countdown__timer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.countdown-ring {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.countdown-ring svg {
+    transform: rotate(-90deg);
+}
+
+.countdown-ring__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 6;
+}
+
+.countdown-ring__fill {
+    fill: none;
+    stroke: var(--apex-teal);
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+
+.countdown-ring__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-ring__days {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    line-height: 1;
+}
+
+.countdown-ring__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.coverage-countdown__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.coverage-countdown__text {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.coverage-countdown__date {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.coverage-countdown__btn {
+    width: 100%;
+}
+
+/* Recent Activity */
+.recent-activity {
+    padding: var(--space-lg);
+}
+
+.recent-activity__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.recent-activity__header svg {
+    color: var(--apex-teal);
+}
+
+.recent-activity__header h3 {
+    flex: 1;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.recent-activity__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease;
+}
+
+.activity-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.activity-item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+}
+
+.activity-item__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-item__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+}
+
+.activity-item__title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.activity-item__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.activity-item__description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.activity-item__amount {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Health Score Mini */
+.health-score-mini {
+    padding: var(--space-lg);
+}
+
+.health-score-mini__content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.health-score-mini__ring {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.health-score-mini__ring svg {
+    transform: rotate(-90deg);
+}
+
+.score-ring__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 5;
+}
+
+.score-ring__fill {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.score-ring__value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.health-score-mini__info {
+    flex: 1;
+}
+
+.health-score-mini__info h4 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.health-score-mini__trend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--apex-success);
+}
+
+.health-score-mini button {
+    width: 100%;
+}

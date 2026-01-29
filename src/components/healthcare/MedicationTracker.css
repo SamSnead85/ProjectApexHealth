@@ -1,0 +1,391 @@
+/* ============================================
+   MEDICATION TRACKER - Rx Management
+   ============================================ */
+
+.medication-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Header */
+.medication-tracker__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.medication-tracker__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.medication-tracker__icon {
+    color: var(--apex-purple);
+}
+
+.medication-tracker__title h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.medication-tracker__title p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+/* Summary Cards */
+.medication-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-md);
+}
+
+.summary-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+}
+
+.summary-card--alert {
+    border-color: rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.summary-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.summary-card__icon--success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--apex-success);
+}
+
+.summary-card__icon--info {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--apex-teal);
+}
+
+.summary-card__icon--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--apex-warning);
+}
+
+.summary-card__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-card__value {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.summary-card__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Tabs */
+.medication-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-xs);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+
+.medication-tab {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.medication-tab:hover {
+    color: var(--apex-silver);
+}
+
+.medication-tab.active {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--apex-purple);
+}
+
+/* Medication List */
+.medication-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Medication Card */
+.medication-card {
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.medication-card:hover {
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.medication-card.selected {
+    border-color: var(--apex-purple);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.medication-card__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.medication-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-purple);
+    flex-shrink: 0;
+}
+
+.medication-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.medication-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: 2px;
+}
+
+.medication-card__header h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.medication-card__dosage {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.medication-card__timing {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.timing-badge {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+/* Adherence Ring */
+.medication-card__adherence {
+    flex-shrink: 0;
+}
+
+.adherence-ring {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: conic-gradient(var(--apex-success) calc(var(--adherence) * 1%),
+            rgba(255, 255, 255, 0.1) 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.adherence-ring::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--apex-obsidian-glass);
+    border-radius: var(--radius-full);
+}
+
+.adherence-ring span {
+    position: relative;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Medication Details */
+.medication-card__details {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.medication-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.medication-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.medication-detail__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.medication-detail__value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.medication-instructions {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(139, 92, 246, 0.08);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.medication-instructions svg {
+    color: var(--apex-purple);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.medication-instructions span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.medication-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Schedule List */
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+.schedule-item.taken {
+    opacity: 0.6;
+}
+
+.schedule-item__time {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-purple);
+    min-width: 70px;
+}
+
+.schedule-item__content {
+    flex: 1;
+}
+
+.schedule-item__medication {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--apex-white);
+    font-weight: 500;
+}
+
+.schedule-item__medication svg {
+    color: var(--apex-steel);
+}
+
+.schedule-item__dosage {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    font-weight: 400;
+}
+
+.schedule-item__status {
+    flex-shrink: 0;
+}
+
+.status-taken {
+    color: var(--apex-success);
+}
+
+.mark-taken-btn {
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--apex-success);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mark-taken-btn:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .medication-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .medication-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medication-card__actions {
+        flex-direction: column;
+    }
+}

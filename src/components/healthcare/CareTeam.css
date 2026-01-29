@@ -1,0 +1,316 @@
+/* ============================================
+   CARE TEAM WIDGET - Healthcare Provider Cards
+   ============================================ */
+
+.care-team-widget {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Header */
+.care-team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.care-team-header__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.care-team-header__icon {
+    color: var(--apex-teal);
+}
+
+.care-team-header__title h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.care-team-header__title p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+/* Provider Grid */
+.care-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+}
+
+/* Provider Card */
+.provider-card {
+    position: relative;
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.provider-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.provider-card.selected {
+    border-color: var(--apex-teal);
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.provider-card.primary {
+    border-color: rgba(6, 182, 212, 0.2);
+}
+
+.provider-card__primary-badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+}
+
+/* Provider Header */
+.provider-card__header {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.provider-card__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--apex-teal), #0f766e);
+    border-radius: var(--radius-lg);
+    color: white;
+    flex-shrink: 0;
+}
+
+.provider-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.provider-card__name {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.provider-card__title {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    font-weight: 500;
+}
+
+.provider-card__specialty {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Rating */
+.provider-card__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.provider-card__rating-value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.provider-card__rating-count {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Availability */
+.provider-card__availability {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-success);
+    margin-bottom: var(--space-md);
+}
+
+.provider-card__availability svg {
+    opacity: 0.8;
+}
+
+/* Quick Actions */
+.provider-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.provider-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.provider-action:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--apex-white);
+}
+
+.provider-action--video {
+    color: var(--apex-purple);
+}
+
+.provider-action--video:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.provider-action--schedule {
+    color: var(--apex-teal);
+}
+
+.provider-action--schedule:hover {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Provider Detail */
+.provider-detail {
+    margin-top: var(--space-md);
+}
+
+.provider-detail__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.provider-detail__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--apex-teal), #0f766e);
+    border-radius: var(--radius-xl);
+    color: white;
+    flex-shrink: 0;
+}
+
+.provider-detail__info {
+    flex: 1;
+}
+
+.provider-detail__info h3 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 4px 0;
+}
+
+.provider-detail__info p {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+/* Detail Grid */
+.provider-detail__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.provider-detail__item {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.provider-detail__item svg {
+    color: var(--apex-teal);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.provider-detail__item>div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.provider-detail__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.provider-detail__value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.provider-detail__subvalue {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Detail Actions */
+.provider-detail__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+/* Footer */
+.care-team-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .care-team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .provider-detail__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .provider-detail__actions {
+        flex-direction: column;
+    }
+
+    .provider-detail__actions button {
+        width: 100%;
+    }
+}

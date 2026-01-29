@@ -1,0 +1,188 @@
+/* ============================================
+   SKELETON LOADER - Premium Loading States
+   ============================================ */
+
+/* Base Skeleton */
+.skeleton {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.04) 100%);
+    background-size: 200% 100%;
+    border-radius: var(--radius-sm);
+}
+
+.skeleton--animated {
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Variants */
+.skeleton--text {
+    height: 14px;
+    border-radius: var(--radius-xs);
+}
+
+.skeleton--title {
+    height: 20px;
+    border-radius: var(--radius-xs);
+}
+
+.skeleton--avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+}
+
+.skeleton--card {
+    height: 120px;
+    border-radius: var(--radius-md);
+}
+
+.skeleton--metric {
+    height: 80px;
+    border-radius: var(--radius-md);
+}
+
+.skeleton--table-row {
+    height: 48px;
+    border-radius: var(--radius-sm);
+}
+
+.skeleton--image {
+    height: 200px;
+    border-radius: var(--radius-lg);
+}
+
+/* Text Block */
+.skeleton-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Skeleton Card */
+.skeleton-card {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+}
+
+.skeleton-card__header {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.skeleton-card__header-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Skeleton Metric */
+.skeleton-metric {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+}
+
+/* Skeleton Table Row */
+.skeleton-table-row {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+}
+
+/* Skeleton Provider Card */
+.skeleton-provider-card {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+}
+
+.skeleton-provider-card__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Skeleton Appointment */
+.skeleton-appointment {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+}
+
+.skeleton-appointment__date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skeleton-appointment__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Skeleton Dashboard */
+.skeleton-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.skeleton-dashboard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skeleton-dashboard__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.skeleton-dashboard__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skeleton-dashboard__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skeleton-dashboard__content {
+        grid-template-columns: 1fr;
+    }
+}

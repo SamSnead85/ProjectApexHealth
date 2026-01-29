@@ -1,0 +1,94 @@
+/* ============================================
+   STATUS INDICATOR - Healthcare Status Dots
+   ============================================ */
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* Sizes */
+.status-indicator--sm .status-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.status-indicator--md .status-dot {
+    width: 8px;
+    height: 8px;
+}
+
+.status-indicator--lg .status-dot {
+    width: 10px;
+    height: 10px;
+}
+
+/* Status Dot */
+.status-dot {
+    position: relative;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+/* Status Colors */
+.status-dot--active,
+.status-dot--online,
+.status-dot--success {
+    background: var(--apex-success);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.status-dot--pending,
+.status-dot--warning {
+    background: var(--apex-warning);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.status-dot--inactive,
+.status-dot--offline {
+    background: var(--apex-steel);
+}
+
+.status-dot--error {
+    background: var(--apex-danger);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+/* Pulse Animation */
+.status-dot.pulse::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: var(--radius-full);
+    background: inherit;
+    opacity: 0;
+    animation: status-pulse 2s ease-out infinite;
+}
+
+@keyframes status-pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* Label */
+.status-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.status-indicator--sm .status-label {
+    font-size: var(--text-xs);
+}
+
+.status-indicator--lg .status-label {
+    font-size: var(--text-base);
+}
