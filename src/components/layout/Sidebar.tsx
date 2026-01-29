@@ -16,7 +16,13 @@ import {
     CreditCard,
     Shield,
     LogOut,
-    Activity
+    Activity,
+    Brain,
+    Radar,
+    Landmark,
+    Scale,
+    Building,
+    Target
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -50,6 +56,22 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'sir', label: 'SIR Analytics', icon: <Activity size={20} />, path: '/admin/sir' },
                 { id: 'workflows', label: 'Workflow Builder', icon: <GitBranch size={20} />, path: '/admin/workflows' },
                 { id: 'insights', label: 'Analytics', icon: <BarChart3 size={20} />, path: '/admin/insights' },
+            ]
+        },
+        {
+            title: 'Intelligence',
+            items: [
+                { id: 'documents', label: 'Document AI', icon: <Brain size={20} />, path: '/admin/document-intelligence' },
+                { id: 'member360', label: 'Member 360°', icon: <Users size={20} />, path: '/admin/member-360' },
+                { id: 'regulatory', label: 'Regulatory Hub', icon: <Landmark size={20} />, path: '/admin/regulatory-hub' },
+            ]
+        },
+        {
+            title: 'TPA Suite',
+            items: [
+                { id: 'stoploss', label: 'Stop-Loss', icon: <Target size={20} />, path: '/admin/stop-loss' },
+                { id: 'carrier', label: 'Carrier Portal', icon: <Building size={20} />, path: '/admin/carrier-portal' },
+                { id: 'fiduciary', label: 'Fiduciary', icon: <Scale size={20} />, path: '/admin/fiduciary' },
             ]
         },
         {
