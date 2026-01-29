@@ -109,6 +109,7 @@ import CareManagement from './pages/CareManagement'
 import ExecutiveDashboard from './pages/ExecutiveDashboard'
 import BoardReportGenerator from './pages/BoardReportGenerator'
 import CommandPalette from './components/ui/CommandPalette'
+import AICopilot from './components/ai/AICopilot'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -533,6 +534,7 @@ function App() {
                 >
                     {renderPage()}
                 </Shell>
+                <AICopilot />
             </NavigationProvider>
         </ThemeProvider>
     )
