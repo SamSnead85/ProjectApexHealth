@@ -74,11 +74,11 @@ export function NodePalette({ onClose }: NodePaletteProps) {
     )
 
     const nodesByCategory = Object.entries(NODE_REGISTRY).reduce(
-        (acc, [type, metadata]) => {
+        (acc, [nodeType, metadata]) => {
             if (!acc[metadata.category]) {
                 acc[metadata.category] = []
             }
-            acc[metadata.category].push({ type: type as NodeType, ...metadata })
+            acc[metadata.category].push({ ...metadata, type: nodeType as NodeType })
             return acc
         },
         {} as Record<NodeCategory, Array<{ type: NodeType } & typeof NODE_REGISTRY[NodeType]>>
@@ -93,7 +93,7 @@ export function NodePalette({ onClose }: NodePaletteProps) {
         : null
 
     const favoriteNodes = Array.from(favorites)
-        .map((type) => ({ type, ...NODE_REGISTRY[type] }))
+        .map((nodeType) => ({ ...NODE_REGISTRY[nodeType], type: nodeType }))
         .filter((node) => node.label)
 
     return (

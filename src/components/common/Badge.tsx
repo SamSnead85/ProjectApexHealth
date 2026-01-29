@@ -3,12 +3,13 @@ import './Badge.css'
 
 interface BadgeProps {
     children: ReactNode
-    variant?: 'default' | 'success' | 'warning' | 'critical' | 'info' | 'teal' | 'purple' | 'error'
+    variant?: 'default' | 'success' | 'warning' | 'critical' | 'info' | 'teal' | 'purple' | 'error' | 'subtle' | 'secondary'
     size?: 'sm' | 'md'
     icon?: ReactNode
     dot?: boolean
     pulse?: boolean
     className?: string
+    style?: React.CSSProperties
 }
 
 export function Badge({
@@ -18,7 +19,8 @@ export function Badge({
     icon,
     dot = false,
     pulse = false,
-    className = ''
+    className = '',
+    style
 }: BadgeProps) {
     const baseClass = 'apex-badge'
     const variantClass = `apex-badge--${variant}`
@@ -30,7 +32,7 @@ export function Badge({
         .join(' ')
 
     return (
-        <span className={classes}>
+        <span className={classes} style={style}>
             {dot && <span className="apex-badge__dot" />}
             {icon && <span className="apex-badge__icon">{icon}</span>}
             <span className="apex-badge__text">{children}</span>

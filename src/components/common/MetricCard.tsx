@@ -4,18 +4,20 @@ import { TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import './MetricCard.css'
 
 export interface MetricCardProps {
-    title: string
+    title?: string
+    label?: string  // Alias for title
     value: string | number
     subtitle?: string
     trend?: {
         value: number
         direction: 'up' | 'down' | 'neutral'
-    }
+    } | number | string
     change?: {
         value: number
         type: 'increase' | 'decrease' | 'neutral'
-    }
+    } | number | string
     icon?: ReactNode
+    iconColor?: string
     variant?: 'default' | 'success' | 'warning' | 'critical' | 'teal'
     size?: 'sm' | 'md' | 'lg'
     className?: string
@@ -23,15 +25,19 @@ export interface MetricCardProps {
 
 export function MetricCard({
     title,
+    label,
     value,
     subtitle,
     trend,
     change,
     icon,
+    iconColor,
     variant = 'default',
     size = 'md',
     className = ''
 }: MetricCardProps) {
+    // Support both title and label props
+    const displayTitle = title || label || ''
     const baseClass = 'metric-card'
     const variantClass = `metric-card--${variant}`
     const sizeClass = `metric-card--${size}`
@@ -40,11 +46,31 @@ export function MetricCard({
         .filter(Boolean)
         .join(' ')
 
-    // Normalize change to trend format
-    const effectiveTrend = trend || (change ? {
-        value: change.value,
-        direction: change.type === 'increase' ? 'up' as const : change.type === 'decrease' ? 'down' as const : 'neutral' as const
-    } : undefined)
+    // Normalize trend/change to a standard format
+    const normalizeTrend = () => {
+        // Handle trend prop
+        if (trend) {
+            if (typeof trend === 'object' && 'direction' in trend) {
+                return trend
+            }
+            // Simple number or string - treat as neutral
+            return { value: typeof trend === 'number' ? trend : 0, direction: 'neutral' as const }
+        }
+        // Handle change prop
+        if (change) {
+            if (typeof change === 'object' && 'type' in change) {
+                return {
+                    value: change.value,
+                    direction: change.type === 'increase' ? 'up' as const : change.type === 'decrease' ? 'down' as const : 'neutral' as const
+                }
+            }
+            // Simple number or string - treat as neutral
+            return { value: typeof change === 'number' ? change : 0, direction: 'neutral' as const }
+        }
+        return undefined
+    }
+
+    const effectiveTrend = normalizeTrend()
 
     const getTrendIcon = () => {
         if (!effectiveTrend) return null
@@ -63,7 +89,7 @@ export function MetricCard({
             transition={{ duration: 0.3 }}
         >
             <div className="metric-card__header">
-                <span className="metric-card__title">{title}</span>
+                <span className="metric-card__title">{displayTitle}</span>
                 {icon && <span className="metric-card__icon">{icon}</span>}
             </div>
 

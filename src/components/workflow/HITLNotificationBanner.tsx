@@ -58,7 +58,7 @@ const mockCheckpoints: HITLCheckpoint[] = [
 ]
 
 export function HITLNotificationBanner() {
-    const { hitlQueue } = useWorkflowStore()
+    // Note: Using mock data for demo, real implementation would use store
     const [isExpanded, setIsExpanded] = useState(false)
     const [isDismissed, setIsDismissed] = useState(false)
 

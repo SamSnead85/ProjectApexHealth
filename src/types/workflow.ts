@@ -276,7 +276,7 @@ export const NODE_REGISTRY: Record<NodeType, NodeMetadata> = {
 // NODE DATA INTERFACES
 // ============================================================
 
-export interface BaseNodeData {
+export interface BaseNodeData extends Record<string, unknown> {
     label: string
     nodeType: NodeType
     config: Record<string, unknown>
@@ -369,7 +369,7 @@ export interface ExecutionLog {
     nodeId: string
     nodeName: string
     timestamp: Date
-    status: 'started' | 'completed' | 'error' | 'skipped'
+    status: 'started' | 'completed' | 'error' | 'skipped' | 'running' | 'paused'
     input: Record<string, unknown>
     output: Record<string, unknown>
     duration: number

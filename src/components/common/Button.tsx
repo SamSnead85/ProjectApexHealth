@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { ReactNode, MouseEventHandler } from 'react'
 import { motion } from 'framer-motion'
 import './Button.css'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
     children?: ReactNode
     variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'success' | 'glass'
     size?: 'sm' | 'md' | 'lg'
@@ -11,6 +11,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     loading?: boolean
     fullWidth?: boolean
     className?: string
+    disabled?: boolean
+    type?: 'button' | 'submit' | 'reset'
+    onClick?: MouseEventHandler<HTMLButtonElement>
+    title?: string
+    'aria-label'?: string
+    style?: React.CSSProperties
 }
 
 export function Button({
@@ -23,7 +29,11 @@ export function Button({
     fullWidth = false,
     className = '',
     disabled,
-    ...props
+    type = 'button',
+    onClick,
+    title,
+    'aria-label': ariaLabel,
+    style
 }: ButtonProps) {
     const baseClass = 'apex-btn'
     const variantClass = `apex-btn--${variant}`
@@ -39,10 +49,14 @@ export function Button({
         <motion.button
             className={classes}
             disabled={disabled || loading}
+            type={type}
+            onClick={onClick}
+            title={title}
+            aria-label={ariaLabel}
+            style={style}
             whileTap={{ scale: 0.98 }}
             whileHover={{ y: -1 }}
             transition={{ duration: 0.1 }}
-            {...props}
         >
             {loading && (
                 <span className="apex-btn__spinner">
@@ -64,3 +78,4 @@ export function Button({
 }
 
 export default Button
+

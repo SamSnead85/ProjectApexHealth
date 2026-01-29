@@ -63,6 +63,16 @@
     color: var(--apex-critical);
 }
 
+.apex-badge--subtle {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.apex-badge--secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+}
+
 /* Dot Indicator */
 .apex-badge__dot {
     width: 6px;
