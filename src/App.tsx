@@ -114,6 +114,10 @@ import AICopilot from './components/ai/AICopilot'
 import NotificationCenter from './pages/NotificationCenter'
 import TaskQueue from './pages/TaskQueue'
 import UserManagement from './pages/UserManagement'
+// System Monitoring
+import SystemHealth from './pages/SystemHealth'
+import BatchDashboard from './pages/BatchDashboard'
+import ActivityFeed from './pages/ActivityFeed'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -236,6 +240,16 @@ function App() {
         }
         if (activePath.includes('/user-management') || activePath.includes('/users') || activePath.includes('/roles')) {
             return <UserManagement />
+        }
+        // System Monitoring
+        if (activePath.includes('/system-health') || activePath.includes('/status') || activePath.includes('/health')) {
+            return <SystemHealth />
+        }
+        if (activePath.includes('/batch') || activePath.includes('/jobs') || activePath.includes('/processing')) {
+            return <BatchDashboard />
+        }
+        if (activePath.includes('/activity-feed') || activePath.includes('/activity') || activePath.includes('/feed')) {
+            return <ActivityFeed />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
