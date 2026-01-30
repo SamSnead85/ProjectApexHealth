@@ -81,7 +81,6 @@ import SIRDashboard from './pages/SIRDashboard'
 import IBNRActuarial from './pages/IBNRActuarial'
 import PharmacyAnalytics from './pages/PharmacyAnalytics'
 import PopulationHealth from './pages/PopulationHealth'
-import BrokerDashboard from './pages/BrokerDashboard'
 import EmployerAdmin from './pages/EmployerAdmin'
 import NetworkAnalytics from './pages/NetworkAnalytics'
 // Enhancement Modules - Phase 1-6
@@ -351,7 +350,7 @@ function App() {
         }
         // Broker Command Center
         if (activePath === '/broker' || activePath.includes('/broker-dashboard')) {
-            return <BrokerDashboard />
+            return <BrokerPortal />
         }
         // Agency Portal
         if (activePath.includes('/agency')) {
