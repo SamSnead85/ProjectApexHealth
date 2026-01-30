@@ -1,0 +1,275 @@
+/* ============================================
+   BILLING CENTER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.billing-center {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.billing-center::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 25% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.bl__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    position: relative;
+}
+
+.bl__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.bl__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    color: #8b5cf6;
+    position: relative;
+}
+
+.bl__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.bl__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.bl__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+.bl__header-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Metrics */
+.bl__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.bl__stat-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.bl__stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stat-color), transparent);
+    opacity: 0.8;
+}
+
+.bl__stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.bl__stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+}
+
+.bl__stat-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.bl__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.bl__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+/* Main Grid */
+.bl__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+}
+
+/* Section Cards */
+.bl__section {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.bl__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-md);
+}
+
+.bl__section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.bl__section-title svg {
+    color: #8b5cf6;
+}
+
+/* Invoice Row */
+.bl__invoice-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 80px;
+    align-items: center;
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+.bl__invoice-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.bl__invoice-row:last-child {
+    border-bottom: none;
+}
+
+.bl__invoice-id {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.bl__invoice-date,
+.bl__invoice-due {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.bl__invoice-amount {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+/* Current Invoice Card */
+.bl__current-invoice {
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-xl);
+    text-align: center;
+}
+
+.bl__current-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+}
+
+.bl__current-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    margin-bottom: var(--space-sm);
+}
+
+.bl__current-due {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin-bottom: var(--space-lg);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .bl__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bl__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

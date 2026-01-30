@@ -1,0 +1,286 @@
+/* ============================================
+   COMMISSIONS DASHBOARD
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.commissions-dashboard {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.commissions-dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 20% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.cm__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    position: relative;
+}
+
+.cm__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.cm__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-lg);
+    color: #10b981;
+    position: relative;
+}
+
+.cm__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.cm__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+    background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cm__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+.cm__header-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Metrics Grid */
+.cm__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.cm__stat-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cm__stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stat-color), transparent);
+    opacity: 0.8;
+}
+
+.cm__stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cm__stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+}
+
+.cm__stat-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.cm__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.cm__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.cm__stat-change {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+/* Main Grid */
+.cm__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+}
+
+/* Section Cards */
+.cm__section {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.cm__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-md);
+}
+
+.cm__section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+/* Statement Row */
+.cm__statement-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 80px;
+    align-items: center;
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+.cm__statement-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.cm__statement-row:last-child {
+    border-bottom: none;
+}
+
+.cm__statement-month {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.cm__statement-amount {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+    font-family: var(--font-mono);
+}
+
+.cm__statement-groups {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Group Card */
+.cm__group-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    transition: all 0.2s ease;
+}
+
+.cm__group-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.cm__group-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cm__group-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.cm__group-premium {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.cm__group-commission {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .cm__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cm__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

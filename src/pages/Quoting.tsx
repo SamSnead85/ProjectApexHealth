@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigation } from '../context/NavigationContext'
 import { motion } from 'framer-motion'
 import {
     Calculator,
@@ -11,85 +12,129 @@ import {
     Search,
     Filter,
     Clock,
-    CheckCircle2
+    CheckCircle2,
+    TrendingUp,
+    Target,
+    DollarSign,
+    ArrowUpRight
 } from 'lucide-react'
-import { GlassCard, Button, Badge, MetricCard } from '../components/common'
+import { GlassCard, Button, Badge } from '../components/common'
+import './Quoting.css'
 
 // Mock quotes
 const recentQuotes = [
-    { id: 'QT-4821', company: 'Tech Innovators LLC', employees: 125, status: 'pending', created: '2 hours ago' },
-    { id: 'QT-4820', company: 'Summit Corp', employees: 340, status: 'sent', created: '1 day ago' },
-    { id: 'QT-4819', company: 'Valley Systems', employees: 89, status: 'accepted', created: '3 days ago' },
-    { id: 'QT-4818', company: 'Pacific Industries', employees: 210, status: 'expired', created: '2 weeks ago' },
+    { id: 'QT-4821', company: 'Tech Innovators LLC', employees: 125, status: 'pending', created: '2 hours ago', value: '$485K' },
+    { id: 'QT-4820', company: 'Summit Corp', employees: 340, status: 'sent', created: '1 day ago', value: '$1.2M' },
+    { id: 'QT-4819', company: 'Valley Systems', employees: 89, status: 'accepted', created: '3 days ago', value: '$320K' },
+    { id: 'QT-4818', company: 'Pacific Industries', employees: 210, status: 'expired', created: '2 weeks ago', value: '$780K' },
+    { id: 'QT-4817', company: 'Coastal Manufacturing', employees: 175, status: 'accepted', created: '3 weeks ago', value: '$625K' },
 ]
 
 const carriers = [
-    { name: 'Blue Shield', logo: '🔵', plans: 12 },
-    { name: 'Aetna', logo: '❤️', plans: 8 },
-    { name: 'UnitedHealthcare', logo: '🟠', plans: 15 },
-    { name: 'Cigna', logo: '🟢', plans: 10 },
+    { name: 'Blue Shield', logo: '🔵', plans: 12, status: 'active' },
+    { name: 'Aetna', logo: '❤️', plans: 8, status: 'active' },
+    { name: 'UnitedHealthcare', logo: '🟠', plans: 15, status: 'active' },
+    { name: 'Cigna', logo: '🟢', plans: 10, status: 'active' },
+    { name: 'Kaiser Permanente', logo: '🔷', plans: 6, status: 'active' },
 ]
 
+const getStatusVariant = (status: string) => {
+    switch (status) {
+        case 'accepted': return 'success'
+        case 'pending': return 'warning'
+        case 'sent': return 'info'
+        case 'expired': return 'error'
+        default: return 'default'
+    }
+}
+
 export function Quoting() {
+    const { navigate } = useNavigation()
+
     return (
-        <div style={{ padding: 'var(--space-2xl)', background: 'var(--apex-obsidian)', minHeight: '100vh' }}>
+        <div className="quoting-engine">
             {/* Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2xl)' }}>
-                <div>
-                    <h1 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--apex-white)', margin: 0 }}>Quote Engine</h1>
-                    <p style={{ fontSize: 'var(--text-base)', color: 'var(--apex-steel)' }}>
-                        Generate multi-carrier quotes and proposals
-                    </p>
+            <motion.header
+                className="qe__header"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <div className="qe__header-left">
+                    <div className="qe__icon-container">
+                        <Calculator size={28} />
+                        <div className="qe__icon-pulse" />
+                    </div>
+                    <div>
+                        <h1 className="qe__title">Quote Engine</h1>
+                        <p className="qe__subtitle">Generate multi-carrier quotes and proposals</p>
+                    </div>
                 </div>
                 <Button variant="primary" size="sm">
                     <Plus size={16} />
                     New Quote
                 </Button>
-            </div>
+            </motion.header>
 
             {/* Quick Actions */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)' }}>
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-xl)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)', cursor: 'pointer' }}>
-                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--apex-teal)' }}>
-                            <Upload size={24} />
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <div style={{ color: 'var(--apex-white)', fontWeight: 600 }}>Upload Census</div>
-                            <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>Import employee data</div>
-                        </div>
+            <div className="qe__actions-grid">
+                <motion.div
+                    className="qe__action-card qe__action-card--upload"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                >
+                    <div className="qe__action-icon">
+                        <Upload size={28} />
                     </div>
-                </GlassCard>
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-xl)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)', cursor: 'pointer' }}>
-                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10B981' }}>
-                            <Calculator size={24} />
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <div style={{ color: 'var(--apex-white)', fontWeight: 600 }}>Quick Quote</div>
-                            <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>Estimate without census</div>
-                        </div>
+                    <div className="qe__action-text">
+                        <div className="qe__action-title">Upload Census</div>
+                        <div className="qe__action-desc">Import employee data for accurate quotes</div>
                     </div>
-                </GlassCard>
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-xl)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)', cursor: 'pointer' }}>
-                        <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8B5CF6' }}>
-                            <FileSpreadsheet size={24} />
-                        </div>
-                        <div style={{ textAlign: 'center' }}>
-                            <div style={{ color: 'var(--apex-white)', fontWeight: 600 }}>Compare Plans</div>
-                            <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>Side-by-side comparison</div>
-                        </div>
+                </motion.div>
+
+                <motion.div
+                    className="qe__action-card qe__action-card--quick"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                >
+                    <div className="qe__action-icon">
+                        <Calculator size={28} />
                     </div>
-                </GlassCard>
+                    <div className="qe__action-text">
+                        <div className="qe__action-title">Quick Quote</div>
+                        <div className="qe__action-desc">Estimate without census data</div>
+                    </div>
+                </motion.div>
+
+                <motion.div
+                    className="qe__action-card qe__action-card--compare"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    <div className="qe__action-icon">
+                        <FileSpreadsheet size={28} />
+                    </div>
+                    <div className="qe__action-text">
+                        <div className="qe__action-title">Compare Plans</div>
+                        <div className="qe__action-desc">Side-by-side plan comparison</div>
+                    </div>
+                </motion.div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 'var(--space-xl)' }}>
+            {/* Main Grid */}
+            <div className="qe__grid">
                 {/* Recent Quotes */}
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-lg)', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--apex-white)', margin: 0 }}>Recent Quotes</h2>
-                        <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+                <motion.div
+                    className="qe__section"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <div className="qe__section-header">
+                        <h2 className="qe__section-title">Recent Quotes</h2>
+                        <div className="qe__section-actions">
                             <Button variant="ghost" size="sm"><Search size={16} /></Button>
                             <Button variant="ghost" size="sm"><Filter size={16} /></Button>
                         </div>
@@ -98,69 +143,59 @@ export function Quoting() {
                         {recentQuotes.map((quote, i) => (
                             <motion.div
                                 key={quote.id}
+                                className="qe__quote-row"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.05 }}
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: 'var(--space-md) var(--space-lg)',
-                                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                                    cursor: 'pointer'
-                                }}
+                                transition={{ delay: 0.35 + i * 0.05 }}
                             >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
-                                    <div style={{ width: 40, height: 40, borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--apex-silver)' }}>
+                                <div className="qe__quote-info">
+                                    <div className="qe__quote-icon">
                                         <Building2 size={18} />
                                     </div>
-                                    <div>
-                                        <div style={{ color: 'var(--apex-white)', fontWeight: 500 }}>{quote.company}</div>
-                                        <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-xs)' }}>{quote.id} • {quote.employees} employees</div>
+                                    <div className="qe__quote-details">
+                                        <span className="qe__quote-company">{quote.company}</span>
+                                        <span className="qe__quote-meta">{quote.id} • {quote.employees} employees • {quote.value}</span>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
-                                    <span style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-xs)' }}>{quote.created}</span>
-                                    <Badge variant={quote.status === 'accepted' ? 'success' : quote.status === 'expired' ? 'error' : 'info'}>
-                                        {quote.status}
-                                    </Badge>
+                                <div className="qe__quote-right">
+                                    <span className="qe__quote-date">{quote.created}</span>
+                                    <Badge variant={getStatusVariant(quote.status)}>{quote.status}</Badge>
                                     <ChevronRight size={16} style={{ color: 'var(--apex-steel)' }} />
                                 </div>
                             </motion.div>
                         ))}
                     </div>
-                </GlassCard>
+                </motion.div>
 
                 {/* Available Carriers */}
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-lg)', borderBottom: '1px solid var(--glass-border)' }}>
-                        <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--apex-white)', margin: 0 }}>Available Carriers</h2>
+                <motion.div
+                    className="qe__section"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    <div className="qe__section-header">
+                        <h2 className="qe__section-title">Available Carriers</h2>
                     </div>
-                    <div style={{ padding: 'var(--space-md)' }}>
+                    <div>
                         {carriers.map((carrier, i) => (
                             <motion.div
                                 key={carrier.name}
+                                className="qe__carrier-row"
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 'var(--space-md)',
-                                    padding: 'var(--space-md)',
-                                    borderRadius: 'var(--radius-md)'
-                                }}
+                                transition={{ delay: 0.45 + i * 0.05 }}
                             >
-                                <span style={{ fontSize: '1.5rem' }}>{carrier.logo}</span>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ color: 'var(--apex-white)', fontWeight: 500, fontSize: 'var(--text-sm)' }}>{carrier.name}</div>
-                                    <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-xs)' }}>{carrier.plans} plans available</div>
+                                <span className="qe__carrier-logo">{carrier.logo}</span>
+                                <div className="qe__carrier-info">
+                                    <div className="qe__carrier-name">{carrier.name}</div>
+                                    <div className="qe__carrier-plans">{carrier.plans} plans available</div>
                                 </div>
-                                <CheckCircle2 size={16} style={{ color: '#10B981' }} />
+                                <CheckCircle2 size={16} className="qe__carrier-status" />
                             </motion.div>
                         ))}
                     </div>
-                </GlassCard>
+                </motion.div>
             </div>
         </div>
     )
