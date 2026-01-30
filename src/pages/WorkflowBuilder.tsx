@@ -1,24 +1,26 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react'
+import { useState, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import ReactFlow, {
+import {
+    ReactFlow,
     Background,
     Controls,
     MiniMap,
     Node,
     Edge,
     Connection,
-    addEdge,
-    useNodesState,
-    useEdgesState,
-    MarkerType,
     ReactFlowProvider,
-    useReactFlow
-} from 'reactflow'
-import 'reactflow/dist/style.css'
+    useReactFlow,
+    applyNodeChanges,
+    applyEdgeChanges,
+    OnNodesChange,
+    OnEdgesChange,
+} from '@xyflow/react'
+import '@xyflow/react/dist/style.css'
+import { Handle, Position } from '@xyflow/react'
 import {
     Zap, FileText, Brain, GitBranch, Users, Send,
-    Plus, Search, Sparkles, MessageSquareText, X,
-    ChevronRight, Save, Play, Settings, Download,
+    Plus, Search, Sparkles, X,
+    Save, Play, Download,
     Maximize2, Minimize2, LayoutDashboard, CheckCircle,
     AlertCircle, Clock, Filter, Loader2
 } from 'lucide-react'
@@ -74,22 +76,17 @@ const CATEGORY_LABELS: Record<string, string> = {
 // CUSTOM NODE COMPONENT
 // ================================================
 
-function CustomNode({ data }: { data: { label: string; icon: React.ReactNode; color: string; description: string } }) {
+function CustomNode({ data }: { data: { label: string; color: string; description: string } }) {
     return (
         <div className="workflow-node" style={{ borderColor: data.color }}>
-            <div className="workflow-node__header" style={{ background: `${data.color}15` }}>
-                <span className="workflow-node__icon" style={{ color: data.color }}>
-                    {data.icon}
-                </span>
+            <Handle type="target" position={Position.Top} className="workflow-node__handle" />
+            <div className="workflow-node__header" style={{ background: `${data.color}20` }}>
                 <span className="workflow-node__label">{data.label}</span>
             </div>
             <div className="workflow-node__body">
                 <p>{data.description}</p>
             </div>
-            <div className="workflow-node__handles">
-                <div className="workflow-node__handle workflow-node__handle--input" />
-                <div className="workflow-node__handle workflow-node__handle--output" />
-            </div>
+            <Handle type="source" position={Position.Bottom} className="workflow-node__handle" />
         </div>
     )
 }
@@ -102,22 +99,43 @@ const nodeTypes = {
 // WORKFLOW CANVAS COMPONENT
 // ================================================
 
-function WorkflowCanvas() {
+interface CanvasProps {
+    nodes: Node[]
+    edges: Edge[]
+    setNodes: (nodes: Node[]) => void
+    setEdges: (edges: Edge[]) => void
+}
+
+function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) {
     const reactFlowWrapper = useRef<HTMLDivElement>(null)
-    const [nodes, setNodes, onNodesChange] = useNodesState([])
-    const [edges, setEdges, onEdgesChange] = useEdgesState([])
-    const { project } = useReactFlow()
+    const { screenToFlowPosition } = useReactFlow()
+
+    const onNodesChange: OnNodesChange = useCallback(
+        (changes) => setNodes(applyNodeChanges(changes, nodes) as Node[]),
+        [nodes, setNodes]
+    )
+
+    const onEdgesChange: OnEdgesChange = useCallback(
+        (changes) => setEdges(applyEdgeChanges(changes, edges) as Edge[]),
+        [edges, setEdges]
+    )
 
     const onConnect = useCallback(
         (connection: Connection) => {
-            setEdges((eds) => addEdge({
-                ...connection,
-                type: 'smoothstep',
-                animated: true,
-                markerEnd: { type: MarkerType.ArrowClosed }
-            }, eds))
+            if (connection.source && connection.target) {
+                const newEdge: Edge = {
+                    id: `e-${connection.source}-${connection.target}-${Date.now()}`,
+                    source: connection.source,
+                    target: connection.target,
+                    sourceHandle: connection.sourceHandle,
+                    targetHandle: connection.targetHandle,
+                    type: 'smoothstep',
+                    animated: true,
+                }
+                setEdges([...edges, newEdge])
+            }
         },
-        [setEdges]
+        [edges, setEdges]
     )
 
     const onDrop = useCallback(
@@ -127,56 +145,36 @@ function WorkflowCanvas() {
             const nodeTypeData = event.dataTransfer.getData('application/reactflow')
             if (!nodeTypeData || !reactFlowWrapper.current) return
 
-            const nodeType = JSON.parse(nodeTypeData) as WorkflowNodeType
-            const bounds = reactFlowWrapper.current.getBoundingClientRect()
-            const position = project({
-                x: event.clientX - bounds.left,
-                y: event.clientY - bounds.top
-            })
+            try {
+                const nodeType = JSON.parse(nodeTypeData) as WorkflowNodeType
+                const position = screenToFlowPosition({
+                    x: event.clientX,
+                    y: event.clientY
+                })
 
-            const newNode: Node = {
-                id: `${nodeType.type}-${Date.now()}`,
-                type: 'custom',
-                position,
-                data: {
-                    label: nodeType.label,
-                    icon: nodeType.icon,
-                    color: nodeType.color,
-                    description: nodeType.description
+                const newNode: Node = {
+                    id: `${nodeType.type}-${Date.now()}`,
+                    type: 'custom',
+                    position,
+                    data: {
+                        label: nodeType.label,
+                        color: nodeType.color,
+                        description: nodeType.description
+                    }
                 }
-            }
 
-            setNodes((nds) => [...nds, newNode])
+                setNodes([...nodes, newNode])
+            } catch (e) {
+                console.error('Failed to parse dropped node data', e)
+            }
         },
-        [project, setNodes]
+        [screenToFlowPosition, nodes, setNodes]
     )
 
     const onDragOver = useCallback((event: React.DragEvent) => {
         event.preventDefault()
         event.dataTransfer.dropEffect = 'move'
     }, [])
-
-    // Expose a method to add nodes via click
-    const addNodeAtCenter = useCallback((nodeType: WorkflowNodeType) => {
-        const newNode: Node = {
-            id: `${nodeType.type}-${Date.now()}`,
-            type: 'custom',
-            position: { x: 200 + nodes.length * 50, y: 150 + Math.floor(nodes.length / 3) * 100 },
-            data: {
-                label: nodeType.label,
-                icon: nodeType.icon,
-                color: nodeType.color,
-                description: nodeType.description
-            }
-        }
-        setNodes((nds) => [...nds, newNode])
-    }, [nodes.length, setNodes])
-
-    // Expose function to parent  
-    useEffect(() => {
-        (window as any).__addWorkflowNode = addNodeAtCenter
-        return () => { delete (window as any).__addWorkflowNode }
-    }, [addNodeAtCenter])
 
     return (
         <div ref={reactFlowWrapper} className="workflow-canvas-inner">
@@ -196,8 +194,9 @@ function WorkflowCanvas() {
                 <Background color="rgba(255,255,255,0.03)" gap={24} />
                 <Controls />
                 <MiniMap
-                    nodeColor={(n) => n.data?.color || '#64748b'}
-                    maskColor="rgba(0,0,0,0.7)"
+                    nodeStrokeWidth={3}
+                    zoomable
+                    pannable
                 />
             </ReactFlow>
 
@@ -231,6 +230,10 @@ export function WorkflowBuilder() {
     const [aiPrompt, setAIPrompt] = useState('')
     const [isGenerating, setIsGenerating] = useState(false)
 
+    // Local state for nodes and edges
+    const [nodes, setNodes] = useState<Node[]>([])
+    const [edges, setEdges] = useState<Edge[]>([])
+
     // Filter nodes by search
     const filteredNodes = useMemo(() => {
         if (!searchQuery) return NODE_TYPES
@@ -258,16 +261,38 @@ export function WorkflowBuilder() {
 
     // Handle click to add
     const handleClickToAdd = useCallback((node: WorkflowNodeType) => {
-        const addFn = (window as any).__addWorkflowNode
-        if (addFn) addFn(node)
-    }, [])
+        const newNode: Node = {
+            id: `${node.type}-${Date.now()}`,
+            type: 'custom',
+            position: { x: 200 + nodes.length * 50, y: 150 + Math.floor(nodes.length / 3) * 120 },
+            data: {
+                label: node.label,
+                color: node.color,
+                description: node.description
+            }
+        }
+        setNodes(prev => [...prev, newNode])
+    }, [nodes.length])
 
     // AI Generation stub
     const handleAIGenerate = async () => {
         if (!aiPrompt.trim()) return
         setIsGenerating(true)
-        // Simulate AI generation
+        // Simulate AI generation - add sample nodes
         setTimeout(() => {
+            const sampleNodes: Node[] = [
+                { id: 'claim-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Claim Intake', color: '#06B6D4', description: 'Receive claims' } },
+                { id: 'validator-1', type: 'custom', position: { x: 250, y: 180 }, data: { label: 'Data Validator', color: '#8B5CF6', description: 'Validate data' } },
+                { id: 'ai-1', type: 'custom', position: { x: 250, y: 310 }, data: { label: 'AI Analyzer', color: '#10B981', description: 'Analyze with AI' } },
+                { id: 'decision-1', type: 'custom', position: { x: 250, y: 440 }, data: { label: 'Decision Output', color: '#64748B', description: 'Record decision' } },
+            ]
+            const sampleEdges: Edge[] = [
+                { id: 'e1', source: 'claim-1', target: 'validator-1', type: 'smoothstep', animated: true },
+                { id: 'e2', source: 'validator-1', target: 'ai-1', type: 'smoothstep', animated: true },
+                { id: 'e3', source: 'ai-1', target: 'decision-1', type: 'smoothstep', animated: true },
+            ]
+            setNodes(sampleNodes)
+            setEdges(sampleEdges)
             setIsGenerating(false)
             setShowAIPrompt(false)
             setAIPrompt('')
@@ -337,14 +362,14 @@ export function WorkflowBuilder() {
                     </div>
 
                     <div className="workflow-builder-v2__categories">
-                        {Object.entries(nodesByCategory).map(([category, nodes]) => (
+                        {Object.entries(nodesByCategory).map(([category, categoryNodes]) => (
                             <div key={category} className="workflow-builder-v2__category">
                                 <div className="workflow-builder-v2__category-header">
                                     <span>{CATEGORY_LABELS[category] || category}</span>
-                                    <span className="workflow-builder-v2__category-count">{nodes.length}</span>
+                                    <span className="workflow-builder-v2__category-count">{categoryNodes.length}</span>
                                 </div>
                                 <div className="workflow-builder-v2__nodes">
-                                    {nodes.map(node => (
+                                    {categoryNodes.map(node => (
                                         <div
                                             key={node.type}
                                             className="workflow-builder-v2__node-item"
@@ -372,7 +397,12 @@ export function WorkflowBuilder() {
                 {/* Canvas */}
                 <main className="workflow-builder-v2__canvas">
                     <ReactFlowProvider>
-                        <WorkflowCanvas />
+                        <WorkflowCanvasInner
+                            nodes={nodes}
+                            edges={edges}
+                            setNodes={setNodes}
+                            setEdges={setEdges}
+                        />
                     </ReactFlowProvider>
                 </main>
             </div>
