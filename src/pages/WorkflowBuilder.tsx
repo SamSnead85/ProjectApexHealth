@@ -564,6 +564,8 @@ export function WorkflowBuilder() {
     const [showScheduleModal, setShowScheduleModal] = useState(false)
     const [isRunning, setIsRunning] = useState(false)
     const [runStatus, setRunStatus] = useState<'idle' | 'running' | 'success' | 'error'>('idle')
+    const [currentExecutionStep, setCurrentExecutionStep] = useState(-1)
+    const [executionResults, setExecutionResults] = useState<{ nodeId: string; status: 'pending' | 'running' | 'completed'; details: string; duration?: number }[]>([])
     const [isSaving, setIsSaving] = useState(false)
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saved' | 'error'>('idle')
     const [scheduleConfig, setScheduleConfig] = useState({ frequency: 'daily', time: '09:00', enabled: false })
@@ -905,29 +907,116 @@ export function WorkflowBuilder() {
         }, 1000)
     }, [nodes, edges, workflowName, workflowDescription])
 
-    // Run workflow
+    // Generate execution details based on node type
+    const getExecutionDetails = (nodeLabel: string): string => {
+        const labelLower = nodeLabel.toLowerCase()
+
+        if (labelLower.includes('intake') || labelLower.includes('receive')) {
+            return 'Receiving incoming claim data from EDI 837 feed... Parsing member details, provider info, and service codes'
+        }
+        if (labelLower.includes('valid') || labelLower.includes('data')) {
+            return 'Validating data integrity... Checking required fields, format compliance, and NPI verification'
+        }
+        if (labelLower.includes('eligi')) {
+            return 'Verifying member eligibility... Checking coverage dates, plan benefits, and enrollment status'
+        }
+        if (labelLower.includes('fraud') || labelLower.includes('detect')) {
+            return 'Running AI fraud detection algorithms... Analyzing billing patterns and flagging anomalies'
+        }
+        if (labelLower.includes('risk') || labelLower.includes('score')) {
+            return 'Calculating risk scores... Evaluating claim complexity, historical patterns, and provider metrics'
+        }
+        if (labelLower.includes('ai') || labelLower.includes('analyz')) {
+            return 'AI processing claim data... Applying ML models for classification and recommendation'
+        }
+        if (labelLower.includes('review') || labelLower.includes('human')) {
+            return 'Routing to human reviewer queue... Claim flagged for manual adjudication review'
+        }
+        if (labelLower.includes('approv')) {
+            return 'Processing approval... Generating EOB, updating claim status, and triggering payment'
+        }
+        if (labelLower.includes('deny') || labelLower.includes('reject')) {
+            return 'Processing denial... Generating denial letter with appeal rights and reason codes'
+        }
+        if (labelLower.includes('notif') || labelLower.includes('alert')) {
+            return 'Sending notifications... Alerting stakeholders via email, SMS, and portal updates'
+        }
+        if (labelLower.includes('condition') || labelLower.includes('branch') || labelLower.includes('high')) {
+            return 'Evaluating decision criteria... Checking thresholds and routing to appropriate path'
+        }
+        if (labelLower.includes('queue') || labelLower.includes('assign')) {
+            return 'Assigning to work queue... Balancing workload and prioritizing by urgency'
+        }
+        if (labelLower.includes('process')) {
+            return 'Processing step... Applying business rules and updating claim record'
+        }
+        return 'Executing workflow step... Processing data and applying transformations'
+    }
+
+    // Run workflow with visual step tracking
     const handleRunWorkflow = useCallback(() => {
         if (nodes.length === 0) {
             alert('Please build a workflow before running.')
             return
         }
+
+        // Sort nodes by Y position to get execution order
+        const sortedNodes = [...nodes].sort((a, b) => a.position.y - b.position.y)
+
+        // Initialize execution results
+        const initialResults = sortedNodes.map(node => ({
+            nodeId: node.id,
+            status: 'pending' as const,
+            details: '',
+            duration: undefined
+        }))
+
+        setExecutionResults(initialResults)
+        setCurrentExecutionStep(-1)
         setIsRunning(true)
         setRunStatus('running')
 
-        // Simulate workflow execution with step tracking
-        const totalSteps = nodes.length
-        let currentStep = 0
+        let stepIndex = 0
+        const stepDurations = sortedNodes.map(() => 800 + Math.random() * 600) // Random 0.8-1.4s per step
 
         const runStep = () => {
-            if (currentStep < totalSteps) {
-                currentStep++
-                setTimeout(runStep, 800) // Each step takes ~800ms
-            } else {
-                setRunStatus('success')
-                setIsRunning(false)
+            if (stepIndex < sortedNodes.length) {
+                const currentNode = sortedNodes[stepIndex]
+                const nodeData = currentNode.data as unknown as CustomNodeData
+                const stepStartTime = Date.now()
+
+                // Mark current step as running
+                setCurrentExecutionStep(stepIndex)
+                setExecutionResults(prev => prev.map((r, i) =>
+                    i === stepIndex
+                        ? { ...r, status: 'running', details: getExecutionDetails(nodeData.label) }
+                        : r
+                ))
+
+                // Complete the step after duration
+                setTimeout(() => {
+                    const duration = Date.now() - stepStartTime
+                    setExecutionResults(prev => prev.map((r, i) =>
+                        i === stepIndex
+                            ? { ...r, status: 'completed', duration }
+                            : r
+                    ))
+
+                    stepIndex++
+                    if (stepIndex < sortedNodes.length) {
+                        setTimeout(runStep, 200) // Small gap between steps
+                    } else {
+                        // All steps complete
+                        setTimeout(() => {
+                            setRunStatus('success')
+                            setIsRunning(false)
+                        }, 300)
+                    }
+                }, stepDurations[stepIndex])
             }
         }
 
+        // Start execution after brief delay
         setTimeout(runStep, 500)
     }, [nodes])
 
@@ -1461,7 +1550,7 @@ export function WorkflowBuilder() {
                 )}
             </AnimatePresence>
 
-            {/* Run Workflow Modal */}
+            {/* Run Workflow Modal - Enhanced Visual Execution */}
             <AnimatePresence>
                 {showRunModal && (
                     <motion.div
@@ -1472,7 +1561,7 @@ export function WorkflowBuilder() {
                         onClick={() => !isRunning && setShowRunModal(false)}
                     >
                         <motion.div
-                            className="workflow-builder-v2__action-modal workflow-builder-v2__action-modal--run"
+                            className="workflow-builder-v2__action-modal workflow-builder-v2__action-modal--execution"
                             initial={{ scale: 0.95, y: -20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.95, y: -20 }}
@@ -1480,55 +1569,127 @@ export function WorkflowBuilder() {
                         >
                             <div className="action-modal__header">
                                 <Play size={20} />
-                                <h3>Run Workflow</h3>
-                                {!isRunning && <button onClick={() => setShowRunModal(false)}><X size={18} /></button>}
+                                <h3>{runStatus === 'running' ? 'Executing Workflow' : runStatus === 'success' ? 'Execution Complete' : 'Run Workflow'}</h3>
+                                {!isRunning && <button onClick={() => { setShowRunModal(false); setRunStatus('idle'); setExecutionResults([]); }}><X size={18} /></button>}
                             </div>
-                            <div className="action-modal__content action-modal__content--centered">
+
+                            <div className="action-modal__content">
                                 {runStatus === 'idle' && (
-                                    <>
-                                        <div className="action-modal__run-preview">
+                                    <div className="execution-preview">
+                                        <div className="execution-preview__icon">
                                             <Zap size={48} />
-                                            <h4>{workflowName}</h4>
-                                            <p>Ready to execute {nodes.length} nodes</p>
                                         </div>
-                                        <div className="action-modal__run-info">
-                                            <p>This will run your workflow with simulated data. In production, connect to your data sources.</p>
-                                        </div>
-                                    </>
-                                )}
-                                {runStatus === 'running' && (
-                                    <div className="action-modal__running">
-                                        <Loader2 size={48} className="spin" />
-                                        <h4>Executing Workflow...</h4>
-                                        <p>Processing {nodes.length} nodes</p>
-                                        <div className="action-modal__progress">
-                                            <motion.div
-                                                className="action-modal__progress-bar"
-                                                initial={{ width: 0 }}
-                                                animate={{ width: '100%' }}
-                                                transition={{ duration: nodes.length * 0.8 }}
-                                            />
+                                        <h4>{workflowName}</h4>
+                                        <p>Ready to execute {nodes.length} workflow steps</p>
+                                        <div className="execution-preview__nodes">
+                                            {[...nodes].sort((a, b) => a.position.y - b.position.y).map((node, i) => {
+                                                const nodeData = node.data as unknown as CustomNodeData
+                                                return (
+                                                    <div key={node.id} className="execution-preview__node">
+                                                        <span className="execution-preview__node-num">{i + 1}</span>
+                                                        <span className="execution-preview__node-label">{nodeData.label}</span>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
                                     </div>
                                 )}
-                                {runStatus === 'success' && (
-                                    <div className="action-modal__success">
-                                        <CheckCircle size={48} />
-                                        <h4>Workflow Completed!</h4>
-                                        <p>All {nodes.length} nodes executed successfully</p>
-                                        <div className="action-modal__results">
-                                            <div className="action-modal__result">
-                                                <span>Duration</span>
-                                                <strong>{(nodes.length * 0.8).toFixed(1)}s</strong>
+
+                                {(runStatus === 'running' || runStatus === 'success') && (
+                                    <div className="execution-timeline">
+                                        <div className="execution-timeline__header">
+                                            <div className="execution-timeline__progress-info">
+                                                <span className="execution-timeline__completed">
+                                                    {executionResults.filter(r => r.status === 'completed').length} of {executionResults.length}
+                                                </span>
+                                                <span className="execution-timeline__status">
+                                                    {runStatus === 'running' ? 'Processing...' : 'Completed'}
+                                                </span>
                                             </div>
-                                            <div className="action-modal__result">
-                                                <span>Status</span>
-                                                <strong className="success">Success</strong>
+                                            <div className="execution-timeline__progress-bar">
+                                                <motion.div
+                                                    className="execution-timeline__progress-fill"
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: `${(executionResults.filter(r => r.status === 'completed').length / executionResults.length) * 100}%` }}
+                                                    transition={{ duration: 0.3 }}
+                                                />
                                             </div>
                                         </div>
+
+                                        <div className="execution-timeline__steps">
+                                            {executionResults.map((result, index) => {
+                                                const node = [...nodes].sort((a, b) => a.position.y - b.position.y)[index]
+                                                const nodeData = node?.data as unknown as CustomNodeData
+
+                                                return (
+                                                    <motion.div
+                                                        key={result.nodeId}
+                                                        className={`execution-step execution-step--${result.status}`}
+                                                        initial={{ opacity: 0, x: -20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        transition={{ delay: index * 0.1 }}
+                                                    >
+                                                        <div className="execution-step__indicator">
+                                                            {result.status === 'pending' && (
+                                                                <div className="execution-step__dot execution-step__dot--pending" />
+                                                            )}
+                                                            {result.status === 'running' && (
+                                                                <Loader2 size={16} className="spin execution-step__spinner" />
+                                                            )}
+                                                            {result.status === 'completed' && (
+                                                                <CheckCircle size={16} className="execution-step__check" />
+                                                            )}
+                                                        </div>
+
+                                                        <div className="execution-step__content">
+                                                            <div className="execution-step__header">
+                                                                <div className="execution-step__icon" style={{ background: `${nodeData?.color}20`, color: nodeData?.color }}>
+                                                                    {nodeData?.icon || <Zap size={14} />}
+                                                                </div>
+                                                                <div className="execution-step__info">
+                                                                    <span className="execution-step__label">{nodeData?.label || 'Step'}</span>
+                                                                    <span className="execution-step__status-text">
+                                                                        {result.status === 'pending' && 'Waiting...'}
+                                                                        {result.status === 'running' && 'Executing...'}
+                                                                        {result.status === 'completed' && `Completed in ${result.duration}ms`}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            {(result.status === 'running' || result.status === 'completed') && result.details && (
+                                                                <motion.div
+                                                                    className="execution-step__details"
+                                                                    initial={{ opacity: 0, height: 0 }}
+                                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                                    transition={{ duration: 0.2 }}
+                                                                >
+                                                                    <p>{result.details}</p>
+                                                                </motion.div>
+                                                            )}
+                                                        </div>
+                                                    </motion.div>
+                                                )
+                                            })}
+                                        </div>
+
+                                        {runStatus === 'success' && (
+                                            <motion.div
+                                                className="execution-summary"
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: 0.3 }}
+                                            >
+                                                <CheckCircle size={24} />
+                                                <div className="execution-summary__info">
+                                                    <h4>Workflow Executed Successfully</h4>
+                                                    <p>All {executionResults.length} steps completed • Total time: {(executionResults.reduce((sum, r) => sum + (r.duration || 0), 0) / 1000).toFixed(1)}s</p>
+                                                </div>
+                                            </motion.div>
+                                        )}
                                     </div>
                                 )}
                             </div>
+
                             <div className="action-modal__footer">
                                 {runStatus === 'idle' && (
                                     <>
@@ -1547,7 +1708,7 @@ export function WorkflowBuilder() {
                                 {runStatus === 'success' && (
                                     <button
                                         className="action-modal__btn action-modal__btn--primary"
-                                        onClick={() => { setShowRunModal(false); setRunStatus('idle'); }}
+                                        onClick={() => { setShowRunModal(false); setRunStatus('idle'); setExecutionResults([]); }}
                                     >
                                         <CheckCircle size={16} /> Done
                                     </button>
