@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef } from 'react'
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ReactFlow,
@@ -19,10 +19,11 @@ import '@xyflow/react/dist/style.css'
 import { Handle, Position } from '@xyflow/react'
 import {
     Zap, FileText, Brain, GitBranch, Users, Send,
-    Plus, Search, Sparkles, X,
-    Save, Play, Download,
+    Plus, Search, Sparkles, X, Trash2, Copy, Edit3,
+    Save, Play, Download, Undo2, Redo2, Keyboard,
     Maximize2, Minimize2, LayoutDashboard, CheckCircle,
-    AlertCircle, Clock, Filter, Loader2
+    AlertCircle, Clock, Filter, Loader2, Settings,
+    Eye, EyeOff, Layers, HelpCircle, ChevronDown, ChevronRight
 } from 'lucide-react'
 import './WorkflowBuilder.css'
 
@@ -42,52 +43,87 @@ interface WorkflowNodeType {
 const NODE_TYPES: WorkflowNodeType[] = [
     // Triggers
     { type: 'claimIntake', label: 'Claim Intake', icon: <FileText size={16} />, color: '#06B6D4', category: 'trigger', description: 'Receive new claims' },
-    { type: 'scheduledTrigger', label: 'Scheduled Trigger', icon: <Clock size={16} />, color: '#06B6D4', category: 'trigger', description: 'Run on schedule' },
+    { type: 'scheduledTrigger', label: 'Scheduled', icon: <Clock size={16} />, color: '#06B6D4', category: 'trigger', description: 'Run on schedule' },
     { type: 'eventTrigger', label: 'Event Trigger', icon: <Zap size={16} />, color: '#06B6D4', category: 'trigger', description: 'React to events' },
+    { type: 'apiTrigger', label: 'API Webhook', icon: <Zap size={16} />, color: '#06B6D4', category: 'trigger', description: 'API endpoint trigger' },
     // Processing
-    { type: 'dataValidator', label: 'Data Validator', icon: <CheckCircle size={16} />, color: '#8B5CF6', category: 'processing', description: 'Validate claim data' },
-    { type: 'eligibilityCheck', label: 'Eligibility Check', icon: <Filter size={16} />, color: '#8B5CF6', category: 'processing', description: 'Verify member eligibility' },
-    { type: 'claimProcessor', label: 'Claim Processor', icon: <FileText size={16} />, color: '#8B5CF6', category: 'processing', description: 'Process claims' },
+    { type: 'dataValidator', label: 'Validator', icon: <CheckCircle size={16} />, color: '#8B5CF6', category: 'processing', description: 'Validate claim data' },
+    { type: 'eligibilityCheck', label: 'Eligibility', icon: <Filter size={16} />, color: '#8B5CF6', category: 'processing', description: 'Verify eligibility' },
+    { type: 'claimProcessor', label: 'Processor', icon: <FileText size={16} />, color: '#8B5CF6', category: 'processing', description: 'Process claims' },
+    { type: 'transformer', label: 'Transform', icon: <Layers size={16} />, color: '#8B5CF6', category: 'processing', description: 'Transform data' },
     // AI
     { type: 'aiAnalyzer', label: 'AI Analyzer', icon: <Brain size={16} />, color: '#10B981', category: 'ai', description: 'AI-powered analysis' },
-    { type: 'fraudDetector', label: 'Fraud Detector', icon: <AlertCircle size={16} />, color: '#10B981', category: 'ai', description: 'Detect fraud patterns' },
+    { type: 'fraudDetector', label: 'Fraud Detection', icon: <AlertCircle size={16} />, color: '#10B981', category: 'ai', description: 'Detect fraud patterns' },
     { type: 'riskScorer', label: 'Risk Scorer', icon: <Sparkles size={16} />, color: '#10B981', category: 'ai', description: 'Calculate risk scores' },
+    { type: 'nlpExtractor', label: 'NLP Extract', icon: <Brain size={16} />, color: '#10B981', category: 'ai', description: 'Extract with NLP' },
     // Control
-    { type: 'conditional', label: 'Conditional', icon: <GitBranch size={16} />, color: '#F59E0B', category: 'control', description: 'Branch logic' },
+    { type: 'conditional', label: 'Condition', icon: <GitBranch size={16} />, color: '#F59E0B', category: 'control', description: 'Branch logic' },
     { type: 'loop', label: 'Loop', icon: <GitBranch size={16} />, color: '#F59E0B', category: 'control', description: 'Repeat actions' },
+    { type: 'delay', label: 'Delay', icon: <Clock size={16} />, color: '#F59E0B', category: 'control', description: 'Wait period' },
     // HITL
     { type: 'humanReview', label: 'Human Review', icon: <Users size={16} />, color: '#EF4444', category: 'hitl', description: 'Manual review step' },
-    { type: 'approvalGate', label: 'Approval Gate', icon: <Users size={16} />, color: '#EF4444', category: 'hitl', description: 'Require approval' },
+    { type: 'approvalGate', label: 'Approval', icon: <CheckCircle size={16} />, color: '#EF4444', category: 'hitl', description: 'Require approval' },
     // Output
-    { type: 'notification', label: 'Notification', icon: <Send size={16} />, color: '#64748B', category: 'output', description: 'Send notifications' },
-    { type: 'decision', label: 'Decision Output', icon: <CheckCircle size={16} />, color: '#64748B', category: 'output', description: 'Record decision' },
+    { type: 'notification', label: 'Notify', icon: <Send size={16} />, color: '#64748B', category: 'output', description: 'Send notifications' },
+    { type: 'decision', label: 'Decision', icon: <CheckCircle size={16} />, color: '#64748B', category: 'output', description: 'Record decision' },
+    { type: 'integrationOutput', label: 'Integration', icon: <Zap size={16} />, color: '#64748B', category: 'output', description: 'External system' },
 ]
 
-const CATEGORY_LABELS: Record<string, string> = {
-    trigger: 'Triggers',
-    processing: 'Processing',
-    ai: 'AI / ML',
-    control: 'Control Flow',
-    hitl: 'Human-in-the-Loop',
-    output: 'Outputs'
+const CATEGORY_LABELS: Record<string, { label: string; icon: React.ReactNode }> = {
+    trigger: { label: 'Triggers', icon: <Zap size={14} /> },
+    processing: { label: 'Processing', icon: <Layers size={14} /> },
+    ai: { label: 'AI / ML', icon: <Brain size={14} /> },
+    control: { label: 'Control Flow', icon: <GitBranch size={14} /> },
+    hitl: { label: 'Human Review', icon: <Users size={14} /> },
+    output: { label: 'Outputs', icon: <Send size={14} /> }
 }
 
 // ================================================
 // CUSTOM NODE COMPONENT
 // ================================================
 
-function CustomNode({ data }: { data: { label: string; color: string; description: string } }) {
+interface CustomNodeData {
+    label: string
+    color: string
+    description: string
+    icon?: React.ReactNode
+    isSelected?: boolean
+}
+
+function CustomNode({ data, selected }: { data: CustomNodeData; selected?: boolean }) {
     return (
-        <div className="workflow-node" style={{ borderColor: data.color }}>
-            <Handle type="target" position={Position.Top} className="workflow-node__handle" />
-            <div className="workflow-node__header" style={{ background: `${data.color}20` }}>
+        <motion.div
+            className={`workflow-node ${selected ? 'workflow-node--selected' : ''}`}
+            style={{ borderColor: data.color }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.02 }}
+        >
+            <Handle type="target" position={Position.Top} className="workflow-node__handle workflow-node__handle--target" />
+            <div className="workflow-node__header" style={{ background: `${data.color}15`, borderBottom: `1px solid ${data.color}30` }}>
+                <div className="workflow-node__icon" style={{ background: `${data.color}20`, color: data.color }}>
+                    {data.icon || <Zap size={14} />}
+                </div>
                 <span className="workflow-node__label">{data.label}</span>
             </div>
             <div className="workflow-node__body">
                 <p>{data.description}</p>
             </div>
-            <Handle type="source" position={Position.Bottom} className="workflow-node__handle" />
-        </div>
+            {selected && (
+                <div className="workflow-node__actions">
+                    <button className="workflow-node__action" title="Configure">
+                        <Settings size={12} />
+                    </button>
+                    <button className="workflow-node__action" title="Duplicate">
+                        <Copy size={12} />
+                    </button>
+                    <button className="workflow-node__action workflow-node__action--danger" title="Delete">
+                        <Trash2 size={12} />
+                    </button>
+                </div>
+            )}
+            <Handle type="source" position={Position.Bottom} className="workflow-node__handle workflow-node__handle--source" />
+        </motion.div>
     )
 }
 
@@ -104,11 +140,12 @@ interface CanvasProps {
     edges: Edge[]
     setNodes: (nodes: Node[]) => void
     setEdges: (edges: Edge[]) => void
+    onNodeSelect: (node: Node | null) => void
 }
 
-function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) {
+function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges, onNodeSelect }: CanvasProps) {
     const reactFlowWrapper = useRef<HTMLDivElement>(null)
-    const { screenToFlowPosition } = useReactFlow()
+    const { screenToFlowPosition, fitView } = useReactFlow()
 
     const onNodesChange: OnNodesChange = useCallback(
         (changes) => setNodes(applyNodeChanges(changes, nodes) as Node[]),
@@ -131,6 +168,7 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) 
                     targetHandle: connection.targetHandle,
                     type: 'smoothstep',
                     animated: true,
+                    style: { stroke: '#6366f1', strokeWidth: 2 }
                 }
                 setEdges([...edges, newEdge])
             }
@@ -159,7 +197,8 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) 
                     data: {
                         label: nodeType.label,
                         color: nodeType.color,
-                        description: nodeType.description
+                        description: nodeType.description,
+                        icon: nodeType.icon
                     }
                 }
 
@@ -176,6 +215,21 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) 
         event.dataTransfer.dropEffect = 'move'
     }, [])
 
+    const onNodeClick = useCallback((_: React.MouseEvent, node: Node) => {
+        onNodeSelect(node)
+    }, [onNodeSelect])
+
+    const onPaneClick = useCallback(() => {
+        onNodeSelect(null)
+    }, [onNodeSelect])
+
+    // Auto-fit on first load with nodes
+    useEffect(() => {
+        if (nodes.length > 0) {
+            setTimeout(() => fitView({ padding: 0.2 }), 100)
+        }
+    }, [nodes.length > 0])
+
     return (
         <div ref={reactFlowWrapper} className="workflow-canvas-inner">
             <ReactFlow
@@ -186,17 +240,25 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) 
                 onConnect={onConnect}
                 onDrop={onDrop}
                 onDragOver={onDragOver}
+                onNodeClick={onNodeClick}
+                onPaneClick={onPaneClick}
                 nodeTypes={nodeTypes}
                 fitView
                 snapToGrid
                 snapGrid={[16, 16]}
+                defaultEdgeOptions={{
+                    type: 'smoothstep',
+                    animated: true,
+                    style: { stroke: '#6366f1', strokeWidth: 2 }
+                }}
             >
                 <Background color="rgba(255,255,255,0.03)" gap={24} />
-                <Controls />
+                <Controls className="workflow-controls" />
                 <MiniMap
                     nodeStrokeWidth={3}
                     zoomable
                     pannable
+                    className="workflow-minimap"
                 />
             </ReactFlow>
 
@@ -205,16 +267,127 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges }: CanvasProps) 
                     <div className="workflow-empty-state__icon">
                         <Sparkles size={48} />
                     </div>
-                    <h3>Start Building Your Workflow</h3>
-                    <p>Drag nodes from the left panel or click them to add</p>
+                    <h3>Build Your Healthcare Workflow</h3>
+                    <p>Drag nodes from the left panel or click to add them to the canvas</p>
                     <div className="workflow-empty-state__tips">
-                        <span><Zap size={14} /> Start with a Trigger</span>
-                        <span><Brain size={14} /> Add AI Analysis</span>
-                        <span><Users size={14} /> Include Human Review</span>
+                        <div className="workflow-empty-state__tip">
+                            <Zap size={16} />
+                            <span>Start with a <strong>Trigger</strong></span>
+                        </div>
+                        <div className="workflow-empty-state__tip">
+                            <Brain size={16} />
+                            <span>Add <strong>AI Analysis</strong></span>
+                        </div>
+                        <div className="workflow-empty-state__tip">
+                            <Users size={16} />
+                            <span>Include <strong>Human Review</strong></span>
+                        </div>
+                    </div>
+                    <div className="workflow-empty-state__shortcuts">
+                        <span><kbd>⌘</kbd> + <kbd>Z</kbd> Undo</span>
+                        <span><kbd>⌘</kbd> + <kbd>S</kbd> Save</span>
+                        <span><kbd>Del</kbd> Delete Node</span>
                     </div>
                 </div>
             )}
         </div>
+    )
+}
+
+// ================================================
+// NODE CONFIGURATION PANEL
+// ================================================
+
+interface ConfigPanelProps {
+    node: Node | null
+    onClose: () => void
+    onUpdate: (nodeId: string, data: Partial<CustomNodeData>) => void
+    onDelete: (nodeId: string) => void
+}
+
+function NodeConfigPanel({ node, onClose, onUpdate, onDelete }: ConfigPanelProps) {
+    if (!node) return null
+
+    const data = node.data as unknown as CustomNodeData
+
+    return (
+        <motion.aside
+            className="workflow-builder-v2__config-panel"
+            initial={{ x: 320, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 320, opacity: 0 }}
+            transition={{ type: 'spring', damping: 25 }}
+        >
+            <div className="config-panel__header">
+                <div className="config-panel__title">
+                    <Settings size={16} />
+                    <span>Configure Node</span>
+                </div>
+                <button onClick={onClose} className="config-panel__close">
+                    <X size={16} />
+                </button>
+            </div>
+
+            <div className="config-panel__content">
+                <div className="config-panel__node-preview" style={{ borderColor: data.color }}>
+                    <div className="config-panel__node-icon" style={{ background: `${data.color}20`, color: data.color }}>
+                        {data.icon || <Zap size={20} />}
+                    </div>
+                    <div className="config-panel__node-info">
+                        <span className="config-panel__node-label">{data.label}</span>
+                        <span className="config-panel__node-id">{node.id}</span>
+                    </div>
+                </div>
+
+                <div className="config-panel__section">
+                    <label className="config-panel__label">Display Name</label>
+                    <input
+                        type="text"
+                        className="config-panel__input"
+                        value={data.label}
+                        onChange={(e) => onUpdate(node.id, { label: e.target.value })}
+                    />
+                </div>
+
+                <div className="config-panel__section">
+                    <label className="config-panel__label">Description</label>
+                    <textarea
+                        className="config-panel__textarea"
+                        value={data.description}
+                        onChange={(e) => onUpdate(node.id, { description: e.target.value })}
+                        rows={3}
+                    />
+                </div>
+
+                <div className="config-panel__section">
+                    <label className="config-panel__label">Node Settings</label>
+                    <div className="config-panel__settings">
+                        <div className="config-panel__setting">
+                            <span>Retry on Failure</span>
+                            <input type="checkbox" defaultChecked />
+                        </div>
+                        <div className="config-panel__setting">
+                            <span>Log Execution</span>
+                            <input type="checkbox" defaultChecked />
+                        </div>
+                        <div className="config-panel__setting">
+                            <span>Timeout (seconds)</span>
+                            <input type="number" defaultValue={30} className="config-panel__number" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="config-panel__footer">
+                <button
+                    className="config-panel__delete-btn"
+                    onClick={() => onDelete(node.id)}
+                >
+                    <Trash2 size={14} />
+                    Delete Node
+                </button>
+            </div>
+        </motion.aside>
     )
 }
 
@@ -229,10 +402,71 @@ export function WorkflowBuilder() {
     const [showAIPrompt, setShowAIPrompt] = useState(false)
     const [aiPrompt, setAIPrompt] = useState('')
     const [isGenerating, setIsGenerating] = useState(false)
+    const [selectedNode, setSelectedNode] = useState<Node | null>(null)
+    const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false)
+    const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['trigger', 'processing', 'ai', 'control', 'hitl', 'output']))
 
     // Local state for nodes and edges
     const [nodes, setNodes] = useState<Node[]>([])
     const [edges, setEdges] = useState<Edge[]>([])
+
+    // Undo/Redo history
+    const [history, setHistory] = useState<{ nodes: Node[]; edges: Edge[] }[]>([])
+    const [historyIndex, setHistoryIndex] = useState(-1)
+
+    // Save to history
+    const saveToHistory = useCallback(() => {
+        setHistory(prev => [...prev.slice(0, historyIndex + 1), { nodes, edges }])
+        setHistoryIndex(prev => prev + 1)
+    }, [nodes, edges, historyIndex])
+
+    // Undo
+    const undo = useCallback(() => {
+        if (historyIndex > 0) {
+            const prev = history[historyIndex - 1]
+            setNodes(prev.nodes)
+            setEdges(prev.edges)
+            setHistoryIndex(historyIndex - 1)
+        }
+    }, [history, historyIndex])
+
+    // Redo
+    const redo = useCallback(() => {
+        if (historyIndex < history.length - 1) {
+            const next = history[historyIndex + 1]
+            setNodes(next.nodes)
+            setEdges(next.edges)
+            setHistoryIndex(historyIndex + 1)
+        }
+    }, [history, historyIndex])
+
+    // Keyboard shortcuts
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.metaKey || e.ctrlKey) {
+                if (e.key === 'z' && !e.shiftKey) {
+                    e.preventDefault()
+                    undo()
+                } else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') {
+                    e.preventDefault()
+                    redo()
+                } else if (e.key === 's') {
+                    e.preventDefault()
+                    // Save workflow
+                }
+            }
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                if (selectedNode) {
+                    deleteNode(selectedNode.id)
+                }
+            }
+            if (e.key === '?') {
+                setShowKeyboardShortcuts(prev => !prev)
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [undo, redo, selectedNode])
 
     // Filter nodes by search
     const filteredNodes = useMemo(() => {
@@ -253,6 +487,15 @@ export function WorkflowBuilder() {
         return groups
     }, [filteredNodes])
 
+    const toggleCategory = (category: string) => {
+        setExpandedCategories(prev => {
+            const next = new Set(prev)
+            if (next.has(category)) next.delete(category)
+            else next.add(category)
+            return next
+        })
+    }
+
     // Handle drag start
     const handleDragStart = useCallback((event: React.DragEvent, node: WorkflowNodeType) => {
         event.dataTransfer.setData('application/reactflow', JSON.stringify(node))
@@ -264,38 +507,62 @@ export function WorkflowBuilder() {
         const newNode: Node = {
             id: `${node.type}-${Date.now()}`,
             type: 'custom',
-            position: { x: 200 + nodes.length * 50, y: 150 + Math.floor(nodes.length / 3) * 120 },
+            position: { x: 200 + nodes.length * 60, y: 100 + Math.floor(nodes.length / 3) * 140 },
             data: {
                 label: node.label,
                 color: node.color,
-                description: node.description
+                description: node.description,
+                icon: node.icon
             }
         }
         setNodes(prev => [...prev, newNode])
-    }, [nodes.length])
+        saveToHistory()
+    }, [nodes.length, saveToHistory])
 
-    // AI Generation stub
+    // Update node
+    const updateNode = useCallback((nodeId: string, data: Partial<CustomNodeData>) => {
+        setNodes(prev => prev.map(n =>
+            n.id === nodeId ? { ...n, data: { ...n.data, ...data } } : n
+        ))
+    }, [])
+
+    // Delete node
+    const deleteNode = useCallback((nodeId: string) => {
+        setNodes(prev => prev.filter(n => n.id !== nodeId))
+        setEdges(prev => prev.filter(e => e.source !== nodeId && e.target !== nodeId))
+        setSelectedNode(null)
+        saveToHistory()
+    }, [saveToHistory])
+
+    // AI Generation
     const handleAIGenerate = async () => {
         if (!aiPrompt.trim()) return
         setIsGenerating(true)
-        // Simulate AI generation - add sample nodes
         setTimeout(() => {
             const sampleNodes: Node[] = [
-                { id: 'claim-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Claim Intake', color: '#06B6D4', description: 'Receive claims' } },
-                { id: 'validator-1', type: 'custom', position: { x: 250, y: 180 }, data: { label: 'Data Validator', color: '#8B5CF6', description: 'Validate data' } },
-                { id: 'ai-1', type: 'custom', position: { x: 250, y: 310 }, data: { label: 'AI Analyzer', color: '#10B981', description: 'Analyze with AI' } },
-                { id: 'decision-1', type: 'custom', position: { x: 250, y: 440 }, data: { label: 'Decision Output', color: '#64748B', description: 'Record decision' } },
+                { id: 'trigger-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Claim Intake', color: '#06B6D4', description: 'Receive new claims', icon: <FileText size={14} /> } },
+                { id: 'validator-1', type: 'custom', position: { x: 250, y: 180 }, data: { label: 'Data Validator', color: '#8B5CF6', description: 'Validate claim data', icon: <CheckCircle size={14} /> } },
+                { id: 'ai-1', type: 'custom', position: { x: 100, y: 310 }, data: { label: 'Fraud Detection', color: '#10B981', description: 'AI fraud analysis', icon: <Brain size={14} /> } },
+                { id: 'ai-2', type: 'custom', position: { x: 400, y: 310 }, data: { label: 'Risk Scorer', color: '#10B981', description: 'Calculate risk', icon: <Sparkles size={14} /> } },
+                { id: 'condition-1', type: 'custom', position: { x: 250, y: 440 }, data: { label: 'High Value?', color: '#F59E0B', description: 'Check if > $10K', icon: <GitBranch size={14} /> } },
+                { id: 'review-1', type: 'custom', position: { x: 100, y: 570 }, data: { label: 'Human Review', color: '#EF4444', description: 'Manual review', icon: <Users size={14} /> } },
+                { id: 'decision-1', type: 'custom', position: { x: 400, y: 570 }, data: { label: 'Auto Approve', color: '#64748B', description: 'Approve claim', icon: <CheckCircle size={14} /> } },
             ]
             const sampleEdges: Edge[] = [
-                { id: 'e1', source: 'claim-1', target: 'validator-1', type: 'smoothstep', animated: true },
-                { id: 'e2', source: 'validator-1', target: 'ai-1', type: 'smoothstep', animated: true },
-                { id: 'e3', source: 'ai-1', target: 'decision-1', type: 'smoothstep', animated: true },
+                { id: 'e1', source: 'trigger-1', target: 'validator-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e2', source: 'validator-1', target: 'ai-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e3', source: 'validator-1', target: 'ai-2', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e4', source: 'ai-1', target: 'condition-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e5', source: 'ai-2', target: 'condition-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e6', source: 'condition-1', target: 'review-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
+                { id: 'e7', source: 'condition-1', target: 'decision-1', type: 'smoothstep', animated: true, style: { stroke: '#6366f1', strokeWidth: 2 } },
             ]
             setNodes(sampleNodes)
             setEdges(sampleEdges)
             setIsGenerating(false)
             setShowAIPrompt(false)
             setAIPrompt('')
+            saveToHistory()
         }, 2000)
     }
 
@@ -311,10 +578,30 @@ export function WorkflowBuilder() {
                         onChange={(e) => setWorkflowName(e.target.value)}
                         className="workflow-builder-v2__title-input"
                     />
-                    <span className="workflow-builder-v2__status">Draft</span>
+                    <span className="workflow-builder-v2__status">
+                        {nodes.length > 0 ? `${nodes.length} nodes` : 'Draft'}
+                    </span>
                 </div>
 
                 <div className="workflow-builder-v2__header-center">
+                    <div className="workflow-builder-v2__history-btns">
+                        <button
+                            className="workflow-builder-v2__history-btn"
+                            onClick={undo}
+                            disabled={historyIndex <= 0}
+                            title="Undo (⌘Z)"
+                        >
+                            <Undo2 size={16} />
+                        </button>
+                        <button
+                            className="workflow-builder-v2__history-btn"
+                            onClick={redo}
+                            disabled={historyIndex >= history.length - 1}
+                            title="Redo (⌘⇧Z)"
+                        >
+                            <Redo2 size={16} />
+                        </button>
+                    </div>
                     <button
                         className="workflow-builder-v2__ai-btn"
                         onClick={() => setShowAIPrompt(true)}
@@ -325,18 +612,26 @@ export function WorkflowBuilder() {
                 </div>
 
                 <div className="workflow-builder-v2__header-right">
-                    <button className="workflow-builder-v2__action-btn">
+                    <button
+                        className="workflow-builder-v2__action-btn"
+                        onClick={() => setShowKeyboardShortcuts(true)}
+                        title="Keyboard Shortcuts"
+                    >
+                        <Keyboard size={16} />
+                    </button>
+                    <button className="workflow-builder-v2__action-btn" title="Save">
                         <Save size={16} />
                     </button>
-                    <button className="workflow-builder-v2__action-btn">
+                    <button className="workflow-builder-v2__action-btn workflow-builder-v2__action-btn--primary" title="Run Workflow">
                         <Play size={16} />
                     </button>
-                    <button className="workflow-builder-v2__action-btn">
+                    <button className="workflow-builder-v2__action-btn" title="Export">
                         <Download size={16} />
                     </button>
                     <button
                         className="workflow-builder-v2__action-btn"
                         onClick={() => setIsFullscreen(!isFullscreen)}
+                        title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
                     >
                         {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                     </button>
@@ -348,7 +643,8 @@ export function WorkflowBuilder() {
                 {/* Left Palette - ALWAYS VISIBLE */}
                 <aside className="workflow-builder-v2__palette">
                     <div className="workflow-builder-v2__palette-header">
-                        <h2>Node Palette</h2>
+                        <h2>Components</h2>
+                        <span className="workflow-builder-v2__palette-count">{NODE_TYPES.length}</span>
                     </div>
 
                     <div className="workflow-builder-v2__search">
@@ -359,36 +655,61 @@ export function WorkflowBuilder() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
+                        {searchQuery && (
+                            <button onClick={() => setSearchQuery('')} className="workflow-builder-v2__search-clear">
+                                <X size={14} />
+                            </button>
+                        )}
                     </div>
 
                     <div className="workflow-builder-v2__categories">
                         {Object.entries(nodesByCategory).map(([category, categoryNodes]) => (
                             <div key={category} className="workflow-builder-v2__category">
-                                <div className="workflow-builder-v2__category-header">
-                                    <span>{CATEGORY_LABELS[category] || category}</span>
-                                    <span className="workflow-builder-v2__category-count">{categoryNodes.length}</span>
-                                </div>
-                                <div className="workflow-builder-v2__nodes">
-                                    {categoryNodes.map(node => (
-                                        <div
-                                            key={node.type}
-                                            className="workflow-builder-v2__node-item"
-                                            draggable
-                                            onDragStart={(e) => handleDragStart(e, node)}
-                                            onClick={() => handleClickToAdd(node)}
-                                            style={{ borderLeftColor: node.color }}
+                                <button
+                                    className="workflow-builder-v2__category-header"
+                                    onClick={() => toggleCategory(category)}
+                                >
+                                    <div className="workflow-builder-v2__category-info">
+                                        {CATEGORY_LABELS[category]?.icon}
+                                        <span>{CATEGORY_LABELS[category]?.label || category}</span>
+                                    </div>
+                                    <div className="workflow-builder-v2__category-meta">
+                                        <span className="workflow-builder-v2__category-count">{categoryNodes.length}</span>
+                                        {expandedCategories.has(category) ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                                    </div>
+                                </button>
+                                <AnimatePresence>
+                                    {expandedCategories.has(category) && (
+                                        <motion.div
+                                            className="workflow-builder-v2__nodes"
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
                                         >
-                                            <span className="workflow-builder-v2__node-icon" style={{ color: node.color }}>
-                                                {node.icon}
-                                            </span>
-                                            <div className="workflow-builder-v2__node-info">
-                                                <span className="workflow-builder-v2__node-label">{node.label}</span>
-                                                <span className="workflow-builder-v2__node-desc">{node.description}</span>
-                                            </div>
-                                            <Plus size={14} className="workflow-builder-v2__node-add" />
-                                        </div>
-                                    ))}
-                                </div>
+                                            {categoryNodes.map(node => (
+                                                <motion.div
+                                                    key={node.type}
+                                                    className="workflow-builder-v2__node-item"
+                                                    draggable
+                                                    onDragStart={(e) => handleDragStart(e as unknown as React.DragEvent, node)}
+                                                    onClick={() => handleClickToAdd(node)}
+                                                    style={{ borderLeftColor: node.color }}
+                                                    whileHover={{ x: 4 }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                >
+                                                    <span className="workflow-builder-v2__node-icon" style={{ background: `${node.color}15`, color: node.color }}>
+                                                        {node.icon}
+                                                    </span>
+                                                    <div className="workflow-builder-v2__node-info">
+                                                        <span className="workflow-builder-v2__node-label">{node.label}</span>
+                                                        <span className="workflow-builder-v2__node-desc">{node.description}</span>
+                                                    </div>
+                                                    <Plus size={14} className="workflow-builder-v2__node-add" />
+                                                </motion.div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         ))}
                     </div>
@@ -402,9 +723,22 @@ export function WorkflowBuilder() {
                             edges={edges}
                             setNodes={setNodes}
                             setEdges={setEdges}
+                            onNodeSelect={setSelectedNode}
                         />
                     </ReactFlowProvider>
                 </main>
+
+                {/* Config Panel */}
+                <AnimatePresence>
+                    {selectedNode && (
+                        <NodeConfigPanel
+                            node={selectedNode}
+                            onClose={() => setSelectedNode(null)}
+                            onUpdate={updateNode}
+                            onDelete={deleteNode}
+                        />
+                    )}
+                </AnimatePresence>
             </div>
 
             {/* AI Prompt Modal */}
@@ -425,7 +759,7 @@ export function WorkflowBuilder() {
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="workflow-builder-v2__modal-header">
-                                <Sparkles size={20} />
+                                <Sparkles size={20} className="workflow-builder-v2__modal-icon" />
                                 <h3>Generate Workflow with AI</h3>
                                 <button onClick={() => setShowAIPrompt(false)}><X size={18} /></button>
                             </div>
@@ -435,18 +769,25 @@ export function WorkflowBuilder() {
                                     onChange={(e) => setAIPrompt(e.target.value)}
                                     placeholder="Describe your workflow in plain English...&#10;&#10;Example: 'Create a claims processing workflow that validates data, runs fraud detection, and routes high-value claims to human reviewers.'"
                                     rows={5}
+                                    autoFocus
                                 />
                                 <div className="workflow-builder-v2__modal-hints">
-                                    <span>Try:</span>
-                                    <button onClick={() => setAIPrompt('Auto-approve claims under $500, flag others for review')}>
-                                        Auto-approval workflow
+                                    <span>Quick prompts:</span>
+                                    <button onClick={() => setAIPrompt('Auto-approve claims under $500, flag others for human review')}>
+                                        Auto-approval
                                     </button>
-                                    <button onClick={() => setAIPrompt('Process referrals with eligibility check and provider assignment')}>
-                                        Referral processing
+                                    <button onClick={() => setAIPrompt('Process referrals with eligibility check and provider matching')}>
+                                        Referrals
+                                    </button>
+                                    <button onClick={() => setAIPrompt('Prior authorization with clinical review and member notification')}>
+                                        Prior Auth
                                     </button>
                                 </div>
                             </div>
                             <div className="workflow-builder-v2__modal-footer">
+                                <button className="workflow-builder-v2__cancel-btn" onClick={() => setShowAIPrompt(false)}>
+                                    Cancel
+                                </button>
                                 <button
                                     className="workflow-builder-v2__generate-btn"
                                     onClick={handleAIGenerate}
@@ -458,6 +799,80 @@ export function WorkflowBuilder() {
                                         <><Sparkles size={16} /> Generate Workflow</>
                                     )}
                                 </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Keyboard Shortcuts Modal */}
+            <AnimatePresence>
+                {showKeyboardShortcuts && (
+                    <motion.div
+                        className="workflow-builder-v2__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowKeyboardShortcuts(false)}
+                    >
+                        <motion.div
+                            className="workflow-builder-v2__shortcuts-modal"
+                            initial={{ scale: 0.95 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0.95 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="shortcuts-modal__header">
+                                <Keyboard size={20} />
+                                <h3>Keyboard Shortcuts</h3>
+                                <button onClick={() => setShowKeyboardShortcuts(false)}><X size={18} /></button>
+                            </div>
+                            <div className="shortcuts-modal__content">
+                                <div className="shortcuts-modal__group">
+                                    <h4>General</h4>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Undo</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>Z</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Redo</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>⇧</kbd><kbd>Z</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Save</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>S</kbd></div>
+                                    </div>
+                                </div>
+                                <div className="shortcuts-modal__group">
+                                    <h4>Canvas</h4>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Delete Node</span>
+                                        <div className="shortcuts-modal__keys"><kbd>Del</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Zoom In</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>+</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Zoom Out</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>-</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Fit View</span>
+                                        <div className="shortcuts-modal__keys"><kbd>⌘</kbd><kbd>0</kbd></div>
+                                    </div>
+                                </div>
+                                <div className="shortcuts-modal__group">
+                                    <h4>Panels</h4>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Show Shortcuts</span>
+                                        <div className="shortcuts-modal__keys"><kbd>?</kbd></div>
+                                    </div>
+                                    <div className="shortcuts-modal__item">
+                                        <span>Fullscreen</span>
+                                        <div className="shortcuts-modal__keys"><kbd>F</kbd></div>
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>
