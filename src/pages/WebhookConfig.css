@@ -1,0 +1,285 @@
+/* WebhookConfig.css - Webhook Configuration */
+/* Apex Obsidian v2.5 Design System */
+
+.webhook-config {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.webhook-config h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.webhook-config .page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Action Bar */
+.webhook-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.add-webhook-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-teal);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.add-webhook-btn:hover {
+    background: var(--accent-cyan);
+}
+
+/* Webhook Cards */
+.webhooks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.webhook-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.webhook-header {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.webhook-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.webhook-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.webhook-icon.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.webhook-icon.inactive {
+    background: rgba(107, 114, 128, 0.15);
+    color: #6b7280;
+}
+
+.webhook-name h4 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.125rem;
+}
+
+.webhook-name span {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.webhook-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(107, 114, 128, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.webhook-toggle.active {
+    background: var(--accent-teal);
+}
+
+.webhook-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.webhook-toggle.active::after {
+    left: 22px;
+}
+
+.webhook-body {
+    padding: 1.25rem;
+}
+
+.webhook-url {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.webhook-url code {
+    flex: 1;
+    font-family: 'SF Mono', monospace;
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.copy-btn {
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.webhook-events {
+    margin-bottom: 1rem;
+}
+
+.events-label {
+    font-size: 0.688rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: 0.5rem;
+}
+
+.events-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.event-tag {
+    padding: 0.35rem 0.75rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #818cf8;
+}
+
+.webhook-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
+
+.webhook-footer {
+    padding: 1rem 1.25rem;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.last-triggered {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.webhook-btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.wh-btn {
+    padding: 0.5rem 0.875rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.wh-btn.test {
+    background: rgba(99, 102, 241, 0.15);
+    border: none;
+    color: #818cf8;
+}
+
+.wh-btn.edit {
+    background: transparent;
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .webhook-config {
+        padding: 1rem;
+    }
+
+    .webhooks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .webhook-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

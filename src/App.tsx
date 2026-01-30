@@ -118,6 +118,10 @@ import UserManagement from './pages/UserManagement'
 import SystemHealth from './pages/SystemHealth'
 import BatchDashboard from './pages/BatchDashboard'
 import ActivityFeed from './pages/ActivityFeed'
+// Data Integration & Member Experience
+import EDIManager from './pages/EDIManager'
+import DigitalIDCard from './pages/DigitalIDCard'
+import WebhookConfig from './pages/WebhookConfig'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -250,6 +254,16 @@ function App() {
         }
         if (activePath.includes('/activity-feed') || activePath.includes('/activity') || activePath.includes('/feed')) {
             return <ActivityFeed />
+        }
+        // Data Integration & Member Experience
+        if (activePath.includes('/edi') || activePath.includes('/x12') || activePath.includes('/edi-manager')) {
+            return <EDIManager />
+        }
+        if (activePath.includes('/digital-id') || activePath.includes('/wallet-card') || activePath.includes('/member-card')) {
+            return <DigitalIDCard />
+        }
+        if (activePath.includes('/webhooks') || activePath.includes('/webhook-config') || activePath.includes('/integrations')) {
+            return <WebhookConfig />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
