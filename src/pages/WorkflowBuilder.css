@@ -34,6 +34,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     height: 56px;
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
 }
 
 .workflow-builder-v2__header-left {
