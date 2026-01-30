@@ -1092,6 +1092,7 @@ export function WorkflowBuilder() {
                         value={workflowName}
                         onChange={(e) => setWorkflowName(e.target.value)}
                         className="workflow-builder-v2__title-input"
+                        placeholder="Click to name your workflow..."
                     />
                     <span className="workflow-builder-v2__status">
                         {nodes.length > 0 ? `${nodes.length} nodes` : 'Draft'}
