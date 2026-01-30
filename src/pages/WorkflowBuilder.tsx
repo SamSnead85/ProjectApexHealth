@@ -23,7 +23,8 @@ import {
     Save, Play, Download, Undo2, Redo2, Keyboard,
     Maximize2, Minimize2, LayoutDashboard, CheckCircle,
     AlertCircle, Clock, Filter, Loader2, Settings,
-    Eye, EyeOff, Layers, HelpCircle, ChevronDown, ChevronRight
+    Eye, EyeOff, Layers, HelpCircle, ChevronDown, ChevronRight,
+    LayoutTemplate
 } from 'lucide-react'
 import './WorkflowBuilder.css'
 
@@ -77,6 +78,108 @@ const CATEGORY_LABELS: Record<string, { label: string; icon: React.ReactNode }> 
     hitl: { label: 'Human Review', icon: <Users size={14} /> },
     output: { label: 'Outputs', icon: <Send size={14} /> }
 }
+
+// ================================================
+// WORKFLOW TEMPLATES
+// ================================================
+
+interface WorkflowTemplate {
+    id: string
+    name: string
+    description: string
+    icon: React.ReactNode
+    category: string
+    nodes: Node[]
+    edges: Edge[]
+}
+
+const WORKFLOW_TEMPLATES: WorkflowTemplate[] = [
+    {
+        id: 'claims-processing',
+        name: 'Claims Processing',
+        description: 'Standard claims intake, validation, and adjudication workflow',
+        icon: <FileText size={20} />,
+        category: 'Claims',
+        nodes: [
+            { id: 'intake-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Claim Intake', color: '#06B6D4', description: 'Receive claims' } },
+            { id: 'validate-1', type: 'custom', position: { x: 250, y: 160 }, data: { label: 'Data Validation', color: '#8B5CF6', description: 'Validate data' } },
+            { id: 'eligibility-1', type: 'custom', position: { x: 250, y: 270 }, data: { label: 'Eligibility Check', color: '#8B5CF6', description: 'Check eligibility' } },
+            { id: 'process-1', type: 'custom', position: { x: 250, y: 380 }, data: { label: 'Process Claim', color: '#8B5CF6', description: 'Adjudicate' } },
+            { id: 'output-1', type: 'custom', position: { x: 250, y: 490 }, data: { label: 'Decision', color: '#64748B', description: 'Record decision' } },
+        ],
+        edges: [
+            { id: 'e1', source: 'intake-1', target: 'validate-1', type: 'smoothstep', animated: true },
+            { id: 'e2', source: 'validate-1', target: 'eligibility-1', type: 'smoothstep', animated: true },
+            { id: 'e3', source: 'eligibility-1', target: 'process-1', type: 'smoothstep', animated: true },
+            { id: 'e4', source: 'process-1', target: 'output-1', type: 'smoothstep', animated: true },
+        ]
+    },
+    {
+        id: 'prior-auth',
+        name: 'Prior Authorization',
+        description: 'Clinical prior auth with AI analysis and approval routing',
+        icon: <CheckCircle size={20} />,
+        category: 'Authorization',
+        nodes: [
+            { id: 'request-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Auth Request', color: '#06B6D4', description: 'Receive request' } },
+            { id: 'clinical-1', type: 'custom', position: { x: 250, y: 160 }, data: { label: 'Clinical Review', color: '#10B981', description: 'AI analysis' } },
+            { id: 'condition-1', type: 'custom', position: { x: 250, y: 270 }, data: { label: 'Auto-Approve?', color: '#F59E0B', description: 'Check criteria' } },
+            { id: 'approve-1', type: 'custom', position: { x: 100, y: 380 }, data: { label: 'Auto Approve', color: '#64748B', description: 'Approve' } },
+            { id: 'review-1', type: 'custom', position: { x: 400, y: 380 }, data: { label: 'MD Review', color: '#EF4444', description: 'Physician review' } },
+            { id: 'notify-1', type: 'custom', position: { x: 250, y: 490 }, data: { label: 'Notify Member', color: '#64748B', description: 'Send decision' } },
+        ],
+        edges: [
+            { id: 'e1', source: 'request-1', target: 'clinical-1', type: 'smoothstep', animated: true },
+            { id: 'e2', source: 'clinical-1', target: 'condition-1', type: 'smoothstep', animated: true },
+            { id: 'e3', source: 'condition-1', target: 'approve-1', type: 'smoothstep', animated: true },
+            { id: 'e4', source: 'condition-1', target: 'review-1', type: 'smoothstep', animated: true },
+            { id: 'e5', source: 'approve-1', target: 'notify-1', type: 'smoothstep', animated: true },
+            { id: 'e6', source: 'review-1', target: 'notify-1', type: 'smoothstep', animated: true },
+        ]
+    },
+    {
+        id: 'fraud-detection',
+        name: 'Fraud Detection',
+        description: 'AI-powered fraud analysis with investigation routing',
+        icon: <AlertCircle size={20} />,
+        category: 'Compliance',
+        nodes: [
+            { id: 'trigger-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Claim Event', color: '#06B6D4', description: 'New claim' } },
+            { id: 'fraud-ai-1', type: 'custom', position: { x: 250, y: 160 }, data: { label: 'Fraud Analysis', color: '#10B981', description: 'AI detection' } },
+            { id: 'risk-1', type: 'custom', position: { x: 250, y: 270 }, data: { label: 'Risk Score', color: '#10B981', description: 'Calculate risk' } },
+            { id: 'condition-1', type: 'custom', position: { x: 250, y: 380 }, data: { label: 'High Risk?', color: '#F59E0B', description: 'Check threshold' } },
+            { id: 'investigate-1', type: 'custom', position: { x: 100, y: 490 }, data: { label: 'Investigation', color: '#EF4444', description: 'SIU review' } },
+            { id: 'clear-1', type: 'custom', position: { x: 400, y: 490 }, data: { label: 'Clear Claim', color: '#64748B', description: 'Proceed' } },
+        ],
+        edges: [
+            { id: 'e1', source: 'trigger-1', target: 'fraud-ai-1', type: 'smoothstep', animated: true },
+            { id: 'e2', source: 'fraud-ai-1', target: 'risk-1', type: 'smoothstep', animated: true },
+            { id: 'e3', source: 'risk-1', target: 'condition-1', type: 'smoothstep', animated: true },
+            { id: 'e4', source: 'condition-1', target: 'investigate-1', type: 'smoothstep', animated: true },
+            { id: 'e5', source: 'condition-1', target: 'clear-1', type: 'smoothstep', animated: true },
+        ]
+    },
+    {
+        id: 'member-onboarding',
+        name: 'Member Onboarding',
+        description: 'New member enrollment and welcome workflow',
+        icon: <Users size={20} />,
+        category: 'Member Services',
+        nodes: [
+            { id: 'enroll-1', type: 'custom', position: { x: 250, y: 50 }, data: { label: 'Enrollment', color: '#06B6D4', description: 'New member' } },
+            { id: 'validate-1', type: 'custom', position: { x: 250, y: 160 }, data: { label: 'Validate Data', color: '#8B5CF6', description: 'Check info' } },
+            { id: 'create-1', type: 'custom', position: { x: 250, y: 270 }, data: { label: 'Create Account', color: '#8B5CF6', description: 'Setup profile' } },
+            { id: 'id-card-1', type: 'custom', position: { x: 100, y: 380 }, data: { label: 'Generate ID', color: '#64748B', description: 'Create ID card' } },
+            { id: 'welcome-1', type: 'custom', position: { x: 400, y: 380 }, data: { label: 'Welcome Kit', color: '#64748B', description: 'Send materials' } },
+        ],
+        edges: [
+            { id: 'e1', source: 'enroll-1', target: 'validate-1', type: 'smoothstep', animated: true },
+            { id: 'e2', source: 'validate-1', target: 'create-1', type: 'smoothstep', animated: true },
+            { id: 'e3', source: 'create-1', target: 'id-card-1', type: 'smoothstep', animated: true },
+            { id: 'e4', source: 'create-1', target: 'welcome-1', type: 'smoothstep', animated: true },
+        ]
+    },
+]
 
 // ================================================
 // CUSTOM NODE COMPONENT
@@ -404,6 +507,7 @@ export function WorkflowBuilder() {
     const [isGenerating, setIsGenerating] = useState(false)
     const [selectedNode, setSelectedNode] = useState<Node | null>(null)
     const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false)
+    const [showTemplates, setShowTemplates] = useState(false)
     const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['trigger', 'processing', 'ai', 'control', 'hitl', 'output']))
 
     // Local state for nodes and edges
@@ -566,6 +670,15 @@ export function WorkflowBuilder() {
         }, 2000)
     }
 
+    // Load template
+    const loadTemplate = useCallback((template: WorkflowTemplate) => {
+        setNodes(template.nodes)
+        setEdges(template.edges)
+        setWorkflowName(template.name)
+        setShowTemplates(false)
+        saveToHistory()
+    }, [saveToHistory])
+
     return (
         <div className={`workflow-builder-v2 ${isFullscreen ? 'workflow-builder-v2--fullscreen' : ''}`}>
             {/* Header */}
@@ -602,6 +715,13 @@ export function WorkflowBuilder() {
                             <Redo2 size={16} />
                         </button>
                     </div>
+                    <button
+                        className="workflow-builder-v2__template-btn"
+                        onClick={() => setShowTemplates(true)}
+                    >
+                        <LayoutTemplate size={16} />
+                        Templates
+                    </button>
                     <button
                         className="workflow-builder-v2__ai-btn"
                         onClick={() => setShowAIPrompt(true)}
@@ -872,6 +992,61 @@ export function WorkflowBuilder() {
                                         <span>Fullscreen</span>
                                         <div className="shortcuts-modal__keys"><kbd>F</kbd></div>
                                     </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Templates Modal */}
+            <AnimatePresence>
+                {showTemplates && (
+                    <motion.div
+                        className="workflow-builder-v2__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowTemplates(false)}
+                    >
+                        <motion.div
+                            className="workflow-builder-v2__templates-modal"
+                            initial={{ scale: 0.95, y: -20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.95, y: -20 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="templates-modal__header">
+                                <LayoutTemplate size={20} />
+                                <h3>Workflow Templates</h3>
+                                <button onClick={() => setShowTemplates(false)}><X size={18} /></button>
+                            </div>
+                            <div className="templates-modal__content">
+                                <p className="templates-modal__description">
+                                    Start with a pre-built healthcare workflow template and customize it to fit your needs.
+                                </p>
+                                <div className="templates-modal__grid">
+                                    {WORKFLOW_TEMPLATES.map(template => (
+                                        <motion.div
+                                            key={template.id}
+                                            className="templates-modal__card"
+                                            onClick={() => loadTemplate(template)}
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <div className="templates-modal__card-icon">
+                                                {template.icon}
+                                            </div>
+                                            <div className="templates-modal__card-content">
+                                                <h4>{template.name}</h4>
+                                                <p>{template.description}</p>
+                                                <div className="templates-modal__card-meta">
+                                                    <span className="templates-modal__card-category">{template.category}</span>
+                                                    <span className="templates-modal__card-nodes">{template.nodes.length} nodes</span>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
                                 </div>
                             </div>
                         </motion.div>
