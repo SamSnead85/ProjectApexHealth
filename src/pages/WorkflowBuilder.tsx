@@ -396,6 +396,7 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges, onNodeSelect }:
                 fitView
                 snapToGrid
                 snapGrid={[16, 16]}
+                proOptions={{ hideAttribution: true }}
                 defaultEdgeOptions={{
                     type: 'smoothstep',
                     animated: true,
