@@ -8,14 +8,15 @@ import {
   AnomalyDetection
 } from '../types/workflow'
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY
+// API key with fallback for production environments
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyAWg6XO3SvNV5T3t7qMgNczv9gmM4r2aN8'
 
 let genAI: GoogleGenerativeAI | null = null
 
 function getGenAI(): GoogleGenerativeAI {
   if (!genAI) {
     if (!API_KEY) {
-      throw new Error('Gemini API key not configured')
+      throw new Error('Gemini API key not configured. Please set VITE_GEMINI_API_KEY environment variable.')
     }
     genAI = new GoogleGenerativeAI(API_KEY)
   }
