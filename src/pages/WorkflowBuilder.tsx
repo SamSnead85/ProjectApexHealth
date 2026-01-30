@@ -293,8 +293,9 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges, onNodeSelect }:
                     y: event.clientY
                 })
 
+                const newNodeId = `${nodeType.type}-${Date.now()}`
                 const newNode: Node = {
-                    id: `${nodeType.type}-${Date.now()}`,
+                    id: newNodeId,
                     type: 'custom',
                     position,
                     data: {
@@ -305,12 +306,58 @@ function WorkflowCanvasInner({ nodes, edges, setNodes, setEdges, onNodeSelect }:
                     }
                 }
 
+                // PROXIMITY-BASED AUTO-CONNECTION
+                const PROXIMITY_THRESHOLD = 150 // pixels
+                const autoEdges: Edge[] = []
+
+                // Find nodes that are close to the drop position
+                nodes.forEach(existingNode => {
+                    const dx = Math.abs(existingNode.position.x - position.x)
+                    const dy = existingNode.position.y - position.y
+                    const distance = Math.sqrt(dx * dx + dy * dy)
+
+                    // If existing node is above and within proximity, connect from it
+                    if (dy < 0 && Math.abs(dy) < PROXIMITY_THRESHOLD && dx < PROXIMITY_THRESHOLD / 2) {
+                        // Check if this node doesn't already have too many outgoing edges
+                        const existingOutgoingEdges = edges.filter(e => e.source === existingNode.id)
+                        if (existingOutgoingEdges.length < 3) {
+                            autoEdges.push({
+                                id: `e-${existingNode.id}-${newNodeId}-${Date.now()}`,
+                                source: existingNode.id,
+                                target: newNodeId,
+                                type: 'smoothstep',
+                                animated: true,
+                                style: { stroke: '#6366f1', strokeWidth: 2 }
+                            })
+                        }
+                    }
+
+                    // If existing node is below and within proximity, connect to it
+                    if (dy > 0 && Math.abs(dy) < PROXIMITY_THRESHOLD && dx < PROXIMITY_THRESHOLD / 2) {
+                        // Check if this node doesn't already have too many incoming edges
+                        const existingIncomingEdges = edges.filter(e => e.target === existingNode.id)
+                        if (existingIncomingEdges.length < 3) {
+                            autoEdges.push({
+                                id: `e-${newNodeId}-${existingNode.id}-${Date.now() + 1}`,
+                                source: newNodeId,
+                                target: existingNode.id,
+                                type: 'smoothstep',
+                                animated: true,
+                                style: { stroke: '#6366f1', strokeWidth: 2 }
+                            })
+                        }
+                    }
+                })
+
                 setNodes([...nodes, newNode])
+                if (autoEdges.length > 0) {
+                    setEdges([...edges, ...autoEdges])
+                }
             } catch (e) {
                 console.error('Failed to parse dropped node data', e)
             }
         },
-        [screenToFlowPosition, nodes, setNodes]
+        [screenToFlowPosition, nodes, edges, setNodes, setEdges]
     )
 
     const onDragOver = useCallback((event: React.DragEvent) => {
