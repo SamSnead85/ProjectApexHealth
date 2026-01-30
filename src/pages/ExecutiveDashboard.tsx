@@ -207,33 +207,53 @@ export default function ExecutiveDashboard() {
                     </h3>
                     <div className="chart-container">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={revenueData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                                <XAxis dataKey="month" stroke="#6b7280" />
-                                <YAxis stroke="#6b7280" tickFormatter={(v) => `$${v}M`} />
+                            <AreaChart data={revenueData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#10b981" stopOpacity={0.5} />
+                                        <stop offset="50%" stopColor="#10b981" stopOpacity={0.15} />
+                                        <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="claimsGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.4} />
+                                        <stop offset="50%" stopColor="#f59e0b" stopOpacity={0.1} />
+                                        <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                                    </linearGradient>
+                                    <filter id="chartGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                                    </filter>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 12 }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} tickFormatter={(v) => `$${v}M`} />
                                 <Tooltip
                                     contentStyle={{
-                                        background: 'rgba(17, 24, 39, 0.95)',
+                                        background: 'linear-gradient(180deg, rgba(25, 25, 40, 0.98) 0%, rgba(15, 15, 25, 0.98) 100%)',
                                         border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: '8px'
+                                        borderRadius: '12px',
+                                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)'
                                     }}
                                     formatter={(value: number) => [`$${value}M`, '']}
                                 />
                                 <Area
                                     type="monotone"
                                     dataKey="revenue"
-                                    stroke="#22c55e"
-                                    fill="rgba(34, 197, 94, 0.2)"
-                                    strokeWidth={2}
+                                    stroke="#10b981"
+                                    fill="url(#revenueGradient)"
+                                    strokeWidth={3}
                                     name="Revenue"
+                                    dot={{ fill: '#10b981', strokeWidth: 2, stroke: '#0a0a12', r: 4 }}
+                                    activeDot={{ r: 7, fill: '#10b981', stroke: 'rgba(16, 185, 129, 0.3)', strokeWidth: 6 }}
                                 />
                                 <Area
                                     type="monotone"
                                     dataKey="claims"
-                                    stroke="#ef4444"
-                                    fill="rgba(239, 68, 68, 0.2)"
-                                    strokeWidth={2}
+                                    stroke="#f59e0b"
+                                    fill="url(#claimsGradient)"
+                                    strokeWidth={3}
                                     name="Claims"
+                                    dot={{ fill: '#f59e0b', strokeWidth: 2, stroke: '#0a0a12', r: 4 }}
+                                    activeDot={{ r: 7, fill: '#f59e0b', stroke: 'rgba(245, 158, 11, 0.3)', strokeWidth: 6 }}
                                 />
                             </AreaChart>
                         </ResponsiveContainer>
@@ -250,32 +270,55 @@ export default function ExecutiveDashboard() {
                         <Activity size={18} />
                         Cost by Category
                     </h3>
-                    <div className="chart-container">
+                    <div className="chart-container chart-container--pie">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
+                                <defs>
+                                    {categoryData.map((entry, index) => (
+                                        <linearGradient key={index} id={`pieGrad${index}`} x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stopColor={entry.color} stopOpacity={1} />
+                                            <stop offset="100%" stopColor={entry.color} stopOpacity={0.6} />
+                                        </linearGradient>
+                                    ))}
+                                    <filter id="pieGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feGaussianBlur stdDeviation="4" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
                                 <Pie
                                     data={categoryData}
                                     cx="50%"
                                     cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={100}
-                                    paddingAngle={2}
+                                    innerRadius={55}
+                                    outerRadius={95}
+                                    paddingAngle={3}
                                     dataKey="value"
+                                    stroke="rgba(0,0,0,0.3)"
+                                    strokeWidth={2}
                                 >
                                     {categoryData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                        <Cell
+                                            key={`cell-${index}`}
+                                            fill={`url(#pieGrad${index})`}
+                                            style={{ filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.3))' }}
+                                        />
                                     ))}
                                 </Pie>
                                 <Tooltip
                                     contentStyle={{
-                                        background: 'rgba(17, 24, 39, 0.95)',
+                                        background: 'linear-gradient(180deg, rgba(25, 25, 40, 0.98) 0%, rgba(15, 15, 25, 0.98) 100%)',
                                         border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: '8px'
+                                        borderRadius: '12px',
+                                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)'
                                     }}
                                     formatter={(value: number) => [`${value}%`, '']}
                                 />
                             </PieChart>
                         </ResponsiveContainer>
+                        <div className="pie-center-label">
+                            <span className="pie-center-value">$24.7M</span>
+                            <span className="pie-center-text">Total Cost</span>
+                        </div>
                     </div>
                 </motion.div>
             </div>
