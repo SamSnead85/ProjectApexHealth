@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigation } from '../context/NavigationContext'
 import { motion } from 'framer-motion'
 import {
     DollarSign,
@@ -10,9 +11,11 @@ import {
     AlertTriangle,
     Calendar,
     ChevronRight,
-    TrendingUp
+    TrendingUp,
+    ArrowUpRight
 } from 'lucide-react'
-import { GlassCard, Button, Badge, MetricCard } from '../components/common'
+import { GlassCard, Button, Badge } from '../components/common'
+import './Billing.css'
 
 // Mock data
 const invoices = [
@@ -20,85 +23,118 @@ const invoices = [
     { id: 'INV-2024-01', period: 'January 2024', amount: 245200, dueDate: 'Jan 1, 2024', status: 'paid', paidDate: 'Dec 28, 2023' },
     { id: 'INV-2023-12', period: 'December 2023', amount: 243600, dueDate: 'Dec 1, 2023', status: 'paid', paidDate: 'Nov 29, 2023' },
     { id: 'INV-2023-11', period: 'November 2023', amount: 241800, dueDate: 'Nov 1, 2023', status: 'paid', paidDate: 'Oct 30, 2023' },
+    { id: 'INV-2023-10', period: 'October 2023', amount: 239500, dueDate: 'Oct 1, 2023', status: 'paid', paidDate: 'Sep 28, 2023' },
 ]
 
 export function Billing() {
-    return (
-        <div style={{ padding: 'var(--space-2xl)', background: 'var(--apex-obsidian)', minHeight: '100vh' }}>
-            {/* Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2xl)' }}>
-                <div>
-                    <h1 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--apex-white)', margin: 0 }}>Billing & Invoices</h1>
-                    <p style={{ fontSize: 'var(--text-base)', color: 'var(--apex-steel)' }}>
-                        Manage invoices and payment history
-                    </p>
-                </div>
-                <Button variant="primary" size="sm">
-                    <CreditCard size={16} />
-                    Make Payment
-                </Button>
-            </div>
+    const { navigate } = useNavigation()
 
-            {/* Current Due Banner */}
-            <GlassCard style={{ marginBottom: 'var(--space-2xl)', padding: 'var(--space-xl)', background: 'linear-gradient(135deg, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0.05) 100%)', border: '1px solid rgba(6,182,212,0.3)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                        <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-xs)' }}>Current Balance Due</div>
-                        <div style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--apex-white)' }}>$247,850.00</div>
-                        <div style={{ color: 'var(--apex-teal)', fontSize: 'var(--text-sm)' }}>Due by February 1, 2024</div>
+    return (
+        <div className="billing-center">
+            {/* Header */}
+            <motion.header
+                className="bl__header"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <div className="bl__header-left">
+                    <div className="bl__icon-container">
+                        <CreditCard size={28} />
+                        <div className="bl__icon-pulse" />
                     </div>
-                    <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                        <Button variant="ghost" size="sm"><Download size={16} /> Download Invoice</Button>
-                        <Button variant="primary" size="sm"><CreditCard size={16} /> Pay Now</Button>
+                    <div>
+                        <h1 className="bl__title">Billing & Invoices</h1>
+                        <p className="bl__subtitle">Manage invoices and payment history</p>
                     </div>
                 </div>
-            </GlassCard>
+                <div className="bl__header-actions">
+                    <Button variant="ghost" size="sm">
+                        <Download size={16} />
+                        Export
+                    </Button>
+                    <Button variant="primary" size="sm">
+                        <CreditCard size={16} />
+                        Make Payment
+                    </Button>
+                </div>
+            </motion.header>
+
+            {/* Current Invoice Banner */}
+            <motion.div
+                className="bl__current-invoice"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                style={{ marginBottom: 'var(--space-xl)' }}
+            >
+                <div className="bl__current-label">Current Balance Due</div>
+                <div className="bl__current-amount">$247,850.00</div>
+                <div className="bl__current-due">Due by February 1, 2024</div>
+                <div style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'center' }}>
+                    <Button variant="ghost" size="sm"><Download size={16} /> Download Invoice</Button>
+                    <Button variant="primary" size="sm"><CreditCard size={16} /> Pay Now</Button>
+                </div>
+            </motion.div>
 
             {/* Metrics */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)' }}>
-                <MetricCard label="YTD Payments" value="$978K" change={5.2} trend="up" icon={<DollarSign size={20} />} />
-                <MetricCard label="Current Invoice" value="$247,850" icon={<FileText size={20} />} />
-                <MetricCard label="Payment Status" value="On Time" icon={<CheckCircle2 size={20} />} iconColor="#10B981" />
-                <MetricCard label="Next Due" value="Feb 1" icon={<Calendar size={20} />} />
+            <div className="bl__metrics">
+                {[
+                    { label: 'YTD Payments', value: '$978K', icon: DollarSign, color: '#10b981' },
+                    { label: 'Current Invoice', value: '$247,850', icon: FileText, color: '#8b5cf6' },
+                    { label: 'Payment Status', value: 'On Time', icon: CheckCircle2, color: '#06b6d4' },
+                    { label: 'Next Due', value: 'Feb 1', icon: Calendar, color: '#f59e0b' },
+                ].map((stat, i) => (
+                    <motion.div
+                        key={stat.label}
+                        className="bl__stat-card"
+                        style={{ '--stat-color': stat.color } as any}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 + i * 0.05 }}
+                    >
+                        <div className="bl__stat-icon" style={{ background: `${stat.color}15`, color: stat.color }}>
+                            <stat.icon size={20} />
+                        </div>
+                        <div className="bl__stat-content">
+                            <div className="bl__stat-value">{stat.value}</div>
+                            <div className="bl__stat-label">{stat.label}</div>
+                        </div>
+                    </motion.div>
+                ))}
             </div>
 
             {/* Invoice History */}
-            <GlassCard>
-                <div style={{ padding: 'var(--space-lg)', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--apex-white)', margin: 0 }}>Invoice History</h2>
+            <motion.div
+                className="bl__section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+            >
+                <div className="bl__section-header">
+                    <h2 className="bl__section-title">
+                        <FileText size={20} />
+                        Invoice History
+                    </h2>
                     <Button variant="ghost" size="sm">View All</Button>
                 </div>
+
+                {/* Invoice Rows */}
                 <div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 120px', padding: 'var(--space-md) var(--space-lg)', background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--glass-border)' }}>
-                        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Invoice</span>
-                        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Period</span>
-                        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Amount</span>
-                        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Status</span>
-                        <span></span>
-                    </div>
                     {invoices.map((inv, i) => (
                         <motion.div
                             key={inv.id}
+                            className="bl__invoice-row"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.05 }}
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: '1fr 1fr 1fr 1fr 120px',
-                                padding: 'var(--space-md) var(--space-lg)',
-                                borderBottom: '1px solid rgba(255,255,255,0.04)',
-                                alignItems: 'center'
-                            }}
+                            transition={{ delay: 0.45 + i * 0.05 }}
                         >
-                            <span style={{ color: 'var(--apex-white)', fontWeight: 500, fontFamily: 'var(--font-mono)' }}>{inv.id}</span>
-                            <span style={{ color: 'var(--apex-silver)' }}>{inv.period}</span>
-                            <span style={{ color: 'var(--apex-white)', fontFamily: 'var(--font-mono)' }}>${inv.amount.toLocaleString()}</span>
+                            <span className="bl__invoice-id">{inv.id}</span>
+                            <span className="bl__invoice-date">{inv.period}</span>
+                            <span className="bl__invoice-amount">${inv.amount.toLocaleString()}</span>
                             <div>
-                                {inv.status === 'paid' ? (
-                                    <Badge variant="success">Paid</Badge>
-                                ) : (
-                                    <Badge variant="warning">Due {inv.dueDate}</Badge>
-                                )}
+                                <Badge variant={inv.status === 'paid' ? 'success' : 'warning'}>
+                                    {inv.status === 'paid' ? 'Paid' : `Due ${inv.dueDate}`}
+                                </Badge>
                             </div>
                             <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
                                 <Button variant="ghost" size="sm"><Download size={14} /></Button>
@@ -107,7 +143,7 @@ export function Billing() {
                         </motion.div>
                     ))}
                 </div>
-            </GlassCard>
+            </motion.div>
         </div>
     )
 }

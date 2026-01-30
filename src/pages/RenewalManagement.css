@@ -1,0 +1,274 @@
+/* ============================================
+   RENEWAL MANAGEMENT
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.renewal-management {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.renewal-management::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 25% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 0%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.rm__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    position: relative;
+}
+
+.rm__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.rm__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius-lg);
+    color: #f59e0b;
+    position: relative;
+}
+
+.rm__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(245, 158, 11, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.rm__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.rm__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+.rm__header-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Metrics */
+.rm__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.rm__stat-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.rm__stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stat-color), transparent);
+    opacity: 0.8;
+}
+
+.rm__stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.rm__stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+}
+
+.rm__stat-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.rm__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.rm__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+/* Main Grid */
+.rm__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+}
+
+/* Section Cards */
+.rm__section {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.rm__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-md);
+}
+
+.rm__section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.rm__section-title svg {
+    color: #f59e0b;
+}
+
+/* Renewal Row */
+.rm__renewal-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 80px;
+    align-items: center;
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+.rm__renewal-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.rm__renewal-row:last-child {
+    border-bottom: none;
+}
+
+.rm__renewal-company {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.rm__renewal-date,
+.rm__renewal-premium {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Timeline */
+.rm__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.rm__timeline-item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-sm);
+}
+
+.rm__timeline-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--apex-teal);
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.rm__timeline-content {
+    flex: 1;
+}
+
+.rm__timeline-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.rm__timeline-date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .rm__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rm__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
