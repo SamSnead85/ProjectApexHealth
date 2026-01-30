@@ -162,11 +162,11 @@ export function SIRDashboard() {
                         <LayoutDashboard size={14} />
                         <span>Analytics</span>
                         <ChevronRight size={12} />
-                        <span className="sir-analytics__breadcrumb--active">Self-Insured Reporting</span>
+                        <span className="sir-analytics__breadcrumb--active">Performance Intelligence</span>
                     </div>
                     <h1 className="sir-analytics__title">
                         <span className="sir-analytics__title-icon"><Zap /></span>
-                        SIR Analytics Command Center
+                        Performance Intelligence Center
                     </h1>
                 </div>
                 <div className="sir-analytics__header-right">

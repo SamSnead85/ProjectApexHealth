@@ -264,40 +264,43 @@ export function WorkflowBuilder() {
                 </div>
             </motion.div>
 
-            {/* Node Palette (Left Sidebar) */}
-            <AnimatePresence>
-                {isPaletteOpen && (
-                    <motion.div
-                        className={`workflow-builder__palette ${isFullscreen ? 'workflow-builder__palette--floating' : ''}`}
-                        initial={{ x: -300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -300, opacity: 0 }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    >
-                        <NodePalette />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Main Content Area - Palette, Canvas, Assistant */}
+            <div className="workflow-builder__main">
+                {/* Node Palette (Left Sidebar) - Always present when open */}
+                <AnimatePresence mode="wait">
+                    {isPaletteOpen && (
+                        <motion.div
+                            className={`workflow-builder__palette ${isFullscreen ? 'workflow-builder__palette--floating' : ''}`}
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: 280, opacity: 1 }}
+                            exit={{ width: 0, opacity: 0 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        >
+                            <NodePalette />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-            {/* Main Canvas */}
-            <div className="workflow-builder__canvas">
-                <WorkflowCanvas />
+                {/* Main Canvas */}
+                <div className="workflow-builder__canvas">
+                    <WorkflowCanvas />
+                </div>
+
+                {/* AI Assistant (Right Sidebar) */}
+                <AnimatePresence mode="wait">
+                    {isAIAssistantOpen && (
+                        <motion.div
+                            className={`workflow-builder__assistant ${isFullscreen ? 'workflow-builder__assistant--floating' : ''}`}
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: 360, opacity: 1 }}
+                            exit={{ width: 0, opacity: 0 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        >
+                            <AIAssistant />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
-
-            {/* AI Assistant (Right Sidebar) */}
-            <AnimatePresence>
-                {isAIAssistantOpen && (
-                    <motion.div
-                        className={`workflow-builder__assistant ${isFullscreen ? 'workflow-builder__assistant--floating' : ''}`}
-                        initial={{ x: 360, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: 360, opacity: 0 }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    >
-                        <AIAssistant />
-                    </motion.div>
-                )}
-            </AnimatePresence>
 
             {/* NLP Prompt Overlay */}
             <AnimatePresence>

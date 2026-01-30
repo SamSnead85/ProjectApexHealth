@@ -54,7 +54,7 @@ const commands: CommandItem[] = [
     // Analytics
     { id: 'vbc', title: 'Value-Based Care', description: 'Quality measures and contracts', icon: <TrendingUp size={18} />, path: '/value-based-care', category: 'Analytics' },
     { id: 'provider', title: 'Provider Performance', description: 'Scorecard and efficiency metrics', icon: <Activity size={18} />, path: '/provider-performance', category: 'Analytics' },
-    { id: 'sir', title: 'SIR Analytics', description: 'Self-insured reporting command center', icon: <BarChart3 size={18} />, path: '/sir', category: 'Analytics' },
+    { id: 'sir', title: 'Performance Intelligence', description: 'Healthcare analytics command center', icon: <BarChart3 size={18} />, path: '/sir', category: 'Analytics' },
 
     // Care
     { id: 'care', title: 'Care Management', description: 'Programs and patient tracking', icon: <HeartPulse size={18} />, path: '/care-management', category: 'Care' },

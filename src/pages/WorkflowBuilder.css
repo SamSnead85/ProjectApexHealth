@@ -6,9 +6,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
-    background: var(--apex-obsidian);
+    background: var(--apex-obsidian, #050508);
     position: relative;
 }
 
@@ -41,9 +42,11 @@
     padding: 0.75rem 1rem;
     background: rgba(5, 5, 8, 0.8);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
     z-index: 50;
     gap: 1rem;
+    flex-shrink: 0;
+    min-height: 56px;
 }
 
 .workflow-builder__header-left,
@@ -68,13 +71,13 @@
 .workflow-builder__title h1 {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-primary, #fff);
     margin: 0;
 }
 
 .workflow-builder__status {
     font-size: 0.75rem;
-    color: var(--text-tertiary);
+    color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
     padding: 0.25rem 0.5rem;
     background: rgba(6, 182, 212, 0.1);
     border-radius: 4px;
@@ -83,7 +86,7 @@
 
 .workflow-builder__autosave {
     font-size: 0.7rem;
-    color: var(--apex-success);
+    color: var(--apex-success, #10B981);
     padding: 0.2rem 0.5rem;
     background: rgba(16, 185, 129, 0.1);
     border-radius: 4px;
@@ -107,7 +110,7 @@
     display: flex;
     gap: 1rem;
     font-size: 0.75rem;
-    color: var(--text-tertiary);
+    color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
 }
 
 .workflow-builder__stats span {
@@ -117,55 +120,79 @@
 }
 
 /* ============================================
-   MAIN LAYOUT
+   MAIN CONTENT AREA - Using Flex for reliable layout
+   ============================================ */
+
+.workflow-builder__main {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ============================================
+   NODE PALETTE - Left Sidebar (ALWAYS VISIBLE)
    ============================================ */
 
 .workflow-builder__palette {
-    position: absolute;
-    left: 0;
-    top: 60px;
-    bottom: 0;
     width: 280px;
-    z-index: 40;
-    background: var(--glass-bg);
+    min-width: 280px;
+    height: 100%;
+    background: rgba(10, 10, 14, 0.95);
     backdrop-filter: blur(20px);
-    border-right: 1px solid var(--glass-border);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+    z-index: 40;
 }
 
 .workflow-builder__palette--floating {
-    top: 70px;
+    position: absolute;
+    top: 10px;
     bottom: 10px;
     left: 10px;
     border-radius: 12px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
+/* ============================================
+   MAIN CANVAS - Center Area
+   ============================================ */
+
 .workflow-builder__canvas {
     flex: 1;
-    height: calc(100% - 60px);
+    height: 100%;
     position: relative;
     overflow: hidden;
+    background: #0a0a0e;
 }
 
+/* ============================================
+   AI ASSISTANT - Right Sidebar
+   ============================================ */
+
 .workflow-builder__assistant {
-    position: absolute;
-    right: 0;
-    top: 60px;
-    bottom: 0;
     width: 360px;
-    z-index: 40;
-    background: var(--glass-bg);
+    min-width: 360px;
+    height: 100%;
+    background: rgba(10, 10, 14, 0.95);
     backdrop-filter: blur(20px);
-    border-left: 1px solid var(--glass-border);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-y: auto;
+    flex-shrink: 0;
+    z-index: 40;
 }
 
 .workflow-builder__assistant--floating {
-    top: 70px;
+    position: absolute;
+    top: 10px;
     bottom: 10px;
     right: 10px;
     border-radius: 12px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
