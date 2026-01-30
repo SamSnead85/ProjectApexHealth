@@ -606,22 +606,153 @@ export function WorkflowBuilder() {
         event.dataTransfer.effectAllowed = 'move'
     }, [])
 
-    // Handle click to add
-    const handleClickToAdd = useCallback((node: WorkflowNodeType) => {
-        const newNode: Node = {
-            id: `${node.type}-${Date.now()}`,
-            type: 'custom',
-            position: { x: 200 + nodes.length * 60, y: 100 + Math.floor(nodes.length / 3) * 140 },
-            data: {
-                label: node.label,
-                color: node.color,
-                description: node.description,
-                icon: node.icon
+    // Handle click to add - SMART PLACEMENT with auto-connection
+    const handleClickToAdd = useCallback((nodeType: WorkflowNodeType) => {
+        const NODE_WIDTH = 180
+        const NODE_HEIGHT = 80
+        const VERTICAL_SPACING = 120
+        const HORIZONTAL_SPACING = 200
+        const CANVAS_CENTER_X = 300
+
+        // Find workflow structure
+        const findEndNodes = (): Node[] => {
+            // End nodes are nodes that have no outgoing edges
+            const sourceNodeIds = new Set(edges.map(e => e.source))
+            const targetNodeIds = new Set(edges.map(e => e.target))
+
+            // Nodes that are sources but not targets (could also be end nodes if disconnected)
+            // End nodes = nodes that don't have outgoing edges
+            const nodesWithNoOutgoing = nodes.filter(n => !sourceNodeIds.has(n.id))
+
+            if (nodesWithNoOutgoing.length === 0 && nodes.length > 0) {
+                // All nodes have outgoing edges, return the last one by Y position
+                return [nodes.reduce((max, n) => n.position.y > max.position.y ? n : max, nodes[0])]
+            }
+
+            return nodesWithNoOutgoing.length > 0 ? nodesWithNoOutgoing : []
+        }
+
+        const findStartNodes = (): Node[] => {
+            // Start nodes are nodes that have no incoming edges
+            const targetNodeIds = new Set(edges.map(e => e.target))
+            return nodes.filter(n => !targetNodeIds.has(n.id))
+        }
+
+        const getLowestY = (): number => {
+            if (nodes.length === 0) return 50
+            return Math.max(...nodes.map(n => n.position.y)) + VERTICAL_SPACING
+        }
+
+        const getHighestY = (): number => {
+            if (nodes.length === 0) return 50
+            return Math.min(...nodes.map(n => n.position.y))
+        }
+
+        let newPosition: { x: number; y: number }
+        let connectFromNode: Node | null = null
+        let connectToNode: Node | null = null
+
+        // SMART PLACEMENT LOGIC
+        if (nodes.length === 0) {
+            // First node - center it at the top
+            newPosition = { x: CANVAS_CENTER_X, y: 50 }
+        } else if (nodeType.category === 'trigger') {
+            // Triggers go at the top, above existing start nodes
+            const startNodes = findStartNodes()
+            const topY = getHighestY()
+
+            if (startNodes.length > 0) {
+                // Position above and offset horizontally if there's already a trigger
+                newPosition = {
+                    x: CANVAS_CENTER_X + (startNodes.length * HORIZONTAL_SPACING),
+                    y: Math.max(50, topY - VERTICAL_SPACING)
+                }
+            } else {
+                newPosition = { x: CANVAS_CENTER_X, y: 50 }
+            }
+
+            // Find the first processing node to connect to
+            const firstProcessingNode = nodes.find(n => {
+                const data = n.data as unknown as CustomNodeData
+                return data.color === '#8B5CF6' // Processing color
+            })
+            if (firstProcessingNode) {
+                connectToNode = firstProcessingNode
+            }
+        } else if (nodeType.category === 'output') {
+            // Outputs go at the end, below existing end nodes
+            const endNodes = findEndNodes()
+            const bottomY = getLowestY()
+
+            newPosition = {
+                x: CANVAS_CENTER_X + ((endNodes.length > 1 ? endNodes.length - 1 : 0) * (HORIZONTAL_SPACING / 2)),
+                y: bottomY
+            }
+
+            // Connect from the last end node
+            if (endNodes.length > 0) {
+                connectFromNode = endNodes[endNodes.length - 1]
+            }
+        } else {
+            // Processing, AI, Control, HITL nodes - add to the end of the workflow
+            const endNodes = findEndNodes()
+            const bottomY = getLowestY()
+
+            newPosition = { x: CANVAS_CENTER_X, y: bottomY }
+
+            // Connect from the most recent end node (lowest Y that's an end node)
+            if (endNodes.length > 0) {
+                connectFromNode = endNodes.reduce((lowest, n) =>
+                    n.position.y > lowest.position.y ? n : lowest, endNodes[0]
+                )
             }
         }
+
+        const newNodeId = `${nodeType.type}-${Date.now()}`
+        const newNode: Node = {
+            id: newNodeId,
+            type: 'custom',
+            position: newPosition,
+            data: {
+                label: nodeType.label,
+                color: nodeType.color,
+                description: nodeType.description,
+                icon: nodeType.icon
+            }
+        }
+
+        // Create automatic edge connection
+        const newEdges: Edge[] = []
+
+        if (connectFromNode) {
+            newEdges.push({
+                id: `e-${connectFromNode.id}-${newNodeId}-${Date.now()}`,
+                source: connectFromNode.id,
+                target: newNodeId,
+                type: 'smoothstep',
+                animated: true,
+                style: { stroke: '#6366f1', strokeWidth: 2 }
+            })
+        }
+
+        if (connectToNode) {
+            newEdges.push({
+                id: `e-${newNodeId}-${connectToNode.id}-${Date.now()}`,
+                source: newNodeId,
+                target: connectToNode.id,
+                type: 'smoothstep',
+                animated: true,
+                style: { stroke: '#6366f1', strokeWidth: 2 }
+            })
+        }
+
+        // Update both nodes and edges
         setNodes(prev => [...prev, newNode])
+        if (newEdges.length > 0) {
+            setEdges(prev => [...prev, ...newEdges])
+        }
         saveToHistory()
-    }, [nodes.length, saveToHistory])
+    }, [nodes, edges, saveToHistory])
 
     // Update node
     const updateNode = useCallback((nodeId: string, data: Partial<CustomNodeData>) => {
