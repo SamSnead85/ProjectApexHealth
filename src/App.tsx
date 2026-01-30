@@ -122,6 +122,10 @@ import ActivityFeed from './pages/ActivityFeed'
 import EDIManager from './pages/EDIManager'
 import DigitalIDCard from './pages/DigitalIDCard'
 import WebhookConfig from './pages/WebhookConfig'
+// Award-Winning UX Modules
+import DataVisualizationStudio from './pages/DataVisualizationStudio'
+import IntegrationMarketplace from './pages/IntegrationMarketplace'
+import BenchmarkAnalytics from './pages/BenchmarkAnalytics'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -262,8 +266,18 @@ function App() {
         if (activePath.includes('/digital-id') || activePath.includes('/wallet-card') || activePath.includes('/member-card')) {
             return <DigitalIDCard />
         }
-        if (activePath.includes('/webhooks') || activePath.includes('/webhook-config') || activePath.includes('/integrations')) {
+        if (activePath.includes('/webhooks') || activePath.includes('/webhook-config')) {
             return <WebhookConfig />
+        }
+        // Award-Winning UX Modules
+        if (activePath.includes('/viz-studio') || activePath.includes('/visualization') || activePath.includes('/chart-builder')) {
+            return <DataVisualizationStudio />
+        }
+        if (activePath.includes('/marketplace') || activePath.includes('/integrations') || activePath.includes('/connectors')) {
+            return <IntegrationMarketplace />
+        }
+        if (activePath.includes('/benchmarks') || activePath.includes('/benchmark-analytics') || activePath.includes('/industry-compare')) {
+            return <BenchmarkAnalytics />
         }
         // SIR Analytics Command Center
         if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
