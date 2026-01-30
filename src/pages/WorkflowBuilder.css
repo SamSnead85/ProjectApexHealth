@@ -1259,3 +1259,385 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   ACTION MODALS (Save, Run, Schedule, Export)
+   ============================================ */
+
+.workflow-builder-v2__action-modal {
+    background: linear-gradient(180deg, rgba(18, 18, 24, 0.98) 0%, rgba(12, 12, 16, 0.98) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    min-width: 400px;
+    max-width: 500px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    overflow: hidden;
+}
+
+.workflow-builder-v2__action-modal--run {
+    min-width: 450px;
+}
+
+.action-modal__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.action-modal__header svg:first-child {
+    color: #6366f1;
+}
+
+.action-modal__header h3 {
+    flex: 1;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.action-modal__header button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    transition: all 0.2s;
+}
+
+.action-modal__header button:hover {
+    color: #fff;
+}
+
+.action-modal__content {
+    padding: 1.5rem;
+}
+
+.action-modal__content--centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+}
+
+.action-modal__field {
+    margin-bottom: 1.25rem;
+}
+
+.action-modal__field label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.action-modal__field input,
+.action-modal__field textarea,
+.action-modal__field select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-size: 0.9375rem;
+    transition: all 0.2s;
+}
+
+.action-modal__field input:focus,
+.action-modal__field textarea:focus,
+.action-modal__field select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.action-modal__field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.action-modal__field select {
+    cursor: pointer;
+}
+
+.action-modal__stats {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    border-radius: 10px;
+}
+
+.action-modal__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.action-modal__stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #6366f1;
+}
+
+.action-modal__stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.action-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.action-modal__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-modal__btn--secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.action-modal__btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.action-modal__btn--primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    color: #fff;
+}
+
+.action-modal__btn--primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.action-modal__btn--primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.action-modal__btn--run {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+/* Run Workflow States */
+.action-modal__run-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.action-modal__run-preview svg {
+    color: #6366f1;
+}
+
+.action-modal__run-preview h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.action-modal__run-preview p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.action-modal__run-info {
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    border-radius: 8px;
+}
+
+.action-modal__run-info p {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.action-modal__running {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.action-modal__running svg {
+    color: #6366f1;
+}
+
+.action-modal__running h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.action-modal__running p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.action-modal__progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.action-modal__progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #10B981);
+    border-radius: 2px;
+}
+
+.action-modal__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.action-modal__success svg {
+    color: #10B981;
+}
+
+.action-modal__success h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.action-modal__success p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.action-modal__results {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+}
+
+.action-modal__result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.action-modal__result span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+}
+
+.action-modal__result strong {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.action-modal__result strong.success {
+    color: #10B981;
+}
+
+/* Schedule Modal */
+.action-modal__schedule-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.action-modal__schedule-info h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 0.25rem;
+}
+
+.action-modal__schedule-info p {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.action-modal__toggle {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+}
+
+.action-modal__toggle label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    color: #fff;
+}
+
+.action-modal__toggle input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #10B981;
+}
+
+/* Spin animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}

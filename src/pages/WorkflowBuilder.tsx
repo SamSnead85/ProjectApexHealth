@@ -547,6 +547,7 @@ function NodeConfigPanel({ node, onClose, onUpdate, onDelete }: ConfigPanelProps
 
 export function WorkflowBuilder() {
     const [workflowName, setWorkflowName] = useState('Untitled Workflow')
+    const [workflowDescription, setWorkflowDescription] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
     const [isFullscreen, setIsFullscreen] = useState(false)
     const [showAIPrompt, setShowAIPrompt] = useState(false)
@@ -556,6 +557,16 @@ export function WorkflowBuilder() {
     const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false)
     const [showTemplates, setShowTemplates] = useState(false)
     const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['trigger', 'processing', 'ai', 'control', 'hitl', 'output']))
+
+    // Workflow Action Modals
+    const [showSaveModal, setShowSaveModal] = useState(false)
+    const [showRunModal, setShowRunModal] = useState(false)
+    const [showScheduleModal, setShowScheduleModal] = useState(false)
+    const [isRunning, setIsRunning] = useState(false)
+    const [runStatus, setRunStatus] = useState<'idle' | 'running' | 'success' | 'error'>('idle')
+    const [isSaving, setIsSaving] = useState(false)
+    const [saveStatus, setSaveStatus] = useState<'idle' | 'saved' | 'error'>('idle')
+    const [scheduleConfig, setScheduleConfig] = useState({ frequency: 'daily', time: '09:00', enabled: false })
 
     // Local state for nodes and edges
     const [nodes, setNodes] = useState<Node[]>([])
@@ -857,6 +868,130 @@ export function WorkflowBuilder() {
         saveToHistory()
     }, [saveToHistory])
 
+    // WORKFLOW ACTIONS
+
+    // Save workflow
+    const handleSaveWorkflow = useCallback(() => {
+        if (nodes.length === 0) {
+            alert('Please add at least one node before saving.')
+            return
+        }
+        setIsSaving(true)
+        setSaveStatus('idle')
+
+        // Simulate saving to backend
+        setTimeout(() => {
+            const workflowData = {
+                id: `workflow-${Date.now()}`,
+                name: workflowName,
+                description: workflowDescription,
+                nodes: nodes.map(n => ({ ...n, data: { ...(n.data as object), icon: undefined } })),
+                edges,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            }
+
+            // Save to localStorage for persistence
+            const savedWorkflows = JSON.parse(localStorage.getItem('apex_workflows') || '[]')
+            savedWorkflows.push(workflowData)
+            localStorage.setItem('apex_workflows', JSON.stringify(savedWorkflows))
+
+            setIsSaving(false)
+            setSaveStatus('saved')
+            setTimeout(() => {
+                setShowSaveModal(false)
+                setSaveStatus('idle')
+            }, 1500)
+        }, 1000)
+    }, [nodes, edges, workflowName, workflowDescription])
+
+    // Run workflow
+    const handleRunWorkflow = useCallback(() => {
+        if (nodes.length === 0) {
+            alert('Please build a workflow before running.')
+            return
+        }
+        setIsRunning(true)
+        setRunStatus('running')
+
+        // Simulate workflow execution with step tracking
+        const totalSteps = nodes.length
+        let currentStep = 0
+
+        const runStep = () => {
+            if (currentStep < totalSteps) {
+                currentStep++
+                setTimeout(runStep, 800) // Each step takes ~800ms
+            } else {
+                setRunStatus('success')
+                setIsRunning(false)
+            }
+        }
+
+        setTimeout(runStep, 500)
+    }, [nodes])
+
+    // Export workflow
+    const handleExportWorkflow = useCallback(() => {
+        if (nodes.length === 0) {
+            alert('Please build a workflow before exporting.')
+            return
+        }
+
+        const workflowData = {
+            name: workflowName,
+            description: workflowDescription,
+            version: '1.0',
+            exportedAt: new Date().toISOString(),
+            nodes: nodes.map(n => ({
+                id: n.id,
+                type: n.type,
+                position: n.position,
+                data: { ...(n.data as object), icon: undefined }
+            })),
+            edges: edges.map(e => ({
+                id: e.id,
+                source: e.source,
+                target: e.target,
+                type: e.type
+            }))
+        }
+
+        const blob = new Blob([JSON.stringify(workflowData, null, 2)], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `${workflowName.toLowerCase().replace(/\s+/g, '-')}-workflow.json`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+    }, [nodes, edges, workflowName, workflowDescription])
+
+    // Schedule workflow
+    const handleScheduleWorkflow = useCallback(() => {
+        if (nodes.length === 0) {
+            alert('Please build a workflow before scheduling.')
+            return
+        }
+        setShowScheduleModal(true)
+    }, [nodes])
+
+    const saveSchedule = useCallback(() => {
+        // Save schedule configuration
+        const scheduleData = {
+            workflowName,
+            ...scheduleConfig,
+            scheduledAt: new Date().toISOString()
+        }
+
+        const savedSchedules = JSON.parse(localStorage.getItem('apex_workflow_schedules') || '[]')
+        savedSchedules.push(scheduleData)
+        localStorage.setItem('apex_workflow_schedules', JSON.stringify(savedSchedules))
+
+        setShowScheduleModal(false)
+        alert(`Workflow scheduled to run ${scheduleConfig.frequency} at ${scheduleConfig.time}`)
+    }, [workflowName, scheduleConfig])
     return (
         <div className={`workflow-builder-v2 ${isFullscreen ? 'workflow-builder-v2--fullscreen' : ''}`}>
             {/* Header */}
@@ -917,13 +1052,32 @@ export function WorkflowBuilder() {
                     >
                         <Keyboard size={16} />
                     </button>
-                    <button className="workflow-builder-v2__action-btn" title="Save">
+                    <button
+                        className="workflow-builder-v2__action-btn"
+                        onClick={() => setShowSaveModal(true)}
+                        title="Save Workflow"
+                    >
                         <Save size={16} />
                     </button>
-                    <button className="workflow-builder-v2__action-btn workflow-builder-v2__action-btn--primary" title="Run Workflow">
+                    <button
+                        className="workflow-builder-v2__action-btn"
+                        onClick={handleScheduleWorkflow}
+                        title="Schedule Workflow"
+                    >
+                        <Clock size={16} />
+                    </button>
+                    <button
+                        className="workflow-builder-v2__action-btn workflow-builder-v2__action-btn--primary"
+                        onClick={() => setShowRunModal(true)}
+                        title="Run Workflow"
+                    >
                         <Play size={16} />
                     </button>
-                    <button className="workflow-builder-v2__action-btn" title="Export">
+                    <button
+                        className="workflow-builder-v2__action-btn"
+                        onClick={handleExportWorkflow}
+                        title="Export Workflow"
+                    >
                         <Download size={16} />
                     </button>
                     <button
@@ -1226,6 +1380,253 @@ export function WorkflowBuilder() {
                                         </motion.div>
                                     ))}
                                 </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Save Workflow Modal */}
+            <AnimatePresence>
+                {showSaveModal && (
+                    <motion.div
+                        className="workflow-builder-v2__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowSaveModal(false)}
+                    >
+                        <motion.div
+                            className="workflow-builder-v2__action-modal"
+                            initial={{ scale: 0.95, y: -20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.95, y: -20 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="action-modal__header">
+                                <Save size={20} />
+                                <h3>Save Workflow</h3>
+                                <button onClick={() => setShowSaveModal(false)}><X size={18} /></button>
+                            </div>
+                            <div className="action-modal__content">
+                                <div className="action-modal__field">
+                                    <label>Workflow Name</label>
+                                    <input
+                                        type="text"
+                                        value={workflowName}
+                                        onChange={(e) => setWorkflowName(e.target.value)}
+                                        placeholder="Enter workflow name..."
+                                    />
+                                </div>
+                                <div className="action-modal__field">
+                                    <label>Description</label>
+                                    <textarea
+                                        value={workflowDescription}
+                                        onChange={(e) => setWorkflowDescription(e.target.value)}
+                                        placeholder="Describe what this workflow does..."
+                                        rows={3}
+                                    />
+                                </div>
+                                <div className="action-modal__stats">
+                                    <div className="action-modal__stat">
+                                        <span className="action-modal__stat-value">{nodes.length}</span>
+                                        <span className="action-modal__stat-label">Nodes</span>
+                                    </div>
+                                    <div className="action-modal__stat">
+                                        <span className="action-modal__stat-value">{edges.length}</span>
+                                        <span className="action-modal__stat-label">Connections</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="action-modal__footer">
+                                <button className="action-modal__btn action-modal__btn--secondary" onClick={() => setShowSaveModal(false)}>
+                                    Cancel
+                                </button>
+                                <button
+                                    className="action-modal__btn action-modal__btn--primary"
+                                    onClick={handleSaveWorkflow}
+                                    disabled={isSaving || nodes.length === 0}
+                                >
+                                    {isSaving ? (
+                                        <><Loader2 size={16} className="spin" /> Saving...</>
+                                    ) : saveStatus === 'saved' ? (
+                                        <><CheckCircle size={16} /> Saved!</>
+                                    ) : (
+                                        <><Save size={16} /> Save Workflow</>
+                                    )}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Run Workflow Modal */}
+            <AnimatePresence>
+                {showRunModal && (
+                    <motion.div
+                        className="workflow-builder-v2__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => !isRunning && setShowRunModal(false)}
+                    >
+                        <motion.div
+                            className="workflow-builder-v2__action-modal workflow-builder-v2__action-modal--run"
+                            initial={{ scale: 0.95, y: -20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.95, y: -20 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="action-modal__header">
+                                <Play size={20} />
+                                <h3>Run Workflow</h3>
+                                {!isRunning && <button onClick={() => setShowRunModal(false)}><X size={18} /></button>}
+                            </div>
+                            <div className="action-modal__content action-modal__content--centered">
+                                {runStatus === 'idle' && (
+                                    <>
+                                        <div className="action-modal__run-preview">
+                                            <Zap size={48} />
+                                            <h4>{workflowName}</h4>
+                                            <p>Ready to execute {nodes.length} nodes</p>
+                                        </div>
+                                        <div className="action-modal__run-info">
+                                            <p>This will run your workflow with simulated data. In production, connect to your data sources.</p>
+                                        </div>
+                                    </>
+                                )}
+                                {runStatus === 'running' && (
+                                    <div className="action-modal__running">
+                                        <Loader2 size={48} className="spin" />
+                                        <h4>Executing Workflow...</h4>
+                                        <p>Processing {nodes.length} nodes</p>
+                                        <div className="action-modal__progress">
+                                            <motion.div
+                                                className="action-modal__progress-bar"
+                                                initial={{ width: 0 }}
+                                                animate={{ width: '100%' }}
+                                                transition={{ duration: nodes.length * 0.8 }}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                                {runStatus === 'success' && (
+                                    <div className="action-modal__success">
+                                        <CheckCircle size={48} />
+                                        <h4>Workflow Completed!</h4>
+                                        <p>All {nodes.length} nodes executed successfully</p>
+                                        <div className="action-modal__results">
+                                            <div className="action-modal__result">
+                                                <span>Duration</span>
+                                                <strong>{(nodes.length * 0.8).toFixed(1)}s</strong>
+                                            </div>
+                                            <div className="action-modal__result">
+                                                <span>Status</span>
+                                                <strong className="success">Success</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="action-modal__footer">
+                                {runStatus === 'idle' && (
+                                    <>
+                                        <button className="action-modal__btn action-modal__btn--secondary" onClick={() => setShowRunModal(false)}>
+                                            Cancel
+                                        </button>
+                                        <button
+                                            className="action-modal__btn action-modal__btn--primary action-modal__btn--run"
+                                            onClick={handleRunWorkflow}
+                                            disabled={nodes.length === 0}
+                                        >
+                                            <Play size={16} /> Execute Now
+                                        </button>
+                                    </>
+                                )}
+                                {runStatus === 'success' && (
+                                    <button
+                                        className="action-modal__btn action-modal__btn--primary"
+                                        onClick={() => { setShowRunModal(false); setRunStatus('idle'); }}
+                                    >
+                                        <CheckCircle size={16} /> Done
+                                    </button>
+                                )}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Schedule Workflow Modal */}
+            <AnimatePresence>
+                {showScheduleModal && (
+                    <motion.div
+                        className="workflow-builder-v2__modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowScheduleModal(false)}
+                    >
+                        <motion.div
+                            className="workflow-builder-v2__action-modal"
+                            initial={{ scale: 0.95, y: -20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.95, y: -20 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="action-modal__header">
+                                <Clock size={20} />
+                                <h3>Schedule Workflow</h3>
+                                <button onClick={() => setShowScheduleModal(false)}><X size={18} /></button>
+                            </div>
+                            <div className="action-modal__content">
+                                <div className="action-modal__schedule-info">
+                                    <h4>{workflowName}</h4>
+                                    <p>Configure when this workflow should run automatically</p>
+                                </div>
+                                <div className="action-modal__field">
+                                    <label>Frequency</label>
+                                    <select
+                                        value={scheduleConfig.frequency}
+                                        onChange={(e) => setScheduleConfig(prev => ({ ...prev, frequency: e.target.value }))}
+                                    >
+                                        <option value="hourly">Hourly</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                </div>
+                                <div className="action-modal__field">
+                                    <label>Time</label>
+                                    <input
+                                        type="time"
+                                        value={scheduleConfig.time}
+                                        onChange={(e) => setScheduleConfig(prev => ({ ...prev, time: e.target.value }))}
+                                    />
+                                </div>
+                                <div className="action-modal__toggle">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={scheduleConfig.enabled}
+                                            onChange={(e) => setScheduleConfig(prev => ({ ...prev, enabled: e.target.checked }))}
+                                        />
+                                        <span>Enable Schedule</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="action-modal__footer">
+                                <button className="action-modal__btn action-modal__btn--secondary" onClick={() => setShowScheduleModal(false)}>
+                                    Cancel
+                                </button>
+                                <button
+                                    className="action-modal__btn action-modal__btn--primary"
+                                    onClick={saveSchedule}
+                                    disabled={!scheduleConfig.enabled}
+                                >
+                                    <Clock size={16} /> Save Schedule
+                                </button>
                             </div>
                         </motion.div>
                     </motion.div>
