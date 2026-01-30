@@ -77,111 +77,59 @@ const suggestedQueries: SuggestedQuery[] = [
         category: 'Network'
     }
 ]
+import { geminiService } from '../services/gemini'
 
-// Mock AI response generator
-const generateAIResponse = (query: string): Promise<Message> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const responses: Record<string, { content: string; hasViz: boolean }> = {
-                'cost driver': {
-                    content: `Based on YTD claims analysis, here are your **top 10 cost drivers**:
+// Generate AI response using Gemini
+const generateAIResponse = async (query: string): Promise<Message> => {
+    try {
+        // Create a healthcare analytics context for the AI
+        const systemPrompt = `You are an expert healthcare analytics AI copilot for the Apex Health platform. 
+You help administrators, brokers, and employers analyze health plan data including:
+- Claims analysis and cost drivers
+- Member risk stratification and predictions  
+- Pharmacy trends and spend optimization
+- Stop-loss tracking and projections
+- Provider performance and network analytics
+- Benchmark comparisons against industry standards
 
-1. **Specialty Pharmacy** - $720K (↑23% vs prior year)
-   - Key drugs: Humira, Stelara, Ozempic
-   
-2. **Inpatient Surgical** - $485K (↑8%)
-   - High-volume procedures: Joint replacements, spinal fusion
-   
-3. **Oncology** - $312K (↑15%)
-   - 4 active cancer cases contributing 78% of category spend
-   
-4. **Dialysis/ESRD** - $285K (↑5%)
-   - 3 members requiring ongoing treatment
-   
-5. **Mental Health** - $198K (↑32%)
-   - Significant increase in residential treatment
+When responding:
+- Use markdown formatting with **bold** for emphasis
+- Include specific numbers and percentages when relevant
+- Provide actionable insights and recommendations
+- Format tables using | for columns when presenting data
+- Be concise but comprehensive
 
-**Recommended Actions:**
-- Review specialty pharmacy formulary
-- Evaluate COE program for orthopedic procedures
-- Expand telehealth access for behavioral health`,
-                    hasViz: true
-                },
-                'high-risk': {
-                    content: `The ML model (91% accuracy) has identified **3 members** with elevated risk of becoming high-cost claimants:
+User Query: ${query}
 
-| Member ID | Risk Score | Primary Conditions | Predicted 12-Mo Cost |
-|-----------|-----------|-------------------|---------------------|
-| HCC-2847 | 823 | Pre-diabetes, HTN, Obesity | $95K-$125K |
-| HCC-1923 | 798 | CKD Stage 3, Diabetes | $110K-$145K |
-| HCC-3412 | 756 | Chronic Pain, Depression | $75K-$95K |
+Provide a helpful, data-driven response as if you have access to the organization's health plan data.`
 
-**Key Risk Indicators:**
-- Rising HbA1c levels in 2 members
-- Increased ED utilization (3+ visits in 90 days)
-- Gaps in preventive care compliance
+        const response = await geminiService.chat(systemPrompt)
 
-**Intervention Recommendations:**
-1. Enroll in disease management programs
-2. Schedule PCP outreach calls
-3. Review medication adherence`,
-                    hasViz: true
-                },
-                'pharmacy': {
-                    content: `**Year-over-Year Pharmacy Spend by Therapeutic Class:**
+        return {
+            id: `msg-${Date.now()}`,
+            role: 'assistant',
+            content: response,
+            timestamp: new Date(),
+            visualizations: query.toLowerCase().includes('chart') ||
+                query.toLowerCase().includes('trend') ||
+                query.toLowerCase().includes('compare')
+                ? [{ type: 'chart', data: {} }]
+                : undefined
+        }
+    } catch (error) {
+        console.error('Gemini API error:', error)
+        return {
+            id: `msg-${Date.now()}`,
+            role: 'assistant',
+            content: `I apologize, but I encountered an issue processing your request. This could be due to:
 
-| Class | Current YTD | Prior YTD | Change |
-|-------|-------------|-----------|--------|
-| Specialty | $720K | $585K | +23% |
-| Diabetes | $145K | $98K | +48% |
-| Cardiovascular | $87K | $92K | -5% |
-| Mental Health | $65K | $58K | +12% |
-| Pain Management | $42K | $51K | -18% |
+- **API connectivity** - Please check your network connection
+- **API key** - Ensure the Gemini API key is configured correctly
 
-**Key Insights:**
-- GLP-1 drugs (Ozempic, Wegovy) driving 65% of diabetes increase
-- Specialty spend now represents 51% of total pharmacy
-- Biosimilar adoption at 12% (industry avg: 28%)
-
-**Savings Opportunities:**
-- Biosimilar conversion: Est. $85K/year
-- Site-of-care optimization: Est. $45K/year`,
-                    hasViz: true
-                },
-                'default': {
-                    content: `I'd be happy to help with that analysis. Based on your current claims data, I can provide insights on:
-
-- **Claims trending** by category, provider, or diagnosis
-- **Predictive analytics** for high-cost claimant identification
-- **Benchmark comparisons** against industry standards
-- **Stop-loss tracking** and recovery projections
-- **Population health** metrics and care gaps
-
-What specific aspect would you like to explore?`,
-                    hasViz: false
-                }
-            }
-
-            const lowerQuery = query.toLowerCase()
-            let response = responses.default
-
-            if (lowerQuery.includes('cost driver') || lowerQuery.includes('top')) {
-                response = responses['cost driver']
-            } else if (lowerQuery.includes('high-risk') || lowerQuery.includes('predict') || lowerQuery.includes('claimant')) {
-                response = responses['high-risk']
-            } else if (lowerQuery.includes('pharmacy') || lowerQuery.includes('drug') || lowerQuery.includes('rx')) {
-                response = responses.pharmacy
-            }
-
-            resolve({
-                id: `msg-${Date.now()}`,
-                role: 'assistant',
-                content: response.content,
-                timestamp: new Date(),
-                visualizations: response.hasViz ? [{ type: 'chart', data: {} }] : undefined
-            })
-        }, 1500)
-    })
+Please try again or contact support if the issue persists.`,
+            timestamp: new Date()
+        }
+    }
 }
 
 export function AICopilot() {
