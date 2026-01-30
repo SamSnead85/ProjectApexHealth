@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
     Users,
     Calendar,
@@ -8,150 +8,416 @@ import {
     AlertCircle,
     Mail,
     Settings,
-    BarChart3,
-    Send,
-    Download
+    Download,
+    Search,
+    Brain,
+    Sparkles,
+    Shield,
+    TrendingUp,
+    TrendingDown,
+    ArrowUpRight,
+    ArrowDownRight,
+    Heart,
+    Activity,
+    FileText,
+    Zap,
+    ChevronRight,
+    Eye,
+    DollarSign,
+    Building2
 } from 'lucide-react'
-import { GlassCard, Button, Badge, MetricCard } from '../components/common'
+import { GlassCard, Button, Badge } from '../components/common'
+import './Enrollment.css'
 
-// Mock enrollment data
+// ============================================
+// MOCK DATA - Benefits Administration
+// ============================================
+
 const enrollmentStats = {
-    total: 1250,
-    completed: 975,
-    inProgress: 180,
-    notStarted: 95,
+    total: 487,
+    completed: 442,
+    inProgress: 28,
+    notStarted: 17,
     deadline: 'February 15, 2024',
-    daysRemaining: 12
+    daysRemaining: 45
 }
 
-const recentActivity = [
-    { employee: 'John Martinez', action: 'Completed enrollment', time: '2 hours ago', status: 'complete' },
-    { employee: 'Sarah Chen', action: 'Updated dependents', time: '4 hours ago', status: 'update' },
-    { employee: 'Mike Johnson', action: 'Started enrollment', time: '5 hours ago', status: 'started' },
-    { employee: 'Emily Davis', action: 'Completed enrollment', time: '1 day ago', status: 'complete' },
+const employees = [
+    { id: 'EMP-001', name: 'Daniel Johnson', initials: 'DJ', department: 'Engineering', status: 'active', plan: 'PPO Gold', planTier: 'Family', cost: 524, coverageStart: '2024-01-01' },
+    { id: 'EMP-002', name: 'Michael Chen', initials: 'MC', department: 'Marketing', status: 'pending', plan: 'HMO Silver', planTier: 'Employee+Spouse', cost: 389, coverageStart: '2024-02-01' },
+    { id: 'EMP-003', name: 'Emily Rodriguez', initials: 'ER', department: 'Sales', status: 'active', plan: 'HDHP', planTier: 'Employee', cost: 245, coverageStart: '2024-01-01' },
+    { id: 'EMP-004', name: 'James Wilson', initials: 'JW', department: 'Finance', status: 'active', plan: 'PPO Gold', planTier: 'Employee+Child', cost: 412, coverageStart: '2024-01-01' },
+    { id: 'EMP-005', name: 'Lisa Thompson', initials: 'LT', department: 'HR', status: 'pending', plan: 'PPO Gold', planTier: 'Family', cost: 524, coverageStart: '2024-02-01' },
+    { id: 'EMP-006', name: 'David Kim', initials: 'DK', department: 'IT', status: 'active', plan: 'HMO Silver', planTier: 'Employee', cost: 198, coverageStart: '2024-01-01' },
 ]
 
+const benefitPlans = [
+    { name: 'PPO Gold', enrolled: 245, percent: 50.3, color: '#f59e0b', cost: '$17.9K/mo' },
+    { name: 'HMO Silver', enrolled: 156, percent: 32.0, color: '#6366f1', cost: '$9.8K/mo' },
+    { name: 'HDHP Bronze', enrolled: 86, percent: 17.7, color: '#10b981', cost: '$4.2K/mo' },
+]
+
+const timelineEvents = [
+    { event: 'Open Enrollment Period Begins', date: '2024-02-01', status: 'upcoming' },
+    { event: 'Life Event: New Baby for John Adams', date: '2024-02-05', status: 'upcoming' },
+    { event: 'Termination Processing: Robert Miller', date: '2024-01-15', status: 'complete' },
+    { event: 'Quarterly Benefits Review', date: '2024-01-10', status: 'complete' },
+]
+
+const aiInsights = [
+    { text: 'Based on current enrollment patterns, recommend adding a **Dental Vision Bundle** to increase participation by 12%', confidence: 87 },
+    { text: '**23 employees** have not completed enrollment forms. Auto-reminder scheduled for tomorrow.', confidence: 94 },
+]
+
+// ============================================
+// COMPONENT
+// ============================================
+
 export function Enrollment() {
+    const [searchQuery, setSearchQuery] = useState('')
     const progressPercent = Math.round((enrollmentStats.completed / enrollmentStats.total) * 100)
 
+    const filteredEmployees = employees.filter(emp =>
+        emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        emp.department.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
     return (
-        <div style={{ padding: 'var(--space-2xl)', background: 'var(--apex-obsidian)', minHeight: '100vh' }}>
-            {/* Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2xl)' }}>
-                <div>
-                    <h1 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--apex-white)', margin: 0 }}>Enrollment Management</h1>
-                    <p style={{ fontSize: 'var(--text-base)', color: 'var(--apex-steel)' }}>
-                        Open Enrollment 2024 - {enrollmentStats.daysRemaining} days remaining
-                    </p>
+        <div className="benefits-admin">
+            {/* Premium Header */}
+            <motion.header
+                className="benefits-admin__header"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <div className="benefits-admin__title-section">
+                    <div className="benefits-admin__icon-container">
+                        <Heart size={28} />
+                        <div className="benefits-admin__icon-pulse" />
+                    </div>
+                    <div>
+                        <h1 className="benefits-admin__title">Benefits Administration</h1>
+                        <div className="benefits-admin__subtitle">
+                            <span>Employee Management • Plan Configuration • Cost Analysis</span>
+                        </div>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+                <div className="benefits-admin__badges">
+                    <div className="benefits-admin__badge benefits-admin__badge--live">
+                        Live Sync
+                    </div>
+                    <div className="benefits-admin__badge">
+                        <Zap size={14} />
+                        94.5% Enrolled
+                    </div>
+                </div>
+                <div className="benefits-admin__actions">
                     <Button variant="ghost" size="sm">
-                        <Mail size={16} />
-                        Send Reminders
+                        <Download size={16} />
+                        Export Census
                     </Button>
                     <Button variant="primary" size="sm">
-                        <Settings size={16} />
-                        Configure OE
+                        <Users size={16} />
+                        Add Employee
                     </Button>
                 </div>
-            </div>
+            </motion.header>
 
             {/* Progress Banner */}
-            <GlassCard style={{ marginBottom: 'var(--space-2xl)', padding: 'var(--space-xl)', background: 'linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(16,185,129,0.1) 100%)', border: '1px solid rgba(6,182,212,0.3)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)' }}>
-                    <div>
-                        <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--apex-white)', margin: 0 }}>Enrollment Progress</h2>
-                        <p style={{ color: 'var(--apex-silver)', fontSize: 'var(--text-sm)', margin: 0 }}>Deadline: {enrollmentStats.deadline}</p>
+            <motion.div
+                className="benefits-admin__progress-banner"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+            >
+                <div className="benefits-admin__progress-header">
+                    <div className="benefits-admin__progress-info">
+                        <h2>
+                            <Calendar size={22} />
+                            Open Enrollment Progress
+                            <span className="benefits-admin__ai-tag">
+                                <Sparkles size={10} />
+                                AI Monitored
+                            </span>
+                        </h2>
+                        <p>Deadline: {enrollmentStats.deadline} • {enrollmentStats.daysRemaining} days remaining</p>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--apex-white)' }}>{progressPercent}%</div>
-                        <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>{enrollmentStats.completed} of {enrollmentStats.total} employees</div>
+                    <div className="benefits-admin__progress-stats">
+                        <motion.div
+                            className="benefits-admin__progress-percent"
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.3, type: 'spring' }}
+                        >
+                            {progressPercent}%
+                        </motion.div>
+                        <div className="benefits-admin__progress-meta">
+                            {enrollmentStats.completed} of {enrollmentStats.total} employees
+                        </div>
                     </div>
                 </div>
-                <div style={{ height: 12, background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
+
+                <div className="benefits-admin__progress-track">
                     <motion.div
+                        className="benefits-admin__progress-fill"
                         initial={{ width: 0 }}
                         animate={{ width: `${progressPercent}%` }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                        style={{ height: '100%', background: 'linear-gradient(90deg, var(--apex-teal), #10B981)', borderRadius: 'var(--radius-full)' }}
+                        transition={{ duration: 1.2, ease: 'easeOut' }}
                     />
                 </div>
-            </GlassCard>
 
-            {/* Metrics */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)' }}>
-                <MetricCard label="Completed" value={enrollmentStats.completed.toString()} icon={<CheckCircle2 size={20} />} iconColor="#10B981" />
-                <MetricCard label="In Progress" value={enrollmentStats.inProgress.toString()} icon={<Clock size={20} />} iconColor="#F59E0B" />
-                <MetricCard label="Not Started" value={enrollmentStats.notStarted.toString()} icon={<AlertCircle size={20} />} iconColor="#EF4444" />
-                <MetricCard label="Days Left" value={enrollmentStats.daysRemaining.toString()} icon={<Calendar size={20} />} iconColor="var(--apex-teal)" />
+                <div className="benefits-admin__progress-segments">
+                    <div className="benefits-admin__progress-segment">
+                        <span className="benefits-admin__progress-segment-dot benefits-admin__progress-segment-dot--complete" />
+                        <div className="benefits-admin__progress-segment-info">
+                            <span className="benefits-admin__progress-segment-label">Completed</span>
+                            <span className="benefits-admin__progress-segment-value">{enrollmentStats.completed}</span>
+                        </div>
+                    </div>
+                    <div className="benefits-admin__progress-segment">
+                        <span className="benefits-admin__progress-segment-dot benefits-admin__progress-segment-dot--progress" />
+                        <div className="benefits-admin__progress-segment-info">
+                            <span className="benefits-admin__progress-segment-label">In Progress</span>
+                            <span className="benefits-admin__progress-segment-value">{enrollmentStats.inProgress}</span>
+                        </div>
+                    </div>
+                    <div className="benefits-admin__progress-segment">
+                        <span className="benefits-admin__progress-segment-dot benefits-admin__progress-segment-dot--not-started" />
+                        <div className="benefits-admin__progress-segment-info">
+                            <span className="benefits-admin__progress-segment-label">Not Started</span>
+                            <span className="benefits-admin__progress-segment-value">{enrollmentStats.notStarted}</span>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Premium Metrics Grid */}
+            <div className="benefits-admin__metrics">
+                {[
+                    { label: 'Total Employees', value: '487', change: '+12', isUp: true, icon: Users, color: '#06b6d4' },
+                    { label: 'Monthly Premium', value: '$248K', change: '+4.2%', isUp: false, icon: DollarSign, color: '#f59e0b' },
+                    { label: 'Enrollment Rate', value: '94.5%', change: '+2.1%', isUp: true, icon: TrendingUp, color: '#10b981' },
+                    { label: 'Days to Deadline', value: '45', change: null, isUp: null, icon: Calendar, color: '#8b5cf6' },
+                    { label: 'Pending Actions', value: '23', change: '-8', isUp: true, icon: Clock, color: '#ef4444' },
+                    { label: 'Cost per Employee', value: '$509', change: '-2.3%', isUp: true, icon: Activity, color: '#6366f1' },
+                ].map((metric, i) => (
+                    <motion.div
+                        key={metric.label}
+                        className="benefits-admin__metric-card"
+                        style={{ '--card-glow-color': metric.color } as any}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 + i * 0.05 }}
+                    >
+                        <div className="benefits-admin__metric-glow" />
+                        <div className="benefits-admin__metric-header">
+                            <div
+                                className="benefits-admin__metric-icon"
+                                style={{ background: `${metric.color}15`, color: metric.color }}
+                            >
+                                <metric.icon size={20} />
+                            </div>
+                            {metric.change && (
+                                <span className={`benefits-admin__metric-trend benefits-admin__metric-trend--${metric.isUp ? 'up' : 'down'}`}>
+                                    {metric.isUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                                    {metric.change}
+                                </span>
+                            )}
+                        </div>
+                        <div className="benefits-admin__metric-value">{metric.value}</div>
+                        <div className="benefits-admin__metric-label">{metric.label}</div>
+                    </motion.div>
+                ))}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 'var(--space-xl)' }}>
-                {/* Recent Activity */}
-                <GlassCard>
-                    <div style={{ padding: 'var(--space-lg)', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--apex-white)', margin: 0 }}>Recent Activity</h2>
-                        <Button variant="ghost" size="sm">View All</Button>
+            {/* Main Grid */}
+            <div className="benefits-admin__grid">
+                {/* Employee Roster */}
+                <motion.div
+                    className="benefits-admin__roster"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    <div className="benefits-admin__roster-header">
+                        <div className="benefits-admin__roster-title">
+                            <Users size={20} />
+                            <h3>Employee Roster</h3>
+                            <Badge variant="default">{employees.length} employees</Badge>
+                        </div>
+                        <div className="benefits-admin__roster-search">
+                            <Search size={16} />
+                            <input
+                                type="text"
+                                placeholder="Search employees..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        {recentActivity.map((item, i) => (
+                    <table className="benefits-admin__roster-table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Plan</th>
+                                <th>Cost/Mo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredEmployees.map((emp, i) => (
+                                <motion.tr
+                                    key={emp.id}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 + i * 0.03 }}
+                                >
+                                    <td>
+                                        <div className="benefits-admin__roster-employee">
+                                            <div
+                                                className="benefits-admin__roster-avatar"
+                                                style={{ background: `hsl(${i * 60}, 70%, 40%)` }}
+                                            >
+                                                {emp.initials}
+                                            </div>
+                                            <div className="benefits-admin__roster-employee-info">
+                                                <span className="benefits-admin__roster-employee-name">{emp.name}</span>
+                                                <span className="benefits-admin__roster-employee-id">{emp.id}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{emp.department}</td>
+                                    <td>
+                                        <span className={`benefits-admin__roster-status benefits-admin__roster-status--${emp.status}`}>
+                                            {emp.status}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div className="benefits-admin__roster-plan">
+                                            <span className="benefits-admin__roster-plan-name">{emp.plan}</span>
+                                            <span className="benefits-admin__roster-plan-tier">{emp.planTier}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span className="benefits-admin__roster-cost">${emp.cost}</span>
+                                    </td>
+                                    <td>
+                                        <button className="benefits-admin__roster-action">
+                                            Manage
+                                        </button>
+                                    </td>
+                                </motion.tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </motion.div>
+
+                {/* Sidebar */}
+                <div className="benefits-admin__sidebar">
+                    {/* AI Insights Panel */}
+                    <motion.div
+                        className="benefits-admin__ai-panel"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <div className="benefits-admin__ai-header">
+                            <div className="benefits-admin__ai-icon">
+                                <Brain size={22} />
+                            </div>
+                            <div>
+                                <h3 className="benefits-admin__ai-title">AI Insights</h3>
+                                <p className="benefits-admin__ai-subtitle">Powered by Intellisure™</p>
+                            </div>
+                        </div>
+                        {aiInsights.map((insight, i) => (
                             <motion.div
                                 key={i}
+                                className="benefits-admin__ai-insight"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.05 }}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 'var(--space-md)',
-                                    padding: 'var(--space-md) var(--space-lg)',
-                                    borderBottom: '1px solid rgba(255,255,255,0.04)'
-                                }}
+                                transition={{ delay: 0.6 + i * 0.1 }}
                             >
-                                <div style={{
-                                    width: 36, height: 36, borderRadius: '50%',
-                                    background: item.status === 'complete' ? 'rgba(16,185,129,0.15)' : 'rgba(6,182,212,0.15)',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: item.status === 'complete' ? '#10B981' : 'var(--apex-teal)'
-                                }}>
-                                    {item.status === 'complete' ? <CheckCircle2 size={16} /> : <Users size={16} />}
-                                </div>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ color: 'var(--apex-white)', fontWeight: 500, fontSize: 'var(--text-sm)' }}>{item.employee}</div>
-                                    <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-xs)' }}>{item.action}</div>
-                                </div>
-                                <span style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-xs)' }}>{item.time}</span>
+                                <p dangerouslySetInnerHTML={{ __html: insight.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                             </motion.div>
                         ))}
-                    </div>
-                </GlassCard>
-
-                {/* Quick Actions */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-                    <GlassCard style={{ padding: 'var(--space-lg)' }}>
-                        <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--apex-white)', margin: '0 0 var(--space-lg) 0' }}>Quick Actions</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-                            <Button variant="ghost" size="sm" style={{ justifyContent: 'flex-start' }}>
-                                <Send size={16} /> Send Reminder to Pending
-                            </Button>
-                            <Button variant="ghost" size="sm" style={{ justifyContent: 'flex-start' }}>
-                                <Download size={16} /> Export Enrollment Report
-                            </Button>
-                            <Button variant="ghost" size="sm" style={{ justifyContent: 'flex-start' }}>
-                                <BarChart3 size={16} /> View Analytics
-                            </Button>
+                        <div className="benefits-admin__ai-confidence">
+                            <span>Model Confidence</span>
+                            <span>94.2%</span>
                         </div>
-                    </GlassCard>
+                    </motion.div>
 
-                    <GlassCard style={{ padding: 'var(--space-lg)', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
-                            <AlertCircle size={18} style={{ color: '#F59E0B' }} />
-                            <span style={{ color: '#F59E0B', fontWeight: 600 }}>Action Required</span>
+                    {/* Timeline Events */}
+                    <motion.div
+                        className="benefits-admin__timeline"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 }}
+                    >
+                        <div className="benefits-admin__timeline-header">
+                            <Calendar size={18} />
+                            <h3>Upcoming Events</h3>
                         </div>
-                        <p style={{ color: 'var(--apex-silver)', fontSize: 'var(--text-sm)', margin: 0 }}>
-                            {enrollmentStats.notStarted} employees haven't started enrollment yet. Consider sending a reminder.
-                        </p>
-                    </GlassCard>
+                        <div className="benefits-admin__timeline-list">
+                            {timelineEvents.map((event, i) => (
+                                <div key={i} className={`benefits-admin__timeline-item benefits-admin__timeline-item--${event.status}`}>
+                                    <div className="benefits-admin__timeline-marker">
+                                        <div className="benefits-admin__timeline-dot" />
+                                        {i < timelineEvents.length - 1 && <div className="benefits-admin__timeline-line" />}
+                                    </div>
+                                    <div className="benefits-admin__timeline-content">
+                                        <div className="benefits-admin__timeline-event">{event.event}</div>
+                                        <div className="benefits-admin__timeline-date">{event.date}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Plan Distribution */}
+                    <motion.div
+                        className="benefits-admin__plans"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 }}
+                    >
+                        <div className="benefits-admin__plans-header">
+                            <Shield size={18} />
+                            <h3>Benefit Plans</h3>
+                        </div>
+                        {benefitPlans.map((plan, i) => (
+                            <motion.div
+                                key={plan.name}
+                                className="benefits-admin__plan-item"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.8 + i * 0.1 }}
+                            >
+                                <div
+                                    className="benefits-admin__plan-color"
+                                    style={{ background: plan.color }}
+                                />
+                                <div className="benefits-admin__plan-info">
+                                    <div className="benefits-admin__plan-name">{plan.name}</div>
+                                    <div className="benefits-admin__plan-bar">
+                                        <motion.div
+                                            className="benefits-admin__plan-fill"
+                                            style={{ background: plan.color }}
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${plan.percent}%` }}
+                                            transition={{ duration: 0.8, delay: 0.9 + i * 0.1 }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="benefits-admin__plan-stats">
+                                    <div className="benefits-admin__plan-enrolled">{plan.enrolled}</div>
+                                    <div className="benefits-admin__plan-percent">{plan.percent}%</div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </div>

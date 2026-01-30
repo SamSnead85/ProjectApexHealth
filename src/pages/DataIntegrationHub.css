@@ -1,0 +1,572 @@
+/* ============================================
+   DATA INTEGRATION HUB
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.data-hub {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient Background Effects */
+.data-hub::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ambientPulse 8s ease-in-out infinite;
+}
+
+.data-hub::after {
+    content: '';
+    position: absolute;
+    bottom: -300px;
+    right: -200px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ambientPulse 12s ease-in-out infinite reverse;
+}
+
+@keyframes ambientPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Header */
+.dh__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.dh__header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+}
+
+.dh__icon-container {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.dh__icon-container svg {
+    color: #06b6d4;
+    z-index: 1;
+}
+
+.dh__icon-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%);
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.dh__title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.dh__subtitle {
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    margin-top: var(--space-xs);
+}
+
+.dh__header-badges {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.dh__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.dh__badge--active {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.dh__badge--error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.dh__header-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Stats Row */
+.dh__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.dh__stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-fast);
+}
+
+.dh__stat-card:hover {
+    border-color: var(--stat-color, var(--glass-border));
+}
+
+.dh__stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dh__stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dh__stat-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+}
+
+.dh__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Main Grid */
+.dh__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.dh__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Section Header */
+.dh__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.dh__section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.dh__section-title svg {
+    color: var(--apex-teal);
+}
+
+.dh__section-title h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+/* Integrations */
+.dh__integrations {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.dh__integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.dh__integration-card {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.dh__integration-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(6, 182, 212, 0.3);
+    transform: translateY(-2px);
+}
+
+.dh__integration-card.selected {
+    border-color: var(--apex-teal);
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.dh__integration-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.dh__integration-provider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.dh__integration-icon {
+    font-size: 24px;
+}
+
+.dh__integration-name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.dh__integration-type {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dh__integration-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+.dh__integration-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.dh__integration-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    color: var(--apex-silver);
+}
+
+.dh__integration-health {
+    margin-left: auto;
+}
+
+.dh__integration-health-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dh__integration-health-ring span {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+    background: var(--apex-obsidian);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dh__integration-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dh__integration-sync {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.dh__integration-errors {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: #ef4444;
+}
+
+/* Sync Log */
+.dh__sync-log {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.dh__sync-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.dh__sync-header svg {
+    color: var(--apex-teal);
+}
+
+.dh__sync-header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.dh__sync-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dh__sync-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+}
+
+.dh__sync-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.dh__sync-item--failed {
+    border-left: 2px solid #ef4444;
+}
+
+.dh__sync-direction {
+    flex-shrink: 0;
+}
+
+.dh__sync-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.dh__sync-integration {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.dh__sync-meta {
+    display: flex;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.dh__sync-time {
+    font-size: 10px;
+    color: var(--apex-steel);
+    white-space: nowrap;
+}
+
+.dh__sync-status {
+    flex-shrink: 0;
+}
+
+.dh__sync-status--success {
+    color: #10b981;
+}
+
+.dh__sync-status--failed {
+    color: #ef4444;
+}
+
+.dh__sync-status--partial {
+    color: #f59e0b;
+}
+
+/* Quick Actions */
+.dh__quick-actions {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.dh__quick-actions h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-md);
+}
+
+.dh__quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+}
+
+.dh__quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.dh__quick-btn:hover {
+    background: rgba(6, 182, 212, 0.08);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: var(--apex-teal);
+}
+
+.dh__quick-btn span {
+    font-size: var(--text-xs);
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .dh__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dh__integrations-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .dh__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dh__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dh__header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+}

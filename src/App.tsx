@@ -126,6 +126,9 @@ import WebhookConfig from './pages/WebhookConfig'
 import DataVisualizationStudio from './pages/DataVisualizationStudio'
 import IntegrationMarketplace from './pages/IntegrationMarketplace'
 import BenchmarkAnalytics from './pages/BenchmarkAnalytics'
+// Compliance & Data Integration Modules
+import ComplianceCenter from './pages/ComplianceCenter'
+import DataIntegrationHub from './pages/DataIntegrationHub'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -177,6 +180,13 @@ function App() {
 
     // Determine which page to render based on path
     const renderPage = () => {
+        // Compliance & Data Integration Modules
+        if (activePath.includes('/compliance-center') || activePath.includes('/compliance/center') || activePath.includes('/aca-compliance')) {
+            return <ComplianceCenter />
+        }
+        if (activePath.includes('/data-integration') || activePath.includes('/integration-hub') || activePath.includes('/data/integration')) {
+            return <DataIntegrationHub />
+        }
         // Enhancement Modules - Phase 1-6
         if (activePath.includes('/document-intelligence') || activePath.includes('/ai-documents') || activePath.includes('/ocr')) {
             return <DocumentIntelligence />

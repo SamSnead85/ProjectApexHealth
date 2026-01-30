@@ -1,140 +1,597 @@
-/* Broker Portal Dashboard Styles */
+/* ============================================
+   BROKER COMMAND CENTER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
 
-.broker-portal {
-    padding: var(--space-2xl);
+.broker-command-center {
     min-height: 100vh;
+    padding: var(--space-xl);
     background: var(--apex-obsidian);
+    position: relative;
+    overflow: hidden;
 }
 
-.broker-portal__header {
+/* Ambient Background Effects */
+.broker-command-center::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ambientPulse 8s ease-in-out infinite;
+}
+
+.broker-command-center::after {
+    content: '';
+    position: absolute;
+    bottom: -300px;
+    left: -200px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ambientPulse 12s ease-in-out infinite reverse;
+}
+
+@keyframes ambientPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Premium Header */
+.bcc__header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: var(--space-2xl);
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
 }
 
-.broker-portal__title-section {
+.bcc__header-left {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
+    align-items: flex-start;
+    gap: var(--space-md);
 }
 
-.broker-portal__title {
-    font-size: 2rem;
+.bcc__icon-container {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.bcc__icon-container svg {
+    color: #a78bfa;
+    z-index: 1;
+}
+
+.bcc__icon-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.bcc__title {
+    font-size: var(--text-3xl);
     font-weight: 700;
     color: var(--apex-white);
     margin: 0;
+    letter-spacing: -0.02em;
 }
 
-.broker-portal__subtitle {
-    font-size: var(--text-base);
+.bcc__subtitle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
     color: var(--apex-steel);
+    font-size: var(--text-sm);
 }
 
-.broker-portal__actions {
+.bcc__header-badges {
     display: flex;
     gap: var(--space-sm);
 }
 
-/* Metrics Grid */
-.broker-portal__metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-    margin-bottom: var(--space-2xl);
+.bcc__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-silver);
 }
 
-/* Dashboard Grid */
-.broker-portal__grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--space-xl);
+.bcc__badge--live {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #a78bfa;
 }
 
-.broker-portal__main {
+.bcc__badge--live::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a78bfa;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.bcc__header-actions {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-sm);
 }
 
-.broker-portal__sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
+/* Premium Metrics Grid */
+.bcc__metrics {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
 }
 
-/* Book of Business Section */
-.book-of-business {
-    background: var(--apex-obsidian-elevated);
+.bcc__metric-card {
+    position: relative;
+    padding: var(--space-lg);
+    background: var(--apex-obsidian-glass);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     overflow: hidden;
+    transition: all var(--transition-normal);
 }
 
-.book-of-business__header {
+.bcc__metric-card:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+.bcc__metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--glow-color, transparent);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.bcc__metric-card:hover::before {
+    opacity: 1;
+}
+
+.bcc__metric-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, var(--glow-color) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+.bcc__metric-card:hover .bcc__metric-glow {
+    opacity: 0.08;
+}
+
+.bcc__metric-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: var(--space-lg);
-    border-bottom: 1px solid var(--glass-border);
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
 }
 
-.book-of-business__title {
+.bcc__metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcc__metric-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.bcc__metric-trend--down {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.bcc__metric-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    margin-bottom: 2px;
+}
+
+.bcc__metric-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Main Grid */
+.bcc__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.bcc__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.bcc__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Sales Pipeline */
+.bcc__pipeline {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.bcc__pipeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.bcc__pipeline-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.bcc__pipeline-title svg {
+    color: #8b5cf6;
+}
+
+.bcc__pipeline-title h2 {
     font-size: var(--text-lg);
     font-weight: 600;
     color: var(--apex-white);
     margin: 0;
 }
 
-.book-of-business__table {
-    width: 100%;
-}
-
-.book-of-business__row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 80px;
-    padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+.bcc__ai-tag {
+    display: inline-flex;
     align-items: center;
-    transition: background var(--transition-fast);
+    gap: 4px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.book-of-business__row:hover {
-    background: rgba(6, 182, 212, 0.05);
+.bcc__pipeline-total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
-.book-of-business__row--header {
-    background: rgba(255, 255, 255, 0.02);
+.bcc__pipeline-total span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
 }
 
-.book-of-business__cell {
+.bcc__pipeline-total strong {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+}
+
+.bcc__pipeline-funnel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.bcc__pipeline-stage {
+    display: flex;
+    justify-content: center;
+}
+
+.bcc__pipeline-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid;
+    transition: all var(--transition-fast);
+}
+
+.bcc__pipeline-bar:hover {
+    transform: scale(1.02);
+}
+
+.bcc__pipeline-stage-name {
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    font-weight: 600;
+    color: var(--apex-white);
 }
 
-.book-of-business__cell--header {
+.bcc__pipeline-stage-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.bcc__pipeline-count {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.bcc__pipeline-value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+/* Book of Business Table */
+.bcc__book {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.bcc__book-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.bcc__book-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.bcc__book-title svg {
+    color: var(--apex-teal);
+}
+
+.bcc__book-title h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.bcc__book-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bcc__book-table th {
+    text-align: left;
+    padding: var(--space-md) var(--space-lg);
     font-size: var(--text-xs);
     font-weight: 600;
     color: var(--apex-steel);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.book-of-business__cell--primary {
+.bcc__book-table td {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background var(--transition-fast);
+}
+
+.bcc__book-table tbody tr {
+    cursor: pointer;
+}
+
+.bcc__book-table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.bcc__book-row--at-risk td {
+    background: rgba(239, 68, 68, 0.03);
+}
+
+.bcc__book-row--at-risk:hover td {
+    background: rgba(239, 68, 68, 0.06) !important;
+}
+
+.bcc__book-client {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.bcc__book-client-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcc__book-client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.bcc__book-client-name {
     color: var(--apex-white);
     font-weight: 500;
 }
 
-.book-of-business__cell--number {
+.bcc__book-client-lives {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.bcc__book-number {
     font-family: var(--font-mono);
 }
 
-.book-of-business__cell--actions {
+.bcc__book-premium {
+    display: flex;
+    flex-direction: column;
+}
+
+.bcc__book-premium span:first-child {
+    color: var(--apex-white);
+    font-weight: 500;
+    font-family: var(--font-mono);
+}
+
+.bcc__book-trend {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+}
+
+.bcc__book-trend.positive {
+    color: #10b981;
+}
+
+.bcc__book-trend.negative {
+    color: #ef4444;
+}
+
+.bcc__book-health {
+    display: flex;
+    align-items: center;
+}
+
+.bcc__book-health-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcc__book-health-ring span {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--apex-white);
+    background: var(--apex-obsidian);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcc__book-risk {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bcc__book-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.bcc__book-actions {
     display: flex;
     gap: var(--space-xs);
 }
 
-.book-of-business__action-btn {
+.bcc__book-action {
     width: 32px;
     height: 32px;
     display: flex;
@@ -148,266 +605,250 @@
     transition: all var(--transition-fast);
 }
 
-.book-of-business__action-btn:hover {
+.bcc__book-action:hover {
     background: rgba(6, 182, 212, 0.1);
     border-color: rgba(6, 182, 212, 0.3);
     color: var(--apex-teal);
 }
 
-.book-of-business__cell--actions {
+/* AI Recommendations Panel */
+.bcc__ai-panel {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
     position: relative;
-}
-
-.book-of-business__dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    z-index: 100;
-    min-width: 160px;
-    background: var(--apex-obsidian-elevated);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
 
-.book-of-business__dropdown button {
-    display: block;
-    width: 100%;
-    padding: var(--space-sm) var(--space-md);
-    background: none;
-    border: none;
-    color: var(--apex-silver);
-    font-size: var(--text-sm);
-    text-align: left;
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.bcc__ai-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), rgba(6, 182, 212, 0.6), transparent);
 }
 
-.book-of-business__dropdown button:hover {
-    background: rgba(6, 182, 212, 0.1);
-    color: var(--apex-teal);
-}
-
-/* Commission Widget */
-.commission-widget {
-    background: var(--apex-obsidian-elevated);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-lg);
-}
-
-.commission-widget__header {
+.bcc__ai-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-lg);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
 }
 
-.commission-widget__title {
-    font-size: var(--text-lg);
+.bcc__ai-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a78bfa;
+}
+
+.bcc__ai-header h3 {
+    font-size: var(--text-md);
     font-weight: 600;
     color: var(--apex-white);
     margin: 0;
 }
 
-.commission-widget__period {
+.bcc__ai-header p {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+.bcc__ai-rec {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+    border-left: 3px solid;
+}
+
+.bcc__ai-rec--upsell {
+    border-color: #10b981;
+}
+
+.bcc__ai-rec--retention {
+    border-color: #ef4444;
+}
+
+.bcc__ai-rec--opportunity {
+    border-color: #f59e0b;
+}
+
+.bcc__ai-rec-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xs);
+}
+
+.bcc__ai-rec-type {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--apex-steel);
+}
+
+.bcc__ai-rec-confidence {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: #a78bfa;
+    background: rgba(139, 92, 246, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.bcc__ai-rec-client {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.bcc__ai-rec-action {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.bcc__ai-rec-impact {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: #10b981;
+}
+
+/* Commission Widget */
+.bcc__commission {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.bcc__commission-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.bcc__commission-header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+    display: flex;
+    align-items: center;
     gap: var(--space-xs);
 }
 
-.commission-widget__period-btn {
+.bcc__commission-header h3 svg {
+    color: #10b981;
+}
+
+.bcc__commission-toggle {
+    display: flex;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    padding: 2px;
+}
+
+.bcc__commission-toggle button {
     padding: 6px 12px;
     background: transparent;
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-md);
+    border: none;
+    border-radius: var(--radius-sm);
     font-size: var(--text-xs);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--apex-steel);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
-.commission-widget__period-btn--active {
+.bcc__commission-toggle button.active {
     background: rgba(6, 182, 212, 0.15);
-    border-color: rgba(6, 182, 212, 0.4);
     color: var(--apex-teal);
 }
 
-.commission-widget__amount {
-    font-size: 2.5rem;
+.bcc__commission-amount {
+    font-size: 2rem;
     font-weight: 700;
+    font-family: var(--font-mono);
     color: var(--apex-white);
     margin-bottom: var(--space-xs);
 }
 
-.commission-widget__change {
+.bcc__commission-change {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
     font-size: var(--text-sm);
-}
-
-.commission-widget__change--positive {
-    color: var(--apex-success);
-}
-
-.commission-widget__change--negative {
-    color: var(--apex-error);
-}
-
-.commission-widget__breakdown {
-    margin-top: var(--space-lg);
-    padding-top: var(--space-lg);
-    border-top: 1px solid var(--glass-border);
-}
-
-.commission-widget__breakdown-title {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    color: var(--apex-steel);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: var(--space-md);
-}
-
-.commission-widget__breakdown-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-sm) 0;
-}
-
-.commission-widget__breakdown-label {
-    font-size: var(--text-sm);
-    color: var(--apex-silver);
-}
-
-.commission-widget__breakdown-value {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    font-family: var(--font-mono);
-    color: var(--apex-white);
-}
-
-/* Renewal Pipeline */
-.renewal-pipeline {
-    background: var(--apex-obsidian-elevated);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-lg);
-}
-
-.renewal-pipeline__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    color: #10b981;
     margin-bottom: var(--space-lg);
 }
 
-.renewal-pipeline__title {
-    font-size: var(--text-lg);
-    font-weight: 600;
-    color: var(--apex-white);
-    margin: 0;
+.bcc__commission-breakdown {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
 }
 
-.renewal-pipeline__list {
+.bcc__commission-item {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
-.renewal-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid transparent;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-}
-
-.renewal-item:hover {
-    background: rgba(6, 182, 212, 0.05);
-    border-color: rgba(6, 182, 212, 0.2);
-}
-
-.renewal-item__date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(6, 182, 212, 0.1);
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    border-radius: var(--radius-md);
-}
-
-.renewal-item__month {
-    font-size: 9px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--apex-teal);
-}
-
-.renewal-item__day {
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--apex-white);
-}
-
-.renewal-item__details {
-    flex: 1;
-}
-
-.renewal-item__company {
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
     font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--apex-white);
 }
 
-.renewal-item__meta {
-    font-size: var(--text-xs);
+.bcc__commission-item span:first-child {
     color: var(--apex-steel);
 }
 
-.renewal-item__premium {
-    font-size: var(--text-sm);
-    font-weight: 600;
+.bcc__commission-item span:last-child {
+    color: var(--apex-white);
+    font-weight: 500;
     font-family: var(--font-mono);
-    color: var(--apex-silver);
 }
 
 /* Quick Actions */
-.quick-actions {
-    background: var(--apex-obsidian-elevated);
+.bcc__quick-actions {
+    background: var(--apex-obsidian-glass);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     padding: var(--space-lg);
 }
 
-.quick-actions__title {
-    font-size: var(--text-lg);
+.bcc__quick-actions h3 {
+    font-size: var(--text-md);
     font-weight: 600;
     color: var(--apex-white);
-    margin: 0 0 var(--space-lg) 0;
+    margin: 0 0 var(--space-md);
 }
 
-.quick-actions__grid {
+.bcc__quick-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
 }
 
-.quick-action-btn {
+.bcc__quick-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
@@ -415,20 +856,14 @@
     transition: all var(--transition-fast);
 }
 
-.quick-action-btn:hover {
+.bcc__quick-btn:hover {
     background: rgba(6, 182, 212, 0.08);
     border-color: rgba(6, 182, 212, 0.3);
 }
 
-.quick-action-btn:hover .quick-action-btn__icon {
-    color: var(--apex-teal);
-    border-color: rgba(6, 182, 212, 0.4);
-    background: rgba(6, 182, 212, 0.15);
-}
-
-.quick-action-btn__icon {
-    width: 44px;
-    height: 44px;
+.bcc__quick-icon {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -439,34 +874,42 @@
     transition: all var(--transition-fast);
 }
 
-.quick-action-btn__label {
+.bcc__quick-btn:hover .bcc__quick-icon {
+    color: var(--apex-teal);
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+.bcc__quick-btn span {
     font-size: var(--text-xs);
     font-weight: 500;
     color: var(--apex-silver);
 }
 
 /* Responsive */
+@media (max-width: 1400px) {
+    .bcc__metrics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 1200px) {
-    .broker-portal__metrics {
-        grid-template-columns: repeat(2, 1fr);
+    .bcc__grid {
+        grid-template-columns: 1fr;
     }
 
-    .broker-portal__grid {
-        grid-template-columns: 1fr;
+    .bcc__metrics {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .broker-portal {
-        padding: var(--space-lg);
-    }
-
-    .broker-portal__metrics {
+    .bcc__metrics {
         grid-template-columns: 1fr;
     }
 
-    .book-of-business__row {
-        grid-template-columns: 1fr;
-        gap: var(--space-xs);
+    .bcc__header {
+        flex-direction: column;
+        gap: var(--space-md);
     }
 }

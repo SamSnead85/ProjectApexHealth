@@ -22,7 +22,9 @@ import {
     Landmark,
     Scale,
     Building,
-    Target
+    Target,
+    Database,
+    Plug
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -67,6 +69,13 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'claims-prediction', label: 'Claims Prediction', icon: <Activity size={20} />, path: '/admin/claims-prediction' },
                 { id: 'fraud-detection', label: 'Fraud Detection', icon: <Shield size={20} />, path: '/admin/fraud-detection' },
                 { id: 'benefit-calc', label: 'Benefit Calculator', icon: <CreditCard size={20} />, path: '/admin/benefit-calculator' },
+            ]
+        },
+        {
+            title: 'Compliance & Data',
+            items: [
+                { id: 'compliance-center', label: 'Compliance Center', icon: <Shield size={20} />, path: '/admin/compliance-center' },
+                { id: 'data-hub', label: 'Integration Hub', icon: <Database size={20} />, path: '/admin/data-integration' },
             ]
         },
         {
