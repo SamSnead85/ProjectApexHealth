@@ -1,0 +1,514 @@
+/* ============================================
+   SPORTS AND FITNESS COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Workout Summary Card */
+.workout-summary-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.workout-summary-card:hover {
+    background: rgba(15, 23, 42, 0.7);
+}
+
+.workout-summary-card__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+}
+
+.workout-summary-card__content {
+    flex: 1;
+}
+
+.workout-summary-card__type {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.workout-summary-card__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.workout-summary-card__stats {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.workout-summary-card__stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+}
+
+.workout-summary-card__stat svg {
+    color: var(--apex-steel);
+}
+
+.workout-summary-card__arrow {
+    color: var(--apex-steel);
+}
+
+/* Exercise Timer */
+.exercise-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-xl);
+}
+
+.exercise-timer__display {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.exercise-timer__display svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.exercise-timer__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.exercise-timer__progress {
+    fill: none;
+    stroke: var(--apex-teal);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.1s ease;
+}
+
+.exercise-timer__time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    font-family: 'SF Mono', Monaco, monospace;
+    color: var(--apex-white);
+}
+
+.exercise-timer__controls {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.exercise-timer__controls button {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.exercise-timer__controls button:first-child {
+    background: var(--apex-teal);
+    border-color: transparent;
+    color: var(--apex-noir);
+}
+
+/* Activity Ring */
+.activity-ring {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.activity-ring__circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.activity-ring__circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.activity-ring__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.activity-ring__progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.activity-ring__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.activity-ring__info {}
+
+.activity-ring__label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+}
+
+.activity-ring__value {
+    font-size: var(--text-lg);
+    font-weight: 600;
+}
+
+.activity-ring__value small {
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--apex-steel);
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.leaderboard-list__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.leaderboard-list__entries {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.leaderboard-list__entry {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+}
+
+.leaderboard-list__entry.current-user {
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.leaderboard-list__rank {
+    min-width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-steel);
+}
+
+.leaderboard-list__rank.top-1 {
+    color: #ffd700;
+}
+
+.leaderboard-list__rank.top-2 {
+    color: #c0c0c0;
+}
+
+.leaderboard-list__rank.top-3 {
+    color: #cd7f32;
+}
+
+.leaderboard-list__avatar {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.leaderboard-list__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leaderboard-list__name {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.leaderboard-list__value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.leaderboard-list__change {
+    color: var(--apex-steel);
+}
+
+.leaderboard-list__change--up {
+    color: #10b981;
+}
+
+.leaderboard-list__change--down {
+    color: #ef4444;
+    transform: rotate(180deg);
+}
+
+/* Challenge Card */
+.challenge-card {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-xl);
+}
+
+.challenge-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.challenge-card__icon {
+    color: #f59e0b;
+}
+
+.challenge-card__meta {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.challenge-card__days {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.challenge-card__participants {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.challenge-card__title {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.challenge-card__description {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.challenge-card__progress {
+    position: relative;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+}
+
+.challenge-card__progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, var(--apex-teal));
+    border-radius: var(--radius-full);
+}
+
+.challenge-card__progress span {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.challenge-card__reward {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: #f59e0b;
+    margin: var(--space-md) 0;
+    display: inline-block;
+}
+
+.challenge-card__action {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: #8b5cf6;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+}
+
+.challenge-card__action.joined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+/* Fitness Class Card */
+.fitness-class-card {
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.fitness-class-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+}
+
+.fitness-class-card__type {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+}
+
+.fitness-class-card__level {
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.fitness-class-card__name {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.fitness-class-card__instructor {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.fitness-class-card__instructor-photo {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.fitness-class-card__instructor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fitness-class-card__instructor span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.fitness-class-card__details {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.fitness-class-card__details span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.fitness-class-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fitness-class-card__spots {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.fitness-class-card__spots.low {
+    color: #ef4444;
+}
+
+.fitness-class-card__footer button {
+    padding: var(--space-xs) var(--space-lg);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+.fitness-class-card__footer button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

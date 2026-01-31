@@ -1,0 +1,584 @@
+/* ============================================
+   EVENT COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Event Card */
+.event-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+}
+
+.event-card.sold-out {
+    opacity: 0.7;
+}
+
+.event-card__image {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.event-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-card__category {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+}
+
+.event-card__sold-out {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: white;
+}
+
+.event-card__favorite {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.event-card__favorite.active {
+    color: #ef4444;
+}
+
+.event-card__content {
+    padding: var(--space-md);
+}
+
+.event-card__date {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    margin-bottom: var(--space-xs);
+}
+
+.event-card__title {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.event-card__venue {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.event-card__footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.event-card__location {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.event-card__price {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Seat Selector */
+.seat-selector {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.seat-selector__stage {
+    text-align: center;
+    padding: var(--space-md);
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.2), transparent);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-teal);
+    letter-spacing: 0.2em;
+    margin-bottom: var(--space-lg);
+}
+
+.seat-selector__map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: var(--space-lg);
+}
+
+.seat-selector__row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.seat-selector__row-label {
+    width: 20px;
+    font-size: 10px;
+    color: var(--apex-steel);
+    text-align: center;
+}
+
+.seat-selector__seat {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--seat-color, rgba(255, 255, 255, 0.1));
+    border: none;
+    border-radius: 4px 4px 6px 6px;
+    font-size: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.seat-selector__seat.unavailable {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.2);
+    cursor: not-allowed;
+}
+
+.seat-selector__seat.selected {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.seat-selector__seat:hover:not(.unavailable):not(.selected) {
+    transform: scale(1.1);
+}
+
+.seat-selector__legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.seat-selector__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.seat-selector__legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.seat-selector__legend-color.unavailable {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.seat-selector__legend-color.selected {
+    background: var(--apex-teal);
+}
+
+/* Ticket Quantity Selector */
+.ticket-quantity-selector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.ticket-quantity-selector__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-lg);
+}
+
+.ticket-quantity-selector__info {}
+
+.ticket-quantity-selector__name {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.ticket-quantity-selector__desc {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin: 2px 0;
+}
+
+.ticket-quantity-selector__price {
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+}
+
+.ticket-quantity-selector__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.ticket-quantity-selector__controls button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.ticket-quantity-selector__controls button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.ticket-quantity-selector__controls span {
+    min-width: 24px;
+    text-align: center;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Digital Ticket */
+.digital-ticket {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.15));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.digital-ticket__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.digital-ticket__content {
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+.digital-ticket__event {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-xl);
+    color: var(--apex-white);
+}
+
+.digital-ticket__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.digital-ticket__detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.digital-ticket__seating {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+
+.digital-ticket__seat-info {
+    text-align: center;
+}
+
+.digital-ticket__seat-info span {
+    display: block;
+    font-size: 10px;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+}
+
+.digital-ticket__seat-info strong {
+    font-size: var(--text-xl);
+    color: var(--apex-white);
+}
+
+.digital-ticket__barcode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-lg);
+    background: white;
+    color: black;
+}
+
+.digital-ticket__code {
+    margin-top: var(--space-sm);
+    font-size: 10px;
+    font-family: 'SF Mono', Monaco, monospace;
+    letter-spacing: 0.1em;
+}
+
+.digital-ticket__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.digital-ticket__holder {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.digital-ticket__download {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-md);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+/* Event Schedule */
+.event-schedule {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-schedule__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    cursor: pointer;
+}
+
+.event-schedule__item.past {
+    opacity: 0.5;
+}
+
+.event-schedule__time {
+    min-width: 60px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+}
+
+.event-schedule__item.current .event-schedule__time {
+    color: var(--apex-teal);
+}
+
+.event-schedule__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4px;
+}
+
+.event-schedule__marker span {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.event-schedule__item.current .event-schedule__marker span {
+    background: var(--apex-teal);
+    box-shadow: 0 0 10px var(--apex-teal);
+}
+
+.event-schedule__content {
+    flex: 1;
+}
+
+.event-schedule__title {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.event-schedule__artist {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+}
+
+.event-schedule__stage {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-top: 2px;
+}
+
+/* RSVP Card */
+.rsvp-card {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    border-radius: var(--radius-xl);
+}
+
+.rsvp-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.rsvp-card__host {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.rsvp-card__host-photo {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.rsvp-card__host-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rsvp-card__host span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.rsvp-card__deadline {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.rsvp-card__event {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--text-xl);
+    color: var(--apex-white);
+}
+
+.rsvp-card__date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-lg);
+}
+
+.rsvp-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.rsvp-card__action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.rsvp-card__action--yes.active {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.rsvp-card__action--no.active {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.rsvp-card__action--maybe.active {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: #f59e0b;
+    color: #f59e0b;
+}

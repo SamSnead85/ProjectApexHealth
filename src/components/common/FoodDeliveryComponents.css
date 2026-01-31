@@ -1,0 +1,608 @@
+/* ============================================
+   FOOD DELIVERY COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Restaurant Card */
+.restaurant-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-2px);
+}
+
+.restaurant-card__image {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.restaurant-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.restaurant-card__promo {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    padding: 4px 8px;
+    background: #ef4444;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.restaurant-card__favorite {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.restaurant-card__favorite.active {
+    color: #ef4444;
+}
+
+.restaurant-card__content {
+    padding: var(--space-md);
+}
+
+.restaurant-card__name {
+    margin: 0 0 4px 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.restaurant-card__cuisine {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.restaurant-card__meta {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.restaurant-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: #f59e0b;
+}
+
+.restaurant-card__delivery,
+.restaurant-card__distance {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.restaurant-card__fee {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+/* Menu Item Card */
+.menu-item-card {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-lg);
+}
+
+.menu-item-card__image {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.menu-item-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-item-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: 4px;
+}
+
+.menu-item-card__name {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.menu-item-card__tags {
+    display: flex;
+    gap: 4px;
+}
+
+.menu-item-card__tag {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.menu-item-card__tag--vegetarian {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.menu-item-card__tag--vegan {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.menu-item-card__tag--spicy {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.menu-item-card__tag--popular {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.menu-item-card__new-badge {
+    padding: 2px 4px;
+    background: var(--apex-teal);
+    border-radius: var(--radius-xs);
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--apex-noir);
+}
+
+.menu-item-card__description {
+    flex: 1;
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    line-height: 1.4;
+}
+
+.menu-item-card__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.menu-item-card__price {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.menu-item-card__calories {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.menu-item-card__add {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+/* Cart Item Row */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cart-item-row__image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.cart-item-row__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-item-row__name {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.cart-item-row__customizations {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-item-row__price {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin-top: 2px;
+}
+
+.cart-item-row__quantity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.cart-item-row__quantity button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.cart-item-row__quantity span {
+    min-width: 20px;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.cart-item-row__remove {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.cart-item-row__remove:hover {
+    color: #ef4444;
+}
+
+/* Order Summary */
+.order-summary {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.order-summary__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.order-summary__rows {
+    margin-bottom: var(--space-md);
+}
+
+.order-summary__row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-xs) 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.order-summary__row--discount {
+    color: #10b981;
+}
+
+.order-summary__total {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-md) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.order-summary__checkout {
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+/* Delivery Tracker */
+.delivery-tracker {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.delivery-tracker__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.delivery-tracker__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--apex-teal);
+}
+
+.delivery-tracker__info {}
+
+.delivery-tracker__label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.delivery-tracker__time {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.delivery-tracker__driver {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.delivery-tracker__driver-photo {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-md);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.delivery-tracker__driver-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.delivery-tracker__driver span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.delivery-tracker__steps {}
+
+.delivery-tracker__step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.delivery-tracker__step:last-child {
+    padding-bottom: 0;
+}
+
+.delivery-tracker__step-indicator {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: 10px;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.delivery-tracker__step--completed .delivery-tracker__step-indicator {
+    background: #10b981;
+    color: white;
+}
+
+.delivery-tracker__step--current .delivery-tracker__step-indicator {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(6, 182, 212, 0);
+    }
+}
+
+.delivery-tracker__step-content {
+    flex: 1;
+}
+
+.delivery-tracker__step-title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.delivery-tracker__step--pending .delivery-tracker__step-title {
+    color: var(--apex-steel);
+}
+
+.delivery-tracker__step-desc {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.delivery-tracker__step-time {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    margin-top: 2px;
+}
+
+.delivery-tracker__connector {
+    position: absolute;
+    left: 11px;
+    top: 28px;
+    width: 2px;
+    height: calc(100% - 28px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.delivery-tracker__step--completed .delivery-tracker__connector {
+    background: #10b981;
+}
+
+/* Tip Selector */
+.tip-selector {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.tip-selector__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+}
+
+.tip-selector__presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.tip-selector__preset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.tip-selector__preset.active {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+}
+
+.tip-selector__percent {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.tip-selector__preset.active .tip-selector__percent {
+    color: var(--apex-teal);
+}
+
+.tip-selector__amount {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.tip-selector__custom {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.tip-selector__custom span {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.tip-selector__custom input {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.tip-selector__custom input:focus {
+    border-color: var(--apex-teal);
+}

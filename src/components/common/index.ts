@@ -62,3 +62,15 @@ export * from './NotificationComponents'
 
 // Workflow
 export * from './WorkflowComponents'
+
+// Finance & Real Estate
+export * from './FinanceComponents'
+export * from './RealEstateComponents'
+
+// Travel & Hospitality
+export * from './TravelComponents'
+export * from './FoodDeliveryComponents'
+
+// Sports & Events
+export * from './SportsAndFitnessComponents'
+export * from './EventComponents'
