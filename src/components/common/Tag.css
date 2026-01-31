@@ -1,0 +1,224 @@
+/* ============================================
+   TAG & CHIP
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Sizes */
+.tag--sm {
+    padding: 2px 8px;
+    font-size: 10px;
+}
+
+.tag--md {
+    padding: 4px 10px;
+    font-size: var(--text-xs);
+}
+
+.tag--lg {
+    padding: 6px 12px;
+    font-size: var(--text-sm);
+}
+
+/* Subtle variant (default) */
+.tag--subtle.tag--gray {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.tag--subtle.tag--teal {
+    background: rgba(6, 182, 212, 0.15);
+    color: #06b6d4;
+}
+
+.tag--subtle.tag--blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.tag--subtle.tag--green {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.tag--subtle.tag--yellow {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.tag--subtle.tag--red {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.tag--subtle.tag--purple {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+/* Solid variant */
+.tag--solid.tag--gray {
+    background: #6b7280;
+    color: white;
+}
+
+.tag--solid.tag--teal {
+    background: #06b6d4;
+    color: white;
+}
+
+.tag--solid.tag--blue {
+    background: #3b82f6;
+    color: white;
+}
+
+.tag--solid.tag--green {
+    background: #10b981;
+    color: white;
+}
+
+.tag--solid.tag--yellow {
+    background: #f59e0b;
+    color: white;
+}
+
+.tag--solid.tag--red {
+    background: #ef4444;
+    color: white;
+}
+
+.tag--solid.tag--purple {
+    background: #8b5cf6;
+    color: white;
+}
+
+/* Outline variant */
+.tag--outline {
+    background: transparent;
+    border: 1px solid;
+}
+
+.tag--outline.tag--gray {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--apex-silver);
+}
+
+.tag--outline.tag--teal {
+    border-color: #06b6d4;
+    color: #06b6d4;
+}
+
+.tag--outline.tag--blue {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.tag--outline.tag--green {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.tag--outline.tag--yellow {
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.tag--outline.tag--red {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.tag--outline.tag--purple {
+    border-color: #8b5cf6;
+    color: #8b5cf6;
+}
+
+.tag__icon {
+    display: flex;
+    align-items: center;
+}
+
+.tag__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 2px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.tag__remove:hover {
+    opacity: 1;
+}
+
+/* Tag Group */
+.tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+/* Chip */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--apex-silver);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--apex-white);
+}
+
+.chip--selected {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.chip__icon {
+    display: flex;
+    align-items: center;
+}
+
+/* Chip Group */
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+/* Light mode */
+[data-theme="light"] .chip {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #475569;
+}
+
+[data-theme="light"] .chip:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #0f172a;
+}
