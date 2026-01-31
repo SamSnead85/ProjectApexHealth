@@ -1,0 +1,155 @@
+/* ============================================
+   ALERT
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid;
+}
+
+.alert--info {
+    background: rgba(6, 182, 212, 0.1);
+    border-left-color: #06b6d4;
+}
+
+.alert--success {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+}
+
+.alert--warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-left-color: #f59e0b;
+}
+
+.alert--error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+}
+
+.alert__icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.alert--info .alert__icon {
+    color: #06b6d4;
+}
+
+.alert--success .alert__icon {
+    color: #10b981;
+}
+
+.alert--warning .alert__icon {
+    color: #f59e0b;
+}
+
+.alert--error .alert__icon {
+    color: #ef4444;
+}
+
+.alert__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 4px;
+}
+
+.alert__message {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    line-height: 1.5;
+}
+
+.alert__action {
+    flex-shrink: 0;
+}
+
+.alert__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.alert__dismiss:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* Alert Banner */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    overflow: hidden;
+}
+
+.alert-banner--info {
+    background: linear-gradient(90deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+    color: #06b6d4;
+}
+
+.alert-banner--success {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    color: #10b981;
+}
+
+.alert-banner--warning {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    color: #f59e0b;
+}
+
+.alert-banner--error {
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+    color: #ef4444;
+}
+
+.alert-banner__content {
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.alert-banner__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.alert-banner__dismiss:hover {
+    opacity: 1;
+}
+
+/* Light mode */
+[data-theme="light"] .alert__title {
+    color: #0f172a;
+}
+
+[data-theme="light"] .alert__message {
+    color: #475569;
+}
