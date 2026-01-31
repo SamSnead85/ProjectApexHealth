@@ -1,0 +1,260 @@
+/* ============================================
+   SETTINGS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.settings-page {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.settings-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 30% 0%, rgba(107, 114, 128, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.st__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.st__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.st__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(107, 114, 128, 0.2), rgba(107, 114, 128, 0.05));
+    border: 1px solid rgba(107, 114, 128, 0.3);
+    border-radius: var(--radius-lg);
+    color: #9ca3af;
+    position: relative;
+}
+
+.st__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(107, 114, 128, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.st__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.st__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+/* Settings Layout */
+.st__layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--space-xl);
+}
+
+/* Sidebar Nav */
+.st__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.st__nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.st__nav-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--apex-white);
+}
+
+.st__nav-item--active {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+    color: var(--apex-teal);
+    border-left: 2px solid var(--apex-teal);
+}
+
+/* Content */
+.st__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Section */
+.st__section {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.st__section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.st__section-description {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-lg);
+}
+
+/* Form Group */
+.st__form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.st__form-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+    margin-bottom: var(--space-xs);
+}
+
+.st__form-input {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    transition: all 0.2s ease;
+}
+
+.st__form-input:focus {
+    outline: none;
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+/* Toggle Switch */
+.st__toggle-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+}
+
+.st__toggle-info {
+    flex: 1;
+}
+
+.st__toggle-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.st__toggle-description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-top: 2px;
+}
+
+.st__toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.st__toggle--active {
+    background: var(--apex-teal);
+}
+
+.st__toggle-handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.st__toggle--active .st__toggle-handle {
+    transform: translateX(20px);
+}
+
+/* Danger Zone */
+.st__danger-zone {
+    border-color: rgba(239, 68, 68, 0.2);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), transparent);
+}
+
+.st__danger-zone .st__section-title {
+    color: #ef4444;
+}
+
+@media (max-width: 1024px) {
+    .st__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .st__nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,202 @@
+/* ============================================
+   COVERAGE COMPARISON
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.coverage-comparison {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.coverage-comparison::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 30% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.cc__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.cc__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.cc__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    color: #8b5cf6;
+    position: relative;
+}
+
+.cc__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.cc__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.cc__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+/* Plan Cards Grid */
+.cc__plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.cc__plan-card {
+    position: relative;
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+}
+
+.cc__plan-card--selected {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.cc__plan-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cc__plan-badge {
+    position: absolute;
+    top: -12px;
+    right: var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: white;
+}
+
+.cc__plan-name {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.cc__plan-carrier {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-lg);
+}
+
+.cc__plan-premium {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.cc__plan-period {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Comparison Table */
+.cc__comparison-table {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.cc__table-header {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+}
+
+.cc__table-row {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    align-items: center;
+}
+
+.cc__table-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.cc__feature-name {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.cc__feature-value {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    text-align: center;
+}
+
+.cc__feature-value--best {
+    color: var(--apex-teal);
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .cc__plans-grid {
+        grid-template-columns: 1fr;
+    }
+}

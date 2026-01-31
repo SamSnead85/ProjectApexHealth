@@ -1,0 +1,208 @@
+/* ============================================
+   PAYMENT HISTORY
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.payment-history {
+    min-height: 100vh;
+    padding: var(--space-xl);
+    background: var(--apex-obsidian);
+    position: relative;
+}
+
+.payment-history::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 20% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.ph__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.ph__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.ph__icon-container {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-lg);
+    color: #10b981;
+    position: relative;
+}
+
+.ph__icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    animation: iconPulse 2s ease-out infinite;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+.ph__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.ph__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 4px;
+}
+
+/* Metrics */
+.ph__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.ph__stat-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ph__stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stat-color), transparent);
+}
+
+.ph__stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.ph__stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+}
+
+.ph__stat-content {
+    flex: 1;
+}
+
+.ph__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.ph__stat-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Section */
+.ph__section {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.ph__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-md);
+}
+
+.ph__section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+/* Payment Row */
+.ph__payment-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 80px;
+    align-items: center;
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+.ph__payment-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.ph__payment-date,
+.ph__payment-method,
+.ph__payment-reference {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.ph__payment-amount {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 1024px) {
+    .ph__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
