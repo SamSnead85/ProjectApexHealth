@@ -1,0 +1,150 @@
+/* ============================================
+   CLIPBOARD UTILITIES
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Copy Button */
+.copy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-button--icon {
+    padding: 6px;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+}
+
+.copy-button--icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.copy-button--icon.copy-button--copied {
+    color: #10b981;
+}
+
+.copy-button--button {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.copy-button--button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.copy-button--button.copy-button--copied {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.copy-button--inline {
+    padding: 4px 8px;
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.copy-button--inline:hover {
+    text-decoration: underline;
+}
+
+/* Size variants */
+.copy-button--sm {
+    font-size: var(--text-xs);
+}
+
+.copy-button--sm.copy-button--icon {
+    padding: 4px;
+}
+
+.copy-button--lg.copy-button--button {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-md);
+}
+
+/* Code Block */
+.code-block {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.code-block__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.code-block__language {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.code-block__content {
+    margin: 0;
+    padding: var(--space-md);
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--apex-silver);
+}
+
+.code-block__line {
+    display: flex;
+}
+
+.code-block__line-number {
+    display: inline-block;
+    min-width: 32px;
+    padding-right: var(--space-md);
+    color: var(--apex-steel);
+    text-align: right;
+    user-select: none;
+    opacity: 0.5;
+}
+
+.code-block__line-content {
+    flex: 1;
+}
+
+/* Link with Copy */
+.link-with-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.link-with-copy__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.link-with-copy__link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}

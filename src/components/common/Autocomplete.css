@@ -1,0 +1,209 @@
+/* ============================================
+   AUTOCOMPLETE
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.autocomplete {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.autocomplete__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.autocomplete__control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* Tags */
+.autocomplete__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.autocomplete__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.autocomplete__tag-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-teal);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.autocomplete__tag-remove:hover {
+    background: rgba(6, 182, 212, 0.2);
+}
+
+/* Input wrapper */
+.autocomplete__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.autocomplete__icon {
+    position: absolute;
+    left: var(--space-md);
+    color: var(--apex-steel);
+    pointer-events: none;
+}
+
+.autocomplete__input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    padding-left: 40px;
+    padding-right: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    transition: all 0.2s ease;
+}
+
+.autocomplete__input::placeholder {
+    color: var(--apex-steel);
+}
+
+.autocomplete__input:focus {
+    outline: none;
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+}
+
+.autocomplete__input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.autocomplete--error .autocomplete__input {
+    border-color: #ef4444;
+}
+
+.autocomplete__loader {
+    position: absolute;
+    right: var(--space-md);
+    color: var(--apex-teal);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.autocomplete__error {
+    font-size: var(--text-xs);
+    color: #ef4444;
+}
+
+/* Dropdown */
+.autocomplete__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: var(--space-xs);
+    max-height: 280px;
+    overflow-y: auto;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.autocomplete__empty {
+    padding: var(--space-lg);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* Options */
+.autocomplete__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.autocomplete__option:hover,
+.autocomplete__option--highlighted {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.autocomplete__option--selected {
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.autocomplete__option--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.autocomplete__option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.autocomplete__option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.autocomplete__option-label {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.autocomplete__option-description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.autocomplete__option-check {
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}

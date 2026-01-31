@@ -1,0 +1,124 @@
+/* ============================================
+   DRAWER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+}
+
+.drawer {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Position variants */
+.drawer--right {
+    top: 0;
+    right: 0;
+    height: 100vh;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+
+.drawer--left {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+
+.drawer--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* Header */
+.drawer__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.drawer__header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.drawer__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.drawer__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0;
+}
+
+.drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.drawer__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* Body */
+.drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-lg);
+}
+
+/* Footer */
+.drawer__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+/* Light mode */
+[data-theme="light"] .drawer {
+    background: white;
+}
+
+[data-theme="light"] .drawer__title {
+    color: #0f172a;
+}

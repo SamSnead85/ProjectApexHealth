@@ -1,0 +1,193 @@
+/* ============================================
+   SLIDER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.slider--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.slider__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider__label {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.slider__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Track wrapper */
+.slider__track-wrapper {
+    position: relative;
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.slider__track-wrapper--range {
+    height: 32px;
+}
+
+/* Track */
+.slider__track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.slider--lg .slider__track {
+    height: 6px;
+}
+
+/* Fill */
+.slider__fill {
+    position: absolute;
+    left: 0;
+    height: 4px;
+    background: var(--apex-teal);
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+.slider--gradient .slider__fill {
+    background: linear-gradient(90deg, #06b6d4, #8b5cf6);
+}
+
+.slider--lg .slider__fill {
+    height: 6px;
+}
+
+/* Input (native range) */
+.slider__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slider__input::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    cursor: grab;
+}
+
+.slider__input::-moz-range-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    cursor: grab;
+}
+
+/* Thumb visualization overlay */
+.slider__track-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--apex-teal);
+    border: 2px solid white;
+    border-radius: 50%;
+    left: calc(var(--slider-percentage, 0%) - 8px);
+    box-shadow: 0 2px 8px rgba(6, 182, 212, 0.4);
+    pointer-events: none;
+    transition: transform 0.1s ease;
+    z-index: 2;
+}
+
+.slider--lg .slider__track-wrapper::before {
+    width: 20px;
+    height: 20px;
+    left: calc(var(--slider-percentage, 0%) - 10px);
+}
+
+.slider__input:active+.slider__track+.slider__fill+.slider__track-wrapper::before,
+.slider__track-wrapper:hover::before {
+    transform: scale(1.1);
+}
+
+/* Range slider - dual thumbs need special handling */
+.slider--range .slider__track-wrapper::before {
+    display: none;
+}
+
+.slider__input--start,
+.slider__input--end {
+    pointer-events: none;
+}
+
+.slider__input--start::-webkit-slider-thumb,
+.slider__input--end::-webkit-slider-thumb {
+    pointer-events: auto;
+}
+
+.slider__input--start::-moz-range-thumb,
+.slider__input--end::-moz-range-thumb {
+    pointer-events: auto;
+}
+
+/* Marks */
+.slider__marks {
+    position: relative;
+    height: 16px;
+    margin-top: var(--space-xs);
+}
+
+.slider__mark {
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.slider__mark::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin-bottom: 4px;
+}
+
+.slider__mark--active::before {
+    background: var(--apex-teal);
+}
+
+.slider__mark-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    white-space: nowrap;
+}
+
+/* Size variants */
+.slider--sm .slider__track,
+.slider--sm .slider__fill {
+    height: 2px;
+}
+
+.slider--sm .slider__track-wrapper::before {
+    width: 12px;
+    height: 12px;
+    left: calc(var(--slider-percentage, 0%) - 6px);
+}

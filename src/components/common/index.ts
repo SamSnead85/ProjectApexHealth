@@ -41,5 +41,13 @@ export { FormField, TextAreaField, SelectField } from './FormField'
 export { Card, CardHeader, CardBody, CardFooter, StatCard, LinkCard } from './Card'
 export { Stepper, StepIndicator } from './Stepper'
 export { Rating, EmojiRating, ThumbsRating } from './Rating'
+export { Slider, RangeSlider } from './Slider'
+export { DatePicker } from './DatePicker'
+export { ColorPicker, ColorSwatch } from './ColorPicker'
+export { Autocomplete } from './Autocomplete'
+export { Drawer } from './Drawer'
+export { Popover, PopoverMenu } from './Popover'
+export { CopyButton, CodeBlock, LinkWithCopy } from './Clipboard'
+
 
 
