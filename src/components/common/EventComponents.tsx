@@ -6,9 +6,9 @@ import './EventComponents.css'
 // Event Card
 interface Event { id: string; title: string; image: string; date: Date; venue: string; location: string; price: number; priceRange?: { min: number; max: number }; category: string; isFavorite?: boolean; soldOut?: boolean }
 
-interface EventCardProps { event: Event; currency?: string; onSelect?: () => void; onFavorite?: () => void; className?: string }
+interface TicketedEventCardProps { event: Event; currency?: string; onSelect?: () => void; onFavorite?: () => void; className?: string }
 
-export function EventCard({ event, currency = 'USD', onSelect, onFavorite, className = '' }: EventCardProps) {
+export function TicketedEventCard({ event, currency = 'USD', onSelect, onFavorite, className = '' }: TicketedEventCardProps) {
     const formatPrice = (p: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(p)
     const formatDate = (d: Date) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
 
@@ -205,4 +205,4 @@ export function RSVPCard({ eventName, date, hostName, hostPhoto, deadline, onRes
     )
 }
 
-export default { EventCard, SeatSelector, TicketQuantitySelector, DigitalTicket, EventSchedule, RSVPCard }
+export default { TicketedEventCard, SeatSelector, TicketQuantitySelector, DigitalTicket, EventSchedule, RSVPCard }

@@ -80,9 +80,9 @@ export function MenuItemCard({ item, currency = 'USD', onAdd, onCustomize, class
 // Cart Item
 interface CartItem { id: string; name: string; price: number; quantity: number; customizations?: string[]; image?: string }
 
-interface CartItemRowProps { item: CartItem; currency?: string; onIncrease?: () => void; onDecrease?: () => void; onRemove?: () => void; className?: string }
+interface FoodCartItemProps { item: CartItem; currency?: string; onIncrease?: () => void; onDecrease?: () => void; onRemove?: () => void; className?: string }
 
-export function CartItemRow({ item, currency = 'USD', onIncrease, onDecrease, onRemove, className = '' }: CartItemRowProps) {
+export function FoodCartItem({ item, currency = 'USD', onIncrease, onDecrease, onRemove, className = '' }: FoodCartItemProps) {
     const formatPrice = (p: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(p)
 
     return (
@@ -213,4 +213,4 @@ export function TipSelector({ orderTotal, currency = 'USD', presets = [15, 18, 2
     )
 }
 
-export default { RestaurantCard, MenuItemCard, CartItemRow, OrderSummary, DeliveryTracker, TipSelector }
+export default { RestaurantCard, MenuItemCard, FoodCartItem, OrderSummary, DeliveryTracker, TipSelector }

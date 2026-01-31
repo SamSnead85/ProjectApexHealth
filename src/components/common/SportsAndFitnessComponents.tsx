@@ -45,7 +45,7 @@ export function ExerciseTimer({ initialTime, type = 'countdown', autoStart = fal
     const [isRunning, setIsRunning] = useState(autoStart)
 
     useEffect(() => {
-        let interval: NodeJS.Timeout
+        let interval: ReturnType<typeof setInterval>
         if (isRunning) {
             interval = setInterval(() => {
                 setTime(t => {
