@@ -1,0 +1,203 @@
+/* ============================================
+   STATUS INDICATOR
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Status Indicator */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.status-indicator--sm .status-indicator__dot {
+    width: 6px;
+    height: 6px;
+}
+
+.status-indicator--md .status-indicator__dot {
+    width: 8px;
+    height: 8px;
+}
+
+.status-indicator--lg .status-indicator__dot {
+    width: 10px;
+    height: 10px;
+}
+
+.status-indicator__dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-indicator__dot--success {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.status-indicator__dot--warning {
+    background: #f59e0b;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.status-indicator__dot--error {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.status-indicator__dot--info {
+    background: #06b6d4;
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+}
+
+.status-indicator__dot--pending {
+    background: #8b5cf6;
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+}
+
+.status-indicator__dot--neutral {
+    background: var(--apex-steel);
+}
+
+.status-indicator__dot--pulse {
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+.status-indicator__label {
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 500;
+}
+
+.status-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-badge--success {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.status-badge--success .status-badge__dot {
+    background: #10b981;
+}
+
+.status-badge--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.status-badge--warning .status-badge__dot {
+    background: #f59e0b;
+}
+
+.status-badge--error {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.status-badge--error .status-badge__dot {
+    background: #ef4444;
+}
+
+.status-badge--info {
+    background: rgba(6, 182, 212, 0.15);
+    color: #06b6d4;
+}
+
+.status-badge--info .status-badge__dot {
+    background: #06b6d4;
+}
+
+.status-badge--pending {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.status-badge--pending .status-badge__dot {
+    background: #8b5cf6;
+}
+
+.status-badge--neutral {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-silver);
+}
+
+.status-badge--neutral .status-badge__dot {
+    background: var(--apex-steel);
+}
+
+/* Traffic Light */
+.traffic-light {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.traffic-light__bar {
+    display: flex;
+    height: 8px;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.traffic-light__segment {
+    height: 100%;
+}
+
+.traffic-light__segment--success {
+    background: #10b981;
+}
+
+.traffic-light__segment--warning {
+    background: #f59e0b;
+}
+
+.traffic-light__segment--error {
+    background: #ef4444;
+}
+
+.traffic-light__labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+}
+
+.traffic-light__label--success {
+    color: #10b981;
+}
+
+.traffic-light__label--warning {
+    color: #f59e0b;
+}
+
+.traffic-light__label--error {
+    color: #ef4444;
+}

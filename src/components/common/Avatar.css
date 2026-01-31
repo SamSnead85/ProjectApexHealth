@@ -1,0 +1,130 @@
+/* ============================================
+   AVATAR
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.avatar {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: visible;
+    flex-shrink: 0;
+}
+
+/* Sizes */
+.avatar--xs {
+    width: 24px;
+    height: 24px;
+    font-size: var(--text-xs);
+}
+
+.avatar--sm {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-xs);
+}
+
+.avatar--md {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-sm);
+}
+
+.avatar--lg {
+    width: 48px;
+    height: 48px;
+    font-size: var(--text-base);
+}
+
+.avatar--xl {
+    width: 64px;
+    height: 64px;
+    font-size: var(--text-lg);
+}
+
+.avatar__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar__initials {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Status */
+.avatar__status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 25%;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--apex-obsidian);
+}
+
+.avatar__status--online {
+    background: #10b981;
+    box-shadow: 0 0 6px #10b981;
+}
+
+.avatar__status--offline {
+    background: var(--apex-steel);
+}
+
+.avatar__status--away {
+    background: #f59e0b;
+    box-shadow: 0 0 6px #f59e0b;
+}
+
+.avatar__status--busy {
+    background: #ef4444;
+    box-shadow: 0 0 6px #ef4444;
+}
+
+/* Avatar Group */
+.avatar-group {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.avatar-group .avatar {
+    margin-left: -8px;
+    border: 2px solid var(--apex-obsidian);
+    transition: all 0.2s ease;
+}
+
+.avatar-group .avatar:hover {
+    z-index: 1;
+    transform: translateY(-2px);
+}
+
+.avatar-group .avatar:last-child {
+    margin-left: 0;
+}
+
+/* Overflow count */
+.avatar--overflow {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar__count {
+    font-size: inherit;
+    font-weight: 600;
+    color: var(--apex-silver);
+}
