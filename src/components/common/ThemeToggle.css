@@ -1,0 +1,143 @@
+/* ============================================
+   THEME TOGGLE
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.theme-toggle__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle__button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--apex-white);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.theme-toggle__label {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Theme Selector (Full) */
+.theme-selector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.theme-selector__option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.theme-selector__option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.theme-selector__option--active {
+    background: rgba(6, 182, 212, 0.08);
+    border-color: var(--apex-teal);
+}
+
+.theme-selector__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    color: var(--apex-silver);
+}
+
+.theme-selector__option--active .theme-selector__icon {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.theme-selector__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.theme-selector__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.theme-selector__description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.theme-selector__indicator {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--apex-teal);
+    border-radius: var(--radius-lg);
+    pointer-events: none;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] .theme-toggle__button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #64748b;
+}
+
+[data-theme="light"] .theme-toggle__button:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #0f172a;
+}
+
+[data-theme="light"] .theme-selector__option {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .theme-selector__option:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .theme-selector__icon {
+    background: rgba(0, 0, 0, 0.05);
+    color: #64748b;
+}
+
+[data-theme="light"] .theme-selector__label {
+    color: #0f172a;
+}
+
+[data-theme="light"] .theme-selector__description {
+    color: #64748b;
+}

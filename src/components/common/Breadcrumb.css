@@ -1,0 +1,79 @@
+/* ============================================
+   BREADCRUMB
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb__item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.breadcrumb__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+.breadcrumb__current {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.breadcrumb__separator {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+    opacity: 0.5;
+}
+
+/* Compact variant */
+.breadcrumb--compact .breadcrumb__link,
+.breadcrumb--compact .breadcrumb__current {
+    padding: 2px 4px;
+}
+
+/* Light mode */
+[data-theme="light"] .breadcrumb__link {
+    color: #64748b;
+}
+
+[data-theme="light"] .breadcrumb__link:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #0f172a;
+}
+
+[data-theme="light"] .breadcrumb__current {
+    color: #0f172a;
+}
