@@ -1,0 +1,84 @@
+/* ============================================
+   SEARCH INPUT
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.search-input {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    transition: all 0.2s ease;
+}
+
+.search-input:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-input--focused {
+    border-color: var(--apex-teal);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.search-input__icon {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.search-input--focused .search-input__icon {
+    color: var(--apex-teal);
+}
+
+.search-input__field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    min-width: 0;
+}
+
+.search-input__field::placeholder {
+    color: var(--apex-steel);
+}
+
+.search-input__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.search-input__clear:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--apex-white);
+}
+
+/* Full width variant */
+.search-input--full {
+    width: 100%;
+}
+
+/* Compact variant */
+.search-input--compact {
+    padding: 6px var(--space-sm);
+}
+
+.search-input--compact .search-input__field {
+    font-size: var(--text-xs);
+}
