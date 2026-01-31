@@ -1,0 +1,211 @@
+/* ============================================
+   RESPONSIVE UTILITIES
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Breakpoints:
+   mobile: < 640px
+   tablet: 640px - 1024px
+   desktop: 1024px - 1280px
+   wide: > 1280px
+*/
+
+/* Show On */
+.show-on {
+    display: none;
+}
+
+.show-on--mobile {
+    @media (max-width: 639px) {
+        display: block;
+    }
+}
+
+.show-on--tablet {
+    @media (min-width: 640px) and (max-width: 1023px) {
+        display: block;
+    }
+}
+
+.show-on--desktop {
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        display: block;
+    }
+}
+
+.show-on--wide {
+    @media (min-width: 1280px) {
+        display: block;
+    }
+}
+
+/* Hide On */
+.hide-on--mobile {
+    @media (max-width: 639px) {
+        display: none !important;
+    }
+}
+
+.hide-on--tablet {
+    @media (min-width: 640px) and (max-width: 1023px) {
+        display: none !important;
+    }
+}
+
+.hide-on--desktop {
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        display: none !important;
+    }
+}
+
+.hide-on--wide {
+    @media (min-width: 1280px) {
+        display: none !important;
+    }
+}
+
+/* Responsive Stack */
+.responsive-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, 16px);
+}
+
+.responsive-stack--sm {
+    @media (min-width: 640px) {
+        flex-direction: row;
+    }
+}
+
+.responsive-stack--md {
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.responsive-stack--lg {
+    @media (min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.responsive-stack--reverse {
+    @media (max-width: 639px) {
+        flex-direction: column-reverse;
+    }
+}
+
+/* Responsive Grid */
+.responsive-grid {
+    display: grid;
+    gap: var(--grid-gap, 16px);
+    grid-template-columns: repeat(var(--grid-cols-mobile, 1), 1fr);
+}
+
+@media (min-width: 640px) {
+    .responsive-grid {
+        grid-template-columns: repeat(var(--grid-cols-tablet, 2), 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-grid {
+        grid-template-columns: repeat(var(--grid-cols-desktop, 3), 1fr);
+    }
+}
+
+/* Responsive Text */
+.responsive-text {
+    font-size: var(--text-size-mobile, 14px);
+}
+
+@media (min-width: 640px) {
+    .responsive-text {
+        font-size: var(--text-size-tablet, 16px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-text {
+        font-size: var(--text-size-desktop, 18px);
+    }
+}
+
+/* Aspect Ratio */
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    padding-bottom: var(--aspect-padding, 56.25%);
+    /* default 16:9 */
+}
+
+.aspect-ratio>* {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Container Max */
+.container-max {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-max--padded {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+}
+
+@media (min-width: 640px) {
+    .container-max--padded {
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+    }
+}
+
+.container-max--sm {
+    max-width: 640px;
+}
+
+.container-max--md {
+    max-width: 768px;
+}
+
+.container-max--lg {
+    max-width: 1024px;
+}
+
+.container-max--xl {
+    max-width: 1280px;
+}
+
+.container-max--full {
+    max-width: none;
+}
+
+/* Mobile-first utilities */
+.mobile-only {
+    @media (min-width: 640px) {
+        display: none !important;
+    }
+}
+
+.tablet-up {
+    display: none;
+
+    @media (min-width: 640px) {
+        display: block;
+    }
+}
+
+.desktop-up {
+    display: none;
+
+    @media (min-width: 1024px) {
+        display: block;
+    }
+}

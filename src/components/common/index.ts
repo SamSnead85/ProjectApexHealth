@@ -48,6 +48,11 @@ export { Autocomplete } from './Autocomplete'
 export { Drawer } from './Drawer'
 export { Popover, PopoverMenu } from './Popover'
 export { CopyButton, CodeBlock, LinkWithCopy } from './Clipboard'
+export { FadeIn, ScaleIn, StaggerContainer, StaggerItem, Pulse, Float, Shimmer, Typewriter } from './Animations'
+export { SkipLink, ScreenReaderOnly, LiveRegion, FocusTrap, AccessibilityPanel, AccessibilityToggle } from './Accessibility'
+export { ShowOn, HideOn, ResponsiveStack, ResponsiveGrid, ResponsiveText, AspectRatio, ContainerMax } from './Responsive'
+export { ConnectivityProvider, useConnectivity, OfflineBanner, ConnectionStatus, OnlineOnly, OfflineOnly } from './Connectivity'
+
 
 
 

@@ -1,0 +1,237 @@
+/* ============================================
+   ACCESSIBILITY
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Skip Link */
+.skip-link {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--apex-teal);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    z-index: 10000;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: var(--space-md);
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Accessibility Toggle */
+.accessibility-toggle {
+    position: fixed;
+    bottom: 80px;
+    right: var(--space-lg);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--apex-silver);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: all 0.2s ease;
+}
+
+.accessibility-toggle:hover {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+/* Accessibility Panel */
+.accessibility-panel {
+    position: fixed;
+    bottom: 140px;
+    right: var(--space-lg);
+    width: 280px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    overflow: hidden;
+}
+
+.accessibility-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.accessibility-panel__header h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.accessibility-panel__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 20px;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accessibility-panel__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.accessibility-panel__content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.accessibility-panel__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+}
+
+.accessibility-panel__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.accessibility-panel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.accessibility-panel__controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accessibility-panel__controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.accessibility-panel__controls span {
+    min-width: 50px;
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.accessibility-panel__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.accessibility-panel__option:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.accessibility-panel__option--active {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.accessibility-panel__reset {
+    margin-top: var(--space-sm);
+    padding: var(--space-sm);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.accessibility-panel__reset:hover {
+    color: var(--apex-white);
+}
+
+/* High Contrast Mode */
+.high-contrast {
+    filter: contrast(1.2);
+}
+
+.high-contrast * {
+    border-color: white !important;
+}
+
+/* Reduce Motion */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+/* Focus Mode */
+.focus-mode *:focus {
+    outline: 3px solid var(--apex-teal) !important;
+    outline-offset: 2px !important;
+}
