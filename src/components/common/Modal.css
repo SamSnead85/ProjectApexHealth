@@ -1,0 +1,141 @@
+/* ============================================
+   MODAL
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.modal__overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9998;
+}
+
+.modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 2 * var(--space-lg));
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    outline: none;
+    overflow: hidden;
+}
+
+/* Size variants */
+.modal--sm {
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal--md {
+    width: 100%;
+    max-width: 540px;
+}
+
+.modal--lg {
+    width: 100%;
+    max-width: 720px;
+}
+
+.modal--xl {
+    width: 100%;
+    max-width: 960px;
+}
+
+.modal--full {
+    width: 100%;
+    max-width: calc(100vw - 2 * var(--space-lg));
+    height: calc(100vh - 2 * var(--space-lg));
+}
+
+/* Header */
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.modal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal__close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+/* Content */
+.modal__content {
+    flex: 1;
+    padding: var(--space-xl);
+    overflow-y: auto;
+}
+
+/* Footer */
+.modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    padding: var(--space-lg) var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Scrollbar */
+.modal__content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal__content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .modal__overlay {
+        padding: var(--space-sm);
+        align-items: flex-end;
+    }
+
+    .modal {
+        max-height: 90vh;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .modal--full {
+        height: 100vh;
+        border-radius: 0;
+    }
+}

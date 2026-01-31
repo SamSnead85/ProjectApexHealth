@@ -1,0 +1,139 @@
+/* ============================================
+   DROPDOWN
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.dropdown--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.dropdown__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+.dropdown__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-white);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 180px;
+}
+
+.dropdown__trigger:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.dropdown__trigger--open {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.dropdown__value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    text-align: left;
+}
+
+.dropdown__trigger svg {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+/* Menu */
+.dropdown__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: var(--space-xs);
+    padding: var(--space-xs);
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.dropdown__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-silver);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+}
+
+.dropdown__option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+.dropdown__option--selected {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--apex-teal);
+}
+
+.dropdown__option--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.dropdown__option-icon {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+}
+
+.dropdown__option-label {
+    flex: 1;
+}
+
+.dropdown__check {
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+/* Scrollbar styling */
+.dropdown__menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown__menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dropdown__menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
