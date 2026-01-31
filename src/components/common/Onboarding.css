@@ -1,0 +1,272 @@
+/* ============================================
+   ONBOARDING
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Onboarding Tour */
+.onboarding__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+.onboarding__modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.onboarding__close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+
+.onboarding__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.onboarding__image {
+    width: 100%;
+    height: 200px;
+    background: rgba(6, 182, 212, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.onboarding__image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.onboarding__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.onboarding__progress {
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--space-lg);
+}
+
+.onboarding__progress-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.onboarding__progress-dot--active {
+    width: 24px;
+    background: var(--apex-teal);
+    border-radius: 4px;
+}
+
+.onboarding__progress-dot--completed {
+    background: var(--apex-teal);
+}
+
+.onboarding__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-sm);
+}
+
+.onboarding__description {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin: 0 0 var(--space-lg);
+    line-height: 1.6;
+}
+
+.onboarding__actions {
+    display: flex;
+    gap: var(--space-sm);
+    width: 100%;
+}
+
+.onboarding__btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.onboarding__btn--primary {
+    background: var(--apex-teal);
+    border: none;
+    color: white;
+}
+
+.onboarding__btn--primary:hover {
+    background: #0ea5e9;
+}
+
+.onboarding__btn--secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.onboarding__btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+.onboarding__skip {
+    margin-top: var(--space-md);
+    background: transparent;
+    border: none;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.onboarding__skip:hover {
+    color: var(--apex-silver);
+}
+
+/* Welcome Modal */
+.welcome__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+.welcome__modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 480px;
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+}
+
+.welcome__title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0 0 var(--space-sm);
+}
+
+.welcome__description {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin: 0 0 var(--space-xl);
+}
+
+.welcome__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    text-align: left;
+}
+
+.welcome__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+
+.welcome__feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+.welcome__feature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.welcome__feature-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.welcome__feature-description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.welcome__actions {
+    display: flex;
+    justify-content: center;
+}
+
+.welcome__btn {
+    padding: var(--space-sm) var(--space-2xl);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.welcome__btn:hover {
+    background: #0ea5e9;
+}

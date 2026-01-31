@@ -1,0 +1,148 @@
+/* ============================================
+   RATING
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Star Rating */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.rating__label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.rating__stars {
+    display: flex;
+    gap: 2px;
+}
+
+.rating__star {
+    padding: 2px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.rating--readonly .rating__star {
+    cursor: default;
+}
+
+.rating__star:hover:not(:disabled) {
+    color: #fbbf24;
+}
+
+.rating__star--filled {
+    color: #fbbf24;
+}
+
+.rating__star--half {
+    color: #fbbf24;
+    opacity: 0.5;
+}
+
+.rating__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    min-width: 28px;
+}
+
+/* Size variants */
+.rating--sm .rating__star svg {
+    width: 16px;
+    height: 16px;
+}
+
+.rating--md .rating__star svg {
+    width: 20px;
+    height: 20px;
+}
+
+.rating--lg .rating__star svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Emoji Rating */
+.emoji-rating {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.emoji-rating__item {
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.emoji-rating--readonly .emoji-rating__item {
+    cursor: default;
+}
+
+.emoji-rating__item:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.emoji-rating__item--selected {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+}
+
+.emoji-rating__emoji {
+    font-size: 24px;
+}
+
+/* Thumbs Rating */
+.thumbs-rating {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.thumbs-rating__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.thumbs-rating__btn span {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.thumbs-rating__btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.thumbs-rating__btn--selected {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+}
+
+.thumbs-rating__btn--selected span {
+    color: #10b981;
+}
+
+.thumbs-rating__btn--selected-down {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+}
+
+.thumbs-rating__btn--selected-down span {
+    color: #ef4444;
+}

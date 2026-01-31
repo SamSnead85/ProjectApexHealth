@@ -1,0 +1,132 @@
+/* ============================================
+   KEYBOARD SHORTCUTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.keyboard-shortcuts__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+.keyboard-shortcuts__modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.keyboard-shortcuts__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.keyboard-shortcuts__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin: 0;
+}
+
+.keyboard-shortcuts__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.keyboard-shortcuts__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.keyboard-shortcuts__list {
+    padding: var(--space-md);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.keyboard-shortcuts__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+}
+
+.keyboard-shortcuts__item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.keyboard-shortcuts__description {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.keyboard-shortcuts__key {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--apex-white);
+}
+
+.keyboard-shortcuts__footer {
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-align: center;
+}
+
+.keyboard-shortcuts__footer kbd {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--apex-teal);
+    margin: 0 2px;
+}
+
+/* Scrollbar */
+.keyboard-shortcuts__list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.keyboard-shortcuts__list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.keyboard-shortcuts__list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}

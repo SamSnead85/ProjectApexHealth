@@ -2,138 +2,102 @@ import { motion } from 'framer-motion'
 import './Skeleton.css'
 
 interface SkeletonProps {
-    variant?: 'text' | 'circular' | 'rectangular' | 'card' | 'metric'
     width?: string | number
     height?: string | number
+    variant?: 'text' | 'circular' | 'rectangular'
+    animation?: 'pulse' | 'wave' | 'none'
     className?: string
-    count?: number
 }
 
 export function Skeleton({
-    variant = 'text',
     width,
     height,
-    className = '',
-    count = 1
+    variant = 'text',
+    animation = 'pulse',
+    className = ''
 }: SkeletonProps) {
-    const getVariantStyles = () => {
-        switch (variant) {
-            case 'circular':
-                return {
-                    width: width || 40,
-                    height: height || 40,
-                    borderRadius: '50%'
-                }
-            case 'rectangular':
-                return {
-                    width: width || '100%',
-                    height: height || 120
-                }
-            case 'text':
-                return {
-                    width: width || '100%',
-                    height: height || 16,
-                    borderRadius: 4
-                }
-            case 'card':
-                return {
-                    width: width || '100%',
-                    height: height || 180,
-                    borderRadius: 12
-                }
-            case 'metric':
-                return {
-                    width: width || '100%',
-                    height: height || 80,
-                    borderRadius: 12
-                }
-            default:
-                return { width, height }
-        }
+    const style = {
+        width: width || (variant === 'circular' ? height : '100%'),
+        height: height || (variant === 'text' ? '1em' : undefined),
+        aspectRatio: variant === 'circular' ? '1' : undefined
     }
 
-    const items = Array.from({ length: count }, (_, i) => i)
-
     return (
-        <>
-            {items.map((_, index) => (
-                <motion.div
-                    key={index}
-                    className={`skeleton skeleton--${variant} ${className}`}
-                    style={getVariantStyles()}
-                    initial={{ opacity: 0.5 }}
-                    animate={{ opacity: [0.5, 0.8, 0.5] }}
-                    transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: index * 0.1
-                    }}
+        <span
+            className={`skeleton skeleton--${variant} skeleton--${animation} ${className}`}
+            style={style}
+        />
+    )
+}
+
+// Skeleton text line
+export function SkeletonText({ lines = 3, className = '' }: { lines?: number; className?: string }) {
+    return (
+        <div className={`skeleton-text ${className}`}>
+            {Array.from({ length: lines }, (_, i) => (
+                <Skeleton
+                    key={i}
+                    width={i === lines - 1 ? '60%' : '100%'}
+                    height={14}
+                    variant="rectangular"
                 />
             ))}
-        </>
+        </div>
     )
 }
 
-// Pre-built skeleton layouts
-export function DashboardSkeleton() {
+// Skeleton card
+export function SkeletonCard({ className = '' }: { className?: string }) {
     return (
-        <div className="skeleton-dashboard">
-            {/* Header */}
-            <div className="skeleton-header">
-                <Skeleton variant="text" width="30%" height={32} />
-                <Skeleton variant="text" width="40%" height={16} />
-            </div>
-
-            {/* Metrics */}
-            <div className="skeleton-metrics">
-                <Skeleton variant="metric" />
-                <Skeleton variant="metric" />
-                <Skeleton variant="metric" />
-                <Skeleton variant="metric" />
-            </div>
-
-            {/* Cards */}
-            <div className="skeleton-cards">
-                <Skeleton variant="card" height={240} />
-                <Skeleton variant="card" height={240} />
+        <div className={`skeleton-card ${className}`}>
+            <Skeleton variant="rectangular" height={160} />
+            <div className="skeleton-card__content">
+                <Skeleton variant="text" height={20} width="70%" />
+                <SkeletonText lines={2} />
             </div>
         </div>
     )
 }
 
-export function TableSkeleton({ rows = 5 }: { rows?: number }) {
+// Skeleton table row
+export function SkeletonTableRow({ columns = 4, className = '' }: { columns?: number; className?: string }) {
     return (
-        <div className="skeleton-table">
-            {/* Header */}
-            <div className="skeleton-table-header">
-                <Skeleton variant="text" width="15%" />
-                <Skeleton variant="text" width="25%" />
-                <Skeleton variant="text" width="20%" />
-                <Skeleton variant="text" width="15%" />
-                <Skeleton variant="text" width="10%" />
-            </div>
+        <div className={`skeleton-table-row ${className}`}>
+            {Array.from({ length: columns }, (_, i) => (
+                <Skeleton key={i} variant="rectangular" height={16} width={i === 0 ? '40%' : '60%'} />
+            ))}
+        </div>
+    )
+}
 
-            {/* Rows */}
-            {Array.from({ length: rows }).map((_, i) => (
-                <div key={i} className="skeleton-table-row">
-                    <Skeleton variant="text" width="15%" />
-                    <Skeleton variant="text" width="25%" />
-                    <Skeleton variant="text" width="20%" />
-                    <Skeleton variant="text" width="15%" />
-                    <Skeleton variant="text" width="10%" />
+// Skeleton avatar with text
+export function SkeletonAvatar({ withText = true, className = '' }: { withText?: boolean; className?: string }) {
+    return (
+        <div className={`skeleton-avatar ${className}`}>
+            <Skeleton variant="circular" width={40} height={40} />
+            {withText && (
+                <div className="skeleton-avatar__text">
+                    <Skeleton variant="rectangular" height={14} width={120} />
+                    <Skeleton variant="rectangular" height={12} width={80} />
                 </div>
-            ))}
+            )}
         </div>
     )
 }
 
-export function CardGridSkeleton({ cards = 6 }: { cards?: number }) {
+// Full page skeleton
+export function SkeletonPage({ className = '' }: { className?: string }) {
     return (
-        <div className="skeleton-card-grid">
-            {Array.from({ length: cards }).map((_, i) => (
-                <Skeleton key={i} variant="card" height={200} />
-            ))}
+        <div className={`skeleton-page ${className}`}>
+            <div className="skeleton-page__header">
+                <Skeleton variant="rectangular" height={32} width={200} />
+                <Skeleton variant="rectangular" height={16} width={300} />
+            </div>
+            <div className="skeleton-page__grid">
+                {Array.from({ length: 4 }, (_, i) => (
+                    <SkeletonCard key={i} />
+                ))}
+            </div>
         </div>
     )
 }

@@ -1,122 +1,147 @@
-/* ================================
-   SKELETON LOADING COMPONENTS
-   Premium shimmer animation
-   ================================ */
+/* ============================================
+   SKELETON
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
 
 .skeleton {
-    background: linear-gradient(90deg,
-            var(--apex-obsidian-glass) 0%,
-            var(--apex-obsidian-elevated) 50%,
-            var(--apex-obsidian-glass) 100%);
-    background-size: 200% 100%;
-    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
 }
 
-@keyframes skeleton-shimmer {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* Variants */
 .skeleton--text {
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-sm);
 }
 
 .skeleton--circular {
     border-radius: 50%;
 }
 
-.skeleton--rectangular,
-.skeleton--card,
-.skeleton--metric {
+.skeleton--rectangular {
     border-radius: var(--radius-md);
 }
 
-/* Dashboard Skeleton */
-.skeleton-dashboard {
+/* Pulse animation */
+.skeleton--pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* Wave animation */
+.skeleton--wave {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton--wave::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent);
+    animation: skeleton-wave 1.5s linear infinite;
+}
+
+@keyframes skeleton-wave {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Skeleton Text */
+.skeleton-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Skeleton Card */
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.skeleton-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+}
+
+/* Skeleton Table Row */
+.skeleton-table-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.skeleton-table-row>* {
+    flex: 1;
+}
+
+/* Skeleton Avatar */
+.skeleton-avatar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.skeleton-avatar__text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Skeleton Page */
+.skeleton-page {
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
-    padding: var(--space-md);
+    padding: var(--space-xl);
 }
 
-.skeleton-header {
+.skeleton-page__header {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 }
 
-.skeleton-metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-}
-
-.skeleton-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
-}
-
-/* Table Skeleton */
-.skeleton-table {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    padding: var(--space-md);
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-}
-
-.skeleton-table-header,
-.skeleton-table-row {
-    display: flex;
-    gap: var(--space-md);
-    padding: var(--space-md);
-}
-
-.skeleton-table-header {
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.skeleton-table-row {
-    padding: var(--space-sm) var(--space-md);
-}
-
-/* Card Grid Skeleton */
-.skeleton-card-grid {
+.skeleton-page__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-lg);
 }
 
-/* Light Theme */
+/* Light mode */
 [data-theme="light"] .skeleton {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .skeleton--wave::after {
     background: linear-gradient(90deg,
-            var(--apex-obsidian-glass) 0%,
-            var(--apex-obsidian-elevated) 50%,
-            var(--apex-obsidian-glass) 100%);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .skeleton-metrics {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .skeleton-cards {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .skeleton-metrics {
-        grid-template-columns: 1fr;
-    }
+            transparent,
+            rgba(0, 0, 0, 0.05),
+            transparent);
 }

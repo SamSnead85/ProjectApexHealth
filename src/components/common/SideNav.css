@@ -1,0 +1,238 @@
+/* ============================================
+   SIDE NAV & BOTTOM NAV
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Side Navigation */
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.98);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    transition: width 0.3s ease;
+}
+
+.side-nav--collapsed {
+    width: 72px;
+}
+
+.side-nav__header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.side-nav__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-sm);
+}
+
+.side-nav__item-wrapper {
+    margin-bottom: 2px;
+}
+
+.side-nav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--apex-silver);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.side-nav__item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+.side-nav__item--active {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.side-nav__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.side-nav__item-label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.side-nav__item-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--apex-teal);
+}
+
+.side-nav__item-new {
+    padding: 2px 6px;
+    background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+    border-radius: var(--radius-sm);
+    font-size: 9px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.side-nav__item-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.side-nav__item-chevron--expanded {
+    transform: rotate(180deg);
+}
+
+/* Children */
+.side-nav__children {
+    overflow: hidden;
+    padding-left: 36px;
+}
+
+.side-nav__child {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    transition: all 0.2s ease;
+}
+
+.side-nav__child:hover {
+    color: var(--apex-silver);
+}
+
+.side-nav__child--active {
+    color: var(--apex-teal);
+}
+
+.side-nav__child-icon {
+    display: flex;
+    align-items: center;
+    width: 16px;
+}
+
+/* Toggle */
+.side-nav__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin: var(--space-sm) auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.side-nav__toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.side-nav__footer {
+    padding: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Bottom Navigation (Mobile) */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: var(--space-xs) var(--space-sm);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .side-nav {
+        display: none;
+    }
+
+    .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.bottom-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-md);
+    text-decoration: none;
+    color: var(--apex-steel);
+    transition: color 0.2s ease;
+}
+
+.bottom-nav__item--active {
+    color: var(--apex-teal);
+}
+
+.bottom-nav__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-nav__badge {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: #ef4444;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-nav__label {
+    font-size: 10px;
+    font-weight: 500;
+}

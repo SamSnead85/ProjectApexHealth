@@ -1,0 +1,208 @@
+/* ============================================
+   STEPPER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Base Stepper */
+.stepper {
+    display: flex;
+}
+
+.stepper--horizontal {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.stepper--vertical {
+    flex-direction: column;
+}
+
+/* Step wrapper */
+.stepper__step-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.stepper--vertical .stepper__step-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Step */
+.stepper__step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.stepper__step--clickable {
+    cursor: pointer;
+}
+
+.stepper--vertical .stepper__step {
+    padding: var(--space-sm) 0;
+}
+
+/* Indicator */
+.stepper__indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--apex-steel);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.stepper--sm .stepper__indicator {
+    width: 24px;
+    height: 24px;
+    font-size: var(--text-xs);
+}
+
+.stepper--lg .stepper__indicator {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-md);
+}
+
+/* Status styles */
+.stepper__step--current .stepper__indicator {
+    background: var(--apex-teal);
+    border-color: var(--apex-teal);
+    color: white;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+.stepper__step--completed .stepper__indicator {
+    background: var(--apex-teal);
+    border-color: var(--apex-teal);
+    color: white;
+}
+
+.stepper__step--upcoming .stepper__indicator {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--apex-steel);
+}
+
+/* Number and dot */
+.stepper__number {
+    font-variant-numeric: tabular-nums;
+}
+
+.stepper__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Content */
+.stepper__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stepper__title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+    white-space: nowrap;
+}
+
+.stepper__step--current .stepper__title {
+    color: var(--apex-white);
+}
+
+.stepper__step--completed .stepper__title {
+    color: var(--apex-white);
+}
+
+.stepper__description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Connector */
+.stepper__connector {
+    flex: 1;
+    height: 2px;
+    min-width: 24px;
+    margin: 0 var(--space-sm);
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stepper--vertical .stepper__connector {
+    width: 2px;
+    height: 24px;
+    min-height: 24px;
+    margin: 0;
+    margin-left: 15px;
+}
+
+.stepper__connector-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--apex-teal);
+    transform-origin: left center;
+}
+
+.stepper--vertical .stepper__connector-fill {
+    transform-origin: top center;
+}
+
+/* Dotted variant */
+.stepper--dotted .stepper__indicator {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    border: none;
+}
+
+.stepper--dotted .stepper__step--current .stepper__indicator {
+    width: 16px;
+    height: 16px;
+}
+
+/* Step Indicator (simplified) */
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step-indicator__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.step-indicator__dot:disabled {
+    cursor: default;
+}
+
+.step-indicator__dot--active {
+    width: 24px;
+    background: var(--apex-teal);
+    border-radius: 4px;
+}
+
+.step-indicator__dot--completed {
+    background: var(--apex-teal);
+}

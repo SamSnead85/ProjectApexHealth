@@ -228,7 +228,18 @@ export function Shell({
             <CommandPalette
                 isOpen={showCommandPalette}
                 onClose={() => setShowCommandPalette(false)}
-                onNavigate={handleCommandPaletteNavigate}
+                groups={[
+                    {
+                        label: 'Navigation',
+                        items: searchableItems.map(item => ({
+                            id: item.path,
+                            label: item.label,
+                            description: item.path,
+                            keywords: item.keywords,
+                            action: () => handleCommandPaletteNavigate(item.path)
+                        }))
+                    }
+                ]}
             />
         </div>
     )
