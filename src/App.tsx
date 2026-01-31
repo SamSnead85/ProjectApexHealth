@@ -573,7 +573,7 @@ function App() {
         }
         // Employer Portal Dashboard
         if (activePortal === 'employer' && (activePath === '/employer' || activePath.includes('/employer/dashboard'))) {
-            return <EmployerPortal />
+            return <EmployerAdmin />
         }
         // Default to dashboard
         return <Dashboard portalType={activePortal} />
