@@ -1,11 +1,13 @@
-/* Employer Benefits Administration - Institutional Enterprise Styling */
-/* Boardroom Purity + Anti-Vibe-Coding Standards */
+/* ============================================================
+   EMPLOYER ADMIN MODERN - Premium Apex Obsidian v3 Design
+   AI-Powered Benefits Administration Command Center
+   ============================================================ */
 
 /* ============================================================
    PAGE LAYOUT
    ============================================================ */
 
-.employer-admin {
+.employer-admin-modern {
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
@@ -15,470 +17,765 @@
 }
 
 /* ============================================================
-   PAGE HEADER
+   PREMIUM HEADER
    ============================================================ */
 
-.employer-admin__header {
+.employer-admin-modern__header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     gap: var(--space-4);
     padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--border-subtle);
 }
 
-.employer-admin__header-content h1 {
-    font-size: 1.375rem;
-    font-weight: 600;
+.employer-admin-modern__title-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex: 1;
+}
+
+.employer-admin-modern__icon-container {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(13, 148, 136, 0.05));
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+}
+
+.employer-admin-modern__icon-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid var(--accent-primary);
+    opacity: 0;
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+
+    70% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+}
+
+.employer-admin-modern__title {
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.02em;
-    line-height: 1.2;
 }
 
-.employer-admin__header-content p {
+.employer-admin-modern__subtitle {
     font-size: 0.75rem;
     color: var(--text-tertiary);
-    margin: var(--space-1) 0 0;
+    margin-top: var(--space-1);
 }
 
-.employer-admin__header-actions {
+.employer-admin-modern__badges {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.employer-admin-modern__badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.employer-admin-modern__badge--live {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.employer-admin-modern__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.employer-admin-modern__actions {
     display: flex;
     gap: var(--space-2);
 }
 
 /* ============================================================
-   METRICS
+   GLOWING METRIC CARDS
    ============================================================ */
 
-.employer-admin__metrics {
+.employer-admin-modern__metrics {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-3);
+    gap: var(--space-4);
 }
 
 @media (max-width: 1200px) {
-    .employer-admin__metrics {
+    .employer-admin-modern__metrics {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    .employer-admin__metrics {
+    .employer-admin-modern__metrics {
         grid-template-columns: 1fr;
     }
 }
 
-.employer-metric-card {
+.employer-admin-modern__metric-card {
+    position: relative;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
-    position: relative;
-    transition: all 0.2s ease;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.employer-metric-card::before {
-    content: '';
+.employer-admin-modern__metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.employer-admin-modern__metric-glow {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent-primary);
+    top: -50%;
+    right: -50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, var(--card-glow-color, #0d9488) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity 0.2s ease;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
-.employer-metric-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+.employer-admin-modern__metric-card:hover .employer-admin-modern__metric-glow {
+    opacity: 0.08;
 }
 
-.employer-metric-card:hover::before {
-    opacity: 1;
-}
-
-.employer-metric-card__header {
+.employer-admin-modern__metric-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
 }
 
-.employer-metric-card__icon {
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-md);
+.employer-admin-modern__metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.employer-metric-card__trend {
+.employer-admin-modern__metric-trend {
     display: flex;
     align-items: center;
     gap: 2px;
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     font-weight: 600;
-    padding: 2px 6px;
+    padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
 }
 
-.employer-metric-card__trend--up {
-    color: #059669;
-    background: rgba(5, 150, 105, 0.08);
+.employer-admin-modern__metric-trend--up {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
 }
 
-.employer-metric-card__trend--down {
-    color: #dc2626;
-    background: rgba(220, 38, 38, 0.08);
+.employer-admin-modern__metric-trend--down {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
 }
 
-.employer-metric-card__value {
-    font-size: 1.5rem;
+.employer-admin-modern__metric-value {
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.02em;
     font-feature-settings: 'tnum' 1;
-    line-height: 1.1;
+    line-height: 1;
 }
 
-.employer-metric-card__label {
+.employer-admin-modern__metric-label {
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-secondary);
-    margin-top: var(--space-1);
+    margin-top: var(--space-2);
 }
 
 /* ============================================================
-   MAIN GRID
+   MAIN GRID LAYOUT
    ============================================================ */
 
-.employer-admin__grid {
+.employer-admin-modern__grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: var(--space-4);
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-5);
 }
 
-.employer-admin__card--roster {
-    grid-row: span 2;
-}
-
-@media (max-width: 1024px) {
-    .employer-admin__grid {
+@media (max-width: 1200px) {
+    .employer-admin-modern__grid {
         grid-template-columns: 1fr;
     }
-
-    .employer-admin__card--roster {
-        grid-row: auto;
-    }
 }
 
-/* Panel Base */
-.employer-admin__card {
+/* ============================================================
+   EMPLOYEE ROSTER
+   ============================================================ */
+
+.employer-admin-modern__roster {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
 
-.employer-admin__card-header {
+.employer-admin-modern__roster-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--space-4);
-    border-bottom: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: var(--space-3);
 }
 
-.employer-admin__card-header h3 {
+.employer-admin-modern__roster-title {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: 0.875rem;
+}
+
+.employer-admin-modern__roster-title h3 {
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
 }
 
-.employer-admin__card-header h3 svg {
-    color: var(--text-tertiary);
+.employer-admin-modern__roster-title svg {
+    color: var(--accent-primary);
 }
 
-.employer-admin__card-stats {
+.employer-admin-modern__roster-controls {
     display: flex;
-    align-items: center;
     gap: var(--space-3);
-    font-size: 0.75rem;
-    color: var(--text-secondary);
 }
 
-/* ============================================================
-   EMPLOYEE ROSTER TABLE
-   ============================================================ */
-
-.employer-admin__filters {
-    display: flex;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-bottom: 1px solid var(--border-hairline);
+.employer-admin-modern__roster-controls select {
+    padding: var(--space-2) var(--space-3);
     background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
 }
 
-.employer-admin__search {
+.employer-admin-modern__roster-search {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) var(--space-3);
-    background: var(--bg-card);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    flex: 1;
-    max-width: 280px;
+    min-width: 200px;
 }
 
-.employer-admin__search svg {
+.employer-admin-modern__roster-search svg {
     color: var(--text-tertiary);
 }
 
-.employer-admin__search input {
+.employer-admin-modern__roster-search input {
+    flex: 1;
     background: transparent;
     border: none;
+    outline: none;
     font-size: 0.75rem;
     color: var(--text-primary);
-    outline: none;
-    flex: 1;
 }
 
-.employer-admin__search input::placeholder {
+.employer-admin-modern__roster-search input::placeholder {
     color: var(--text-tertiary);
 }
 
-.employer-admin__roster-header {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.8fr 0.5fr;
-    gap: var(--space-3);
+.employer-admin-modern__roster-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employer-admin-modern__roster-table th {
     padding: var(--space-2) var(--space-4);
     background: var(--bg-secondary);
-    font-size: 0.5625rem;
+    font-size: 0.625rem;
     font-weight: 600;
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    text-align: left;
 }
 
-.employer-admin__roster-list {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.employee-row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.8fr 0.5fr;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    align-items: center;
+.employer-admin-modern__roster-table tbody tr {
     border-bottom: 1px solid var(--border-hairline);
     transition: background 0.15s ease;
 }
 
-.employee-row:hover {
+.employer-admin-modern__roster-table tbody tr:hover {
     background: var(--bg-hover);
 }
 
-.employee-row__name {
+.employer-admin-modern__roster-table td {
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.employer-admin-modern__employee {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.employer-admin-modern__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+
+.employer-admin-modern__employee-info {
     display: flex;
     flex-direction: column;
 }
 
-.employee-row__name-text {
-    font-size: 0.8125rem;
+.employer-admin-modern__employee-name {
     font-weight: 600;
     color: var(--text-primary);
 }
 
-.employee-row__id {
-    font-size: 0.5625rem;
+.employer-admin-modern__employee-id {
+    font-size: 0.625rem;
     color: var(--text-tertiary);
 }
 
-.employee-row__department,
-.employee-row__plan,
-.employee-row__date {
-    font-size: 0.75rem;
+.employer-admin-modern__status {
+    display: inline-flex;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.employer-admin-modern__status--active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.employer-admin-modern__status--pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.employer-admin-modern__status--cobra {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.employer-admin-modern__status--terminated {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.employer-admin-modern__cost {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+}
+
+.employer-admin-modern__manage-btn {
+    padding: var(--space-1) var(--space-2);
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.6875rem;
+    font-weight: 500;
     color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.employer-admin-modern__manage-btn:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.employer-admin-modern__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* ============================================================
+   AI INSIGHTS PANEL
+   ============================================================ */
+
+.employer-admin-modern__ai-panel {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(13, 148, 136, 0.02));
+    border: 1px solid rgba(13, 148, 136, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+}
+
+.employer-admin-modern__ai-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.employer-admin-modern__ai-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--accent-primary), #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.employer-admin-modern__ai-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.employer-admin-modern__ai-subtitle {
+    font-size: 0.6875rem;
+    color: var(--accent-primary);
+    margin: 0;
+}
+
+.employer-admin-modern__ai-insight {
+    padding: var(--space-3);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-2);
+}
+
+.employer-admin-modern__ai-insight p {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 var(--space-2);
+}
+
+.employer-admin-modern__ai-insight p strong {
+    color: var(--accent-primary);
+}
+
+.employer-admin-modern__ai-confidence {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+.employer-admin-modern__ai-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+}
+
+.employer-admin-modern__ai-footer span:last-child {
+    font-weight: 600;
+    color: var(--accent-primary);
 }
 
 /* ============================================================
    BENEFIT PLANS
    ============================================================ */
 
-.employer-admin__plans-list {
-    padding: var(--space-3);
+.employer-admin-modern__plans {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+}
+
+.employer-admin-modern__plans-header {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-}
-
-.plan-card {
-    padding: var(--space-3);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    transition: all 0.15s ease;
-}
-
-.plan-card:hover {
-    background: var(--bg-tertiary);
-}
-
-.plan-card__header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-2);
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
 }
 
-.plan-card__name {
+.employer-admin-modern__plans-header svg {
+    color: var(--accent-primary);
+}
+
+.employer-admin-modern__plans-header h3 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+}
+
+.employer-admin-modern__cost-tag {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+.employer-admin-modern__plan-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+}
+
+.employer-admin-modern__plan-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+}
+
+.employer-admin-modern__plan-info {
+    flex: 1;
+}
+
+.employer-admin-modern__plan-name {
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--text-primary);
+    margin-bottom: var(--space-1);
 }
 
-.plan-card__stats {
-    display: flex;
-    gap: var(--space-4);
-}
-
-.plan-card__stat {
-    display: flex;
-    flex-direction: column;
-}
-
-.plan-card__stat-label {
-    font-size: 0.5625rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.plan-card__stat-value {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    font-feature-settings: 'tnum' 1;
-}
-
-.plan-card__bar {
+.employer-admin-modern__plan-bar {
     height: 4px;
-    background: var(--bg-card);
+    background: var(--bg-secondary);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
 
-.plan-card__bar-fill {
+.employer-admin-modern__plan-fill {
     height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), #059669);
     border-radius: var(--radius-full);
-    background: #2563eb;
+}
+
+.employer-admin-modern__plan-stats {
+    text-align: right;
+}
+
+.employer-admin-modern__plan-enrolled {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.employer-admin-modern__plan-percent {
+    display: block;
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
 }
 
 /* ============================================================
    EVENTS TIMELINE
    ============================================================ */
 
-.employer-admin__events-list {
-    padding: var(--space-3);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+.employer-admin-modern__events {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
 }
 
-.event-item {
-    display: flex;
-    gap: var(--space-3);
-    padding: var(--space-3);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    transition: all 0.15s ease;
-    align-items: flex-start;
-}
-
-.event-item:hover {
-    background: var(--bg-tertiary);
-}
-
-.event-item__icon {
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-md);
+.employer-admin-modern__events-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: var(--bg-card);
-    color: var(--text-tertiary);
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
 }
 
-.event-item__content {
-    flex: 1;
-    min-width: 0;
+.employer-admin-modern__events-header svg {
+    color: var(--accent-primary);
 }
 
-.event-item__title {
-    font-size: 0.75rem;
+.employer-admin-modern__events-header h3 {
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 2px;
+    margin: 0;
+    flex: 1;
 }
 
-.event-item__description {
-    font-size: 0.6875rem;
+.employer-admin-modern__events-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.employer-admin-modern__event {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+}
+
+.employer-admin-modern__event-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.employer-admin-modern__event-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-subtle);
+    border: 2px solid var(--bg-card);
+}
+
+.employer-admin-modern__event--high .employer-admin-modern__event-dot {
+    background: #ef4444;
+}
+
+.employer-admin-modern__event--medium .employer-admin-modern__event-dot {
+    background: #f59e0b;
+}
+
+.employer-admin-modern__event-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border-subtle);
+    margin-top: var(--space-1);
+}
+
+.employer-admin-modern__event-content {
+    flex: 1;
+    padding-bottom: var(--space-3);
+}
+
+.employer-admin-modern__event-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.employer-admin-modern__event-employee {
+    font-size: 0.75rem;
     color: var(--text-secondary);
+    margin-top: 2px;
 }
 
-.event-item__date {
-    font-size: 0.625rem;
+.employer-admin-modern__event-date {
+    font-size: 0.6875rem;
     color: var(--text-tertiary);
-    font-feature-settings: 'tnum' 1;
+    margin-top: var(--space-1);
 }
 
 /* ============================================================
-   DARK MODE
+   DARK MODE ENHANCEMENTS
    ============================================================ */
 
-[data-theme="dark"] .employer-metric-card,
-[data-theme="dark"] .employer-admin__card {
+[data-theme="dark"] .employer-admin-modern__metric-card,
+[data-theme="dark"] .employer-admin-modern__roster,
+[data-theme="dark"] .employer-admin-modern__plans,
+[data-theme="dark"] .employer-admin-modern__events {
     background: rgba(30, 41, 59, 0.6);
     border-color: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .employer-admin__filters,
-[data-theme="dark"] .employer-admin__roster-header {
-    background: rgba(15, 23, 42, 0.6);
+[data-theme="dark"] .employer-admin-modern__ai-panel {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(13, 148, 136, 0.04));
 }
 
-[data-theme="dark"] .plan-card,
-[data-theme="dark"] .event-item {
-    background: rgba(15, 23, 42, 0.5);
-}
-
-[data-theme="dark"] .plan-card:hover,
-[data-theme="dark"] .event-item:hover {
-    background: rgba(30, 41, 59, 0.7);
+[data-theme="dark"] .employer-admin-modern__metric-card:hover .employer-admin-modern__metric-glow {
+    opacity: 0.12;
 }
 
 /* ============================================================
    SCROLLBAR
    ============================================================ */
 
-.employer-admin__roster-list::-webkit-scrollbar {
+.employer-admin-modern ::-webkit-scrollbar {
     width: 4px;
 }
 
-.employer-admin__roster-list::-webkit-scrollbar-track {
+.employer-admin-modern ::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.employer-admin__roster-list::-webkit-scrollbar-thumb {
+.employer-admin-modern ::-webkit-scrollbar-thumb {
     background: var(--border-subtle);
     border-radius: 2px;
 }

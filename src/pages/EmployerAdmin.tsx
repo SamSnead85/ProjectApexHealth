@@ -28,15 +28,23 @@ import {
     ArrowDownRight,
     BarChart3,
     PieChart,
-    Award
+    Award,
+    Brain,
+    Sparkles,
+    Zap,
+    Activity
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
 import './EmployerAdmin.css'
 
-// Types
+// ==============================================
+// TYPES
+// ==============================================
+
 interface Employee {
     id: string
     name: string
+    initials: string
     department: string
     hireDate: string
     status: 'active' | 'pending' | 'terminated' | 'cobra'
@@ -66,30 +74,23 @@ interface UpcomingEvent {
     priority: 'high' | 'medium' | 'low'
 }
 
-interface EmployerMetric {
-    label: string
-    value: string | number
-    change: number
-    trend: 'up' | 'down' | 'neutral'
-    icon: React.ElementType
-    color: string
+interface AIInsight {
+    text: string
+    confidence: number
+    type: 'recommendation' | 'alert' | 'optimization'
 }
 
-// Mock Data
-const employerMetrics: EmployerMetric[] = [
-    { label: 'Total Employees', value: 487, change: 3.2, trend: 'up', icon: Users, color: '#3B82F6' },
-    { label: 'Monthly Premium', value: 245800, change: 5.1, trend: 'up', icon: DollarSign, color: '#EF4444' },
-    { label: 'Enrollment Rate', value: '94.5%', change: 1.8, trend: 'up', icon: CheckCircle2, color: '#10B981' },
-    { label: 'Days to Open Enrollment', value: 45, change: 0, trend: 'neutral', icon: Calendar, color: '#F59E0B' },
-]
+// ==============================================
+// PREMIUM MOCK DATA
+// ==============================================
 
 const employees: Employee[] = [
-    { id: 'EMP-001', name: 'Sarah Johnson', department: 'Engineering', hireDate: '2022-03-15', status: 'active', planType: 'PPO Gold', tier: 'family', monthlyCost: 1850, lastAction: 'Annual enrollment' },
-    { id: 'EMP-002', name: 'Michael Chen', department: 'Marketing', hireDate: '2023-06-01', status: 'active', planType: 'HDHP', tier: 'employee+spouse', monthlyCost: 1250, lastAction: 'Life event - marriage' },
-    { id: 'EMP-003', name: 'Emily Rodriguez', department: 'Sales', hireDate: '2024-01-08', status: 'pending', planType: 'PPO Silver', tier: 'employee', monthlyCost: 650, lastAction: 'New hire enrollment' },
-    { id: 'EMP-004', name: 'James Wilson', department: 'Finance', hireDate: '2021-08-22', status: 'active', planType: 'PPO Gold', tier: 'employee+child', monthlyCost: 1450, lastAction: 'Dependent add' },
-    { id: 'EMP-005', name: 'Lisa Thompson', department: 'HR', hireDate: '2019-11-01', status: 'cobra', planType: 'PPO Gold', tier: 'family', monthlyCost: 2150, lastAction: 'COBRA election' },
-    { id: 'EMP-006', name: 'David Kim', department: 'Engineering', hireDate: '2023-09-15', status: 'active', planType: 'HDHP', tier: 'employee', monthlyCost: 480, lastAction: 'HSA contribution update' },
+    { id: 'EMP-001', name: 'Sarah Johnson', initials: 'SJ', department: 'Engineering', hireDate: '2022-03-15', status: 'active', planType: 'PPO Gold', tier: 'family', monthlyCost: 1850, lastAction: 'Annual enrollment' },
+    { id: 'EMP-002', name: 'Michael Chen', initials: 'MC', department: 'Marketing', hireDate: '2023-06-01', status: 'active', planType: 'HDHP', tier: 'employee+spouse', monthlyCost: 1250, lastAction: 'Life event - marriage' },
+    { id: 'EMP-003', name: 'Emily Rodriguez', initials: 'ER', department: 'Sales', hireDate: '2024-01-08', status: 'pending', planType: 'PPO Silver', tier: 'employee', monthlyCost: 650, lastAction: 'New hire enrollment' },
+    { id: 'EMP-004', name: 'James Wilson', initials: 'JW', department: 'Finance', hireDate: '2021-08-22', status: 'active', planType: 'PPO Gold', tier: 'employee+child', monthlyCost: 1450, lastAction: 'Dependent add' },
+    { id: 'EMP-005', name: 'Lisa Thompson', initials: 'LT', department: 'HR', hireDate: '2019-11-01', status: 'cobra', planType: 'PPO Gold', tier: 'family', monthlyCost: 2150, lastAction: 'COBRA election' },
+    { id: 'EMP-006', name: 'David Kim', initials: 'DK', department: 'Engineering', hireDate: '2023-09-15', status: 'active', planType: 'HDHP', tier: 'employee', monthlyCost: 480, lastAction: 'HSA contribution update' },
 ]
 
 const benefitPlans: BenefitPlan[] = [
@@ -108,21 +109,20 @@ const upcomingEvents: UpcomingEvent[] = [
     { id: 'EVT-005', type: 'enrollment', title: 'New Hire 30-Day Deadline', date: '2024-02-08', employee: 'Emily Rodriguez', priority: 'high' },
 ]
 
-// Utility functions
+const aiInsights: AIInsight[] = [
+    { text: 'Based on utilization patterns, recommend promoting **HDHP with HSA** to reduce employer costs by ~12%', confidence: 91, type: 'optimization' },
+    { text: '**3 employees** approaching 30-day enrollment deadline. Auto-reminders scheduled.', confidence: 98, type: 'alert' },
+    { text: 'Dental plan renewal in 28 days. Current rates **3.2% below market** - recommend early lock-in.', confidence: 87, type: 'recommendation' },
+]
+
+// ==============================================
+// UTILITY FUNCTIONS
+// ==============================================
+
 const formatCurrency = (value: number): string => {
     if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
     if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`
     return `$${value.toLocaleString()}`
-}
-
-const getStatusColor = (status: string): string => {
-    switch (status) {
-        case 'active': return '#10B981'
-        case 'pending': return '#F59E0B'
-        case 'terminated': return '#EF4444'
-        case 'cobra': return '#8B5CF6'
-        default: return '#6B7280'
-    }
 }
 
 const getPlanTypeIcon = (type: string): React.ElementType => {
@@ -136,139 +136,9 @@ const getPlanTypeIcon = (type: string): React.ElementType => {
     }
 }
 
-// Components
-const MetricCard = ({ metric, index }: { metric: EmployerMetric; index: number }) => {
-    const Icon = metric.icon
-    const formattedValue = typeof metric.value === 'number' && metric.label.includes('Premium')
-        ? formatCurrency(metric.value)
-        : typeof metric.value === 'number'
-            ? metric.value.toLocaleString()
-            : metric.value
-
-    return (
-        <motion.div
-            className="employer-metric-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-        >
-            <div className="employer-metric-card__header">
-                <div className="employer-metric-card__icon" style={{ background: `${metric.color}15`, color: metric.color }}>
-                    <Icon size={20} />
-                </div>
-                {metric.trend !== 'neutral' && (
-                    <div className={`employer-metric-card__trend employer-metric-card__trend--${metric.trend}`}>
-                        {metric.trend === 'up' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                        <span>{metric.change > 0 ? '+' : ''}{metric.change}%</span>
-                    </div>
-                )}
-            </div>
-            <div className="employer-metric-card__value">{formattedValue}</div>
-            <div className="employer-metric-card__label">{metric.label}</div>
-        </motion.div>
-    )
-}
-
-const EmployeeRow = ({ employee, index }: { employee: Employee; index: number }) => (
-    <motion.div
-        className="employee-row"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: index * 0.03 }}
-    >
-        <div className="employee-row__info">
-            <span className="employee-row__name">{employee.name}</span>
-            <span className="employee-row__id">{employee.id}</span>
-        </div>
-        <span className="employee-row__dept">{employee.department}</span>
-        <Badge
-            variant={employee.status === 'active' ? 'success' : employee.status === 'pending' ? 'warning' : employee.status === 'cobra' ? 'info' : 'critical'}
-            size="sm"
-        >
-            {employee.status}
-        </Badge>
-        <span className="employee-row__plan">{employee.planType}</span>
-        <span className="employee-row__tier">{employee.tier}</span>
-        <span className="employee-row__cost">{formatCurrency(employee.monthlyCost)}</span>
-        <Button variant="ghost" size="sm">Manage</Button>
-    </motion.div>
-)
-
-const BenefitPlanCard = ({ plan, index }: { plan: BenefitPlan; index: number }) => {
-    const Icon = getPlanTypeIcon(plan.type)
-    const enrollmentRate = (plan.enrolled / plan.eligible) * 100
-
-    return (
-        <motion.div
-            className="benefit-plan-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-        >
-            <div className="benefit-plan-card__header">
-                <div className="benefit-plan-card__icon">
-                    <Icon size={18} />
-                </div>
-                <div className="benefit-plan-card__info">
-                    <span className="benefit-plan-card__name">{plan.name}</span>
-                    <span className="benefit-plan-card__type">{plan.type}</span>
-                </div>
-            </div>
-            <div className="benefit-plan-card__enrollment">
-                <div className="benefit-plan-card__enrollment-bar">
-                    <motion.div
-                        className="benefit-plan-card__enrollment-fill"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${enrollmentRate}%` }}
-                        transition={{ delay: index * 0.05, duration: 0.5 }}
-                    />
-                </div>
-                <span>{plan.enrolled}/{plan.eligible} enrolled ({enrollmentRate.toFixed(0)}%)</span>
-            </div>
-            <div className="benefit-plan-card__costs">
-                <div className="benefit-plan-card__cost-item">
-                    <span>Employer</span>
-                    <strong>{formatCurrency(plan.employerContribution)}</strong>
-                </div>
-                <div className="benefit-plan-card__cost-item">
-                    <span>Employee</span>
-                    <strong>{formatCurrency(plan.employeeContribution)}</strong>
-                </div>
-            </div>
-        </motion.div>
-    )
-}
-
-const EventCard = ({ event, index }: { event: UpcomingEvent; index: number }) => {
-    const getEventIcon = () => {
-        switch (event.type) {
-            case 'enrollment': return <UserPlus size={16} />
-            case 'termination': return <UserMinus size={16} />
-            case 'life-event': return <Heart size={16} />
-            case 'renewal': return <RefreshCw size={16} />
-            default: return <Calendar size={16} />
-        }
-    }
-
-    return (
-        <motion.div
-            className={`event-card event-card--${event.priority}`}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.05 }}
-        >
-            <div className="event-card__icon">{getEventIcon()}</div>
-            <div className="event-card__content">
-                <span className="event-card__title">{event.title}</span>
-                {event.employee && <span className="event-card__employee">{event.employee}</span>}
-            </div>
-            <div className="event-card__date">
-                <Calendar size={12} />
-                <span>{event.date}</span>
-            </div>
-        </motion.div>
-    )
-}
+// ==============================================
+// MAIN COMPONENT
+// ==============================================
 
 export function EmployerAdmin() {
     const [searchTerm, setSearchTerm] = useState('')
@@ -288,39 +158,103 @@ export function EmployerAdmin() {
         return emps
     }, [statusFilter, searchTerm])
 
-    const totalMonthlyPremium = benefitPlans.reduce((sum, p) => sum + p.monthlyCost, 0)
     const totalEmployerContribution = benefitPlans.reduce((sum, p) => sum + p.employerContribution, 0)
+    const enrollmentRate = 94.5
+    const totalEmployees = 487
 
     return (
-        <div className="employer-admin">
-            {/* Header */}
-            <div className="employer-admin__header">
-                <div className="employer-admin__header-content">
-                    <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
-                        Benefits Administration
-                    </motion.h1>
-                    <p>Employee Management • Plan Configuration • Cost Analysis</p>
+        <div className="employer-admin-modern">
+            {/* Premium Header */}
+            <motion.header
+                className="employer-admin-modern__header"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <div className="employer-admin-modern__title-section">
+                    <div className="employer-admin-modern__icon-container">
+                        <Heart size={28} />
+                        <div className="employer-admin-modern__icon-pulse" />
+                    </div>
+                    <div>
+                        <h1 className="employer-admin-modern__title">Benefits Administration</h1>
+                        <div className="employer-admin-modern__subtitle">
+                            <span>Employee Management • Plan Configuration • Cost Analysis</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="employer-admin__header-actions">
-                    <Button variant="secondary" icon={<Download size={16} />}>Export Census</Button>
-                    <Button variant="primary" icon={<UserPlus size={16} />}>Add Employee</Button>
+                <div className="employer-admin-modern__badges">
+                    <div className="employer-admin-modern__badge employer-admin-modern__badge--live">
+                        <span className="employer-admin-modern__badge-dot" />
+                        Live Sync
+                    </div>
+                    <div className="employer-admin-modern__badge">
+                        <Sparkles size={12} />
+                        AI Monitored
+                    </div>
                 </div>
+                <div className="employer-admin-modern__actions">
+                    <Button variant="ghost" size="sm" icon={<Download size={16} />}>
+                        Export Census
+                    </Button>
+                    <Button variant="primary" size="sm" icon={<UserPlus size={16} />}>
+                        Add Employee
+                    </Button>
+                </div>
+            </motion.header>
+
+            {/* Premium Metrics Grid */}
+            <div className="employer-admin-modern__metrics">
+                {[
+                    { label: 'Total Employees', value: totalEmployees.toString(), change: '+12', isUp: true, icon: Users, color: '#06b6d4' },
+                    { label: 'Monthly Premium', value: formatCurrency(totalEmployerContribution * 1.4), change: '+4.2%', isUp: false, icon: DollarSign, color: '#f59e0b' },
+                    { label: 'Enrollment Rate', value: `${enrollmentRate}%`, change: '+2.1%', isUp: true, icon: TrendingUp, color: '#10b981' },
+                    { label: 'Days to Deadline', value: '45', change: null, isUp: null, icon: Calendar, color: '#8b5cf6' },
+                ].map((metric, i) => (
+                    <motion.div
+                        key={metric.label}
+                        className="employer-admin-modern__metric-card"
+                        style={{ '--card-glow-color': metric.color } as any}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 + i * 0.05 }}
+                    >
+                        <div className="employer-admin-modern__metric-glow" />
+                        <div className="employer-admin-modern__metric-header">
+                            <div
+                                className="employer-admin-modern__metric-icon"
+                                style={{ background: `${metric.color}15`, color: metric.color }}
+                            >
+                                <metric.icon size={20} />
+                            </div>
+                            {metric.change && (
+                                <span className={`employer-admin-modern__metric-trend employer-admin-modern__metric-trend--${metric.isUp ? 'up' : 'down'}`}>
+                                    {metric.isUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                                    {metric.change}
+                                </span>
+                            )}
+                        </div>
+                        <div className="employer-admin-modern__metric-value">{metric.value}</div>
+                        <div className="employer-admin-modern__metric-label">{metric.label}</div>
+                    </motion.div>
+                ))}
             </div>
 
-            {/* Metrics */}
-            <section className="employer-admin__metrics">
-                {employerMetrics.map((metric, index) => (
-                    <MetricCard key={metric.label} metric={metric} index={index} />
-                ))}
-            </section>
-
             {/* Main Grid */}
-            <div className="employer-admin__grid">
+            <div className="employer-admin-modern__grid">
                 {/* Employee Roster */}
-                <GlassCard className="employer-admin__card employer-admin__card--employees">
-                    <div className="employer-admin__card-header">
-                        <h3><Users size={18} /> Employee Roster</h3>
-                        <div className="employer-admin__filters">
+                <motion.div
+                    className="employer-admin-modern__roster"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <div className="employer-admin-modern__roster-header">
+                        <div className="employer-admin-modern__roster-title">
+                            <Users size={20} />
+                            <h3>Employee Roster</h3>
+                            <Badge variant="default">{employees.length} employees</Badge>
+                        </div>
+                        <div className="employer-admin-modern__roster-controls">
                             <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                                 <option value="all">All Status</option>
                                 <option value="active">Active</option>
@@ -328,8 +262,8 @@ export function EmployerAdmin() {
                                 <option value="cobra">COBRA</option>
                                 <option value="terminated">Terminated</option>
                             </select>
-                            <div className="employer-admin__search">
-                                <Search size={14} />
+                            <div className="employer-admin-modern__roster-search">
+                                <Search size={16} />
                                 <input
                                     type="text"
                                     placeholder="Search employees..."
@@ -339,51 +273,174 @@ export function EmployerAdmin() {
                             </div>
                         </div>
                     </div>
-                    <div className="employer-admin__roster-header">
-                        <span>Employee</span>
-                        <span>Department</span>
-                        <span>Status</span>
-                        <span>Plan</span>
-                        <span>Tier</span>
-                        <span>Monthly</span>
-                        <span></span>
-                    </div>
-                    <div className="employer-admin__roster-list">
-                        {filteredEmployees.map((employee, index) => (
-                            <EmployeeRow key={employee.id} employee={employee} index={index} />
-                        ))}
-                    </div>
-                </GlassCard>
+                    <table className="employer-admin-modern__roster-table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Plan</th>
+                                <th>Tier</th>
+                                <th>Monthly</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredEmployees.map((emp, i) => (
+                                <motion.tr
+                                    key={emp.id}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.4 + i * 0.03 }}
+                                >
+                                    <td>
+                                        <div className="employer-admin-modern__employee">
+                                            <div
+                                                className="employer-admin-modern__avatar"
+                                                style={{ background: `hsl(${i * 60}, 70%, 40%)` }}
+                                            >
+                                                {emp.initials}
+                                            </div>
+                                            <div className="employer-admin-modern__employee-info">
+                                                <span className="employer-admin-modern__employee-name">{emp.name}</span>
+                                                <span className="employer-admin-modern__employee-id">{emp.id}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{emp.department}</td>
+                                    <td>
+                                        <span className={`employer-admin-modern__status employer-admin-modern__status--${emp.status}`}>
+                                            {emp.status}
+                                        </span>
+                                    </td>
+                                    <td>{emp.planType}</td>
+                                    <td>{emp.tier}</td>
+                                    <td className="employer-admin-modern__cost">{formatCurrency(emp.monthlyCost)}</td>
+                                    <td>
+                                        <button className="employer-admin-modern__manage-btn">Manage</button>
+                                    </td>
+                                </motion.tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </motion.div>
 
-                {/* Benefit Plans */}
-                <GlassCard className="employer-admin__card employer-admin__card--plans">
-                    <div className="employer-admin__card-header">
-                        <h3><Shield size={18} /> Benefit Plans</h3>
-                        <span className="employer-admin__cost-summary">
-                            ER Cost: <strong>{formatCurrency(totalEmployerContribution)}</strong>/mo
-                        </span>
-                    </div>
-                    <div className="employer-admin__plans-grid">
-                        {benefitPlans.map((plan, index) => (
-                            <BenefitPlanCard key={plan.id} plan={plan} index={index} />
+                {/* Sidebar */}
+                <div className="employer-admin-modern__sidebar">
+                    {/* AI Insights Panel */}
+                    <motion.div
+                        className="employer-admin-modern__ai-panel"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <div className="employer-admin-modern__ai-header">
+                            <div className="employer-admin-modern__ai-icon">
+                                <Brain size={22} />
+                            </div>
+                            <div>
+                                <h3 className="employer-admin-modern__ai-title">AI Insights</h3>
+                                <p className="employer-admin-modern__ai-subtitle">Powered by Intellisure™</p>
+                            </div>
+                        </div>
+                        {aiInsights.map((insight, i) => (
+                            <motion.div
+                                key={i}
+                                className={`employer-admin-modern__ai-insight employer-admin-modern__ai-insight--${insight.type}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 + i * 0.1 }}
+                            >
+                                <p dangerouslySetInnerHTML={{ __html: insight.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                                <div className="employer-admin-modern__ai-confidence">
+                                    <Activity size={10} />
+                                    <span>{insight.confidence}% confidence</span>
+                                </div>
+                            </motion.div>
                         ))}
-                    </div>
-                </GlassCard>
+                        <div className="employer-admin-modern__ai-footer">
+                            <span>Model Confidence</span>
+                            <span>94.2%</span>
+                        </div>
+                    </motion.div>
 
-                {/* Upcoming Events */}
-                <GlassCard className="employer-admin__card employer-admin__card--events">
-                    <div className="employer-admin__card-header">
-                        <h3><Calendar size={18} /> Upcoming Events</h3>
-                        <Badge variant="warning" size="sm">
-                            {upcomingEvents.filter(e => e.priority === 'high').length} High Priority
-                        </Badge>
-                    </div>
-                    <div className="employer-admin__events-list">
-                        {upcomingEvents.map((event, index) => (
-                            <EventCard key={event.id} event={event} index={index} />
-                        ))}
-                    </div>
-                </GlassCard>
+                    {/* Benefit Plans */}
+                    <motion.div
+                        className="employer-admin-modern__plans"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <div className="employer-admin-modern__plans-header">
+                            <Shield size={18} />
+                            <h3>Benefit Plans</h3>
+                            <span className="employer-admin-modern__cost-tag">ER: {formatCurrency(totalEmployerContribution)}/mo</span>
+                        </div>
+                        {benefitPlans.map((plan, i) => {
+                            const Icon = getPlanTypeIcon(plan.type)
+                            const rate = (plan.enrolled / plan.eligible) * 100
+                            return (
+                                <motion.div
+                                    key={plan.id}
+                                    className="employer-admin-modern__plan-item"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.6 + i * 0.05 }}
+                                >
+                                    <div className="employer-admin-modern__plan-icon">
+                                        <Icon size={14} />
+                                    </div>
+                                    <div className="employer-admin-modern__plan-info">
+                                        <div className="employer-admin-modern__plan-name">{plan.name}</div>
+                                        <div className="employer-admin-modern__plan-bar">
+                                            <motion.div
+                                                className="employer-admin-modern__plan-fill"
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${rate}%` }}
+                                                transition={{ duration: 0.8, delay: 0.7 + i * 0.05 }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="employer-admin-modern__plan-stats">
+                                        <span className="employer-admin-modern__plan-enrolled">{plan.enrolled}/{plan.eligible}</span>
+                                        <span className="employer-admin-modern__plan-percent">{rate.toFixed(0)}%</span>
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
+                    </motion.div>
+
+                    {/* Upcoming Events */}
+                    <motion.div
+                        className="employer-admin-modern__events"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 }}
+                    >
+                        <div className="employer-admin-modern__events-header">
+                            <Calendar size={18} />
+                            <h3>Upcoming Events</h3>
+                            <Badge variant="warning" size="sm">
+                                {upcomingEvents.filter(e => e.priority === 'high').length} urgent
+                            </Badge>
+                        </div>
+                        <div className="employer-admin-modern__events-list">
+                            {upcomingEvents.slice(0, 4).map((event, i) => (
+                                <div key={event.id} className={`employer-admin-modern__event employer-admin-modern__event--${event.priority}`}>
+                                    <div className="employer-admin-modern__event-marker">
+                                        <div className="employer-admin-modern__event-dot" />
+                                        {i < 3 && <div className="employer-admin-modern__event-line" />}
+                                    </div>
+                                    <div className="employer-admin-modern__event-content">
+                                        <div className="employer-admin-modern__event-title">{event.title}</div>
+                                        {event.employee && <div className="employer-admin-modern__event-employee">{event.employee}</div>}
+                                        <div className="employer-admin-modern__event-date">{event.date}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </div>
     )
