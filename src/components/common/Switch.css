@@ -1,0 +1,141 @@
+/* ============================================
+   SWITCH
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    cursor: pointer;
+}
+
+.switch--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.switch__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.switch__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.switch__description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.switch__track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.switch--sm .switch__track {
+    width: 36px;
+    height: 20px;
+}
+
+.switch--md .switch__track {
+    width: 44px;
+    height: 24px;
+}
+
+.switch--lg .switch__track {
+    width: 52px;
+    height: 28px;
+}
+
+.switch__track:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.switch__track--checked {
+    background: var(--apex-teal);
+}
+
+.switch__track--checked:hover {
+    background: #0ea5e9;
+}
+
+.switch__thumb {
+    display: block;
+    width: 50%;
+    aspect-ratio: 1;
+    background: var(--apex-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch__track--checked .switch__thumb {
+    margin-left: auto;
+}
+
+/* Inline Switch */
+.inline-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 36px;
+    height: 20px;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.inline-switch:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.inline-switch--checked {
+    background: var(--apex-teal);
+}
+
+.inline-switch--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.inline-switch__thumb {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: var(--apex-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.inline-switch--checked .inline-switch__thumb {
+    margin-left: auto;
+}
+
+/* Light mode */
+[data-theme="light"] .switch__label {
+    color: #0f172a;
+}
+
+[data-theme="light"] .switch__track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .inline-switch {
+    background: rgba(0, 0, 0, 0.1);
+}
