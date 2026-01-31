@@ -162,7 +162,7 @@ interface LongPressProps {
 }
 
 export function LongPress({ children, onLongPress, duration = 500, className = '' }: LongPressProps) {
-    const timeoutRef = useRef<NodeJS.Timeout>()
+    const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
     const [pressing, setPressing] = useState(false)
 
     const handleStart = () => {
@@ -219,7 +219,7 @@ export function DoubleTap({
     className = ''
 }: DoubleTapProps) {
     const lastTap = useRef(0)
-    const singleTapTimeout = useRef<NodeJS.Timeout>()
+    const singleTapTimeout = useRef<ReturnType<typeof setTimeout>>()
 
     const handleTap = () => {
         const now = Date.now()
@@ -267,29 +267,35 @@ export function Draggable({
 }: DraggableProps) {
     const x = useMotionValue(0)
     const y = useMotionValue(0)
+    const containerRef = useRef<HTMLDivElement>(null)
 
-    const dragConstraints = bounds === 'parent' ? bounds : {
-        left: bounds.left,
-        right: bounds.right,
-        top: bounds.top,
-        bottom: bounds.bottom
-    }
+    // For 'parent' bounds, use the container ref; otherwise use numeric constraints
+    const dragConstraints = bounds === 'parent'
+        ? containerRef
+        : {
+            left: bounds.left,
+            right: bounds.right,
+            top: bounds.top,
+            bottom: bounds.bottom
+        }
 
     const dragDirections = axis === 'both' ? true : axis
 
     return (
-        <motion.div
-            className={`draggable ${className}`}
-            style={{ x: axis !== 'y' ? x : 0, y: axis !== 'x' ? y : 0 }}
-            drag={dragDirections}
-            dragConstraints={dragConstraints}
-            dragElastic={0.05}
-            onDragStart={onDragStart}
-            onDragEnd={(_, info) => onDragEnd?.({ x: info.point.x, y: info.point.y })}
-            whileDrag={{ scale: 1.02, cursor: 'grabbing' }}
-        >
-            {children}
-        </motion.div>
+        <div ref={containerRef} className={`draggable-container ${className}`}>
+            <motion.div
+                className="draggable"
+                style={{ x: axis !== 'y' ? x : 0, y: axis !== 'x' ? y : 0 }}
+                drag={dragDirections}
+                dragConstraints={dragConstraints}
+                dragElastic={0.05}
+                onDragStart={onDragStart}
+                onDragEnd={(_, info) => onDragEnd?.({ x: info.point.x, y: info.point.y })}
+                whileDrag={{ scale: 1.02, cursor: 'grabbing' }}
+            >
+                {children}
+            </motion.div>
+        </div>
     )
 }
 

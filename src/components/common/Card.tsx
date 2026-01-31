@@ -10,6 +10,7 @@ interface CardProps {
     onClick?: () => void
     href?: string
     className?: string
+    style?: React.CSSProperties
 }
 
 export function Card({
@@ -18,13 +19,15 @@ export function Card({
     padding = 'md',
     onClick,
     href,
-    className = ''
+    className = '',
+    style
 }: CardProps) {
     const isClickable = onClick || href
     const Component = href ? 'a' : onClick ? motion.div : 'div'
 
     const props = {
         className: `card card--${variant} card--padding-${padding} ${isClickable ? 'card--clickable' : ''} ${className}`,
+        style,
         ...(onClick && { onClick, whileHover: { scale: 1.01 }, whileTap: { scale: 0.99 } }),
         ...(href && { href })
     }
@@ -140,3 +143,6 @@ export function LinkCard({ title, description, icon, href, external = false }: L
 }
 
 export default Card
+
+// Alias exports for backward compatibility
+export { Card as GlassCard }

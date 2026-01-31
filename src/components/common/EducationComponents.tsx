@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, GraduationCap, Play, Pause, Volume2, VolumeX, ChevronLeft, ChevronRight, Check, Clock, Award, Star, Trophy, Target, Zap, Lock, Unlock, CirclePlay, RotateCcw } from 'lucide-react'
+import { BookOpen, GraduationCap, Play, Pause, Volume2, VolumeX, ChevronLeft, ChevronRight, Check, Clock, Award, Star, Trophy, Target, Zap, Lock, Unlock, PlayCircle, RotateCcw } from 'lucide-react'
 import './EducationComponents.css'
 
 // Course Card
@@ -21,7 +21,7 @@ export function CourseCard({ course, onStart, onContinue, className = '' }: Cour
                         {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
                     </span>
                 )}
-                <button className="course-card__play"><CirclePlay size={48} /></button>
+                <button className="course-card__play"><PlayCircle size={48} /></button>
             </div>
             <div className="course-card__content">
                 <h3 className="course-card__title">{course.title}</h3>
@@ -77,7 +77,7 @@ export function LessonPlayer({ videoUrl, title, duration, onComplete, className 
             <div className="lesson-player__video">
                 <video ref={videoRef} src={videoUrl} muted={muted} onTimeUpdate={handleTimeUpdate} />
                 <div className="lesson-player__overlay" onClick={togglePlay}>
-                    {!isPlaying && <CirclePlay size={64} />}
+                    {!isPlaying && <PlayCircle size={64} />}
                 </div>
             </div>
             <div className="lesson-player__controls">

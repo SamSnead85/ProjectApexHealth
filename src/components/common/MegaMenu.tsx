@@ -41,7 +41,7 @@ export function MegaMenu({
     const [activeSection, setActiveSection] = useState<string | null>(null)
     const [isMobileOpen, setIsMobileOpen] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
-    const timeoutRef = useRef<NodeJS.Timeout>()
+    const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {

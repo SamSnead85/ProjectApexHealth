@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import './Badge.css'
 
-interface BadgeProps {
+export interface BadgeProps {
     children: ReactNode
     variant?: 'default' | 'success' | 'warning' | 'critical' | 'info' | 'teal' | 'purple' | 'error' | 'subtle' | 'secondary'
     size?: 'sm' | 'md'

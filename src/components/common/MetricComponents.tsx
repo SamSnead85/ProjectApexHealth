@@ -4,22 +4,70 @@ import { Gauge, TrendingUp, TrendingDown, Activity, Target, Zap, BarChart2, Line
 import './MetricComponents.css'
 
 // Metric Card
-interface MetricCardProps { label: string; value: string | number; change?: number; changeLabel?: string; icon?: ReactNode; trend?: 'up' | 'down' | 'neutral'; variant?: 'default' | 'success' | 'warning' | 'danger'; className?: string }
+interface MetricCardProps {
+    label?: string;
+    title?: string; // Alias for label (backward compatibility)
+    value: string | number;
+    change?: number | { value: number; type?: string; direction?: string };
+    changeLabel?: string;
+    subtitle?: string; // Alias for changeLabel (backward compatibility)
+    icon?: ReactNode;
+    iconColor?: string; // Optional color for icon (backward compatibility)
+    trend?: 'up' | 'down' | 'neutral' | { value: number; direction: string };
+    variant?: 'default' | 'success' | 'warning' | 'danger' | 'teal';
+    className?: string;
+}
 
-export function MetricCard({ label, value, change, changeLabel, icon, trend, variant = 'default', className = '' }: MetricCardProps) {
-    const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus
+export function MetricCard({
+    label,
+    title,
+    value,
+    change,
+    changeLabel,
+    subtitle,
+    icon,
+    iconColor,
+    trend,
+    variant = 'default',
+    className = ''
+}: MetricCardProps) {
+    // Support both label and title props
+    const displayLabel = label || title || '';
+
+    // Support both changeLabel and subtitle props
+    const displayChangeLabel = changeLabel || subtitle;
+
+    // Normalize change value - support both number and object format
+    const normalizedChange = typeof change === 'object' ? change.value : change;
+
+    // Normalize trend - support both string and object format
+    let normalizedTrend: 'up' | 'down' | 'neutral' | undefined;
+    if (typeof trend === 'object') {
+        normalizedTrend = trend.direction as 'up' | 'down' | 'neutral';
+    } else if (trend) {
+        normalizedTrend = trend;
+    } else if (typeof change === 'object') {
+        // Derive trend from change object if not provided
+        normalizedTrend = change.direction === 'up' || change.type === 'increase' ? 'up' :
+            change.direction === 'down' || change.type === 'decrease' ? 'down' : 'neutral';
+    }
+
+    // Map 'teal' variant to 'success' for styling
+    const mappedVariant = variant === 'teal' ? 'success' : variant;
+
+    const TrendIcon = normalizedTrend === 'up' ? TrendingUp : normalizedTrend === 'down' ? TrendingDown : Minus;
 
     return (
-        <div className={`metric-card metric-card--${variant} ${className}`}>
+        <div className={`metric-card metric-card--${mappedVariant} ${className}`}>
             {icon && <div className="metric-card__icon">{icon}</div>}
             <div className="metric-card__content">
-                <span className="metric-card__label">{label}</span>
+                <span className="metric-card__label">{displayLabel}</span>
                 <span className="metric-card__value">{value}</span>
-                {change !== undefined && (
-                    <div className={`metric-card__change ${trend || 'neutral'}`}>
+                {normalizedChange !== undefined && (
+                    <div className={`metric-card__change ${normalizedTrend || 'neutral'}`}>
                         <TrendIcon size={12} />
-                        <span>{change > 0 ? '+' : ''}{change}%</span>
-                        {changeLabel && <span className="metric-card__change-label">{changeLabel}</span>}
+                        <span>{normalizedChange > 0 ? '+' : ''}{normalizedChange}%</span>
+                        {displayChangeLabel && <span className="metric-card__change-label">{displayChangeLabel}</span>}
                     </div>
                 )}
             </div>

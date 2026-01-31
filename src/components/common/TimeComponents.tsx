@@ -152,7 +152,7 @@ interface StopwatchProps {
 export function Stopwatch({ autoStart = false, onStop, className = '' }: StopwatchProps) {
     const [time, setTime] = useState(0)
     const [isRunning, setIsRunning] = useState(autoStart)
-    const intervalRef = useRef<NodeJS.Timeout>()
+    const intervalRef = useRef<ReturnType<typeof setInterval>>()
 
     useEffect(() => {
         if (isRunning) {
@@ -221,7 +221,7 @@ export function TimerInput({ initialSeconds = 300, onComplete, className = '' }:
     const [seconds, setSeconds] = useState(initialSeconds)
     const [isRunning, setIsRunning] = useState(false)
     const [editMode, setEditMode] = useState(true)
-    const intervalRef = useRef<NodeJS.Timeout>()
+    const intervalRef = useRef<ReturnType<typeof setInterval>>()
 
     useEffect(() => {
         if (isRunning && seconds > 0) {

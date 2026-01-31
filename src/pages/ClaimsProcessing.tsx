@@ -841,35 +841,39 @@ export function ClaimsProcessing() {
             {/* Metrics */}
             <div className="claims-processing__metrics">
                 <MetricCard
-                    title="Total Claims"
+                    label="Total Claims"
                     value={claimsMetrics.totalReceived.toLocaleString()}
                     icon={<FileText size={20} />}
-                    trend={{ value: 12.5, direction: 'up' }}
-                    subtitle="This month"
+                    change={12.5}
+                    trend="up"
+                    changeLabel="This month"
                 />
                 <MetricCard
-                    title="Auto-Adjudicated"
+                    label="Auto-Adjudicated"
                     value={`${claimsMetrics.autoAdjudicated.rate}%`}
                     icon={<Zap size={20} />}
-                    trend={{ value: 8.2, direction: 'up' }}
-                    subtitle={`${claimsMetrics.autoAdjudicated.count} claims`}
+                    change={8.2}
+                    trend="up"
+                    changeLabel={`${claimsMetrics.autoAdjudicated.count} claims`}
                     variant="success"
                 />
                 <MetricCard
-                    title="Pending Review"
+                    label="Pending Review"
                     value={claimsMetrics.pendingReview.toString()}
                     icon={<Clock size={20} />}
-                    trend={{ value: 3.1, direction: 'down' }}
-                    subtitle="In queue"
+                    change={-3.1}
+                    trend="down"
+                    changeLabel="In queue"
                     variant="warning"
                 />
                 <MetricCard
-                    title="Avg Processing"
+                    label="Avg Processing"
                     value={`${claimsMetrics.avgProcessingDays} days`}
                     icon={<ArrowUpRight size={20} />}
-                    trend={{ value: 0.4, direction: 'down' }}
-                    subtitle="Time to decision"
-                    variant="teal"
+                    change={-0.4}
+                    trend="down"
+                    changeLabel="Time to decision"
+                    variant="success"
                 />
             </div>
 

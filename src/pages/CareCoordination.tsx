@@ -99,27 +99,31 @@ export function CareCoordination() {
             {/* Stats */}
             <div className="care-coordination__stats">
                 <MetricCard
-                    title="Open Care Gaps"
+                    label="Open Care Gaps"
                     value="852"
-                    change={{ value: 12.5, type: 'decrease' }}
+                    change={-12.5}
+                    trend="down"
                     icon={<AlertTriangle size={20} />}
                 />
                 <MetricCard
-                    title="Scheduled Interventions"
+                    label="Scheduled Interventions"
                     value="234"
-                    change={{ value: 8.2, type: 'increase' }}
+                    change={8.2}
+                    trend="up"
                     icon={<Calendar size={20} />}
                 />
                 <MetricCard
-                    title="Members in Programs"
+                    label="Members in Programs"
                     value="2,369"
-                    change={{ value: 15.3, type: 'increase' }}
+                    change={15.3}
+                    trend="up"
                     icon={<Users size={20} />}
                 />
                 <MetricCard
-                    title="Closure Rate"
+                    label="Closure Rate"
                     value="84%"
-                    change={{ value: 5.2, type: 'increase' }}
+                    change={5.2}
+                    trend="up"
                     icon={<CheckCircle2 size={20} />}
                 />
             </div>

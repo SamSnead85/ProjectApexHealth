@@ -244,7 +244,7 @@ export function Typewriter({
     const [isComplete, setIsComplete] = useState(false)
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout
+        let timeout: ReturnType<typeof setTimeout>
         let index = 0
 
         const startTyping = () => {

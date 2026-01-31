@@ -235,7 +235,7 @@ export function TeamMembersPanel({
                                     <select
                                         value={member.role}
                                         onChange={(e) => onRoleChange?.(member.id, e.target.value)}
-                                        disabled={isCurrentUser || member.role === 'owner'}
+                                        disabled={isCurrentUser}
                                     >
                                         <option value="admin">Admin</option>
                                         <option value="member">Member</option>

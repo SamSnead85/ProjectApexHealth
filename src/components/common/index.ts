@@ -1,76 +1,65 @@
 // Master Component Index - Premium UI Library
 // Apex Obsidian v3 Design System
 
-// Core UI Components
-export * from './Buttons'
-export * from './Inputs'
-export * from './Cards'
-export * from './Modals'
-export * from './Tables'
-export * from './Navigation'
-export * from './Feedback'
-export * from './Overlays'
+// Core Individual Components
+export * from './Badge'
+export * from './Button'
+export * from './Card'
+export * from './Input'
+export * from './Modal'
+export * from './Tabs'
+export * from './Tooltip'
+export * from './Avatar'
+export * from './Skeleton'
+export * from './Dropdown'
+export * from './Drawer'
+export * from './Breadcrumb'
+export * from './EmptyState'
+export * from './FormField'
+export * from './Divider'
+export * from './Alert'
+export * from './Banner'
+export * from './Popover'
+export * from './Autocomplete'
+export * from './DatePicker'
+export * from './FileUpload'
+export * from './FilterPanel'
+export * from './Slider'
 
-// Data Display
-export * from './DataDisplayComponents'
-export * from './ChartComponents'
+// Data & Tables
+export * from './DataTable'
+export * from './AdvancedTable'
+export * from './CommandPalette'
+
+// Charts - explicit re-export to avoid ProgressRing conflict with MetricComponents
+export { LineChart, BarChart, PieChart } from './Charts'
+
+// Specialized Modules
+export * from './LayoutComponents'
 export * from './MetricComponents'
 export * from './AnalyticsWidgets'
-
-// Forms & Input
-export * from './FormComponents'
-export * from './FileUploadComponents'
-export * from './DateTimeComponents'
-export * from './SearchFilterComponents'
-
-// Layout
-export * from './LayoutComponents'
-export * from './NavigationComponents'
-
-// Specialized Components
 export * from './ShoppingComponents'
 export * from './PaymentComponents'
 export * from './MessagingComponents'
-export * from './HealthcareComponents'
 export * from './EducationComponents'
-export * from './SocialComponents'
-export * from './MediaComponents'
-
-// DevTools & Technical
 export * from './DevToolsComponents'
 export * from './CanvasComponents'
 export * from './MapComponents'
 export * from './AudioComponents'
 export * from './VideoConferenceComponents'
-
-// AI & Intelligence
 export * from './AIComponents'
-
-// Gamification
 export * from './GameComponents'
-
-// Enterprise
 export * from './AdminComponents'
 export * from './CRMComponents'
 export * from './CollaborationTools'
 export * from './SchedulingComponents'
-export * from './ErrorHandling'
 export * from './PreferencesSettings'
-
-// Notification System
-export * from './NotificationComponents'
-
-// Workflow
-export * from './WorkflowComponents'
-
-// Finance & Real Estate
 export * from './FinanceComponents'
 export * from './RealEstateComponents'
-
-// Travel & Hospitality
 export * from './TravelComponents'
 export * from './FoodDeliveryComponents'
-
-// Sports & Events
 export * from './SportsAndFitnessComponents'
 export * from './EventComponents'
+
+// Explicit re-export to avoid AlertBanner conflict with Alert module
+export { ErrorFallback, StatusPage, RetryButton, ValidationErrors, ConnectionLost } from './ErrorHandling'

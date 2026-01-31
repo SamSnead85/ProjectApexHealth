@@ -90,26 +90,29 @@ export function ActuarialTools() {
             {/* Key Metrics */}
             <div className="actuarial__metrics">
                 <MetricCard
-                    title="Medical Loss Ratio"
+                    label="Medical Loss Ratio"
                     value={`${currentMlr}%`}
-                    change={{ value: 0.5, type: 'decrease' }}
+                    change={-0.5}
+                    trend="down"
                     icon={<Percent size={20} />}
                 />
                 <MetricCard
-                    title="IBNR Reserve"
+                    label="IBNR Reserve"
                     value={formatCurrency(totalIbnr)}
-                    change={{ value: 3.2, type: 'increase' }}
+                    change={3.2}
+                    trend="up"
                     icon={<Calculator size={20} />}
                 />
                 <MetricCard
-                    title="Total Reserves"
+                    label="Total Reserves"
                     value={formatCurrency(totalReserves)}
                     icon={<DollarSign size={20} />}
                 />
                 <MetricCard
-                    title="Claims Trend"
+                    label="Claims Trend"
                     value="+4.2%"
-                    change={{ value: 1.1, type: 'decrease' }}
+                    change={-1.1}
+                    trend="down"
                     icon={<TrendingUp size={20} />}
                 />
             </div>

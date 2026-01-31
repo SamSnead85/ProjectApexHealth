@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Heart, Activity, Thermometer, Droplet, Brain, Pill, FileText, User, AlertCircle, TrendingUp, TrendingDown, Scale, Clock, Calendar, ChevronRight, CircleAlert, CheckCircle } from 'lucide-react'
+import { Heart, Activity, Thermometer, Droplet, Brain, Pill, FileText, User, AlertCircle, TrendingUp, TrendingDown, Scale, Clock, Calendar, ChevronRight, AlertOctagon, CheckCircle } from 'lucide-react'
 import './HealthcareComponents.css'
 
 // Vital Signs Card
@@ -168,7 +168,7 @@ interface HealthAlert { type: 'info' | 'warning' | 'urgent'; title: string; mess
 interface HealthAlertBannerProps { alert: HealthAlert; onDismiss?: () => void; className?: string }
 
 export function HealthAlertBanner({ alert, onDismiss, className = '' }: HealthAlertBannerProps) {
-    const icons = { info: Activity, warning: AlertCircle, urgent: CircleAlert }
+    const icons = { info: Activity, warning: AlertCircle, urgent: AlertOctagon }
     const Icon = icons[alert.type]
 
     return (

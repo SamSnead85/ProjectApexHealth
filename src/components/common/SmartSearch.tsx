@@ -49,7 +49,7 @@ export function SmartSearch({
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [activeCategory, setActiveCategory] = useState<string | null>(null)
     const inputRef = useRef<HTMLInputElement>(null)
-    const debounceRef = useRef<NodeJS.Timeout>()
+    const debounceRef = useRef<ReturnType<typeof setTimeout>>()
 
     useEffect(() => {
         if (isOpen) {

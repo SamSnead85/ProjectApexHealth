@@ -117,23 +117,24 @@ export function ComplianceDashboard() {
             {/* Stats */}
             <div className="compliance__stats">
                 <MetricCard
-                    title="Compliance Score"
+                    label="Compliance Score"
                     value="94%"
-                    change={{ value: 2.5, type: 'increase' }}
+                    change={2.5}
+                    trend="up"
                     icon={<Shield size={20} />}
                 />
                 <MetricCard
-                    title="Compliant Items"
+                    label="Compliant Items"
                     value={`${stats.compliant}/${stats.total}`}
                     icon={<CheckCircle2 size={20} />}
                 />
                 <MetricCard
-                    title="At Risk"
+                    label="At Risk"
                     value={stats.atRisk.toString()}
                     icon={<AlertTriangle size={20} />}
                 />
                 <MetricCard
-                    title="Pending Reviews"
+                    label="Pending Reviews"
                     value={stats.pending.toString()}
                     icon={<Clock size={20} />}
                 />

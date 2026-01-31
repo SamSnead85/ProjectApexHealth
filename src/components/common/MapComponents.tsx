@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Navigation, Compass, Layers as LayersIcon, ZoomIn, ZoomOut, Maximize, Search, Car, Walking, Bike, Clock, Star, Phone, Globe, ChevronRight, Route, Locate } from 'lucide-react'
+import { MapPin, Navigation, Compass, Layers as LayersIcon, ZoomIn, ZoomOut, Maximize, Search, Car, Footprints, Bike, Clock, Star, Phone, Globe, ChevronRight, Route, Locate } from 'lucide-react'
 import './MapComponents.css'
 
 // Location Card
@@ -70,7 +70,7 @@ interface TransportModeSelectorProps { mode: 'driving' | 'walking' | 'cycling'; 
 export function TransportModeSelector({ mode, onChange, className = '' }: TransportModeSelectorProps) {
     const modes = [
         { id: 'driving' as const, icon: <Car size={18} />, label: 'Drive' },
-        { id: 'walking' as const, icon: <Walking size={18} />, label: 'Walk' },
+        { id: 'walking' as const, icon: <Footprints size={18} />, label: 'Walk' },
         { id: 'cycling' as const, icon: <Bike size={18} />, label: 'Bike' },
     ]
 

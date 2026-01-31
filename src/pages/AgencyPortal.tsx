@@ -157,32 +157,36 @@ export function AgencyPortal() {
             {/* Key Metrics */}
             <div className="agency-portal__metrics">
                 <MetricCard
-                    title="Total Brokers"
+                    label="Total Brokers"
                     value={agencyData.totalBrokers.toString()}
                     icon={<Users size={20} />}
-                    trend={{ value: 3, direction: 'up' }}
-                    variant="teal"
+                    change={3}
+                    trend="up"
+                    variant="success"
                 />
                 <MetricCard
-                    title="Active Lives"
+                    label="Active Lives"
                     value={formatCurrency(agencyData.activeLives)}
                     icon={<Target size={20} />}
-                    trend={{ value: 8.5, direction: 'up' }}
-                    variant="teal"
+                    change={8.5}
+                    trend="up"
+                    variant="success"
                 />
                 <MetricCard
-                    title="Monthly Premium"
+                    label="Monthly Premium"
                     value={formatCurrency(agencyData.monthlyPremium)}
                     icon={<DollarSign size={20} />}
-                    trend={{ value: 12.2, direction: 'up' }}
-                    variant="teal"
+                    change={12.2}
+                    trend="up"
+                    variant="success"
                 />
                 <MetricCard
-                    title="YTD Commission"
+                    label="YTD Commission"
                     value={formatCurrency(commissionData.current)}
                     icon={<TrendingUp size={20} />}
-                    trend={{ value: commissionData.growth, direction: 'up' }}
-                    variant="teal"
+                    change={commissionData.growth}
+                    trend="up"
+                    variant="success"
                 />
             </div>
 

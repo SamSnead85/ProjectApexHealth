@@ -38,31 +38,35 @@ export function VoiceProvider({
 }: VoiceProviderProps) {
     const [isListening, setIsListening] = useState(false)
     const [transcript, setTranscript] = useState('')
-    const recognitionRef = useRef<SpeechRecognition | null>(null)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const recognitionRef = useRef<any>(null)
 
     const isSupported = typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)
 
     useEffect(() => {
         if (!isSupported) return
 
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-        recognitionRef.current = new SpeechRecognition()
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const SpeechRecognitionAPI = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+        recognitionRef.current = new SpeechRecognitionAPI()
         recognitionRef.current.continuous = continuous
         recognitionRef.current.interimResults = true
         recognitionRef.current.lang = language
 
-        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
-            const results = Array.from(event.results)
-            const transcript = results.map(r => r[0].transcript).join('')
-            setTranscript(transcript)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognitionRef.current.onresult = (event: any) => {
+            const results = Array.from(event.results) as any[]
+            const transcriptText = results.map((r: any) => r[0].transcript).join('')
+            setTranscript(transcriptText)
 
-            const isFinal = results.some(r => r.isFinal)
+            const isFinal = results.some((r: any) => r.isFinal)
             if (isFinal) {
-                onResult?.(transcript)
+                onResult?.(transcriptText)
             }
         }
 
-        recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognitionRef.current.onerror = (event: any) => {
             setIsListening(false)
             onError?.(event.error)
         }

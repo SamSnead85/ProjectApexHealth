@@ -36,7 +36,7 @@ export function Carousel({
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const autoPlayRef = useRef<NodeJS.Timeout>()
+    const autoPlayRef = useRef<ReturnType<typeof setInterval>>()
 
     const totalSlides = slides.length
     const maxIndex = Math.max(0, totalSlides - slidesToShow)

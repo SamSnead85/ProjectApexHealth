@@ -151,7 +151,7 @@ export function Equalizer({ bands, onChange, className = '' }: EqualizerProps) {
                 {bands.map((band, i) => (
                     <div key={i} className="equalizer__band">
                         <input type="range" min={-12} max={12} value={band.value} onChange={(e) => onChange?.(i, Number(e.target.value))}
-                            orient="vertical" />
+                            className="equalizer__slider" />
                         <span className="equalizer__freq">{band.frequency}</span>
                     </div>
                 ))}
