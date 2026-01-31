@@ -1,0 +1,576 @@
+/* ============================================
+   FINANCE COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Account Balance Card */
+.account-balance-card {
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+}
+
+.account-balance-card--checking {
+    border-top: 3px solid var(--apex-teal);
+}
+
+.account-balance-card--savings {
+    border-top: 3px solid #10b981;
+}
+
+.account-balance-card--credit {
+    border-top: 3px solid #8b5cf6;
+}
+
+.account-balance-card--investment {
+    border-top: 3px solid #f59e0b;
+}
+
+.account-balance-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.account-balance-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+}
+
+.account-balance-card--savings .account-balance-card__icon {
+    color: #10b981;
+}
+
+.account-balance-card--credit .account-balance-card__icon {
+    color: #8b5cf6;
+}
+
+.account-balance-card--investment .account-balance-card__icon {
+    color: #f59e0b;
+}
+
+.account-balance-card__info {
+    flex: 1;
+}
+
+.account-balance-card__name {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.account-balance-card__number {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.account-balance-card__balance {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin-bottom: var(--space-sm);
+}
+
+.account-balance-card__change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.account-balance-card__change.positive {
+    color: #10b981;
+}
+
+.account-balance-card__change.negative {
+    color: #ef4444;
+}
+
+.account-balance-card__period {
+    color: var(--apex-steel);
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+/* Transaction Row */
+.transaction-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.transaction-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.transaction-row--pending {
+    opacity: 0.7;
+}
+
+.transaction-row--failed {
+    opacity: 0.5;
+}
+
+.transaction-row__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.transaction-row__icon--credit {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.transaction-row__icon--debit {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.transaction-row__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.transaction-row__description {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.transaction-row__meta {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.transaction-row__amount {
+    font-size: var(--text-md);
+    font-weight: 600;
+    text-align: right;
+}
+
+.transaction-row__amount--credit {
+    color: #10b981;
+}
+
+.transaction-row__amount--debit {
+    color: var(--apex-white);
+}
+
+.transaction-row__status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    text-transform: capitalize;
+}
+
+.transaction-row__status--pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.transaction-row__status--failed {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* Budget Progress */
+.budget-progress {
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.budget-progress.over-budget {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.budget-progress__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.budget-progress__icon {
+    color: var(--apex-teal);
+}
+
+.budget-progress__category {
+    flex: 1;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.budget-progress__amount {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.budget-progress__bar {
+    position: relative;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-xs);
+}
+
+.budget-progress__fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.budget-progress.over-budget .budget-progress__fill {
+    background: #ef4444;
+}
+
+.budget-progress__warning {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: #f59e0b;
+}
+
+.budget-progress__remaining {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.budget-progress__remaining.negative {
+    color: #ef4444;
+}
+
+/* Expense Breakdown */
+.expense-breakdown {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.expense-breakdown__chart {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+}
+
+.expense-breakdown__chart svg {
+    width: 100%;
+    height: 100%;
+}
+
+.expense-breakdown__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.expense-breakdown__total {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.expense-breakdown__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.expense-breakdown__legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.expense-breakdown__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.expense-breakdown__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.expense-breakdown__name {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.expense-breakdown__value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.expense-breakdown__percent {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    min-width: 36px;
+    text-align: right;
+}
+
+/* Investment Card */
+.investment-card {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.investment-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.investment-card__symbol {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--apex-teal);
+}
+
+.investment-card__info {
+    flex: 1;
+}
+
+.investment-card__name {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.investment-card__shares {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.investment-card__price {
+    margin-bottom: var(--space-md);
+}
+
+.investment-card__current {
+    display: block;
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.investment-card__change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.investment-card__change.positive {
+    color: #10b981;
+}
+
+.investment-card__change.negative {
+    color: #ef4444;
+}
+
+.investment-card__footer {
+    display: flex;
+    gap: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.investment-card__stat {
+    flex: 1;
+}
+
+.investment-card__stat-label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.investment-card__stat-value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.investment-card__stat-value.positive {
+    color: #10b981;
+}
+
+.investment-card__stat-value.negative {
+    color: #ef4444;
+}
+
+.investment-card__trade {
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+/* Quick Transfer */
+.quick-transfer {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.quick-transfer__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.quick-transfer__recipients {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    overflow-x: auto;
+}
+
+.quick-transfer__recipient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    min-width: 70px;
+}
+
+.quick-transfer__recipient:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.quick-transfer__recipient.selected {
+    border-color: var(--apex-teal);
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.quick-transfer__avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-lg);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.quick-transfer__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.quick-transfer__recipient span {
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    text-align: center;
+}
+
+.quick-transfer__form {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.quick-transfer__input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.quick-transfer__input svg {
+    color: var(--apex-steel);
+}
+
+.quick-transfer__input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.quick-transfer__submit {
+    padding: var(--space-sm) var(--space-xl);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+.quick-transfer__submit:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

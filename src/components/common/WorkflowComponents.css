@@ -1,0 +1,564 @@
+/* ============================================
+   WORKFLOW COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Workflow Node */
+.workflow-node {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.workflow-node:hover {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.workflow-node.selected {
+    border-color: var(--apex-teal);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}
+
+.workflow-node--trigger .workflow-node__icon {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.workflow-node--action .workflow-node__icon {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.workflow-node--condition .workflow-node__icon {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.workflow-node--delay .workflow-node__icon {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.workflow-node--end .workflow-node__icon {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.workflow-node--running {
+    border-color: var(--apex-teal);
+}
+
+.workflow-node--success {
+    border-color: #10b981;
+}
+
+.workflow-node--error {
+    border-color: #ef4444;
+}
+
+.workflow-node__icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.workflow-node__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.workflow-node__title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.workflow-node__description {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.workflow-node__status {
+    flex-shrink: 0;
+}
+
+.workflow-node__status svg {
+    color: #10b981;
+}
+
+.workflow-node--error .workflow-node__status svg {
+    color: #ef4444;
+}
+
+.workflow-node__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(6, 182, 212, 0.3);
+    border-top-color: var(--apex-teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.workflow-node__actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+}
+
+.workflow-node:hover .workflow-node__actions {
+    opacity: 1;
+}
+
+.workflow-node__actions button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.workflow-node__actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+/* Workflow Connection */
+.workflow-connection__line {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 2;
+}
+
+.workflow-connection.active .workflow-connection__line {
+    stroke: var(--apex-teal);
+}
+
+.workflow-connection__flow {
+    fill: none;
+    stroke: var(--apex-teal);
+    stroke-width: 2;
+    stroke-dasharray: 8 4;
+    animation: flow 1s linear infinite;
+}
+
+@keyframes flow {
+    to {
+        stroke-dashoffset: -12;
+    }
+}
+
+.workflow-connection__label {
+    font-size: 10px;
+    fill: var(--apex-steel);
+    text-anchor: middle;
+}
+
+.workflow-connection__arrow {
+    fill: rgba(255, 255, 255, 0.2);
+}
+
+.workflow-connection.active .workflow-connection__arrow {
+    fill: var(--apex-teal);
+}
+
+/* Workflow Status Bar */
+.workflow-status-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.workflow-status-bar__controls {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.workflow-status-bar__controls button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.workflow-status-bar__controls button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.workflow-status-bar--running .workflow-status-bar__controls button:first-child {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.workflow-status-bar__info {
+    flex: 1;
+}
+
+.workflow-status-bar__status {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.workflow-status-bar--running .workflow-status-bar__status {
+    color: var(--apex-teal);
+}
+
+.workflow-status-bar--completed .workflow-status-bar__status {
+    color: #10b981;
+}
+
+.workflow-status-bar--failed .workflow-status-bar__status {
+    color: #ef4444;
+}
+
+.workflow-status-bar__step {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.workflow-status-bar__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 120px;
+}
+
+.workflow-status-bar__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--apex-teal);
+    border-radius: 2px;
+}
+
+.workflow-status-bar__progress span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.workflow-status-bar__time {
+    font-size: var(--text-sm);
+    font-family: 'SF Mono', Monaco, monospace;
+    color: var(--apex-steel);
+}
+
+/* Step List */
+.step-list {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.step-list--vertical {
+    flex-direction: column;
+}
+
+.step-list__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    position: relative;
+    cursor: pointer;
+}
+
+.step-list--horizontal .step-list__item {
+    flex: 1;
+}
+
+.step-list__indicator {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.step-list__item--current .step-list__indicator {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.step-list__item--completed .step-list__indicator {
+    background: #10b981;
+    color: white;
+}
+
+.step-list__item--error .step-list__indicator {
+    background: #ef4444;
+    color: white;
+}
+
+.step-list__content {
+    flex: 1;
+}
+
+.step-list__title {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.step-list__item--current .step-list__title {
+    color: var(--apex-white);
+    font-weight: 500;
+}
+
+.step-list__duration {
+    display: block;
+    font-size: 10px;
+    color: var(--apex-steel);
+}
+
+.step-list__connector {
+    flex: 1;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 var(--space-xs);
+}
+
+.step-list--vertical .step-list__connector {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    width: 2px;
+    height: calc(100% - 28px);
+}
+
+.step-list__item--completed+.step-list__item .step-list__connector,
+.step-list__item--completed .step-list__connector {
+    background: #10b981;
+}
+
+/* Execution Log */
+.execution-log {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.execution-log__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.execution-log__header button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.execution-log__entries {
+    padding: var(--space-sm);
+    overflow-y: auto;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 11px;
+}
+
+.execution-log__entry {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: 4px 0;
+}
+
+.execution-log__time {
+    color: var(--apex-steel);
+}
+
+.execution-log__level {
+    min-width: 40px;
+    font-weight: 600;
+}
+
+.execution-log__entry--info .execution-log__level {
+    color: var(--apex-teal);
+}
+
+.execution-log__entry--warn .execution-log__level {
+    color: #f59e0b;
+}
+
+.execution-log__entry--error .execution-log__level {
+    color: #ef4444;
+}
+
+.execution-log__entry--debug .execution-log__level {
+    color: var(--apex-steel);
+}
+
+.execution-log__message {
+    flex: 1;
+    color: var(--apex-silver);
+}
+
+.execution-log__expand {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.execution-log__data {
+    width: 100%;
+    margin: var(--space-xs) 0 0 44px;
+    padding: var(--space-sm);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-sm);
+    color: var(--apex-silver);
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+/* Action Palette */
+.action-palette {
+    width: 280px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.action-palette__search {
+    width: 100%;
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.action-palette__categories {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.action-palette__category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.action-palette__category-header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.action-palette__count {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.action-palette__actions {
+    padding: 0 var(--space-sm) var(--space-sm);
+}
+
+.action-palette__action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm);
+    background: transparent;
+    border: none;
+    text-align: left;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.action-palette__action:hover {
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.action-palette__action-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.action-palette__action-info {
+    flex: 1;
+}
+
+.action-palette__action-info span:first-child {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.action-palette__action-desc {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}

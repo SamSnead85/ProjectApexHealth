@@ -1,0 +1,595 @@
+/* ============================================
+   REAL ESTATE COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Property Card */
+.property-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.property-card__gallery {
+    position: relative;
+    aspect-ratio: 16/10;
+}
+
+.property-card__gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-card__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.property-card:hover .property-card__nav {
+    opacity: 1;
+}
+
+.property-card__nav--prev {
+    left: var(--space-sm);
+}
+
+.property-card__nav--next {
+    right: var(--space-sm);
+}
+
+.property-card__dots {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+}
+
+.property-card__dots span {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+}
+
+.property-card__dots span.active {
+    background: white;
+}
+
+.property-card__badges {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    display: flex;
+    gap: 4px;
+}
+
+.property-card__badge {
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.property-card__badge--new {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.property-card__badge--sale {
+    background: #10b981;
+    color: white;
+}
+
+.property-card__badge--rent {
+    background: #8b5cf6;
+    color: white;
+}
+
+.property-card__actions {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    display: flex;
+    gap: 4px;
+}
+
+.property-card__actions button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.property-card__actions button.active {
+    color: #ef4444;
+}
+
+.property-card__content {
+    padding: var(--space-md);
+}
+
+.property-card__price {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin-bottom: 4px;
+}
+
+.property-card__title {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-md);
+    color: var(--apex-silver);
+}
+
+.property-card__address {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.property-card__features {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.property-card__features span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Agent Card */
+.agent-card {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.agent-card__photo {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-2xl);
+    color: var(--apex-teal);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.agent-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent-card__info {
+    flex: 1;
+}
+
+.agent-card__name {
+    margin: 0 0 2px 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.agent-card__title {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.agent-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #f59e0b;
+    font-size: var(--text-sm);
+    margin-bottom: 2px;
+}
+
+.agent-card__reviews {
+    color: var(--apex-steel);
+}
+
+.agent-card__listings {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.agent-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.agent-card__actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.agent-card__actions button:first-child {
+    background: var(--apex-teal);
+    border-color: transparent;
+    color: var(--apex-noir);
+}
+
+/* Property Features */
+.property-features {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.property-features--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.property-features--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.property-features--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.property-features__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+}
+
+.property-features__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.property-features__content {
+    flex: 1;
+}
+
+.property-features__value {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.property-features__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Mortgage Calculator */
+.mortgage-calculator {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.mortgage-calculator__title {
+    margin: 0 0 var(--space-lg) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.mortgage-calculator__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.mortgage-calculator__field label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: 4px;
+}
+
+.mortgage-calculator__field input,
+.mortgage-calculator__field select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.mortgage-calculator__result {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mortgage-calculator__monthly {
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+.mortgage-calculator__label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.mortgage-calculator__amount {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--apex-teal);
+}
+
+.mortgage-calculator__breakdown {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+}
+
+.mortgage-calculator__stat {
+    text-align: center;
+}
+
+.mortgage-calculator__stat span:first-child {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.mortgage-calculator__stat span:last-child {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Property Comparison */
+.property-comparison {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.property-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.property-comparison th,
+.property-comparison td {
+    padding: var(--space-md);
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.property-comparison th {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.property-comparison__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    position: relative;
+}
+
+.property-comparison__header img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.property-comparison__header span {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.property-comparison__header button {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.3);
+    border: none;
+    border-radius: 50%;
+    color: #ef4444;
+    cursor: pointer;
+}
+
+.property-comparison__label {
+    text-align: left;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.property-comparison td {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Schedule Tour */
+.schedule-tour {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.schedule-tour__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.schedule-tour__types {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.schedule-tour__types button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.schedule-tour__types button.active {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.schedule-tour__dates {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    overflow-x: auto;
+}
+
+.schedule-tour__dates button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    min-width: 60px;
+}
+
+.schedule-tour__dates button.active {
+    background: var(--apex-teal);
+    border-color: transparent;
+}
+
+.schedule-tour__day {
+    font-size: 10px;
+    color: var(--apex-steel);
+}
+
+.schedule-tour__date {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.schedule-tour__dates button.active .schedule-tour__day,
+.schedule-tour__dates button.active .schedule-tour__date {
+    color: var(--apex-noir);
+}
+
+.schedule-tour__times {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.schedule-tour__times button {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.schedule-tour__times button.active {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.schedule-tour__submit {
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+.schedule-tour__submit:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

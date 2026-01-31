@@ -1,0 +1,542 @@
+/* ============================================
+   NOTIFICATION COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Toast */
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    min-width: 320px;
+    max-width: 420px;
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.toast--success {
+    border-left: 3px solid #10b981;
+}
+
+.toast--error {
+    border-left: 3px solid #ef4444;
+}
+
+.toast--warning {
+    border-left: 3px solid #f59e0b;
+}
+
+.toast--info {
+    border-left: 3px solid var(--apex-teal);
+}
+
+.toast__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.toast--success .toast__icon {
+    color: #10b981;
+}
+
+.toast--error .toast__icon {
+    color: #ef4444;
+}
+
+.toast--warning .toast__icon {
+    color: #f59e0b;
+}
+
+.toast--info .toast__icon {
+    color: var(--apex-teal);
+}
+
+.toast__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast__title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.toast__message {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: 2px;
+}
+
+.toast__action {
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.toast__close {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+/* Notification Center */
+.notification-center {
+    width: 380px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.notification-center__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.notification-center__header h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.notification-center__badge {
+    padding: 2px 8px;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--apex-noir);
+}
+
+.notification-center__actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-left: auto;
+}
+
+.notification-center__actions button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.notification-center__actions button:hover {
+    color: var(--apex-silver);
+}
+
+.notification-center__list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-center__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    color: var(--apex-steel);
+}
+
+.notification-center__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+}
+
+.notification-center__item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.notification-center__item.unread {
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.notification-center__icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.notification-center__icon--message {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.notification-center__icon--alert {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.notification-center__icon--update {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--apex-teal);
+}
+
+.notification-center__icon--event {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.notification-center__icon--mention {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.notification-center__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-center__title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.notification-center__message {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notification-center__time {
+    font-size: 10px;
+    color: var(--apex-steel);
+}
+
+.notification-center__delete {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+    opacity: 0;
+}
+
+.notification-center__item:hover .notification-center__delete {
+    opacity: 1;
+}
+
+/* Badge */
+.badge-wrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    border-radius: var(--radius-full);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.badge--default {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.badge--success {
+    background: #10b981;
+    color: white;
+}
+
+.badge--warning {
+    background: #f59e0b;
+    color: var(--apex-noir);
+}
+
+.badge--danger {
+    background: #ef4444;
+    color: white;
+}
+
+.badge--dot {
+    min-width: 10px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+}
+
+/* Notification Bell */
+.notification-bell {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.notification-bell:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.notification-bell__badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    background: #ef4444;
+    border-radius: var(--radius-full);
+    font-size: 9px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Inline Alert */
+.inline-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+}
+
+.inline-alert--success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.inline-alert--error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.inline-alert--warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.inline-alert--info {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.inline-alert__icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.inline-alert--success .inline-alert__icon {
+    color: #10b981;
+}
+
+.inline-alert--error .inline-alert__icon {
+    color: #ef4444;
+}
+
+.inline-alert--warning .inline-alert__icon {
+    color: #f59e0b;
+}
+
+.inline-alert--info .inline-alert__icon {
+    color: var(--apex-teal);
+}
+
+.inline-alert__content {
+    flex: 1;
+}
+
+.inline-alert__title {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.inline-alert__message {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.inline-alert__action {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-white);
+    cursor: pointer;
+}
+
+.inline-alert__dismiss {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+/* Snackbar */
+.snackbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.snackbar__message {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-noir);
+}
+
+.snackbar__action {
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-teal);
+    cursor: pointer;
+}
+
+.snackbar__close {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+/* Banner */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    text-align: center;
+}
+
+.banner--info {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.banner--warning {
+    background: #f59e0b;
+    color: var(--apex-noir);
+}
+
+.banner--error {
+    background: #ef4444;
+    color: white;
+}
+
+.banner--success {
+    background: #10b981;
+    color: white;
+}
+
+.banner--promo {
+    background: linear-gradient(90deg, #8b5cf6, var(--apex-teal));
+    color: white;
+}
+
+.banner__message {
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.banner__action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: inherit;
+    cursor: pointer;
+}
+
+.banner__dismiss {
+    position: absolute;
+    right: var(--space-md);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+}
