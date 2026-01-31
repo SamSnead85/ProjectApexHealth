@@ -1,0 +1,320 @@
+/* ============================================
+   FILE MANAGER
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* File Uploader */
+.file-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.file-uploader__dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    background: rgba(15, 23, 42, 0.3);
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.file-uploader__dropzone:hover,
+.file-uploader__dropzone--active {
+    background: rgba(6, 182, 212, 0.05);
+    border-color: var(--apex-teal);
+}
+
+.file-uploader__dropzone svg {
+    color: var(--apex-steel);
+}
+
+.file-uploader__dropzone--active svg {
+    color: var(--apex-teal);
+}
+
+.file-uploader__text {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.file-uploader__hint {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.file-uploader__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.file-uploader__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+}
+
+.file-uploader__item-icon {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+}
+
+.file-uploader__item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-uploader__item-name {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-uploader__item-size {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.file-uploader__progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.file-uploader__progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+    transition: width 0.2s ease;
+}
+
+.file-uploader__item-error {
+    display: block;
+    font-size: var(--text-xs);
+    color: #ef4444;
+}
+
+.file-uploader__item-status {
+    display: flex;
+    align-items: center;
+}
+
+.file-uploader__item-status .spin {
+    animation: spin 1s linear infinite;
+    color: var(--apex-teal);
+}
+
+.file-uploader__item-status .success {
+    color: #10b981;
+}
+
+.file-uploader__item-status .error {
+    color: #ef4444;
+}
+
+.file-uploader__item-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.15s ease;
+}
+
+.file-uploader__item:hover .file-uploader__item-remove {
+    opacity: 1;
+}
+
+.file-uploader__item-remove:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* File Preview */
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.file-preview__image {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.file-preview__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-preview__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.file-preview__info {
+    flex: 1;
+}
+
+.file-preview__name {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.file-preview__size {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.file-preview__actions {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.file-preview__actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.file-preview__actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* Image Gallery */
+.image-gallery {
+    display: grid;
+}
+
+.image-gallery__item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-gallery__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.image-gallery__item:hover .image-gallery__overlay {
+    opacity: 1;
+}
+
+.image-gallery__lightbox {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+}
+
+.image-gallery__lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+}
+
+.image-gallery__close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.image-gallery__caption {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-sm) var(--space-lg);
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: white;
+}

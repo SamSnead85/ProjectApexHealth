@@ -1,0 +1,254 @@
+/* ============================================
+   INTERNATIONALIZATION
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Language Selector */
+.language-selector {
+    position: relative;
+}
+
+.language-selector__trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.language-selector__trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.language-selector__trigger svg.rotated {
+    transform: rotate(180deg);
+}
+
+.language-selector__dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 180px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.language-selector__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.language-selector__option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.language-selector__option--active {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--apex-teal);
+}
+
+.language-selector__option svg {
+    margin-left: auto;
+}
+
+/* Inline variant */
+.language-selector--inline {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.language-selector__inline-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.language-selector__inline-btn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--apex-silver);
+}
+
+.language-selector__inline-btn--active {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+/* Grid variant */
+.language-selector--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-sm);
+}
+
+.language-selector__grid-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.language-selector__grid-item:hover {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.language-selector__grid-item--active {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--apex-teal);
+}
+
+.language-selector__flag {
+    font-size: var(--text-lg);
+}
+
+.language-selector__name {
+    flex: 1;
+}
+
+/* Timezone Selector */
+.timezone-selector {
+    position: relative;
+}
+
+.timezone-selector__trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.timezone-selector__trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timezone-selector__trigger svg {
+    color: var(--apex-steel);
+}
+
+.timezone-selector__trigger svg.rotated {
+    transform: rotate(180deg);
+}
+
+.timezone-selector__offset {
+    margin-left: auto;
+    color: var(--apex-steel);
+    font-size: var(--text-xs);
+}
+
+.timezone-selector__dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 280px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.timezone-selector__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.timezone-selector__search svg {
+    color: var(--apex-steel);
+}
+
+.timezone-selector__search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.timezone-selector__search input::placeholder {
+    color: var(--apex-steel);
+}
+
+.timezone-selector__list {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.timezone-selector__option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.timezone-selector__option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timezone-selector__option--active {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--apex-teal);
+}
+
+.timezone-selector__option .timezone-selector__offset {
+    margin-left: auto;
+}
+
+/* Currency Display */
+.currency-display {
+    font-feature-settings: 'tnum';
+    font-weight: 600;
+}

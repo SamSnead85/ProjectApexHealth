@@ -1,0 +1,131 @@
+/* ============================================
+   ANIMATED COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Fade In View */
+.fade-in-view {
+    will-change: opacity, transform;
+}
+
+/* Staggered List */
+.staggered-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Page Transition */
+.page-transition {
+    will-change: opacity, transform;
+}
+
+/* Hover Scale */
+.hover-scale {
+    cursor: pointer;
+    will-change: transform;
+}
+
+/* Tap Scale */
+.tap-scale {
+    cursor: pointer;
+    will-change: transform;
+}
+
+/* Animated Counter */
+.animated-counter {
+    font-feature-settings: 'tnum';
+}
+
+/* Typewriter */
+.typewriter {
+    display: inline;
+}
+
+.typewriter__cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    color: var(--apex-teal);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Parallax */
+.parallax {
+    overflow: hidden;
+}
+
+.parallax>div {
+    will-change: transform;
+}
+
+/* Shimmer */
+.shimmer {
+    display: inline-block;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.1) 20%,
+            rgba(255, 255, 255, 0.15) 40%,
+            rgba(255, 255, 255, 0.1) 60%,
+            rgba(255, 255, 255, 0.05) 80%,
+            rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Pulse */
+.pulse {
+    will-change: transform;
+}
+
+/* Bounce */
+.bounce {
+    will-change: transform;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .fade-in-view,
+    .staggered-list,
+    .page-transition,
+    .hover-scale,
+    .tap-scale,
+    .parallax,
+    .pulse,
+    .bounce {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .shimmer {
+        animation: none;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .typewriter__cursor {
+        animation: none;
+        opacity: 1;
+    }
+}

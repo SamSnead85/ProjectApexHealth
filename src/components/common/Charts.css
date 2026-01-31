@@ -1,0 +1,211 @@
+/* ============================================
+   CHARTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.chart {
+    font-family: inherit;
+}
+
+/* Bar Chart */
+.bar-chart__container {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-md);
+}
+
+.bar-chart--horizontal .bar-chart__container {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.bar-chart__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.bar-chart--horizontal .bar-chart__item {
+    flex-direction: row;
+    gap: var(--space-md);
+}
+
+.bar-chart__label {
+    margin-top: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-align: center;
+}
+
+.bar-chart--horizontal .bar-chart__label {
+    min-width: 80px;
+    text-align: right;
+    margin: 0;
+}
+
+.bar-chart__bar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.bar-chart--horizontal .bar-chart__bar-wrapper {
+    flex-direction: row;
+    align-items: center;
+    height: 24px;
+}
+
+.bar-chart__bar {
+    width: 100%;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: var(--apex-teal);
+}
+
+.bar-chart--horizontal .bar-chart__bar {
+    height: 100%;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.bar-chart__value {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.bar-chart--horizontal .bar-chart__value {
+    position: static;
+    transform: none;
+    margin-left: var(--space-sm);
+}
+
+/* Pie Chart */
+.pie-chart {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.pie-chart__container {
+    position: relative;
+}
+
+.pie-chart__svg {
+    display: block;
+}
+
+.pie-chart__segment {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+
+.pie-chart__segment:hover {
+    transform: scale(1.05);
+}
+
+.pie-chart__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-chart__legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.pie-chart__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.pie-chart__legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.pie-chart__legend-label {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.pie-chart__legend-value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* Line Chart */
+.line-chart__svg {
+    width: 100%;
+    height: auto;
+}
+
+.line-chart__grid {
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 1;
+}
+
+.line-chart__dot {
+    cursor: pointer;
+    transition: r 0.2s ease;
+}
+
+.line-chart__dot:hover {
+    r: 6;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+}
+
+.progress-ring svg {
+    display: block;
+}
+
+.progress-ring__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.progress-ring__value {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.progress-ring__text {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pie-chart {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,219 @@
+/* ============================================
+   FORM WIZARD
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.form-wizard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Progress */
+.form-wizard__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.form-wizard__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.form-wizard__progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+.form-wizard__progress-text {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    white-space: nowrap;
+}
+
+/* Steps Indicator */
+.form-wizard__steps {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.form-wizard__step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    position: relative;
+}
+
+.form-wizard__step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.form-wizard__step--current .form-wizard__step-indicator {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.form-wizard__step--completed .form-wizard__step-indicator {
+    background: var(--apex-teal);
+    border-color: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.form-wizard__step--completed {
+    cursor: pointer;
+}
+
+.form-wizard__step-info {
+    display: none;
+}
+
+.form-wizard__step-connector {
+    flex: 1;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 var(--space-sm);
+}
+
+.form-wizard__step--completed .form-wizard__step-connector {
+    background: var(--apex-teal);
+}
+
+/* Content */
+.form-wizard__content {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    min-height: 200px;
+}
+
+.form-wizard__error {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-md);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: #ef4444;
+}
+
+/* Actions */
+.form-wizard__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-wizard__actions-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.form-wizard__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.form-wizard__btn--primary {
+    background: var(--apex-teal);
+    border: none;
+    color: var(--apex-noir);
+}
+
+.form-wizard__btn--primary:hover:not(:disabled) {
+    background: #22d3ee;
+}
+
+.form-wizard__btn--primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.form-wizard__btn--secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.form-wizard__btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-wizard__btn--ghost {
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+}
+
+.form-wizard__btn--ghost:hover {
+    color: var(--apex-silver);
+}
+
+.form-wizard__btn .spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .form-wizard__step-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-wizard__step-title {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--apex-silver);
+    }
+
+    .form-wizard__step--current .form-wizard__step-title {
+        color: var(--apex-white);
+    }
+
+    .form-wizard__step-desc {
+        font-size: var(--text-xs);
+        color: var(--apex-steel);
+    }
+}

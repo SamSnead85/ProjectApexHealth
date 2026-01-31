@@ -1,0 +1,427 @@
+/* ============================================
+   AUDIO COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Audio Player */
+.audio-player {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.audio-player__track {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.audio-player__artwork {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.audio-player__artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.audio-player__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.audio-player__title {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.audio-player__artist {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.audio-player__like {
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.audio-player__like:hover {
+    color: var(--apex-silver);
+}
+
+.audio-player__like.liked {
+    color: #ef4444;
+}
+
+.audio-player__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.audio-player__controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-silver);
+    cursor: pointer;
+    position: relative;
+}
+
+.audio-player__controls button:hover {
+    color: var(--apex-white);
+}
+
+.audio-player__controls button.active {
+    color: var(--apex-teal);
+}
+
+.audio-player__play {
+    width: 48px;
+    height: 48px;
+    background: var(--apex-teal) !important;
+    border-radius: 50%;
+    color: var(--apex-noir) !important;
+}
+
+.audio-player__repeat-one {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.audio-player__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.audio-player__progress span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    min-width: 36px;
+}
+
+.audio-player__progress input[type="range"] {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    -webkit-appearance: none;
+}
+
+.audio-player__progress input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--apex-teal);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.audio-player__volume {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.audio-player__volume button {
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.audio-player__volume input[type="range"] {
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    -webkit-appearance: none;
+}
+
+.audio-player__volume input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: var(--apex-silver);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Track List */
+.track-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-list__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.track-list__item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.track-list__item.playing {
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.track-list__num {
+    width: 24px;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.track-list__item.playing .track-list__num {
+    color: var(--apex-teal);
+}
+
+.track-list__artwork {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    overflow: hidden;
+}
+
+.track-list__artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-list__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.track-list__title {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-list__item.playing .track-list__title {
+    color: var(--apex-teal);
+}
+
+.track-list__artist {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.track-list__duration {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.track-list__more {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+    opacity: 0;
+}
+
+.track-list__item:hover .track-list__more {
+    opacity: 1;
+}
+
+/* Waveform Visualizer */
+.waveform-visualizer {
+    height: 60px;
+    cursor: pointer;
+}
+
+.waveform-visualizer__bars {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 2px;
+}
+
+.waveform-visualizer__bar {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    transition: background 0.15s ease;
+}
+
+.waveform-visualizer__bar.active {
+    background: var(--apex-teal);
+}
+
+/* Equalizer */
+.equalizer {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.equalizer__title {
+    margin: 0 0 var(--space-lg) 0;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+}
+
+.equalizer__bands {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.equalizer__band {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.equalizer__band input[type="range"] {
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    width: 8px;
+    height: 100px;
+}
+
+.equalizer__freq {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Podcast Card */
+.podcast-card {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.podcast-card__artwork {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.podcast-card__artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.podcast-card__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: var(--apex-white);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.podcast-card:hover .podcast-card__play {
+    opacity: 1;
+}
+
+.podcast-card__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.podcast-card__title {
+    margin: 0 0 4px 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.podcast-card__host {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    margin-bottom: 4px;
+}
+
+.podcast-card__episodes {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.podcast-card__latest {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    margin-top: 4px;
+}
+
+.podcast-card__subscribe {
+    margin-top: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+.podcast-card__subscribe.subscribed {
+    background: transparent;
+    border: 1px solid var(--apex-teal);
+    color: var(--apex-teal);
+}

@@ -1,58 +1,64 @@
-// Common components barrel export
-export { GlassCard } from './GlassCard'
-export { Button } from './Button'
-export { Badge } from './Badge'
-export { MetricCard } from './MetricCard'
-export { Input } from './Input'
-export { CommandPalette } from './CommandPalette'
-export { Skeleton, SkeletonText, SkeletonCard, SkeletonTableRow, SkeletonAvatar, SkeletonPage } from './Skeleton'
-export { EmptyState, NoSearchResults, ErrorState, NotFoundState } from './EmptyState'
-export { OnboardingTour, WelcomeModal } from './Onboarding'
-export { ToastProvider, useToast } from './Toast'
-export { PageTransition, staggerContainer, staggerItem, fadeIn, slideInLeft, slideInRight, scaleUp, hoverLift, tapScale } from './PageTransition'
-export { Tooltip } from './Tooltip'
-export { ProgressBar, CircularProgress } from './ProgressBar'
-export { Dropdown } from './Dropdown'
-export { Tabs, TabPanel, useTabs } from './Tabs'
-export { Modal, ModalFooter } from './Modal'
-export { Avatar, AvatarGroup } from './Avatar'
-export { StatusIndicator, StatusBadge, TrafficLight } from './StatusIndicator'
-export { SearchInput } from './SearchInput'
-export { Accordion } from './Accordion'
-export { ThemeToggle, ThemeSelector } from './ThemeToggle'
-export { Breadcrumb } from './Breadcrumb'
-export { NotificationBell } from './NotificationBell'
-export { KPICard, KPIGrid } from './KPICard'
-export { Sparkline, MiniChart } from './Sparkline'
-export { Switch, InlineSwitch } from './Switch'
-export { Timeline, ProgressTimeline } from './Timeline'
-export { Alert, AlertBanner } from './Alert'
-export { StatGroup, InlineStat } from './StatGroup'
-export { Tag, TagGroup, Chip, ChipGroup } from './Tag'
-export { Divider } from './Divider'
-export { Section, PageHeader, Container } from './Section'
-export { FileUpload } from './FileUpload'
-export { KeyboardShortcutsProvider, KeyboardShortcutsHelp, useKeyboardShortcut } from './KeyboardShortcuts'
-export { HelpCenter, FloatingHelp } from './HelpCenter'
-export { SideNav, BottomNav } from './SideNav'
-export { Banner, CookieBanner, AnnouncementBar } from './Banner'
-export { DataTable, TableToolbar } from './DataTable'
-export { FormField, TextAreaField, SelectField } from './FormField'
-export { Card, CardHeader, CardBody, CardFooter, StatCard, LinkCard } from './Card'
-export { Stepper, StepIndicator } from './Stepper'
-export { Rating, EmojiRating, ThumbsRating } from './Rating'
-export { Slider, RangeSlider } from './Slider'
-export { DatePicker } from './DatePicker'
-export { ColorPicker, ColorSwatch } from './ColorPicker'
-export { Autocomplete } from './Autocomplete'
-export { Drawer } from './Drawer'
-export { Popover, PopoverMenu } from './Popover'
-export { CopyButton, CodeBlock, LinkWithCopy } from './Clipboard'
-export { FadeIn, ScaleIn, StaggerContainer, StaggerItem, Pulse, Float, Shimmer, Typewriter } from './Animations'
-export { SkipLink, ScreenReaderOnly, LiveRegion, FocusTrap, AccessibilityPanel, AccessibilityToggle } from './Accessibility'
-export { ShowOn, HideOn, ResponsiveStack, ResponsiveGrid, ResponsiveText, AspectRatio, ContainerMax } from './Responsive'
-export { ConnectivityProvider, useConnectivity, OfflineBanner, ConnectionStatus, OnlineOnly, OfflineOnly } from './Connectivity'
+// Master Component Index - Premium UI Library
+// Apex Obsidian v3 Design System
 
+// Core UI Components
+export * from './Buttons'
+export * from './Inputs'
+export * from './Cards'
+export * from './Modals'
+export * from './Tables'
+export * from './Navigation'
+export * from './Feedback'
+export * from './Overlays'
 
+// Data Display
+export * from './DataDisplayComponents'
+export * from './ChartComponents'
+export * from './MetricComponents'
+export * from './AnalyticsWidgets'
 
+// Forms & Input
+export * from './FormComponents'
+export * from './FileUploadComponents'
+export * from './DateTimeComponents'
+export * from './SearchFilterComponents'
 
+// Layout
+export * from './LayoutComponents'
+export * from './NavigationComponents'
+
+// Specialized Components
+export * from './ShoppingComponents'
+export * from './PaymentComponents'
+export * from './MessagingComponents'
+export * from './HealthcareComponents'
+export * from './EducationComponents'
+export * from './SocialComponents'
+export * from './MediaComponents'
+
+// DevTools & Technical
+export * from './DevToolsComponents'
+export * from './CanvasComponents'
+export * from './MapComponents'
+export * from './AudioComponents'
+export * from './VideoConferenceComponents'
+
+// AI & Intelligence
+export * from './AIComponents'
+
+// Gamification
+export * from './GameComponents'
+
+// Enterprise
+export * from './AdminComponents'
+export * from './CRMComponents'
+export * from './CollaborationTools'
+export * from './SchedulingComponents'
+export * from './ErrorHandling'
+export * from './PreferencesSettings'
+
+// Notification System
+export * from './NotificationComponents'
+
+// Workflow
+export * from './WorkflowComponents'

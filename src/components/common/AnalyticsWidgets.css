@@ -1,0 +1,396 @@
+/* ============================================
+   ANALYTICS WIDGETS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* KPI Card */
+.kpi-card {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.kpi-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+}
+
+.kpi-card__title {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.kpi-card__icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.kpi-card__value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    margin-bottom: var(--space-xs);
+}
+
+.kpi-card__change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-sm);
+}
+
+.kpi-card__change-label {
+    color: var(--apex-steel);
+    margin-left: 4px;
+}
+
+.kpi-card__sparkline {
+    height: 30px;
+    margin-top: var(--space-md);
+}
+
+.kpi-card__sparkline svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Metric Comparison */
+.metric-comparison {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.metric-comparison__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.metric-comparison__header h4 {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.metric-comparison__target {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.metric-comparison__values {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.metric-comparison__current,
+.metric-comparison__previous {
+    flex: 1;
+}
+
+.metric-comparison__label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-xs);
+}
+
+.metric-comparison__value {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.metric-comparison__previous .metric-comparison__value {
+    color: var(--apex-silver);
+}
+
+.metric-comparison__vs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-sm);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.metric-comparison__vs .positive {
+    color: #10b981;
+}
+
+.metric-comparison__vs .negative {
+    color: #ef4444;
+}
+
+.metric-comparison__progress {
+    margin-top: var(--space-md);
+}
+
+.metric-comparison__progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-xs);
+}
+
+.metric-comparison__progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+}
+
+.metric-comparison__progress>span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Goal Tracker */
+.goal-tracker {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.goal-tracker__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0 0 var(--space-lg) 0;
+    font-size: var(--text-md);
+    color: var(--apex-white);
+}
+
+.goal-tracker__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.goal-tracker__item {
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.goal-tracker__item--complete {
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.goal-tracker__item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+}
+
+.goal-tracker__item-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.goal-tracker__item-values {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.goal-tracker__item-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-xs);
+}
+
+.goal-tracker__item-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.goal-tracker__item-progress {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.goal-tracker__item--complete .goal-tracker__item-progress {
+    color: #10b981;
+}
+
+/* Funnel Chart */
+.funnel-chart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.funnel-chart__stage {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.funnel-chart__bar {
+    height: 32px;
+    min-width: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.funnel-chart__fill {
+    height: 100%;
+}
+
+.funnel-chart__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+}
+
+.funnel-chart__name {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.funnel-chart__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.funnel-chart__rate {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+}
+
+/* Live Counter */
+.live-counter {
+    position: relative;
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.live-counter__pulse {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 10px;
+    height: 10px;
+    background: var(--pulse-color);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.live-counter__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.live-counter__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: var(--apex-teal);
+    margin-bottom: var(--space-md);
+}
+
+.live-counter__value {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-feature-settings: 'tnum';
+}
+
+.live-counter__label {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: var(--space-xs);
+}
+
+/* Mini Stat */
+.mini-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.mini-stat__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.mini-stat__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-stat__value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.mini-stat__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.mini-stat__sub {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}

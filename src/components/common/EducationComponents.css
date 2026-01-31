@@ -1,0 +1,502 @@
+/* ============================================
+   EDUCATION COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Course Card */
+.course-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.course-card__thumbnail {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.course-card__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-card__level {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--apex-noir);
+}
+
+.course-card__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    color: var(--apex-white);
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.course-card:hover .course-card__play {
+    opacity: 0.9;
+}
+
+.course-card__content {
+    padding: var(--space-md);
+}
+
+.course-card__title {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.course-card__instructor {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.course-card__meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.course-card__meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.course-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #f59e0b;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.course-card__progress {
+    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-sm);
+}
+
+.course-card__progress-bar {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+.course-card__progress span {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    font-size: 10px;
+    color: var(--apex-steel);
+}
+
+.course-card__cta {
+    width: 100%;
+    padding: var(--space-sm);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}
+
+/* Lesson Player */
+.lesson-player {
+    background: var(--apex-noir);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.lesson-player__video {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+.lesson-player__video video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.lesson-player__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--apex-white);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.lesson-player:hover .lesson-player__overlay {
+    opacity: 1;
+}
+
+.lesson-player__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.lesson-player__controls button {
+    background: transparent;
+    border: none;
+    color: var(--apex-white);
+    cursor: pointer;
+}
+
+.lesson-player__progress {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.lesson-player__progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+.lesson-player__time {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.lesson-player__info {
+    padding: var(--space-md);
+}
+
+.lesson-player__info h4 {
+    margin: 0;
+    color: var(--apex-white);
+}
+
+/* Quiz Question */
+.quiz-question {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.quiz-question__text {
+    margin: 0 0 var(--space-lg) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.quiz-question__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.quiz-question__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.quiz-question__option:hover:not(:disabled) {
+    border-color: var(--apex-teal);
+}
+
+.quiz-question__option.selected {
+    border-color: var(--apex-teal);
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.quiz-question__option.correct {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.quiz-question__option.wrong {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.quiz-question__option-marker {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.quiz-question__option.correct .quiz-question__option-marker {
+    background: #10b981;
+    color: var(--apex-noir);
+}
+
+.quiz-question__explanation {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+/* Progress Tracker */
+.progress-tracker {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.progress-tracker__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+}
+
+.progress-tracker__step.locked {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.progress-tracker__marker {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-steel);
+    z-index: 1;
+}
+
+.progress-tracker__step.completed .progress-tracker__marker {
+    background: var(--apex-teal);
+    border-color: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.progress-tracker__step.current .progress-tracker__marker {
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.progress-tracker__title {
+    margin-top: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-align: center;
+}
+
+.progress-tracker__connector {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-tracker__step.completed .progress-tracker__connector {
+    background: var(--apex-teal);
+}
+
+/* Achievement Badge */
+.achievement-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--rarity-color, rgba(255, 255, 255, 0.06));
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-badge.locked {
+    filter: grayscale(1);
+}
+
+.achievement-badge__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: var(--rarity-color);
+}
+
+.achievement-badge--sm .achievement-badge__icon {
+    width: 32px;
+    height: 32px;
+}
+
+.achievement-badge--lg .achievement-badge__icon {
+    width: 64px;
+    height: 64px;
+}
+
+.achievement-badge__name {
+    display: block;
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.achievement-badge__desc {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.achievement-badge__date {
+    font-size: 10px;
+    color: var(--apex-steel);
+}
+
+.achievement-badge__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--apex-steel);
+}
+
+/* Leaderboard */
+.leaderboard {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.leaderboard__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0 0 var(--space-lg) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.leaderboard__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.leaderboard__entry {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.leaderboard__entry.highlight {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.leaderboard__rank {
+    min-width: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.leaderboard__user {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.leaderboard__avatar {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.leaderboard__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leaderboard__user span {
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+}
+
+.leaderboard__score {
+    font-weight: 600;
+    color: var(--apex-teal);
+}

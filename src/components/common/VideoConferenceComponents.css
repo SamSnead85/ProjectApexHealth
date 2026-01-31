@@ -1,0 +1,460 @@
+/* ============================================
+   VIDEO CONFERENCE COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Participant Video */
+.participant-video {
+    position: relative;
+    background: var(--apex-noir);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.participant-video--sm {
+    aspect-ratio: 16/9;
+    min-width: 160px;
+}
+
+.participant-video--md {
+    aspect-ratio: 16/9;
+    min-width: 280px;
+}
+
+.participant-video--lg {
+    aspect-ratio: 16/9;
+    min-width: 400px;
+}
+
+.participant-video--full {
+    aspect-ratio: 16/9;
+    width: 100%;
+}
+
+.participant-video.speaking {
+    box-shadow: 0 0 0 3px var(--apex-teal);
+}
+
+.participant-video.pinned {
+    box-shadow: 0 0 0 2px #f59e0b;
+}
+
+.participant-video__container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.participant-video__container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.participant-video__avatar {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.3));
+    border-radius: 50%;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.participant-video--sm .participant-video__avatar {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-lg);
+}
+
+.participant-video__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.participant-video__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-sm);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 50%);
+}
+
+.participant-video__info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.participant-video__name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.participant-video__info svg {
+    color: #ef4444;
+}
+
+.participant-video__actions {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.participant-video:hover .participant-video__actions {
+    opacity: 1;
+}
+
+.participant-video__actions button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-white);
+    cursor: pointer;
+}
+
+/* Video Controls Bar */
+.video-controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: var(--radius-xl);
+}
+
+.video-controls-bar__main,
+.video-controls-bar__secondary {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.video-controls-bar__btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-white);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.video-controls-bar__btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.video-controls-bar__btn.off {
+    background: #ef4444;
+}
+
+.video-controls-bar__btn.active {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.video-controls-bar__secondary button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.video-controls-bar__secondary button:hover {
+    color: var(--apex-white);
+}
+
+.video-controls-bar__leave {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-lg);
+    background: #ef4444;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+    cursor: pointer;
+}
+
+/* Participant List */
+.participant-list {
+    width: 280px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.participant-list__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.participant-list__items {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.participant-list__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+}
+
+.participant-list__item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.participant-list__avatar {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 50%;
+    font-size: var(--text-sm);
+    color: var(--apex-teal);
+    overflow: hidden;
+}
+
+.participant-list__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.participant-list__speaking-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--apex-teal);
+    border: 2px solid var(--apex-obsidian);
+    border-radius: 50%;
+}
+
+.participant-list__name {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.participant-list__actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+}
+
+.participant-list__item:hover .participant-list__actions {
+    opacity: 1;
+}
+
+.participant-list__actions button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.participant-list__actions button:hover {
+    color: var(--apex-silver);
+}
+
+.participant-list__actions button.muted {
+    color: #ef4444;
+}
+
+.participant-list__actions button.pinned {
+    color: #f59e0b;
+}
+
+/* Video Grid */
+.video-grid {
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: repeat(var(--grid-cols, 2), 1fr);
+    padding: var(--space-md);
+}
+
+.video-grid--pinned {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+}
+
+.video-grid__pinned {
+    grid-column: 1;
+}
+
+.video-grid__tiles {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+}
+
+.video-grid--pinned .video-grid__tiles {
+    flex-wrap: nowrap;
+}
+
+/* Meeting Timer */
+.meeting-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(239, 68, 68, 0.15);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: #ef4444;
+}
+
+.meeting-timer__dot {
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse-dot 1.5s ease infinite;
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* Pre-Call Setup */
+.pre-call-setup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.pre-call-setup__preview {
+    position: relative;
+    width: 320px;
+    aspect-ratio: 16/9;
+    background: var(--apex-noir);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.pre-call-setup__preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.pre-call-setup__avatar {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--apex-steel);
+}
+
+.pre-call-setup__controls {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.pre-call-setup__controls button {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-white);
+    cursor: pointer;
+}
+
+.pre-call-setup__controls button.off {
+    background: #ef4444;
+}
+
+.pre-call-setup__actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.pre-call-setup__cancel {
+    padding: var(--space-sm) var(--space-xl);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.pre-call-setup__join {
+    padding: var(--space-sm) var(--space-xl);
+    background: var(--apex-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-noir);
+    cursor: pointer;
+}

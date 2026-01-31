@@ -1,0 +1,280 @@
+/* ============================================
+   METRIC COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Metric Card */
+.metric-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+}
+
+.metric-card--success {
+    border-left: 3px solid #10b981;
+}
+
+.metric-card--warning {
+    border-left: 3px solid #f59e0b;
+}
+
+.metric-card--danger {
+    border-left: 3px solid #ef4444;
+}
+
+.metric-card__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+}
+
+.metric-card__content {
+    flex: 1;
+}
+
+.metric-card__label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: 4px;
+}
+
+.metric-card__value {
+    display: block;
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.metric-card__change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.metric-card__change.up {
+    color: #10b981;
+}
+
+.metric-card__change.down {
+    color: #ef4444;
+}
+
+.metric-card__change.neutral {
+    color: var(--apex-steel);
+}
+
+.metric-card__change-label {
+    color: var(--apex-steel);
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+/* Mini Sparkline */
+.mini-sparkline {
+    display: block;
+}
+
+/* Gauge Chart */
+.gauge-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gauge-chart__value {
+    position: absolute;
+    bottom: 20px;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.gauge-chart__label {
+    margin-top: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Comparison Bar */
+.comparison-bar {
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.comparison-bar__label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+    margin-bottom: var(--space-md);
+}
+
+.comparison-bar__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.comparison-bar__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.comparison-bar__value-label {
+    min-width: 24px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.comparison-bar__track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.comparison-bar__fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.comparison-bar__fill--a {
+    background: var(--apex-teal);
+}
+
+.comparison-bar__fill--b {
+    background: #8b5cf6;
+}
+
+.comparison-bar__value {
+    min-width: 40px;
+    text-align: right;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+}
+
+.progress-ring__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring__value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.progress-ring__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Stat Group */
+.stat-group {
+    display: grid;
+    grid-template-columns: repeat(var(--stat-columns, 4), 1fr);
+    gap: var(--space-md);
+}
+
+.stat-group__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.stat-group__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--apex-teal);
+}
+
+.stat-group__info {
+    flex: 1;
+}
+
+.stat-group__value {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.stat-group__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Delta Indicator */
+.delta-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.delta-indicator--sm {
+    font-size: 10px;
+}
+
+.delta-indicator--md {
+    font-size: var(--text-xs);
+}
+
+.delta-indicator--lg {
+    font-size: var(--text-sm);
+}
+
+.delta-indicator.positive {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.delta-indicator.negative {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.delta-indicator.neutral {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-steel);
+}

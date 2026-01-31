@@ -1,0 +1,158 @@
+/* ============================================
+   CAROUSEL
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.carousel {
+    position: relative;
+    width: 100%;
+}
+
+.carousel__viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.carousel__track {
+    display: flex;
+    cursor: grab;
+}
+
+.carousel__track:active {
+    cursor: grabbing;
+}
+
+.carousel__slide {
+    flex-shrink: 0;
+}
+
+/* Arrows */
+.carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--apex-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.carousel__arrow:hover:not(:disabled) {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.carousel__arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.carousel__arrow--prev {
+    left: var(--space-md);
+}
+
+.carousel__arrow--next {
+    right: var(--space-md);
+}
+
+/* Dots */
+.carousel__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+}
+
+.carousel__dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carousel__dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel__dot--active {
+    width: 24px;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+/* Progress */
+.carousel__progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    margin-top: var(--space-md);
+    overflow: hidden;
+}
+
+.carousel__progress-fill {
+    height: 100%;
+    background: var(--apex-teal);
+    border-radius: var(--radius-full);
+}
+
+/* Card Carousel */
+.card-carousel .carousel__slide {
+    padding: var(--space-xs);
+}
+
+/* Testimonial Carousel */
+.testimonial-carousel {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.testimonial-slide {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.testimonial-slide__quote {
+    font-size: var(--text-lg);
+    font-style: italic;
+    color: var(--apex-silver);
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg) 0;
+}
+
+.testimonial-slide__author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.testimonial-slide__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-slide__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.testimonial-slide__role {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}

@@ -1,0 +1,558 @@
+/* ============================================
+   CRM COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Contact Card */
+.contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    transition: all 0.15s ease;
+}
+
+.contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.contact-card--compact {
+    padding: var(--space-sm);
+    background: transparent;
+    border: none;
+}
+
+.contact-card__avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: 50%;
+    color: var(--apex-teal);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.contact-card--compact .contact-card__avatar {
+    width: 36px;
+    height: 36px;
+}
+
+.contact-card__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.contact-card__name {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.contact-card__star {
+    color: #f59e0b;
+    fill: currentColor;
+}
+
+.contact-card__role {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.contact-card__detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.contact-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: var(--space-sm);
+}
+
+.contact-card__tag {
+    padding: 2px 8px;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+}
+
+.contact-card__actions {
+    position: relative;
+}
+
+.contact-card__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.contact-card__menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.contact-card__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 120px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.contact-card__menu button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.contact-card__menu button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.contact-card__menu button.danger {
+    color: #ef4444;
+}
+
+/* Contact List */
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.contact-list__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.contact-list__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.contact-list__search svg {
+    color: var(--apex-steel);
+}
+
+.contact-list__search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.contact-list__filters {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.contact-list__filters button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.contact-list__filters button:hover,
+.contact-list__filters button.active {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.contact-list__items {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-list__item {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+}
+
+.contact-list__item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.contact-list__item .contact-card {
+    flex: 1;
+}
+
+.contact-list__arrow {
+    color: var(--apex-steel);
+}
+
+.contact-list__empty {
+    padding: var(--space-lg);
+    text-align: center;
+    color: var(--apex-steel);
+}
+
+/* Deal Pipeline */
+.deal-pipeline {
+    display: flex;
+    gap: var(--space-md);
+    overflow-x: auto;
+    padding-bottom: var(--space-md);
+}
+
+.deal-pipeline__stage {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.deal-pipeline__stage-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border-left: 3px solid var(--stage-color);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: var(--space-sm);
+}
+
+.deal-pipeline__stage-header h4 {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.deal-pipeline__stage-count {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.deal-pipeline__stage-value {
+    margin-left: auto;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--stage-color);
+}
+
+.deal-pipeline__deals {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex: 1;
+}
+
+.deal-pipeline__deal {
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.deal-pipeline__deal:hover {
+    border-color: var(--stage-color);
+}
+
+.deal-pipeline__deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.deal-pipeline__deal-header h5 {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.deal-pipeline__deal-value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #10b981;
+}
+
+.deal-pipeline__deal-company {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.deal-pipeline__deal-probability {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.deal-pipeline__deal-probability-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.deal-pipeline__deal-probability-bar>div {
+    height: 100%;
+    background: var(--apex-teal);
+    transition: width 0.3s ease;
+}
+
+.deal-pipeline__deal-probability>span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Activity Timeline */
+.activity-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.activity-timeline__item {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    margin-left: 12px;
+    padding-left: var(--space-lg);
+    cursor: pointer;
+}
+
+.activity-timeline__item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.activity-timeline__icon {
+    position: relative;
+    left: calc(-1 * var(--space-lg) - 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--apex-noir);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.activity-timeline__icon--call {
+    color: #10b981;
+}
+
+.activity-timeline__icon--email {
+    color: #3b82f6;
+}
+
+.activity-timeline__icon--meeting {
+    color: #8b5cf6;
+}
+
+.activity-timeline__icon--note {
+    color: #f59e0b;
+}
+
+.activity-timeline__icon--task {
+    color: var(--apex-teal);
+}
+
+.activity-timeline__content {
+    flex: 1;
+    margin-left: calc(-1 * (var(--space-lg) + 28px));
+    padding-left: var(--space-lg);
+}
+
+.activity-timeline__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.activity-timeline__header h5 {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.activity-timeline__date {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.activity-timeline__desc {
+    margin: var(--space-xs) 0 0 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.activity-timeline__user {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Lead Score */
+.lead-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.lead-score__ring {
+    position: relative;
+}
+
+.lead-score--sm .lead-score__ring {
+    width: 48px;
+    height: 48px;
+}
+
+.lead-score--md .lead-score__ring {
+    width: 64px;
+    height: 64px;
+}
+
+.lead-score--lg .lead-score__ring {
+    width: 80px;
+    height: 80px;
+}
+
+.lead-score__ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.lead-score__bg,
+.lead-score__fill {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.lead-score__bg {
+    stroke: rgba(255, 255, 255, 0.1);
+}
+
+.lead-score--hot .lead-score__fill {
+    stroke: #ef4444;
+}
+
+.lead-score--warm .lead-score__fill {
+    stroke: #f59e0b;
+}
+
+.lead-score--cold .lead-score__fill {
+    stroke: #3b82f6;
+}
+
+.lead-score__value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    color: var(--apex-white);
+}
+
+.lead-score--sm .lead-score__value {
+    font-size: var(--text-sm);
+}
+
+.lead-score--md .lead-score__value {
+    font-size: var(--text-lg);
+}
+
+.lead-score--lg .lead-score__value {
+    font-size: var(--text-xl);
+}
+
+.lead-score__label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.lead-score--hot .lead-score__label {
+    color: #ef4444;
+}
+
+.lead-score--warm .lead-score__label {
+    color: #f59e0b;
+}
+
+.lead-score--cold .lead-score__label {
+    color: #3b82f6;
+}

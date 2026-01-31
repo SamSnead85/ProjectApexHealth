@@ -1,0 +1,258 @@
+/* ============================================
+   LAYOUT COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Split View */
+.split-view {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+.split-view.dragging {
+    cursor: col-resize;
+    user-select: none;
+}
+
+.split-view__left,
+.split-view__right {
+    overflow: auto;
+    height: 100%;
+}
+
+.split-view__divider {
+    width: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: col-resize;
+    transition: background 0.15s ease;
+}
+
+.split-view__divider:hover {
+    background: rgba(6, 182, 212, 0.2);
+}
+
+.split-view__divider svg {
+    color: var(--apex-steel);
+}
+
+/* Accordion */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.accordion__item {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.accordion__item.disabled {
+    opacity: 0.5;
+}
+
+.accordion__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+    text-align: left;
+    cursor: pointer;
+}
+
+.accordion__header:disabled {
+    cursor: not-allowed;
+}
+
+.accordion__header svg:first-child {
+    color: var(--apex-teal);
+}
+
+.accordion__header span {
+    flex: 1;
+}
+
+.accordion__chevron {
+    color: var(--apex-steel);
+    transition: transform 0.2s ease;
+}
+
+.accordion__item.open .accordion__chevron {
+    transform: rotate(180deg);
+}
+
+.accordion__content {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.accordion__content-inner {
+    padding: var(--space-md);
+}
+
+/* Masonry Grid */
+.masonry-grid {
+    display: flex;
+    width: 100%;
+}
+
+.masonry-grid__column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Side Panel */
+.side-panel__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.98);
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 101;
+}
+
+.side-panel--left {
+    left: 0;
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.side-panel--right {
+    right: 0;
+}
+
+.side-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.side-panel__header h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.side-panel__header button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.side-panel__header button:hover {
+    color: var(--apex-silver);
+}
+
+.side-panel__content {
+    padding: var(--space-md);
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+
+/* Container */
+.container {
+    width: 100%;
+}
+
+.container--sm {
+    max-width: 640px;
+}
+
+.container--md {
+    max-width: 768px;
+}
+
+.container--lg {
+    max-width: 1024px;
+}
+
+.container--xl {
+    max-width: 1280px;
+}
+
+.container--full {
+    max-width: 100%;
+}
+
+.container--padding {
+    padding: 0 var(--space-md);
+}
+
+.container--centered {
+    margin: 0 auto;
+}
+
+/* Stack */
+.stack {
+    display: flex;
+}
+
+.stack--vertical {
+    flex-direction: column;
+}
+
+.stack--horizontal {
+    flex-direction: row;
+}
+
+.stack--wrap {
+    flex-wrap: wrap;
+}
+
+/* View Switcher */
+.view-switcher {
+    display: flex;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.view-switcher__btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.view-switcher__btn:hover {
+    color: var(--apex-silver);
+}
+
+.view-switcher__btn.active {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--apex-teal);
+}

@@ -1,0 +1,342 @@
+/* ============================================
+   SETTINGS PANEL
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.settings-panel__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 700px;
+    max-width: 90vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.98);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+}
+
+.settings-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.settings-panel__header h2 {
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.settings-panel__close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: 20px;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.settings-panel__close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-white);
+}
+
+.settings-panel__layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.settings-panel__nav {
+    width: 200px;
+    padding: var(--space-md);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-y: auto;
+}
+
+.settings-panel__nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+}
+
+.settings-panel__nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--apex-silver);
+}
+
+.settings-panel__nav-item--active {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--apex-teal);
+}
+
+.settings-panel__content {
+    flex: 1;
+    padding: var(--space-lg);
+    overflow-y: auto;
+}
+
+.settings-panel__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.settings-panel__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.settings-panel__btn--primary {
+    background: var(--apex-teal);
+    border: none;
+    color: var(--apex-noir);
+}
+
+.settings-panel__btn--primary:hover {
+    background: #22d3ee;
+}
+
+.settings-panel__btn--secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.settings-panel__btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Settings Group */
+.settings-group {
+    margin-bottom: var(--space-xl);
+}
+
+.settings-group__header {
+    margin-bottom: var(--space-md);
+}
+
+.settings-group__title {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.settings-group__desc {
+    margin: 4px 0 0 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.settings-group__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Settings Item */
+.settings-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+}
+
+.settings-item__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-item__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.settings-item__desc {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.settings-item__control {
+    flex-shrink: 0;
+}
+
+/* Theme Picker */
+.theme-picker {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.theme-picker__option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.theme-picker__option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.theme-picker__option--active {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+/* Accent Color Picker */
+.accent-color-picker {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.accent-color-picker__swatch {
+    width: 28px;
+    height: 28px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.accent-color-picker__swatch:hover {
+    transform: scale(1.1);
+}
+
+.accent-color-picker__swatch--active {
+    border-color: var(--apex-white);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Language Selector */
+.language-selector {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+}
+
+.language-selector option {
+    background: var(--apex-noir);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-switch--sm {
+    width: 32px;
+    height: 18px;
+}
+
+.toggle-switch--md {
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch--lg {
+    width: 56px;
+    height: 30px;
+}
+
+.toggle-switch--checked {
+    background: var(--apex-teal);
+}
+
+.toggle-switch--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.toggle-switch__thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.toggle-switch--sm .toggle-switch__thumb {
+    width: 14px;
+    height: 14px;
+}
+
+.toggle-switch--md .toggle-switch__thumb {
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-switch--lg .toggle-switch__thumb {
+    width: 26px;
+    height: 26px;
+}
+
+.toggle-switch--checked.toggle-switch--sm .toggle-switch__thumb {
+    transform: translateX(14px);
+}
+
+.toggle-switch--checked.toggle-switch--md .toggle-switch__thumb {
+    transform: translateX(20px);
+}
+
+.toggle-switch--checked.toggle-switch--lg .toggle-switch__thumb {
+    transform: translateX(26px);
+}

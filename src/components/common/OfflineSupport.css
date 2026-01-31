@@ -1,0 +1,204 @@
+/* ============================================
+   OFFLINE SUPPORT
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Offline Banner */
+.offline-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-sm);
+    color: white;
+}
+
+.offline-banner--offline {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.offline-banner--syncing {
+    background: linear-gradient(90deg, var(--apex-teal), #0891b2);
+}
+
+.offline-banner__badge {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+}
+
+.offline-banner button {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+}
+
+.offline-banner button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.offline-banner .spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sync Indicator */
+.sync-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.sync-indicator__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.sync-indicator__btn:hover:not(:disabled) {
+    color: var(--apex-silver);
+}
+
+.sync-indicator__btn:disabled {
+    cursor: not-allowed;
+}
+
+.sync-indicator__btn--syncing {
+    color: var(--apex-teal);
+}
+
+.sync-indicator__btn--synced {
+    color: #10b981;
+}
+
+.sync-indicator__btn--error {
+    color: #ef4444;
+}
+
+.sync-indicator__label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.sync-indicator--sm .sync-indicator__label {
+    font-size: 10px;
+}
+
+.sync-indicator--lg .sync-indicator__label {
+    font-size: var(--text-sm);
+}
+
+/* Offline Action */
+.offline-action {
+    position: relative;
+}
+
+.offline-action__message {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(239, 68, 68, 0.9);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: white;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+.offline-action__message::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(239, 68, 68, 0.9);
+}
+
+/* Network Quality */
+.network-quality {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.network-quality__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+}
+
+.network-quality__bars span {
+    width: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 1px;
+}
+
+.network-quality__bars span:nth-child(1) {
+    height: 33%;
+}
+
+.network-quality__bars span:nth-child(2) {
+    height: 66%;
+}
+
+.network-quality__bars span:nth-child(3) {
+    height: 100%;
+}
+
+.network-quality__bars span.active {
+    background: var(--apex-steel);
+}
+
+.network-quality--excellent .network-quality__bars span.active {
+    background: #10b981;
+}
+
+.network-quality--good .network-quality__bars span.active {
+    background: #10b981;
+}
+
+.network-quality--fair .network-quality__bars span.active {
+    background: #f59e0b;
+}
+
+.network-quality--poor .network-quality__bars span.active {
+    background: #ef4444;
+}
+
+.network-quality--offline .network-quality__bars span {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.network-quality__speed {
+    font-size: var(--text-xs);
+    font-feature-settings: 'tnum';
+    color: var(--apex-steel);
+}

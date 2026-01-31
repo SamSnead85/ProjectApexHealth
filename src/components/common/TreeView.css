@@ -1,0 +1,174 @@
+/* ============================================
+   TREE VIEW
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+.tree-view {
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.tree-view__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tree-view__search-icon {
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.tree-view__search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    outline: none;
+}
+
+.tree-view__search-input::placeholder {
+    color: var(--apex-steel);
+}
+
+.tree-view__search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.tree-view__search-clear:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--apex-white);
+}
+
+.tree-view__content {
+    padding: var(--space-sm) 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tree-view__node {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.tree-view__node--selected {
+    background: rgba(6, 182, 212, 0.15) !important;
+}
+
+.tree-view__node--selected .tree-view__label {
+    color: var(--apex-teal);
+}
+
+.tree-view__expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.tree-view__expand:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+.tree-view__expand-placeholder {
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.tree-view__icon {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+    flex-shrink: 0;
+}
+
+.tree-view__label {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tree-view__favorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.15s ease;
+}
+
+.tree-view__node:hover .tree-view__favorite {
+    opacity: 1;
+}
+
+.tree-view__favorite:hover {
+    color: #f59e0b;
+}
+
+.tree-view__favorite--active {
+    opacity: 1;
+    color: #f59e0b;
+}
+
+.tree-view__empty {
+    padding: var(--space-lg);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+/* File Explorer */
+.file-explorer {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-explorer__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-silver);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}

@@ -1,0 +1,209 @@
+/* ============================================
+   TIME COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Clock Display */
+.clock-display {
+    text-align: center;
+}
+
+.clock-display__time {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    font-feature-settings: 'tnum';
+    color: var(--apex-white);
+}
+
+.clock-display__date {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-top: var(--space-xs);
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+}
+
+.countdown-timer--complete {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    color: #10b981;
+}
+
+.countdown-timer__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-timer__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    font-feature-settings: 'tnum';
+    color: var(--apex-white);
+}
+
+.countdown-timer__label {
+    margin-top: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Stopwatch */
+.stopwatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.stopwatch__display {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    font-feature-settings: 'tnum';
+    color: var(--apex-white);
+}
+
+.stopwatch__controls {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.stopwatch__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.stopwatch__btn--start {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.stopwatch__btn--start:hover {
+    background: #22d3ee;
+}
+
+.stopwatch__btn--pause {
+    background: #f59e0b;
+    color: var(--apex-noir);
+}
+
+.stopwatch__btn--reset {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.stopwatch__btn--reset:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Timer Input */
+.timer-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.timer-input__display {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    font-feature-settings: 'tnum';
+    color: var(--apex-white);
+}
+
+.timer-input__presets {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.timer-input__preset {
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.timer-input__preset:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.timer-input__preset--active {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.timer-input__controls {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.timer-input__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.timer-input__btn--start {
+    background: var(--apex-teal);
+    color: var(--apex-noir);
+}
+
+.timer-input__btn--start:hover:not(:disabled) {
+    background: #22d3ee;
+}
+
+.timer-input__btn--start:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.timer-input__btn--pause {
+    background: #f59e0b;
+    color: var(--apex-noir);
+}
+
+.timer-input__btn--reset {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.timer-input__btn--reset:hover {
+    background: rgba(255, 255, 255, 0.15);
+}

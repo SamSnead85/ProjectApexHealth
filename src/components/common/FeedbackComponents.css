@@ -1,0 +1,447 @@
+/* ============================================
+   FEEDBACK COMPONENTS
+   Premium Futuristic Design - Apex Obsidian v3
+   ============================================ */
+
+/* Rating */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.rating__stars {
+    display: flex;
+    gap: 2px;
+}
+
+.rating__star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.rating__star:hover:not(:disabled) {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.rating__star--filled {
+    color: #f59e0b;
+}
+
+.rating--sm .rating__star svg {
+    width: 16px;
+    height: 16px;
+}
+
+.rating--md .rating__star svg {
+    width: 20px;
+    height: 20px;
+}
+
+.rating--lg .rating__star svg {
+    width: 24px;
+    height: 24px;
+}
+
+.rating--readonly .rating__star {
+    cursor: default;
+}
+
+.rating__value {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-silver);
+}
+
+/* Reaction Button */
+.reaction-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.reaction-button--sm {
+    padding: 4px 10px;
+    font-size: var(--text-xs);
+}
+
+.reaction-button--md {
+    padding: 6px 12px;
+    font-size: var(--text-sm);
+}
+
+.reaction-button--lg {
+    padding: 8px 16px;
+    font-size: var(--text-md);
+}
+
+.reaction-button--sm svg {
+    width: 14px;
+    height: 14px;
+}
+
+.reaction-button--md svg {
+    width: 16px;
+    height: 16px;
+}
+
+.reaction-button--lg svg {
+    width: 20px;
+    height: 20px;
+}
+
+.reaction-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.reaction-button--active.reaction-button--like,
+.reaction-button--active.reaction-button--dislike {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--apex-teal);
+    color: var(--apex-teal);
+}
+
+.reaction-button--active.reaction-button--love {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.reaction-button--active.reaction-button--bookmark {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: #a855f7;
+    color: #a855f7;
+}
+
+.reaction-button__count {
+    font-feature-settings: 'tnum';
+}
+
+/* Comment Input */
+.comment-input {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.comment-input__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.comment-input__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment-input__wrapper {
+    flex: 1;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.comment-input__wrapper textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--text-sm);
+    color: var(--apex-white);
+    resize: none;
+    max-height: 120px;
+    outline: none;
+}
+
+.comment-input__wrapper textarea::placeholder {
+    color: var(--apex-steel);
+}
+
+.comment-input__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xs) var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comment-input__count {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.comment-input__count--warning {
+    color: #f59e0b;
+}
+
+.comment-input__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--apex-teal);
+    border: none;
+    border-radius: 50%;
+    color: var(--apex-noir);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.comment-input__submit:hover:not(:disabled) {
+    background: #22d3ee;
+}
+
+.comment-input__submit:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Feedback Banner */
+.feedback-banner {
+    padding: var(--space-md);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+}
+
+.feedback-banner__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.feedback-banner__question {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.feedback-banner__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.feedback-banner__actions button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.feedback-banner__actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-silver);
+}
+
+.feedback-banner__thanks {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: #10b981;
+}
+
+/* NPS Score */
+.nps-score {
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+    text-align: center;
+}
+
+.nps-score__title {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.nps-score__scale {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: var(--space-sm);
+}
+
+.nps-score__btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.nps-score__btn:hover {
+    transform: translateY(-2px);
+}
+
+.nps-score__btn--detractor:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.nps-score__btn--passive:hover {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.nps-score__btn--promoter:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.nps-score__labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.nps-score__thanks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    color: #10b981;
+}
+
+.nps-score__heart {
+    width: 32px;
+    height: 32px;
+    animation: pulse-heart 1s ease infinite;
+}
+
+@keyframes pulse-heart {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Report Button */
+.report-button {
+    position: relative;
+}
+
+.report-button__trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    cursor: pointer;
+}
+
+.report-button__trigger:hover {
+    color: #ef4444;
+}
+
+.report-button__modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.report-button__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.report-button__content {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    padding: var(--space-lg);
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+}
+
+.report-button__content h4 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-lg);
+    color: var(--apex-white);
+}
+
+.report-button__content p {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+}
+
+.report-button__reasons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.report-button__reasons button {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    text-align: left;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.report-button__reasons button:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.report-button__submitted {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
