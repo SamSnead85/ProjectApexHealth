@@ -17,14 +17,13 @@ import './Landing.css'
 // Premium Module Grid with Category-Based Navigation
 // ============================================================================
 
-// Module categories with ClaimsLink-style card layout
+// Module categories - Institutional Enterprise Design
 const moduleCategories = [
     {
         id: 'claims',
         name: 'Claims Intelligence',
         description: 'AI-powered adjudication and payment integrity',
         icon: FileText,
-        gradient: 'from-cyan-500 to-teal-500',
         modules: [
             { name: 'Claims Processing', path: '/claims', icon: FileText, desc: 'Intelligent adjudication engine' },
             { name: 'Prior Authorization', path: '/prior-auth', icon: ClipboardCheck, desc: 'AI-assisted pre-approval' },
@@ -39,7 +38,6 @@ const moduleCategories = [
         name: 'Provider Network',
         description: 'Network management and credentialing',
         icon: Stethoscope,
-        gradient: 'from-violet-500 to-purple-500',
         modules: [
             { name: 'Provider Directory', path: '/providers', icon: Search, desc: 'Find in-network providers' },
             { name: 'Credentialing', path: '/credentialing', icon: BadgeCheck, desc: 'Provider verification' },
@@ -53,7 +51,6 @@ const moduleCategories = [
         name: 'Member Experience',
         description: 'Digital-first member engagement',
         icon: Heart,
-        gradient: 'from-pink-500 to-rose-500',
         modules: [
             { name: 'Member 360', path: '/member-360', icon: User, desc: 'Unified member view' },
             { name: 'Benefits Navigator', path: '/benefits', icon: Heart, desc: 'Coverage explorer' },
@@ -69,7 +66,6 @@ const moduleCategories = [
         name: 'Analytics & AI',
         description: 'Predictive insights and reporting',
         icon: Brain,
-        gradient: 'from-amber-500 to-orange-500',
         modules: [
             { name: 'Executive Dashboard', path: '/executive', icon: BarChart3, desc: 'C-suite insights' },
             { name: 'Advanced Analytics', path: '/advanced-analytics', icon: Brain, desc: 'AI-powered analysis' },
@@ -84,7 +80,6 @@ const moduleCategories = [
         name: 'Compliance & Security',
         description: 'Regulatory adherence and audit readiness',
         icon: Shield,
-        gradient: 'from-emerald-500 to-green-500',
         modules: [
             { name: 'Compliance Center', path: '/compliance-center', icon: ShieldCheck, desc: 'Regulatory hub' },
             { name: 'Audit Dashboard', path: '/audit', icon: Eye, desc: 'Activity tracking' },
@@ -98,7 +93,6 @@ const moduleCategories = [
         name: 'Operations & Admin',
         description: 'Platform management and workflows',
         icon: Settings,
-        gradient: 'from-slate-500 to-gray-600',
         modules: [
             { name: 'Workflow Builder', path: '/workflows', icon: Workflow, desc: 'Process automation' },
             { name: 'Task Queue', path: '/task-queue', icon: ClipboardCheck, desc: 'Work management' },
@@ -227,26 +221,26 @@ function ModuleCard({ module, onNavigate, isNew = false }: { module: any, onNavi
     )
 }
 
-// Category Section Component - Premium ClaimsLink Style
+// Category Section Component - Institutional Enterprise Style
 function CategorySection({ category, onNavigate, index }: { category: typeof moduleCategories[0], onNavigate: (path: string) => void, index: number }) {
     return (
         <motion.section
             className="category-section"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
         >
             <div className="category-section__header">
-                <div className={`category-section__icon bg-gradient-to-br ${category.gradient}`}>
-                    <category.icon size={24} />
+                <div className="category-section__icon">
+                    <category.icon size={20} strokeWidth={1.5} />
                 </div>
                 <div className="category-section__info">
                     <h3 className="category-section__title">{category.name}</h3>
                     <p className="category-section__description">{category.description}</p>
                 </div>
-                <Badge variant="secondary" className="category-section__count">
-                    {category.modules.length} modules
-                </Badge>
+                <span className="category-section__count">
+                    {category.modules.length} MODULES
+                </span>
             </div>
             <div className="category-section__modules">
                 {category.modules.map((module, idx) => (
