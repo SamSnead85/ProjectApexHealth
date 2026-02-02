@@ -186,6 +186,34 @@ function App() {
         return <Landing onLogin={handleLogin} />
     }
 
+    // ============================================================
+    // ROLE-BASED DIRECT PORTAL ROUTING
+    // Single-portal users get focused experience without sidebar
+    // ============================================================
+
+    // Member Portal - Direct focused experience (no Shell/sidebar)
+    if (activePortal === 'member') {
+        return (
+            <ThemeProvider>
+                <ToastProvider>
+                    <MemberPortal onLogout={handleLogout} />
+                </ToastProvider>
+            </ThemeProvider>
+        )
+    }
+
+    // Broker Portal - Direct agency dashboard (no Shell/sidebar)
+    if (activePortal === 'broker') {
+        return (
+            <ThemeProvider>
+                <ToastProvider>
+                    <BrokerPortal onLogout={handleLogout} />
+                </ToastProvider>
+            </ThemeProvider>
+        )
+    }
+
+
     // Determine which page to render based on path
     const renderPage = () => {
         // Strategic Module Additions - Premium Implementation
@@ -378,10 +406,6 @@ function App() {
         // Quoting (Broker)
         if (activePath.includes('/quoting') || activePath.includes('/quotes')) {
             return <Quoting />
-        }
-        // Broker Command Center
-        if (activePath === '/broker' || activePath.includes('/broker-dashboard')) {
-            return <BrokerPortal />
         }
         // Agency Portal
         if (activePath.includes('/agency')) {
@@ -590,24 +614,13 @@ function App() {
         if (activePath.includes('/kpi') || activePath.includes('/kpi-tracking')) {
             return <KPITracking />
         }
-        // Member Home (Dashboard)
-        if (activePortal === 'member' && (activePath === '/member' || activePath.includes('/member/home'))) {
-            return <MemberHome />
-        }
-        // Member Portal pages (legacy)
-        if (activePortal === 'member') {
-            return <MemberPortal />
-        }
-        // Broker Portal Dashboard
-        if (activePortal === 'broker' && (activePath === '/broker' || activePath.includes('/broker/dashboard') || activePath.includes('/clients'))) {
-            return <BrokerPortal />
-        }
         // Employer Portal Dashboard
         if (activePortal === 'employer' && (activePath === '/employer' || activePath.includes('/employer/dashboard'))) {
             return <EmployerAdmin />
         }
         // Default to dashboard
         return <Dashboard portalType={activePortal} />
+
     }
 
     // Authenticated App with Shell - always show portal switcher for demo mode

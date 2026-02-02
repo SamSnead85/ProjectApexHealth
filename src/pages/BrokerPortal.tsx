@@ -1,462 +1,339 @@
 import { useState } from 'react'
-import { useNavigation } from '../context/NavigationContext'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
-    Briefcase,
-    Users,
-    DollarSign,
-    TrendingUp,
-    TrendingDown,
-    Calendar,
-    Eye,
-    MoreHorizontal,
-    Plus,
-    FileText,
-    Calculator,
-    UserPlus,
-    RefreshCw,
-    ArrowUpRight,
-    ArrowDownRight,
-    Brain,
-    Sparkles,
-    Zap,
-    Target,
-    Shield,
-    Activity,
-    AlertTriangle,
-    ChevronRight,
-    BarChart3,
-    PieChart
+    Briefcase, Users, FileText, TrendingUp, DollarSign, Calendar,
+    Building2, Search, Plus, Filter, ChevronRight, Bell, Settings,
+    LogOut, User, Download, ExternalLink, Clock, CheckCircle,
+    AlertCircle, PieChart, BarChart3, Target, Shield, Phone,
+    MessageSquare, Star, Activity, Wallet, HelpCircle
 } from 'lucide-react'
-import { GlassCard, Button, Badge, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, Input } from '../components/common'
 import './BrokerPortal.css'
 
-// ============================================
-// PREMIUM MOCK DATA - Broker Command Center
-// ============================================
+// ============================================================================
+// BROKER PORTAL - AGENCY-LEVEL DASHBOARD
+// Focused portal for brokers to manage their book of business
+// ============================================================================
 
-const bookOfBusiness = [
-    { id: 1, company: 'Apex Solutions', employees: 165, lives: 412, premium: 720000, health: 98, renewalRisk: 'low', status: 'active', renewal: '2024-04-15', trend: 5.2 },
-    { id: 2, company: 'Mountain View Corp', employees: 205, lives: 520, premium: 1180000, health: 92, renewalRisk: 'low', status: 'active', renewal: '2024-02-01', trend: -2.1 },
-    { id: 3, company: 'Sunrise Industries', employees: 89, lives: 234, premium: 398000, health: 78, renewalRisk: 'medium', status: 'active', renewal: '2024-03-15', trend: 0 },
-    { id: 4, company: 'TechFlow Systems', employees: 312, lives: 890, premium: 1620000, health: 95, renewalRisk: 'low', status: 'active', renewal: '2024-06-01', trend: 8.4 },
-    { id: 5, company: 'Harbor Logistics', employees: 456, lives: 1230, premium: 2100000, health: 88, renewalRisk: 'low', status: 'active', renewal: '2024-05-15', trend: 3.2 },
-    { id: 6, company: 'Granite Packaging', employees: 78, lives: 189, premium: 340000, health: 62, renewalRisk: 'high', status: 'at-risk', renewal: '2024-02-28', trend: -5.8 },
-]
-
-const clientHealthMonitor = [
-    { company: 'Apex Solutions', health: 98, premium: '$720K', status: 'healthy', action: 'none' },
-    { company: 'Mountain View Corp', health: 92, premium: '$1.18M', status: 'healthy', action: 'upsell' },
-    { company: 'Granite Packaging', health: 62, premium: '$340K', status: 'at-risk', action: 'urgent' },
-]
-
-const salesPipeline = [
-    { stage: 'Lead', count: 12, value: 1850000, color: '#6366f1' },
-    { stage: 'Qualified', count: 8, value: 1420000, color: '#8b5cf6' },
-    { stage: 'Proposal', count: 5, value: 980000, color: '#a78bfa' },
-    { stage: 'Negotiation', count: 3, value: 620000, color: '#06b6d4' },
-    { stage: 'Closed', count: 2, value: 340000, color: '#10b981' },
-]
-
-const aiRecommendations = [
-    { type: 'upsell', client: 'TechFlow Systems', action: 'Add Dental Vision Bundle', impact: '+$145K/yr', confidence: 91 },
-    { type: 'retention', client: 'Granite Packaging', action: 'Schedule retention call', impact: 'Prevent $340K churn', confidence: 87 },
-    { type: 'opportunity', client: 'Mountain View Corp', action: 'Propose HSA upgrade', impact: '+$42K/yr', confidence: 84 },
-]
-
-// ============================================
-// HELPER FUNCTIONS
-// ============================================
-
-const formatCurrency = (amount: number) => {
-    if (amount >= 1000000) return `$${(amount / 1000000).toFixed(2)}M`
-    if (amount >= 1000) return `$${(amount / 1000).toFixed(0)}K`
-    return `$${amount}`
+// Mock broker data
+const brokerData = {
+    name: 'Michael Roberts',
+    agency: 'Premier Benefits Group',
+    agencyId: 'AGN-4821',
+    licenseNumber: 'LIC-789234',
+    tier: 'Gold Partner',
+    clientCount: 47,
+    totalLives: 8420,
+    monthlyRevenue: 125400,
+    pendingRenewals: 12,
 }
 
-const getHealthColor = (health: number) => {
-    if (health >= 90) return '#10b981'
-    if (health >= 70) return '#f59e0b'
-    return '#ef4444'
+// Client list
+const clients = [
+    { id: 1, name: 'TechCorp Industries', lives: 1240, premium: 2450000, renewal: '2026-06-01', status: 'active', health: 95 },
+    { id: 2, name: 'Bay Area Manufacturing', lives: 890, premium: 1850000, renewal: '2026-04-15', status: 'renewal', health: 88 },
+    { id: 3, name: 'Pacific Retail Group', lives: 2100, premium: 3200000, renewal: '2026-09-01', status: 'active', health: 92 },
+    { id: 4, name: 'Golden State Logistics', lives: 560, premium: 980000, renewal: '2026-03-01', status: 'at-risk', health: 72 },
+    { id: 5, name: 'Sunset Medical Partners', lives: 340, premium: 720000, renewal: '2026-07-15', status: 'active', health: 97 },
+]
+
+// Recent activity
+const recentActivity = [
+    { id: 1, type: 'quote', client: 'New Client Lead', action: 'Quote requested for 200 lives', time: '2 hours ago', icon: FileText },
+    { id: 2, type: 'renewal', client: 'Bay Area Manufacturing', action: 'Renewal proposal sent', time: '4 hours ago', icon: Calendar },
+    { id: 3, type: 'commission', client: 'System', action: 'Commission payment processed - $12,400', time: '1 day ago', icon: DollarSign },
+    { id: 4, type: 'support', client: 'TechCorp Industries', action: 'Support ticket resolved', time: '2 days ago', icon: CheckCircle },
+]
+
+// Quick metrics
+const quickMetrics = [
+    { label: 'Active Clients', value: 47, icon: Building2, color: 'cyan', change: '+3' },
+    { label: 'Total Lives', value: '8,420', icon: Users, color: 'emerald', change: '+156' },
+    { label: 'Monthly Revenue', value: '$125K', icon: DollarSign, color: 'violet', change: '+8%' },
+    { label: 'Pending Renewals', value: 12, icon: Calendar, color: 'amber', change: '' },
+]
+
+interface BrokerPortalProps {
+    onLogout: () => void
+    isAdmin?: boolean
 }
 
-const getRiskBadge = (risk: string) => {
-    switch (risk) {
-        case 'low': return { bg: 'rgba(16, 185, 129, 0.15)', color: '#10b981', text: 'Low Risk' }
-        case 'medium': return { bg: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', text: 'Medium' }
-        case 'high': return { bg: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', text: 'High Risk' }
-        default: return { bg: 'rgba(255,255,255,0.05)', color: '#94a3b8', text: 'Unknown' }
+// Metric Card Component
+function MetricCard({ metric }: { metric: typeof quickMetrics[0] }) {
+    const Icon = metric.icon
+    return (
+        <div className={`bp-metric-card bp-metric-card--${metric.color}`}>
+            <div className="bp-metric-card__icon">
+                <Icon size={20} />
+            </div>
+            <div className="bp-metric-card__content">
+                <span className="bp-metric-card__value">{metric.value}</span>
+                <span className="bp-metric-card__label">{metric.label}</span>
+            </div>
+            {metric.change && (
+                <span className="bp-metric-card__change">{metric.change}</span>
+            )}
+        </div>
+    )
+}
+
+// Client Row Component
+function ClientRow({ client, onClick }: { client: typeof clients[0], onClick: () => void }) {
+    const getStatusColor = (status: string) => {
+        switch (status) {
+            case 'active': return 'success'
+            case 'renewal': return 'warning'
+            case 'at-risk': return 'critical'
+            default: return 'secondary'
+        }
     }
-}
 
-// ============================================
-// COMPONENT
-// ============================================
-
-export function BrokerPortal() {
-    const { navigate } = useNavigation()
-    const [commissionPeriod, setCommissionPeriod] = useState<'mtd' | 'ytd'>('ytd')
-    const [showMenu, setShowMenu] = useState<number | null>(null)
-
-    const totalPipelineValue = salesPipeline.reduce((sum, s) => sum + s.value, 0)
+    const getHealthColor = (health: number) => {
+        if (health >= 90) return '#10B981'
+        if (health >= 75) return '#F59E0B'
+        return '#EF4444'
+    }
 
     return (
-        <div className="broker-command-center">
-            {/* Premium Header */}
-            <motion.header
-                className="bcc__header"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-            >
-                <div className="bcc__header-left">
-                    <div className="bcc__icon-container">
-                        <Briefcase size={28} />
-                        <div className="bcc__icon-pulse" />
-                    </div>
-                    <div>
-                        <h1 className="bcc__title">Broker Command Center</h1>
-                        <div className="bcc__subtitle">
-                            <span>Pipeline Management • Commission Tracking • Client Health</span>
-                        </div>
-                    </div>
+        <motion.div
+            className="bp-client-row"
+            onClick={onClick}
+            whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.04)' }}
+        >
+            <div className="bp-client-row__name">
+                <Building2 size={18} />
+                <div>
+                    <span className="bp-client-row__company">{client.name}</span>
+                    <span className="bp-client-row__lives">{client.lives.toLocaleString()} lives</span>
                 </div>
-                <div className="bcc__header-badges">
-                    <div className="bcc__badge bcc__badge--live">
-                        Live Pipeline
-                    </div>
-                    <div className="bcc__badge">
-                        <Target size={14} />
-                        94.2% Retention
-                    </div>
-                </div>
-                <div className="bcc__header-actions">
-                    <Button variant="ghost" size="sm">
-                        <FileText size={16} />
-                        Reports
-                    </Button>
-                    <Button variant="primary" size="sm">
-                        <Plus size={16} />
-                        New Opportunity
-                    </Button>
-                </div>
-            </motion.header>
-
-            {/* Premium Metrics Grid */}
-            <div className="bcc__metrics">
-                {[
-                    { label: 'Active Premium', value: '$2.5M', change: '+12.4%', isUp: true, icon: DollarSign, color: '#10b981' },
-                    { label: 'YTD Commission', value: '$185K', change: '+8.2%', isUp: true, icon: TrendingUp, color: '#06b6d4' },
-                    { label: 'Book of Business', value: '48', change: '+3', isUp: true, icon: Briefcase, color: '#8b5cf6' },
-                    { label: 'Retention Rate', value: '94.2%', change: '+1.8%', isUp: true, icon: Shield, color: '#f59e0b' },
-                    { label: 'Pipeline Value', value: formatCurrency(totalPipelineValue), change: '+$420K', isUp: true, icon: Target, color: '#6366f1' },
-                    { label: 'At-Risk Clients', value: '3', change: '-2', isUp: true, icon: AlertTriangle, color: '#ef4444' },
-                ].map((metric, i) => (
-                    <motion.div
-                        key={metric.label}
-                        className="bcc__metric-card"
-                        style={{ '--glow-color': metric.color } as any}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 + i * 0.05 }}
-                    >
-                        <div className="bcc__metric-glow" />
-                        <div className="bcc__metric-header">
-                            <div className="bcc__metric-icon" style={{ background: `${metric.color}15`, color: metric.color }}>
-                                <metric.icon size={20} />
-                            </div>
-                            <span className={`bcc__metric-trend bcc__metric-trend--up`}>
-                                {metric.isUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                                {metric.change}
-                            </span>
-                        </div>
-                        <div className="bcc__metric-value">{metric.value}</div>
-                        <div className="bcc__metric-label">{metric.label}</div>
-                    </motion.div>
-                ))}
             </div>
+            <div className="bp-client-row__premium">
+                ${(client.premium / 1000000).toFixed(2)}M
+            </div>
+            <div className="bp-client-row__renewal">
+                {new Date(client.renewal).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+            </div>
+            <div className="bp-client-row__health">
+                <div
+                    className="bp-client-row__health-bar"
+                    style={{
+                        width: `${client.health}%`,
+                        backgroundColor: getHealthColor(client.health)
+                    }}
+                />
+                <span>{client.health}%</span>
+            </div>
+            <Badge variant={getStatusColor(client.status)}>
+                {client.status}
+            </Badge>
+            <ChevronRight size={16} className="bp-client-row__arrow" />
+        </motion.div>
+    )
+}
 
-            {/* Main Grid */}
-            <div className="bcc__grid">
-                {/* Left Column */}
-                <div className="bcc__main">
-                    {/* Sales Pipeline Visualization */}
-                    <motion.div
-                        className="bcc__pipeline"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        <div className="bcc__pipeline-header">
-                            <div className="bcc__pipeline-title">
-                                <BarChart3 size={20} />
-                                <h2>Sales Pipeline</h2>
-                                <span className="bcc__ai-tag">
-                                    <Sparkles size={10} />
-                                    AI Scored
-                                </span>
-                            </div>
-                            <div className="bcc__pipeline-total">
-                                <span>Total Value</span>
-                                <strong>{formatCurrency(totalPipelineValue)}</strong>
-                            </div>
-                        </div>
-                        <div className="bcc__pipeline-funnel">
-                            {salesPipeline.map((stage, i) => {
-                                const width = 100 - (i * 15)
-                                return (
-                                    <motion.div
-                                        key={stage.stage}
-                                        className="bcc__pipeline-stage"
-                                        initial={{ opacity: 0, scaleX: 0 }}
-                                        animate={{ opacity: 1, scaleX: 1 }}
-                                        transition={{ delay: 0.4 + i * 0.1 }}
-                                    >
-                                        <div
-                                            className="bcc__pipeline-bar"
-                                            style={{
-                                                width: `${width}%`,
-                                                background: `linear-gradient(90deg, ${stage.color}40 0%, ${stage.color}10 100%)`,
-                                                borderColor: stage.color
-                                            }}
-                                        >
-                                            <span className="bcc__pipeline-stage-name">{stage.stage}</span>
-                                            <div className="bcc__pipeline-stage-stats">
-                                                <span className="bcc__pipeline-count">{stage.count} deals</span>
-                                                <span className="bcc__pipeline-value" style={{ color: stage.color }}>{formatCurrency(stage.value)}</span>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </motion.div>
+// Activity Item
+function ActivityItem({ activity }: { activity: typeof recentActivity[0] }) {
+    const Icon = activity.icon
+    return (
+        <div className="bp-activity-item">
+            <div className="bp-activity-item__icon">
+                <Icon size={16} />
+            </div>
+            <div className="bp-activity-item__content">
+                <span className="bp-activity-item__client">{activity.client}</span>
+                <span className="bp-activity-item__action">{activity.action}</span>
+            </div>
+            <span className="bp-activity-item__time">{activity.time}</span>
+        </div>
+    )
+}
 
-                    {/* Book of Business Table */}
-                    <motion.div
-                        className="bcc__book"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <div className="bcc__book-header">
-                            <div className="bcc__book-title">
-                                <Users size={20} />
-                                <h2>Book of Business</h2>
-                                <Badge variant="default">{bookOfBusiness.length} clients</Badge>
-                            </div>
-                            <Button variant="ghost" size="sm">View All</Button>
-                        </div>
-                        <table className="bcc__book-table">
-                            <thead>
-                                <tr>
-                                    <th>Client</th>
-                                    <th>Employees</th>
-                                    <th>Premium</th>
-                                    <th>Health</th>
-                                    <th>Risk</th>
-                                    <th>Renewal</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {bookOfBusiness.map((client, i) => {
-                                    const riskBadge = getRiskBadge(client.renewalRisk)
-                                    return (
-                                        <motion.tr
-                                            key={client.id}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.5 + i * 0.03 }}
-                                            className={client.status === 'at-risk' ? 'bcc__book-row--at-risk' : ''}
-                                        >
-                                            <td>
-                                                <div className="bcc__book-client">
-                                                    <div className="bcc__book-client-icon" style={{ background: i % 2 === 0 ? 'rgba(6,182,212,0.15)' : 'rgba(139,92,246,0.15)' }}>
-                                                        <Briefcase size={16} style={{ color: i % 2 === 0 ? '#06b6d4' : '#8b5cf6' }} />
-                                                    </div>
-                                                    <div className="bcc__book-client-info">
-                                                        <span className="bcc__book-client-name">{client.company}</span>
-                                                        <span className="bcc__book-client-lives">{client.lives} lives</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="bcc__book-number">{client.employees.toLocaleString()}</td>
-                                            <td>
-                                                <div className="bcc__book-premium">
-                                                    <span>{formatCurrency(client.premium)}</span>
-                                                    {client.trend !== 0 && (
-                                                        <span className={`bcc__book-trend ${client.trend > 0 ? 'positive' : 'negative'}`}>
-                                                            {client.trend > 0 ? '+' : ''}{client.trend}%
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="bcc__book-health">
-                                                    <div
-                                                        className="bcc__book-health-ring"
-                                                        style={{
-                                                            background: `conic-gradient(${getHealthColor(client.health)} ${client.health * 3.6}deg, rgba(255,255,255,0.1) 0deg)`
-                                                        }}
-                                                    >
-                                                        <span>{client.health}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    className="bcc__book-risk"
-                                                    style={{ background: riskBadge.bg, color: riskBadge.color }}
-                                                >
-                                                    {riskBadge.text}
-                                                </span>
-                                            </td>
-                                            <td className="bcc__book-date">{client.renewal}</td>
-                                            <td>
-                                                <div className="bcc__book-actions">
-                                                    <button
-                                                        className="bcc__book-action"
-                                                        onClick={() => navigate(`/broker/clients/${client.id}`)}
-                                                    >
-                                                        <Eye size={16} />
-                                                    </button>
-                                                    <button
-                                                        className="bcc__book-action"
-                                                        onClick={() => setShowMenu(showMenu === client.id ? null : client.id)}
-                                                    >
-                                                        <MoreHorizontal size={16} />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </motion.tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                    </motion.div>
+export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
+    const [searchQuery, setSearchQuery] = useState('')
+    const [activeTab, setActiveTab] = useState('dashboard')
+
+    return (
+        <div className="broker-portal">
+            {/* Header */}
+            <header className="bp-header">
+                <div className="bp-header__brand">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bpLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#8B5CF6" />
+                                <stop offset="100%" stopColor="#EC4899" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#bpLogoGrad)" />
+                        <rect x="5" y="5" width="30" height="30" rx="8" fill="#030712" fillOpacity="0.9" />
+                        <path d="M20 10L30 28H10L20 10Z" fill="none" stroke="url(#bpLogoGrad)" strokeWidth="2" />
+                    </svg>
+                    <div className="bp-header__text">
+                        <span className="bp-header__name">APEX</span>
+                        <span className="bp-header__portal">Broker Portal</span>
+                    </div>
                 </div>
 
-                {/* Right Column - Sidebar */}
-                <div className="bcc__sidebar">
-                    {/* AI Recommendations Panel */}
-                    <motion.div
-                        className="bcc__ai-panel"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 }}
-                    >
-                        <div className="bcc__ai-header">
-                            <div className="bcc__ai-icon">
-                                <Brain size={22} />
-                            </div>
-                            <div>
-                                <h3>AI Recommendations</h3>
-                                <p>Powered by Intellisure™</p>
-                            </div>
-                        </div>
-                        {aiRecommendations.map((rec, i) => (
-                            <motion.div
-                                key={i}
-                                className={`bcc__ai-rec bcc__ai-rec--${rec.type}`}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.6 + i * 0.1 }}
-                            >
-                                <div className="bcc__ai-rec-header">
-                                    <span className="bcc__ai-rec-type">{rec.type}</span>
-                                    <span className="bcc__ai-rec-confidence">{rec.confidence}%</span>
-                                </div>
-                                <div className="bcc__ai-rec-client">{rec.client}</div>
-                                <div className="bcc__ai-rec-action">{rec.action}</div>
-                                <div className="bcc__ai-rec-impact">
-                                    <Zap size={12} />
-                                    {rec.impact}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                    {/* Commission Widget */}
-                    <motion.div
-                        className="bcc__commission"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        <div className="bcc__commission-header">
-                            <h3>
-                                <DollarSign size={18} />
-                                Commission Tracking
-                            </h3>
-                            <div className="bcc__commission-toggle">
-                                <button
-                                    className={commissionPeriod === 'mtd' ? 'active' : ''}
-                                    onClick={() => setCommissionPeriod('mtd')}
-                                >
-                                    MTD
-                                </button>
-                                <button
-                                    className={commissionPeriod === 'ytd' ? 'active' : ''}
-                                    onClick={() => setCommissionPeriod('ytd')}
-                                >
-                                    YTD
-                                </button>
-                            </div>
-                        </div>
-                        <motion.div
-                            className="bcc__commission-amount"
-                            key={commissionPeriod}
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
+                <nav className="bp-header__nav">
+                    {['dashboard', 'clients', 'quotes', 'renewals', 'commissions', 'reports'].map(tab => (
+                        <button
+                            key={tab}
+                            className={`bp-nav-btn ${activeTab === tab ? 'bp-nav-btn--active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
                         >
-                            {commissionPeriod === 'ytd' ? '$185,420' : '$24,680'}
-                        </motion.div>
-                        <div className="bcc__commission-change">
-                            <TrendingUp size={16} />
-                            <span>+{commissionPeriod === 'ytd' ? '12.4' : '8.2'}% vs last {commissionPeriod === 'ytd' ? 'year' : 'month'}</span>
-                        </div>
-                        <div className="bcc__commission-breakdown">
-                            <div className="bcc__commission-item">
-                                <span>Medical</span>
-                                <span>{commissionPeriod === 'ytd' ? '$124,200' : '$16,500'}</span>
-                            </div>
-                            <div className="bcc__commission-item">
-                                <span>Dental</span>
-                                <span>{commissionPeriod === 'ytd' ? '$38,600' : '$5,120'}</span>
-                            </div>
-                            <div className="bcc__commission-item">
-                                <span>Vision</span>
-                                <span>{commissionPeriod === 'ytd' ? '$22,620' : '$3,060'}</span>
-                            </div>
-                        </div>
-                    </motion.div>
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                    ))}
+                </nav>
 
-                    {/* Quick Actions */}
-                    <motion.div
-                        className="bcc__quick-actions"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7 }}
-                    >
-                        <h3>Quick Actions</h3>
-                        <div className="bcc__quick-grid">
-                            {[
-                                { icon: Calculator, label: 'New Quote' },
-                                { icon: UserPlus, label: 'Add Client' },
-                                { icon: FileText, label: 'Commissions' },
-                                { icon: ArrowUpRight, label: 'Reports' },
-                            ].map((action, i) => (
-                                <button key={i} className="bcc__quick-btn">
-                                    <div className="bcc__quick-icon">
-                                        <action.icon size={20} />
-                                    </div>
-                                    <span>{action.label}</span>
-                                </button>
-                            ))}
+                <div className="bp-header__actions">
+                    <Button variant="primary" size="sm" icon={<Plus size={16} />}>
+                        New Quote
+                    </Button>
+                    <button className="bp-header__icon-btn">
+                        <Bell size={20} />
+                        <span className="bp-header__badge">5</span>
+                    </button>
+                    <div className="bp-header__user">
+                        <div className="bp-header__avatar">
+                            {brokerData.name.split(' ').map(n => n[0]).join('')}
                         </div>
-                    </motion.div>
+                        <div className="bp-header__user-info">
+                            <span className="bp-header__user-name">{brokerData.name}</span>
+                            <span className="bp-header__agency">{brokerData.agency}</span>
+                        </div>
+                    </div>
+                    <button className="bp-header__logout" onClick={onLogout}>
+                        <LogOut size={18} />
+                    </button>
                 </div>
-            </div>
+            </header>
+
+            {/* Main Content */}
+            <main className="bp-main">
+                {/* Welcome & Quick Stats */}
+                <section className="bp-welcome">
+                    <div className="bp-welcome__content">
+                        <h1>Welcome back, {brokerData.name.split(' ')[0]}</h1>
+                        <p>{brokerData.agency} • {brokerData.tier}</p>
+                    </div>
+                    <div className="bp-welcome__metrics">
+                        {quickMetrics.map(metric => (
+                            <MetricCard key={metric.label} metric={metric} />
+                        ))}
+                    </div>
+                </section>
+
+                {/* Content Grid */}
+                <div className="bp-content-grid">
+                    {/* Client List */}
+                    <section className="bp-clients">
+                        <div className="bp-section-header">
+                            <h2>Your Clients</h2>
+                            <div className="bp-section-header__actions">
+                                <div className="bp-search">
+                                    <Search size={16} />
+                                    <input
+                                        type="text"
+                                        placeholder="Search clients..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                    />
+                                </div>
+                                <Button variant="ghost" size="sm" icon={<Filter size={14} />}>
+                                    Filter
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="bp-clients-table">
+                            <div className="bp-clients-table__header">
+                                <span>Client</span>
+                                <span>Premium</span>
+                                <span>Renewal</span>
+                                <span>Health Score</span>
+                                <span>Status</span>
+                                <span></span>
+                            </div>
+                            <div className="bp-clients-table__body">
+                                {clients.filter(c =>
+                                    c.name.toLowerCase().includes(searchQuery.toLowerCase())
+                                ).map(client => (
+                                    <ClientRow
+                                        key={client.id}
+                                        client={client}
+                                        onClick={() => console.log('Navigate to client', client.id)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Sidebar */}
+                    <aside className="bp-sidebar">
+                        {/* Recent Activity */}
+                        <div className="bp-sidebar-card">
+                            <h3>Recent Activity</h3>
+                            <div className="bp-activity-list">
+                                {recentActivity.map(activity => (
+                                    <ActivityItem key={activity.id} activity={activity} />
+                                ))}
+                            </div>
+                            <Button variant="ghost" size="sm" fullWidth>
+                                View All Activity
+                            </Button>
+                        </div>
+
+                        {/* Quick Actions */}
+                        <div className="bp-sidebar-card">
+                            <h3>Quick Actions</h3>
+                            <div className="bp-quick-actions">
+                                <button className="bp-quick-action">
+                                    <FileText size={18} />
+                                    <span>Create Quote</span>
+                                </button>
+                                <button className="bp-quick-action">
+                                    <Users size={18} />
+                                    <span>Add Client</span>
+                                </button>
+                                <button className="bp-quick-action">
+                                    <Download size={18} />
+                                    <span>Commission Statement</span>
+                                </button>
+                                <button className="bp-quick-action">
+                                    <Phone size={18} />
+                                    <span>Contact Support</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Performance */}
+                        <div className="bp-sidebar-card bp-sidebar-card--highlight">
+                            <div className="bp-performance-header">
+                                <Star size={20} />
+                                <span>Gold Partner Status</span>
+                            </div>
+                            <p className="bp-performance-text">
+                                You're on track for Platinum! Add 3 more clients this quarter.
+                            </p>
+                            <div className="bp-performance-bar">
+                                <div className="bp-performance-bar__fill" style={{ width: '78%' }} />
+                            </div>
+                            <span className="bp-performance-label">78% to Platinum</span>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+
+            {/* Footer */}
+            <footer className="bp-footer">
+                <div className="bp-footer__links">
+                    <a href="#">Partner Resources</a>
+                    <a href="#">Training</a>
+                    <a href="#">Support</a>
+                    <a href="#">Terms</a>
+                </div>
+                <span className="bp-footer__copy">© 2026 Apex Health Intelligence • Partner Portal</span>
+            </footer>
         </div>
     )
 }
