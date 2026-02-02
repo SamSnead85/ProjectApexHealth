@@ -342,15 +342,15 @@ export function Landing({ onLogin }: LandingProps) {
                                     </div>
 
                                     <h1 className="landing__headline">
-                                        Pay Right,
+                                        Healthcare Intelligence,
                                         <br />
-                                        <span className="landing__headline-em">The First Time</span>
+                                        <span className="landing__headline-em">Unified</span>
                                     </h1>
 
                                     <p className="landing__description">
-                                        Shift from 'Pay & Chase' to Pre-Pay Prevention. The first cognitive
-                                        health administration platform that unifies claims adjudication,
-                                        payment integrity, and appeals governance.
+                                        The AI-native platform that transforms healthcare administration.
+                                        From claims processing and member experience to provider networks,
+                                        compliance, and analytics — all in one intelligent ecosystem.
                                     </p>
 
                                     <div className="landing__ctas">
