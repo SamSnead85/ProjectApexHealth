@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { Shell } from './components/layout'
 import { ThemeProvider } from './context/ThemeContext'
 import { NavigationProvider } from './context/NavigationContext'
+import { ToastProvider } from './components/common/Toast'
 import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard'
 import WorkflowBuilder from './pages/WorkflowBuilder'
@@ -128,6 +130,13 @@ import BenchmarkAnalytics from './pages/BenchmarkAnalytics'
 // Compliance & Data Integration Modules
 import ComplianceCenter from './pages/ComplianceCenter'
 import DataIntegrationHub from './pages/DataIntegrationHub'
+// Strategic Module Additions - Premium Implementation
+import CareJourneyNavigator from './pages/CareJourneyNavigator'
+import OONClaimsWizard from './pages/OONClaimsWizard'
+import HealthConcierge from './pages/HealthConcierge'
+import AgentAssistDashboard from './pages/AgentAssistDashboard'
+import AdvancedAnalytics from './pages/AdvancedAnalytics'
+import CommandCenter from './pages/CommandCenter'
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -179,10 +188,28 @@ function App() {
 
     // Determine which page to render based on path
     const renderPage = () => {
+        // Strategic Module Additions - Premium Implementation
+        if (activePath.includes('/care-journey') || activePath.includes('/care-timeline') || activePath.includes('/journey')) {
+            return <CareJourneyNavigator />
+        }
+        if (activePath.includes('/oon-claims') || activePath.includes('/out-of-network') || activePath.includes('/submit-claim')) {
+            return <OONClaimsWizard />
+        }
+        if (activePath.includes('/health-concierge') || activePath.includes('/ai-concierge') || activePath.includes('/concierge')) {
+            return <HealthConcierge />
+        }
+        if (activePath.includes('/agent-assist') || activePath.includes('/advocate') || activePath.includes('/csr-dashboard')) {
+            return <AgentAssistDashboard />
+        }
+        // Command Center - Modular Dashboard
+        if (activePath.includes('/command-center') || activePath.includes('/module-hub') || activePath.includes('/dashboard-home')) {
+            return <CommandCenter portal={activePortal} onLogout={handleLogout} />
+        }
         // Compliance & Data Integration Modules
         if (activePath.includes('/compliance-center') || activePath.includes('/compliance/center') || activePath.includes('/aca-compliance')) {
             return <ComplianceCenter />
         }
+
         if (activePath.includes('/data-integration') || activePath.includes('/integration-hub') || activePath.includes('/data/integration')) {
             return <DataIntegrationHub />
         }
@@ -303,6 +330,10 @@ function App() {
         // Population Health & Quality
         if (activePath.includes('/population-health') || activePath.includes('/hedis') || activePath.includes('/quality')) {
             return <PopulationHealth />
+        }
+        // Advanced Analytics - Premium Executive Dashboard
+        if (activePath.includes('/advanced-analytics') || activePath.includes('/exec-analytics')) {
+            return <AdvancedAnalytics />
         }
         // Workflow builder paths
         if (activePath.includes('/workflows')) {
@@ -582,25 +613,29 @@ function App() {
     // Authenticated App with Shell - always show portal switcher for demo mode
     return (
         <ThemeProvider>
-            <CommandPalette
-                isOpen={commandPaletteOpen}
-                onClose={() => setCommandPaletteOpen(false)}
-                onNavigate={(path) => {
-                    handleNavigate(path)
-                    setCommandPaletteOpen(false)
-                }}
-            />
-            <NavigationProvider onNavigate={handleNavigate}>
-                <Shell
-                    activePortal={activePortal}
-                    activePath={activePath}
-                    onNavigate={handleNavigate}
-                    onSwitchPortal={handleSwitchPortal}
-                >
-                    {renderPage()}
-                </Shell>
-                <AICopilot />
-            </NavigationProvider>
+            <ToastProvider>
+                <CommandPalette
+                    isOpen={commandPaletteOpen}
+                    onClose={() => setCommandPaletteOpen(false)}
+                    onNavigate={(path) => {
+                        handleNavigate(path)
+                        setCommandPaletteOpen(false)
+                    }}
+                />
+                <NavigationProvider onNavigate={handleNavigate}>
+                    <Shell
+                        activePortal={activePortal}
+                        activePath={activePath}
+                        onNavigate={handleNavigate}
+                        onSwitchPortal={handleSwitchPortal}
+                    >
+                        <AnimatePresence mode="wait">
+                            {renderPage()}
+                        </AnimatePresence>
+                    </Shell>
+                    <AICopilot />
+                </NavigationProvider>
+            </ToastProvider>
         </ThemeProvider>
     )
 }

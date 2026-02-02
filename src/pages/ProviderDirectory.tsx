@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Search,
@@ -18,10 +18,24 @@ import {
     Heart,
     Brain,
     Eye,
-    Baby
+    Baby,
+    Globe,
+    Video,
+    Sparkles,
+    Moon,
+    Sun,
+    X,
+    Sliders
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
 import './ProviderDirectory.css'
+
+// ============================================================================
+// ROLE-BASED ACCESS PATTERN
+// This module supports: Member (primary), Provider (secondary), Admin (full)
+// Future RBAC: Export role checks for integration
+// ============================================================================
+export type UserRole = 'member' | 'provider' | 'admin' | 'broker'
 
 // NUCC Taxonomy Codes for specialty mapping
 const SPECIALTY_TAXONOMY = {
@@ -65,9 +79,11 @@ interface Provider {
     affiliations: string[]
     boardCertified: boolean
     telehealth: boolean
+    eveningHours: boolean
+    weekendHours: boolean
 }
 
-// Mock provider data with FHIR-compatible structure
+// Extended mock provider data with new fields
 const mockProviders: Provider[] = [
     {
         id: 'prov-001',
@@ -93,7 +109,9 @@ const mockProviders: Provider[] = [
         availability: 'Next available: Tomorrow',
         affiliations: ['UCSF Medical Center', 'Sutter Health'],
         boardCertified: true,
-        telehealth: true
+        telehealth: true,
+        eveningHours: true,
+        weekendHours: false
     },
     {
         id: 'prov-002',
@@ -119,7 +137,9 @@ const mockProviders: Provider[] = [
         availability: 'Next available: Jan 30',
         affiliations: ['UCSF Medical Center'],
         boardCertified: true,
-        telehealth: false
+        telehealth: false,
+        eveningHours: false,
+        weekendHours: true
     },
     {
         id: 'prov-003',
@@ -145,7 +165,9 @@ const mockProviders: Provider[] = [
         availability: 'Waitlist: ~2 weeks',
         affiliations: ['California Pacific Medical Center'],
         boardCertified: true,
-        telehealth: true
+        telehealth: true,
+        eveningHours: true,
+        weekendHours: true
     },
     {
         id: 'prov-004',
@@ -171,7 +193,9 @@ const mockProviders: Provider[] = [
         availability: 'Next available: Today',
         affiliations: ['Kaiser Permanente'],
         boardCertified: true,
-        telehealth: true
+        telehealth: true,
+        eveningHours: false,
+        weekendHours: false
     },
     {
         id: 'prov-005',
@@ -197,9 +221,42 @@ const mockProviders: Provider[] = [
         availability: 'Next available: Jan 28',
         affiliations: ['CPMC', 'UCSF'],
         boardCertified: true,
-        telehealth: true
+        telehealth: true,
+        eveningHours: true,
+        weekendHours: true
+    },
+    {
+        id: 'prov-006',
+        npi: '4444444444',
+        name: 'Dr. Ahmed Hassan',
+        credentials: 'MD, FAAP',
+        specialty: 'Pediatrics',
+        taxonomyCode: '208000000X',
+        networkStatus: 'in_network',
+        acceptingPatients: 'accepting',
+        gender: 'Male',
+        languages: ['English', 'Arabic', 'French'],
+        rating: 4.8,
+        reviewCount: 324,
+        address: {
+            street: '2200 Post Street',
+            city: 'San Francisco',
+            state: 'CA',
+            zip: '94115'
+        },
+        phone: '(415) 555-9876',
+        distance: 1.8,
+        availability: 'Next available: Tomorrow',
+        affiliations: ['UCSF Benioff Children\'s Hospital'],
+        boardCertified: true,
+        telehealth: true,
+        eveningHours: true,
+        weekendHours: true
     }
 ]
+
+// Get all unique languages from providers
+const allLanguages = [...new Set(mockProviders.flatMap(p => p.languages))].sort()
 
 const specialtyIcons: Record<string, React.ReactNode> = {
     'Internal Medicine': <Stethoscope size={16} />,
@@ -211,6 +268,82 @@ const specialtyIcons: Record<string, React.ReactNode> = {
     'Ophthalmology': <Eye size={16} />
 }
 
+// ============================================================================
+// AI MATCH SCORING ALGORITHM
+// Calculates personalized match score based on member preferences
+// ============================================================================
+interface MatchPreferences {
+    preferredLanguage: string | null
+    preferredGender: 'Male' | 'Female' | null
+    requiresTelehealth: boolean
+    requiresEveningHours: boolean
+    requiresWeekendHours: boolean
+}
+
+function calculateMatchScore(provider: Provider, preferences: MatchPreferences): number {
+    let score = 50 // Base score
+
+    // Distance factor (closer = better, max 20 points)
+    score += Math.max(0, 20 - (provider.distance * 4))
+
+    // Rating factor (max 15 points)
+    score += (provider.rating / 5) * 15
+
+    // Network status bonus
+    if (provider.networkStatus === 'preferred') score += 10
+    else if (provider.networkStatus === 'in_network') score += 5
+
+    // Accepting patients bonus
+    if (provider.acceptingPatients === 'accepting') score += 5
+
+    // Language match (exact match = 10 points)
+    if (preferences.preferredLanguage && provider.languages.includes(preferences.preferredLanguage)) {
+        score += 10
+    }
+
+    // Gender match
+    if (preferences.preferredGender && provider.gender === preferences.preferredGender) {
+        score += 8
+    }
+
+    // Telehealth requirement
+    if (preferences.requiresTelehealth && provider.telehealth) {
+        score += 7
+    } else if (preferences.requiresTelehealth && !provider.telehealth) {
+        score -= 15 // Penalty if required but not available
+    }
+
+    // Evening hours
+    if (preferences.requiresEveningHours && provider.eveningHours) {
+        score += 5
+    } else if (preferences.requiresEveningHours && !provider.eveningHours) {
+        score -= 10
+    }
+
+    // Weekend hours
+    if (preferences.requiresWeekendHours && provider.weekendHours) {
+        score += 5
+    } else if (preferences.requiresWeekendHours && !provider.weekendHours) {
+        score -= 10
+    }
+
+    // Board certified bonus
+    if (provider.boardCertified) score += 3
+
+    // Normalize to 0-100
+    return Math.min(100, Math.max(0, score))
+}
+
+function getMatchLabel(score: number): { label: string; variant: 'teal' | 'success' | 'warning' | 'info' } {
+    if (score >= 85) return { label: 'Best Match', variant: 'teal' }
+    if (score >= 70) return { label: 'Great Fit', variant: 'success' }
+    if (score >= 55) return { label: 'Good Match', variant: 'info' }
+    return { label: 'Match', variant: 'warning' }
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function ProviderDirectory() {
     const [providers] = useState<Provider[]>(mockProviders)
     const [searchQuery, setSearchQuery] = useState('')
@@ -218,17 +351,79 @@ export function ProviderDirectory() {
     const [selectedNetwork, setSelectedNetwork] = useState<NetworkStatus | 'all'>('all')
     const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null)
     const [showFilters, setShowFilters] = useState(false)
+    const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
+
+    // Smart Match preferences
+    const [preferredLanguage, setPreferredLanguage] = useState<string>('')
+    const [preferredGender, setPreferredGender] = useState<'Male' | 'Female' | ''>('')
+    const [requiresTelehealth, setRequiresTelehealth] = useState(false)
+    const [requiresEveningHours, setRequiresEveningHours] = useState(false)
+    const [requiresWeekendHours, setRequiresWeekendHours] = useState(false)
+    const [sortBy, setSortBy] = useState<'match' | 'distance' | 'rating'>('match')
+
+    // Current role context (will be provided by auth context in production)
+    const [currentRole] = useState<UserRole>('member')
 
     const specialties = [...new Set(providers.map(p => p.specialty))]
 
-    const filteredProviders = providers.filter(provider => {
-        const matchesSearch = !searchQuery ||
-            provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            provider.specialty.toLowerCase().includes(searchQuery.toLowerCase())
-        const matchesSpecialty = selectedSpecialty === 'all' || provider.specialty === selectedSpecialty
-        const matchesNetwork = selectedNetwork === 'all' || provider.networkStatus === selectedNetwork
-        return matchesSearch && matchesSpecialty && matchesNetwork
-    })
+    // Build match preferences object
+    const matchPreferences: MatchPreferences = useMemo(() => ({
+        preferredLanguage: preferredLanguage || null,
+        preferredGender: preferredGender || null,
+        requiresTelehealth,
+        requiresEveningHours,
+        requiresWeekendHours
+    }), [preferredLanguage, preferredGender, requiresTelehealth, requiresEveningHours, requiresWeekendHours])
+
+    // Check if any smart filters are active
+    const hasActiveSmartFilters = preferredLanguage || preferredGender || requiresTelehealth || requiresEveningHours || requiresWeekendHours
+
+    // Filter and sort providers with match scores
+    const filteredProviders = useMemo(() => {
+        let result = providers.filter(provider => {
+            const matchesSearch = !searchQuery ||
+                provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                provider.specialty.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                provider.languages.some(l => l.toLowerCase().includes(searchQuery.toLowerCase()))
+            const matchesSpecialty = selectedSpecialty === 'all' || provider.specialty === selectedSpecialty
+            const matchesNetwork = selectedNetwork === 'all' || provider.networkStatus === selectedNetwork
+
+            // Smart filters
+            const matchesLanguage = !preferredLanguage || provider.languages.includes(preferredLanguage)
+            const matchesGender = !preferredGender || provider.gender === preferredGender
+            const matchesTelehealth = !requiresTelehealth || provider.telehealth
+            const matchesEvening = !requiresEveningHours || provider.eveningHours
+            const matchesWeekend = !requiresWeekendHours || provider.weekendHours
+
+            return matchesSearch && matchesSpecialty && matchesNetwork &&
+                matchesLanguage && matchesGender && matchesTelehealth &&
+                matchesEvening && matchesWeekend
+        })
+
+        // Calculate match scores
+        const withScores = result.map(provider => ({
+            provider,
+            matchScore: calculateMatchScore(provider, matchPreferences)
+        }))
+
+        // Sort based on selection
+        withScores.sort((a, b) => {
+            switch (sortBy) {
+                case 'match':
+                    return b.matchScore - a.matchScore
+                case 'distance':
+                    return a.provider.distance - b.provider.distance
+                case 'rating':
+                    return b.provider.rating - a.provider.rating
+                default:
+                    return b.matchScore - a.matchScore
+            }
+        })
+
+        return withScores
+    }, [providers, searchQuery, selectedSpecialty, selectedNetwork, preferredLanguage,
+        preferredGender, requiresTelehealth, requiresEveningHours, requiresWeekendHours,
+        matchPreferences, sortBy])
 
     const getNetworkBadge = (status: NetworkStatus) => {
         switch (status) {
@@ -252,19 +447,36 @@ export function ProviderDirectory() {
         }
     }
 
+    const clearSmartFilters = () => {
+        setPreferredLanguage('')
+        setPreferredGender('')
+        setRequiresTelehealth(false)
+        setRequiresEveningHours(false)
+        setRequiresWeekendHours(false)
+    }
+
     return (
         <div className="provider-directory">
             {/* Header */}
             <div className="provider-directory__header">
                 <div>
-                    <h1 className="provider-directory__title">Provider Directory</h1>
+                    <h1 className="provider-directory__title">
+                        <Sparkles className="provider-directory__title-icon" size={28} />
+                        Smart Provider Match
+                    </h1>
                     <p className="provider-directory__subtitle">
-                        CMS-compliant provider search • FHIR Practitioner/Organization API
+                        AI-powered personalized provider recommendations • CMS-compliant
                     </p>
                 </div>
-                <Badge variant="info" icon={<CheckCircle2 size={12} />}>
-                    NUCC Taxonomy Codes
-                </Badge>
+                <div className="provider-directory__header-badges">
+                    <Badge variant="info" icon={<CheckCircle2 size={12} />}>
+                        NUCC Taxonomy
+                    </Badge>
+                    <Badge variant="teal" size="sm">
+                        {currentRole === 'member' ? '👤 Member View' :
+                            currentRole === 'provider' ? '🩺 Provider View' : '⚙️ Admin View'}
+                    </Badge>
+                </div>
             </div>
 
             {/* Search & Filters */}
@@ -274,7 +486,7 @@ export function ProviderDirectory() {
                         <Search size={18} />
                         <input
                             type="text"
-                            placeholder="Search by name, specialty, or condition..."
+                            placeholder="Search by name, specialty, language, or condition..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -291,8 +503,17 @@ export function ProviderDirectory() {
                         Filters
                         <ChevronDown size={14} className={showFilters ? 'rotated' : ''} />
                     </Button>
+                    <Button
+                        variant={showAdvancedFilters ? 'primary' : 'secondary'}
+                        icon={<Sliders size={16} />}
+                        onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                    >
+                        Smart Match
+                        {hasActiveSmartFilters && <span className="filter-active-dot" />}
+                    </Button>
                 </div>
 
+                {/* Basic Filters */}
                 <AnimatePresence>
                     {showFilters && (
                         <motion.div
@@ -336,72 +557,188 @@ export function ProviderDirectory() {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                {/* Smart Match Filters */}
+                <AnimatePresence>
+                    {showAdvancedFilters && (
+                        <motion.div
+                            className="provider-directory__smart-filters"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                        >
+                            <div className="smart-filters__header">
+                                <div className="smart-filters__title">
+                                    <Sparkles size={16} />
+                                    <span>Smart Match Preferences</span>
+                                </div>
+                                {hasActiveSmartFilters && (
+                                    <button className="smart-filters__clear" onClick={clearSmartFilters}>
+                                        <X size={14} /> Clear All
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="smart-filters__grid">
+                                <div className="provider-directory__filter-group">
+                                    <label><Globe size={14} /> Preferred Language</label>
+                                    <select
+                                        value={preferredLanguage}
+                                        onChange={(e) => setPreferredLanguage(e.target.value)}
+                                    >
+                                        <option value="">Any Language</option>
+                                        {allLanguages.map(lang => (
+                                            <option key={lang} value={lang}>{lang}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="provider-directory__filter-group">
+                                    <label><Users size={14} /> Provider Gender</label>
+                                    <select
+                                        value={preferredGender}
+                                        onChange={(e) => setPreferredGender(e.target.value as 'Male' | 'Female' | '')}
+                                    >
+                                        <option value="">No Preference</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                    </select>
+                                </div>
+
+                                <div className="smart-filters__toggles">
+                                    <label className={`smart-toggle ${requiresTelehealth ? 'active' : ''}`}>
+                                        <input
+                                            type="checkbox"
+                                            checked={requiresTelehealth}
+                                            onChange={(e) => setRequiresTelehealth(e.target.checked)}
+                                        />
+                                        <Video size={14} />
+                                        <span>Telehealth</span>
+                                    </label>
+
+                                    <label className={`smart-toggle ${requiresEveningHours ? 'active' : ''}`}>
+                                        <input
+                                            type="checkbox"
+                                            checked={requiresEveningHours}
+                                            onChange={(e) => setRequiresEveningHours(e.target.checked)}
+                                        />
+                                        <Moon size={14} />
+                                        <span>Evening</span>
+                                    </label>
+
+                                    <label className={`smart-toggle ${requiresWeekendHours ? 'active' : ''}`}>
+                                        <input
+                                            type="checkbox"
+                                            checked={requiresWeekendHours}
+                                            onChange={(e) => setRequiresWeekendHours(e.target.checked)}
+                                        />
+                                        <Sun size={14} />
+                                        <span>Weekend</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </GlassCard>
 
             {/* Results */}
             <div className="provider-directory__results">
                 <div className="provider-directory__results-header">
-                    <span>{filteredProviders.length} providers found</span>
-                    <select className="provider-directory__sort">
-                        <option>Sort: Distance</option>
-                        <option>Sort: Rating</option>
-                        <option>Sort: Availability</option>
+                    <span>
+                        {filteredProviders.length} providers found
+                        {hasActiveSmartFilters && <span className="results-ai-badge"><Sparkles size={12} /> AI Ranked</span>}
+                    </span>
+                    <select
+                        className="provider-directory__sort"
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value as 'match' | 'distance' | 'rating')}
+                    >
+                        <option value="match">Sort: Best Match</option>
+                        <option value="distance">Sort: Distance</option>
+                        <option value="rating">Sort: Rating</option>
                     </select>
                 </div>
 
                 <div className="provider-directory__grid">
                     {/* Provider List */}
                     <div className="provider-directory__list">
-                        {filteredProviders.map((provider, index) => (
-                            <motion.div
-                                key={provider.id}
-                                className={`provider-card netflix-card ${selectedProvider?.id === provider.id ? 'selected' : ''}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                onClick={() => setSelectedProvider(provider)}
-                            >
-                                <div className="provider-card__header">
-                                    <div className="provider-card__avatar">
-                                        {specialtyIcons[provider.specialty] || <Stethoscope size={20} />}
+                        {filteredProviders.map(({ provider, matchScore }, index) => {
+                            const matchInfo = getMatchLabel(matchScore)
+                            return (
+                                <motion.div
+                                    key={provider.id}
+                                    className={`provider-card netflix-card ${selectedProvider?.id === provider.id ? 'selected' : ''} ${matchScore >= 85 ? 'best-match' : ''}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    onClick={() => setSelectedProvider(provider)}
+                                >
+                                    {/* Match Score Indicator */}
+                                    <div className="provider-card__match-score">
+                                        <div className="match-score__ring" style={{ '--score': matchScore } as React.CSSProperties}>
+                                            <span>{Math.round(matchScore)}%</span>
+                                        </div>
+                                        <Badge variant={matchInfo.variant} size="sm" icon={<Sparkles size={10} />}>
+                                            {matchInfo.label}
+                                        </Badge>
                                     </div>
-                                    <div className="provider-card__info">
-                                        <h3>{provider.name}</h3>
-                                        <span className="provider-card__credentials">{provider.credentials}</span>
+
+                                    <div className="provider-card__header">
+                                        <div className="provider-card__avatar">
+                                            {specialtyIcons[provider.specialty] || <Stethoscope size={20} />}
+                                        </div>
+                                        <div className="provider-card__info">
+                                            <h3>{provider.name}</h3>
+                                            <span className="provider-card__credentials">{provider.credentials}</span>
+                                        </div>
+                                        {getNetworkBadge(provider.networkStatus)}
                                     </div>
-                                    {getNetworkBadge(provider.networkStatus)}
-                                </div>
 
-                                <div className="provider-card__specialty">
-                                    <span>{provider.specialty}</span>
-                                    <span className="provider-card__taxonomy">NUCC: {provider.taxonomyCode}</span>
-                                </div>
-
-                                <div className="provider-card__meta">
-                                    <div className="provider-card__rating">
-                                        <Star size={14} className="star-filled" />
-                                        <span>{provider.rating}</span>
-                                        <span className="provider-card__reviews">({provider.reviewCount})</span>
+                                    <div className="provider-card__specialty">
+                                        <span>{provider.specialty}</span>
+                                        <span className="provider-card__taxonomy">NUCC: {provider.taxonomyCode}</span>
                                     </div>
-                                    <div className="provider-card__distance">
-                                        <Navigation size={14} />
-                                        <span>{provider.distance} mi</span>
+
+                                    <div className="provider-card__meta">
+                                        <div className="provider-card__rating">
+                                            <Star size={14} className="star-filled" />
+                                            <span>{provider.rating}</span>
+                                            <span className="provider-card__reviews">({provider.reviewCount})</span>
+                                        </div>
+                                        <div className="provider-card__distance">
+                                            <Navigation size={14} />
+                                            <span>{provider.distance} mi</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="provider-card__availability">
-                                    <Clock size={14} />
-                                    <span>{provider.availability}</span>
-                                </div>
+                                    {/* Quick match indicators */}
+                                    <div className="provider-card__quick-tags">
+                                        {provider.languages.length > 1 && (
+                                            <span className="quick-tag"><Globe size={12} /> {provider.languages.length} languages</span>
+                                        )}
+                                        {provider.telehealth && (
+                                            <span className="quick-tag active"><Video size={12} /> Telehealth</span>
+                                        )}
+                                        {provider.eveningHours && (
+                                            <span className="quick-tag"><Moon size={12} /> Evening</span>
+                                        )}
+                                        {provider.weekendHours && (
+                                            <span className="quick-tag"><Sun size={12} /> Weekend</span>
+                                        )}
+                                    </div>
 
-                                <div className="provider-card__footer">
-                                    {getAcceptingBadge(provider.acceptingPatients)}
-                                    {provider.telehealth && (
-                                        <Badge variant="info" size="sm">Telehealth</Badge>
-                                    )}
-                                </div>
-                            </motion.div>
-                        ))}
+                                    <div className="provider-card__availability">
+                                        <Clock size={14} />
+                                        <span>{provider.availability}</span>
+                                    </div>
+
+                                    <div className="provider-card__footer">
+                                        {getAcceptingBadge(provider.acceptingPatients)}
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
                     </div>
 
                     {/* Provider Detail */}
@@ -472,6 +809,21 @@ export function ProviderDirectory() {
                                     </div>
 
                                     <div className="provider-detail__section">
+                                        <h4>Availability</h4>
+                                        <div className="provider-detail__availability-tags">
+                                            {selectedProvider.telehealth && (
+                                                <Badge variant="teal" size="sm" icon={<Video size={10} />}>Telehealth</Badge>
+                                            )}
+                                            {selectedProvider.eveningHours && (
+                                                <Badge variant="info" size="sm" icon={<Moon size={10} />}>Evening Hours</Badge>
+                                            )}
+                                            {selectedProvider.weekendHours && (
+                                                <Badge variant="info" size="sm" icon={<Sun size={10} />}>Weekend Hours</Badge>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div className="provider-detail__section">
                                         <h4>Hospital Affiliations</h4>
                                         <ul className="provider-detail__affiliations">
                                             {selectedProvider.affiliations.map(aff => (
@@ -485,7 +837,7 @@ export function ProviderDirectory() {
                                             Schedule Appointment
                                         </Button>
                                         {selectedProvider.telehealth && (
-                                            <Button variant="secondary">
+                                            <Button variant="secondary" icon={<Video size={16} />}>
                                                 Book Telehealth
                                             </Button>
                                         )}
@@ -498,8 +850,9 @@ export function ProviderDirectory() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                             >
-                                <Stethoscope size={48} />
+                                <Sparkles size={48} />
                                 <p>Select a provider to view details</p>
+                                <span className="no-selection__hint">AI-ranked based on your preferences</span>
                             </motion.div>
                         )}
                     </AnimatePresence>

@@ -182,6 +182,46 @@
     border: 2px solid var(--apex-obsidian);
 }
 
+/* Tour Button */
+.shell__tour-btn {
+    position: relative;
+}
+
+.shell__tour-btn:hover {
+    color: #0D9488;
+    background: rgba(13, 148, 136, 0.1);
+    border-color: rgba(13, 148, 136, 0.3);
+}
+
+.shell__tour-btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), rgba(6, 182, 212, 0.3));
+    opacity: 0;
+    z-index: -1;
+    animation: tourPulse 2s ease-in-out infinite;
+}
+
+.shell__tour-btn:hover::after {
+    opacity: 1;
+}
+
+@keyframes tourPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
 /* User Trigger */
 .shell__user-trigger {
     display: flex;

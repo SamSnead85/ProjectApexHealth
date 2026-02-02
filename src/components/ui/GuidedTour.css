@@ -1,0 +1,196 @@
+/* ============================================
+   GUIDED TOUR - Premium Walkthrough System
+============================================ */
+
+.guided-tour {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.guided-tour>* {
+    pointer-events: auto;
+}
+
+/* Overlay */
+.guided-tour__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+/* Spotlight cutout */
+.guided-tour__spotlight {
+    position: fixed;
+    border-radius: var(--radius-lg);
+    box-shadow:
+        0 0 0 9999px rgba(0, 0, 0, 0.75),
+        0 0 20px rgba(13, 148, 136, 0.4),
+        inset 0 0 0 2px rgba(13, 148, 136, 0.6);
+    pointer-events: none;
+    z-index: 10001;
+}
+
+/* Tooltip */
+.guided-tour__tooltip {
+    position: fixed;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg,
+            rgba(15, 23, 42, 0.98) 0%,
+            rgba(10, 15, 26, 0.98) 100%);
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(13, 148, 136, 0.15);
+    z-index: 10002;
+}
+
+.guided-tour__tooltip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0D9488, #06B6D4, #0D9488);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* Header */
+.guided-tour__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.guided-tour__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 4px var(--space-sm);
+    background: rgba(13, 148, 136, 0.15);
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    color: #0D9488;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.guided-tour__badge svg {
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.guided-tour__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--apex-steel);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.guided-tour__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--apex-white);
+}
+
+/* Content */
+.guided-tour__content {
+    margin-bottom: var(--space-lg);
+}
+
+.guided-tour__title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: var(--space-sm);
+}
+
+.guided-tour__description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--apex-silver);
+}
+
+/* Progress dots */
+.guided-tour__progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: var(--space-lg);
+}
+
+.guided-tour__dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.guided-tour__dot.active {
+    width: 24px;
+    background: linear-gradient(90deg, #0D9488, #06B6D4);
+}
+
+.guided-tour__dot.completed {
+    background: #0D9488;
+}
+
+/* Actions */
+.guided-tour__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.guided-tour__step-count {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.guided-tour__buttons {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .guided-tour__tooltip {
+        left: 16px !important;
+        right: 16px !important;
+        width: auto;
+        transform: none !important;
+        bottom: 16px !important;
+        top: auto !important;
+    }
+}

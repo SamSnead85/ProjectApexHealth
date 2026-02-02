@@ -24,7 +24,11 @@ import {
     Building,
     Target,
     Database,
-    Plug
+    Plug,
+    Map,
+    Sparkles,
+    MessageCircle,
+    Headphones
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -93,6 +97,7 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'priorauth', label: 'Prior Auth', icon: <FileSearch size={20} />, path: '/admin/prior-auth', badge: '23' },
                 { id: 'eligibility', label: 'Eligibility', icon: <Shield size={20} />, path: '/admin/eligibility' },
                 { id: 'payments', label: 'Payments', icon: <CreditCard size={20} />, path: '/admin/payments' },
+                { id: 'agent-assist', label: 'Agent Assist', icon: <Headphones size={20} />, path: '/agent-assist', badge: 'AI' },
             ]
         },
         {
@@ -154,12 +159,15 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'idcard', label: 'ID Card', icon: <CreditCard size={20} />, path: '/member/id-card' },
                 { id: 'coverage', label: 'Coverage', icon: <Shield size={20} />, path: '/member/coverage' },
                 { id: 'claims', label: 'Claims', icon: <FileText size={20} />, path: '/member/claims' },
+                { id: 'oon-claims', label: 'Submit OON Claim', icon: <FileText size={20} />, path: '/oon-claims' },
             ]
         },
         {
             title: 'Care',
             items: [
                 { id: 'findcare', label: 'Find Care', icon: <Heart size={20} />, path: '/member/providers' },
+                { id: 'care-journey', label: 'Care Journey', icon: <Map size={20} />, path: '/care-journey' },
+                { id: 'concierge', label: 'AI Concierge', icon: <Sparkles size={20} />, path: '/health-concierge', badge: 'AI' },
                 { id: 'costestimator', label: 'Cost Estimator', icon: <CreditCard size={20} />, path: '/member/cost-estimator' },
                 { id: 'pharmacy', label: 'Pharmacy', icon: <Heart size={20} />, path: '/member/pharmacy' },
             ]
@@ -253,9 +261,12 @@ export function Sidebar({
                 <div className="sidebar__brand">
                     <div
                         className="sidebar__brand-icon"
-                        style={{ background: portalInfo.color }}
+                        style={{ background: `linear-gradient(135deg, ${portalInfo.color}, #06B6D4)` }}
                     >
-                        <span>A</span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                            <path d="M12 4L20 18H4L12 4Z" fill="none" stroke="#030712" strokeWidth="2" strokeLinejoin="round" />
+                            <path d="M10 13H14M12 11V15" stroke="#030712" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
                     </div>
                     <AnimatePresence>
                         {!collapsed && (
@@ -266,7 +277,7 @@ export function Sidebar({
                                 exit={{ opacity: 0, x: -10 }}
                                 transition={{ duration: 0.15 }}
                             >
-                                <span className="sidebar__brand-name">Project Apex</span>
+                                <span className="sidebar__brand-name">APEX</span>
                                 <span className="sidebar__portal-name" style={{ color: portalInfo.color }}>
                                     {portalInfo.label}
                                 </span>

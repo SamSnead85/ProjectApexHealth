@@ -1,9 +1,10 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react'
-import { Search, Bell, User, ChevronDown, Shield, BarChart3, Building2, Users } from 'lucide-react'
+import { Search, Bell, User, ChevronDown, Shield, BarChart3, Building2, Users, Map } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Sidebar from './Sidebar'
 import { ThemeToggleCompact } from '../ThemeToggle'
 import { CommandPalette } from '../common'
+import { GuidedTour, ADMIN_TOUR_STEPS, MEMBER_TOUR_STEPS, BROKER_TOUR_STEPS, TourStep } from '../ui/GuidedTour'
 import './Shell.css'
 
 interface ShellProps {
@@ -38,6 +39,7 @@ export function Shell({
     const [searchQuery, setSearchQuery] = useState('')
     const [showSearchResults, setShowSearchResults] = useState(false)
     const [showCommandPalette, setShowCommandPalette] = useState(false)
+    const [showTour, setShowTour] = useState(false)
 
     // Global ⌘K keyboard shortcut
     useEffect(() => {
@@ -185,6 +187,15 @@ export function Shell({
                         {/* Theme Toggle */}
                         <ThemeToggleCompact />
 
+                        {/* Start Tour Button */}
+                        <button
+                            className="shell__topbar-btn shell__tour-btn"
+                            onClick={() => setShowTour(true)}
+                            title="Start Guided Tour"
+                        >
+                            <Map size={18} />
+                        </button>
+
                         {/* Notifications */}
                         <button
                             className="shell__topbar-btn"
@@ -240,6 +251,20 @@ export function Shell({
                         }))
                     }
                 ]}
+            />
+
+            {/* Guided Tour */}
+            <GuidedTour
+                isOpen={showTour}
+                onClose={() => setShowTour(false)}
+                tourName={`${activePortal.charAt(0).toUpperCase() + activePortal.slice(1)} Tour`}
+                steps={
+                    activePortal === 'admin' ? ADMIN_TOUR_STEPS :
+                        activePortal === 'member' ? MEMBER_TOUR_STEPS :
+                            activePortal === 'broker' ? BROKER_TOUR_STEPS :
+                                ADMIN_TOUR_STEPS
+                }
+                onComplete={() => console.log('Tour completed!')}
             />
         </div>
     )

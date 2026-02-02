@@ -1,105 +1,244 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
-    Lock,
-    User,
-    ArrowRight,
-    Shield,
-    Zap,
-    BarChart3,
-    Brain,
-    Activity,
-    Globe,
-    Play,
-    Sparkles,
-    CheckCircle,
-    TrendingUp,
-    Award,
-    Clock,
-    DollarSign,
-    Heart,
-    Building2
+    Lock, User, ArrowRight, Shield, Zap, BarChart3, Brain, Activity,
+    Globe, Play, Sparkles, CheckCircle, TrendingUp, Award, Clock,
+    DollarSign, Heart, Building2, FileText, Users, Stethoscope,
+    CreditCard, AlertTriangle, Network, ClipboardCheck, Calculator,
+    Workflow, Eye, Pill, Video, MessageSquare, FileCheck, Settings,
+    ChevronRight, Search, Star, BadgeCheck, ShieldCheck, Scale,
+    Landmark, Server, Database, Lock as LockIcon, Cpu
 } from 'lucide-react'
-import { Button, Input } from '../components/common'
+import { Button, Input, Badge, GlassCard } from '../components/common'
 import './Landing.css'
 
-// Enterprise client logos for marquee
+// ============================================================================
+// CLAIMSLINK-INSPIRED ENTERPRISE LANDING PAGE
+// Premium Module Grid with Category-Based Navigation
+// ============================================================================
+
+// Module categories with ClaimsLink-style card layout
+const moduleCategories = [
+    {
+        id: 'claims',
+        name: 'Claims Intelligence',
+        description: 'AI-powered adjudication and payment integrity',
+        icon: FileText,
+        gradient: 'from-cyan-500 to-teal-500',
+        modules: [
+            { name: 'Claims Processing', path: '/claims', icon: FileText, desc: 'Intelligent adjudication engine' },
+            { name: 'Prior Authorization', path: '/prior-auth', icon: ClipboardCheck, desc: 'AI-assisted pre-approval' },
+            { name: 'Fraud Detection', path: '/fraud-detection', icon: AlertTriangle, desc: 'ML anomaly detection' },
+            { name: 'Payment Integrity', path: '/payment-processing', icon: CreditCard, desc: 'Error prevention system' },
+            { name: 'Appeals Management', path: '/appeals', icon: Scale, desc: 'Dispute resolution workflow' },
+            { name: 'EOB Viewer', path: '/eob', icon: FileCheck, desc: 'Explanation of benefits' },
+        ]
+    },
+    {
+        id: 'provider',
+        name: 'Provider Network',
+        description: 'Network management and credentialing',
+        icon: Stethoscope,
+        gradient: 'from-violet-500 to-purple-500',
+        modules: [
+            { name: 'Provider Directory', path: '/providers', icon: Search, desc: 'Find in-network providers' },
+            { name: 'Credentialing', path: '/credentialing', icon: BadgeCheck, desc: 'Provider verification' },
+            { name: 'Network Adequacy', path: '/network-adequacy', icon: Network, desc: 'Coverage analysis' },
+            { name: 'Fee Schedules', path: '/fee-schedule', icon: DollarSign, desc: 'Rate management' },
+            { name: 'Provider Portal', path: '/provider-portal', icon: Building2, desc: 'Self-service tools' },
+        ]
+    },
+    {
+        id: 'member',
+        name: 'Member Experience',
+        description: 'Digital-first member engagement',
+        icon: Heart,
+        gradient: 'from-pink-500 to-rose-500',
+        modules: [
+            { name: 'Member 360', path: '/member-360', icon: User, desc: 'Unified member view' },
+            { name: 'Benefits Navigator', path: '/benefits', icon: Heart, desc: 'Coverage explorer' },
+            { name: 'Care Journey', path: '/care-journey', icon: Activity, desc: 'Health timeline' },
+            { name: 'Digital ID Card', path: '/digital-id', icon: CreditCard, desc: 'Mobile wallet card' },
+            { name: 'HSA/FSA Wallet', path: '/hsa', icon: DollarSign, desc: 'Spending accounts' },
+            { name: 'Telehealth', path: '/telehealth', icon: Video, desc: 'Virtual visits' },
+            { name: 'Pharmacy', path: '/pharmacy', icon: Pill, desc: 'Rx management' },
+        ]
+    },
+    {
+        id: 'analytics',
+        name: 'Analytics & AI',
+        description: 'Predictive insights and reporting',
+        icon: Brain,
+        gradient: 'from-amber-500 to-orange-500',
+        modules: [
+            { name: 'Executive Dashboard', path: '/executive', icon: BarChart3, desc: 'C-suite insights' },
+            { name: 'Advanced Analytics', path: '/advanced-analytics', icon: Brain, desc: 'AI-powered analysis' },
+            { name: 'Population Health', path: '/population-health', icon: Users, desc: 'Cohort analytics' },
+            { name: 'Claims Prediction', path: '/claims-prediction', icon: TrendingUp, desc: 'Forecasting engine' },
+            { name: 'Value-Based Care', path: '/value-based-care', icon: Award, desc: 'Quality metrics' },
+            { name: 'Custom Reports', path: '/report-builder', icon: FileText, desc: 'Report builder' },
+        ]
+    },
+    {
+        id: 'compliance',
+        name: 'Compliance & Security',
+        description: 'Regulatory adherence and audit readiness',
+        icon: Shield,
+        gradient: 'from-emerald-500 to-green-500',
+        modules: [
+            { name: 'Compliance Center', path: '/compliance-center', icon: ShieldCheck, desc: 'Regulatory hub' },
+            { name: 'Audit Dashboard', path: '/audit', icon: Eye, desc: 'Activity tracking' },
+            { name: 'HIPAA Controls', path: '/compliance', icon: Lock, desc: 'Privacy management' },
+            { name: 'CMS EDE Portal', path: '/regulatory-hub', icon: Landmark, desc: 'Marketplace integration' },
+            { name: 'Data Integration', path: '/data-integration', icon: Database, desc: 'EDI management' },
+        ]
+    },
+    {
+        id: 'operations',
+        name: 'Operations & Admin',
+        description: 'Platform management and workflows',
+        icon: Settings,
+        gradient: 'from-slate-500 to-gray-600',
+        modules: [
+            { name: 'Workflow Builder', path: '/workflows', icon: Workflow, desc: 'Process automation' },
+            { name: 'Task Queue', path: '/task-queue', icon: ClipboardCheck, desc: 'Work management' },
+            { name: 'User Management', path: '/user-management', icon: Users, desc: 'Access control' },
+            { name: 'System Health', path: '/system-health', icon: Server, desc: 'Monitoring' },
+            { name: 'API Management', path: '/api-management', icon: Cpu, desc: 'Developer tools' },
+        ]
+    },
+]
+
+// Compliance certifications with details
+const complianceBadges = [
+    {
+        name: 'HIPAA',
+        fullName: 'Health Insurance Portability and Accountability Act',
+        status: 'Compliant',
+        icon: Shield,
+        description: 'Full PHI protection and privacy controls'
+    },
+    {
+        name: 'HITRUST CSF',
+        fullName: 'Health Information Trust Alliance',
+        status: 'r2 Certified',
+        icon: ShieldCheck,
+        description: 'Comprehensive security framework certification'
+    },
+    {
+        name: 'SOC 2',
+        fullName: 'Service Organization Control',
+        status: 'Type II',
+        icon: BadgeCheck,
+        description: 'Trust services criteria compliance'
+    },
+    {
+        name: 'CMS EDE',
+        fullName: 'Enhanced Direct Enrollment',
+        status: 'Certified',
+        icon: Landmark,
+        description: 'Direct marketplace enrollment capability'
+    },
+]
+
+// Enterprise statistics
+const platformStats = [
+    { value: '500M+', label: 'Claims Processed', icon: FileText },
+    { value: '$4.2B', label: 'Savings Identified', icon: DollarSign },
+    { value: '99.99%', label: 'Platform Uptime', icon: Zap },
+    { value: '12M+', label: 'Members Served', icon: Users },
+]
+
+// Enterprise clients
 const enterpriseClients = [
-    { name: 'Blue Shield', industry: 'Healthcare' },
-    { name: 'Aetna', industry: 'Insurance' },
-    { name: 'Kaiser Permanente', industry: 'Healthcare' },
-    { name: 'UnitedHealth', industry: 'Healthcare' },
-    { name: 'Cigna', industry: 'Insurance' },
-    { name: 'Humana', industry: 'Healthcare' },
-    { name: 'Anthem', industry: 'Insurance' },
-    { name: 'Centene', industry: 'Healthcare' },
-]
-
-// Value proposition ticker items
-const valuePropositions = [
-    { metric: '$2.3M', label: 'Avg. Annual Savings', icon: DollarSign },
-    { metric: '94%', label: 'Claims Auto-Adjudication', icon: Zap },
-    { metric: '45%', label: 'Faster Enrollment', icon: Clock },
-    { metric: '99.99%', label: 'Platform Uptime', icon: Shield },
-    { metric: '4.9/5', label: 'Customer Satisfaction', icon: Heart },
-]
-
-// Testimonials for social proof
-const testimonials = [
-    {
-        quote: "Project Apex transformed our benefits administration. We've cut processing time by 60% and our members love the experience.",
-        author: "Sarah Chen",
-        role: "VP of Benefits",
-        company: "Fortune 100 Healthcare Co."
-    },
-    {
-        quote: "The AI-powered insights have helped us identify $4M in cost savings opportunities we never knew existed.",
-        author: "Michael Torres",
-        role: "Chief Technology Officer",
-        company: "National Insurance Group"
-    },
-    {
-        quote: "Best-in-class platform. The ROI was evident within the first quarter of implementation.",
-        author: "Jennifer Walsh",
-        role: "Director of Operations",
-        company: "Regional Health System"
-    }
+    'Blue Shield', 'Aetna', 'Kaiser Permanente', 'UnitedHealth',
+    'Cigna', 'Humana', 'Anthem', 'Centene'
 ]
 
 interface LandingProps {
     onLogin: (portal: 'admin' | 'broker' | 'employer' | 'member') => void
 }
 
-// Animated counter for stats
-const AnimatedCounter = ({ value, suffix, label }: { value: number, suffix: string, label: string }) => {
-    const [count, setCount] = useState(0)
+// Module Card Component
+function ModuleCard({ module, onNavigate }: { module: any, onNavigate: () => void }) {
+    return (
+        <motion.button
+            className="module-card"
+            onClick={onNavigate}
+            whileHover={{ y: -4, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        >
+            <div className="module-card__icon">
+                <module.icon size={20} />
+            </div>
+            <div className="module-card__content">
+                <span className="module-card__name">{module.name}</span>
+                <span className="module-card__desc">{module.desc}</span>
+            </div>
+            <ChevronRight size={16} className="module-card__arrow" />
+        </motion.button>
+    )
+}
 
-    useEffect(() => {
-        const duration = 2000
-        const steps = 60
-        const increment = value / steps
-        let current = 0
-        const timer = setInterval(() => {
-            current += increment
-            if (current >= value) {
-                setCount(value)
-                clearInterval(timer)
-            } else {
-                setCount(Math.floor(current))
-            }
-        }, duration / steps)
-        return () => clearInterval(timer)
-    }, [value])
+// Category Section Component
+function CategorySection({ category, onNavigate, index }: { category: typeof moduleCategories[0], onNavigate: (path: string) => void, index: number }) {
+    const [isExpanded, setIsExpanded] = useState(true)
 
     return (
-        <div className="landing__stat">
-            <span className="landing__stat-value">{count.toLocaleString()}{suffix}</span>
-            <span className="landing__stat-label">{label}</span>
-        </div>
+        <motion.section
+            className="category-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+            <div className="category-section__header">
+                <div className={`category-section__icon bg-gradient-to-br ${category.gradient}`}>
+                    <category.icon size={24} />
+                </div>
+                <div className="category-section__info">
+                    <h3 className="category-section__title">{category.name}</h3>
+                    <p className="category-section__description">{category.description}</p>
+                </div>
+                <Badge variant="secondary" className="category-section__count">
+                    {category.modules.length} modules
+                </Badge>
+            </div>
+            <div className="category-section__modules">
+                {category.modules.map((module) => (
+                    <ModuleCard
+                        key={module.path}
+                        module={module}
+                        onNavigate={() => onNavigate(module.path)}
+                    />
+                ))}
+            </div>
+        </motion.section>
+    )
+}
+
+// Compliance Badge Component
+function ComplianceBadge({ badge }: { badge: typeof complianceBadges[0] }) {
+    return (
+        <motion.div
+            className="compliance-badge-card"
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400 }}
+        >
+            <div className="compliance-badge-card__icon">
+                <badge.icon size={20} />
+            </div>
+            <div className="compliance-badge-card__content">
+                <span className="compliance-badge-card__name">{badge.name}</span>
+                <span className="compliance-badge-card__status">{badge.status}</span>
+            </div>
+            <CheckCircle size={16} className="compliance-badge-card__check" />
+        </motion.div>
     )
 }
 
 export function Landing({ onLogin }: LandingProps) {
+    const [activeView, setActiveView] = useState<'hero' | 'modules'>('hero')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -110,452 +249,334 @@ export function Landing({ onLogin }: LandingProps) {
         setTimeout(() => {
             onLogin('admin')
             setIsLoading(false)
-        }, 1000)
+        }, 800)
+    }
+
+    const handleExploreModules = () => {
+        setActiveView('modules')
+    }
+
+    const handleNavigateToModule = (path: string) => {
+        onLogin('admin')
+        // Navigation will be handled after login
     }
 
     return (
         <div className="landing">
-            {/* Elegant Layered Background */}
+            {/* Premium Background */}
             <div className="landing__bg">
-                {/* Base gradient */}
                 <div className="landing__bg-base" />
-
-                {/* Subtle radial glow */}
                 <div className="landing__bg-glow" />
-
-                {/* Animated mesh grid */}
                 <div className="landing__bg-grid" />
-
-                {/* Vignette */}
                 <div className="landing__bg-vignette" />
-
-                {/* Subtle noise texture */}
                 <div className="landing__bg-noise" />
             </div>
 
-            {/* Content */}
             <div className="landing__container">
                 {/* Header */}
                 <motion.header
                     className="landing__header"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
                 >
                     <div className="landing__logo">
                         <div className="landing__logo-mark">
-                            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" fill="url(#logo-gradient)" fillOpacity="0.1" />
-                                <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" stroke="url(#logo-gradient)" strokeWidth="1.5" />
-                                <path d="M16 8L22 11V21L16 24L10 21V11L16 8Z" fill="url(#logo-gradient)" />
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
-                                    <linearGradient id="logo-gradient" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#0D9488" />
-                                        <stop offset="1" stopColor="#06B6D4" />
+                                    <linearGradient id="apexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#6366f1" />
+                                        <stop offset="50%" stopColor="#06B6D4" />
+                                        <stop offset="100%" stopColor="#34d399" />
                                     </linearGradient>
+                                    <filter id="glow">
+                                        <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
                                 </defs>
+                                <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#apexGradient)" filter="url(#glow)" />
+                                <rect x="6" y="6" width="36" height="36" rx="9" fill="#030712" fillOpacity="0.9" />
+                                <path d="M24 12L36 34H12L24 12Z" fill="none" stroke="url(#apexGradient)" strokeWidth="2.5" strokeLinejoin="round" />
+                                <path d="M22 25H26M24 23V27" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round" />
+                                <circle cx="24" cy="20" r="2" fill="#6366f1" />
+                                <circle cx="18" cy="30" r="1.5" fill="#34d399" fillOpacity="0.7" />
+                                <circle cx="30" cy="30" r="1.5" fill="#34d399" fillOpacity="0.7" />
                             </svg>
                         </div>
                         <div className="landing__logo-text">
-                            <span className="landing__logo-name">Project Apex</span>
-                            <span className="landing__logo-tag">Healthcare Intelligence</span>
+                            <span className="landing__logo-name">APEX</span>
+                            <span className="landing__logo-tag">Health Intelligence</span>
                         </div>
                     </div>
                     <nav className="landing__nav">
-                        <a href="#platform">Platform</a>
-                        <a href="#solutions">Solutions</a>
+                        <button onClick={() => setActiveView('hero')} className={activeView === 'hero' ? 'active' : ''}>Platform</button>
+                        <button onClick={handleExploreModules} className={activeView === 'modules' ? 'active' : ''}>Modules</button>
                         <a href="#enterprise">Enterprise</a>
-                        <a href="#about">About</a>
+                        <a href="#compliance">Security</a>
                         <Button variant="ghost" size="sm">Contact Sales</Button>
                     </nav>
                 </motion.header>
 
-                {/* Hero Section */}
-                <main className="landing__hero">
-                    {/* Left: Content */}
-                    <motion.div
-                        className="landing__content"
-                        initial={{ opacity: 0, x: -40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, delay: 0.2 }}
-                    >
-                        {/* Badge */}
-                        <div className="landing__badge">
-                            <Sparkles size={14} />
-                            <span>AI-Powered Healthcare Administration</span>
-                        </div>
-
-                        {/* Headline */}
-                        <h1 className="landing__headline">
-                            Transform How You
-                            <br />
-                            <span className="landing__headline-em">Manage Healthcare</span>
-                        </h1>
-
-                        {/* Description */}
-                        <p className="landing__description">
-                            Enterprise-grade platform that streamlines benefits administration,
-                            claims processing, and care coordination. Trusted by leading
-                            organizations to deliver exceptional healthcare experiences.
-                        </p>
-
-                        {/* CTAs */}
-                        <div className="landing__ctas">
-                            <Button
-                                size="lg"
-                                icon={<ArrowRight size={18} />}
-                                iconPosition="right"
-                                onClick={() => onLogin('admin')}
-                            >
-                                Start Free Trial
-                            </Button>
-                            <Button
-                                variant="secondary"
-                                size="lg"
-                                icon={<Play size={16} />}
-                            >
-                                Watch Demo
-                            </Button>
-                        </div>
-
-                        {/* Stats */}
-                        <div className="landing__stats">
-                            <AnimatedCounter value={500} suffix="M+" label="Claims Processed" />
-                            <div className="landing__stats-divider" />
-                            <AnimatedCounter value={99} suffix=".9%" label="Uptime SLA" />
-                            <div className="landing__stats-divider" />
-                            <AnimatedCounter value={4} suffix=".8" label="Customer Rating" />
-                        </div>
-                    </motion.div>
-
-                    {/* Right: Login Card */}
-                    <motion.div
-                        className="landing__card-wrapper"
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, delay: 0.3 }}
-                    >
-                        <div className="landing__card">
-                            {/* Card Header */}
-                            <div className="landing__card-header">
-                                <div className="landing__card-icon">
-                                    <Shield size={20} />
-                                </div>
-                                <h2 className="landing__card-title">Secure Access</h2>
-                                <p className="landing__card-subtitle">Sign in to your enterprise portal</p>
-                            </div>
-
-                            {/* Login Form */}
-                            <form onSubmit={handleLogin} className="landing__form">
-                                <Input
-                                    label="Email"
-                                    type="email"
-                                    placeholder="you@company.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    icon={<User size={18} />}
-                                    fullWidth
-                                />
-
-                                <Input
-                                    label="Password"
-                                    type="password"
-                                    placeholder="••••••••"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    icon={<Lock size={18} />}
-                                    fullWidth
-                                />
-
-                                <div className="landing__form-options">
-                                    <label className="landing__checkbox">
-                                        <input type="checkbox" />
-                                        <span>Remember me</span>
-                                    </label>
-                                    <a href="#" className="landing__link">Forgot password?</a>
-                                </div>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    loading={isLoading}
-                                    icon={<ArrowRight size={18} />}
-                                    iconPosition="right"
+                <AnimatePresence mode="wait">
+                    {activeView === 'hero' ? (
+                        <motion.div
+                            key="hero"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {/* Hero Section */}
+                            <main className="landing__hero">
+                                <motion.div
+                                    className="landing__content"
+                                    initial={{ opacity: 0, x: -40 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.2 }}
                                 >
-                                    Sign In
-                                </Button>
-                            </form>
+                                    <div className="landing__badge">
+                                        <Brain size={14} />
+                                        <span>AI-Native Health Payer Operating System</span>
+                                    </div>
 
-                            {/* SSO */}
-                            <div className="landing__sso">
-                                <div className="landing__sso-divider">
-                                    <span>or</span>
-                                </div>
-                                <Button
-                                    variant="secondary"
-                                    fullWidth
-                                    onClick={() => onLogin('admin')}
+                                    <h1 className="landing__headline">
+                                        Pay Right,
+                                        <br />
+                                        <span className="landing__headline-em">The First Time</span>
+                                    </h1>
+
+                                    <p className="landing__description">
+                                        Shift from 'Pay & Chase' to Pre-Pay Prevention. The first cognitive
+                                        health administration platform that unifies claims adjudication,
+                                        payment integrity, and appeals governance.
+                                    </p>
+
+                                    <div className="landing__ctas">
+                                        <Button
+                                            size="lg"
+                                            icon={<Play size={16} />}
+                                            onClick={() => onLogin('admin')}
+                                        >
+                                            Start Demo
+                                        </Button>
+                                        <Button
+                                            variant="secondary"
+                                            size="lg"
+                                            icon={<ArrowRight size={16} />}
+                                            iconPosition="right"
+                                            onClick={handleExploreModules}
+                                        >
+                                            Explore Modules
+                                        </Button>
+                                    </div>
+
+                                    {/* Platform Stats */}
+                                    <div className="landing__stats">
+                                        {platformStats.map((stat, idx) => (
+                                            <div key={idx} className="landing__stat">
+                                                <span className="landing__stat-value">{stat.value}</span>
+                                                <span className="landing__stat-label">{stat.label}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+
+                                {/* Login Card */}
+                                <motion.div
+                                    className="landing__card-wrapper"
+                                    initial={{ opacity: 0, x: 40 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.3 }}
                                 >
-                                    Continue with SSO
-                                </Button>
-                            </div>
+                                    <div className="landing__card">
+                                        <div className="landing__card-header">
+                                            <div className="landing__card-icon">
+                                                <Shield size={20} />
+                                            </div>
+                                            <h2 className="landing__card-title">Secure Access</h2>
+                                            <p className="landing__card-subtitle">Enterprise portal login</p>
+                                        </div>
 
-                            {/* Portal Shortcuts */}
-                            <div className="landing__portals">
-                                <span className="landing__portals-label">Quick Access</span>
-                                <div className="landing__portals-row">
-                                    <button
-                                        className="landing__portal"
-                                        onClick={() => onLogin('admin')}
-                                    >
-                                        <Shield size={14} />
-                                        Admin
-                                    </button>
-                                    <button
-                                        className="landing__portal"
-                                        onClick={() => onLogin('broker')}
-                                    >
-                                        <BarChart3 size={14} />
-                                        Broker
-                                    </button>
-                                    <button
-                                        className="landing__portal"
-                                        onClick={() => onLogin('employer')}
-                                    >
-                                        <Globe size={14} />
-                                        Employer
-                                    </button>
-                                    <button
-                                        className="landing__portal"
-                                        onClick={() => onLogin('member')}
-                                    >
-                                        <User size={14} />
-                                        Member
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </main>
+                                        <form onSubmit={handleLogin} className="landing__form">
+                                            <Input
+                                                label="Email"
+                                                type="email"
+                                                placeholder="you@company.com"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                icon={<User size={18} />}
+                                                fullWidth
+                                            />
+                                            <Input
+                                                label="Password"
+                                                type="password"
+                                                placeholder="••••••••"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                icon={<Lock size={18} />}
+                                                fullWidth
+                                            />
+                                            <Button type="submit" fullWidth loading={isLoading}>
+                                                Sign In
+                                            </Button>
+                                        </form>
 
-                {/* Value Proposition Ticker */}
-                <motion.section
-                    className="landing__value-ticker"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                    <div className="landing__ticker-track">
-                        {[...valuePropositions, ...valuePropositions].map((prop, idx) => (
-                            <div key={idx} className="landing__ticker-item">
-                                <prop.icon size={18} />
-                                <span className="landing__ticker-metric">{prop.metric}</span>
-                                <span className="landing__ticker-label">{prop.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </motion.section>
+                                        <div className="landing__sso">
+                                            <div className="landing__sso-divider"><span>or continue as</span></div>
+                                        </div>
 
-                {/* Features Strip */}
-                <motion.section
-                    className="landing__features"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                    {[
-                        { icon: <Brain size={20} />, title: 'AI-First', desc: 'Gemini-powered intelligence' },
-                        { icon: <Zap size={20} />, title: 'Real-Time', desc: 'Instant claims processing' },
-                        { icon: <Shield size={20} />, title: 'Secure', desc: 'HIPAA & SOC 2 certified' },
-                        { icon: <Activity size={20} />, title: 'Analytics', desc: 'Predictive insights' },
-                    ].map((feature) => (
-                        <div key={feature.title} className="landing__feature">
-                            <div className="landing__feature-icon">{feature.icon}</div>
-                            <div className="landing__feature-text">
-                                <span className="landing__feature-title">{feature.title}</span>
-                                <span className="landing__feature-desc">{feature.desc}</span>
-                            </div>
-                        </div>
-                    ))}
-                </motion.section>
+                                        <div className="landing__demo-personas">
+                                            <button className="landing__demo-persona" onClick={() => onLogin('admin')}>
+                                                <div className="landing__demo-icon landing__demo-icon--admin">
+                                                    <Shield size={18} />
+                                                </div>
+                                                <div className="landing__demo-text">
+                                                    <span className="landing__demo-role">Administrator</span>
+                                                    <span className="landing__demo-desc">Full platform access</span>
+                                                </div>
+                                            </button>
+                                            <button className="landing__demo-persona" onClick={() => onLogin('broker')}>
+                                                <div className="landing__demo-icon landing__demo-icon--broker">
+                                                    <BarChart3 size={18} />
+                                                </div>
+                                                <div className="landing__demo-text">
+                                                    <span className="landing__demo-role">Broker</span>
+                                                    <span className="landing__demo-desc">Sales & commissions</span>
+                                                </div>
+                                            </button>
+                                            <button className="landing__demo-persona" onClick={() => onLogin('member')}>
+                                                <div className="landing__demo-icon landing__demo-icon--member">
+                                                    <User size={18} />
+                                                </div>
+                                                <div className="landing__demo-text">
+                                                    <span className="landing__demo-role">Member</span>
+                                                    <span className="landing__demo-desc">Benefits & care</span>
+                                                </div>
+                                            </button>
+                                            <button className="landing__demo-persona" onClick={() => onLogin('employer')}>
+                                                <div className="landing__demo-icon landing__demo-icon--employer">
+                                                    <Building2 size={18} />
+                                                </div>
+                                                <div className="landing__demo-text">
+                                                    <span className="landing__demo-role">Employer</span>
+                                                    <span className="landing__demo-desc">HR administration</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </main>
 
-                {/* Enterprise Logo Marquee */}
-                <motion.section
-                    className="landing__enterprise"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                >
-                    <span className="landing__enterprise-label">
-                        <Building2 size={14} />
-                        Trusted by leading healthcare organizations
-                    </span>
-                    <div className="landing__enterprise-marquee">
-                        <div className="landing__enterprise-track">
-                            {[...enterpriseClients, ...enterpriseClients].map((client, idx) => (
-                                <div key={idx} className="landing__enterprise-logo">
-                                    <span className="landing__enterprise-name">{client.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </motion.section>
-
-                {/* Testimonials Section */}
-                <motion.section
-                    className="landing__testimonials"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.7 }}
-                >
-                    <h2 className="landing__testimonials-title">
-                        <Award size={20} />
-                        What Our Clients Say
-                    </h2>
-                    <div className="landing__testimonials-grid">
-                        {testimonials.map((testimonial, idx) => (
-                            <motion.div
-                                key={idx}
-                                className="landing__testimonial-card"
+                            {/* Compliance Badges */}
+                            <motion.section
+                                className="landing__compliance-section"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
+                                transition={{ delay: 0.5 }}
                             >
-                                <div className="landing__testimonial-quote">
-                                    <CheckCircle size={16} className="landing__testimonial-check" />
-                                    "{testimonial.quote}"
+                                <h3 className="landing__compliance-title">
+                                    <ShieldCheck size={18} />
+                                    Enterprise-Grade Security & Compliance
+                                </h3>
+                                <div className="landing__compliance-grid">
+                                    {complianceBadges.map((badge) => (
+                                        <ComplianceBadge key={badge.name} badge={badge} />
+                                    ))}
                                 </div>
-                                <div className="landing__testimonial-author">
-                                    <div className="landing__testimonial-avatar">
-                                        {testimonial.author.charAt(0)}
-                                    </div>
-                                    <div className="landing__testimonial-info">
-                                        <span className="landing__testimonial-name">{testimonial.author}</span>
-                                        <span className="landing__testimonial-role">{testimonial.role}</span>
-                                        <span className="landing__testimonial-company">{testimonial.company}</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.section>
+                            </motion.section>
 
-                {/* ROI Calculator Teaser */}
-                <motion.section
-                    className="landing__roi-teaser"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.9 }}
-                >
-                    <div className="landing__roi-content">
-                        <div className="landing__roi-text">
-                            <TrendingUp size={24} />
-                            <h3>Calculate Your ROI</h3>
-                            <p>See how much you could save with Project Apex's AI-powered automation</p>
-                        </div>
-                        <div className="landing__roi-metrics">
-                            <div className="landing__roi-metric">
-                                <span className="landing__roi-value">$2.3M</span>
-                                <span className="landing__roi-label">Avg. Annual Savings</span>
-                            </div>
-                            <div className="landing__roi-metric">
-                                <span className="landing__roi-value">127%</span>
-                                <span className="landing__roi-label">Avg. First Year ROI</span>
-                            </div>
-                            <div className="landing__roi-metric">
-                                <span className="landing__roi-value">6mo</span>
-                                <span className="landing__roi-label">Time to Value</span>
-                            </div>
-                        </div>
-                        <Button
-                            variant="primary"
-                            size="lg"
-                            icon={<ArrowRight size={18} />}
-                            iconPosition="right"
+                            {/* Enterprise Clients */}
+                            <motion.section
+                                className="landing__enterprise"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6 }}
+                            >
+                                <span className="landing__enterprise-label">
+                                    <Building2 size={14} />
+                                    Trusted by leading healthcare organizations
+                                </span>
+                                <div className="landing__enterprise-marquee">
+                                    <div className="landing__enterprise-track">
+                                        {[...enterpriseClients, ...enterpriseClients].map((client, idx) => (
+                                            <div key={idx} className="landing__enterprise-logo">
+                                                <span className="landing__enterprise-name">{client}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.section>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="modules"
+                            className="landing__modules-view"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            Get Your Custom ROI Analysis
-                        </Button>
-                    </div>
-                </motion.section>
-
-                {/* Compliance Badges */}
-                <motion.section
-                    className="landing__compliance"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 1 }}
-                >
-                    <div className="landing__compliance-badges">
-                        {[
-                            { name: 'HIPAA', desc: 'Compliant' },
-                            { name: 'SOC 2', desc: 'Type II' },
-                            { name: 'HITRUST', desc: 'Certified' },
-                            { name: 'CMS', desc: 'Approved' },
-                        ].map((badge) => (
-                            <div key={badge.name} className="landing__compliance-badge">
-                                <Shield size={16} />
-                                <span className="landing__badge-name">{badge.name}</span>
-                                <span className="landing__badge-desc">{badge.desc}</span>
+                            {/* Module Grid Header */}
+                            <div className="modules-header">
+                                <div className="modules-header__content">
+                                    <Badge variant="teal" dot>
+                                        <Sparkles size={12} /> 40+ Modules
+                                    </Badge>
+                                    <h2 className="modules-header__title">Platform Modules</h2>
+                                    <p className="modules-header__subtitle">
+                                        Comprehensive healthcare administration capabilities.
+                                        Click any module to explore.
+                                    </p>
+                                </div>
+                                <Button
+                                    variant="primary"
+                                    size="lg"
+                                    icon={<Play size={16} />}
+                                    onClick={() => onLogin('admin')}
+                                >
+                                    Start Full Demo
+                                </Button>
                             </div>
-                        ))}
-                    </div>
-                </motion.section>
+
+                            {/* Category Grid */}
+                            <div className="modules-grid">
+                                {moduleCategories.map((category, idx) => (
+                                    <CategorySection
+                                        key={category.id}
+                                        category={category}
+                                        index={idx}
+                                        onNavigate={handleNavigateToModule}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Compliance Footer */}
+                            <div className="modules-footer">
+                                <div className="modules-footer__badges">
+                                    {complianceBadges.map((badge) => (
+                                        <div key={badge.name} className="modules-footer__badge">
+                                            <badge.icon size={16} />
+                                            <span>{badge.name}</span>
+                                            <CheckCircle size={12} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Footer */}
                 <footer className="landing__footer">
-                    <div className="landing__footer-main">
-                        <div className="landing__footer-brand">
-                            <div className="landing__logo">
-                                <div className="landing__logo-mark">
-                                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" fill="url(#footer-logo-gradient)" fillOpacity="0.1" />
-                                        <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" stroke="url(#footer-logo-gradient)" strokeWidth="1.5" />
-                                        <path d="M16 8L22 11V21L16 24L10 21V11L16 8Z" fill="url(#footer-logo-gradient)" />
-                                        <defs>
-                                            <linearGradient id="footer-logo-gradient" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                                                <stop stopColor="#0D9488" />
-                                                <stop offset="1" stopColor="#06B6D4" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <span className="landing__footer-name">Project Apex</span>
-                            </div>
-                            <p className="landing__footer-desc">
-                                The future of healthcare benefits administration. AI-powered. Enterprise-ready.
-                            </p>
-                        </div>
-                        <div className="landing__footer-links-grid">
-                            <div className="landing__footer-col">
-                                <h4>Platform</h4>
-                                <a href="#">Features</a>
-                                <a href="#">Integrations</a>
-                                <a href="#">API</a>
-                                <a href="#">Pricing</a>
-                            </div>
-                            <div className="landing__footer-col">
-                                <h4>Solutions</h4>
-                                <a href="#">For Brokers</a>
-                                <a href="#">For Employers</a>
-                                <a href="#">For Carriers</a>
-                                <a href="#">For TPAs</a>
-                            </div>
-                            <div className="landing__footer-col">
-                                <h4>Company</h4>
-                                <a href="#">About</a>
-                                <a href="#">Careers</a>
-                                <a href="#">Blog</a>
-                                <a href="#">Contact</a>
-                            </div>
-                        </div>
-                    </div>
                     <div className="landing__footer-bottom">
-                        <span>© 2026 Project Apex. All rights reserved.</span>
+                        <span>© 2026 Project Apex Health Intelligence. All rights reserved.</span>
                         <div className="landing__footer-legal">
                             <a href="#">Privacy</a>
                             <a href="#">Terms</a>
                             <a href="#">Security</a>
-                            <a href="#">Support</a>
+                            <a href="#">BAA</a>
                         </div>
                     </div>
                 </footer>
