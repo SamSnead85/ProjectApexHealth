@@ -200,8 +200,9 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
 
     return (
         <div className="command-center">
-            {/* Grid Background */}
+            {/* Premium Layered Background */}
             <div className="cc-grid-bg" />
+            <div className="cc-honeycomb" />
 
             {/* Header */}
             <header className="cc-header">
