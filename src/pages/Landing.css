@@ -1367,25 +1367,73 @@
     }
 }
 
-/* Module Card */
+/* Module Card - ClaimsLink Photography Style */
 .module-card {
+    position: relative;
+    height: 240px;
     display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-lg);
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 20px;
+    overflow: hidden;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     text-align: left;
     width: 100%;
 }
 
 .module-card:hover {
-    background: rgba(6, 182, 212, 0.08);
-    border-color: rgba(6, 182, 212, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.module-card__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.module-card:hover .module-card__image {
+    transform: scale(1.08);
+}
+
+.module-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.7) 30%,
+            rgba(0, 0, 0, 0.2) 60%,
+            transparent 100%);
+}
+
+.module-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: white;
+    z-index: 2;
+}
+
+.module-card__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px;
 }
 
 .module-card__icon {
@@ -1394,55 +1442,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(6, 182, 212, 0.1);
-    border-radius: var(--radius-md);
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: 10px;
     color: #06B6D4;
-    flex-shrink: 0;
-    transition: all var(--transition-fast);
+    margin-bottom: 8px;
+    transition: all 0.3s;
 }
 
 .module-card:hover .module-card__icon {
-    background: rgba(6, 182, 212, 0.2);
-    box-shadow: 0 0 16px rgba(6, 182, 212, 0.3);
-}
-
-.module-card__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
+    background: rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
 }
 
 .module-card__name {
-    font-size: var(--text-sm);
+    font-family: var(--font-display);
+    font-size: 16px;
     font-weight: 600;
     color: var(--apex-white);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0;
 }
 
 .module-card__desc {
-    font-size: 11px;
-    color: var(--apex-steel);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.module-card__arrow {
-    color: var(--apex-steel);
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: all var(--transition-fast);
-    flex-shrink: 0;
-}
-
-.module-card:hover .module-card__arrow {
-    opacity: 1;
-    transform: translateX(0);
-    color: #06B6D4;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
 }
 
 /* Modules Footer */
