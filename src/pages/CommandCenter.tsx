@@ -302,50 +302,47 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
                     </div>
                 </section>
 
-                {/* All Modules */}
+                {/* All Modules - Horizontal Rails */}
                 <section className="cc-modules">
                     <div className="cc-section-header">
                         <h2>All Modules</h2>
-                        <ChevronRight size={20} />
                     </div>
 
-                    {/* Category Tabs */}
-                    <div className="cc-tabs">
-                        {categories.map(cat => {
-                            const Icon = cat.icon
-                            const isActive = activeCategory === cat.key
-                            return (
-                                <button
-                                    key={cat.key}
-                                    className={`cc-tab ${isActive ? 'cc-tab--active' : ''}`}
-                                    onClick={() => setActiveCategory(cat.key)}
-                                >
-                                    <Icon size={16} />
-                                    <span>{cat.name}</span>
-                                </button>
-                            )
-                        })}
-                    </div>
-
-                    {/* Module List */}
-                    <div className="cc-module-list">
-                        <AnimatePresence mode="wait">
-                            {filteredModules.map((module, idx) => (
-                                <motion.div
-                                    key={module.id}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 10 }}
-                                    transition={{ delay: idx * 0.05 }}
-                                >
-                                    <MiniCard
-                                        module={module}
-                                        onClick={() => handleModuleClick(module.path)}
-                                    />
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
+                    {/* Horizontal Rails for Each Category */}
+                    {categories.map((cat, catIdx) => {
+                        const catModules = allModules[cat.key as keyof typeof allModules] || []
+                        const Icon = cat.icon
+                        return (
+                            <motion.div
+                                key={cat.key}
+                                className="cc-rail"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: catIdx * 0.1 }}
+                            >
+                                <div className="cc-rail__header">
+                                    <Icon size={18} className="cc-rail__icon" />
+                                    <h3 className="cc-rail__title">{cat.name}</h3>
+                                    <span className="cc-rail__count">{catModules.length}</span>
+                                </div>
+                                <div className="cc-rail__scroll">
+                                    {catModules.map((module, idx) => (
+                                        <motion.div
+                                            key={module.id}
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ delay: idx * 0.05 }}
+                                        >
+                                            <MiniCard
+                                                module={module}
+                                                onClick={() => handleModuleClick(module.path)}
+                                            />
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )
+                    })}
                 </section>
             </main>
 
