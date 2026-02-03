@@ -153,42 +153,53 @@ interface LandingProps {
     onLogin: (portal: 'admin' | 'broker' | 'employer' | 'member') => void
 }
 
-// Module Card Component - ClaimsLink Style with Photography
+// Module Card Images - Purpose-Specific Healthcare Imagery
 const moduleImages: Record<string, string> = {
-    '/claims': 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
-    '/prior-auth': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop',
-    '/fraud-detection': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop',
-    '/payment-processing': 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop',
-    '/appeals': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop',
-    '/eob': 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=300&fit=crop',
-    '/providers': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop',
-    '/credentialing': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
-    '/network-adequacy': 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=300&fit=crop',
-    '/fee-schedule': 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&h=300&fit=crop',
-    '/provider-portal': 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=300&fit=crop',
-    '/member-360': 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop',
-    '/benefits': 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=400&h=300&fit=crop',
-    '/care-journey': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=300&fit=crop',
-    '/digital-id': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop',
-    '/hsa': 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=400&h=300&fit=crop',
-    '/telehealth': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
-    '/pharmacy': 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&h=300&fit=crop',
-    '/executive': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
-    '/advanced-analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
-    '/population-health': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop',
-    '/claims-prediction': 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
-    '/value-based-care': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
-    '/report-builder': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-    '/compliance-center': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop',
-    '/audit': 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&h=300&fit=crop',
-    '/compliance': 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=300&fit=crop',
-    '/regulatory-hub': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop',
-    '/data-integration': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop',
-    '/workflows': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
-    '/task-queue': 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop',
-    '/user-management': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop',
-    '/system-health': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
-    '/api-management': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
+    // Claims Intelligence - Document and processing focused
+    '/claims': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop', // Documents/paperwork
+    '/prior-auth': 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=300&fit=crop', // Medical approval/checklist
+    '/fraud-detection': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop', // Cybersecurity/protection
+    '/payment-processing': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop', // Financial/payments
+    '/appeals': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop', // Legal/gavel
+    '/eob': 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&h=300&fit=crop', // Documents/statements
+
+    // Provider Network - Doctors and medical facilities
+    '/providers': 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=300&fit=crop', // Doctor portrait
+    '/credentialing': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop', // Medical credentials/stethoscope
+    '/network-adequacy': 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop', // Hospital building
+    '/fee-schedule': 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=300&fit=crop', // Calculator/finance
+    '/provider-portal': 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=300&fit=crop', // Medical professional with laptop
+
+    // Member Experience - People and patient care
+    '/member-360': 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=300&fit=crop', // Family healthcare
+    '/benefits': 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=400&h=300&fit=crop', // Health insurance card
+    '/care-journey': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=300&fit=crop', // Patient care timeline
+    '/digital-id': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop', // Digital card/mobile
+    '/hsa': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop', // Savings/piggy bank
+    '/telehealth': 'https://images.unsplash.com/photo-1609904288889-79629be02c85?w=400&h=300&fit=crop', // Video doctor visit
+    '/pharmacy': 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=300&fit=crop', // Prescription pills
+
+    // Analytics & AI - Data and dashboards
+    '/executive': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop', // Dashboard/charts
+    '/advanced-analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop', // Data analytics
+    '/population-health': 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=400&h=300&fit=crop', // Group of people/community
+    '/claims-prediction': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop', // Forecasting/graphs
+    '/value-based-care': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop', // Quality care
+    '/report-builder': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop', // Business reports
+
+    // Compliance & Security - Shields and regulation
+    '/compliance-center': 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=300&fit=crop', // Security/shield
+    '/audit': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop', // Audit documents
+    '/compliance': 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=300&fit=crop', // HIPAA/lock
+    '/regulatory-hub': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop', // Government/legal
+    '/data-integration': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop', // Server/data center
+
+    // Operations & Admin - Technology and management  
+    '/workflows': 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop', // Process/workflow
+    '/task-queue': 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop', // Checklist/tasks
+    '/user-management': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop', // Team/users
+    '/system-health': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop', // Server monitoring
+    '/api-management': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop', // Code/API
 }
 
 function ModuleCard({ module, onNavigate, isNew = false }: { module: any, onNavigate: () => void, isNew?: boolean }) {
