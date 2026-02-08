@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // Project Apex - Complete Health Platform
 export default defineConfig({
     plugins: [react()],
-    base: './',
+    base: '/',
     server: {
         port: 4200,
         open: true,

@@ -1,11 +1,12 @@
 [build]
-  command = "npm run build"
+  command = "npm install --ignore-workspaces && npx tsc -b && npx vite build"
   publish = "dist"
 
 [build.environment]
   VITE_GEMINI_API_KEY = "AIzaSyAWg6XO3SvNV5T3t7qMgNczv9gmM4r2aN8"
   VITE_APP_NAME = "Project Apex"
   VITE_APP_VERSION = "1.0.0"
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
