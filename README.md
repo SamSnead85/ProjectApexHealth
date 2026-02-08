@@ -1,5 +1,7 @@
 # Project Apex - Complete Health Platform
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/projectapexhealth/deploy-status)](https://outcomeops.health)
+
 Enterprise healthcare administration platform with modular architecture, deep agentic AI capabilities, and full regulatory compliance (HIPAA, CMS, EDI).
 
 ## Architecture
