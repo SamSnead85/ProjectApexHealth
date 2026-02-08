@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useNavigation } from '../context/NavigationContext'
 import {
     Search, Bell, Settings, LogOut, ChevronRight, Sparkles, Shield, ArrowRight,
     FileText, ClipboardCheck, AlertTriangle, CreditCard, Scale, FileCheck,
@@ -10,6 +10,7 @@ import {
     Clock, Zap, HelpCircle
 } from 'lucide-react'
 import { Badge, Button } from '../components/common'
+import { PremiumMetricCard, type CardVariant, type TrendDirection } from '../components/ui/PremiumMetricCard'
 import './CommandCenter.css'
 
 // ============================================================================
@@ -17,14 +18,16 @@ import './CommandCenter.css'
 // Photography-based cards with glass overlays, minimal text, premium feel
 // ============================================================================
 
-// Core modules with photography
+// Core modules with premium images
 const coreModules = [
     {
         id: 'claims-processing',
         name: 'Claims Intelligence',
         subtitle: 'AI-Powered Adjudication',
         path: '/claims',
-        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=900&fit=crop&q=80',
+        image: '/images/modules/claims-intelligence.png',
+        accentColor: '#06b6d4',
+        icon: FileText,
         isNew: false,
     },
     {
@@ -32,7 +35,9 @@ const coreModules = [
         name: 'Executive Analytics',
         subtitle: 'Command Center',
         path: '/executive',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=900&fit=crop&q=80',
+        image: '/images/modules/executive-analytics.png',
+        accentColor: '#a855f7',
+        icon: Brain,
         isNew: false,
     },
     {
@@ -40,7 +45,9 @@ const coreModules = [
         name: 'Member Experience',
         subtitle: 'Care Management',
         path: '/member-360',
-        image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=900&fit=crop&q=80',
+        image: '/images/modules/member-experience.png',
+        accentColor: '#f97316',
+        icon: Heart,
         isNew: true,
     },
     {
@@ -48,10 +55,13 @@ const coreModules = [
         name: 'Compliance Hub',
         subtitle: 'Regulatory Intelligence',
         path: '/compliance-center',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=900&fit=crop&q=80',
+        image: '/images/modules/compliance-hub.png',
+        accentColor: '#34d399',
+        icon: Shield,
         isNew: false,
     },
 ]
+
 
 // All modules grouped by category
 const allModules = {
@@ -112,12 +122,49 @@ const categories = [
     { key: 'operations', name: 'Operations', icon: Settings },
 ]
 
-const quickStats = [
-    { label: 'Pending Tasks', value: '24', icon: Clock, trend: -12 },
-    { label: 'Claims Today', value: '1,247', icon: FileText, trend: 8 },
-    { label: 'Active Members', value: '12.4M', icon: Users, trend: 3 },
-    { label: 'System Uptime', value: '99.9%', icon: Zap, trend: 0 },
-]
+// Enhanced quick stats with sparklines and variants
+const quickStats: Array<{
+    label: string
+    value: string
+    icon: typeof Clock
+    trend: { direction: TrendDirection; value: string }
+    variant: CardVariant
+    sparkline: number[]
+}> = [
+        {
+            label: 'Pending Tasks',
+            value: '24',
+            icon: Clock,
+            trend: { direction: 'down', value: '12%' },
+            variant: 'amber',
+            sparkline: [40, 35, 38, 32, 28, 30, 24]
+        },
+        {
+            label: 'Claims Today',
+            value: '1,247',
+            icon: FileText,
+            trend: { direction: 'up', value: '8%' },
+            variant: 'teal',
+            sparkline: [950, 1020, 1100, 1150, 1180, 1220, 1247]
+        },
+        {
+            label: 'Active Members',
+            value: '12.4M',
+            icon: Users,
+            trend: { direction: 'up', value: '3%' },
+            variant: 'purple',
+            sparkline: [11.8, 11.9, 12.0, 12.1, 12.2, 12.3, 12.4]
+        },
+        {
+            label: 'System Uptime',
+            value: '99.9%',
+            icon: Zap,
+            trend: { direction: 'neutral', value: '0%' },
+            variant: 'emerald',
+            sparkline: [99.95, 99.92, 99.98, 99.90, 99.92, 99.95, 99.90]
+        },
+    ]
+
 
 interface CommandCenterProps {
     portal: 'admin' | 'broker' | 'employer' | 'member'
@@ -125,33 +172,51 @@ interface CommandCenterProps {
     onLogout: () => void
 }
 
-// Photography Card (ClaimsLink Style)
-function PhotoCard({ module, onClick }: { module: typeof coreModules[0], onClick: () => void }) {
+// Premium Image Card - Large centered title for clear module identification
+function OrbCard({ module, onClick }: { module: typeof coreModules[0], onClick: () => void }) {
+    const Icon = module.icon
     return (
         <motion.button
-            className="cc-photo-card"
+            className="cc-hero-card"
             onClick={onClick}
-            whileHover={{ y: -12, scale: 1.02 }}
+            whileHover={{ y: -8, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
+            style={{ '--accent-color': module.accentColor } as React.CSSProperties}
         >
-            <img
-                src={module.image}
-                alt={module.name}
-                className="cc-photo-card__image"
-            />
-            <div className="cc-photo-card__overlay" />
+            {/* Full Background Image */}
+            <div className="cc-hero-card__image">
+                <img src={module.image} alt={module.name} />
+            </div>
+
+            {/* Gradient Overlay */}
+            <div className="cc-hero-card__overlay" />
+
+            {/* NEW Badge */}
             {module.isNew && (
-                <span className="cc-photo-card__badge">NEW</span>
+                <span className="cc-hero-card__badge">NEW</span>
             )}
-            <div className="cc-photo-card__content">
-                <h3 className="cc-photo-card__title">{module.name}</h3>
-                <p className="cc-photo-card__subtitle">{module.subtitle}</p>
+
+            {/* Centered Title Block - The Hero Element */}
+            <div className="cc-hero-card__center">
+                <div className="cc-hero-card__icon-lg">
+                    <Icon size={32} strokeWidth={1.5} />
+                </div>
+                <h3 className="cc-hero-card__title-lg">{module.name}</h3>
+                <p className="cc-hero-card__subtitle-lg">{module.subtitle}</p>
+            </div>
+
+            {/* Bottom Arrow on Hover */}
+            <div className="cc-hero-card__footer">
+                <span className="cc-hero-card__cta">Open Module</span>
+                <ArrowRight size={16} />
             </div>
         </motion.button>
     )
 }
+
+
 
 // Mini Module Card
 function MiniCard({ module, onClick }: { module: any, onClick: () => void }) {
@@ -174,8 +239,25 @@ function MiniCard({ module, onClick }: { module: any, onClick: () => void }) {
     )
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function CommandCenter({ portal, userName = 'Demo User', onLogout }: CommandCenterProps) {
-    const navigate = useNavigate()
+    const { navigate } = useNavigation()
+    const [systemStatus, setSystemStatus] = useState<any>(null)
+
+    // Fetch real-time system health from API
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/health/ready`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setSystemStatus(data);
+                }
+            } catch { /* offline mode */ }
+        })();
+    }, []);
     const [searchQuery, setSearchQuery] = useState('')
     const [activeCategory, setActiveCategory] = useState('claims')
 
@@ -263,21 +345,22 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
                         </h1>
                         <p className="cc-welcome__sub">Healthcare intelligence at your command</p>
                     </div>
-                    <div className="cc-stats">
+                    <div className="cc-premium-stats">
                         {quickStats.map((stat, idx) => (
-                            <div key={idx} className="cc-stat">
-                                <stat.icon size={20} className="cc-stat__icon" />
-                                <span className="cc-stat__value">{stat.value}</span>
-                                <span className="cc-stat__label">{stat.label}</span>
-                                {stat.trend !== 0 && (
-                                    <span className={`cc-stat__trend ${stat.trend > 0 ? 'cc-stat__trend--up' : 'cc-stat__trend--down'}`}>
-                                        {stat.trend > 0 ? '+' : ''}{stat.trend}%
-                                    </span>
-                                )}
-                            </div>
+                            <PremiumMetricCard
+                                key={idx}
+                                value={stat.value}
+                                label={stat.label}
+                                icon={<stat.icon size={22} />}
+                                trend={stat.trend}
+                                variant={stat.variant}
+                                sparklineData={stat.sparkline}
+                                compact
+                            />
                         ))}
                     </div>
                 </section>
+
 
                 {/* Core Capabilities - Photo Cards */}
                 <section className="cc-core">
@@ -293,7 +376,7 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                             >
-                                <PhotoCard
+                                <OrbCard
                                     module={module}
                                     onClick={() => handleModuleClick(module.path)}
                                 />
@@ -357,7 +440,7 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
                 </div>
                 <span className="cc-footer__copy">© 2026 Apex Health Intelligence</span>
             </footer>
-        </div>
+        </div >
     )
 }
 

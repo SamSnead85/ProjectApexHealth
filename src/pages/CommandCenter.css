@@ -319,7 +319,16 @@
     margin: 0;
 }
 
-/* Stats Row */
+/* Premium Stats Grid - Using PremiumMetricCard */
+.cc-premium-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 16px;
+    flex: 1;
+    max-width: 860px;
+}
+
+/* Stats Row (Legacy fallback) */
 .cc-stats {
     display: flex;
     gap: 16px;
@@ -395,7 +404,7 @@
 }
 
 /* ============================================
-   PHOTOGRAPHY CARDS (CLAIMSLINK STYLE)
+   PREMIUM HERO IMAGE CARDS
 ============================================ */
 .cc-core {
     margin-bottom: 64px;
@@ -419,47 +428,57 @@
     }
 }
 
-.cc-photo-card {
+/* Hero Card - Premium Image Based */
+.cc-hero-card {
     position: relative;
-    height: 380px;
+    width: 100%;
+    height: 280px;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
     text-align: left;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0a0f1a;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cc-photo-card:hover {
+.cc-hero-card:hover {
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 24px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px -20px var(--accent-color);
 }
 
-.cc-photo-card__image {
+/* Full Background Image */
+.cc-hero-card__image {
     position: absolute;
     inset: 0;
+    z-index: 0;
+}
+
+.cc-hero-card__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cc-photo-card:hover .cc-photo-card__image {
-    transform: scale(1.05);
+.cc-hero-card:hover .cc-hero-card__image img {
+    transform: scale(1.08);
 }
 
-.cc-photo-card__overlay {
+/* Gradient Overlay - Subtle to let image show through */
+.cc-hero-card__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top,
-            rgba(2, 6, 23, 0.95) 0%,
-            rgba(2, 6, 23, 0.4) 40%,
-            transparent 70%);
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+    z-index: 1;
 }
 
-.cc-photo-card__badge {
+/* Badge */
+.cc-hero-card__badge {
     position: absolute;
     top: 16px;
     right: 16px;
@@ -470,9 +489,235 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     color: white;
+    z-index: 3;
 }
 
-.cc-photo-card__content {
+/* Centered Title Block - THE HERO ELEMENT */
+.cc-hero-card__center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 2;
+    padding: 24px;
+    text-align: center;
+}
+
+.cc-hero-card__icon-lg {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    color: white;
+    transition: all 0.4s;
+}
+
+.cc-hero-card:hover .cc-hero-card__icon-lg {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.cc-hero-card__title-lg {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--apex-white);
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.cc-hero-card__subtitle-lg {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Footer CTA - Shows on Hover */
+.cc-hero-card__footer {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 3;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cc-hero-card:hover .cc-hero-card__footer {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.cc-hero-card__cta {
+    letter-spacing: 0.02em;
+}
+
+.cc-orb-card {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cc-orb-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px -10px var(--glow-color);
+}
+
+/* Orb Background Container */
+.cc-orb-card__bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+/* Animated Gradient Orbs */
+.cc-orb-card__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.6;
+    animation: orbFloat 8s ease-in-out infinite;
+}
+
+.cc-orb-card__orb--1 {
+    width: 200px;
+    height: 200px;
+    background: var(--orb-gradient);
+    top: -60px;
+    right: -40px;
+    animation-delay: 0s;
+}
+
+.cc-orb-card__orb--2 {
+    width: 150px;
+    height: 150px;
+    background: var(--orb-color);
+    bottom: -30px;
+    left: -20px;
+    animation-delay: -3s;
+}
+
+.cc-orb-card__orb--3 {
+    width: 100px;
+    height: 100px;
+    background: var(--orb-gradient);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -5s;
+    opacity: 0.3;
+}
+
+@keyframes orbFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(10px, -15px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(-5px, 10px) scale(0.95);
+    }
+
+    75% {
+        transform: translate(-10px, -5px) scale(1.02);
+    }
+}
+
+.cc-orb-card:hover .cc-orb-card__orb {
+    opacity: 0.8;
+    filter: blur(30px);
+}
+
+/* Glass Overlay */
+.cc-orb-card__glass {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.3) 100%);
+    backdrop-filter: blur(1px);
+}
+
+/* Central Icon */
+.cc-orb-card__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.cc-orb-card:hover .cc-orb-card__icon {
+    transform: translate(-50%, -65%) scale(1.1);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 40px -10px var(--glow-color);
+}
+
+/* Badge */
+.cc-orb-card__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: white;
+    z-index: 3;
+}
+
+/* Content */
+.cc-orb-card__content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -481,9 +726,10 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    z-index: 2;
 }
 
-.cc-photo-card__title {
+.cc-orb-card__title {
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 600;
@@ -491,10 +737,36 @@
     margin: 0;
 }
 
-.cc-photo-card__subtitle {
+.cc-orb-card__subtitle {
     font-size: 13px;
     color: rgba(255, 255, 255, 0.5);
     margin: 0;
+}
+
+/* Hover Arrow */
+.cc-orb-card__arrow {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+}
+
+.cc-orb-card:hover .cc-orb-card__arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: white;
 }
 
 /* ============================================
@@ -713,8 +985,8 @@
         min-width: unset;
     }
 
-    .cc-photo-card {
-        height: 320px;
+    .cc-orb-card {
+        height: 280px;
     }
 
     .cc-footer {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileText,
@@ -788,10 +788,25 @@ const claimsMetrics = {
     denialRate: 5.4
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function ClaimsProcessing() {
-    const [claims] = useState<Claim[]>(mockClaims)
+    const [claims, setClaims] = useState<Claim[]>(mockClaims)
     const [selectedClaim, setSelectedClaim] = useState<Claim | null>(null)
     const [statusFilter, setStatusFilter] = useState<ClaimStatus | 'all'>('all')
+
+    // Fetch claims from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/claims?limit=50`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.data?.length) setClaims(data.data);
+            } catch { /* use mock data */ }
+        })();
+    }, []);
     const [searchQuery, setSearchQuery] = useState('')
 
     const filteredClaims = claims.filter(claim => {

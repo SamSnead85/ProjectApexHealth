@@ -1,0 +1,145 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - AI Services Deployment
+# ═══════════════════════════════════════════════════════════════════════════════
+# Deploys the Python FastAPI AI services with:
+#   - 2 replicas for high availability
+#   - Higher resource limits for ML inference workloads
+#   - Health probes on /health
+#   - GPU scheduling annotations (optional, commented out)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-ai-services
+  namespace: apex-health
+  labels:
+    app: apex-ai-services
+    tier: backend
+    app.kubernetes.io/name: apex-ai-services
+    app.kubernetes.io/component: ai
+    app.kubernetes.io/part-of: apex-health-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apex-ai-services
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: apex-ai-services
+        tier: backend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+
+      # Spread across nodes for availability
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: apex-ai-services
+
+      # Optional: schedule on GPU-enabled nodes for ML inference
+      # nodeSelector:
+      #   accelerator: nvidia-gpu
+      # tolerations:
+      #   - key: "nvidia.com/gpu"
+      #     operator: "Exists"
+      #     effect: "NoSchedule"
+
+      containers:
+        - name: apex-ai-services
+          image: ghcr.io/apex-health/apex-ai-services:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+          # ─── Resource Limits ───────────────────────────────────────────────
+          # Higher limits than the API server because ML inference is
+          # CPU/memory intensive (embedding generation, prediction models)
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+              # Optional: request GPU
+              # nvidia.com/gpu: 1
+
+          # ─── Environment Variables ─────────────────────────────────────────
+          envFrom:
+            - configMapRef:
+                name: apex-config
+            - secretRef:
+                name: apex-secrets
+
+          env:
+            - name: DEBUG
+              value: "false"
+            - name: WEB_CONCURRENCY
+              value: "4"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+          # ─── Health Probes ─────────────────────────────────────────────────
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          # AI models can take a while to load on startup
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 18  # 15 + 18*10 = 195s max startup
+
+---
+# ─── Service ───────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: apex-ai-services
+  namespace: apex-health
+  labels:
+    app: apex-ai-services
+spec:
+  type: ClusterIP
+  selector:
+    app: apex-ai-services
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP

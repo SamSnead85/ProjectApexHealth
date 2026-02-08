@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     AreaChart,
@@ -34,17 +34,19 @@ import {
     ArrowUpRight,
     ArrowDownRight
 } from 'lucide-react'
+import { PremiumMetricCard, type CardVariant, type TrendDirection } from '../components/ui/PremiumMetricCard'
 import './ExecutiveDashboard.css'
 
 interface KPI {
     id: string
     title: string
     value: string
-    trend: 'up' | 'down'
-    trendValue: string
+    trend: { direction: TrendDirection; value: string }
     benchmark: string
     status: 'success' | 'warning' | 'critical' | 'neutral'
     icon: React.ReactNode
+    variant: CardVariant
+    sparkline: number[]
 }
 
 interface AIInsight {
@@ -55,10 +57,50 @@ interface AIInsight {
 }
 
 const kpis: KPI[] = [
-    { id: '1', title: 'Total Claims Cost', value: '$24.7M', trend: 'down', trendValue: '-4.2%', benchmark: 'vs $25.8M budget', status: 'success', icon: <DollarSign size={18} /> },
-    { id: '2', title: 'Medical Loss Ratio', value: '82.4%', trend: 'down', trendValue: '-1.8%', benchmark: 'Target: 85%', status: 'success', icon: <Activity size={18} /> },
-    { id: '3', title: 'Member Enrollment', value: '47,892', trend: 'up', trendValue: '+3.1%', benchmark: '+1,423 this quarter', status: 'success', icon: <Users size={18} /> },
-    { id: '4', title: 'PMPM Cost', value: '$487', trend: 'up', trendValue: '+2.3%', benchmark: 'Industry: $512', status: 'warning', icon: <Target size={18} /> },
+    {
+        id: '1',
+        title: 'Total Claims Cost',
+        value: '$24.7M',
+        trend: { direction: 'down', value: '4.2%' },
+        benchmark: 'vs $25.8M budget',
+        status: 'success',
+        icon: <DollarSign size={22} />,
+        variant: 'emerald',
+        sparkline: [26.5, 26.1, 25.8, 25.4, 25.0, 24.9, 24.7]
+    },
+    {
+        id: '2',
+        title: 'Medical Loss Ratio',
+        value: '82.4%',
+        trend: { direction: 'down', value: '1.8%' },
+        benchmark: 'Target: 85%',
+        status: 'success',
+        icon: <Activity size={22} />,
+        variant: 'teal',
+        sparkline: [85.2, 84.8, 84.2, 83.8, 83.2, 82.8, 82.4]
+    },
+    {
+        id: '3',
+        title: 'Member Enrollment',
+        value: '47,892',
+        trend: { direction: 'up', value: '3.1%' },
+        benchmark: '+1,423 this quarter',
+        status: 'success',
+        icon: <Users size={22} />,
+        variant: 'purple',
+        sparkline: [46000, 46400, 46800, 47100, 47400, 47700, 47892]
+    },
+    {
+        id: '4',
+        title: 'PMPM Cost',
+        value: '$487',
+        trend: { direction: 'up', value: '2.3%' },
+        benchmark: 'Industry: $512',
+        status: 'warning',
+        icon: <Target size={22} />,
+        variant: 'amber',
+        sparkline: [470, 475, 478, 480, 483, 485, 487]
+    },
 ]
 
 const aiInsights: AIInsight[] = [
@@ -91,12 +133,37 @@ const benchmarks = [
     { label: 'First Pass Rate', you: '94.2%', industry: '88.7%', delta: '+6.2%', positive: true },
 ]
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function ExecutiveDashboard() {
     const [refreshing, setRefreshing] = useState(false)
+    const [dashboardData, setDashboardData] = useState<any>(null)
+
+    // Fetch real KPIs from analytics API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/dashboard`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setDashboardData(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const handleRefresh = () => {
         setRefreshing(true)
-        setTimeout(() => setRefreshing(false), 1500)
+        if (API_BASE) {
+            fetch(`${API_BASE}/api/v1/analytics/dashboard`)
+                .then(r => r.json())
+                .then(d => { if (d.data) setDashboardData(d.data); })
+                .catch(() => {})
+                .finally(() => setRefreshing(false));
+        } else {
+            setTimeout(() => setRefreshing(false), 1500)
+        }
     }
 
     return (
@@ -123,29 +190,18 @@ export default function ExecutiveDashboard() {
                 </p>
             </motion.div>
 
-            {/* Executive KPIs */}
+            {/* Executive KPIs - Premium Cards */}
             <div className="executive-kpis">
                 {kpis.map((kpi, index) => (
-                    <motion.div
+                    <PremiumMetricCard
                         key={kpi.id}
-                        className={`kpi-card ${kpi.status}`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 + index * 0.05 }}
-                    >
-                        <div className="kpi-header">
-                            <span className="kpi-title">{kpi.title}</span>
-                            <div className="kpi-icon">{kpi.icon}</div>
-                        </div>
-                        <div className="kpi-value">{kpi.value}</div>
-                        <div className="kpi-comparison">
-                            <span className={`kpi-trend ${kpi.trend}`}>
-                                {kpi.trend === 'up' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                                {kpi.trendValue}
-                            </span>
-                            <span className="kpi-benchmark">{kpi.benchmark}</span>
-                        </div>
-                    </motion.div>
+                        value={kpi.value}
+                        label={kpi.title}
+                        icon={kpi.icon}
+                        trend={kpi.trend}
+                        variant={kpi.variant}
+                        sparklineData={kpi.sparkline}
+                    />
                 ))}
             </div>
 

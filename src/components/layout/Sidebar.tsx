@@ -11,6 +11,7 @@ import {
     Settings,
     ChevronLeft,
     ChevronRight,
+    ChevronDown,
     Briefcase,
     FileText,
     CreditCard,
@@ -28,7 +29,16 @@ import {
     Map,
     Sparkles,
     MessageCircle,
-    Headphones
+    Headphones,
+    Phone,
+    PhoneCall,
+    MonitorSpeaker,
+    Globe,
+    Blocks,
+    AlertTriangle,
+    Archive,
+    Workflow,
+    ShieldCheck
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -111,10 +121,29 @@ const portalNavigation: Record<string, NavGroup[]> = {
             ]
         },
         {
+            title: 'Voice Center',
+            items: [
+                { id: 'voice-builder', label: 'Voice Agent Builder', icon: <Phone size={20} />, path: '/admin/voice-agent-builder', badge: 'AI' },
+                { id: 'voice-monitor', label: 'Call Monitor', icon: <PhoneCall size={20} />, path: '/admin/voice-monitor' },
+                { id: 'call-center', label: 'Call Center', icon: <Headphones size={20} />, path: '/admin/call-center' },
+            ]
+        },
+        {
+            title: 'Interoperability',
+            items: [
+                { id: 'fhir', label: 'FHIR Explorer', icon: <Globe size={20} />, path: '/admin/fhir-explorer' },
+                { id: 'edi-manager', label: 'EDI Manager', icon: <Database size={20} />, path: '/admin/edi-manager' },
+                { id: 'integrations', label: 'Integrations', icon: <Plug size={20} />, path: '/admin/integrations' },
+            ]
+        },
+        {
             title: 'System',
             items: [
                 { id: 'audit', label: 'Audit Trail', icon: <FileSearch size={20} />, path: '/admin/audit' },
-                { id: 'compliance', label: 'Compliance', icon: <Shield size={20} />, path: '/admin/compliance' },
+                { id: 'compliance', label: 'Compliance', icon: <ShieldCheck size={20} />, path: '/admin/compliance' },
+                { id: 'breach-response', label: 'Breach Response', icon: <AlertTriangle size={20} />, path: '/admin/breach-response' },
+                { id: 'data-retention', label: 'Data Retention', icon: <Archive size={20} />, path: '/admin/data-retention' },
+                { id: 'modules', label: 'Module Licensing', icon: <Blocks size={20} />, path: '/admin/module-licensing' },
                 { id: 'settings', label: 'Settings', icon: <Settings size={20} />, path: '/admin/settings' },
             ]
         }
@@ -200,6 +229,26 @@ export function Sidebar({
 }: SidebarProps) {
     const navigation = portalNavigation[activePortal] || []
     const portalInfo = portalLabels[activePortal]
+
+    // Track which groups are expanded (start with first two expanded)
+    const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => {
+        const initialExpanded = new Set<string>()
+        // Default expand first 2 groups
+        navigation.slice(0, 2).forEach(g => initialExpanded.add(g.title))
+        return initialExpanded
+    })
+
+    const toggleGroup = (title: string) => {
+        setExpandedGroups(prev => {
+            const next = new Set(prev)
+            if (next.has(title)) {
+                next.delete(title)
+            } else {
+                next.add(title)
+            }
+            return next
+        })
+    }
 
     // Flatten all nav items for keyboard navigation
     const flatItems = useMemo(() => {
@@ -307,59 +356,82 @@ export function Sidebar({
                 role="navigation"
                 aria-label="Main navigation"
             >
-                {navigation.map((group) => (
-                    <div key={group.title} className="sidebar__group" role="group" aria-label={group.title}>
-                        <AnimatePresence>
-                            {!collapsed && (
-                                <motion.span
-                                    className="sidebar__group-title"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                >
-                                    {group.title}
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
+                {navigation.map((group) => {
+                    const isExpanded = expandedGroups.has(group.title)
+                    const hasActiveItem = group.items.some(item => activePath === item.path)
 
-                        <ul className="sidebar__list" role="list">
-                            {group.items.map((item) => {
-                                const isActive = activePath === item.path
-                                const itemIndex = flatItems.findIndex(i => i.id === item.id)
-                                const isFocused = focusedIndex === itemIndex
-                                return (
-                                    <li key={item.id} role="listitem">
-                                        <button
-                                            className={`sidebar__item ${isActive ? 'sidebar__item--active' : ''} ${isFocused ? 'sidebar__item--focused' : ''}`}
-                                            onClick={() => onNavigate(item.path)}
-                                            onFocus={() => setFocusedIndex(itemIndex)}
-                                            title={collapsed ? item.label : undefined}
-                                            tabIndex={0}
-                                            aria-current={isActive ? 'page' : undefined}
-                                        >
-                                            <span className="sidebar__item-icon">{item.icon}</span>
-                                            <AnimatePresence>
-                                                {!collapsed && (
-                                                    <motion.span
-                                                        className="sidebar__item-label"
-                                                        initial={{ opacity: 0, x: -10 }}
-                                                        animate={{ opacity: 1, x: 0 }}
-                                                        exit={{ opacity: 0, x: -10 }}
+                    return (
+                        <div key={group.title} className="sidebar__group" role="group" aria-label={group.title}>
+                            {/* Collapsible Header */}
+                            {!collapsed && (
+                                <button
+                                    className={`sidebar__group-header ${isExpanded ? 'sidebar__group-header--expanded' : ''} ${hasActiveItem ? 'sidebar__group-header--active' : ''}`}
+                                    onClick={() => toggleGroup(group.title)}
+                                    aria-expanded={isExpanded}
+                                >
+                                    <span className="sidebar__group-title">{group.title}</span>
+                                    <motion.span
+                                        className="sidebar__group-chevron"
+                                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <ChevronDown size={16} />
+                                    </motion.span>
+                                </button>
+                            )}
+
+                            {/* Collapsible Items */}
+                            <AnimatePresence initial={false}>
+                                {(isExpanded || collapsed) && (
+                                    <motion.ul
+                                        className="sidebar__list"
+                                        role="list"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        style={{ overflow: 'hidden' }}
+                                    >
+                                        {group.items.map((item) => {
+                                            const isActive = activePath === item.path
+                                            const itemIndex = flatItems.findIndex(i => i.id === item.id)
+                                            const isFocused = focusedIndex === itemIndex
+                                            return (
+                                                <li key={item.id} role="listitem">
+                                                    <button
+                                                        className={`sidebar__item ${isActive ? 'sidebar__item--active' : ''} ${isFocused ? 'sidebar__item--focused' : ''}`}
+                                                        onClick={() => onNavigate(item.path)}
+                                                        onFocus={() => setFocusedIndex(itemIndex)}
+                                                        title={collapsed ? item.label : undefined}
+                                                        tabIndex={0}
+                                                        aria-current={isActive ? 'page' : undefined}
                                                     >
-                                                        {item.label}
-                                                    </motion.span>
-                                                )}
-                                            </AnimatePresence>
-                                            {item.badge && !collapsed && (
-                                                <span className="sidebar__item-badge">{item.badge}</span>
-                                            )}
-                                        </button>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                ))}
+                                                        <span className="sidebar__item-icon">{item.icon}</span>
+                                                        <AnimatePresence>
+                                                            {!collapsed && (
+                                                                <motion.span
+                                                                    className="sidebar__item-label"
+                                                                    initial={{ opacity: 0, x: -10 }}
+                                                                    animate={{ opacity: 1, x: 0 }}
+                                                                    exit={{ opacity: 0, x: -10 }}
+                                                                >
+                                                                    {item.label}
+                                                                </motion.span>
+                                                            )}
+                                                        </AnimatePresence>
+                                                        {item.badge && !collapsed && (
+                                                            <span className="sidebar__item-badge">{item.badge}</span>
+                                                        )}
+                                                    </button>
+                                                </li>
+                                            )
+                                        })}
+                                    </motion.ul>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    )
+                })}
             </nav>
 
             {/* Footer */}

@@ -1,0 +1,65 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - ConfigMap
+# ═══════════════════════════════════════════════════════════════════════════════
+# Non-sensitive configuration values shared across services.
+# These can be updated without rebuilding images.
+#
+# IMPORTANT: Do NOT put secrets here. Use k8s/secrets.yaml for sensitive values.
+#
+# Apply: kubectl apply -f configmap.yaml -n apex-health
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apex-config
+  namespace: apex-health
+  labels:
+    app.kubernetes.io/part-of: apex-health-platform
+data:
+  # ─── Application ──────────────────────────────────────────────────────────
+  NODE_ENV: "production"
+  API_PORT: "3000"
+  API_BASE_URL: "https://app.apex-health.io/api"
+  WEB_URL: "https://app.apex-health.io"
+  AI_SERVICES_URL: "http://apex-ai-services.apex-health.svc.cluster.local"
+
+  # ─── Database ─────────────────────────────────────────────────────────────
+  # Connection details (credentials are in Secrets)
+  DB_HOST: "apex-postgresql.apex-health.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_DATABASE: "apex_health"
+  DB_SSL: "true"
+  DB_LOGGING: "false"
+
+  # ─── Redis ────────────────────────────────────────────────────────────────
+  REDIS_HOST: "apex-redis.apex-health.svc.cluster.local"
+  REDIS_PORT: "6379"
+
+  # ─── Keycloak ─────────────────────────────────────────────────────────────
+  KEYCLOAK_URL: "https://auth.apex-health.io"
+  KEYCLOAK_REALM: "apex-health"
+  KEYCLOAK_CLIENT_ID: "apex-api"
+
+  # ─── Elasticsearch ────────────────────────────────────────────────────────
+  ELASTICSEARCH_NODE: "http://apex-elasticsearch.apex-health.svc.cluster.local:9200"
+
+  # ─── Object Storage (S3 / MinIO) ─────────────────────────────────────────
+  MINIO_ENDPOINT: "s3.amazonaws.com"
+  MINIO_PORT: "443"
+  MINIO_USE_SSL: "true"
+  MINIO_BUCKET_DOCUMENTS: "apex-health-documents"
+  MINIO_BUCKET_EXPORTS: "apex-health-exports"
+
+  # ─── FHIR ─────────────────────────────────────────────────────────────────
+  FHIR_VERSION: "R4"
+
+  # ─── HIPAA Audit ──────────────────────────────────────────────────────────
+  AUDIT_LOG_ENABLED: "true"
+  AUDIT_LOG_RETENTION_DAYS: "2555"    # 7 years per HIPAA requirements
+
+  # ─── AI Services ──────────────────────────────────────────────────────────
+  # Model selection and inference settings
+  AI_DEFAULT_MODEL: "gemini-pro"
+  AI_MAX_TOKENS: "4096"
+  AI_TEMPERATURE: "0.1"               # Low temperature for healthcare accuracy

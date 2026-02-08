@@ -1,0 +1,13 @@
+[project]
+name = "apex-health-ai-services"
+version = "1.0.0"
+description = "AI agent orchestration and intelligence services for Apex Health Platform"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120

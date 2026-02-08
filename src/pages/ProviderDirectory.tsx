@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Search,
@@ -344,8 +344,23 @@ function getMatchLabel(score: number): { label: string; variant: 'teal' | 'succe
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function ProviderDirectory() {
-    const [providers] = useState<Provider[]>(mockProviders)
+    const [providers, setProviders] = useState<Provider[]>(mockProviders)
+
+    // Fetch providers from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/providers?limit=50`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.data?.length) setProviders(data.data);
+            } catch { /* use mock data */ }
+        })();
+    }, []);
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedSpecialty, setSelectedSpecialty] = useState<string>('all')
     const [selectedNetwork, setSelectedNetwork] = useState<NetworkStatus | 'all'>('all')

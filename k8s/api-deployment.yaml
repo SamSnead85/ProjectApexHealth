@@ -1,0 +1,144 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - NestJS API Deployment
+# ═══════════════════════════════════════════════════════════════════════════════
+# Deploys the NestJS API server with:
+#   - 2 replicas for high availability
+#   - Rolling update strategy for zero-downtime deployments
+#   - Resource limits to prevent runaway consumption
+#   - Liveness/readiness probes for automatic recovery
+#   - Configuration from ConfigMap and Secrets
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-api
+  namespace: apex-health
+  labels:
+    app: apex-api
+    tier: backend
+    app.kubernetes.io/name: apex-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: apex-health-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apex-api
+  # Rolling update: deploy new pods before killing old ones
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0        # Never take down existing pods first
+      maxSurge: 1              # Add 1 new pod at a time
+  template:
+    metadata:
+      labels:
+        app: apex-api
+        tier: backend
+      annotations:
+        # Force redeployment when config changes
+        checksum/config: "{{ include (print .Template.BasePath \"/configmap.yaml\") . | sha256sum }}"
+    spec:
+      # Security: don't run as root
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+
+      # Spread pods across nodes for availability
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: apex-api
+
+      containers:
+        - name: apex-api
+          image: ghcr.io/apex-health/apex-api:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+
+          # ─── Resource Limits ───────────────────────────────────────────────
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+          # ─── Environment Variables ─────────────────────────────────────────
+          envFrom:
+            - configMapRef:
+                name: apex-config
+            - secretRef:
+                name: apex-secrets
+
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: API_PORT
+              value: "3000"
+            # Inject pod name for distributed tracing
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+          # ─── Health Probes ─────────────────────────────────────────────────
+          # Readiness: is this pod ready to accept traffic?
+          # Checks DB connectivity via the /api/v1/health/ready endpoint
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health/ready
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          # Liveness: is this pod still alive and responsive?
+          # Uses the lightweight /api/v1/health/live endpoint
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health/live
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          # Startup: give the app time to initialize on first boot
+          startupProbe:
+            httpGet:
+              path: /api/v1/health/live
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 12  # 10 + 12*5 = 70s max startup time
+
+---
+# ─── Service ───────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: apex-api
+  namespace: apex-health
+  labels:
+    app: apex-api
+spec:
+  type: ClusterIP
+  selector:
+    app: apex-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP

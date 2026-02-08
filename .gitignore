@@ -8,9 +8,12 @@ node_modules/
 /build
 /.next
 /out
+apps/api/dist/
+apps/ai-services/__pycache__/
 
 # Testing
 /coverage
+apps/api/coverage/
 
 # Environment
 .env
@@ -23,10 +26,43 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pino-pretty.log
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# OS
 .DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python (AI services)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+
+# Docker
+docker-compose.override.yml
+*.log
+
+# Turborepo
+.turbo/

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     ShieldAlert,
@@ -59,12 +59,30 @@ const getStatusIcon = (status: FraudCase['status']) => {
     }
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function FraudDetection() {
     const [filter, setFilter] = useState<'all' | 'investigating' | 'confirmed' | 'cleared'>('all')
+    const [apiCases, setApiCases] = useState<typeof mockCases | null>(null)
 
+    // Fetch fraud analysis from AI services with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/fraud-cases`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data?.length) setApiCases(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
+
+    const cases = apiCases || mockCases;
     const filteredCases = filter === 'all'
-        ? mockCases
-        : mockCases.filter(c => c.status === filter)
+        ? cases
+        : cases.filter(c => c.status === filter)
 
     return (
         <div className="fraud-detection">

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     LineChart,
@@ -208,8 +208,25 @@ const GlowingStatCard = ({
     </motion.div>
 )
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function ClaimsPrediction() {
     const [activeMetric, setActiveMetric] = useState<'actual' | 'predicted' | 'both'>('both')
+    const [apiPredictions, setApiPredictions] = useState<any>(null)
+
+    // Fetch predictions from AI services with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/claims-predictions`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setApiPredictions(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     return (
         <div className="claims-prediction-v2">

@@ -1,0 +1,534 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - CI/CD Pipeline
+# ═══════════════════════════════════════════════════════════════════════════════
+# Comprehensive pipeline for linting, testing, building, security scanning,
+# and Docker image publishing. Runs on every push to main and all PRs.
+#
+# Architecture:
+#   Frontend  → React + Vite (Vitest)
+#   API       → NestJS (Jest)
+#   AI Svcs   → FastAPI + Python 3.11 (pytest)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: Apex Health CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs for the same branch/PR to save resources
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "20"
+  PYTHON_VERSION: "3.11"
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository }}
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Lint & Type Check - Fast feedback on code quality
+  # ─────────────────────────────────────────────────────────────────────────────
+  lint-and-typecheck:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      # Cache node_modules for the monorepo
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/api/node_modules
+            packages/shared/node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
+      - name: Install dependencies (root)
+        run: npm ci
+
+      - name: Install dependencies (API)
+        run: npm ci
+        working-directory: apps/api
+
+      # Frontend: ESLint + TypeScript
+      - name: Lint frontend
+        run: npm run lint
+
+      - name: Type check frontend
+        run: npx tsc --noEmit
+
+      # API: ESLint + TypeScript
+      - name: Lint API
+        run: npm run lint
+        working-directory: apps/api
+
+      - name: Type check API
+        run: npx tsc --noEmit
+        working-directory: apps/api
+
+      # Python AI Services: Ruff linter
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Lint AI services (Ruff)
+        run: |
+          pip install ruff
+          ruff check apps/ai-services/
+          ruff format --check apps/ai-services/
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Frontend Unit Tests - Vitest
+  # ─────────────────────────────────────────────────────────────────────────────
+  test-frontend:
+    name: Frontend Tests (Vitest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint-and-typecheck]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Vitest
+        run: npx vitest run --coverage --reporter=default --reporter=junit --outputFile=test-results/frontend-junit.xml
+        env:
+          CI: true
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: coverage/
+          retention-days: 7
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-test-results
+          path: test-results/
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # API Unit Tests - Jest with PostgreSQL test database
+  # ─────────────────────────────────────────────────────────────────────────────
+  test-api:
+    name: API Tests (Jest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint-and-typecheck]
+
+    # Test database services
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: apex_test
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: apex_health_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U apex_test -d apex_health_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USERNAME: apex_test
+      DB_PASSWORD: test_password
+      DB_DATABASE: apex_health_test
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      JWT_SECRET: ci-test-jwt-secret-not-for-production
+      NODE_ENV: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Cache node_modules (API)
+        uses: actions/cache@v4
+        with:
+          path: apps/api/node_modules
+          key: node-modules-api-${{ runner.os }}-${{ hashFiles('apps/api/package-lock.json') }}
+          restore-keys: |
+            node-modules-api-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/api
+
+      - name: Run Jest unit tests
+        run: npm test -- --coverage --ci --reporters=default --reporters=jest-junit
+        working-directory: apps/api
+        env:
+          JEST_JUNIT_OUTPUT_DIR: test-results
+          JEST_JUNIT_OUTPUT_NAME: api-junit.xml
+
+      - name: Run E2E tests
+        run: npm run test:e2e -- --ci
+        working-directory: apps/api
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-coverage
+          path: apps/api/coverage/
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI Services Tests - pytest with PostgreSQL
+  # ─────────────────────────────────────────────────────────────────────────────
+  test-ai-services:
+    name: AI Services Tests (pytest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [lint-and-typecheck]
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: apex_test
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: apex_health_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U apex_test -d apex_health_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USERNAME: apex_test
+      DB_PASSWORD: test_password
+      DB_DATABASE: apex_health_test
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Cache pip packages for faster installs
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('apps/ai-services/requirements.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio pytest-cov httpx
+        working-directory: apps/ai-services
+
+      - name: Run pytest
+        run: |
+          pytest tests/ \
+            --cov=app \
+            --cov-report=xml:coverage.xml \
+            --cov-report=html:htmlcov \
+            --junitxml=test-results/ai-services-junit.xml \
+            -v
+        working-directory: apps/ai-services
+        env:
+          TESTING: "true"
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-services-coverage
+          path: apps/ai-services/coverage.xml
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Build Frontend - Ensures production build succeeds
+  # ─────────────────────────────────────────────────────────────────────────────
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [test-frontend]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: dist/
+          retention-days: 3
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Build API - Ensures NestJS compilation succeeds
+  # ─────────────────────────────────────────────────────────────────────────────
+  build-api:
+    name: Build API
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [test-api]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Cache node_modules (API)
+        uses: actions/cache@v4
+        with:
+          path: apps/api/node_modules
+          key: node-modules-api-${{ runner.os }}-${{ hashFiles('apps/api/package-lock.json') }}
+          restore-keys: |
+            node-modules-api-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/api
+
+      - name: Build NestJS
+        run: npm run build
+        working-directory: apps/api
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-dist
+          path: apps/api/dist/
+          retention-days: 3
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Security Scan - Dependency auditing and vulnerability detection
+  # ─────────────────────────────────────────────────────────────────────────────
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [lint-and-typecheck]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # npm audit for frontend
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=high || true
+        continue-on-error: true
+
+      # npm audit for API
+      - name: Audit API dependencies
+        run: npm audit --audit-level=high || true
+        working-directory: apps/api
+        continue-on-error: true
+
+      # pip-audit for Python
+      - name: Audit Python dependencies
+        run: |
+          pip install pip-audit
+          pip-audit -r apps/ai-services/requirements.txt || true
+        continue-on-error: true
+
+      # Snyk scan (requires SNYK_TOKEN secret)
+      - name: Run Snyk vulnerability scan
+        if: env.SNYK_TOKEN != ''
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --all-projects
+
+      # SAST with CodeQL (for HIPAA compliance)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript, python
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Docker Build & Push - Build images on main branch only
+  # ─────────────────────────────────────────────────────────────────────────────
+  docker-build:
+    name: Docker Build & Push
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [build-frontend, build-api, test-ai-services, security-scan]
+    # Only build/push on main branch merges (not PRs)
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        include:
+          - image: apex-web
+            context: .
+            dockerfile: Dockerfile
+          - image: apex-api
+            context: apps/api
+            dockerfile: apps/api/Dockerfile
+          - image: apex-ai-services
+            context: apps/ai-services
+            dockerfile: apps/ai-services/Dockerfile
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Login to GitHub Container Registry
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Generate image metadata (tags, labels)
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}/${{ matrix.image }}
+          tags: |
+            type=sha,prefix=
+            type=ref,event=branch
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      # Build and push with layer caching
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Search,
@@ -146,11 +146,29 @@ const mockEligibility: MemberEligibility = {
     lastVerified: '2024-01-26T15:45:00Z'
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function Eligibility() {
-    const [eligibility] = useState<MemberEligibility>(mockEligibility)
+    const [eligibility, setEligibility] = useState<MemberEligibility>(mockEligibility)
     const [searchQuery, setSearchQuery] = useState('')
     const [isVerifying, setIsVerifying] = useState(false)
     const [activeTab, setActiveTab] = useState<'summary' | 'benefits' | 'accumulators'>('summary')
+
+    // Verify eligibility via API when search is performed
+    const verifyViaApi = useCallback(async (memberId: string) => {
+        if (!API_BASE) return;
+        try {
+            const res = await fetch(`${API_BASE}/api/v1/eligibility/verify`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ memberId, serviceDate: new Date().toISOString().split('T')[0] }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.data) setEligibility(data.data);
+            }
+        } catch { /* use mock data */ }
+    }, []);
 
     const handleVerify = async () => {
         setIsVerifying(true)

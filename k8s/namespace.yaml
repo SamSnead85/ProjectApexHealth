@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - Kubernetes Namespace
+# ═══════════════════════════════════════════════════════════════════════════════
+# Isolates all Apex Health resources in a dedicated namespace.
+# Apply first: kubectl apply -f namespace.yaml
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apex-health
+  labels:
+    app.kubernetes.io/part-of: apex-health-platform
+    # Enable Istio sidecar injection if using service mesh
+    # istio-injection: enabled
+  annotations:
+    # HIPAA: mark this namespace as containing PHI workloads
+    compliance.apex-health.io/hipaa: "true"
+    description: "Apex Health Platform - Enterprise Healthcare SaaS"

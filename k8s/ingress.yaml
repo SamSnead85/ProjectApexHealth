@@ -1,0 +1,102 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Apex Health Platform - Ingress Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+# nginx Ingress with:
+#   - TLS termination via cert-manager
+#   - Path-based routing: / → web, /api → api, /ai → ai-services
+#   - Rate limiting to prevent abuse
+#   - Security headers and CORS
+#   - Request size limits for file uploads (documents, EDI files)
+#
+# Prerequisites:
+#   - nginx Ingress Controller installed
+#   - cert-manager for automatic TLS certificate provisioning
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apex-ingress
+  namespace: apex-health
+  labels:
+    app.kubernetes.io/part-of: apex-health-platform
+  annotations:
+    # ─── TLS: Use cert-manager to auto-provision certificates ────────────
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+    # ─── nginx Ingress Controller Settings ───────────────────────────────
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    # ─── Rate Limiting ───────────────────────────────────────────────────
+    # 100 requests/second per IP with a burst of 200
+    # Protects against DDoS and brute-force attempts
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "2"
+    nginx.ingress.kubernetes.io/limit-connections: "50"
+
+    # ─── Request Body Size ───────────────────────────────────────────────
+    # Allow up to 50MB for document uploads (medical records, EDI files)
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+
+    # ─── Timeouts ────────────────────────────────────────────────────────
+    # AI endpoints may take longer for ML inference
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+
+    # ─── Security Headers ────────────────────────────────────────────────
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: SAMEORIGIN";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+      more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains";
+
+    # ─── WebSocket Support ───────────────────────────────────────────────
+    # Required for real-time features (voice agents, live dashboards)
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
+
+spec:
+  ingressClassName: nginx
+
+  # ─── TLS Configuration ──────────────────────────────────────────────────────
+  tls:
+    - hosts:
+        - app.apex-health.io
+        - api.apex-health.io
+      secretName: apex-health-tls
+
+  # ─── Routing Rules ──────────────────────────────────────────────────────────
+  rules:
+    # Main application domain
+    - host: app.apex-health.io
+      http:
+        paths:
+          # /api/* → NestJS API backend
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: apex-api
+                port:
+                  name: http
+
+          # /ai/* → Python AI services
+          - path: /ai
+            pathType: Prefix
+            backend:
+              service:
+                name: apex-ai-services
+                port:
+                  name: http
+
+          # Everything else → React SPA (must be last)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: apex-web
+                port:
+                  name: http

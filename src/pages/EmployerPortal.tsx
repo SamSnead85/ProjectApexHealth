@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigation } from '../context/NavigationContext'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -123,9 +123,26 @@ const getTypeColor = (type: string) => {
 // MAIN COMPONENT
 // ============================================
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function EmployerPortal() {
     const { navigate } = useNavigation()
     const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null)
+    const [apiEmployerData, setApiEmployerData] = useState<any>(null)
+
+    // Fetch employer dashboard data from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/employer-dashboard`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setApiEmployerData(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const totalPremium = plans.reduce((sum, p) => sum + p.premium, 0)
     const totalEnrolled = plans.reduce((sum, p) => sum + p.enrolled, 0)

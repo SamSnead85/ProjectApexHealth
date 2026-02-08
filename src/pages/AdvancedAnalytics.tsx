@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     TrendingUp, TrendingDown, Activity, DollarSign, Users, Clock,
@@ -75,9 +75,26 @@ const systemStatus = [
     { name: 'Provider API', status: 'warning' as const, message: 'Elevated response times detected', metric: '320ms avg' }
 ]
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function AdvancedAnalytics() {
     const [activeTab, setActiveTab] = useState('overview')
     const [isRefreshing, setIsRefreshing] = useState(false)
+    const [apiAnalytics, setApiAnalytics] = useState<any>(null)
+
+    // Fetch analytics from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/advanced`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setApiAnalytics(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const handleRefresh = async () => {
         setIsRefreshing(true)

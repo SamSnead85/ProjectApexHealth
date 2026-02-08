@@ -95,18 +95,57 @@
 }
 
 .sidebar__group {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+/* Collapsible Group Header */
+.sidebar__group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-xs) var(--space-md);
+    margin-bottom: var(--space-xs);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.sidebar__group-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.sidebar__group-header--active {
+    background: rgba(13, 148, 136, 0.08);
 }
 
 .sidebar__group-title {
-    display: block;
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--apex-steel);
-    padding: 0 var(--space-md);
-    margin-bottom: var(--space-sm);
+}
+
+.sidebar__group-header--expanded .sidebar__group-title {
+    color: var(--apex-silver);
+}
+
+.sidebar__group-header--active .sidebar__group-title {
+    color: var(--apex-teal);
+}
+
+.sidebar__group-chevron {
+    display: flex;
+    align-items: center;
+    color: var(--apex-steel);
+    transition: color var(--transition-fast);
+}
+
+.sidebar__group-header:hover .sidebar__group-chevron {
+    color: var(--apex-silver);
 }
 
 .sidebar__list {
@@ -114,7 +153,9 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    padding-left: 0;
 }
+
 
 /* Nav Item */
 .sidebar__item {

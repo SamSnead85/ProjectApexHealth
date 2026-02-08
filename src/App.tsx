@@ -1,142 +1,160 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Shell } from './components/layout'
 import { ThemeProvider } from './context/ThemeContext'
 import { NavigationProvider } from './context/NavigationContext'
+import { AuthProvider } from './context/AuthContext'
 import { ToastProvider } from './components/common/Toast'
-import Landing from './pages/Landing'
-import Dashboard from './pages/Dashboard'
-import WorkflowBuilder from './pages/WorkflowBuilder'
-import Analytics from './pages/Analytics'
-import Claims from './pages/Claims'
-import MemberPortal from './pages/MemberPortal'
-import FindCare from './pages/FindCare'
-import BrokerPortal from './pages/BrokerPortal'
-import EmployerPortal from './pages/EmployerPortal'
-import AgencyPortal from './pages/AgencyPortal'
-import AuditTrail from './pages/AuditTrail'
-import Commissions from './pages/Commissions'
-import Quoting from './pages/Quoting'
-import Enrollment from './pages/Enrollment'
-import Billing from './pages/Billing'
-import Census from './pages/Census'
-import Settings from './pages/Settings'
-import PlanConfiguration from './pages/PlanConfiguration'
-import Eligibility from './pages/Eligibility'
-import ClaimsProcessing from './pages/ClaimsProcessing'
-import PriorAuthorization from './pages/PriorAuthorization'
-import ProviderDirectory from './pages/ProviderDirectory'
-import CostEstimator from './pages/CostEstimator'
-import EOBViewer from './pages/EOBViewer'
-import MemberHome from './pages/MemberHome'
-import HSAWallet from './pages/HSAWallet'
-import MessageCenter from './pages/MessageCenter'
-import Notifications from './pages/Notifications'
-import Reports from './pages/Reports'
-import Pharmacy from './pages/Pharmacy'
-import Telehealth from './pages/Telehealth'
-import Documents from './pages/Documents'
-import CareTeam from './pages/CareTeam'
-import Wellness from './pages/Wellness'
-import Appointments from './pages/Appointments'
-import BenefitsSummary from './pages/BenefitsSummary'
-// Extended Feature Pages
-import Appeals from './pages/Appeals'
-import PaymentProcessing from './pages/PaymentProcessing'
-import NetworkManagement from './pages/NetworkManagement'
-import ProviderCredentialing from './pages/ProviderCredentialing'
-import MemberIDCard from './pages/MemberIDCard'
-import RiskAdjustment from './pages/RiskAdjustment'
-import UtilizationManagement from './pages/UtilizationManagement'
-import CareCoordination from './pages/CareCoordination'
-import QualityMetrics from './pages/QualityMetrics'
-import ComplianceDashboard from './pages/ComplianceDashboard'
-import MemberOutreach from './pages/MemberOutreach'
-import PremiumBilling from './pages/PremiumBilling'
-import ActuarialTools from './pages/ActuarialTools'
-import GroupEnrollment from './pages/GroupEnrollment'
-import ProviderPortal from './pages/ProviderPortal'
-// Phase 11-15 Pages
-import PlanDocuments from './pages/PlanDocuments'
-import CoverageComparison from './pages/CoverageComparison'
-import NetworkSearch from './pages/NetworkSearch'
-import PaymentHistory from './pages/PaymentHistory'
-import AgingReports from './pages/AgingReports'
-import RefundProcessing from './pages/RefundProcessing'
-import BillingDisputes from './pages/BillingDisputes'
-import SecureMessaging from './pages/SecureMessaging'
-import SMSNotifications from './pages/SMSNotifications'
-import EmailTemplates from './pages/EmailTemplates'
-import PushNotifications from './pages/PushNotifications'
-import MemberSurveys from './pages/MemberSurveys'
-import CredentialingPortal from './pages/CredentialingPortal'
-import ContractNegotiation from './pages/ContractNegotiation'
-import NetworkAdequacy from './pages/NetworkAdequacy'
-import FeeScheduleManagement from './pages/FeeScheduleManagement'
-import ProviderEnrollment from './pages/ProviderEnrollment'
-import CustomReportBuilder from './pages/CustomReportBuilder'
-import ScheduledReports from './pages/ScheduledReports'
-import ExecutiveDashboards from './pages/ExecutiveDashboards'
-import DataExports from './pages/DataExports'
-import KPITracking from './pages/KPITracking'
-import SIRDashboard from './pages/SIRDashboard'
-import IBNRActuarial from './pages/IBNRActuarial'
-import PharmacyAnalytics from './pages/PharmacyAnalytics'
-import PopulationHealth from './pages/PopulationHealth'
-import EmployerAdmin from './pages/EmployerAdmin'
-import NetworkAnalytics from './pages/NetworkAnalytics'
-// Enhancement Modules - Phase 1-6
-import DocumentIntelligence from './pages/DocumentIntelligence'
-import Member360 from './pages/Member360'
-import RegulatoryHub from './pages/RegulatoryHub'
-import StopLossManagement from './pages/StopLossManagement'
-import CarrierVendorPortal from './pages/CarrierVendorPortal'
-import FiduciaryDashboard from './pages/FiduciaryDashboard'
-// AI-Powered Features
-import ClaimsPrediction from './pages/ClaimsPrediction'
-import FraudDetection from './pages/FraudDetection'
-import BenefitCalculator from './pages/BenefitCalculator'
-// Analytics Modules
-import ValueBasedCare from './pages/ValueBasedCare'
-import ProviderPerformance from './pages/ProviderPerformance'
-// Enterprise Modules
-import SSOConfiguration from './pages/SSOConfiguration'
-import BrandingSettings from './pages/BrandingSettings'
-import ClinicalDecisionSupport from './pages/ClinicalDecisionSupport'
-import APIManagement from './pages/APIManagement'
-import AuditDashboard from './pages/AuditDashboard'
-import CareManagement from './pages/CareManagement'
-// Boardroom Ready Features
-import ExecutiveDashboard from './pages/ExecutiveDashboard'
-import BoardReportGenerator from './pages/BoardReportGenerator'
+import { lazyWithSkeleton } from './utils/performance'
+// Non-page components loaded eagerly (always visible in shell)
 import CommandPalette from './components/ui/CommandPalette'
 import AICopilot from './components/ai/AICopilot'
+
+// ═══════════════════════════════════════════════════════════════
+// Lazy-loaded page components - only loaded when navigated to.
+// Reduces initial bundle from ~1.8MB to under 500KB.
+// ═══════════════════════════════════════════════════════════════
+
+// Core Pages
+const Landing = lazyWithSkeleton(() => import('./pages/Landing'))
+const Dashboard = lazyWithSkeleton(() => import('./pages/Dashboard'))
+const WorkflowBuilder = lazyWithSkeleton(() => import('./pages/WorkflowBuilder'))
+const Analytics = lazyWithSkeleton(() => import('./pages/Analytics'))
+const Claims = lazyWithSkeleton(() => import('./pages/Claims'))
+const MemberPortal = lazyWithSkeleton(() => import('./pages/MemberPortal'))
+const FindCare = lazyWithSkeleton(() => import('./pages/FindCare'))
+const BrokerPortal = lazyWithSkeleton(() => import('./pages/BrokerPortal'))
+const EmployerPortal = lazyWithSkeleton(() => import('./pages/EmployerPortal'))
+const AgencyPortal = lazyWithSkeleton(() => import('./pages/AgencyPortal'))
+const AuditTrail = lazyWithSkeleton(() => import('./pages/AuditTrail'))
+const Commissions = lazyWithSkeleton(() => import('./pages/Commissions'))
+const Quoting = lazyWithSkeleton(() => import('./pages/Quoting'))
+const Enrollment = lazyWithSkeleton(() => import('./pages/Enrollment'))
+const Billing = lazyWithSkeleton(() => import('./pages/Billing'))
+const Census = lazyWithSkeleton(() => import('./pages/Census'))
+const Settings = lazyWithSkeleton(() => import('./pages/Settings'))
+const PlanConfiguration = lazyWithSkeleton(() => import('./pages/PlanConfiguration'))
+const Eligibility = lazyWithSkeleton(() => import('./pages/Eligibility'))
+const ClaimsProcessing = lazyWithSkeleton(() => import('./pages/ClaimsProcessing'))
+const PriorAuthorization = lazyWithSkeleton(() => import('./pages/PriorAuthorization'))
+const ProviderDirectory = lazyWithSkeleton(() => import('./pages/ProviderDirectory'))
+const CostEstimator = lazyWithSkeleton(() => import('./pages/CostEstimator'))
+const EOBViewer = lazyWithSkeleton(() => import('./pages/EOBViewer'))
+const MemberHome = lazyWithSkeleton(() => import('./pages/MemberHome'))
+const HSAWallet = lazyWithSkeleton(() => import('./pages/HSAWallet'))
+const MessageCenter = lazyWithSkeleton(() => import('./pages/MessageCenter'))
+const Notifications = lazyWithSkeleton(() => import('./pages/Notifications'))
+const Reports = lazyWithSkeleton(() => import('./pages/Reports'))
+const Pharmacy = lazyWithSkeleton(() => import('./pages/Pharmacy'))
+const Telehealth = lazyWithSkeleton(() => import('./pages/Telehealth'))
+const Documents = lazyWithSkeleton(() => import('./pages/Documents'))
+const CareTeam = lazyWithSkeleton(() => import('./pages/CareTeam'))
+const Wellness = lazyWithSkeleton(() => import('./pages/Wellness'))
+const Appointments = lazyWithSkeleton(() => import('./pages/Appointments'))
+const BenefitsSummary = lazyWithSkeleton(() => import('./pages/BenefitsSummary'))
+// Extended Feature Pages
+const Appeals = lazyWithSkeleton(() => import('./pages/Appeals'))
+const PaymentProcessing = lazyWithSkeleton(() => import('./pages/PaymentProcessing'))
+const NetworkManagement = lazyWithSkeleton(() => import('./pages/NetworkManagement'))
+const ProviderCredentialing = lazyWithSkeleton(() => import('./pages/ProviderCredentialing'))
+const MemberIDCard = lazyWithSkeleton(() => import('./pages/MemberIDCard'))
+const RiskAdjustment = lazyWithSkeleton(() => import('./pages/RiskAdjustment'))
+const UtilizationManagement = lazyWithSkeleton(() => import('./pages/UtilizationManagement'))
+const CareCoordination = lazyWithSkeleton(() => import('./pages/CareCoordination'))
+const QualityMetrics = lazyWithSkeleton(() => import('./pages/QualityMetrics'))
+const ComplianceDashboard = lazyWithSkeleton(() => import('./pages/ComplianceDashboard'))
+const MemberOutreach = lazyWithSkeleton(() => import('./pages/MemberOutreach'))
+const PremiumBilling = lazyWithSkeleton(() => import('./pages/PremiumBilling'))
+const ActuarialTools = lazyWithSkeleton(() => import('./pages/ActuarialTools'))
+const GroupEnrollment = lazyWithSkeleton(() => import('./pages/GroupEnrollment'))
+const ProviderPortal = lazyWithSkeleton(() => import('./pages/ProviderPortal'))
+// Phase 11-15 Pages
+const PlanDocuments = lazyWithSkeleton(() => import('./pages/PlanDocuments'))
+const CoverageComparison = lazyWithSkeleton(() => import('./pages/CoverageComparison'))
+const NetworkSearch = lazyWithSkeleton(() => import('./pages/NetworkSearch'))
+const PaymentHistory = lazyWithSkeleton(() => import('./pages/PaymentHistory'))
+const AgingReports = lazyWithSkeleton(() => import('./pages/AgingReports'))
+const RefundProcessing = lazyWithSkeleton(() => import('./pages/RefundProcessing'))
+const BillingDisputes = lazyWithSkeleton(() => import('./pages/BillingDisputes'))
+const SecureMessaging = lazyWithSkeleton(() => import('./pages/SecureMessaging'))
+const SMSNotifications = lazyWithSkeleton(() => import('./pages/SMSNotifications'))
+const EmailTemplates = lazyWithSkeleton(() => import('./pages/EmailTemplates'))
+const PushNotifications = lazyWithSkeleton(() => import('./pages/PushNotifications'))
+const MemberSurveys = lazyWithSkeleton(() => import('./pages/MemberSurveys'))
+const CredentialingPortal = lazyWithSkeleton(() => import('./pages/CredentialingPortal'))
+const ContractNegotiation = lazyWithSkeleton(() => import('./pages/ContractNegotiation'))
+const NetworkAdequacy = lazyWithSkeleton(() => import('./pages/NetworkAdequacy'))
+const FeeScheduleManagement = lazyWithSkeleton(() => import('./pages/FeeScheduleManagement'))
+const ProviderEnrollment = lazyWithSkeleton(() => import('./pages/ProviderEnrollment'))
+const CustomReportBuilder = lazyWithSkeleton(() => import('./pages/CustomReportBuilder'))
+const ScheduledReports = lazyWithSkeleton(() => import('./pages/ScheduledReports'))
+const ExecutiveDashboards = lazyWithSkeleton(() => import('./pages/ExecutiveDashboards'))
+const DataExports = lazyWithSkeleton(() => import('./pages/DataExports'))
+const KPITracking = lazyWithSkeleton(() => import('./pages/KPITracking'))
+const SIRDashboard = lazyWithSkeleton(() => import('./pages/SIRDashboard'))
+const IBNRActuarial = lazyWithSkeleton(() => import('./pages/IBNRActuarial'))
+const PharmacyAnalytics = lazyWithSkeleton(() => import('./pages/PharmacyAnalytics'))
+const PopulationHealth = lazyWithSkeleton(() => import('./pages/PopulationHealth'))
+const EmployerAdmin = lazyWithSkeleton(() => import('./pages/EmployerAdmin'))
+const NetworkAnalytics = lazyWithSkeleton(() => import('./pages/NetworkAnalytics'))
+// Enhancement Modules
+const DocumentIntelligence = lazyWithSkeleton(() => import('./pages/DocumentIntelligence'))
+const Member360 = lazyWithSkeleton(() => import('./pages/Member360'))
+const RegulatoryHub = lazyWithSkeleton(() => import('./pages/RegulatoryHub'))
+const StopLossManagement = lazyWithSkeleton(() => import('./pages/StopLossManagement'))
+const CarrierVendorPortal = lazyWithSkeleton(() => import('./pages/CarrierVendorPortal'))
+const FiduciaryDashboard = lazyWithSkeleton(() => import('./pages/FiduciaryDashboard'))
+// AI-Powered Features
+const ClaimsPrediction = lazyWithSkeleton(() => import('./pages/ClaimsPrediction'))
+const FraudDetection = lazyWithSkeleton(() => import('./pages/FraudDetection'))
+const BenefitCalculator = lazyWithSkeleton(() => import('./pages/BenefitCalculator'))
+// Analytics Modules
+const ValueBasedCare = lazyWithSkeleton(() => import('./pages/ValueBasedCare'))
+const ProviderPerformance = lazyWithSkeleton(() => import('./pages/ProviderPerformance'))
+// Enterprise Modules
+const SSOConfiguration = lazyWithSkeleton(() => import('./pages/SSOConfiguration'))
+const BrandingSettings = lazyWithSkeleton(() => import('./pages/BrandingSettings'))
+const ClinicalDecisionSupport = lazyWithSkeleton(() => import('./pages/ClinicalDecisionSupport'))
+const APIManagement = lazyWithSkeleton(() => import('./pages/APIManagement'))
+const AuditDashboard = lazyWithSkeleton(() => import('./pages/AuditDashboard'))
+const CareManagement = lazyWithSkeleton(() => import('./pages/CareManagement'))
+// Boardroom Ready Features
+const ExecutiveDashboard = lazyWithSkeleton(() => import('./pages/ExecutiveDashboard'))
+const BoardReportGenerator = lazyWithSkeleton(() => import('./pages/BoardReportGenerator'))
 // Operational Completeness
-import NotificationCenter from './pages/NotificationCenter'
-import TaskQueue from './pages/TaskQueue'
-import UserManagement from './pages/UserManagement'
+const NotificationCenter = lazyWithSkeleton(() => import('./pages/NotificationCenter'))
+const TaskQueue = lazyWithSkeleton(() => import('./pages/TaskQueue'))
+const UserManagement = lazyWithSkeleton(() => import('./pages/UserManagement'))
 // System Monitoring
-import SystemHealth from './pages/SystemHealth'
-import BatchDashboard from './pages/BatchDashboard'
-import ActivityFeed from './pages/ActivityFeed'
+const SystemHealth = lazyWithSkeleton(() => import('./pages/SystemHealth'))
+const BatchDashboard = lazyWithSkeleton(() => import('./pages/BatchDashboard'))
+const ActivityFeed = lazyWithSkeleton(() => import('./pages/ActivityFeed'))
 // Data Integration & Member Experience
-import EDIManager from './pages/EDIManager'
-import DigitalIDCard from './pages/DigitalIDCard'
-import WebhookConfig from './pages/WebhookConfig'
+const EDIManager = lazyWithSkeleton(() => import('./pages/EDIManager'))
+const DigitalIDCard = lazyWithSkeleton(() => import('./pages/DigitalIDCard'))
+const WebhookConfig = lazyWithSkeleton(() => import('./pages/WebhookConfig'))
 // Award-Winning UX Modules
-import DataVisualizationStudio from './pages/DataVisualizationStudio'
-import IntegrationMarketplace from './pages/IntegrationMarketplace'
-import BenchmarkAnalytics from './pages/BenchmarkAnalytics'
-// Compliance & Data Integration Modules
-import ComplianceCenter from './pages/ComplianceCenter'
-import DataIntegrationHub from './pages/DataIntegrationHub'
-// Strategic Module Additions - Premium Implementation
-import CareJourneyNavigator from './pages/CareJourneyNavigator'
-import OONClaimsWizard from './pages/OONClaimsWizard'
-import HealthConcierge from './pages/HealthConcierge'
-import AgentAssistDashboard from './pages/AgentAssistDashboard'
-import AdvancedAnalytics from './pages/AdvancedAnalytics'
-import CommandCenter from './pages/CommandCenter'
+const DataVisualizationStudio = lazyWithSkeleton(() => import('./pages/DataVisualizationStudio'))
+const IntegrationMarketplace = lazyWithSkeleton(() => import('./pages/IntegrationMarketplace'))
+const BenchmarkAnalytics = lazyWithSkeleton(() => import('./pages/BenchmarkAnalytics'))
+// Compliance & Data Integration
+const ComplianceCenter = lazyWithSkeleton(() => import('./pages/ComplianceCenter'))
+const DataIntegrationHub = lazyWithSkeleton(() => import('./pages/DataIntegrationHub'))
+// Strategic Module Additions
+const CareJourneyNavigator = lazyWithSkeleton(() => import('./pages/CareJourneyNavigator'))
+const OONClaimsWizard = lazyWithSkeleton(() => import('./pages/OONClaimsWizard'))
+const HealthConcierge = lazyWithSkeleton(() => import('./pages/HealthConcierge'))
+const AgentAssistDashboard = lazyWithSkeleton(() => import('./pages/AgentAssistDashboard'))
+const AdvancedAnalytics = lazyWithSkeleton(() => import('./pages/AdvancedAnalytics'))
+const CommandCenter = lazyWithSkeleton(() => import('./pages/CommandCenter'))
+// Enterprise Modules - Voice, FHIR, Compliance, Module Management
+const VoiceAgentBuilder = lazyWithSkeleton(() => import('./pages/VoiceAgentBuilder'))
+const VoiceAgentMonitor = lazyWithSkeleton(() => import('./pages/VoiceAgentMonitor'))
+const CallCenterDashboard = lazyWithSkeleton(() => import('./pages/CallCenterDashboard'))
+const FHIRExplorer = lazyWithSkeleton(() => import('./pages/FHIRExplorer'))
+const ModuleLicensing = lazyWithSkeleton(() => import('./pages/ModuleLicensing'))
+const BreachResponse = lazyWithSkeleton(() => import('./pages/BreachResponse'))
+const DataRetention = lazyWithSkeleton(() => import('./pages/DataRetention'))
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -614,6 +632,31 @@ function App() {
         if (activePath.includes('/kpi') || activePath.includes('/kpi-tracking')) {
             return <KPITracking />
         }
+        // Voice Center
+        if (activePath.includes('/voice-agent-builder') || activePath.includes('/voice-builder')) {
+            return <VoiceAgentBuilder />
+        }
+        if (activePath.includes('/voice-monitor') || activePath.includes('/voice-agent-monitor')) {
+            return <VoiceAgentMonitor />
+        }
+        if (activePath.includes('/call-center') || activePath.includes('/call-dashboard')) {
+            return <CallCenterDashboard />
+        }
+        // FHIR & Interoperability
+        if (activePath.includes('/fhir-explorer') || activePath.includes('/fhir')) {
+            return <FHIRExplorer />
+        }
+        // Module Management
+        if (activePath.includes('/module-licensing') || activePath.includes('/modules')) {
+            return <ModuleLicensing />
+        }
+        // HIPAA Compliance
+        if (activePath.includes('/breach-response') || activePath.includes('/incident-response')) {
+            return <BreachResponse />
+        }
+        if (activePath.includes('/data-retention') || activePath.includes('/retention-policies')) {
+            return <DataRetention />
+        }
         // Employer Portal Dashboard
         if (activePortal === 'employer' && (activePath === '/employer' || activePath.includes('/employer/dashboard'))) {
             return <EmployerAdmin />
@@ -626,29 +669,31 @@ function App() {
     // Authenticated App with Shell - always show portal switcher for demo mode
     return (
         <ThemeProvider>
-            <ToastProvider>
-                <CommandPalette
-                    isOpen={commandPaletteOpen}
-                    onClose={() => setCommandPaletteOpen(false)}
-                    onNavigate={(path) => {
-                        handleNavigate(path)
-                        setCommandPaletteOpen(false)
-                    }}
-                />
-                <NavigationProvider onNavigate={handleNavigate}>
-                    <Shell
-                        activePortal={activePortal}
-                        activePath={activePath}
-                        onNavigate={handleNavigate}
-                        onSwitchPortal={handleSwitchPortal}
-                    >
-                        <AnimatePresence mode="wait">
-                            {renderPage()}
-                        </AnimatePresence>
-                    </Shell>
-                    <AICopilot />
-                </NavigationProvider>
-            </ToastProvider>
+            <AuthProvider>
+                <ToastProvider>
+                    <CommandPalette
+                        isOpen={commandPaletteOpen}
+                        onClose={() => setCommandPaletteOpen(false)}
+                        onNavigate={(path) => {
+                            handleNavigate(path)
+                            setCommandPaletteOpen(false)
+                        }}
+                    />
+                    <NavigationProvider onNavigate={handleNavigate}>
+                        <Shell
+                            activePortal={activePortal}
+                            activePath={activePath}
+                            onNavigate={handleNavigate}
+                            onSwitchPortal={handleSwitchPortal}
+                        >
+                            <AnimatePresence mode="wait">
+                                {renderPage()}
+                            </AnimatePresence>
+                        </Shell>
+                        <AICopilot />
+                    </NavigationProvider>
+                </ToastProvider>
+            </AuthProvider>
         </ThemeProvider>
     )
 }

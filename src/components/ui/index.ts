@@ -3,3 +3,4 @@ export { EmptyState, NoSearchResults, NoDocuments, NoAppointments, NoMessages, E
 export { Breadcrumbs } from './Breadcrumbs'
 export { NotificationCenter } from './NotificationCenter'
 export { StatusIndicator, ConnectionStatus, CoverageStatus, ClaimStatus } from './StatusIndicator'
+export { PremiumMetricCard } from './PremiumMetricCard'

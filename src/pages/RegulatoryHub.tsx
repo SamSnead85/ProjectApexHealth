@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     Landmark,
@@ -202,9 +202,26 @@ const calendarDays = [
     { day: 31, deadlines: ['1094-C'] as string[], priority: 'normal' as const }
 ]
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function RegulatoryHub() {
     const [activeFilter, setActiveFilter] = useState<string>('all')
     const [currentMonth] = useState('March 2026')
+    const [apiDeadlines, setApiDeadlines] = useState<typeof mockDeadlines | null>(null)
+
+    // Fetch regulatory deadlines from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/regulatory-deadlines`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data?.length) setApiDeadlines(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const getDeadlineIcon = (priority: Deadline['priority']) => {
         switch (priority) {

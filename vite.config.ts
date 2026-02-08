@@ -2,15 +2,37 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // Project Apex - Complete Health Platform
-// Using port 4200 to avoid conflicts with other projects
 export default defineConfig({
     plugins: [react()],
     base: './',
     server: {
         port: 4200,
         open: true,
-        strictPort: true  // Will error if port is taken instead of silently using another
-    }
+        strictPort: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+                secure: false,
+            },
+            '/ws': {
+                target: 'ws://localhost:3000',
+                ws: true,
+                changeOrigin: true,
+            },
+        },
+    },
+    build: {
+        chunkSizeWarningLimit: 600,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom', 'framer-motion'],
+                    charts: ['recharts'],
+                    icons: ['lucide-react'],
+                },
+            },
+        },
+        sourcemap: false,
+    },
 })
-
-

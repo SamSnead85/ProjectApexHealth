@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Users,
     TrendingUp,
@@ -116,9 +116,26 @@ const ConfidenceRing = ({ score }: { score: number }) => {
     )
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function Dashboard({ portalType }: DashboardProps) {
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [lastUpdated, setLastUpdated] = useState(new Date())
+    const [apiData, setApiData] = useState<any>(null)
+
+    // Fetch dashboard data from analytics API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/dashboard`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setApiData(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const getPortalTitle = () => {
         switch (portalType) {

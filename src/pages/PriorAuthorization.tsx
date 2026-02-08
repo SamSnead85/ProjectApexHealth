@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileCheck,
@@ -131,10 +131,25 @@ const paMetrics = {
     autoApproved: 34.2
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function PriorAuthorization() {
-    const [requests] = useState<PriorAuth[]>(mockPARequests)
+    const [requests, setRequests] = useState<PriorAuth[]>(mockPARequests)
     const [selectedRequest, setSelectedRequest] = useState<PriorAuth | null>(null)
     const [statusFilter, setStatusFilter] = useState<PAStatus | 'all'>('all')
+
+    // Fetch prior auths from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/prior-auth?limit=50`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.data?.length) setRequests(data.data);
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const filteredRequests = requests.filter(req =>
         statusFilter === 'all' || req.status === statusFilter

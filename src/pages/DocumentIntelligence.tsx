@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileText,
@@ -151,10 +151,30 @@ const versionDiffs = {
     ]
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function DocumentIntelligence() {
     const [isDragging, setIsDragging] = useState(false)
+    const [documents, setDocuments] = useState(mockDocuments)
     const [selectedDoc, setSelectedDoc] = useState<Document | null>(mockDocuments[0])
     const [compareVersion, setCompareVersion] = useState('v2')
+
+    // Fetch documents from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/documents?limit=20`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data?.length) {
+                        setDocuments(data.data);
+                        setSelectedDoc(data.data[0]);
+                    }
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()

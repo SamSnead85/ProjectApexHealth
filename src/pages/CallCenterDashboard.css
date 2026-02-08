@@ -1,0 +1,421 @@
+/* CallCenterDashboard.css - Call Center Operations */
+/* Apex Obsidian v2.5 Design System */
+
+.call-center-dashboard {
+    padding: 2rem;
+    min-height: 100vh;
+    background: var(--bg-primary);
+    background-image:
+        radial-gradient(ellipse at 30% 0%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 100%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+}
+
+/* Header */
+.ccd-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.ccd-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.ccd-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.ccd-header-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* KPI Cards */
+.ccd-kpis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Section Headers */
+.ccd-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.ccd-section-header h3,
+.ccd-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0;
+}
+
+.ccd-section-title {
+    margin-bottom: 1rem;
+}
+
+/* Agent Status Board */
+.ccd-agent-board {
+    margin-bottom: 1.5rem;
+}
+
+.ccd-agent-summary {
+    display: flex;
+    gap: 1rem;
+}
+
+.ccd-agent-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.625rem;
+    border-radius: 12px;
+}
+
+.ccd-agent-count.available { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.ccd-agent-count.on-call { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.ccd-agent-count.break { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.ccd-agent-count.offline { background: rgba(100, 116, 139, 0.1); color: #64748b; }
+
+.ccd-agent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.ccd-agent-card {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.ccd-agent-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ccd-agent-card.on_call { border-left: 3px solid #3b82f6; }
+.ccd-agent-card.available { border-left: 3px solid #22c55e; }
+.ccd-agent-card.break { border-left: 3px solid #f59e0b; }
+.ccd-agent-card.offline { border-left: 3px solid #64748b; }
+
+.ccd-agent-top {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.75rem;
+}
+
+.ccd-agent-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ccd-agent-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ccd-agent-name {
+    display: block;
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ccd-agent-role {
+    display: block;
+    font-size: 0.688rem;
+    color: var(--text-tertiary);
+}
+
+.ccd-agent-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.ccd-agent-stat .stat-value {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ccd-agent-stat .stat-label {
+    display: block;
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
+
+/* Charts Row */
+.ccd-charts-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ccd-chart-container {
+    height: 280px;
+}
+
+.ccd-pie-container {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: auto;
+}
+
+.ccd-pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 160px;
+}
+
+.ccd-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.813rem;
+}
+
+.ccd-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.ccd-legend-label {
+    flex: 1;
+    color: var(--text-secondary);
+}
+
+.ccd-legend-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Bottom Row */
+.ccd-bottom-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ccd-queue-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-primary);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* SLA Gauge */
+.ccd-sla-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.ccd-sla-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.ccd-sla-ring svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ccd-sla-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.ccd-sla-pct {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #22c55e;
+}
+
+.ccd-sla-label {
+    display: block;
+    font-size: 0.688rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
+
+.ccd-sla-targets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ccd-sla-target {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+}
+
+.ccd-sla-target:last-child {
+    border-bottom: none;
+}
+
+/* Escalation Table */
+.ccd-escalations {
+    margin-bottom: 1.5rem;
+}
+
+.ccd-esc-header,
+.ccd-esc-row {
+    display: grid;
+    grid-template-columns: 80px 120px 1fr 120px 80px 100px 80px;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.625rem 0.5rem;
+}
+
+.ccd-esc-header {
+    font-size: 0.688rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.ccd-esc-row {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.2s ease;
+}
+
+.ccd-esc-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.ccd-esc-id {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.ccd-esc-reason {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ccd-esc-time {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .ccd-kpis {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ccd-agent-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1200px) {
+    .ccd-charts-row,
+    .ccd-bottom-row {
+        grid-template-columns: 1fr;
+    }
+
+    .ccd-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .call-center-dashboard {
+        padding: 1rem;
+    }
+
+    .ccd-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .ccd-kpis {
+        grid-template-columns: 1fr;
+    }
+
+    .ccd-agent-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ccd-esc-header,
+    .ccd-esc-row {
+        grid-template-columns: 80px 1fr 80px 80px;
+    }
+
+    .ccd-esc-header span:nth-child(3),
+    .ccd-esc-header span:nth-child(4),
+    .ccd-esc-header span:nth-child(7),
+    .ccd-esc-row span:nth-child(3),
+    .ccd-esc-row span:nth-child(4),
+    .ccd-esc-row span:nth-child(7) {
+        display: none;
+    }
+}

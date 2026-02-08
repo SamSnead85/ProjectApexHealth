@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     Search,
@@ -195,9 +195,28 @@ const mockDependents: Dependent[] = [
 
 type TabType = 'overview' | 'eligibility' | 'events' | 'communications' | 'dependents' | 'aca'
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function Member360() {
     const [activeTab, setActiveTab] = useState<TabType>('overview')
     const [searchQuery, setSearchQuery] = useState('')
+    const [member, setMember] = useState(mockMember)
+    const [timeline, setTimeline] = useState(mockTimeline)
+
+    // Fetch member data from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/members/AHP100001/360`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data?.member) setMember(data.data.member);
+                    if (data.data?.timeline) setTimeline(data.data.timeline);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     const getInitials = (first: string, last: string) =>
         `${first.charAt(0)}${last.charAt(0)}`

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     Briefcase, Users, FileText, TrendingUp, DollarSign, Calendar,
@@ -148,9 +148,26 @@ function ActivityItem({ activity }: { activity: typeof recentActivity[0] }) {
     )
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [activeTab, setActiveTab] = useState('dashboard')
+    const [apiBrokerData, setApiBrokerData] = useState<any>(null)
+
+    // Fetch broker dashboard data from API with mock fallback
+    useEffect(() => {
+        if (!API_BASE) return;
+        (async () => {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/analytics/broker-dashboard`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.data) setApiBrokerData(data.data);
+                }
+            } catch { /* use mock data */ }
+        })();
+    }, []);
 
     return (
         <div className="broker-portal">

@@ -1,0 +1,119 @@
+{
+  "realm": "apex-health",
+  "enabled": true,
+  "displayName": "Apex Health Platform",
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "passwordPolicy": "length(12) and upperCase(1) and lowerCase(1) and digits(1) and specialChars(1) and notUsername and passwordHistory(5)",
+  "accessTokenLifespan": 3600,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionIdleTimeout": 2592000,
+  "roles": {
+    "realm": [
+      { "name": "system_admin", "description": "Full system administrator" },
+      { "name": "org_admin", "description": "Organization administrator" },
+      { "name": "claims_processor", "description": "Claims processing staff" },
+      { "name": "claims_supervisor", "description": "Claims supervisor with approval authority" },
+      { "name": "medical_director", "description": "Medical director with clinical authority" },
+      { "name": "care_manager", "description": "Care management coordinator" },
+      { "name": "member", "description": "Health plan member" },
+      { "name": "broker", "description": "Insurance broker" },
+      { "name": "employer_admin", "description": "Employer group administrator" },
+      { "name": "provider", "description": "Healthcare provider" },
+      { "name": "auditor", "description": "Compliance auditor (read-only)" },
+      { "name": "analyst", "description": "Data analyst" },
+      { "name": "support", "description": "Customer support agent" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "apex-web",
+      "name": "Apex Health Web App",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "rootUrl": "http://localhost:4200",
+      "redirectUris": ["http://localhost:4200/*"],
+      "webOrigins": ["http://localhost:4200"],
+      "protocol": "openid-connect",
+      "defaultClientScopes": ["openid", "profile", "email", "roles"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "apex-api",
+      "name": "Apex Health API",
+      "enabled": true,
+      "publicClient": false,
+      "serviceAccountsEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": false,
+      "protocol": "openid-connect",
+      "secret": "change-me-in-production",
+      "defaultClientScopes": ["openid", "profile", "email", "roles"]
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "roles",
+      "protocol": "openid-connect",
+      "attributes": { "include.in.token.scope": "true" },
+      "protocolMappers": [
+        {
+          "name": "realm-roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": {
+            "claim.name": "realm_roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "organization-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "config": {
+            "claim.name": "organization_id",
+            "user.attribute": "organization_id",
+            "jsonType.label": "String",
+            "access.token.claim": "true",
+            "id.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin@apexhealth.com",
+      "email": "admin@apexhealth.com",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "System",
+      "lastName": "Administrator",
+      "credentials": [{ "type": "password", "value": "ApexAdmin2024!", "temporary": true }],
+      "realmRoles": ["system_admin"],
+      "attributes": { "organization_id": ["00000000-0000-0000-0000-000000000001"] }
+    }
+  ]
+}
