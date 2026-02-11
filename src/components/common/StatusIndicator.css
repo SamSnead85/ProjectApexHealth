@@ -1,6 +1,6 @@
 /* ============================================
    STATUS INDICATOR
-   Premium Futuristic Design - Apex Obsidian v3
+   Light Theme Design - Apex v3
    ============================================ */
 
 /* Status Indicator */
@@ -32,31 +32,31 @@
 
 .status-indicator__dot--success {
     background: #10b981;
-    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
 }
 
 .status-indicator__dot--warning {
     background: #f59e0b;
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
 .status-indicator__dot--error {
     background: #ef4444;
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
 }
 
 .status-indicator__dot--info {
-    background: #06b6d4;
-    box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+    background: #2563EB;
+    box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
 }
 
 .status-indicator__dot--pending {
     background: #8b5cf6;
-    box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 6px rgba(139, 92, 246, 0.4);
 }
 
 .status-indicator__dot--neutral {
-    background: var(--apex-steel);
+    background: #9CA3AF;
 }
 
 .status-indicator__dot--pulse {
@@ -79,7 +79,7 @@
 
 .status-indicator__label {
     font-size: var(--text-xs);
-    color: var(--apex-silver);
+    color: #4B5563;
 }
 
 /* Status Badge */
@@ -100,8 +100,8 @@
 }
 
 .status-badge--success {
-    background: rgba(16, 185, 129, 0.15);
-    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
 }
 
 .status-badge--success .status-badge__dot {
@@ -109,8 +109,8 @@
 }
 
 .status-badge--warning {
-    background: rgba(245, 158, 11, 0.15);
-    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
 }
 
 .status-badge--warning .status-badge__dot {
@@ -118,8 +118,8 @@
 }
 
 .status-badge--error {
-    background: rgba(239, 68, 68, 0.15);
-    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
 }
 
 .status-badge--error .status-badge__dot {
@@ -127,17 +127,17 @@
 }
 
 .status-badge--info {
-    background: rgba(6, 182, 212, 0.15);
-    color: #06b6d4;
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563EB;
 }
 
 .status-badge--info .status-badge__dot {
-    background: #06b6d4;
+    background: #2563EB;
 }
 
 .status-badge--pending {
-    background: rgba(139, 92, 246, 0.15);
-    color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
 }
 
 .status-badge--pending .status-badge__dot {
@@ -145,12 +145,12 @@
 }
 
 .status-badge--neutral {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--apex-silver);
+    background: #F3F5F8;
+    color: #4B5563;
 }
 
 .status-badge--neutral .status-badge__dot {
-    background: var(--apex-steel);
+    background: #9CA3AF;
 }
 
 /* Traffic Light */
@@ -165,7 +165,7 @@
     height: 8px;
     border-radius: var(--radius-full);
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
+    background: #E5E7EB;
 }
 
 .traffic-light__segment {
@@ -191,13 +191,13 @@
 }
 
 .traffic-light__label--success {
-    color: #10b981;
+    color: #059669;
 }
 
 .traffic-light__label--warning {
-    color: #f59e0b;
+    color: #d97706;
 }
 
 .traffic-light__label--error {
-    color: #ef4444;
+    color: #dc2626;
 }

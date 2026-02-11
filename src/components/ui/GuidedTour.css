@@ -1,5 +1,6 @@
 /* ============================================
    GUIDED TOUR - Premium Walkthrough System
+   Light Theme
 ============================================ */
 
 .guided-tour {
@@ -17,8 +18,8 @@
 .guided-tour__overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
 }
 
 /* Spotlight cutout */
@@ -26,9 +27,9 @@
     position: fixed;
     border-radius: var(--radius-lg);
     box-shadow:
-        0 0 0 9999px rgba(0, 0, 0, 0.75),
-        0 0 20px rgba(13, 148, 136, 0.4),
-        inset 0 0 0 2px rgba(13, 148, 136, 0.6);
+        0 0 0 9999px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(37, 99, 235, 0.3),
+        inset 0 0 0 2px rgba(37, 99, 235, 0.5);
     pointer-events: none;
     z-index: 10001;
 }
@@ -39,14 +40,12 @@
     width: 360px;
     max-width: calc(100vw - 32px);
     padding: var(--space-lg);
-    background: linear-gradient(135deg,
-            rgba(15, 23, 42, 0.98) 0%,
-            rgba(10, 15, 26, 0.98) 100%);
-    border: 1px solid rgba(13, 148, 136, 0.3);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-xl);
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(13, 148, 136, 0.15);
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 0 40px rgba(37, 99, 235, 0.06);
     z-index: 10002;
 }
 
@@ -57,7 +56,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #0D9488, #06B6D4, #0D9488);
+    background: linear-gradient(90deg, #2563EB, #3B82F6, #2563EB);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
@@ -74,12 +73,12 @@
     align-items: center;
     gap: var(--space-xs);
     padding: 4px var(--space-sm);
-    background: rgba(13, 148, 136, 0.15);
-    border: 1px solid rgba(13, 148, 136, 0.3);
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     border-radius: var(--radius-full);
     font-size: 11px;
     font-weight: 600;
-    color: #0D9488;
+    color: #2563EB;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -106,17 +105,17 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #F3F5F8;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-md);
-    color: var(--apex-steel);
+    color: #9CA3AF;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
 .guided-tour__close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--apex-white);
+    background: #E5E7EB;
+    color: #111827;
 }
 
 /* Content */
@@ -128,14 +127,14 @@
     font-family: var(--font-display);
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--apex-white);
+    color: #111827;
     margin-bottom: var(--space-sm);
 }
 
 .guided-tour__description {
     font-size: var(--text-sm);
     line-height: 1.6;
-    color: var(--apex-silver);
+    color: #4B5563;
 }
 
 /* Progress dots */
@@ -150,18 +149,18 @@
 .guided-tour__dot {
     width: 8px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.15);
+    background: #E5E7EB;
     border-radius: var(--radius-full);
     transition: all var(--transition-fast);
 }
 
 .guided-tour__dot.active {
     width: 24px;
-    background: linear-gradient(90deg, #0D9488, #06B6D4);
+    background: linear-gradient(90deg, #2563EB, #3B82F6);
 }
 
 .guided-tour__dot.completed {
-    background: #0D9488;
+    background: #2563EB;
 }
 
 /* Actions */
@@ -170,12 +169,12 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #E5E7EB;
 }
 
 .guided-tour__step-count {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: #9CA3AF;
 }
 
 .guided-tour__buttons {

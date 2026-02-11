@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(6, 182, 212, 0.2);
-    border: 2px solid var(--apex-noir);
+    border: 2px solid var(--card-bg, #FFFFFF);
     border-radius: 50%;
     overflow: hidden;
     font-size: var(--text-xs);
@@ -46,7 +46,7 @@
     right: 0;
     width: 10px;
     height: 10px;
-    border: 2px solid var(--apex-noir);
+    border: 2px solid var(--card-bg, #FFFFFF);
     border-radius: 50%;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .online-users__status--offline {
-    background: var(--apex-steel);
+    background: var(--text-tertiary, #6B7280);
 }
 
 .online-users__more {
@@ -73,12 +73,12 @@
     align-items: center;
     justify-content: center;
     margin-left: -8px;
-    background: rgba(15, 23, 42, 0.9);
-    border: 2px solid var(--apex-noir);
+    background: #F3F4F6;
+    border: 2px solid var(--card-bg, #FFFFFF);
     border-radius: 50%;
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 /* Presence Indicator */
@@ -121,19 +121,19 @@
 }
 
 .presence-indicator--offline .presence-indicator__dot {
-    background: var(--apex-steel);
+    background: var(--text-tertiary, #6B7280);
 }
 
 .presence-indicator__label {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 /* Share Link */
 .share-link {
     padding: var(--space-md);
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-lg);
 }
 
@@ -142,7 +142,7 @@
     align-items: center;
     gap: var(--space-sm);
     margin-bottom: var(--space-md);
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-weight: 600;
 }
 
@@ -155,12 +155,12 @@
 .share-link__input input {
     flex: 1;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #F3F4F6;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-md);
     font-family: monospace;
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .share-link__input button {
@@ -172,7 +172,7 @@
     border: none;
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
-    color: var(--apex-noir);
+    color: var(--card-bg, #FFFFFF);
     cursor: pointer;
 }
 
@@ -185,7 +185,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .share-link__permissions {
@@ -196,8 +196,8 @@
 
 .share-link__permissions select {
     padding: 4px 8px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #F3F4F6;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: var(--apex-teal);
@@ -206,8 +206,8 @@
 /* Team Members */
 .team-members {
     padding: var(--space-md);
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-lg);
 }
 
@@ -221,15 +221,15 @@
 .team-members__header h4 {
     margin: 0;
     font-size: var(--text-md);
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .team-members__count {
     padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .team-members__invite {
@@ -261,7 +261,7 @@
 }
 
 .team-members__item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: #F9FAFB;
 }
 
 .team-members__avatar {
@@ -300,17 +300,17 @@
     display: block;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .team-members__you {
     font-weight: 400;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .team-members__email {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .team-members__role {
@@ -323,7 +323,7 @@
 .team-members__role select {
     padding: 4px 8px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: inherit;
@@ -338,7 +338,7 @@
     background: transparent;
     border: none;
     border-radius: var(--radius-sm);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     cursor: pointer;
 }
 
@@ -356,12 +356,12 @@
     width: 100%;
     min-height: 80px;
     padding: var(--space-md);
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-lg);
     font-family: inherit;
     font-size: var(--text-sm);
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     resize: vertical;
 }
 
@@ -375,8 +375,8 @@
     bottom: calc(100% + 4px);
     left: 0;
     width: 200px;
-    background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-md);
     overflow: hidden;
     z-index: 10;
@@ -392,12 +392,12 @@
     border: none;
     text-align: left;
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
     cursor: pointer;
 }
 
 .mentions-input__suggestions button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: #F3F4F6;
 }
 
 .mentions-input__suggestion-avatar {

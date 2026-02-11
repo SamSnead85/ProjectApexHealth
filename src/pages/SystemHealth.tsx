@@ -199,28 +199,28 @@ export default function SystemHealth() {
                                     <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                             <XAxis
                                 dataKey="hour"
-                                tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                                axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                tick={{ fill: '#6B7280', fontSize: 10 }}
+                                axisLine={{ stroke: '#E5E7EB' }}
                                 tickLine={false}
                                 interval={5}
                             />
                             <YAxis
                                 domain={[99, 100]}
-                                tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                                axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                tick={{ fill: '#6B7280', fontSize: 10 }}
+                                axisLine={{ stroke: '#E5E7EB' }}
                                 tickLine={false}
                                 tickFormatter={(v) => `${v}%`}
                             />
                             <Tooltip
                                 contentStyle={{
-                                    background: 'rgba(15,15,20,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    background: '#FFFFFF',
+                                    border: '1px solid #E5E7EB',
                                     borderRadius: '8px',
                                     fontSize: '0.75rem',
-                                    color: '#fff'
+                                    color: '#111827'
                                 }}
                                 formatter={(value: number) => [`${value.toFixed(2)}%`, 'Uptime']}
                             />
@@ -248,27 +248,27 @@ export default function SystemHealth() {
                     </h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <LineChart data={responseTimeData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                             <XAxis
                                 dataKey="hour"
-                                tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                                axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                tick={{ fill: '#6B7280', fontSize: 10 }}
+                                axisLine={{ stroke: '#E5E7EB' }}
                                 tickLine={false}
                                 interval={5}
                             />
                             <YAxis
-                                tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                                axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                                tick={{ fill: '#6B7280', fontSize: 10 }}
+                                axisLine={{ stroke: '#E5E7EB' }}
                                 tickLine={false}
                                 tickFormatter={(v) => `${v}ms`}
                             />
                             <Tooltip
                                 contentStyle={{
-                                    background: 'rgba(15,15,20,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    background: '#FFFFFF',
+                                    border: '1px solid #E5E7EB',
                                     borderRadius: '8px',
                                     fontSize: '0.75rem',
-                                    color: '#fff'
+                                    color: '#111827'
                                 }}
                                 formatter={(value: number) => [`${value.toFixed(1)}ms`]}
                             />

@@ -5,7 +5,7 @@
 
 .id-card-page {
     min-height: 100vh;
-    background: #080b0e;
+    background: var(--apex-obsidian);
     padding: var(--space-xl);
     position: relative;
 }
@@ -56,7 +56,7 @@
 }
 
 .id-card-page__back:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -69,7 +69,7 @@
 
 .id-card-page__header p {
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--apex-silver);
     margin: 0;
 }
 
@@ -384,8 +384,8 @@
     gap: var(--space-md);
     width: 100%;
     padding: 14px 18px;
-    background: rgba(15, 23, 30, 0.6);
-    border: 1px solid rgba(45, 212, 191, 0.1);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -425,12 +425,12 @@
 .id-card-quick-action__title {
     font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--apex-white);
 }
 
 .id-card-quick-action__subtitle {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
 }
 
 .id-card-quick-action--status {
@@ -438,8 +438,8 @@
 }
 
 .id-card-quick-action--status:hover {
-    background: rgba(15, 23, 30, 0.6);
-    border-color: rgba(45, 212, 191, 0.1);
+    background: #FFFFFF;
+    border-color: #E5E7EB;
 }
 
 /* ============================================

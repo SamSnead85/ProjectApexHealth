@@ -1,4 +1,5 @@
 /* AICopilot.css - Professional Healthcare AI Assistant */
+/* Light Theme - White panel with blue accent */
 
 .ai-copilot-trigger {
     position: fixed;
@@ -7,22 +8,22 @@
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: var(--apex-obsidian-card, #242838);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #2563EB;
+    border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--apex-teal, #0D7C8C);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
     transition: all 0.25s ease;
     z-index: 1000;
 }
 
 .ai-copilot-trigger:hover {
-    background: var(--apex-obsidian-elevated, #1F2330);
-    border-color: rgba(13, 124, 140, 0.3);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: #1D4ED8;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    transform: translateY(-2px);
 }
 
 /* Chat Panel */
@@ -32,10 +33,10 @@
     right: 2rem;
     width: 400px;
     height: 580px;
-    background: var(--apex-obsidian-soft, #141620);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 16px;
-    box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     z-index: 1001;
@@ -48,8 +49,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.25rem;
-    background: var(--apex-obsidian-glass, #191C28);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
 }
 
 .copilot-title {
@@ -62,24 +63,24 @@
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: rgba(13, 124, 140, 0.15);
-    border: 1px solid rgba(13, 124, 140, 0.25);
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--apex-teal, #0D7C8C);
+    color: #2563EB;
 }
 
 .copilot-title h3 {
     font-size: 0.9375rem;
-    color: var(--apex-white, #EDF0F4);
+    color: #111827;
     margin: 0 0 2px 0;
     font-weight: 600;
 }
 
 .copilot-title span {
     font-size: 0.6875rem;
-    color: var(--apex-steel, #6B7585);
+    color: #9CA3AF;
     display: flex;
     align-items: center;
     gap: 0.35rem;
@@ -88,7 +89,7 @@
 .online-dot {
     width: 6px;
     height: 6px;
-    background: var(--apex-success, #0E7B5A);
+    background: #059669;
     border-radius: 50%;
 }
 
@@ -98,7 +99,7 @@
     border-radius: 8px;
     background: transparent;
     border: none;
-    color: var(--apex-steel, #6B7585);
+    color: #9CA3AF;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -107,8 +108,8 @@
 }
 
 .copilot-close:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--apex-white, #EDF0F4);
+    background: #E5E7EB;
+    color: #111827;
 }
 
 /* Messages */
@@ -122,7 +123,7 @@
 }
 
 .copilot-messages::-webkit-scrollbar { width: 3px; }
-.copilot-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 2px; }
+.copilot-messages::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 2px; }
 
 .message {
     display: flex;
@@ -146,13 +147,13 @@
 }
 
 .message.assistant .message-avatar {
-    background: rgba(13, 124, 140, 0.15);
-    color: var(--apex-teal, #0D7C8C);
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563EB;
 }
 
 .message.user .message-avatar {
-    background: rgba(74, 111, 165, 0.15);
-    color: var(--apex-purple, #4A6FA5);
+    background: rgba(107, 114, 128, 0.1);
+    color: #4B5563;
 }
 
 .message-body {
@@ -165,18 +166,18 @@
     border-radius: 12px;
     font-size: 0.8125rem;
     line-height: 1.55;
-    color: var(--apex-white, #EDF0F4);
+    color: #111827;
 }
 
 .message.assistant .message-content {
-    background: var(--apex-obsidian-glass, #191C28);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #F3F5F8;
+    border: 1px solid #E5E7EB;
     border-top-left-radius: 3px;
 }
 
 .message.user .message-content {
-    background: rgba(13, 124, 140, 0.12);
-    border: 1px solid rgba(13, 124, 140, 0.2);
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.15);
     border-top-right-radius: 3px;
 }
 
@@ -184,18 +185,18 @@
 .message-data-card {
     margin-top: 0.5rem;
     padding: 0.75rem;
-    background: var(--apex-obsidian-elevated, #1F2330);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
     border-radius: 10px;
 }
 
 .data-card-title {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--apex-teal, #0D7C8C);
+    color: #2563EB;
     margin-bottom: 0.5rem;
     padding-bottom: 0.375rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid #E5E7EB;
 }
 
 .data-card-row {
@@ -207,13 +208,13 @@
 
 .data-card-label {
     font-size: 0.6875rem;
-    color: var(--apex-steel, #6B7585);
+    color: #9CA3AF;
 }
 
 .data-card-value {
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--apex-silver, #9BA4B4);
+    color: #4B5563;
 }
 
 /* Action buttons in messages */
@@ -226,11 +227,11 @@
 
 .action-btn {
     padding: 0.375rem 0.625rem;
-    background: rgba(13, 124, 140, 0.1);
-    border: 1px solid rgba(13, 124, 140, 0.25);
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.15);
     border-radius: 8px;
     font-size: 0.6875rem;
-    color: var(--apex-teal, #0D7C8C);
+    color: #2563EB;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -239,13 +240,13 @@
 }
 
 .action-btn:hover {
-    background: rgba(13, 124, 140, 0.18);
-    border-color: rgba(13, 124, 140, 0.4);
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.3);
 }
 
 .message-time {
     font-size: 0.5625rem;
-    color: var(--apex-muted, #454D5E);
+    color: #9CA3AF;
     margin-top: 0.25rem;
     padding-left: 0.25rem;
 }
@@ -260,7 +261,7 @@
 .typing-dot {
     width: 5px;
     height: 5px;
-    background: var(--apex-teal, #0D7C8C);
+    background: #2563EB;
     border-radius: 50%;
     animation: typing 1.4s infinite ease-in-out;
 }
@@ -279,16 +280,16 @@
     display: flex;
     gap: 0.375rem;
     flex-wrap: wrap;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid #E5E7EB;
 }
 
 .suggestion-chip {
     padding: 0.4rem 0.7rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #F3F5F8;
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
     font-size: 0.6875rem;
-    color: var(--apex-silver, #9BA4B4);
+    color: #4B5563;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -297,46 +298,47 @@
 }
 
 .suggestion-chip:hover {
-    background: rgba(13, 124, 140, 0.1);
-    border-color: rgba(13, 124, 140, 0.25);
-    color: var(--apex-teal, #0D7C8C);
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.2);
+    color: #2563EB;
 }
 
 /* Input */
 .copilot-input {
     padding: 0.75rem 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #E5E7EB;
     display: flex;
     gap: 0.625rem;
     align-items: center;
-    background: var(--apex-obsidian-glass, #191C28);
+    background: #FFFFFF;
 }
 
 .copilot-input input {
     flex: 1;
     padding: 0.75rem 0.875rem;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #F3F5F8;
+    border: 1px solid #E5E7EB;
     border-radius: 10px;
-    color: var(--apex-white, #EDF0F4);
+    color: #111827;
     font-size: 0.8125rem;
     font-family: inherit;
 }
 
 .copilot-input input:focus {
     outline: none;
-    border-color: rgba(13, 124, 140, 0.4);
+    border-color: rgba(37, 99, 235, 0.4);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
 .copilot-input input::placeholder {
-    color: var(--apex-muted, #454D5E);
+    color: #9CA3AF;
 }
 
 .send-btn {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: var(--apex-teal, #0D7C8C);
+    background: #2563EB;
     border: none;
     color: white;
     cursor: pointer;
@@ -347,7 +349,7 @@
 }
 
 .send-btn:hover {
-    background: var(--apex-teal-soft, #0F91A3);
+    background: #1D4ED8;
 }
 
 .send-btn:disabled {

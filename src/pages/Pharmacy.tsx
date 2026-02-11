@@ -240,7 +240,7 @@ export function Pharmacy() {
                         <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fbbf24', marginBottom: '0.15rem' }}>
                             Refill Reminder
                         </div>
-                        <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)' }}>
+                        <div style={{ fontSize: '0.82rem', color: '#4B5563' }}>
                             {refillDueRx.length === 1
                                 ? `${refillDueRx[0].drugName} ${refillDueRx[0].strength} is due for refill on ${formatDate(refillDueRx[0].nextRefillDate)}`
                                 : `${refillDueRx.length} prescriptions are due for refill soon: ${refillDueRx.map(rx => rx.drugName).join(', ')}`
@@ -261,13 +261,13 @@ export function Pharmacy() {
                     transition={{ delay: 0.1 }}
                     style={{
                         borderRadius: '16px', marginBottom: '1.25rem', overflow: 'hidden',
-                        background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                        background: '#FFFFFF', border: '1px solid #E5E7EB'
                     }}
                 >
                     <div style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                         padding: '0.85rem 1.25rem',
-                        background: 'rgba(239,68,68,0.06)', borderBottom: '1px solid rgba(239,68,68,0.1)'
+                        background: 'rgba(239,68,68,0.04)', borderBottom: '1px solid rgba(239,68,68,0.1)'
                     }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                             <ShieldAlert size={18} style={{ color: '#f87171' }} />
@@ -277,7 +277,7 @@ export function Pharmacy() {
                             <Badge variant="critical" size="sm">{drugInteractions.length}</Badge>
                         </div>
                         <button onClick={() => setShowInteractions(false)} style={{
-                            background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', display: 'flex', padding: '4px'
+                            background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer', display: 'flex', padding: '4px'
                         }}>
                             <X size={16} />
                         </button>
@@ -297,7 +297,7 @@ export function Pharmacy() {
                                 }
                                 <div style={{ flex: 1 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
-                                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'rgba(255,255,255,0.9)' }}>
+                                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: '#111827' }}>
                                             {interaction.drugs.join(' + ')}
                                         </span>
                                         <Badge
@@ -307,7 +307,7 @@ export function Pharmacy() {
                                             {interaction.severity}
                                         </Badge>
                                     </div>
-                                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>
+                                    <p style={{ margin: 0, fontSize: '0.78rem', color: '#6B7280', lineHeight: 1.5 }}>
                                         {interaction.description}
                                     </p>
                                 </div>

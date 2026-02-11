@@ -96,7 +96,7 @@ const ComplianceScoreRing = ({ score, label, size = 120 }: { score: number; labe
     return (
         <div className="compliance-score-ring" style={{ width: size, height: size }}>
             <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8" />
+                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="8" />
                 <motion.circle
                     cx="50" cy="50" r="45"
                     fill="none"

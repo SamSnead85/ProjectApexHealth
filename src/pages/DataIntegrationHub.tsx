@@ -256,7 +256,7 @@ export function DataIntegrationHub() {
                                             <div
                                                 className="dh__integration-health-ring"
                                                 style={{
-                                                    background: `conic-gradient(${getHealthColor(integration.healthScore)} ${integration.healthScore * 3.6}deg, rgba(255,255,255,0.1) 0deg)`
+                                                    background: `conic-gradient(${getHealthColor(integration.healthScore)} ${integration.healthScore * 3.6}deg, rgba(0,0,0,0.08) 0deg)`
                                                 }}
                                             >
                                                 <span>{integration.healthScore}</span>

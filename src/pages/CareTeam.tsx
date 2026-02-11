@@ -185,10 +185,10 @@ export function CareTeam() {
                 style={{
                     display: 'flex', gap: '0.75rem', alignItems: 'center',
                     padding: '0.85rem 1.25rem', borderRadius: '16px', marginBottom: '1.5rem',
-                    background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                    background: '#FFFFFF', border: '1px solid #E5E7EB'
                 }}
             >
-                <Search size={16} style={{ color: 'rgba(255,255,255,0.4)', flexShrink: 0 }} />
+                <Search size={16} style={{ color: '#9CA3AF', flexShrink: 0 }} />
                 <input
                     type="text"
                     placeholder="Search by name, specialty, or practice..."
@@ -196,17 +196,17 @@ export function CareTeam() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{
                         flex: 1, padding: '0.35rem 0', border: 'none', background: 'transparent',
-                        color: '#fff', fontSize: '0.85rem', outline: 'none'
+                        color: '#111827', fontSize: '0.85rem', outline: 'none'
                     }}
                 />
                 {searchQuery && (
                     <button onClick={() => setSearchQuery('')} style={{
-                        background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', display: 'flex', padding: '4px'
+                        background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer', display: 'flex', padding: '4px'
                     }}>
                         <X size={14} />
                     </button>
                 )}
-                <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: '0.75rem', color: '#9CA3AF', whiteSpace: 'nowrap' }}>
                     {filteredTeam.length} provider{filteredTeam.length !== 1 ? 's' : ''}
                 </span>
             </motion.div>
@@ -280,8 +280,8 @@ export function CareTeam() {
             <h3 className="care-team__section-title">Specialists & Other Providers</h3>
             {filteredSpecialists.length === 0 && !filteredPrimaryCare && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{
-                    textAlign: 'center', padding: '2.5rem', color: 'rgba(255,255,255,0.4)', borderRadius: '16px',
-                    background: 'rgba(10,15,26,0.4)', border: '1px solid rgba(255,255,255,0.06)', marginBottom: '1.5rem'
+                    textAlign: 'center', padding: '2.5rem', color: '#9CA3AF', borderRadius: '16px',
+                    background: '#F9FAFB', border: '1px solid #E5E7EB', marginBottom: '1.5rem'
                 }}>
                     <Search size={28} style={{ marginBottom: '0.5rem', opacity: 0.5 }} />
                     <p style={{ margin: 0, fontSize: '0.9rem' }}>No providers match "{searchQuery}"</p>

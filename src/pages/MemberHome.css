@@ -32,7 +32,7 @@
     width: 44px;
     height: 44px;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     color: var(--apex-silver);
     cursor: pointer;
@@ -43,7 +43,7 @@
 }
 
 .notification-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-white);
 }
 
@@ -95,7 +95,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     cursor: pointer;
@@ -104,7 +104,7 @@
 }
 
 .quick-action:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: #E5E7EB;
     border-color: var(--apex-teal);
 }
 
@@ -193,13 +193,13 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .activity-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .activity-item__icon {
@@ -499,7 +499,7 @@
     flex-direction: column;
     gap: 2px;
     padding: 6px;
-    background: rgba(255, 255, 255, 0.95);
+    background: #FFFFFF;
     border-radius: var(--radius-sm);
 }
 
@@ -525,7 +525,7 @@
 .digital-id-card__member-info {
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #E5E7EB;
 }
 
 .digital-id-card__name {
@@ -594,7 +594,7 @@
 }
 
 .wallet-btn--apple:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .wallet-btn--google {
@@ -643,9 +643,9 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid #E5E7EB;
 }
 
 .account-balance__info {
@@ -701,14 +701,14 @@
     align-items: center;
     gap: 4px;
     padding: var(--space-md) var(--space-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid #E5E7EB;
     transition: all var(--transition-fast);
 }
 
 .copay-item:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: #E5E7EB;
     border-color: var(--apex-teal);
 }
 
@@ -802,7 +802,7 @@
 
 .benefit-bar__track {
     height: 10px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #E5E7EB;
     border-radius: var(--radius-full);
     overflow: hidden;
 }

@@ -82,14 +82,14 @@ export default function DigitalIDCard() {
                                         onClick={(e) => { e.stopPropagation(); handleCopyId() }}
                                         style={{
                                             background: 'none', border: 'none', cursor: 'pointer',
-                                            color: copied ? '#4ade80' : 'rgba(255,255,255,0.5)', display: 'flex', padding: '2px'
+                                            color: copied ? '#4ade80' : '#6B7280', display: 'flex', padding: '2px'
                                         }}
                                         title="Copy Member ID"
                                     >
                                         {copied ? <Check size={12} /> : <Copy size={12} />}
                                     </button>
                                 </div>
-                                <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.15rem' }}>
+                                <div style={{ fontSize: '0.65rem', color: '#9CA3AF', marginTop: '0.15rem' }}>
                                     Dependent: Self
                                 </div>
                             </div>

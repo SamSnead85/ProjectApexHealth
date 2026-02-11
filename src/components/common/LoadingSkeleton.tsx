@@ -25,7 +25,7 @@ function injectKeyframes() {
 // ── Base shimmer style ──
 const shimmerBase: React.CSSProperties = {
     background:
-        'linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 100%)',
+        'linear-gradient(90deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.03) 100%)',
     backgroundSize: '200% 100%',
     animation: 'loadingSkeleton-shimmer 2s ease-in-out infinite',
     borderRadius: 12,
@@ -97,7 +97,7 @@ export function CardSkeleton({
                 justifyContent: 'space-between',
                 padding: 20,
                 boxSizing: 'border-box',
-                border: '1px solid rgba(255,255,255,0.04)',
+                border: '1px solid rgba(0,0,0,0.06)',
                 ...style,
             }}
         >
@@ -108,7 +108,7 @@ export function CardSkeleton({
                             width: '45%',
                             height: 12,
                             borderRadius: 6,
-                            background: 'rgba(255,255,255,0.05)',
+                            background: 'rgba(0,0,0,0.05)',
                         }}
                     />
                     <div
@@ -116,7 +116,7 @@ export function CardSkeleton({
                             width: 32,
                             height: 32,
                             borderRadius: 8,
-                            background: 'rgba(255,255,255,0.04)',
+                            background: 'rgba(0,0,0,0.04)',
                         }}
                     />
                 </div>
@@ -127,7 +127,7 @@ export function CardSkeleton({
                         width: '60%',
                         height: 24,
                         borderRadius: 6,
-                        background: 'rgba(255,255,255,0.05)',
+                        background: 'rgba(0,0,0,0.05)',
                     }}
                 />
                 <div
@@ -135,7 +135,7 @@ export function CardSkeleton({
                         width: '35%',
                         height: 10,
                         borderRadius: 4,
-                        background: 'rgba(255,255,255,0.03)',
+                        background: 'rgba(0,0,0,0.03)',
                     }}
                 />
             </div>
@@ -176,7 +176,7 @@ export function TableSkeleton({
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 0,
-                border: '1px solid rgba(255,255,255,0.04)',
+                border: '1px solid rgba(0,0,0,0.06)',
                 flex: 1,
                 ...style,
             }}
@@ -187,7 +187,7 @@ export function TableSkeleton({
                     display: 'flex',
                     gap: gap.medium,
                     paddingBottom: 14,
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    borderBottom: '1px solid rgba(0,0,0,0.06)',
                     marginBottom: 6,
                 }}
             >
@@ -198,7 +198,7 @@ export function TableSkeleton({
                             width: colWidths[c % colWidths.length],
                             height: 10,
                             borderRadius: 4,
-                            background: 'rgba(255,255,255,0.07)',
+                            background: 'rgba(0,0,0,0.07)',
                         }}
                     />
                 ))}
@@ -212,7 +212,7 @@ export function TableSkeleton({
                         display: 'flex',
                         gap: gap.medium,
                         padding: '12px 0',
-                        borderBottom: r < rows - 1 ? '1px solid rgba(255,255,255,0.03)' : 'none',
+                        borderBottom: r < rows - 1 ? '1px solid rgba(0,0,0,0.04)' : 'none',
                     }}
                 >
                     {Array.from({ length: columns }, (_, c) => (
@@ -222,7 +222,7 @@ export function TableSkeleton({
                                 width: colWidths[c % colWidths.length],
                                 height: 10,
                                 borderRadius: 4,
-                                background: `rgba(255,255,255,${0.03 + (c % 2) * 0.02})`,
+                                background: `rgba(0,0,0,${0.03 + (c % 2) * 0.02})`,
                             }}
                         />
                     ))}
@@ -262,7 +262,7 @@ export function ChartSkeleton({
                 display: 'flex',
                 flexDirection: 'column',
                 gap: gap.large,
-                border: '1px solid rgba(255,255,255,0.04)',
+                border: '1px solid rgba(0,0,0,0.06)',
                 flex: 1,
                 minHeight: 280,
                 ...style,
@@ -270,10 +270,10 @@ export function ChartSkeleton({
         >
             {/* Chart title bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ width: '30%', height: 12, borderRadius: 6, background: 'rgba(255,255,255,0.06)' }} />
+                <div style={{ width: '30%', height: 12, borderRadius: 6, background: 'rgba(0,0,0,0.06)' }} />
                 <div style={{ display: 'flex', gap: 8 }}>
-                    <div style={{ width: 50, height: 22, ...shimmerPill, background: 'rgba(255,255,255,0.04)' }} />
-                    <div style={{ width: 50, height: 22, ...shimmerPill, background: 'rgba(255,255,255,0.04)' }} />
+                    <div style={{ width: 50, height: 22, ...shimmerPill, background: 'rgba(0,0,0,0.04)' }} />
+                    <div style={{ width: 50, height: 22, ...shimmerPill, background: 'rgba(0,0,0,0.04)' }} />
                 </div>
             </div>
 
@@ -287,7 +287,7 @@ export function ChartSkeleton({
                                 flex: 1,
                                 height: `${h}%`,
                                 borderRadius: '4px 4px 0 0',
-                                background: 'rgba(255,255,255,0.04)',
+                                background: 'rgba(0,0,0,0.04)',
                             }}
                         />
                     ))}
@@ -299,8 +299,8 @@ export function ChartSkeleton({
                             width: 160,
                             height: 160,
                             borderRadius: '50%',
-                            background: 'rgba(255,255,255,0.04)',
-                            border: '12px solid rgba(255,255,255,0.06)',
+                            background: 'rgba(0,0,0,0.04)',
+                            border: '12px solid rgba(0,0,0,0.06)',
                         }}
                     />
                 </div>
@@ -316,12 +316,12 @@ export function ChartSkeleton({
                         <path
                             d="M0,120 C50,100 80,40 140,60 C200,80 220,20 280,50 C340,80 370,30 400,45"
                             fill="none"
-                            stroke="rgba(255,255,255,0.3)"
+                            stroke="rgba(0,0,0,0.15)"
                             strokeWidth="2"
                         />
                         <path
                             d="M0,120 C50,100 80,40 140,60 C200,80 220,20 280,50 C340,80 370,30 400,45 L400,150 L0,150 Z"
-                            fill="rgba(255,255,255,0.05)"
+                            fill="rgba(0,0,0,0.04)"
                         />
                     </svg>
                 </div>
@@ -336,7 +336,7 @@ export function ChartSkeleton({
                             width: 32,
                             height: 8,
                             borderRadius: 4,
-                            background: 'rgba(255,255,255,0.04)',
+                            background: 'rgba(0,0,0,0.04)',
                         }}
                     />
                 ))}
@@ -376,7 +376,7 @@ export function PageSkeleton({
                 style={{ display: 'flex', gap: gap.small, alignItems: 'center' }}
             >
                 <div style={{ width: 60, height: 10, ...shimmerPill }} />
-                <div style={{ width: 8, height: 8, borderRadius: 2, background: 'rgba(255,255,255,0.06)' }} />
+                <div style={{ width: 8, height: 8, borderRadius: 2, background: 'rgba(0,0,0,0.06)' }} />
                 <div style={{ width: 90, height: 10, ...shimmerPill }} />
             </motion.div>
 

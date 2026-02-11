@@ -1,6 +1,6 @@
 /* ============================================
    EMPTY STATE
-   Premium Futuristic Design - Apex Obsidian v3
+   Light Theme Design - Apex v3
    ============================================ */
 
 .empty-state {
@@ -20,9 +20,9 @@
     width: 80px;
     height: 80px;
     margin-bottom: var(--space-lg);
-    background: rgba(255, 255, 255, 0.05);
+    background: #F3F5F8;
     border-radius: 50%;
-    color: var(--apex-steel);
+    color: #9CA3AF;
 }
 
 .empty-state--error .empty-state__icon {
@@ -31,20 +31,20 @@
 }
 
 .empty-state--search .empty-state__icon {
-    background: rgba(6, 182, 212, 0.1);
-    color: var(--apex-teal);
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563EB;
 }
 
 .empty-state__title {
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--apex-white);
+    color: #111827;
     margin: 0 0 var(--space-xs);
 }
 
 .empty-state__description {
     font-size: var(--text-sm);
-    color: var(--apex-steel);
+    color: #9CA3AF;
     margin: 0;
     max-width: 360px;
     line-height: 1.5;
@@ -62,7 +62,7 @@
     align-items: center;
     gap: 8px;
     padding: var(--space-sm) var(--space-lg);
-    background: var(--apex-teal);
+    background: #2563EB;
     border: none;
     border-radius: var(--radius-md);
     color: white;
@@ -73,15 +73,15 @@
 }
 
 .empty-state__action:hover {
-    background: #0ea5e9;
+    background: #1D4ED8;
 }
 
 .empty-state__secondary-action {
     padding: var(--space-sm) var(--space-lg);
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-md);
-    color: var(--apex-silver);
+    color: #4B5563;
     font-size: var(--text-sm);
     font-weight: 500;
     cursor: pointer;
@@ -89,23 +89,14 @@
 }
 
 .empty-state__secondary-action:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: var(--apex-white);
+    background: #F3F5F8;
+    border-color: #D1D5DB;
+    color: #111827;
 }
 
 /* Card variant */
 .empty-state--card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-xl);
-}
-
-/* Light mode */
-[data-theme="light"] .empty-state__title {
-    color: #0f172a;
-}
-
-[data-theme="light"] .empty-state__icon {
-    background: rgba(0, 0, 0, 0.05);
 }

@@ -223,19 +223,20 @@ const starTrendData = [
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: '16px',
     padding: '24px',
-    backdropFilter: 'blur(20px)'
+    boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
 }
 
 const tooltipStyle: React.CSSProperties = {
-    background: 'linear-gradient(180deg, rgba(25, 25, 40, 0.98) 0%, rgba(15, 15, 25, 0.98) 100%)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: '12px',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
-    fontSize: '12px'
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    fontSize: '12px',
+    color: '#111827'
 }
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -260,7 +261,7 @@ export default function StarRatings() {
                             key={i}
                             size={size}
                             fill={filled ? '#F59E0B' : half ? 'url(#halfStar)' : 'transparent'}
-                            stroke={filled || half ? '#F59E0B' : 'rgba(255,255,255,0.15)'}
+                            stroke={filled || half ? '#F59E0B' : 'rgba(0,0,0,0.15)'}
                             strokeWidth={1.5}
                             style={{ filter: filled ? 'drop-shadow(0 0 4px rgba(245,158,11,0.4))' : 'none' }}
                         />
@@ -334,7 +335,7 @@ export default function StarRatings() {
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}
             >
                 <div>
-                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: 'var(--apex-white, #F8FAFC)', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
                         <Star size={28} style={{ color: '#F59E0B', filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.5))' }} />
                         CMS Star Ratings & Quality
                     </h1>
@@ -362,7 +363,7 @@ export default function StarRatings() {
                 transition={{ delay: 0.1, duration: 0.5 }}
                 style={{
                     ...cardStyle,
-                    background: 'linear-gradient(135deg, rgba(10,15,26,0.8) 0%, rgba(20,25,40,0.6) 100%)',
+                    background: 'linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%)',
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: '32px',
@@ -393,7 +394,7 @@ export default function StarRatings() {
                             Overall CMS Star Rating
                         </div>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '8px' }}>
-                            <span style={{ fontSize: '48px', fontWeight: 800, color: '#F8FAFC', lineHeight: 1, letterSpacing: '-1px' }}>
+                            <span style={{ fontSize: '48px', fontWeight: 800, color: '#111827', lineHeight: 1, letterSpacing: '-1px' }}>
                                 {overallRating}
                             </span>
                             <span style={{ fontSize: '16px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 500 }}>/ 5.0</span>
@@ -432,14 +433,14 @@ export default function StarRatings() {
                                     <stop offset="100%" stopColor="#F59E0B" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
                             <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                             <YAxis domain={[3, 5]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                             <Tooltip contentStyle={tooltipStyle} formatter={(value: number) => [`${value} Stars`, 'Rating']} />
                             <Area
                                 type="monotone" dataKey="rating" stroke="#F59E0B" fill="url(#starTrendGrad)"
                                 strokeWidth={3}
-                                dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: '#0a0f1a', r: 5 }}
+                                dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: '#FFFFFF', r: 5 }}
                                 activeDot={{ r: 7, fill: '#F59E0B', stroke: 'rgba(245,158,11,0.3)', strokeWidth: 6 }}
                             />
                         </AreaChart>
@@ -475,7 +476,7 @@ export default function StarRatings() {
                         </div>
                         <div>
                             <div style={{ fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.3px' }}>{stat.label}</div>
-                            <div style={{ fontSize: '24px', fontWeight: 700, color: '#F8FAFC', lineHeight: 1.2 }}>{stat.value}</div>
+                            <div style={{ fontSize: '24px', fontWeight: 700, color: '#111827', lineHeight: 1.2 }}>{stat.value}</div>
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', marginTop: '2px' }}>{stat.change}</div>
                         </div>
                     </motion.div>
@@ -484,7 +485,7 @@ export default function StarRatings() {
 
             {/* ── 3. Five Domain Cards ───────────────────────────────────── */}
             <div>
-                <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#111827', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Activity size={20} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Star Rating Domains
                 </h2>
@@ -502,7 +503,7 @@ export default function StarRatings() {
                                 transition: 'all 0.2s ease',
                                 border: selectedDomain === domain.name
                                     ? `1px solid ${domain.color}40`
-                                    : '1px solid rgba(255,255,255,0.06)',
+                                    : '1px solid #E5E7EB',
                                 boxShadow: selectedDomain === domain.name
                                     ? `0 0 20px ${domain.color}15`
                                     : 'none'
@@ -516,11 +517,11 @@ export default function StarRatings() {
                             }}>
                                 {domain.icon}
                             </div>
-                            <div style={{ fontSize: '14px', fontWeight: 600, color: '#F8FAFC', marginBottom: '6px', lineHeight: 1.3 }}>
+                            <div style={{ fontSize: '14px', fontWeight: 600, color: '#111827', marginBottom: '6px', lineHeight: 1.3 }}>
                                 {domain.name}
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                                <span style={{ fontSize: '26px', fontWeight: 700, color: '#F8FAFC' }}>
+                                <span style={{ fontSize: '26px', fontWeight: 700, color: '#111827' }}>
                                     {domain.stars}
                                 </span>
                                 {renderStars(domain.stars, 14)}
@@ -537,7 +538,7 @@ export default function StarRatings() {
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', lineHeight: 1.4, marginBottom: '10px' }}>
                                 {domain.description}
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', borderTop: '1px solid #E5E7EB', paddingTop: '10px' }}>
                                 <span>{domain.measures} measures</span>
                                 <span style={{ color: 'var(--apex-success, #10B981)', fontWeight: 600 }}>{domain.atTarget} at target</span>
                             </div>
@@ -554,7 +555,7 @@ export default function StarRatings() {
                 style={cardStyle}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#F8FAFC', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#111827', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <Target size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                         HEDIS Measure Performance
                     </h3>
@@ -572,7 +573,7 @@ export default function StarRatings() {
                                         textAlign: h === 'Measure' ? 'left' : 'center',
                                         padding: '10px 14px', color: 'var(--apex-steel, #94A3B8)',
                                         fontWeight: 500, fontSize: '11px', textTransform: 'uppercase',
-                                        letterSpacing: '0.5px', borderBottom: '1px solid rgba(255,255,255,0.06)'
+                                        letterSpacing: '0.5px', borderBottom: '1px solid #E5E7EB'
                                     }}>
                                         {h}
                                     </th>
@@ -587,15 +588,15 @@ export default function StarRatings() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.4 + index * 0.03 }}
                                     style={{
-                                        background: index % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
+                                        background: index % 2 === 0 ? 'rgba(0,0,0,0.02)' : 'transparent',
                                         borderRadius: '8px'
                                     }}
                                 >
-                                    <td style={{ padding: '12px 14px', color: '#F8FAFC', fontWeight: 500 }}>
+                                    <td style={{ padding: '12px 14px', color: '#111827', fontWeight: 500 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                             <span style={{
                                                 fontSize: '10px', fontWeight: 600, color: 'var(--apex-steel, #94A3B8)',
-                                                background: 'rgba(255,255,255,0.05)', padding: '2px 6px',
+                                                background: 'rgba(0,0,0,0.04)', padding: '2px 6px',
                                                 borderRadius: '4px', fontFamily: 'monospace'
                                             }}>
                                                 {measure.id}
@@ -603,7 +604,7 @@ export default function StarRatings() {
                                             {measure.name}
                                         </div>
                                     </td>
-                                    <td style={{ textAlign: 'center', padding: '12px 14px', fontWeight: 600, color: '#F8FAFC' }}>
+                                    <td style={{ textAlign: 'center', padding: '12px 14px', fontWeight: 600, color: '#111827' }}>
                                         {measure.currentRate}%
                                     </td>
                                     <td style={{ textAlign: 'center', padding: '12px 14px', color: 'var(--apex-steel, #94A3B8)' }}>
@@ -653,7 +654,7 @@ export default function StarRatings() {
                 style={cardStyle}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#F8FAFC', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#111827', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <MessageSquare size={18} style={{ color: 'var(--apex-cyan, #06B6D4)' }} />
                         CAHPS Survey Composite Scores
                     </h3>
@@ -681,7 +682,7 @@ export default function StarRatings() {
                                     <stop offset="100%" stopColor="#64748b" stopOpacity={0.2} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
                             <XAxis
                                 dataKey="name" axisLine={false} tickLine={false}
                                 tick={{ fill: '#94A3B8', fontSize: 11 }}
@@ -693,7 +694,7 @@ export default function StarRatings() {
                             <YAxis domain={[60, 100]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                             <Tooltip
                                 contentStyle={tooltipStyle}
-                                cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                                cursor={{ fill: 'rgba(0,0,0,0.03)' }}
                                 formatter={(value: number, name: string) => [`${value}%`, name === 'score' ? 'Your Plan' : 'National Avg']}
                             />
                             <Bar dataKey="score" name="score" fill="url(#cahpsBarGrad)" radius={[6, 6, 0, 0]} maxBarSize={40} />
@@ -709,7 +710,7 @@ export default function StarRatings() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Target size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Benchmark Comparison
                 </h3>
@@ -735,11 +736,11 @@ export default function StarRatings() {
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '10px', color: 'var(--apex-steel, #94A3B8)', textTransform: 'uppercase', letterSpacing: '0.3px', marginBottom: '4px' }}>National</div>
-                                    <div style={{ fontSize: '18px', fontWeight: 700, color: '#F8FAFC' }}>{item.nationalAvg}</div>
+                                    <div style={{ fontSize: '18px', fontWeight: 700, color: '#111827' }}>{item.nationalAvg}</div>
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '10px', color: 'var(--apex-steel, #94A3B8)', textTransform: 'uppercase', letterSpacing: '0.3px', marginBottom: '4px' }}>Peer Group</div>
-                                    <div style={{ fontSize: '18px', fontWeight: 700, color: '#F8FAFC' }}>{item.peerGroup}</div>
+                                    <div style={{ fontSize: '18px', fontWeight: 700, color: '#111827' }}>{item.peerGroup}</div>
                                 </div>
                             </div>
                             <div style={{
@@ -767,7 +768,7 @@ export default function StarRatings() {
                 style={cardStyle}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#F8FAFC', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#111827', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Brain size={18} style={{ color: 'var(--apex-purple, #8B5CF6)' }} />
                     AI-Generated Improvement Recommendations
                     </h3>
@@ -790,8 +791,8 @@ export default function StarRatings() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.65 + index * 0.05 }}
                             style={{
-                                background: 'rgba(255,255,255,0.02)',
-                                border: '1px solid rgba(255,255,255,0.05)',
+                                background: 'rgba(0,0,0,0.02)',
+                                border: '1px solid #E5E7EB',
                                 borderRadius: '12px',
                                 padding: '18px 20px',
                                 display: 'flex',
@@ -813,7 +814,7 @@ export default function StarRatings() {
                             </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
-                                    <span style={{ fontSize: '14px', fontWeight: 600, color: '#F8FAFC' }}>{item.title}</span>
+                                    <span style={{ fontSize: '14px', fontWeight: 600, color: '#111827' }}>{item.title}</span>
                                     <span style={{
                                         ...getPriorityStyle(item.priority),
                                         display: 'inline-flex', alignItems: 'center',
@@ -859,9 +860,9 @@ export default function StarRatings() {
                     style={{
                         display: 'flex', alignItems: 'center', gap: '8px',
                         padding: '12px 24px', borderRadius: '12px',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        background: 'rgba(255,255,255,0.04)',
-                        color: '#F8FAFC', fontSize: '14px', fontWeight: 500,
+                        border: '1px solid #E5E7EB',
+                        background: 'rgba(0,0,0,0.04)',
+                        color: '#111827', fontSize: '14px', fontWeight: 500,
                         cursor: 'pointer', transition: 'all 0.2s ease'
                     }}
                 >

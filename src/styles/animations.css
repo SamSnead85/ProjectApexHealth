@@ -1,6 +1,7 @@
 /* ============================================
    PREMIUM ANIMATIONS v2.0
    Enterprise-Grade Motion Design
+   Light Theme Compatible
    ============================================ */
 
 /* --------------------------------
@@ -107,15 +108,15 @@
 
 @keyframes pulseRing {
     0% {
-        box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.25);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2);
     }
 
     70% {
-        box-shadow: 0 0 0 6px rgba(13, 148, 136, 0);
+        box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(13, 148, 136, 0);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
     }
 }
 
@@ -206,11 +207,11 @@
 
     0%,
     100% {
-        box-shadow: 0 0 8px rgba(13, 148, 136, 0.1);
+        box-shadow: 0 0 8px rgba(37, 99, 235, 0.08);
     }
 
     50% {
-        box-shadow: 0 0 12px rgba(13, 148, 136, 0.2);
+        box-shadow: 0 0 12px rgba(37, 99, 235, 0.15);
     }
 }
 
@@ -218,11 +219,11 @@
 
     0%,
     100% {
-        border-color: rgba(13, 148, 136, 0.15);
+        border-color: rgba(37, 99, 235, 0.12);
     }
 
     50% {
-        border-color: rgba(13, 148, 136, 0.3);
+        border-color: rgba(37, 99, 235, 0.25);
     }
 }
 
@@ -496,7 +497,7 @@
 
 .hover-lift:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .hover-grow {
@@ -512,7 +513,7 @@
 }
 
 .hover-glow:hover {
-    box-shadow: 0 0 15px rgba(13, 148, 136, 0.15);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.1);
 }
 
 .hover-brighten {
@@ -657,7 +658,7 @@
 /* Counter value highlight on change */
 @keyframes counterHighlight {
     0% {
-        color: var(--apex-teal, #06B6D4);
+        color: var(--apex-blue, #2563EB);
         transform: scale(1.05);
     }
     100% {
@@ -1200,7 +1201,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
-    opacity: 0.3;
+    opacity: 0.15;
     will-change: transform;
     pointer-events: none;
 }
@@ -1281,20 +1282,20 @@
 .skeleton-wave {
     background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.04) 0%,
-        rgba(255, 255, 255, 0.08) 50%,
-        rgba(255, 255, 255, 0.04) 100%
+        rgba(0, 0, 0, 0.04) 0%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 100%
     );
     background-size: 200% 100%;
     animation: skeletonWave 1.8s ease-in-out infinite;
 }
 
-[data-theme="light"] .skeleton-wave {
+[data-theme="dark"] .skeleton-wave {
     background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.04) 0%,
-        rgba(0, 0, 0, 0.08) 50%,
-        rgba(0, 0, 0, 0.04) 100%
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.04) 100%
     );
     background-size: 200% 100%;
 }

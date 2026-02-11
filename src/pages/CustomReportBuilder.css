@@ -88,7 +88,7 @@
 .rb-input {
     width: 100%;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-white);
@@ -115,7 +115,7 @@
 .rb-select {
     width: 100%;
     padding: 10px 36px 10px 14px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-white);
@@ -131,7 +131,7 @@
 }
 
 .rb-select option {
-    background: #1a1a2e;
+    background: #FFFFFF;
     color: var(--apex-white);
 }
 
@@ -156,7 +156,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
@@ -168,8 +168,8 @@
 }
 
 .rb-source-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: #E5E7EB;
 }
 
 .rb-source-btn.active {
@@ -197,7 +197,7 @@
 }
 
 .rb-metrics-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 2px;
 }
 
@@ -206,7 +206,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid transparent;
     border-radius: var(--radius-md);
     color: var(--apex-silver);
@@ -218,7 +218,7 @@
 }
 
 .rb-metric-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border-color: var(--glass-border);
 }
 
@@ -251,7 +251,7 @@
     align-items: center;
     gap: 4px;
     padding: 10px 6px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
@@ -262,7 +262,7 @@
 }
 
 .rb-chart-type-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-silver);
 }
 
@@ -311,7 +311,7 @@
 }
 
 .rb-preview__sep {
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(0, 0, 0, 0.1);
 }
 
 .rb-preview__chart-switcher {
@@ -327,7 +327,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
@@ -336,7 +336,7 @@
 }
 
 .chart-type-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .chart-type-btn.active {
@@ -377,13 +377,12 @@
 
 /* ── Custom Tooltip ── */
 .rb-tooltip {
-    background: rgba(15, 15, 30, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-lg);
     padding: 12px 16px;
     min-width: 180px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .rb-tooltip__label {
@@ -392,7 +391,7 @@
     color: var(--apex-white);
     margin-bottom: 8px;
     padding-bottom: 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #E5E7EB;
 }
 
 .rb-tooltip__row {
@@ -589,7 +588,7 @@
 /* ── Recharts overrides ── */
 .rb-preview__chart .recharts-cartesian-grid-horizontal line,
 .rb-preview__chart .recharts-cartesian-grid-vertical line {
-    stroke: rgba(255, 255, 255, 0.04);
+    stroke: rgba(0, 0, 0, 0.03);
 }
 
 .rb-preview__chart .recharts-legend-item-text {

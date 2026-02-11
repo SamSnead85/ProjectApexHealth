@@ -229,19 +229,20 @@ const interventionOutcomesPie = [
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: '16px',
     padding: '24px',
-    backdropFilter: 'blur(20px)',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
 }
 
 const tooltipStyle: React.CSSProperties = {
-    background: 'linear-gradient(180deg, rgba(25, 25, 40, 0.98) 0%, rgba(15, 15, 25, 0.98) 100%)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: '12px',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
     fontSize: '12px',
+    color: '#111827',
 }
 
 const thStyle: React.CSSProperties = {
@@ -252,14 +253,14 @@ const thStyle: React.CSSProperties = {
     color: 'var(--apex-steel, #8892a4)',
     textTransform: 'uppercase',
     letterSpacing: '0.06em',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+    borderBottom: '1px solid #E5E7EB',
 }
 
 const tdStyle: React.CSSProperties = {
     padding: '12px 14px',
     fontSize: '13px',
-    color: 'var(--apex-silver, #b0b8c8)',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.03)',
+    color: '#4B5563',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -344,7 +345,7 @@ export default function SocialDeterminants() {
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}
             >
                 <div>
-                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: 'var(--apex-white, #F8FAFC)', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
                         <Heart size={28} style={{ color: 'var(--apex-teal, #0D9488)', filter: 'drop-shadow(0 0 8px rgba(13,148,136,0.5))' }} />
                         Social Determinants of Health
                     </h1>
@@ -403,7 +404,7 @@ export default function SocialDeterminants() {
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.3px' }}>{kpi.label}</div>
-                            <div style={{ fontSize: '26px', fontWeight: 700, color: '#F8FAFC', lineHeight: 1.2 }}>{kpi.value}</div>
+                            <div style={{ fontSize: '26px', fontWeight: 700, color: '#111827', lineHeight: 1.2 }}>{kpi.value}</div>
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', marginTop: '2px' }}>{kpi.subtitle}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '4px', fontSize: '11px', color: 'var(--apex-success, #10B981)' }}>
                                 <TrendingUp size={11} />
@@ -423,7 +424,7 @@ export default function SocialDeterminants() {
                     transition={{ delay: 0.3, duration: 0.5 }}
                     style={cardStyle}
                 >
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Activity size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                         SDOH Risk Categories
                         <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>% of screened members affected</span>
@@ -435,7 +436,7 @@ export default function SocialDeterminants() {
                                 layout="vertical"
                                 margin={{ top: 0, right: 30, left: 20, bottom: 0 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" horizontal={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" horizontal={false} />
                                 <XAxis type="number" domain={[0, 30]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} unit="%" />
                                 <YAxis
                                     type="category"
@@ -448,7 +449,7 @@ export default function SocialDeterminants() {
                                 <Tooltip
                                     contentStyle={tooltipStyle}
                                     formatter={(value: number, _name: string, props: any) => [`${value}% (${props?.payload?.members?.toLocaleString() ?? '—'} members)`, 'Prevalence']}
-                                    cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                                    cursor={{ fill: 'rgba(0,0,0,0.03)' }}
                                 />
                                 <Bar dataKey="percentage" radius={[0, 8, 8, 0]} maxBarSize={28}>
                                     {sdohRiskCategories.map((entry, i) => (
@@ -467,8 +468,8 @@ export default function SocialDeterminants() {
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', gap: '6px',
                                     padding: '5px 12px', borderRadius: '8px', fontSize: '11px', fontWeight: 500,
-                                    background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(255,255,255,0.04)',
-                                    border: selectedCategory === cat.category ? `1px solid ${cat.color}40` : '1px solid rgba(255,255,255,0.06)',
+background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0.04)',
+                                                    border: selectedCategory === cat.category ? `1px solid ${cat.color}40` : '1px solid #E5E7EB',
                                     color: selectedCategory === cat.category ? cat.color : 'var(--apex-steel, #94A3B8)',
                                     cursor: 'pointer', transition: 'all 0.2s',
                                 }}
@@ -487,7 +488,7 @@ export default function SocialDeterminants() {
                     transition={{ delay: 0.35, duration: 0.5 }}
                     style={cardStyle}
                 >
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Target size={18} style={{ color: 'var(--apex-success, #10B981)' }} />
                         Intervention Outcomes
                     </h3>
@@ -515,7 +516,7 @@ export default function SocialDeterminants() {
                             position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
                             textAlign: 'center', pointerEvents: 'none',
                         }}>
-                            <span style={{ display: 'block', fontSize: '28px', fontWeight: 700, color: '#F8FAFC' }}>76%</span>
+                            <span style={{ display: 'block', fontSize: '28px', fontWeight: 700, color: '#111827' }}>76%</span>
                             <span style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)' }}>Positive</span>
                         </div>
                     </div>
@@ -525,7 +526,7 @@ export default function SocialDeterminants() {
                             <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                 <div style={{ width: '10px', height: '10px', borderRadius: '3px', background: item.color, flexShrink: 0 }} />
                                 <span style={{ flex: 1, fontSize: '13px', color: 'var(--apex-silver, #b0b8c8)' }}>{item.name}</span>
-                                <span style={{ fontSize: '13px', fontWeight: 600, color: '#F8FAFC' }}>{item.value}%</span>
+                                <span style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.value}%</span>
                             </div>
                         ))}
                     </div>
@@ -540,7 +541,7 @@ export default function SocialDeterminants() {
                 style={cardStyle}
             >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <MapPin size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                         Geospatial SDOH Risk Distribution
                     </h3>
@@ -580,17 +581,17 @@ export default function SocialDeterminants() {
                                         boxShadow: hoveredZip === cell.zip ? `0 4px 20px ${getRiskColor(cell.risk)}40` : 'none',
                                     }}
                                 >
-                                    <span style={{ fontSize: '11px', fontWeight: 600, color: '#F8FAFC', opacity: 0.9 }}>{cell.zip}</span>
-                                    <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.7)' }}>Score: {cell.score}</span>
+                                    <span style={{ fontSize: '11px', fontWeight: 600, color: '#111827', opacity: 0.9 }}>{cell.zip}</span>
+                                    <span style={{ fontSize: '10px', color: 'rgba(0,0,0,0.5)' }}>Score: {cell.score}</span>
                                     {hoveredZip === cell.zip && (
                                         <div style={{
                                             position: 'absolute', bottom: '110%', left: '50%', transform: 'translateX(-50%)',
-                                            background: 'linear-gradient(180deg, rgba(25, 25, 40, 0.98) 0%, rgba(15, 15, 25, 0.98) 100%)',
-                                            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px',
+                                            background: '#FFFFFF',
+                                            border: '1px solid #E5E7EB', borderRadius: '10px',
                                             padding: '10px 14px', whiteSpace: 'nowrap', zIndex: 100,
-                                            boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                                         }}>
-                                            <div style={{ fontSize: '12px', fontWeight: 600, color: '#F8FAFC', marginBottom: '4px' }}>ZIP {cell.zip}</div>
+                                            <div style={{ fontSize: '12px', fontWeight: 600, color: '#111827', marginBottom: '4px' }}>ZIP {cell.zip}</div>
                                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)' }}>Risk Score: {cell.score} · {cell.members} members</div>
                                             <div style={{ fontSize: '11px', color: getRiskColor(cell.risk), fontWeight: 600, marginTop: '2px', textTransform: 'capitalize' }}>{cell.risk} Risk</div>
                                         </div>
@@ -612,7 +613,7 @@ export default function SocialDeterminants() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45, duration: 0.5 }}
             >
-                <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#111827', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Users size={20} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Member SDOH Profiles
                     <span style={{ marginLeft: 'auto', fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>Showing high-priority members</span>
@@ -641,10 +642,10 @@ export default function SocialDeterminants() {
                             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '16px' }}>
                                 <div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                                        <span style={{ fontSize: '15px', fontWeight: 600, color: '#F8FAFC' }}>{member.name}</span>
+                                        <span style={{ fontSize: '15px', fontWeight: 600, color: '#111827' }}>{member.name}</span>
                                         <span style={{
                                             fontSize: '11px', fontWeight: 500, padding: '2px 8px', borderRadius: '6px',
-                                            background: 'rgba(255,255,255,0.06)', color: 'var(--apex-steel, #94A3B8)',
+                                            background: 'rgba(0,0,0,0.04)', color: '#6B7280',
                                             fontFamily: 'monospace',
                                         }}>
                                             {member.id}
@@ -699,7 +700,7 @@ export default function SocialDeterminants() {
                             {/* Intervention Status & Actions */}
                             <div style={{
                                 padding: '12px', borderRadius: '10px',
-                                background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)',
+                                background: 'rgba(0,0,0,0.02)', border: '1px solid #E5E7EB',
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                                     <span style={{ fontSize: '11px', fontWeight: 500, color: 'var(--apex-steel, #94A3B8)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
@@ -738,7 +739,7 @@ export default function SocialDeterminants() {
                 transition={{ delay: 0.55, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Building2 size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Community Resource Directory
                     <span style={{ marginLeft: 'auto', fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>{communityResources.length} active partners</span>
@@ -759,7 +760,7 @@ export default function SocialDeterminants() {
                         <tbody>
                             {communityResources.map((resource) => (
                                 <tr key={resource.name} style={{ transition: 'background 0.15s' }}>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#F8FAFC' }}>{resource.name}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{resource.name}</td>
                                     <td style={tdStyle}>
                                         <span style={{
                                             display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -775,10 +776,10 @@ export default function SocialDeterminants() {
                                             {resource.location}
                                         </span>
                                     </td>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#F8FAFC' }}>{resource.referrals.toLocaleString()}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{resource.referrals.toLocaleString()}</td>
                                     <td style={tdStyle}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '3px', overflow: 'hidden', maxWidth: '80px' }}>
+                                            <div style={{ flex: 1, height: '6px', background: 'rgba(0,0,0,0.06)', borderRadius: '3px', overflow: 'hidden', maxWidth: '80px' }}>
                                                 <div style={{
                                                     width: `${resource.successRate}%`, height: '100%', borderRadius: '3px',
                                                     background: resource.successRate >= 85 ? 'var(--apex-success, #10B981)' : resource.successRate >= 75 ? 'var(--apex-amber, #F59E0B)' : 'var(--apex-red, #EF4444)',
@@ -819,7 +820,7 @@ export default function SocialDeterminants() {
                 transition={{ delay: 0.6, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <FileText size={18} style={{ color: 'var(--apex-purple, #8B5CF6)' }} />
                     ICD-10 Z-Code Tracking
                     <span style={{
@@ -849,9 +850,9 @@ export default function SocialDeterminants() {
                                     <td style={tdStyle}>
                                         <span style={{
                                             display: 'inline-flex', alignItems: 'center',
-                                            padding: '3px 10px', background: 'rgba(255,255,255,0.06)',
+                                            padding: '3px 10px', background: 'rgba(0,0,0,0.04)',
                                             borderRadius: '6px', fontSize: '12px', fontWeight: 600,
-                                            fontFamily: 'monospace', color: '#F8FAFC',
+                                            fontFamily: 'monospace', color: '#111827',
                                         }}>
                                             {zCode.code}
                                         </span>
@@ -866,7 +867,7 @@ export default function SocialDeterminants() {
                                             {zCode.category}
                                         </span>
                                     </td>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#F8FAFC', fontSize: '14px' }}>{zCode.count.toLocaleString()}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827', fontSize: '14px' }}>{zCode.count.toLocaleString()}</td>
                                     <td style={tdStyle}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                             {zCode.trend === 'up' && <TrendingUp size={14} style={{ color: 'var(--apex-red, #EF4444)' }} />}
@@ -885,8 +886,8 @@ export default function SocialDeterminants() {
                                             {zCode.topSubcodes.map((sub, i) => (
                                                 <span key={i} style={{
                                                     fontSize: '10px', padding: '2px 7px', borderRadius: '4px',
-                                                    background: 'rgba(255,255,255,0.04)', color: 'var(--apex-steel, #94A3B8)',
-                                                    border: '1px solid rgba(255,255,255,0.04)',
+                                                    background: 'rgba(0,0,0,0.04)', color: '#6B7280',
+                                                    border: '1px solid #E5E7EB',
                                                 }}>
                                                     {sub}
                                                 </span>
@@ -907,7 +908,7 @@ export default function SocialDeterminants() {
                 transition={{ delay: 0.65, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#F8FAFC', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Shield size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Impact on Clinical Outcomes
                     <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>
@@ -925,7 +926,7 @@ export default function SocialDeterminants() {
                                 data={outcomesComparison}
                                 margin={{ top: 10, right: 20, left: 0, bottom: 20 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
                                 <XAxis
                                     dataKey="metric"
                                     axisLine={false}
@@ -942,7 +943,7 @@ export default function SocialDeterminants() {
                                     formatter={(value: string) => <span style={{ color: '#94A3B8' }}>{value}</span>}
                                 />
                                 <Bar dataKey="withIntervention" name="With SDOH Intervention" fill="#0D9488" radius={[6, 6, 0, 0]} maxBarSize={36} />
-                                <Bar dataKey="without" name="Without Intervention" fill="rgba(255,255,255,0.12)" radius={[6, 6, 0, 0]} maxBarSize={36} />
+                                <Bar dataKey="without" name="Without Intervention" fill="rgba(0,0,0,0.12)" radius={[6, 6, 0, 0]} maxBarSize={36} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -959,7 +960,7 @@ export default function SocialDeterminants() {
                             <div key={outcome.label} style={{
                                 display: 'flex', alignItems: 'center', gap: '14px',
                                 padding: '14px 16px', borderRadius: '12px',
-                                background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)',
+                                background: 'rgba(0,0,0,0.02)', border: '1px solid #E5E7EB',
                             }}>
                                 <div style={{
                                     width: '36px', height: '36px', borderRadius: '10px',
@@ -982,7 +983,7 @@ export default function SocialDeterminants() {
                 {/* AI Insight Footer */}
                 <div style={{
                     marginTop: '20px', padding: '14px 18px', borderRadius: '12px',
-                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(10, 15, 26, 0.4))',
+                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), #FFFFFF)',
                     border: '1px solid rgba(139, 92, 246, 0.18)',
                     display: 'flex', alignItems: 'center', gap: '12px',
                 }}>

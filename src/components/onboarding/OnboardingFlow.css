@@ -1,11 +1,11 @@
 /* OnboardingFlow.css - Premium Guided Onboarding Experience */
-/* Apex Obsidian v2.5 Design System - Award-Winning UX */
+/* Light Theme Design */
 
 .onboarding-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -16,13 +16,13 @@
 .onboarding-container {
     width: 100%;
     max-width: 900px;
-    background: linear-gradient(180deg, rgba(30, 32, 38, 0.98) 0%, rgba(20, 22, 26, 0.98) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 24px;
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.03),
-        0 40px 80px -20px rgba(0, 0, 0, 0.6),
-        0 0 120px rgba(59, 130, 246, 0.08);
+        0 0 0 1px rgba(0, 0, 0, 0.03),
+        0 40px 80px -20px rgba(0, 0, 0, 0.15),
+        0 0 120px rgba(37, 99, 235, 0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@
 /* Progress Bar */
 .onboarding-progress {
     height: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    background: #E5E7EB;
     position: relative;
     overflow: hidden;
 }
@@ -52,7 +52,7 @@
     top: 0;
     width: 40px;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
     animation: shimmer 1.5s infinite;
 }
 
@@ -94,11 +94,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     font-size: 1.25rem;
     font-weight: 700;
-    color: #3B82F6;
+    color: #2563EB;
 }
 
 .step-meta {
@@ -108,7 +108,7 @@
 .step-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-tertiary);
+    color: #9CA3AF;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 0.25rem;
@@ -117,30 +117,30 @@
 .step-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #111827;
 }
 
 .step-skip {
     padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #F3F5F8;
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
-    color: var(--text-tertiary);
+    color: #9CA3AF;
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .step-skip:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-secondary);
+    background: #E5E7EB;
+    color: #4B5563;
 }
 
 /* Step Description */
 .step-description {
     font-size: 1rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: #4B5563;
     margin-bottom: 2rem;
     max-width: 600px;
 }
@@ -159,23 +159,23 @@
 
 .feature-card {
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-    background: rgba(59, 130, 246, 0.08);
-    border-color: rgba(59, 130, 246, 0.2);
+    background: rgba(37, 99, 235, 0.04);
+    border-color: rgba(37, 99, 235, 0.2);
     transform: translateY(-2px);
 }
 
 .feature-card.selected {
-    background: rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.4);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.4);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.08);
 }
 
 .feature-icon {
@@ -185,8 +185,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-    color: #3B82F6;
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563EB;
     margin-bottom: 1rem;
 }
 
@@ -198,13 +198,13 @@
 .feature-title {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #111827;
     margin-bottom: 0.35rem;
 }
 
 .feature-desc {
     font-size: 0.85rem;
-    color: var(--text-tertiary);
+    color: #9CA3AF;
     line-height: 1.5;
 }
 
@@ -217,29 +217,29 @@
     display: block;
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: #4B5563;
     margin-bottom: 0.5rem;
 }
 
 .input-field {
     width: 100%;
     padding: 0.875rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 10px;
     font-size: 1rem;
-    color: var(--text-primary);
+    color: #111827;
     transition: all 0.2s ease;
 }
 
 .input-field:focus {
     outline: none;
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .input-field::placeholder {
-    color: var(--text-tertiary);
+    color: #9CA3AF;
 }
 
 /* Checklist */
@@ -254,20 +254,20 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .checklist-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: #F9FAFB;
 }
 
 .checklist-item.checked {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(5, 150, 105, 0.05);
+    border-color: rgba(5, 150, 105, 0.3);
 }
 
 .checklist-checkbox {
@@ -277,8 +277,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: #F3F5F8;
+    border: 2px solid #D1D5DB;
     transition: all 0.2s ease;
 }
 
@@ -294,7 +294,7 @@
 .checklist-text {
     flex: 1;
     font-size: 0.95rem;
-    color: var(--text-primary);
+    color: #111827;
 }
 
 /* Footer */
@@ -303,8 +303,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid #E5E7EB;
+    background: #F9FAFB;
 }
 
 .step-indicators {
@@ -316,13 +316,13 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: #E5E7EB;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .step-dot:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: #D1D5DB;
 }
 
 .step-dot.active {
@@ -345,10 +345,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 10px;
-    color: var(--text-secondary);
+    color: #4B5563;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
@@ -356,8 +356,8 @@
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
+    background: #F3F5F8;
+    color: #111827;
 }
 
 .btn-primary {
@@ -377,7 +377,7 @@
 
 .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
 }
 
 .btn-primary:disabled {
@@ -414,25 +414,25 @@
     0%,
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3);
     }
 
     50% {
         transform: scale(1.05);
-        box-shadow: 0 0 40px 10px rgba(59, 130, 246, 0.2);
+        box-shadow: 0 0 40px 10px rgba(37, 99, 235, 0.1);
     }
 }
 
 .welcome-title {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #111827;
     margin-bottom: 0.75rem;
 }
 
 .welcome-subtitle {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: #4B5563;
     max-width: 400px;
     line-height: 1.6;
 }
@@ -474,13 +474,13 @@
 .completion-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #111827;
     margin-bottom: 0.75rem;
 }
 
 .completion-text {
     font-size: 1rem;
-    color: var(--text-secondary);
+    color: #4B5563;
     max-width: 400px;
     line-height: 1.6;
     margin-bottom: 2rem;
@@ -503,5 +503,5 @@
 
 .completion-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
 }

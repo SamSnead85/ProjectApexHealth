@@ -62,8 +62,8 @@ const filterChips: { key: FilterKey; label: string; icon: React.ReactNode }[] = 
 const specialties = ['All Specialties', 'Family Medicine', 'Cardiology', 'Urgent Care', 'Dermatology', 'Pediatrics', 'Orthopedics', 'Internal Medicine', 'Psychiatry']
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: 16
 }
 
@@ -145,9 +145,9 @@ export default function NetworkSearch() {
                     <div style={{
                         flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-sm)',
                         padding: '10px var(--space-md)',
-                        background: 'rgba(255,255,255,0.03)',
+                        background: 'rgba(0,0,0,0.02)',
                         borderRadius: 10,
-                        border: '1px solid rgba(255,255,255,0.06)'
+                        border: '1px solid #E5E7EB'
                     }}>
                         <Search size={16} style={{ color: 'var(--apex-steel)', flexShrink: 0 }} />
                         <input
@@ -165,9 +165,9 @@ export default function NetworkSearch() {
                     <div style={{
                         display: 'flex', alignItems: 'center', gap: 'var(--space-sm)',
                         padding: '10px var(--space-md)',
-                        background: 'rgba(255,255,255,0.03)',
+                        background: 'rgba(0,0,0,0.02)',
                         borderRadius: 10,
-                        border: '1px solid rgba(255,255,255,0.06)',
+                        border: '1px solid #E5E7EB',
                         minWidth: 200
                     }}>
                         <Stethoscope size={16} style={{ color: 'var(--apex-steel)', flexShrink: 0 }} />
@@ -180,7 +180,7 @@ export default function NetworkSearch() {
                                 fontSize: 'var(--text-sm)', cursor: 'pointer'
                             }}
                         >
-                            {specialties.map(s => <option key={s} value={s} style={{ background: '#0a0f1a', color: '#fff' }}>{s}</option>)}
+                            {specialties.map(s => <option key={s} value={s} style={{ background: '#FFFFFF', color: '#111827' }}>{s}</option>)}
                         </select>
                     </div>
                     <Button variant="primary" icon={<Search size={14} />}>Search</Button>
@@ -199,10 +199,10 @@ export default function NetworkSearch() {
                                 borderRadius: 20,
                                 border: activeFilters.has(chip.key)
                                     ? '1px solid var(--apex-teal)'
-                                    : '1px solid rgba(255,255,255,0.1)',
+                                    : '1px solid #E5E7EB',
                                 background: activeFilters.has(chip.key)
                                     ? 'rgba(0, 200, 180, 0.1)'
-                                    : 'rgba(255,255,255,0.03)',
+                                    : 'rgba(0,0,0,0.02)',
                                 color: activeFilters.has(chip.key)
                                     ? 'var(--apex-teal)'
                                     : 'var(--apex-silver)',
@@ -240,7 +240,7 @@ export default function NetworkSearch() {
                                         ? '1px solid var(--apex-teal)'
                                         : compareList.includes(provider.id)
                                             ? '1px solid rgba(0, 200, 180, 0.3)'
-                                            : '1px solid rgba(255,255,255,0.06)',
+                                            : '1px solid #E5E7EB',
                                     transition: 'all 0.2s',
                                     position: 'relative'
                                 }}>
@@ -252,7 +252,7 @@ export default function NetworkSearch() {
                                             width: 22, height: 22, borderRadius: 6,
                                             border: compareList.includes(provider.id)
                                                 ? '1px solid var(--apex-teal)'
-                                                : '1px solid rgba(255,255,255,0.15)',
+                                                : '1px solid rgba(0,0,0,0.08)',
                                             background: compareList.includes(provider.id)
                                                 ? 'rgba(0, 200, 180, 0.2)'
                                                 : 'transparent',
@@ -311,7 +311,7 @@ export default function NetworkSearch() {
                                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                                         marginTop: 'var(--space-md)',
                                         paddingTop: 'var(--space-sm)',
-                                        borderTop: '1px solid rgba(255,255,255,0.04)'
+                                        borderTop: '1px solid rgba(0,0,0,0.04)'
                                     }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                                             <Star size={14} style={{ color: '#FFD700', fill: '#FFD700' }} />
@@ -375,7 +375,7 @@ export default function NetworkSearch() {
                                                 key={i}
                                                 size={14}
                                                 style={{
-                                                    color: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : 'rgba(255,255,255,0.1)',
+                                                    color: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : '#E5E7EB',
                                                     fill: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : 'none'
                                                 }}
                                             />

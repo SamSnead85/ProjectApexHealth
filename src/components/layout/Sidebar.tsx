@@ -284,11 +284,11 @@ const SidebarNavItem = React.memo(function SidebarNavItem({
     )
 })
 
-const portalLabels: Record<string, { label: string; color: string }> = {
-    admin: { label: 'Admin Console', color: '#0D9488' },
-    broker: { label: 'Broker Portal', color: '#0D7C8C' },
-    employer: { label: 'Employer Hub', color: '#4A6FA5' },
-    member: { label: 'Member Portal', color: '#0D7C8C' }
+const portalLabels: Record<string, { label: string; color: string; gradientEnd: string }> = {
+    admin: { label: 'Admin Console', color: '#2563EB', gradientEnd: '#60A5FA' },
+    broker: { label: 'Broker Portal', color: '#0D9488', gradientEnd: '#2DD4BF' },
+    employer: { label: 'Employer Hub', color: '#7C3AED', gradientEnd: '#A78BFA' },
+    member: { label: 'Member Portal', color: '#059669', gradientEnd: '#34D399' }
 }
 
 export function Sidebar({
@@ -385,11 +385,11 @@ export function Sidebar({
                 <div className="sidebar__brand">
                     <div
                         className="sidebar__brand-icon"
-                        style={{ background: `linear-gradient(135deg, ${portalInfo.color}, #06B6D4)` }}
+                        style={{ background: `linear-gradient(135deg, ${portalInfo.color}, ${portalInfo.gradientEnd})` }}
                     >
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                            <path d="M12 4L20 18H4L12 4Z" fill="none" stroke="#030712" strokeWidth="2" strokeLinejoin="round" />
-                            <path d="M10 13H14M12 11V15" stroke="#030712" strokeWidth="1.5" strokeLinecap="round" />
+                            <path d="M12 4L20 18H4L12 4Z" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinejoin="round" />
+                            <path d="M10 13H14M12 11V15" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
                     </div>
                     <AnimatePresence>

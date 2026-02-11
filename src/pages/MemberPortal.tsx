@@ -77,7 +77,7 @@ function ProgressRing({ value, max, label, color }: { value: number, max: number
                     cy="40"
                     r="36"
                     fill="none"
-                    stroke="rgba(255,255,255,0.1)"
+                    stroke="rgba(0,0,0,0.1)"
                     strokeWidth="6"
                 />
                 <circle
@@ -120,7 +120,7 @@ function QuickActionCard({ action, onClick, badgeCount }: { action: typeof quick
                     color: '#fff', fontSize: '0.68rem', fontWeight: 700,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     padding: '0 5px', boxShadow: '0 2px 8px rgba(239,68,68,0.4)',
-                    border: '2px solid rgba(10,15,26,0.8)'
+                    border: '2px solid #FFFFFF'
                 }}>
                     {badgeCount}
                 </span>
@@ -259,11 +259,11 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                             style={{
                                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
                                 padding: '1.15rem 0.75rem', borderRadius: '16px', cursor: 'pointer',
-                                background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)',
+                                background: '#FFFFFF', border: '1px solid #E5E7EB',
                                 transition: 'border-color 0.2s'
                             }}
                             onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${item.color}33`)}
-                            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')}
+                            onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E5E7EB')}
                         >
                             <div style={{
                                 width: '44px', height: '44px', borderRadius: '12px', display: 'flex',
@@ -271,7 +271,7 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                             }}>
                                 <item.icon size={22} style={{ color: item.color }} />
                             </div>
-                            <span style={{ fontSize: '0.82rem', fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 500, color: '#1F2937' }}>
                                 {item.label}
                             </span>
                         </motion.button>
@@ -286,16 +286,16 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                         transition={{ delay: 0.2 }}
                         style={{
                             borderRadius: '16px', marginBottom: '1.5rem', overflow: 'hidden',
-                            background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                            background: '#FFFFFF', border: '1px solid #E5E7EB'
                         }}
                     >
                         <div style={{
                             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                            padding: '0.85rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,0.06)'
+                            padding: '0.85rem 1.25rem', borderBottom: '1px solid #E5E7EB'
                         }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                                 <Bell size={16} style={{ color: '#f59e0b' }} />
-                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'rgba(255,255,255,0.9)' }}>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#111827' }}>
                                     Action Items
                                 </span>
                                 <span style={{
@@ -319,17 +319,17 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                                     padding: '0.65rem 1.25rem', cursor: 'pointer',
                                     transition: 'background 0.15s'
                                 }}
-                                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0,0,0,0.02)')}
                                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                                 >
                                     <div style={{
                                         width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0,
-                                        background: item.urgent ? '#ef4444' : 'rgba(255,255,255,0.2)'
+                                        background: item.urgent ? '#ef4444' : 'rgba(0,0,0,0.15)'
                                     }} />
-                                    <span style={{ flex: 1, fontSize: '0.83rem', color: 'rgba(255,255,255,0.75)' }}>
+                                    <span style={{ flex: 1, fontSize: '0.83rem', color: '#374151' }}>
                                         {item.text}
                                     </span>
-                                    <ChevronRight size={14} style={{ color: 'rgba(255,255,255,0.3)' }} />
+                                    <ChevronRight size={14} style={{ color: '#9CA3AF' }} />
                                 </div>
                             ))}
                         </div>

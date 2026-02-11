@@ -6,7 +6,7 @@
 .reports-page--modern {
     min-height: 100vh;
     padding: 0;
-    background: linear-gradient(135deg, #050508 0%, #0a0a0f 50%, #0f0f18 100%);
+    background: var(--apex-obsidian);
     position: relative;
     overflow-x: hidden;
 }
@@ -44,9 +44,9 @@
     top: 0;
     z-index: 100;
     padding: 1rem 2rem;
-    background: rgba(5, 5, 8, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+    border-bottom: 1px solid #E5E7EB;
 }
 
 .reports__header-content {
@@ -79,14 +79,14 @@
 .reports__title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin: 0;
     letter-spacing: -0.02em;
 }
 
 .reports__subtitle {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
     margin: 0.25rem 0 0;
 }
 
@@ -98,17 +98,17 @@
 
 .reports__view-toggle {
     display: flex;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 8px;
     padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid #E5E7EB;
 }
 
 .reports__view-btn {
     padding: 0.5rem 1rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
     background: transparent;
     border: none;
     border-radius: 6px;
@@ -117,7 +117,7 @@
 }
 
 .reports__view-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--apex-white);
 }
 
 .reports__view-btn.active {
@@ -130,10 +130,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--apex-silver);
 }
 
 .reports__date-selector select {
@@ -146,7 +146,7 @@
 }
 
 .reports__date-selector select option {
-    background: #0a0a0f;
+    background: #FFFFFF;
 }
 
 /* ============================================
@@ -163,8 +163,8 @@
 }
 
 .reports__kpi-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid #E5E7EB;
     border-radius: 16px;
     padding: 1.25rem;
     position: relative;
@@ -186,7 +186,7 @@
 
 .reports__kpi-card:hover {
     border-color: rgba(6, 182, 212, 0.2);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.02));
 }
 
 .reports__kpi-card:hover::before {
@@ -232,14 +232,14 @@
 .reports__kpi-value {
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--apex-white);
     letter-spacing: -0.02em;
     line-height: 1.1;
 }
 
 .reports__kpi-label {
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
     margin-top: 0.25rem;
 }
 
@@ -252,10 +252,10 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
     margin-top: 0.75rem;
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #E5E7EB;
 }
 
 .reports__kpi-target .achieved {
@@ -276,8 +276,8 @@
 }
 
 .reports__chart-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid #E5E7EB;
     border-radius: 16px;
     padding: 1.5rem;
     grid-column: span 4;
@@ -301,13 +301,13 @@
 .reports__chart-header h3 {
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin: 0;
 }
 
 .reports__chart-header p {
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
     margin: 0.25rem 0 0;
 }
 
@@ -323,10 +323,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -343,16 +343,16 @@
 
 /* Chart Tooltip */
 .reports__chart-tooltip {
-    background: rgba(10, 10, 14, 0.95);
-    border: 1px solid rgba(6, 182, 212, 0.3);
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
     padding: 0.75rem 1rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .reports__chart-tooltip-label {
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin-bottom: 0.5rem;
 }
 
@@ -378,12 +378,12 @@
 .reports__donut-total {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--apex-white);
 }
 
 .reports__donut-label {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
 }
 
 .reports__legend {
@@ -408,12 +408,12 @@
 
 .reports__legend-name {
     flex: 1;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--apex-silver);
 }
 
 .reports__legend-value {
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
 }
 
 /* ============================================
@@ -439,7 +439,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--apex-silver);
 }
 
 .reports__risk-dot {
@@ -450,7 +450,7 @@
 
 .reports__risk-track {
     height: 8px;
-    background: rgba(255, 255, 255, 0.06);
+    background: #E5E7EB;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -464,7 +464,7 @@
 .reports__risk-count {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     text-align: right;
 }
 
@@ -473,19 +473,19 @@
     gap: 2rem;
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #E5E7EB;
 }
 
 .reports__risk-stat-value {
     display: block;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--apex-white);
 }
 
 .reports__risk-stat-label {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
 }
 
 /* ============================================
@@ -522,13 +522,13 @@
     flex: 1;
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin: 0;
 }
 
 .reports__insights-header p {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
     margin: 0;
 }
 
@@ -543,14 +543,14 @@
     align-items: flex-start;
     gap: 0.75rem;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .reports__insight:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.04);
     transform: translateX(4px);
 }
 
@@ -587,23 +587,23 @@
 .reports__insight-content h4 {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin: 0 0 0.25rem;
 }
 
 .reports__insight-content p {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--apex-silver);
     margin: 0;
     line-height: 1.4;
 }
 
 .reports__insight-content strong {
-    color: #fff;
+    color: var(--apex-white);
 }
 
 .reports__insight svg:last-child {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--apex-muted);
     margin-top: 0.5rem;
 }
 
@@ -619,8 +619,8 @@
 
 .reports__activity-card {
     grid-column: span 4;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid #E5E7EB;
     border-radius: 16px;
     padding: 1.5rem;
 }
@@ -635,7 +635,7 @@
 .reports__activity-header h3 {
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--apex-white);
     margin: 0;
 }
 
@@ -655,7 +655,7 @@
 }
 
 .reports__activity-item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .reports__activity-indicator {
@@ -692,7 +692,7 @@
 
 .reports__activity-content p {
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--apex-white);
     margin: 0;
     line-height: 1.4;
 }
@@ -710,7 +710,7 @@
 
 .reports__activity-time {
     font-size: 0.6875rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--apex-muted);
     white-space: nowrap;
 }
 
@@ -722,9 +722,9 @@
     position: sticky;
     bottom: 0;
     padding: 1rem 2rem;
-    background: rgba(5, 5, 8, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid #E5E7EB;
 }
 
 .reports__quick-actions-inner {
@@ -738,7 +738,7 @@
 .reports__quick-actions-label {
     font-size: 0.8125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--apex-muted);
 }
 
 .reports__quick-actions-buttons {
@@ -832,17 +832,17 @@
     }
 }
 
-/* Recharts overrides for dark theme */
+/* Recharts overrides for light theme */
 .recharts-cartesian-axis-tick-value {
-    fill: rgba(255, 255, 255, 0.4) !important;
+    fill: var(--apex-muted) !important;
 }
 
 .recharts-legend-item-text {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: var(--apex-silver) !important;
 }
 
 .recharts-default-tooltip {
-    background: rgba(10, 10, 14, 0.95) !important;
-    border: 1px solid rgba(6, 182, 212, 0.3) !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E5E7EB !important;
     border-radius: 8px !important;
 }

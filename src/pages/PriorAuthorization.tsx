@@ -323,7 +323,7 @@ export function PriorAuthorization() {
                     <div className="pa-auto-decision">
                         <div className="pa-auto-decision-ring">
                             <svg viewBox="0 0 100 100" className="pa-ring-svg">
-                                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="8" />
+                                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="8" />
                                 <motion.circle
                                     cx="50" cy="50" r="42"
                                     fill="none"
@@ -355,7 +355,7 @@ export function PriorAuthorization() {
                                 <strong>68%</strong>
                             </div>
                             <div className="pa-auto-legend-item">
-                                <span className="pa-auto-dot" style={{ background: 'rgba(255,255,255,0.15)' }} />
+                                <span className="pa-auto-dot" style={{ background: 'rgba(0,0,0,0.1)' }} />
                                 <span>Manual Review</span>
                                 <strong>32%</strong>
                             </div>

@@ -132,7 +132,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     font-size: var(--text-xs);
@@ -261,7 +261,7 @@
 /* Premium Progress Bar */
 .benefits-admin__progress-track {
     height: 14px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-full);
     overflow: hidden;
     position: relative;
@@ -274,8 +274,8 @@
     background: repeating-linear-gradient(90deg,
             transparent,
             transparent 10px,
-            rgba(255, 255, 255, 0.02) 10px,
-            rgba(255, 255, 255, 0.02) 20px);
+            rgba(0, 0, 0, 0.02) 10px,
+            rgba(0, 0, 0, 0.02) 20px);
 }
 
 .benefits-admin__progress-fill {
@@ -293,7 +293,7 @@
     left: 0;
     right: 0;
     height: 50%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, transparent 100%);
     border-radius: var(--radius-full) var(--radius-full) 0 0;
 }
 
@@ -501,7 +501,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     width: 280px;
@@ -537,7 +537,7 @@
     color: var(--apex-steel);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-bottom: 1px solid var(--glass-border);
 }
 
@@ -545,7 +545,7 @@
     padding: var(--space-md) var(--space-lg);
     font-size: var(--text-sm);
     color: var(--apex-silver);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.02);
     transition: background var(--transition-fast);
 }
 
@@ -554,7 +554,7 @@
 }
 
 .benefits-admin__roster-table tbody tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .benefits-admin__roster-employee {
@@ -712,7 +712,7 @@
 
 .benefits-admin__ai-insight {
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-sm);
 }
@@ -888,7 +888,7 @@
 
 .benefits-admin__plan-bar {
     height: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 2px;
     overflow: hidden;
 }

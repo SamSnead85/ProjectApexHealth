@@ -6,7 +6,7 @@
 .billing-center {
     min-height: 100vh;
     padding: var(--space-xl);
-    background: var(--apex-obsidian);
+    background: var(--page-bg, #F3F5F8);
     position: relative;
 }
 
@@ -17,8 +17,8 @@
     left: 0;
     right: 0;
     height: 400px;
-    background: radial-gradient(ellipse at 25% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 75% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 25% 0%, rgba(139, 92, 246, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 0%, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -74,13 +74,13 @@
 .bl__title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin: 0;
 }
 
 .bl__subtitle {
     font-size: var(--text-sm);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     margin-top: 4px;
 }
 
@@ -103,8 +103,8 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, #FFFFFF, #FFFFFF);
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-xl);
     overflow: hidden;
     transition: all 0.3s ease;
@@ -123,8 +123,8 @@
 
 .bl__stat-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-color: #D1D5DB;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .bl__stat-icon {
@@ -145,13 +145,13 @@
 .bl__stat-value {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-mono);
 }
 
 .bl__stat-label {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 2px;
@@ -167,8 +167,8 @@
 /* Section Cards */
 .bl__section {
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, #FFFFFF, #FFFFFF);
+    border: 1px solid #E5E7EB;
     border-radius: var(--radius-xl);
 }
 
@@ -177,7 +177,7 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid #F3F4F6;
     margin-bottom: var(--space-md);
 }
 
@@ -187,7 +187,7 @@
     gap: var(--space-sm);
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin: 0;
 }
 
@@ -201,12 +201,12 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 80px;
     align-items: center;
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid #F3F4F6;
     transition: all 0.2s ease;
 }
 
 .bl__invoice-row:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: #F9FAFB;
 }
 
 .bl__invoice-row:last-child {
@@ -216,19 +216,19 @@
 .bl__invoice-id {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .bl__invoice-date,
 .bl__invoice-due {
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .bl__invoice-amount {
     font-size: var(--text-sm);
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-mono);
 }
 
@@ -243,7 +243,7 @@
 
 .bl__current-label {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: var(--space-sm);
@@ -252,14 +252,14 @@
 .bl__current-amount {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-mono);
     margin-bottom: var(--space-sm);
 }
 
 .bl__current-due {
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
     margin-bottom: var(--space-lg);
 }
 

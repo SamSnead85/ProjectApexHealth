@@ -1,6 +1,6 @@
 /* ============================================
    AVATAR
-   Premium Futuristic Design - Apex Obsidian v3
+   Light Theme Design - Apex v3
    ============================================ */
 
 .avatar {
@@ -49,7 +49,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid #E5E7EB;
 }
 
 .avatar__initials {
@@ -60,7 +60,7 @@
     justify-content: center;
     border-radius: 50%;
     font-weight: 600;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid #E5E7EB;
 }
 
 /* Status */
@@ -73,26 +73,26 @@
     min-width: 8px;
     min-height: 8px;
     border-radius: 50%;
-    border: 2px solid var(--apex-obsidian);
+    border: 2px solid #FFFFFF;
 }
 
 .avatar__status--online {
     background: #10b981;
-    box-shadow: 0 0 6px #10b981;
+    box-shadow: 0 0 4px rgba(16, 185, 129, 0.4);
 }
 
 .avatar__status--offline {
-    background: var(--apex-steel);
+    background: #9CA3AF;
 }
 
 .avatar__status--away {
     background: #f59e0b;
-    box-shadow: 0 0 6px #f59e0b;
+    box-shadow: 0 0 4px rgba(245, 158, 11, 0.4);
 }
 
 .avatar__status--busy {
     background: #ef4444;
-    box-shadow: 0 0 6px #ef4444;
+    box-shadow: 0 0 4px rgba(239, 68, 68, 0.4);
 }
 
 /* Avatar Group */
@@ -104,7 +104,7 @@
 
 .avatar-group .avatar {
     margin-left: -8px;
-    border: 2px solid var(--apex-obsidian);
+    border: 2px solid #FFFFFF;
     transition: all 0.2s ease;
 }
 
@@ -119,12 +119,12 @@
 
 /* Overflow count */
 .avatar--overflow {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: #F3F5F8;
+    border: 2px solid #E5E7EB;
 }
 
 .avatar__count {
     font-size: inherit;
     font-weight: 600;
-    color: var(--apex-silver);
+    color: #4B5563;
 }

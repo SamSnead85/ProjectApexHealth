@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: var(--apex-obsidian);
+    background: var(--page-bg, #F3F5F8);
     font-family: var(--font-body);
     padding: var(--space-lg);
     padding-top: var(--space-md);
@@ -42,7 +42,7 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-primary, #E5E7EB);
 }
 
 .sir-analytics__header-left {
@@ -56,11 +56,11 @@
     align-items: center;
     gap: var(--space-sm);
     font-size: 0.75rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .sir-analytics__breadcrumb--active {
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .sir-analytics__title {
@@ -69,7 +69,7 @@
     gap: 12px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     letter-spacing: -0.02em;
     margin: 0;
 }
@@ -99,8 +99,8 @@
 
 .sir-analytics__period-selector {
     display: flex;
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-sm);
     padding: 3px;
 }
@@ -109,7 +109,7 @@
     padding: var(--space-sm) 12px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     background: transparent;
     border: none;
     border-radius: 6px;
@@ -118,7 +118,7 @@
 }
 
 .sir-analytics__period-btn:hover {
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .sir-analytics__period-btn.active {
@@ -139,18 +139,18 @@
     padding: var(--space-sm) 12px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--apex-silver);
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    color: var(--text-secondary, #374151);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__action-btn:hover {
-    background: var(--apex-obsidian-card);
-    border-color: var(--glass-border-hover);
-    color: var(--apex-white);
+    background: var(--hover-bg, #F3F4F6);
+    border-color: var(--border-hover, #D1D5DB);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__action-btn--primary {
@@ -224,7 +224,7 @@
 
 .sir-analytics__ai-text {
     font-size: 0.8125rem;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .sir-analytics__ai-text strong {
@@ -275,8 +275,8 @@
 }
 
 .sir-kpi-card {
-    background: var(--apex-obsidian-soft);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg, #FFFFFF);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     cursor: pointer;
@@ -298,9 +298,9 @@
 }
 
 .sir-kpi-card:hover {
-    background: var(--apex-obsidian-glass);
-    border-color: var(--glass-border-hover);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: var(--card-bg-hover, #F9FAFB);
+    border-color: var(--border-hover, #D1D5DB);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .sir-kpi-card:hover::before {
@@ -317,7 +317,7 @@
 .sir-kpi-card__label {
     font-size: 0.6875rem;
     font-weight: 500;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -350,7 +350,7 @@
 .sir-kpi-card__value {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     letter-spacing: -0.02em;
     font-feature-settings: 'tnum' 1;
     margin-bottom: var(--space-sm);
@@ -367,17 +367,17 @@
     justify-content: space-between;
     align-items: center;
     padding-top: var(--space-sm);
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--border-primary, #E5E7EB);
 }
 
 .sir-kpi-card__target {
     font-size: 0.625rem;
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-kpi-card__drill {
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
     opacity: 0;
     transition: opacity 0.2s ease;
 }
@@ -417,8 +417,8 @@
    ============================================================ */
 
 .sir-analytics__panel {
-    background: var(--apex-obsidian-soft);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg, #FFFFFF);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -428,7 +428,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-primary, #E5E7EB);
 }
 
 .sir-analytics__panel-title {
@@ -437,7 +437,7 @@
     gap: 12px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__panel-title svg {
@@ -475,7 +475,7 @@
 .sir-analytics__chart-controls {
     display: flex;
     gap: 4px;
-    background: var(--apex-obsidian-elevated);
+    background: var(--elevated-bg, #F3F4F6);
     padding: 3px;
     border-radius: 6px;
 }
@@ -486,7 +486,7 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     background: transparent;
     border: none;
     border-radius: 6px;
@@ -495,12 +495,12 @@
 }
 
 .sir-analytics__chart-btn:hover {
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .sir-analytics__chart-btn.active {
-    background: var(--apex-obsidian-glass);
-    color: var(--apex-white);
+    background: var(--card-bg-hover, #F9FAFB);
+    color: var(--text-primary, #111827);
 }
 
 /* ============================================================
@@ -517,7 +517,7 @@
     gap: var(--space-lg);
     padding: 0 var(--space-lg) var(--space-md);
     font-size: 0.6875rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .sir-analytics__chart-legend .dot {
@@ -530,23 +530,23 @@
 
 /* Tooltip */
 .sir-tooltip {
-    background: var(--apex-obsidian-glass) !important;
-    border: 1px solid var(--glass-border-hover) !important;
+    background: var(--card-bg-hover, #F9FAFB) !important;
+    border: 1px solid var(--border-hover, #D1D5DB) !important;
     border-radius: var(--radius-sm) !important;
     padding: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
 .sir-tooltip__label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin-bottom: var(--space-sm);
 }
 
 .sir-tooltip__value {
     font-size: 0.6875rem;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -583,12 +583,12 @@
     display: block;
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__pie-label {
     font-size: 0.625rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     text-transform: uppercase;
 }
 
@@ -604,7 +604,7 @@
     align-items: center;
     gap: 12px;
     font-size: 0.75rem;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .sir-analytics__category-dot {
@@ -619,7 +619,7 @@
 
 .sir-analytics__category-percent {
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -647,7 +647,7 @@
     gap: 12px;
     padding: 0 var(--space-md) var(--space-md);
     font-size: 0.6875rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .sir-analytics__risk-item {
@@ -664,7 +664,7 @@
 
 .sir-analytics__risk-count {
     font-weight: 600;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
     margin-left: 4px;
 }
 
@@ -691,17 +691,17 @@
     gap: var(--space-md);
     align-items: center;
     padding: 12px var(--space-md);
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .sir-analytics__member-card:hover {
-    background: var(--apex-obsidian-card);
-    border-color: var(--glass-border-hover);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: var(--hover-bg, #F3F4F6);
+    border-color: var(--border-hover, #D1D5DB);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .sir-analytics__member-card--critical {
@@ -726,7 +726,7 @@
 .sir-analytics__member-score {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -756,13 +756,13 @@
 .sir-analytics__member-id {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-mono);
 }
 
 .sir-analytics__member-condition {
     font-size: 0.6875rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -790,13 +790,13 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-analytics__member-metric .label {
     font-size: 0.5625rem;
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
     text-transform: uppercase;
 }
 
@@ -846,8 +846,8 @@
 }
 
 .sir-analytics__stoploss-card {
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-md);
     padding: var(--space-md);
 }
@@ -870,7 +870,7 @@
 .sir-analytics__stoploss-type {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__stoploss-util {
@@ -889,7 +889,7 @@
 
 .sir-analytics__stoploss-bar {
     height: 6px;
-    background: var(--apex-obsidian-elevated);
+    background: var(--elevated-bg, #F3F4F6);
     border-radius: 3px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -920,13 +920,13 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-analytics__stoploss-metrics .label {
     font-size: 0.5625rem;
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
     text-transform: uppercase;
 }
 
@@ -937,8 +937,8 @@
 .sir-analytics__ai-panel {
     display: flex;
     flex-direction: column;
-    background: var(--apex-obsidian-soft);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg, #FFFFFF);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-lg);
     overflow: hidden;
     max-height: calc(100vh - 200px);
@@ -949,7 +949,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-primary, #E5E7EB);
     background: linear-gradient(90deg, rgba(139, 92, 246, 0.05) 0%, transparent 100%);
 }
 
@@ -959,7 +959,7 @@
     gap: 12px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__ai-title svg {
@@ -994,8 +994,8 @@
 
 .sir-analytics__insight {
     padding: 12px;
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1003,7 +1003,7 @@
 }
 
 .sir-analytics__insight:hover {
-    background: var(--apex-obsidian-card);
+    background: var(--hover-bg, #F3F4F6);
 }
 
 .sir-analytics__insight--critical {
@@ -1063,20 +1063,20 @@
 .sir-analytics__insight-confidence {
     font-size: 0.5625rem;
     font-family: var(--font-mono);
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
 }
 
 .sir-analytics__insight-title {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin: 0 0 var(--space-xs);
     line-height: 1.3;
 }
 
 .sir-analytics__insight-summary {
     font-size: 0.6875rem;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     line-height: 1.5;
     margin: 0;
 }
@@ -1091,13 +1091,13 @@
 .sir-analytics__insight-expanded {
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--border-primary, #E5E7EB);
     overflow: hidden;
 }
 
 .sir-analytics__insight-models {
     font-size: 0.625rem;
-    color: var(--apex-muted);
+    color: var(--text-muted, #9CA3AF);
     margin-bottom: var(--space-sm);
 }
 
@@ -1127,7 +1127,7 @@
 .sir-analytics__modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -1137,14 +1137,14 @@
 }
 
 .sir-analytics__modal {
-    background: var(--apex-obsidian-soft);
-    border: 1px solid var(--glass-border-hover);
+    background: var(--card-bg, #FFFFFF);
+    border: 1px solid var(--border-hover, #D1D5DB);
     border-radius: var(--radius-lg);
     width: 100%;
     max-width: 800px;
     max-height: 80vh;
     overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
 }
 
 .sir-analytics__modal-header {
@@ -1152,13 +1152,13 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-primary, #E5E7EB);
 }
 
 .sir-analytics__modal-header h2 {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin: 0;
 }
 
@@ -1168,17 +1168,17 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-sm);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__modal-header button:hover {
-    background: var(--apex-obsidian-card);
-    color: var(--apex-white);
+    background: var(--hover-bg, #F3F4F6);
+    color: var(--text-primary, #111827);
 }
 
 .sir-analytics__modal-body {
@@ -1199,8 +1199,8 @@
 }
 
 .sir-analytics__detail-card {
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-md);
     padding: var(--space-md);
 }
@@ -1208,7 +1208,7 @@
 .sir-analytics__detail-card h4 {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     margin: 0 0 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1217,7 +1217,7 @@
 .sir-analytics__detail-score {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -1239,7 +1239,7 @@
 
 .sir-analytics__detail-ai p {
     font-size: 0.8125rem;
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
     margin: 0;
     line-height: 1.5;
 }
@@ -1273,12 +1273,12 @@
 }
 
 .sir-analytics ::-webkit-scrollbar-thumb {
-    background: var(--glass-border-hover);
+    background: var(--border-hover, #D1D5DB);
     border-radius: 3px;
 }
 
 .sir-analytics ::-webkit-scrollbar-thumb:hover {
-    background: var(--apex-muted);
+    background: var(--text-muted, #9CA3AF);
 }
 
 /* Focus states */

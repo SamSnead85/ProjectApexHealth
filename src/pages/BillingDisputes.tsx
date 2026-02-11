@@ -124,8 +124,8 @@ const statusConfig: Record<DisputeStatus, { label: string; variant: string; icon
 }
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: '#FFFFFF',
+    border: '1px solid #E5E7EB',
     borderRadius: 16
 }
 
@@ -190,7 +190,7 @@ export default function BillingDisputes() {
                             ...cardStyle,
                             padding: 'var(--space-xl)',
                             border: '1px solid rgba(0, 200, 180, 0.15)',
-                            background: 'linear-gradient(135deg, rgba(0, 200, 180, 0.04), rgba(10, 15, 26, 0.6))'
+                            background: 'linear-gradient(135deg, rgba(0, 200, 180, 0.04), #FFFFFF)'
                         }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)' }}>
                                 <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--apex-white)' }}>
@@ -214,8 +214,8 @@ export default function BillingDisputes() {
                                         <div style={{
                                             display: 'flex', alignItems: 'center', gap: 8,
                                             padding: '10px 14px',
-                                            background: disputeErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
-                                            border: disputeErrors[field.key] ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
+                                            background: disputeErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
+                                            border: disputeErrors[field.key] ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
                                             borderRadius: 10
                                         }}>
                                             <span style={{ color: 'var(--apex-steel)' }}>{field.icon}</span>
@@ -239,19 +239,19 @@ export default function BillingDisputes() {
                                     onChange={e => { setNewDispute(prev => ({ ...prev, reason: e.target.value })); setDisputeErrors(prev => { const n = { ...prev }; delete n.reason; return n }) }}
                                     style={{
                                         width: '100%', padding: '10px 14px',
-                                        background: disputeErrors.reason ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
-                                        border: disputeErrors.reason ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
+                                        background: disputeErrors.reason ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
+                                        border: disputeErrors.reason ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
                                         borderRadius: 10, color: 'var(--apex-silver)',
                                         fontSize: 'var(--text-sm)', outline: 'none'
                                     }}
                                 >
-                                    <option value="" style={{ background: '#0a0f1a' }}>Select a reason...</option>
-                                    <option value="Incorrect charge amount" style={{ background: '#0a0f1a' }}>Incorrect charge amount</option>
-                                    <option value="Duplicate billing" style={{ background: '#0a0f1a' }}>Duplicate billing</option>
-                                    <option value="Service not received" style={{ background: '#0a0f1a' }}>Service not received</option>
-                                    <option value="Out-of-network billed incorrectly" style={{ background: '#0a0f1a' }}>Out-of-network billed incorrectly</option>
-                                    <option value="Pre-authorization not honored" style={{ background: '#0a0f1a' }}>Pre-authorization not honored</option>
-                                    <option value="Other" style={{ background: '#0a0f1a' }}>Other</option>
+                                    <option value="" style={{ background: '#FFFFFF' }}>Select a reason...</option>
+                                    <option value="Incorrect charge amount" style={{ background: '#FFFFFF' }}>Incorrect charge amount</option>
+                                    <option value="Duplicate billing" style={{ background: '#FFFFFF' }}>Duplicate billing</option>
+                                    <option value="Service not received" style={{ background: '#FFFFFF' }}>Service not received</option>
+                                    <option value="Out-of-network billed incorrectly" style={{ background: '#FFFFFF' }}>Out-of-network billed incorrectly</option>
+                                    <option value="Pre-authorization not honored" style={{ background: '#FFFFFF' }}>Pre-authorization not honored</option>
+                                    <option value="Other" style={{ background: '#FFFFFF' }}>Other</option>
                                 </select>
                                 {disputeErrors.reason && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 4, display: 'block' }}>{disputeErrors.reason}</span>}
                             </div>
@@ -266,8 +266,8 @@ export default function BillingDisputes() {
                                     onChange={e => { setNewDispute(prev => ({ ...prev, description: e.target.value })); setDisputeErrors(prev => { const n = { ...prev }; delete n.description; return n }) }}
                                     style={{
                                         width: '100%', padding: '10px 14px',
-                                        background: disputeErrors.description ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
-                                        border: disputeErrors.description ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
+                                        background: disputeErrors.description ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
+                                        border: disputeErrors.description ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
                                         borderRadius: 10, color: 'var(--apex-white)',
                                         fontSize: 'var(--text-sm)', outline: 'none',
                                         resize: 'vertical', fontFamily: 'inherit'
@@ -365,8 +365,8 @@ export default function BillingDisputes() {
                         onClick={() => setFilterStatus(status)}
                         style={{
                             padding: '5px 12px', borderRadius: 8,
-                            border: filterStatus === status ? '1px solid var(--apex-teal)' : '1px solid rgba(255,255,255,0.08)',
-                            background: filterStatus === status ? 'rgba(0, 200, 180, 0.1)' : 'rgba(255,255,255,0.03)',
+                            border: filterStatus === status ? '1px solid var(--apex-teal)' : '1px solid #E5E7EB',
+                            background: filterStatus === status ? 'rgba(0, 200, 180, 0.1)' : 'rgba(0,0,0,0.02)',
                             color: filterStatus === status ? 'var(--apex-teal)' : 'var(--apex-silver)',
                             cursor: 'pointer', fontSize: 'var(--text-xs)', fontWeight: 500
                         }}
@@ -386,7 +386,7 @@ export default function BillingDisputes() {
                     <div style={{ ...cardStyle, padding: 0, overflow: 'hidden' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                             <thead>
-                                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                                <tr style={{ borderBottom: '1px solid #E5E7EB' }}>
                                     {['Dispute ID', 'Date Filed', 'Reason', 'Amount', 'Status', 'Assignee'].map(header => (
                                         <th key={header} style={{
                                             textAlign: header === 'Amount' ? 'right' : 'left',
@@ -414,11 +414,11 @@ export default function BillingDisputes() {
                                             transition={{ duration: 0.2, delay: index * 0.03 }}
                                             onClick={() => setSelectedDispute(isSelected ? null : dispute.id)}
                                             style={{
-                                                borderBottom: '1px solid rgba(255,255,255,0.04)',
+                                                borderBottom: '1px solid rgba(0,0,0,0.04)',
                                                 cursor: 'pointer',
                                                 background: isSelected ? 'rgba(0, 200, 180, 0.03)' : 'transparent'
                                             }}
-                                            onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = 'rgba(255,255,255,0.02)' }}
+                                            onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = 'rgba(0,0,0,0.02)' }}
                                             onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = 'transparent' }}
                                         >
                                             <td style={{ padding: 'var(--space-md)', color: 'var(--apex-teal)', fontSize: 'var(--text-sm)', fontWeight: 600 }}>
@@ -447,7 +447,7 @@ export default function BillingDisputes() {
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                                                     <div style={{
                                                         width: 24, height: 24, borderRadius: 6,
-                                                        background: 'rgba(255,255,255,0.06)',
+                                                        background: '#E5E7EB',
                                                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                                                         fontSize: 'var(--text-xs)', color: 'var(--apex-silver)', fontWeight: 600
                                                     }}>
@@ -489,7 +489,7 @@ export default function BillingDisputes() {
                                 </div>
 
                                 {/* Status & Amount */}
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)', padding: 'var(--space-md)', background: 'rgba(255,255,255,0.02)', borderRadius: 10 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)', padding: 'var(--space-md)', background: 'rgba(0,0,0,0.02)', borderRadius: 10 }}>
                                     <Badge variant={statusConfig[selectedDisputeData.status].variant === 'danger' ? 'error' : statusConfig[selectedDisputeData.status].variant as 'warning' | 'info' | 'success'} icon={statusConfig[selectedDisputeData.status].icon}>
                                         {statusConfig[selectedDisputeData.status].label}
                                     </Badge>
@@ -508,7 +508,7 @@ export default function BillingDisputes() {
                                         { label: 'Assignee', value: selectedDisputeData.assignee },
                                         { label: 'Last Update', value: new Date(selectedDisputeData.lastUpdate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }
                                     ].map(item => (
-                                        <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                                        <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(0,0,0,0.02)' }}>
                                             <span style={{ fontSize: 'var(--text-xs)', color: 'var(--apex-steel)' }}>{item.label}</span>
                                             <span style={{ fontSize: 'var(--text-sm)', color: 'var(--apex-white)', fontWeight: 500, textAlign: 'right', maxWidth: '60%' }}>{item.value}</span>
                                         </div>
@@ -534,7 +534,7 @@ export default function BillingDisputes() {
                                         {/* Vertical line */}
                                         <div style={{
                                             position: 'absolute', left: 5, top: 6, bottom: 6,
-                                            width: 2, background: 'rgba(255,255,255,0.06)'
+                                            width: 2, background: '#E5E7EB'
                                         }} />
                                         {selectedDisputeData.timeline.map((event, i) => (
                                             <div key={i} style={{ position: 'relative', marginBottom: i < selectedDisputeData.timeline.length - 1 ? 'var(--space-md)' : 0 }}>
@@ -543,10 +543,10 @@ export default function BillingDisputes() {
                                                     width: 10, height: 10, borderRadius: '50%',
                                                     background: i === selectedDisputeData.timeline.length - 1
                                                         ? statusConfig[selectedDisputeData.status].color
-                                                        : 'rgba(255,255,255,0.15)',
+                                                        : 'rgba(0,0,0,0.08)',
                                                     border: i === selectedDisputeData.timeline.length - 1
                                                         ? `2px solid ${statusConfig[selectedDisputeData.status].color}`
-                                                        : '2px solid rgba(255,255,255,0.1)'
+                                                        : '2px solid rgba(0,0,0,0.08)'
                                                 }} />
                                                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--apex-white)', fontWeight: 500, marginBottom: 2 }}>
                                                     {event.event}

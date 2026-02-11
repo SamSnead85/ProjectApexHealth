@@ -65,7 +65,7 @@ export function Settings() {
                             <div style={{
                                 width: 40, height: 40,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: activeSection === section.id ? 'rgba(6,182,212,0.15)' : 'rgba(255,255,255,0.05)',
+                                background: activeSection === section.id ? 'rgba(6,182,212,0.15)' : 'rgba(0,0,0,0.04)',
                                 borderRadius: 'var(--radius-md)',
                                 color: activeSection === section.id ? 'var(--apex-teal)' : 'var(--apex-steel)'
                             }}>
@@ -92,7 +92,7 @@ export function Settings() {
                         <div>
                             <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--apex-white)', margin: '0 0 var(--space-xl) 0' }}>Profile Settings</h2>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)', padding: 'var(--space-lg)', background: 'rgba(255,255,255,0.02)', borderRadius: 'var(--radius-lg)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-lg)', marginBottom: 'var(--space-2xl)', padding: 'var(--space-lg)', background: 'rgba(0,0,0,0.02)', borderRadius: 'var(--radius-lg)' }}>
                                 <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, var(--apex-teal), #10B981)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700, color: 'white' }}>
                                     MJ
                                 </div>
@@ -142,7 +142,7 @@ export function Settings() {
                             <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--apex-white)', margin: '0 0 var(--space-xl) 0' }}>Notification Preferences</h2>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                                 {['Email notifications for new quotes', 'Push notifications for claim updates', 'Weekly summary reports', 'Renewal reminders'].map((item, i) => (
-                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--space-md)', background: 'rgba(255,255,255,0.02)', borderRadius: 'var(--radius-md)' }}>
+                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--space-md)', background: 'rgba(0,0,0,0.02)', borderRadius: 'var(--radius-md)' }}>
                                         <span style={{ color: 'var(--apex-silver)' }}>{item}</span>
                                         <input type="checkbox" defaultChecked={i < 3} style={{ width: 20, height: 20 }} />
                                     </div>
@@ -155,7 +155,7 @@ export function Settings() {
                         <div>
                             <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--apex-white)', margin: '0 0 var(--space-xl) 0' }}>Security Settings</h2>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-                                <div style={{ padding: 'var(--space-lg)', background: 'rgba(255,255,255,0.02)', borderRadius: 'var(--radius-lg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ padding: 'var(--space-lg)', background: 'rgba(0,0,0,0.02)', borderRadius: 'var(--radius-lg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div>
                                         <div style={{ color: 'var(--apex-white)', fontWeight: 500 }}>Password</div>
                                         <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>Last changed 30 days ago</div>
@@ -178,7 +178,7 @@ export function Settings() {
 
                     {['appearance', 'integrations', 'billing'].includes(activeSection) && (
                         <div style={{ textAlign: 'center', padding: 'var(--space-3xl)' }}>
-                            <div style={{ width: 64, height: 64, margin: '0 auto var(--space-lg)', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--apex-steel)' }}>
+                            <div style={{ width: 64, height: 64, margin: '0 auto var(--space-lg)', borderRadius: '50%', background: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--apex-steel)' }}>
                                 {activeSection === 'appearance' && <Palette size={24} />}
                                 {activeSection === 'integrations' && <Link2 size={24} />}
                                 {activeSection === 'billing' && <CreditCard size={24} />}

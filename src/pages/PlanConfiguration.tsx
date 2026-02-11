@@ -100,7 +100,7 @@ export function PlanConfiguration() {
                             <div style={{
                                 width: 36, height: 36,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: activeSection === section.id ? 'rgba(6,182,212,0.15)' : 'rgba(255,255,255,0.05)',
+                                background: activeSection === section.id ? 'rgba(6,182,212,0.15)' : 'rgba(0,0,0,0.04)',
                                 borderRadius: 'var(--radius-md)',
                                 color: activeSection === section.id ? 'var(--apex-teal)' : 'var(--apex-steel)'
                             }}>
@@ -146,7 +146,7 @@ export function PlanConfiguration() {
                             <Badge variant="info">{plans.length} plans</Badge>
                         </div>
                         <div>
-                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 80px', padding: 'var(--space-md) var(--space-lg)', background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--glass-border)' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 80px', padding: 'var(--space-md) var(--space-lg)', background: 'rgba(0,0,0,0.02)', borderBottom: '1px solid var(--glass-border)' }}>
                                 <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Plan</span>
                                 <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Type</span>
                                 <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', textTransform: 'uppercase' }}>Lives</span>
@@ -163,7 +163,7 @@ export function PlanConfiguration() {
                                         display: 'grid',
                                         gridTemplateColumns: '2fr 1fr 1fr 1fr 80px',
                                         padding: 'var(--space-md) var(--space-lg)',
-                                        borderBottom: '1px solid rgba(255,255,255,0.04)',
+                                        borderBottom: '1px solid rgba(0,0,0,0.06)',
                                         alignItems: 'center',
                                         cursor: 'pointer',
                                         transition: 'background 0.2s'

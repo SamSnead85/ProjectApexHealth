@@ -15,13 +15,13 @@
 .analytics__title {
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     margin-bottom: var(--space-xs);
 }
 
 .analytics__subtitle {
     font-size: var(--text-sm);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .analytics__controls {
@@ -32,8 +32,8 @@
 
 .analytics__time-selector {
     display: flex;
-    background: var(--apex-obsidian-glass);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg-hover, #F9FAFB);
+    border: 1px solid var(--border-primary, #E5E7EB);
     border-radius: var(--radius-md);
     padding: 2px;
 }
@@ -42,7 +42,7 @@
     padding: var(--space-xs) var(--space-md);
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     background: transparent;
     border: none;
     border-radius: var(--radius-sm);
@@ -51,12 +51,12 @@
 }
 
 .analytics__time-btn:hover {
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .analytics__time-btn--active {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: var(--page-bg, #F3F5F8);
 }
 
 /* Metrics Grid */
@@ -80,14 +80,14 @@
 
 .analytics__metric-label {
     font-size: var(--text-sm);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 .analytics__metric-value {
     display: block;
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-display);
     margin-bottom: var(--space-md);
 }
@@ -135,12 +135,12 @@
     gap: var(--space-sm);
     font-size: var(--text-base);
     font-weight: 600;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .analytics__card-meta {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 /* Funnel */
@@ -178,7 +178,7 @@
 
 .analytics__funnel-label {
     font-size: var(--text-sm);
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .analytics__funnel-value {
@@ -204,7 +204,7 @@
 
 .analytics__ai-metric-label {
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .analytics__ai-metric-value {
@@ -216,7 +216,7 @@
 .analytics__ai-metric-bar {
     position: relative;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: visible;
 }
@@ -239,13 +239,13 @@
     top: -4px;
     bottom: -4px;
     width: 2px;
-    background: var(--apex-white);
+    background: var(--text-primary, #111827);
     border-radius: 1px;
 }
 
 .analytics__ai-metric-target-label {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
     margin-top: var(--space-xs);
 }
 
@@ -293,13 +293,13 @@
 .analytics__pie-legend-label {
     flex: 1;
     font-size: var(--text-sm);
-    color: var(--apex-silver);
+    color: var(--text-secondary, #374151);
 }
 
 .analytics__pie-legend-value {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
     font-family: var(--font-mono);
 }
 
@@ -316,8 +316,8 @@
     gap: var(--space-sm);
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--glass-border);
+    background: #F9FAFB;
+    border: 1px solid var(--border-primary, #E5E7EB);
 }
 
 .analytics__alert--warning {
@@ -353,12 +353,12 @@
 
 .analytics__alert-title {
     font-size: var(--text-sm);
-    color: var(--apex-white);
+    color: var(--text-primary, #111827);
 }
 
 .analytics__alert-meta {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: var(--text-tertiary, #6B7280);
 }
 
 /* Responsive */

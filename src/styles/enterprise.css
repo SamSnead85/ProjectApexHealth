@@ -1,6 +1,6 @@
 /* Enterprise Healthcare Platform - Institutional Design System */
 /* Premium "Boardroom Purity" + "Anti-Vibe-Coding" Standards */
-/* Eliminates AI-generated aesthetic in favor of institutional gravitas */
+/* Light Theme Foundation */
 
 /* ============================================================
    FOUNDATION LAYER - Deep Institutional Foundations
@@ -22,7 +22,7 @@
          --clinical-info            → --apex-teal-muted / --apex-teal-glow
        ======================================================================= */
 
-    /* Shadow Scale - Enterprise-specific depth tokens (unique, not in --apex-*) */
+    /* Shadow Scale - Enterprise-specific depth tokens */
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -30,10 +30,10 @@
     --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.04);
     --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 
-    /* Border Tokens - Enterprise-specific borders (unique, not in --apex-*) */
-    --border-hairline: 1px solid rgba(0, 0, 0, 0.06);
-    --border-subtle: 1px solid rgba(0, 0, 0, 0.08);
-    --border-defined: 1px solid rgba(0, 0, 0, 0.12);
+    /* Border Tokens - Enterprise-specific borders */
+    --border-hairline: 1px solid #F3F4F6;
+    --border-subtle: 1px solid #E5E7EB;
+    --border-defined: 1px solid #D1D5DB;
 }
 
 /* Dark Mode Enterprise Tokens */
@@ -698,8 +698,8 @@
     position: absolute;
     z-index: var(--z-dropdown);
     padding: var(--space-2) var(--space-3);
-    background: var(--apex-obsidian-elevated);
-    color: var(--apex-white-soft);
+    background: #1F2937;
+    color: #F9FAFB;
     font-size: 0.75rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -718,7 +718,7 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    background: var(--apex-obsidian-elevated);
+    background: #1F2937;
     transform: rotate(45deg);
 }
 

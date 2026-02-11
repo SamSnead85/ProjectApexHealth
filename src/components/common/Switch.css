@@ -1,6 +1,6 @@
 /* ============================================
    SWITCH
-   Premium Futuristic Design - Apex Obsidian v3
+   Light Theme Design - Apex v3
    ============================================ */
 
 .switch {
@@ -25,12 +25,12 @@
 .switch__label {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--apex-white);
+    color: #111827;
 }
 
 .switch__description {
     font-size: var(--text-xs);
-    color: var(--apex-steel);
+    color: #9CA3AF;
 }
 
 .switch__track {
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     padding: 2px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #D1D5DB;
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
@@ -62,24 +62,24 @@
 }
 
 .switch__track:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: #C0C4CC;
 }
 
 .switch__track--checked {
-    background: var(--apex-teal);
+    background: #2563EB;
 }
 
 .switch__track--checked:hover {
-    background: #0ea5e9;
+    background: #1D4ED8;
 }
 
 .switch__thumb {
     display: block;
     width: 50%;
     aspect-ratio: 1;
-    background: var(--apex-white);
+    background: #FFFFFF;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .switch__track--checked .switch__thumb {
@@ -94,7 +94,7 @@
     width: 36px;
     height: 20px;
     padding: 2px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #D1D5DB;
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
@@ -102,11 +102,11 @@
 }
 
 .inline-switch:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: #C0C4CC;
 }
 
 .inline-switch--checked {
-    background: var(--apex-teal);
+    background: #2563EB;
 }
 
 .inline-switch--disabled {
@@ -118,24 +118,11 @@
     display: block;
     width: 16px;
     height: 16px;
-    background: var(--apex-white);
+    background: #FFFFFF;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .inline-switch--checked .inline-switch__thumb {
     margin-left: auto;
-}
-
-/* Light mode */
-[data-theme="light"] .switch__label {
-    color: #0f172a;
-}
-
-[data-theme="light"] .switch__track {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .inline-switch {
-    background: rgba(0, 0, 0, 0.1);
 }
