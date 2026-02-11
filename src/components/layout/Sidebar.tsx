@@ -39,7 +39,11 @@ import {
     Archive,
     Workflow,
     ShieldCheck,
-    X
+    X,
+    Calendar,
+    Video,
+    Bell,
+    MessageSquare
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -161,6 +165,7 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/broker' },
                 { id: 'clients', label: 'Book of Business', icon: <Briefcase size={20} />, path: '/broker/clients', badge: '24' },
                 { id: 'quotes', label: 'Quoting', icon: <FileText size={20} />, path: '/broker/quotes' },
+                { id: 'renewals', label: 'Renewals', icon: <Calendar size={20} />, path: '/broker/renewals' },
             ]
         },
         {
@@ -168,6 +173,13 @@ const portalNavigation: Record<string, NavGroup[]> = {
             items: [
                 { id: 'commissions', label: 'Commissions', icon: <CreditCard size={20} />, path: '/broker/commissions' },
                 { id: 'reports', label: 'Reports', icon: <BarChart3 size={20} />, path: '/broker/reports' },
+            ]
+        },
+        {
+            title: 'Support',
+            items: [
+                { id: 'messages', label: 'Messages', icon: <MessageSquare size={20} />, path: '/broker/messages' },
+                { id: 'settings', label: 'Settings', icon: <Settings size={20} />, path: '/broker/settings' },
             ]
         }
     ],
@@ -195,24 +207,31 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'dashboard', label: 'Home', icon: <LayoutDashboard size={20} />, path: '/member' },
                 { id: 'idcard', label: 'ID Card', icon: <CreditCard size={20} />, path: '/member/id-card' },
                 { id: 'coverage', label: 'Coverage', icon: <Shield size={20} />, path: '/member/coverage' },
-                { id: 'claims', label: 'Claims', icon: <FileText size={20} />, path: '/member/claims' },
-                { id: 'oon-claims', label: 'Submit OON Claim', icon: <FileText size={20} />, path: '/oon-claims' },
+                { id: 'claims', label: 'My Claims', icon: <FileText size={20} />, path: '/member/claims' },
+                { id: 'eob', label: 'EOB Viewer', icon: <FileText size={20} />, path: '/member/eob' },
+                { id: 'oon-claims', label: 'Submit Claim', icon: <FileText size={20} />, path: '/oon-claims' },
             ]
         },
         {
             title: 'Care',
             items: [
                 { id: 'findcare', label: 'Find Care', icon: <Heart size={20} />, path: '/member/providers' },
+                { id: 'appointments', label: 'Appointments', icon: <Calendar size={20} />, path: '/member/appointments' },
+                { id: 'telehealth', label: 'Telehealth', icon: <Video size={20} />, path: '/member/telehealth' },
                 { id: 'care-journey', label: 'Care Journey', icon: <Map size={20} />, path: '/care-journey' },
                 { id: 'concierge', label: 'AI Concierge', icon: <Sparkles size={20} />, path: '/health-concierge', badge: 'AI' },
                 { id: 'costestimator', label: 'Cost Estimator', icon: <CreditCard size={20} />, path: '/member/cost-estimator' },
                 { id: 'pharmacy', label: 'Pharmacy', icon: <Heart size={20} />, path: '/member/pharmacy' },
+                { id: 'wellness', label: 'Wellness', icon: <Activity size={20} />, path: '/member/wellness' },
             ]
         },
         {
             title: 'Account',
             items: [
-                { id: 'hsa', label: 'HSA/FSA', icon: <CreditCard size={20} />, path: '/member/hsa' },
+                { id: 'hsa', label: 'HSA/FSA Wallet', icon: <CreditCard size={20} />, path: '/member/wallet' },
+                { id: 'documents', label: 'Documents', icon: <FileText size={20} />, path: '/member/documents' },
+                { id: 'messages', label: 'Messages', icon: <MessageSquare size={20} />, path: '/member/messages' },
+                { id: 'notifications', label: 'Notifications', icon: <Bell size={20} />, path: '/member/notifications' },
                 { id: 'settings', label: 'Settings', icon: <Settings size={20} />, path: '/member/settings' },
             ]
         }
@@ -267,9 +286,9 @@ const SidebarNavItem = React.memo(function SidebarNavItem({
 
 const portalLabels: Record<string, { label: string; color: string }> = {
     admin: { label: 'Admin Console', color: '#0D9488' },
-    broker: { label: 'Broker Nexus', color: '#0891B2' },
-    employer: { label: 'Employer Hub', color: '#06B6D4' },
-    member: { label: 'Member Portal', color: '#22D3EE' }
+    broker: { label: 'Broker Portal', color: '#0D7C8C' },
+    employer: { label: 'Employer Hub', color: '#4A6FA5' },
+    member: { label: 'Member Portal', color: '#0D7C8C' }
 }
 
 export function Sidebar({

@@ -251,27 +251,8 @@ function App() {
     // Single-portal users get focused experience without sidebar
     // ============================================================
 
-    // Member Portal - Direct focused experience (no Shell/sidebar)
-    if (activePortal === 'member') {
-        return (
-            <ThemeProvider>
-                <ToastProvider>
-                    <MemberPortal onLogout={handleLogout} />
-                </ToastProvider>
-            </ThemeProvider>
-        )
-    }
-
-    // Broker Portal - Direct agency dashboard (no Shell/sidebar)
-    if (activePortal === 'broker') {
-        return (
-            <ThemeProvider>
-                <ToastProvider>
-                    <BrokerPortal onLogout={handleLogout} />
-                </ToastProvider>
-            </ThemeProvider>
-        )
-    }
+    // Member and Broker portals now route through the Shell with sidebar navigation
+    // (removed standalone rendering that had no navigation)
 
 
     // Determine which page to render based on path
@@ -744,6 +725,77 @@ function App() {
         if (activePortal === 'employer' && (activePath === '/employer' || activePath.includes('/employer/dashboard'))) {
             return <EmployerAdmin />
         }
+
+        // ── Broker Portal Routes ──
+        if (activePortal === 'broker') {
+            if (activePath === '/broker' || activePath.includes('/broker/dashboard')) {
+                return <BrokerPortal onLogout={handleLogout} />
+            }
+            if (activePath.includes('/broker/clients')) {
+                return <BrokerPortal onLogout={handleLogout} />
+            }
+            if (activePath.includes('/broker/quotes') || activePath.includes('/quoting')) {
+                return <Quoting />
+            }
+            if (activePath.includes('/broker/commissions') || activePath.includes('/commissions')) {
+                return <Commissions />
+            }
+            if (activePath.includes('/broker/reports')) {
+                return <Reports />
+            }
+            return <BrokerPortal onLogout={handleLogout} />
+        }
+
+        // ── Member Portal Routes ──
+        if (activePortal === 'member') {
+            if (activePath === '/member' || activePath.includes('/member/dashboard') || activePath.includes('/member/home')) {
+                return <MemberHome />
+            }
+            if (activePath.includes('/member/id-card')) {
+                return <DigitalIDCard />
+            }
+            if (activePath.includes('/member/coverage')) {
+                return <CoverageComparison />
+            }
+            if (activePath.includes('/member/claims')) {
+                return <Claims />
+            }
+            if (activePath.includes('/member/providers') || activePath.includes('/member/find-care')) {
+                return <FindCare />
+            }
+            if (activePath.includes('/member/cost-estimator')) {
+                return <CostEstimator />
+            }
+            if (activePath.includes('/member/pharmacy')) {
+                return <Pharmacy />
+            }
+            if (activePath.includes('/member/wellness')) {
+                return <Wellness />
+            }
+            if (activePath.includes('/member/appointments')) {
+                return <Appointments />
+            }
+            if (activePath.includes('/member/telehealth')) {
+                return <Telehealth />
+            }
+            if (activePath.includes('/member/messages')) {
+                return <MessageCenter />
+            }
+            if (activePath.includes('/member/documents')) {
+                return <PlanDocuments />
+            }
+            if (activePath.includes('/member/eob')) {
+                return <EOBViewer />
+            }
+            if (activePath.includes('/member/wallet') || activePath.includes('/member/hsa')) {
+                return <HSAWallet />
+            }
+            if (activePath.includes('/member/notifications')) {
+                return <Notifications />
+            }
+            return <MemberHome />
+        }
+
         // Default to dashboard
         return <Dashboard portalType={activePortal} />
 
