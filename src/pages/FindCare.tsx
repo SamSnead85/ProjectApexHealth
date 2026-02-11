@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Search,
@@ -12,9 +12,15 @@ import {
     Calendar,
     Clock,
     ChevronRight,
-    X
+    X,
+    Video,
+    MessageSquare,
+    User,
+    Stethoscope,
+    Brain,
+    Eye
 } from 'lucide-react'
-import { GlassCard, Badge, Button } from '../components/common'
+import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
 import './FindCare.css'
 
 interface Provider {
@@ -28,6 +34,22 @@ interface Provider {
     rating: number
     reviewCount: number
     isFavorite?: boolean
+}
+
+interface CareTeamMember {
+    id: string
+    name: string
+    role: string
+    specialty: string
+    icon: React.ReactNode
+    lastVisit: string
+    nextVisit?: string
+    avatarColor: string
+}
+
+interface TimeSlot {
+    time: string
+    available: boolean
 }
 
 // Filter categories
@@ -102,12 +124,82 @@ const mockProviders: Provider[] = [
     },
 ]
 
+// Mock care team
+const mockCareTeam: CareTeamMember[] = [
+    {
+        id: 'ct-1',
+        name: 'Dr. Emily Chen',
+        role: 'Primary Care Physician',
+        specialty: 'Internal Medicine',
+        icon: <Stethoscope size={20} />,
+        lastVisit: 'Dec 15, 2025',
+        nextVisit: 'Mar 15, 2026',
+        avatarColor: '#00d2be',
+    },
+    {
+        id: 'ct-2',
+        name: 'Dr. Sarah Williams',
+        role: 'Specialist',
+        specialty: 'Cardiology',
+        icon: <Heart size={20} />,
+        lastVisit: 'Nov 8, 2025',
+        nextVisit: 'Feb 20, 2026',
+        avatarColor: '#a855f7',
+    },
+    {
+        id: 'ct-3',
+        name: 'Dr. Lisa Martinez',
+        role: 'Behavioral Health',
+        specialty: 'Psychiatry',
+        icon: <Brain size={20} />,
+        lastVisit: 'Jan 10, 2026',
+        nextVisit: 'Feb 14, 2026',
+        avatarColor: '#f59e0b',
+    },
+    {
+        id: 'ct-4',
+        name: 'Dr. Rachel Kim',
+        role: 'Vision Care',
+        specialty: 'Ophthalmology',
+        icon: <Eye size={20} />,
+        lastVisit: 'Aug 22, 2025',
+        avatarColor: '#3b82f6',
+    },
+]
+
+// Mock appointment time slots
+const morningSlots: TimeSlot[] = [
+    { time: '8:00 AM', available: false },
+    { time: '8:30 AM', available: true },
+    { time: '9:00 AM', available: true },
+    { time: '9:30 AM', available: false },
+    { time: '10:00 AM', available: true },
+    { time: '10:30 AM', available: true },
+    { time: '11:00 AM', available: false },
+    { time: '11:30 AM', available: true },
+]
+
+const afternoonSlots: TimeSlot[] = [
+    { time: '1:00 PM', available: true },
+    { time: '1:30 PM', available: false },
+    { time: '2:00 PM', available: true },
+    { time: '2:30 PM', available: true },
+    { time: '3:00 PM', available: false },
+    { time: '3:30 PM', available: true },
+    { time: '4:00 PM', available: false },
+    { time: '4:30 PM', available: true },
+]
+
 export function FindCare() {
+    const [loading, setLoading] = useState(true)
+    useEffect(() => { const t = setTimeout(() => setLoading(false), 800); return () => clearTimeout(t) }, [])
     const [searchQuery, setSearchQuery] = useState('')
     const [location, setLocation] = useState('Tampa, FL')
     const [activeFilter, setActiveFilter] = useState('All')
     const [providers, setProviders] = useState(mockProviders)
     const [showFilters, setShowFilters] = useState(false)
+    const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
+    const [bookingConfirmed, setBookingConfirmed] = useState(false)
 
     const filteredProviders = providers.filter(provider => {
         if (activeFilter !== 'All' && provider.specialty !== activeFilter) return false
@@ -128,6 +220,15 @@ export function FindCare() {
         ))
     }
 
+    const handleBookAppointment = () => {
+        if (selectedSlot) {
+            setBookingConfirmed(true)
+            setTimeout(() => setBookingConfirmed(false), 3000)
+        }
+    }
+
+    if (loading) return <PageSkeleton />
+
     return (
         <div className="find-care">
             {/* Header */}
@@ -136,6 +237,175 @@ export function FindCare() {
                     <h1 className="find-care__title">Find Care</h1>
                     <p className="find-care__subtitle">Search in-network providers near you</p>
                 </div>
+            </div>
+
+            {/* Virtual Visit + Care Quick Actions */}
+            <div className="find-care__quick-actions">
+                {/* Virtual Visit Launcher */}
+                <motion.div
+                    className="find-care__virtual-visit"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <div className="virtual-visit__icon-wrapper">
+                        <div className="virtual-visit__icon-pulse" />
+                        <Video size={28} />
+                    </div>
+                    <div className="virtual-visit__info">
+                        <h3 className="virtual-visit__title">Start Virtual Visit</h3>
+                        <p className="virtual-visit__subtitle">See a provider from the comfort of home</p>
+                        <div className="virtual-visit__availability">
+                            <span className="virtual-visit__dot" />
+                            <span>Next Available: <strong>In 10 minutes</strong></span>
+                        </div>
+                    </div>
+                    <div className="virtual-visit__action">
+                        <Button variant="primary" icon={<Video size={16} />}>
+                            Launch Visit
+                        </Button>
+                        <span className="virtual-visit__cost">$0 copay</span>
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* My Care Team Dashboard */}
+            <div className="find-care__care-team-section">
+                <div className="find-care__section-header">
+                    <h2 className="find-care__section-title">My Care Team</h2>
+                    <Button variant="ghost" size="sm" icon={<ChevronRight size={14} />}>
+                        View All
+                    </Button>
+                </div>
+                <div className="care-team__grid">
+                    {mockCareTeam.map((member, index) => (
+                        <motion.div
+                            key={member.id}
+                            className="care-team__card"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.08 }}
+                        >
+                            <div className="care-team__card-top">
+                                <div
+                                    className="care-team__avatar"
+                                    style={{ background: `${member.avatarColor}20`, color: member.avatarColor }}
+                                >
+                                    {member.icon}
+                                </div>
+                                <div className="care-team__member-info">
+                                    <h4 className="care-team__name">{member.name}</h4>
+                                    <span className="care-team__role">{member.role}</span>
+                                    <span className="care-team__specialty">{member.specialty}</span>
+                                </div>
+                            </div>
+                            <div className="care-team__visits">
+                                <div className="care-team__visit-item">
+                                    <span className="care-team__visit-label">Last Visit</span>
+                                    <span className="care-team__visit-date">{member.lastVisit}</span>
+                                </div>
+                                {member.nextVisit && (
+                                    <div className="care-team__visit-item">
+                                        <span className="care-team__visit-label">Next Visit</span>
+                                        <span className="care-team__visit-date care-team__visit-date--upcoming">{member.nextVisit}</span>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="care-team__actions">
+                                <Button variant="secondary" size="sm" icon={<MessageSquare size={14} />}>
+                                    Message
+                                </Button>
+                                <Button variant="ghost" size="sm" icon={<Calendar size={14} />}>
+                                    Schedule
+                                </Button>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Appointment Booking UI */}
+            <div className="find-care__booking-section">
+                <div className="find-care__section-header">
+                    <h2 className="find-care__section-title">Book an Appointment</h2>
+                    <Badge variant="info">Dr. Emily Chen &mdash; Primary Care</Badge>
+                </div>
+                <GlassCard className="booking__card">
+                    <div className="booking__date-header">
+                        <Calendar size={18} />
+                        <span className="booking__date-label">Available Slots &mdash; Tomorrow, Feb 10</span>
+                    </div>
+
+                    {/* Morning Slots */}
+                    <div className="booking__period">
+                        <span className="booking__period-label">Morning</span>
+                        <div className="booking__slots-grid">
+                            {morningSlots.map(slot => (
+                                <button
+                                    key={slot.time}
+                                    className={`booking__slot ${!slot.available ? 'booking__slot--unavailable' : ''} ${selectedSlot === slot.time ? 'booking__slot--selected' : ''}`}
+                                    disabled={!slot.available}
+                                    onClick={() => setSelectedSlot(slot.time)}
+                                >
+                                    {slot.time}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Afternoon Slots */}
+                    <div className="booking__period">
+                        <span className="booking__period-label">Afternoon</span>
+                        <div className="booking__slots-grid">
+                            {afternoonSlots.map(slot => (
+                                <button
+                                    key={slot.time}
+                                    className={`booking__slot ${!slot.available ? 'booking__slot--unavailable' : ''} ${selectedSlot === slot.time ? 'booking__slot--selected' : ''}`}
+                                    disabled={!slot.available}
+                                    onClick={() => setSelectedSlot(slot.time)}
+                                >
+                                    {slot.time}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Booking Footer */}
+                    <div className="booking__footer">
+                        <div className="booking__selected-info">
+                            {selectedSlot ? (
+                                <>
+                                    <Clock size={14} />
+                                    <span>Selected: <strong>{selectedSlot}</strong> with Dr. Emily Chen</span>
+                                </>
+                            ) : (
+                                <span className="booking__hint">Select a time slot to book</span>
+                            )}
+                        </div>
+                        <AnimatePresence>
+                            {bookingConfirmed ? (
+                                <motion.div
+                                    className="booking__confirmed"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    <Check size={16} />
+                                    <span>Appointment Confirmed!</span>
+                                </motion.div>
+                            ) : (
+                                <Button
+                                    variant="primary"
+                                    icon={<Calendar size={14} />}
+                                    onClick={handleBookAppointment}
+                                    disabled={!selectedSlot}
+                                >
+                                    Book Appointment
+                                </Button>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </GlassCard>
             </div>
 
             {/* Search Bar */}

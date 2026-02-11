@@ -216,6 +216,158 @@
     text-transform: uppercase;
 }
 
+/* System Metrics Gauges */
+.sh-metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sh-metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color 0.2s ease;
+}
+
+.sh-metric-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sh-metric-header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
+}
+
+.sh-metric-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sh-metric-label {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.sh-gauge-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sh-gauge-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.sh-gauge-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease-out;
+}
+
+.sh-gauge-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    min-width: 55px;
+    text-align: right;
+}
+
+/* Charts Row */
+.sh-charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sh-chart-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.sh-chart-card h3 {
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sh-chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.688rem;
+    color: var(--text-secondary);
+}
+
+.sh-chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.sh-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Severity Badges */
+.sh-incident-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.sh-severity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.sh-severity-badge.critical {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.sh-severity-badge.warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.sh-severity-badge.info {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
 /* Incidents */
 .incidents-section {
     margin-bottom: 2rem;
@@ -289,6 +441,16 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .sh-metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sh-charts-row {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .system-health {
         padding: 1rem;
@@ -302,5 +464,9 @@
     .status-time {
         margin-left: 0;
         text-align: center;
+    }
+
+    .sh-metrics-row {
+        grid-template-columns: 1fr;
     }
 }

@@ -18,7 +18,11 @@ import {
     Filter,
     Building2,
     Heart,
-    X
+    X,
+    Bell,
+    AlertTriangle,
+    ShieldAlert,
+    Info
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard } from '../components/common'
 import './Pharmacy.css'
@@ -186,8 +190,133 @@ export function Pharmacy() {
     const activePrescriptions = prescriptions.filter(rx => rx.status === 'active' || rx.status === 'pending')
     const totalMonthlyCost = prescriptions.reduce((sum, rx) => sum + (rx.status === 'active' ? rx.copay : 0), 0)
 
+    // Refill reminders - prescriptions due within 14 days
+    const refillDueRx = prescriptions.filter(rx => {
+        if (rx.status !== 'active') return false
+        const days = getDaysUntilRefill(rx.nextRefillDate)
+        return days <= 14 && days >= 0
+    })
+
+    // Drug interaction warnings (mock data)
+    const drugInteractions = [
+        {
+            id: 'int-1',
+            severity: 'moderate' as const,
+            drugs: ['Lisinopril', 'Metformin'],
+            description: 'Monitor kidney function regularly. Both medications can affect renal function — ensure adequate hydration.',
+        },
+        {
+            id: 'int-2',
+            severity: 'mild' as const,
+            drugs: ['Atorvastatin', 'Metformin'],
+            description: 'Minor interaction. Atorvastatin may slightly increase blood sugar levels. Monitor glucose as usual.',
+        }
+    ]
+
+    const [showInteractions, setShowInteractions] = useState(true)
+
     return (
         <div className="pharmacy-page">
+            {/* Refill Reminder Banner */}
+            {refillDueRx.length > 0 && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                        display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '1rem 1.25rem',
+                        borderRadius: '16px', marginBottom: '1.25rem',
+                        background: 'linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.06) 100%)',
+                        border: '1px solid rgba(251,191,36,0.2)'
+                    }}
+                >
+                    <div style={{
+                        width: '40px', height: '40px', borderRadius: '12px', display: 'flex',
+                        alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                        background: 'rgba(251,191,36,0.15)'
+                    }}>
+                        <Bell size={20} style={{ color: '#fbbf24' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fbbf24', marginBottom: '0.15rem' }}>
+                            Refill Reminder
+                        </div>
+                        <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)' }}>
+                            {refillDueRx.length === 1
+                                ? `${refillDueRx[0].drugName} ${refillDueRx[0].strength} is due for refill on ${formatDate(refillDueRx[0].nextRefillDate)}`
+                                : `${refillDueRx.length} prescriptions are due for refill soon: ${refillDueRx.map(rx => rx.drugName).join(', ')}`
+                            }
+                        </div>
+                    </div>
+                    <Button variant="primary" size="sm" icon={<RefreshCw size={13} />} onClick={() => alert('Refill requests submitted for all due prescriptions!')}>
+                        Refill {refillDueRx.length > 1 ? 'All' : 'Now'}
+                    </Button>
+                </motion.div>
+            )}
+
+            {/* Drug Interaction Warnings */}
+            {showInteractions && drugInteractions.length > 0 && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    style={{
+                        borderRadius: '16px', marginBottom: '1.25rem', overflow: 'hidden',
+                        background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                    }}
+                >
+                    <div style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        padding: '0.85rem 1.25rem',
+                        background: 'rgba(239,68,68,0.06)', borderBottom: '1px solid rgba(239,68,68,0.1)'
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                            <ShieldAlert size={18} style={{ color: '#f87171' }} />
+                            <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#f87171' }}>
+                                Drug Interaction Alerts
+                            </span>
+                            <Badge variant="critical" size="sm">{drugInteractions.length}</Badge>
+                        </div>
+                        <button onClick={() => setShowInteractions(false)} style={{
+                            background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', display: 'flex', padding: '4px'
+                        }}>
+                            <X size={16} />
+                        </button>
+                    </div>
+                    <div style={{ padding: '0.75rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                        {drugInteractions.map(interaction => (
+                            <div key={interaction.id} style={{
+                                display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem',
+                                borderRadius: '10px', background: interaction.severity === 'moderate'
+                                    ? 'rgba(251,191,36,0.06)' : 'rgba(99,102,241,0.06)',
+                                border: `1px solid ${interaction.severity === 'moderate'
+                                    ? 'rgba(251,191,36,0.12)' : 'rgba(99,102,241,0.12)'}`
+                            }}>
+                                {interaction.severity === 'moderate'
+                                    ? <AlertTriangle size={16} style={{ color: '#fbbf24', flexShrink: 0, marginTop: '2px' }} />
+                                    : <Info size={16} style={{ color: '#818cf8', flexShrink: 0, marginTop: '2px' }} />
+                                }
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
+                                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'rgba(255,255,255,0.9)' }}>
+                                            {interaction.drugs.join(' + ')}
+                                        </span>
+                                        <Badge
+                                            variant={interaction.severity === 'moderate' ? 'warning' : 'info'}
+                                            size="sm"
+                                        >
+                                            {interaction.severity}
+                                        </Badge>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>
+                                        {interaction.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+            )}
+
             {/* Header */}
             <div className="pharmacy__header">
                 <div>

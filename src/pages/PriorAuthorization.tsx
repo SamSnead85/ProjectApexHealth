@@ -16,9 +16,17 @@ import {
     FileText,
     Timer,
     Zap,
-    MessageSquare
+    MessageSquare,
+    Activity,
+    Brain,
+    BarChart3,
+    Shield,
+    TrendingUp,
+    Target,
+    Gauge,
+    Eye
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
 import './PriorAuthorization.css'
 
 // CMS-mandated PA decision timeframes
@@ -134,6 +142,8 @@ const paMetrics = {
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 export function PriorAuthorization() {
+    const [loading, setLoading] = useState(true)
+    useEffect(() => { const t = setTimeout(() => setLoading(false), 800); return () => clearTimeout(t) }, [])
     const [requests, setRequests] = useState<PriorAuth[]>(mockPARequests)
     const [selectedRequest, setSelectedRequest] = useState<PriorAuth | null>(null)
     const [statusFilter, setStatusFilter] = useState<PAStatus | 'all'>('all')
@@ -190,6 +200,8 @@ export function PriorAuthorization() {
         return { text: `${days}d ${hours % 24}h remaining`, critical: false }
     }
 
+    if (loading) return <PageSkeleton />
+
     return (
         <div className="prior-auth">
             {/* Header */}
@@ -242,6 +254,211 @@ export function PriorAuthorization() {
                     subtitle="YTD approvals"
                     variant="teal"
                 />
+            </div>
+
+            {/* ========== PHASE 5 COMPLIANCE & ANALYTICS CARDS ========== */}
+            <div className="prior-auth__phase5-row">
+                {/* Turnaround Time Compliance */}
+                <motion.div
+                    className="pa-phase5-card"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    <div className="pa-phase5-card-header">
+                        <div className="pa-phase5-icon" style={{ background: 'rgba(34,197,94,0.12)', color: '#22c55e' }}>
+                            <Timer size={18} />
+                        </div>
+                        <h3>Turnaround Compliance</h3>
+                    </div>
+                    <div className="pa-turnaround-items">
+                        <div className="pa-turnaround-item">
+                            <div className="pa-turnaround-label-row">
+                                <span className="pa-turnaround-label">72hr Expedited</span>
+                                <Badge variant="success" size="sm">98.2%</Badge>
+                            </div>
+                            <div className="pa-turnaround-bar-track">
+                                <motion.div
+                                    className="pa-turnaround-bar-fill"
+                                    style={{ background: 'linear-gradient(90deg, #22c55e, #14b8a6)' }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: '98.2%' }}
+                                    transition={{ duration: 1, delay: 0.3 }}
+                                />
+                            </div>
+                            <span className="pa-turnaround-sub">CMS Compliant</span>
+                        </div>
+                        <div className="pa-turnaround-item">
+                            <div className="pa-turnaround-label-row">
+                                <span className="pa-turnaround-label">7-Day Standard</span>
+                                <Badge variant="success" size="sm">99.1%</Badge>
+                            </div>
+                            <div className="pa-turnaround-bar-track">
+                                <motion.div
+                                    className="pa-turnaround-bar-fill"
+                                    style={{ background: 'linear-gradient(90deg, #14b8a6, #06b6d4)' }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: '99.1%' }}
+                                    transition={{ duration: 1, delay: 0.4 }}
+                                />
+                            </div>
+                            <span className="pa-turnaround-sub">CMS Compliant</span>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Auto-Decision Rate */}
+                <motion.div
+                    className="pa-phase5-card"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25 }}
+                >
+                    <div className="pa-phase5-card-header">
+                        <div className="pa-phase5-icon" style={{ background: 'rgba(139,92,246,0.12)', color: '#8b5cf6' }}>
+                            <Zap size={18} />
+                        </div>
+                        <h3>Auto-Decision Rate</h3>
+                    </div>
+                    <div className="pa-auto-decision">
+                        <div className="pa-auto-decision-ring">
+                            <svg viewBox="0 0 100 100" className="pa-ring-svg">
+                                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="8" />
+                                <motion.circle
+                                    cx="50" cy="50" r="42"
+                                    fill="none"
+                                    stroke="url(#autoGrad)"
+                                    strokeWidth="8"
+                                    strokeLinecap="round"
+                                    strokeDasharray={2 * Math.PI * 42}
+                                    strokeDashoffset={2 * Math.PI * 42}
+                                    animate={{ strokeDashoffset: 2 * Math.PI * 42 * (1 - 0.68) }}
+                                    transition={{ duration: 1.2, delay: 0.3 }}
+                                    transform="rotate(-90 50 50)"
+                                />
+                                <defs>
+                                    <linearGradient id="autoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stopColor="#8b5cf6" />
+                                        <stop offset="100%" stopColor="#06b6d4" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div className="pa-ring-center">
+                                <span className="pa-ring-value">68%</span>
+                                <span className="pa-ring-label">Auto</span>
+                            </div>
+                        </div>
+                        <div className="pa-auto-legend">
+                            <div className="pa-auto-legend-item">
+                                <span className="pa-auto-dot" style={{ background: '#8b5cf6' }} />
+                                <span>Auto-Decided</span>
+                                <strong>68%</strong>
+                            </div>
+                            <div className="pa-auto-legend-item">
+                                <span className="pa-auto-dot" style={{ background: 'rgba(255,255,255,0.15)' }} />
+                                <span>Manual Review</span>
+                                <strong>32%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Public Reporting Metrics (CMS 2026) */}
+                <motion.div
+                    className="pa-phase5-card"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <div className="pa-phase5-card-header">
+                        <div className="pa-phase5-icon" style={{ background: 'rgba(59,130,246,0.12)', color: '#3b82f6' }}>
+                            <BarChart3 size={18} />
+                        </div>
+                        <h3>Public Reporting <Badge variant="info" size="sm">CMS 2026</Badge></h3>
+                    </div>
+                    <div className="pa-public-metrics">
+                        <div className="pa-public-metric">
+                            <div className="pa-public-metric-icon" style={{ color: '#22c55e' }}>
+                                <CheckCircle2 size={16} />
+                            </div>
+                            <div className="pa-public-metric-info">
+                                <span className="pa-public-metric-value">78%</span>
+                                <span className="pa-public-metric-label">Approval Rate</span>
+                            </div>
+                        </div>
+                        <div className="pa-public-metric">
+                            <div className="pa-public-metric-icon" style={{ color: '#ef4444' }}>
+                                <XCircle size={16} />
+                            </div>
+                            <div className="pa-public-metric-info">
+                                <span className="pa-public-metric-value">22%</span>
+                                <span className="pa-public-metric-label">Denial Rate</span>
+                            </div>
+                        </div>
+                        <div className="pa-public-metric">
+                            <div className="pa-public-metric-icon" style={{ color: '#f59e0b' }}>
+                                <Clock size={16} />
+                            </div>
+                            <div className="pa-public-metric-info">
+                                <span className="pa-public-metric-value">18 hrs</span>
+                                <span className="pa-public-metric-label">Avg Processing</span>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* AI Clinical Review */}
+                <motion.div
+                    className="pa-phase5-card pa-ai-card"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                >
+                    <div className="pa-phase5-card-header">
+                        <div className="pa-phase5-icon" style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))', color: '#a78bfa' }}>
+                            <Brain size={18} />
+                        </div>
+                        <h3>AI Clinical Review</h3>
+                    </div>
+                    <div className="pa-ai-content">
+                        <div className="pa-ai-confidence">
+                            <span className="pa-ai-confidence-label">Medical Necessity Match</span>
+                            <div className="pa-ai-confidence-row">
+                                <span className="pa-ai-confidence-value">89%</span>
+                                <span className="pa-ai-confidence-tag">confidence</span>
+                            </div>
+                            <div className="pa-ai-bar-track">
+                                <motion.div
+                                    className="pa-ai-bar-fill"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: '89%' }}
+                                    transition={{ duration: 1, delay: 0.4 }}
+                                />
+                            </div>
+                        </div>
+                        <div className="pa-ai-criteria">
+                            <span className="pa-ai-criteria-title">Clinical Criteria Highlights</span>
+                            <div className="pa-ai-criteria-list">
+                                <div className="pa-ai-criteria-item matched">
+                                    <CheckCircle2 size={12} />
+                                    <span>Diagnosis matches coverage policy</span>
+                                </div>
+                                <div className="pa-ai-criteria-item matched">
+                                    <CheckCircle2 size={12} />
+                                    <span>Step therapy requirements met</span>
+                                </div>
+                                <div className="pa-ai-criteria-item matched">
+                                    <CheckCircle2 size={12} />
+                                    <span>Clinical documentation sufficient</span>
+                                </div>
+                                <div className="pa-ai-criteria-item pending">
+                                    <AlertTriangle size={12} />
+                                    <span>Peer-reviewed evidence pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
             </div>
 
             {/* Main Grid */}

@@ -51,6 +51,7 @@ import {
     Brain
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { exportToCSV, printReport } from '../utils/exportData'
 import './Reports.css'
 
 // Premium color palette
@@ -246,8 +247,17 @@ export function Reports() {
                         >
                             Sync
                         </Button>
-                        <Button variant="primary" icon={<Download size={16} />}>
+                        <Button variant="primary" icon={<Download size={16} />} onClick={() => exportToCSV(spendingTrend.map(row => ({
+                            'Month': row.month,
+                            'Medical': row.medical,
+                            'Pharmacy': row.pharmacy,
+                            'Admin': row.admin,
+                            'Benchmark': row.benchmark,
+                        })), 'analytics_report')}>
                             Export
+                        </Button>
+                        <Button variant="secondary" icon={<FileText size={16} />} onClick={() => printReport('Analytics Command Center')}>
+                            Print
                         </Button>
                     </div>
                 </div>

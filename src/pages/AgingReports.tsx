@@ -12,6 +12,7 @@ import {
     AlertTriangle
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { exportToCSV } from '../utils/exportData'
 import './AgingReports.css'
 
 interface AgingBucket {
@@ -67,7 +68,16 @@ export function AgingReports() {
                         <button className={viewType === 'summary' ? 'active' : ''} onClick={() => setViewType('summary')}>Summary</button>
                         <button className={viewType === 'payer' ? 'active' : ''} onClick={() => setViewType('payer')}>By Payer</button>
                     </div>
-                    <Button variant="secondary" icon={<Download size={16} />}>Export</Button>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => exportToCSV(payerAgings.map(p => ({
+                        'Payer': p.payerName,
+                        'Payer ID': p.payerId,
+                        '0-30 Days': p.buckets['0-30'],
+                        '31-60 Days': p.buckets['31-60'],
+                        '61-90 Days': p.buckets['61-90'],
+                        '91-120 Days': p.buckets['91-120'],
+                        '120+ Days': p.buckets['120+'],
+                        'Total': p.total,
+                    })), 'aging_report')}>Export</Button>
                 </div>
             </div>
 

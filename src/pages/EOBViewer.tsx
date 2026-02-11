@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileText,
@@ -16,7 +16,7 @@ import {
     Printer,
     Info
 } from 'lucide-react'
-import { GlassCard, Badge, Button } from '../components/common'
+import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
 import './EOBViewer.css'
 
 // EOB Document Structure (based on CMS-1500/UB-04)
@@ -183,6 +183,14 @@ export function EOBViewer() {
     const [selectedEOB, setSelectedEOB] = useState<EOB | null>(null)
     const [expandedItems, setExpandedItems] = useState<number[]>([])
     const [showPlainLanguage, setShowPlainLanguage] = useState(true)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
 
     const toggleLineItem = (index: number) => {
         setExpandedItems(prev =>

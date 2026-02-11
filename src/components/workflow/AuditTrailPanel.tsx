@@ -160,7 +160,6 @@ export function AuditTrailPanel() {
 
     const handleExportPDF = () => {
         // TODO: Implement PDF export functionality
-        console.log('Exporting audit trail to PDF...')
     }
 
     return (

@@ -1,11 +1,12 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Database, Search, Code, FileText, Play, Copy, Download,
     ChevronRight, ChevronDown, Check, AlertTriangle, Shield,
     Users, Heart, CreditCard, Building2, Stethoscope, FileJson,
     RefreshCw, Settings, ExternalLink, Zap, Eye, BookOpen,
-    CheckCircle2, XCircle, ArrowRight, Braces, Package, Server
+    CheckCircle2, XCircle, ArrowRight, Braces, Package, Server,
+    Activity, Clock, ArrowUpRight, ShieldCheck, FileCheck, Timer, Radio
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard } from '../components/common'
 import './FHIRExplorer.css'
@@ -132,6 +133,61 @@ const conformanceInfo = {
     security: 'SMART on FHIR (OAuth 2.0)',
 }
 
+// CMS-0057-F Compliance Data
+const cmsComplianceAPIs = [
+    {
+        name: 'Provider Access API',
+        status: 'active' as const,
+        icon: Stethoscope,
+        color: '#22c55e',
+        lastSync: '2h ago',
+        errorRate: '0.02%',
+        details: '47,892 resources served',
+    },
+    {
+        name: 'Payer-to-Payer API',
+        status: 'active' as const,
+        icon: ArrowUpRight,
+        color: '#3b82f6',
+        exchanges: '847',
+        dataQuality: '99.1%',
+        details: '847 exchanges completed',
+    },
+    {
+        name: 'Prior Authorization API',
+        status: 'active' as const,
+        icon: FileCheck,
+        color: '#8b5cf6',
+        submissions: '2,341',
+        avgTurnaround: '18hr',
+        approvalRate: '78%',
+        details: '2,341 submissions processed',
+    },
+]
+
+const apiHealthMetrics = {
+    uptimeSLA: '99.99%',
+    avgResponseTime: '124ms',
+    dailyRequests: '45.2K',
+}
+
+// Compliance deadline: Jan 1, 2027
+const CMS_DEADLINE = new Date('2027-01-01T00:00:00Z')
+
+function useCountdown(target: Date) {
+    const [now, setNow] = useState(new Date())
+    useEffect(() => {
+        const timer = setInterval(() => setNow(new Date()), 60000)
+        return () => clearInterval(timer)
+    }, [])
+    const diff = target.getTime() - now.getTime()
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, total: 0 }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    return { days, hours, minutes, total: diff }
+}
+
 export default function FHIRExplorer() {
     const [selectedResource, setSelectedResource] = useState<ResourceType>('Patient')
     const [searchParams, setSearchParams] = useState<Record<string, string>>({})
@@ -173,6 +229,7 @@ export default function FHIRExplorer() {
     }, [])
 
     const currentResource = fhirResources.find(r => r.type === selectedResource)!
+    const countdown = useCountdown(CMS_DEADLINE)
 
     return (
         <div className="fhir-explorer">
@@ -208,6 +265,147 @@ export default function FHIRExplorer() {
                             Conformance
                         </Button>
                     </div>
+                </div>
+
+                {/* ========== CMS-0057-F COMPLIANCE CHECKLIST ========== */}
+                <GlassCard className="fe-cms-compliance">
+                    <div className="fe-section-header">
+                        <h3 className="fe-section-title">
+                            <ShieldCheck size={18} />
+                            CMS-0057-F Compliance Checklist
+                        </h3>
+                        <Badge variant="success" icon={<CheckCircle2 size={10} />}>All Systems Operational</Badge>
+                    </div>
+                    <div className="fe-cms-api-grid">
+                        {cmsComplianceAPIs.map((api, index) => {
+                            const Icon = api.icon
+                            return (
+                                <motion.div
+                                    key={api.name}
+                                    className="fe-cms-api-card"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.08 }}
+                                >
+                                    <div className="fe-cms-api-header">
+                                        <div className="fe-cms-api-icon" style={{ background: `${api.color}18`, color: api.color }}>
+                                            <Icon size={18} />
+                                        </div>
+                                        <div className="fe-cms-api-title">
+                                            <span className="fe-cms-api-name">{api.name}</span>
+                                            <div className="fe-cms-api-status-row">
+                                                <span className="fe-cms-status-dot active" />
+                                                <span className="fe-cms-status-label">Active</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="fe-cms-api-metrics">
+                                        {api.name === 'Provider Access API' && (
+                                            <>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Last Sync</span>
+                                                    <span className="fe-cms-metric-value">{api.lastSync}</span>
+                                                </div>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Error Rate</span>
+                                                    <span className="fe-cms-metric-value" style={{ color: '#22c55e' }}>{api.errorRate}</span>
+                                                </div>
+                                            </>
+                                        )}
+                                        {api.name === 'Payer-to-Payer API' && (
+                                            <>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Exchanges</span>
+                                                    <span className="fe-cms-metric-value">{api.exchanges}</span>
+                                                </div>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Data Quality</span>
+                                                    <span className="fe-cms-metric-value" style={{ color: '#3b82f6' }}>{api.dataQuality}</span>
+                                                </div>
+                                            </>
+                                        )}
+                                        {api.name === 'Prior Authorization API' && (
+                                            <>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Submissions</span>
+                                                    <span className="fe-cms-metric-value">{api.submissions}</span>
+                                                </div>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Avg Turnaround</span>
+                                                    <span className="fe-cms-metric-value">{api.avgTurnaround}</span>
+                                                </div>
+                                                <div className="fe-cms-metric">
+                                                    <span className="fe-cms-metric-label">Approval Rate</span>
+                                                    <span className="fe-cms-metric-value" style={{ color: '#8b5cf6' }}>{api.approvalRate}</span>
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </GlassCard>
+
+                {/* ========== API HEALTH MONITORING + COMPLIANCE DEADLINE ========== */}
+                <div className="fe-health-deadline-row">
+                    <div className="fe-api-health-cards">
+                        <motion.div className="fe-health-card" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                            <div className="fe-health-icon" style={{ background: 'rgba(34,197,94,0.12)', color: '#22c55e' }}>
+                                <Activity size={18} />
+                            </div>
+                            <div className="fe-health-info">
+                                <span className="fe-health-label">Uptime SLA</span>
+                                <span className="fe-health-value">{apiHealthMetrics.uptimeSLA}</span>
+                            </div>
+                        </motion.div>
+                        <motion.div className="fe-health-card" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+                            <div className="fe-health-icon" style={{ background: 'rgba(59,130,246,0.12)', color: '#3b82f6' }}>
+                                <Timer size={18} />
+                            </div>
+                            <div className="fe-health-info">
+                                <span className="fe-health-label">Avg Response</span>
+                                <span className="fe-health-value">{apiHealthMetrics.avgResponseTime}</span>
+                            </div>
+                        </motion.div>
+                        <motion.div className="fe-health-card" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                            <div className="fe-health-icon" style={{ background: 'rgba(139,92,246,0.12)', color: '#8b5cf6' }}>
+                                <Radio size={18} />
+                            </div>
+                            <div className="fe-health-info">
+                                <span className="fe-health-label">Daily Requests</span>
+                                <span className="fe-health-value">{apiHealthMetrics.dailyRequests}</span>
+                            </div>
+                        </motion.div>
+                    </div>
+                    <motion.div
+                        className="fe-deadline-card"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25 }}
+                    >
+                        <div className="fe-deadline-header">
+                            <Clock size={16} />
+                            <span>CMS-0057-F Full Compliance</span>
+                        </div>
+                        <div className="fe-deadline-countdown">
+                            <div className="fe-countdown-unit">
+                                <span className="fe-countdown-number">{countdown.days}</span>
+                                <span className="fe-countdown-label">Days</span>
+                            </div>
+                            <span className="fe-countdown-sep">:</span>
+                            <div className="fe-countdown-unit">
+                                <span className="fe-countdown-number">{countdown.hours}</span>
+                                <span className="fe-countdown-label">Hours</span>
+                            </div>
+                            <span className="fe-countdown-sep">:</span>
+                            <div className="fe-countdown-unit">
+                                <span className="fe-countdown-number">{countdown.minutes}</span>
+                                <span className="fe-countdown-label">Min</span>
+                            </div>
+                        </div>
+                        <span className="fe-deadline-date">Deadline: January 1, 2027</span>
+                    </motion.div>
                 </div>
 
                 {/* Conformance Statement (collapsible) */}

@@ -270,3 +270,131 @@
     background: var(--apex-obsidian-elevated);
     border-radius: var(--radius-full);
 }
+
+/* ============================================
+   MOBILE SIDEBAR - Full Screen Overlay
+============================================ */
+
+/* Mobile overlay backdrop */
+.sidebar-overlay {
+    display: none;
+}
+
+/* Mobile hamburger button (rendered in Shell) */
+.sidebar-hamburger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Sidebar becomes a full-screen overlay on mobile */
+    .sidebar {
+        position: fixed;
+        inset: 0;
+        width: 100% !important;
+        max-width: 320px;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .sidebar--mobile-open {
+        transform: translateX(0);
+    }
+
+    /* Overlay backdrop when sidebar is open */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay--visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Hamburger button visible on mobile */
+    .sidebar-hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        background: transparent;
+        border: 1px solid var(--glass-border);
+        color: var(--apex-silver);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .sidebar-hamburger:hover {
+        color: var(--apex-white);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--glass-border-hover);
+    }
+
+    /* Override collapsed state on mobile - always show full sidebar */
+    .sidebar--collapsed.sidebar--mobile-open {
+        width: 100% !important;
+        max-width: 320px;
+    }
+
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__brand-text,
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__item-label,
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__group-title,
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__item-badge {
+        display: flex !important;
+        opacity: 1 !important;
+    }
+
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__header {
+        padding: var(--space-lg);
+        justify-content: space-between;
+    }
+
+    .sidebar--collapsed.sidebar--mobile-open .sidebar__item {
+        justify-content: flex-start;
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    /* Close button in mobile sidebar header */
+    .sidebar__mobile-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        color: var(--apex-steel);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .sidebar__mobile-close:hover {
+        color: var(--apex-white);
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Hide mobile close button on desktop */
+@media (min-width: 769px) {
+    .sidebar__mobile-close {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        max-width: 100%;
+    }
+}

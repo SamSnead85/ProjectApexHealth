@@ -1,3 +1,4 @@
+export { useRetry } from './useRetry';
 export { useApiData, useApiMutation, useRealtimeData } from './useApiData';
 export {
   useClaimsSummary,

@@ -23,16 +23,19 @@ export default defineConfig({
         },
     },
     build: {
+        target: 'esnext',
         chunkSizeWarningLimit: 600,
         rollupOptions: {
             output: {
                 manualChunks: {
-                    vendor: ['react', 'react-dom', 'framer-motion'],
+                    vendor: ['react', 'react-dom'],
+                    'framer-motion': ['framer-motion'],
                     charts: ['recharts'],
                     icons: ['lucide-react'],
                 },
             },
         },
         sourcemap: false,
+        cssCodeSplit: true,
     },
 })

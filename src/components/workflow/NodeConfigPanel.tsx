@@ -65,8 +65,7 @@ export function NodeConfigPanel() {
     }
 
     const handleDuplicate = () => {
-        // Would add duplicate logic here
-        console.log('Duplicate node:', selectedNodeId)
+        // TODO: Add duplicate logic here
     }
 
     const renderConfigFields = () => {

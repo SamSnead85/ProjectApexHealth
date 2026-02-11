@@ -434,6 +434,238 @@
     color: var(--text-tertiary);
 }
 
+/* ====== CMS-0057-F Compliance Checklist ====== */
+.fe-cms-compliance {
+    margin-bottom: 1.5rem;
+}
+
+.fe-cms-api-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.fe-cms-api-card {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.fe-cms-api-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.fe-cms-api-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.fe-cms-api-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fe-cms-api-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.fe-cms-api-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.fe-cms-api-status-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.fe-cms-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6b7280;
+}
+
+.fe-cms-status-dot.active {
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+}
+
+.fe-cms-status-label {
+    font-size: 0.688rem;
+    color: #22c55e;
+    font-weight: 500;
+}
+
+.fe-cms-api-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.fe-cms-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.fe-cms-metric-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.fe-cms-metric-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+/* ====== API Health + Deadline Row ====== */
+.fe-health-deadline-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.fe-api-health-cards {
+    display: flex;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.fe-health-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.fe-health-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.fe-health-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fe-health-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.fe-health-label {
+    font-size: 0.688rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.fe-health-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+/* Deadline Countdown */
+.fe-deadline-card {
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(139, 92, 246, 0.06) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 12px;
+}
+
+.fe-deadline-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f59e0b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.fe-deadline-countdown {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.fe-countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fe-countdown-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    min-width: 42px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 0.2rem 0.5rem;
+}
+
+.fe-countdown-label {
+    font-size: 0.563rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 0.15rem;
+}
+
+.fe-countdown-sep {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+}
+
+.fe-deadline-date {
+    font-size: 0.688rem;
+    color: var(--text-tertiary);
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .fe-resource-selector {
@@ -450,6 +682,18 @@
 
     .fe-conf-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fe-cms-api-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fe-health-deadline-row {
+        flex-direction: column;
+    }
+
+    .fe-deadline-card {
+        min-width: unset;
     }
 }
 
@@ -477,5 +721,13 @@
 
     .fe-conf-grid {
         grid-template-columns: 1fr;
+    }
+
+    .fe-cms-api-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fe-api-health-cards {
+        flex-direction: column;
     }
 }

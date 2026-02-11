@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     CreditCard,
@@ -20,7 +20,7 @@ import {
     ArrowDownLeft,
     Wallet
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
 import './HSAWallet.css'
 
 interface Transaction {
@@ -132,6 +132,14 @@ export function HSAWallet() {
     const [account] = useState<Account>(mockAccount)
     const [transactions] = useState<Transaction[]>(mockTransactions)
     const [activeTab, setActiveTab] = useState<'all' | 'expenses' | 'contributions'>('all')
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
 
     const formatCurrency = (amount: number) =>
         `$${Math.abs(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}`

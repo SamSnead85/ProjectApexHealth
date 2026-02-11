@@ -42,8 +42,6 @@ export function useWorkflowAutoSave(options: AutoSaveOptions = {}) {
         saveWorkflow()
         lastSaveRef.current = currentHash
         onSave?.()
-
-        console.log('[AutoSave] Workflow saved automatically')
     }, [workflow, enabled, createStateHash, saveWorkflow, onSave])
 
     // Debounced auto-save effect

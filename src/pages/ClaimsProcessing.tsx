@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo, memo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     FileText,
@@ -24,9 +24,16 @@ import {
     ChevronDown,
     ChevronUp,
     ExternalLink,
-    Download
+    Download,
+    Brain,
+    SlidersHorizontal,
+    Columns,
+    X,
+    Users,
+    Check
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
+import { exportToCSV } from '../utils/exportData'
 import './ClaimsProcessing.css'
 
 // ============================================
@@ -790,7 +797,76 @@ const claimsMetrics = {
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
+// ============================================
+// AI RECOMMENDATIONS (Mock)
+// ============================================
+const aiRecommendations: Record<string, { action: 'approve' | 'review' | 'deny'; confidence: number; label: string }> = {
+    'CLM-2024-00145': { action: 'approve', confidence: 94, label: 'Approve' },
+    'CLM-2024-00146': { action: 'review', confidence: 23, label: 'Review' },
+    'CLM-2024-00147': { action: 'deny', confidence: 87, label: 'Deny' },
+    'CLM-2024-00148': { action: 'review', confidence: 45, label: 'Review' },
+}
+
+// Provider type options for advanced filter
+const providerTypeOptions = ['Hospital', 'Physician Group', 'Imaging Center', 'Pediatrics', 'Specialist']
+
+// Journey step type
+interface JourneyStep {
+    label: string
+    status: 'completed' | 'active' | 'pending'
+    timestamp?: string
+    duration?: string
+}
+
+// Derive claim journey from audit trail
+function getClaimJourney(claim: Claim): JourneyStep[] {
+    const steps: JourneyStep[] = [
+        { label: 'Received', status: 'pending' },
+        { label: 'Validated', status: 'pending' },
+        { label: 'Adjudicated', status: 'pending' },
+        { label: 'Paid', status: 'pending' },
+    ]
+    const auditActions: string[] = claim.auditTrail.map(a => a.action)
+    const findTs = (actions: string[]) =>
+        claim.auditTrail.find(a => actions.includes(a.action))?.timestamp
+
+    if (auditActions.includes('RECEIVED')) {
+        steps[0].status = 'completed'
+        steps[0].timestamp = findTs(['RECEIVED'])
+    }
+    if (['VALIDATED', 'ELIGIBILITY_CHECK', 'BENEFIT_CHECK'].some(a => auditActions.includes(a))) {
+        steps[1].status = 'completed'
+        steps[1].timestamp = findTs(['VALIDATED', 'ELIGIBILITY_CHECK', 'BENEFIT_CHECK'])
+    }
+    if (['ADJUDICATED_AUTO', 'ADJUDICATED_MANUAL', 'APPROVED', 'DENIED'].some(a => auditActions.includes(a))) {
+        steps[2].status = 'completed'
+        steps[2].timestamp = findTs(['ADJUDICATED_AUTO', 'ADJUDICATED_MANUAL', 'APPROVED', 'DENIED'])
+    }
+    if (claim.status === 'approved' && claim.paidAmount > 0) {
+        steps[3].status = 'completed'
+        steps[3].timestamp = claim.eobGeneratedDate || claim.processedDate
+    }
+
+    // First pending step becomes active
+    const firstPending = steps.findIndex(s => s.status === 'pending')
+    if (firstPending > 0) steps[firstPending].status = 'active'
+
+    // Calculate durations between steps
+    for (let i = 1; i < steps.length; i++) {
+        if (steps[i].timestamp && steps[i - 1].timestamp) {
+            const diff = new Date(steps[i].timestamp!).getTime() - new Date(steps[i - 1].timestamp!).getTime()
+            const mins = Math.floor(diff / 60000)
+            const hrs = Math.floor(mins / 60)
+            const days = Math.floor(hrs / 24)
+            steps[i].duration = days > 0 ? `${days}d` : hrs > 0 ? `${hrs}h` : mins > 0 ? `${mins}m` : '<1m'
+        }
+    }
+    return steps
+}
+
 export function ClaimsProcessing() {
+    const [loading, setLoading] = useState(true)
+    useEffect(() => { const t = setTimeout(() => setLoading(false), 800); return () => clearTimeout(t) }, [])
     const [claims, setClaims] = useState<Claim[]>(mockClaims)
     const [selectedClaim, setSelectedClaim] = useState<Claim | null>(null)
     const [statusFilter, setStatusFilter] = useState<ClaimStatus | 'all'>('all')
@@ -809,16 +885,35 @@ export function ClaimsProcessing() {
     }, []);
     const [searchQuery, setSearchQuery] = useState('')
 
-    const filteredClaims = claims.filter(claim => {
+    // Enhanced feature states
+    const [selectedClaimIds, setSelectedClaimIds] = useState<Set<string>>(new Set())
+    const [showFilterPanel, setShowFilterPanel] = useState(false)
+    const [splitPaneMode, setSplitPaneMode] = useState(true)
+
+    // Advanced filter states
+    const [dateFrom, setDateFrom] = useState('')
+    const [dateTo, setDateTo] = useState('')
+    const [amountMin, setAmountMin] = useState('')
+    const [amountMax, setAmountMax] = useState('')
+    const [filterStatuses, setFilterStatuses] = useState<Set<ClaimStatus>>(new Set())
+    const [selectedProviderTypes, setSelectedProviderTypes] = useState<Set<string>>(new Set())
+
+    const filteredClaims = useMemo(() => claims.filter(claim => {
         const matchesStatus = statusFilter === 'all' || claim.status === statusFilter
         const matchesSearch = !searchQuery ||
             claim.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
             claim.memberName.toLowerCase().includes(searchQuery.toLowerCase()) ||
             claim.providerName.toLowerCase().includes(searchQuery.toLowerCase())
-        return matchesStatus && matchesSearch
-    })
+        // Advanced filters
+        const matchesDateFrom = !dateFrom || claim.serviceDate >= dateFrom
+        const matchesDateTo = !dateTo || claim.serviceDate <= dateTo
+        const matchesAmountMin = !amountMin || claim.billedAmount >= parseFloat(amountMin)
+        const matchesAmountMax = !amountMax || claim.billedAmount <= parseFloat(amountMax)
+        const matchesAdvancedStatus = filterStatuses.size === 0 || filterStatuses.has(claim.status)
+        return matchesStatus && matchesSearch && matchesDateFrom && matchesDateTo && matchesAmountMin && matchesAmountMax && matchesAdvancedStatus
+    }), [claims, statusFilter, searchQuery, dateFrom, dateTo, amountMin, amountMax, filterStatuses])
 
-    const getStatusBadge = (status: ClaimStatus) => {
+    const getStatusBadge = useCallback((status: ClaimStatus) => {
         const configs: Record<ClaimStatus, { variant: 'success' | 'warning' | 'critical' | 'info' | 'teal'; label: string }> = {
             pending: { variant: 'warning', label: 'Pending' },
             in_review: { variant: 'info', label: 'In Review' },
@@ -829,9 +924,79 @@ export function ClaimsProcessing() {
         }
         const config = configs[status]
         return <Badge variant={config.variant}>{config.label}</Badge>
+    }, [])
+
+    const formatCurrency = useCallback((amount: number) => `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`, [])
+
+    // Memoize claim journey for selected claim to avoid recalculation on unrelated state changes
+    const selectedClaimJourney = useMemo(
+        () => selectedClaim ? getClaimJourney(selectedClaim) : [],
+        [selectedClaim]
+    )
+
+    // Bulk selection helpers
+    const toggleClaimSelection = useCallback((claimId: string, e: React.MouseEvent) => {
+        e.stopPropagation()
+        setSelectedClaimIds(prev => {
+            const next = new Set(prev)
+            if (next.has(claimId)) next.delete(claimId)
+            else next.add(claimId)
+            return next
+        })
+    }, [])
+
+    const toggleSelectAll = useCallback(() => {
+        setSelectedClaimIds(prev => {
+            if (prev.size === filteredClaims.length) return new Set()
+            return new Set(filteredClaims.map(c => c.id))
+        })
+    }, [filteredClaims])
+
+    const clearAdvancedFilters = useCallback(() => {
+        setDateFrom('')
+        setDateTo('')
+        setAmountMin('')
+        setAmountMax('')
+        setFilterStatuses(new Set())
+        setSelectedProviderTypes(new Set())
+    }, [])
+
+    const toggleFilterStatus = useCallback((status: ClaimStatus) => {
+        setFilterStatuses(prev => {
+            const next = new Set(prev)
+            if (next.has(status)) next.delete(status)
+            else next.add(status)
+            return next
+        })
+    }, [])
+
+    const toggleProviderType = useCallback((type: string) => {
+        setSelectedProviderTypes(prev => {
+            const next = new Set(prev)
+            if (next.has(type)) next.delete(type)
+            else next.add(type)
+            return next
+        })
+    }, [])
+
+    // AI badge renderer
+    const getAiBadge = (claimId: string) => {
+        const rec = aiRecommendations[claimId]
+        if (!rec) return null
+        const isApprove = rec.action === 'approve'
+        const isDeny = rec.action === 'deny'
+        return (
+            <div
+                className={`claims-processing__ai-badge ${isApprove ? 'claims-processing__ai-badge--approve' : isDeny ? 'claims-processing__ai-badge--deny' : 'claims-processing__ai-badge--review'}`}
+                title={`AI Recommendation: ${rec.label} (${rec.confidence}% confidence)`}
+            >
+                <Brain size={10} />
+                <span>AI: {rec.label} ({rec.confidence}%{!isApprove ? ' denial risk' : ''})</span>
+            </div>
+        )
     }
 
-    const formatCurrency = (amount: number) => `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`
+    if (loading) return <PageSkeleton />
 
     return (
         <div className="claims-processing">
@@ -850,6 +1015,26 @@ export function ClaimsProcessing() {
                     <Badge variant="teal" size="sm" icon={<Zap size={12} />}>
                         Auto-Adjudication Active
                     </Badge>
+                    <button
+                        className={`claims-processing__toggle-btn ${showFilterPanel ? 'active' : ''}`}
+                        onClick={() => setShowFilterPanel(p => !p)}
+                        title="Toggle Advanced Filters"
+                        aria-label="Toggle advanced filters"
+                        aria-expanded={showFilterPanel}
+                    >
+                        <SlidersHorizontal size={14} />
+                        Filters
+                    </button>
+                    <button
+                        className={`claims-processing__toggle-btn ${splitPaneMode ? 'active' : ''}`}
+                        onClick={() => setSplitPaneMode(p => !p)}
+                        title="Toggle Split Pane View"
+                        aria-label="Toggle split pane view"
+                        aria-expanded={splitPaneMode}
+                    >
+                        <Columns size={14} />
+                        Split View
+                    </button>
                 </div>
             </div>
 
@@ -892,8 +1077,88 @@ export function ClaimsProcessing() {
                 />
             </div>
 
+            {/* Main Layout */}
+            <div className="claims-processing__layout">
+            {/* Advanced Filter Panel */}
+            <AnimatePresence>
+                {showFilterPanel && (
+                    <motion.aside
+                        className="claims-processing__filter-panel"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: 280, opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                    >
+                        <div className="claims-processing__filter-panel-inner">
+                            <div className="claims-processing__filter-panel-header">
+                                <h3>Advanced Filters</h3>
+                                <button onClick={() => setShowFilterPanel(false)} className="claims-processing__filter-close" aria-label="Close filters panel">
+                                    <X size={14} />
+                                </button>
+                            </div>
+
+                            <div className="claims-processing__filter-group">
+                                <label className="claims-processing__filter-label">Date Range</label>
+                                <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="claims-processing__filter-input" />
+                                <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="claims-processing__filter-input" />
+                            </div>
+
+                            <div className="claims-processing__filter-group">
+                                <label className="claims-processing__filter-label">Amount Range</label>
+                                <div className="claims-processing__filter-range">
+                                    <input type="number" value={amountMin} onChange={e => setAmountMin(e.target.value)} className="claims-processing__filter-input" placeholder="Min $" />
+                                    <span className="claims-processing__filter-range-sep">–</span>
+                                    <input type="number" value={amountMax} onChange={e => setAmountMax(e.target.value)} className="claims-processing__filter-input" placeholder="Max $" />
+                                </div>
+                            </div>
+
+                            <div className="claims-processing__filter-group">
+                                <label className="claims-processing__filter-label">Status</label>
+                                {(['pending', 'approved', 'denied', 'in_review'] as ClaimStatus[]).map(status => (
+                                    <label key={status} className="claims-processing__filter-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            checked={filterStatuses.has(status)}
+                                            onChange={() => toggleFilterStatus(status)}
+                                        />
+                                        <span className="claims-processing__filter-check-mark" />
+                                        <span>{status.replace('_', ' ')}</span>
+                                    </label>
+                                ))}
+                            </div>
+
+                            <div className="claims-processing__filter-group">
+                                <label className="claims-processing__filter-label">Provider Type</label>
+                                {providerTypeOptions.map(type => (
+                                    <label key={type} className="claims-processing__filter-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedProviderTypes.has(type)}
+                                            onChange={() => toggleProviderType(type)}
+                                        />
+                                        <span className="claims-processing__filter-check-mark" />
+                                        <span>{type}</span>
+                                    </label>
+                                ))}
+                            </div>
+
+                            <div className="claims-processing__filter-actions">
+                                <button className="claims-processing__filter-apply" onClick={() => setShowFilterPanel(false)}>
+                                    <Check size={14} />
+                                    Apply Filters
+                                </button>
+                                <button className="claims-processing__filter-clear" onClick={clearAdvancedFilters}>
+                                    <X size={14} />
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </motion.aside>
+                )}
+            </AnimatePresence>
+
             {/* Main Grid */}
-            <div className="claims-processing__grid">
+            <div className={`claims-processing__grid ${splitPaneMode ? '' : 'claims-processing__grid--full'}`}>
                 {/* Claims List */}
                 <section className="claims-processing__list-section">
                     {/* Filters */}
@@ -905,14 +1170,40 @@ export function ClaimsProcessing() {
                                 placeholder="Search by claim ID, member, or provider..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
+                                aria-label="Search claims by ID, member, or provider"
                             />
                         </div>
-                        <div className="claims-processing__status-filters">
+                        <button
+                            className="claims-processing__toggle-btn"
+                            onClick={() => exportToCSV(filteredClaims.map(c => ({
+                                'Claim ID': c.id,
+                                'Member': c.memberName,
+                                'Member ID': c.memberId,
+                                'Provider': c.providerName,
+                                'Service Date': c.serviceDate,
+                                'Received Date': c.receivedDate,
+                                'Claim Type': c.claimType,
+                                'Status': c.status,
+                                'Billed Amount': c.billedAmount,
+                                'Allowed Amount': c.allowedAmount,
+                                'Paid Amount': c.paidAmount,
+                                'Patient Responsibility': c.patientResponsibility,
+                                'Network Status': c.networkStatus,
+                                'Adjudication Method': c.adjudicationMethod,
+                            })), 'claims_export')}
+                            title="Export filtered claims to CSV"
+                            aria-label="Export filtered claims to CSV"
+                        >
+                            <Download size={14} />
+                            Export CSV
+                        </button>
+                        <div className="claims-processing__status-filters" role="group" aria-label="Filter claims by status">
                             {(['all', 'pending', 'in_review', 'approved', 'denied'] as const).map((status) => (
                                 <button
                                     key={status}
                                     className={`claims-processing__filter-btn ${statusFilter === status ? 'active' : ''}`}
                                     onClick={() => setStatusFilter(status)}
+                                    aria-pressed={statusFilter === status}
                                 >
                                     {status === 'all' ? 'All' : status.replace('_', ' ')}
                                 </button>
@@ -922,14 +1213,30 @@ export function ClaimsProcessing() {
 
                     {/* Claims Table */}
                     <GlassCard className="claims-processing__table-card">
-                        <table className="claims-processing__table">
+                        <div aria-live="polite" className="sr-only">
+                            {filteredClaims.length} claim{filteredClaims.length !== 1 ? 's' : ''} shown
+                        </div>
+                        <table className="claims-processing__table" role="table" aria-label="Claims list">
                             <thead>
                                 <tr>
+                                    <th style={{ width: 36 }}>
+                                        <div
+                                            className={`claims-processing__checkbox ${selectedClaimIds.size === filteredClaims.length && filteredClaims.length > 0 ? 'checked' : ''}`}
+                                            onClick={toggleSelectAll}
+                                            role="checkbox"
+                                            aria-checked={selectedClaimIds.size === filteredClaims.length && filteredClaims.length > 0}
+                                            aria-label="Select all claims"
+                                            tabIndex={0}
+                                        >
+                                            {selectedClaimIds.size === filteredClaims.length && filteredClaims.length > 0 && <Check size={10} />}
+                                        </div>
+                                    </th>
                                     <th>Claim ID</th>
                                     <th>Member</th>
                                     <th>Provider</th>
                                     <th>Service Date</th>
                                     <th>Billed</th>
+                                    <th>AI Insight</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -941,9 +1248,21 @@ export function ClaimsProcessing() {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        className={selectedClaim?.id === claim.id ? 'selected' : ''}
+                                        className={`${selectedClaim?.id === claim.id ? 'selected' : ''} ${selectedClaimIds.has(claim.id) ? 'bulk-selected' : ''}`}
                                         onClick={() => setSelectedClaim(claim)}
                                     >
+                                        <td>
+                                            <div
+                                                className={`claims-processing__checkbox ${selectedClaimIds.has(claim.id) ? 'checked' : ''}`}
+                                                onClick={(e) => toggleClaimSelection(claim.id, e)}
+                                                role="checkbox"
+                                                aria-checked={selectedClaimIds.has(claim.id)}
+                                                aria-label={`Select claim ${claim.id}`}
+                                                tabIndex={0}
+                                            >
+                                                {selectedClaimIds.has(claim.id) && <Check size={10} />}
+                                            </div>
+                                        </td>
                                         <td>
                                             <div className="claims-processing__claim-id">
                                                 <span>{claim.id}</span>
@@ -956,6 +1275,7 @@ export function ClaimsProcessing() {
                                         <td>{claim.providerName}</td>
                                         <td>{new Date(claim.serviceDate).toLocaleDateString()}</td>
                                         <td className="claims-processing__amount">{formatCurrency(claim.billedAmount)}</td>
+                                        <td>{getAiBadge(claim.id)}</td>
                                         <td>
                                             <div className="claims-processing__status-cell">
                                                 {getStatusBadge(claim.status)}
@@ -975,6 +1295,7 @@ export function ClaimsProcessing() {
                 </section>
 
                 {/* Claim Detail */}
+                {splitPaneMode && (
                 <AnimatePresence mode="wait">
                     {selectedClaim ? (
                         <motion.section
@@ -993,6 +1314,31 @@ export function ClaimsProcessing() {
                                         </span>
                                     </div>
                                     {getStatusBadge(selectedClaim.status)}
+                                </div>
+
+                                {/* Visual Claim Journey Timeline */}
+                                <div className="claims-processing__journey">
+                                    {selectedClaimJourney.map((step, i, arr) => (
+                                        <div key={step.label} className="claims-processing__journey-step-wrapper">
+                                            <div className={`claims-processing__journey-step claims-processing__journey-step--${step.status}`}>
+                                                <div className="claims-processing__journey-dot">
+                                                    {step.status === 'completed' && <Check size={10} />}
+                                                </div>
+                                                <span className="claims-processing__journey-label">{step.label}</span>
+                                                {step.timestamp && (
+                                                    <span className="claims-processing__journey-time">
+                                                        {new Date(step.timestamp).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                                    </span>
+                                                )}
+                                                {step.duration && (
+                                                    <span className="claims-processing__journey-duration">{step.duration}</span>
+                                                )}
+                                            </div>
+                                            {i < arr.length - 1 && (
+                                                <div className={`claims-processing__journey-connector ${arr[i + 1].status !== 'pending' ? 'claims-processing__journey-connector--active' : ''}`} />
+                                            )}
+                                        </div>
+                                    ))}
                                 </div>
 
                                 {/* Flagged Reasons */}
@@ -1074,7 +1420,7 @@ export function ClaimsProcessing() {
                                 {/* Line Items */}
                                 <div className="claims-processing__line-items">
                                     <h3>Line Items (EDI 835)</h3>
-                                    <table className="claims-processing__line-table">
+                                    <table className="claims-processing__line-table" role="table" aria-label="Claim line items">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -1261,7 +1607,52 @@ export function ClaimsProcessing() {
                         </motion.div>
                     )}
                 </AnimatePresence>
+                )}
             </div>
+            </div>
+
+            {/* Bulk Actions Toolbar */}
+            <AnimatePresence>
+                {selectedClaimIds.size > 0 && (
+                    <motion.div
+                        className="claims-processing__bulk-toolbar"
+                        initial={{ y: 80, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 80, opacity: 0 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    >
+                        <div className="claims-processing__bulk-count" aria-live="polite">
+                            <CheckCircle2 size={16} />
+                            <span>{selectedClaimIds.size} claim{selectedClaimIds.size > 1 ? 's' : ''} selected</span>
+                        </div>
+                        <div className="claims-processing__bulk-actions">
+                            <button className="claims-processing__bulk-btn claims-processing__bulk-btn--approve" aria-label="Approve selected claims">
+                                <CheckCircle2 size={14} />
+                                Approve Selected
+                            </button>
+                            <button className="claims-processing__bulk-btn claims-processing__bulk-btn--deny" aria-label="Deny selected claims">
+                                <XCircle size={14} />
+                                Deny Selected
+                            </button>
+                            <button className="claims-processing__bulk-btn" aria-label="Assign selected claims">
+                                <Users size={14} />
+                                Assign To
+                            </button>
+                            <button className="claims-processing__bulk-btn" aria-label="Export selected claims">
+                                <Download size={14} />
+                                Export
+                            </button>
+                        </div>
+                        <button
+                            className="claims-processing__bulk-close"
+                            onClick={() => setSelectedClaimIds(new Set())}
+                            aria-label="Clear selection"
+                        >
+                            <X size={14} />
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

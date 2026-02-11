@@ -555,3 +555,823 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ============================================
+   ANIMATION REFINEMENTS v2.0
+   Number Counters, Stagger Grids, Chart Draw-In,
+   Page Transitions, Parallax Ready
+   ============================================ */
+
+/* --------------------------------
+   1. NUMBER COUNTER ANIMATIONS
+   CSS-driven animated counters using
+   @property for smooth number transitions
+   -------------------------------- */
+@property --counter-value {
+    syntax: '<integer>';
+    initial-value: 0;
+    inherits: false;
+}
+
+@property --counter-percent {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* Counter base class - apply to any element with a data-target number */
+.counter-animated {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    --counter-value: 0;
+    transition: --counter-value 2s cubic-bezier(0.4, 0, 0.2, 1);
+    counter-reset: animated-count var(--counter-value);
+}
+
+.counter-animated::after {
+    content: counter(animated-count);
+}
+
+.counter-animated.is-visible {
+    --counter-value: var(--counter-target, 100);
+}
+
+/* Counter with percent symbol */
+.counter-animated--percent::after {
+    content: counter(animated-count) "%";
+}
+
+/* Counter with dollar sign */
+.counter-animated--currency::before {
+    content: "$";
+}
+
+/* Counter with comma formatting helper */
+.counter-animated--large {
+    font-feature-settings: "tnum" 1, "ss01" 1;
+}
+
+/* Smooth number tick animation */
+@keyframes numberTick {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    45% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    55% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.number-tick {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+}
+
+.number-tick__digit {
+    display: inline-block;
+    animation: numberTick 0.4s ease-out;
+}
+
+/* Odometer-style rolling digits */
+@keyframes rollUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes rollDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.digit-roll-up {
+    animation: rollUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.digit-roll-down {
+    animation: rollDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Counter value highlight on change */
+@keyframes counterHighlight {
+    0% {
+        color: var(--apex-teal, #06B6D4);
+        transform: scale(1.05);
+    }
+    100% {
+        color: inherit;
+        transform: scale(1);
+    }
+}
+
+.counter-highlight {
+    animation: counterHighlight 0.6s ease-out;
+}
+
+/* --------------------------------
+   2. STAGGERED ENTRANCE FOR CARD GRIDS
+   Apply .stagger-grid to a container,
+   children animate in with delay cascade
+   -------------------------------- */
+@keyframes staggerIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes staggerInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes staggerInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes staggerInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Primary stagger grid - fade up with scale */
+.stagger-grid > * {
+    animation: staggerIn 0.5s ease-out both;
+}
+
+.stagger-grid > *:nth-child(1) { animation-delay: 0s; }
+.stagger-grid > *:nth-child(2) { animation-delay: 0.05s; }
+.stagger-grid > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger-grid > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger-grid > *:nth-child(5) { animation-delay: 0.2s; }
+.stagger-grid > *:nth-child(6) { animation-delay: 0.25s; }
+.stagger-grid > *:nth-child(7) { animation-delay: 0.3s; }
+.stagger-grid > *:nth-child(8) { animation-delay: 0.35s; }
+.stagger-grid > *:nth-child(9) { animation-delay: 0.4s; }
+.stagger-grid > *:nth-child(10) { animation-delay: 0.45s; }
+.stagger-grid > *:nth-child(11) { animation-delay: 0.5s; }
+.stagger-grid > *:nth-child(12) { animation-delay: 0.55s; }
+
+/* Stagger grid from left */
+.stagger-grid--left > * {
+    animation: staggerInLeft 0.5s ease-out both;
+}
+
+.stagger-grid--left > *:nth-child(1) { animation-delay: 0s; }
+.stagger-grid--left > *:nth-child(2) { animation-delay: 0.05s; }
+.stagger-grid--left > *:nth-child(3) { animation-delay: 0.1s; }
+.stagger-grid--left > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger-grid--left > *:nth-child(5) { animation-delay: 0.2s; }
+.stagger-grid--left > *:nth-child(6) { animation-delay: 0.25s; }
+.stagger-grid--left > *:nth-child(7) { animation-delay: 0.3s; }
+.stagger-grid--left > *:nth-child(8) { animation-delay: 0.35s; }
+.stagger-grid--left > *:nth-child(9) { animation-delay: 0.4s; }
+.stagger-grid--left > *:nth-child(10) { animation-delay: 0.45s; }
+.stagger-grid--left > *:nth-child(11) { animation-delay: 0.5s; }
+.stagger-grid--left > *:nth-child(12) { animation-delay: 0.55s; }
+
+/* Stagger grid scale variant */
+.stagger-grid--scale > * {
+    animation: staggerInScale 0.4s ease-out both;
+}
+
+.stagger-grid--scale > *:nth-child(1) { animation-delay: 0s; }
+.stagger-grid--scale > *:nth-child(2) { animation-delay: 0.04s; }
+.stagger-grid--scale > *:nth-child(3) { animation-delay: 0.08s; }
+.stagger-grid--scale > *:nth-child(4) { animation-delay: 0.12s; }
+.stagger-grid--scale > *:nth-child(5) { animation-delay: 0.16s; }
+.stagger-grid--scale > *:nth-child(6) { animation-delay: 0.2s; }
+.stagger-grid--scale > *:nth-child(7) { animation-delay: 0.24s; }
+.stagger-grid--scale > *:nth-child(8) { animation-delay: 0.28s; }
+.stagger-grid--scale > *:nth-child(9) { animation-delay: 0.32s; }
+.stagger-grid--scale > *:nth-child(10) { animation-delay: 0.36s; }
+.stagger-grid--scale > *:nth-child(11) { animation-delay: 0.4s; }
+.stagger-grid--scale > *:nth-child(12) { animation-delay: 0.44s; }
+
+/* Fast stagger variant for large lists */
+.stagger-grid--fast > * {
+    animation: staggerIn 0.3s ease-out both;
+}
+
+.stagger-grid--fast > *:nth-child(1) { animation-delay: 0s; }
+.stagger-grid--fast > *:nth-child(2) { animation-delay: 0.03s; }
+.stagger-grid--fast > *:nth-child(3) { animation-delay: 0.06s; }
+.stagger-grid--fast > *:nth-child(4) { animation-delay: 0.09s; }
+.stagger-grid--fast > *:nth-child(5) { animation-delay: 0.12s; }
+.stagger-grid--fast > *:nth-child(6) { animation-delay: 0.15s; }
+.stagger-grid--fast > *:nth-child(7) { animation-delay: 0.18s; }
+.stagger-grid--fast > *:nth-child(8) { animation-delay: 0.21s; }
+.stagger-grid--fast > *:nth-child(9) { animation-delay: 0.24s; }
+.stagger-grid--fast > *:nth-child(10) { animation-delay: 0.27s; }
+.stagger-grid--fast > *:nth-child(11) { animation-delay: 0.3s; }
+.stagger-grid--fast > *:nth-child(12) { animation-delay: 0.33s; }
+
+/* --------------------------------
+   3. CHART DRAW-IN ANIMATIONS
+   SVG path draw-in, bar chart rise,
+   pie chart fill, and area reveal
+   -------------------------------- */
+
+/* SVG line/path draw-in animation */
+@keyframes chartDrawIn {
+    from {
+        stroke-dashoffset: var(--path-length, 1000);
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.chart-draw-in path,
+.chart-draw-in line,
+.chart-draw-in polyline {
+    stroke-dasharray: var(--path-length, 1000);
+    stroke-dashoffset: var(--path-length, 1000);
+    animation: chartDrawIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger multiple chart lines */
+.chart-draw-in path:nth-child(1) { animation-delay: 0s; }
+.chart-draw-in path:nth-child(2) { animation-delay: 0.2s; }
+.chart-draw-in path:nth-child(3) { animation-delay: 0.4s; }
+.chart-draw-in path:nth-child(4) { animation-delay: 0.6s; }
+
+/* Bar chart rise animation */
+@keyframes barRise {
+    from {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    to {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+.chart-bars-animate rect,
+.chart-bars-animate .bar {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    animation: barRise 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.chart-bars-animate rect:nth-child(1),
+.chart-bars-animate .bar:nth-child(1) { animation-delay: 0s; }
+.chart-bars-animate rect:nth-child(2),
+.chart-bars-animate .bar:nth-child(2) { animation-delay: 0.05s; }
+.chart-bars-animate rect:nth-child(3),
+.chart-bars-animate .bar:nth-child(3) { animation-delay: 0.1s; }
+.chart-bars-animate rect:nth-child(4),
+.chart-bars-animate .bar:nth-child(4) { animation-delay: 0.15s; }
+.chart-bars-animate rect:nth-child(5),
+.chart-bars-animate .bar:nth-child(5) { animation-delay: 0.2s; }
+.chart-bars-animate rect:nth-child(6),
+.chart-bars-animate .bar:nth-child(6) { animation-delay: 0.25s; }
+.chart-bars-animate rect:nth-child(7),
+.chart-bars-animate .bar:nth-child(7) { animation-delay: 0.3s; }
+.chart-bars-animate rect:nth-child(8),
+.chart-bars-animate .bar:nth-child(8) { animation-delay: 0.35s; }
+.chart-bars-animate rect:nth-child(9),
+.chart-bars-animate .bar:nth-child(9) { animation-delay: 0.4s; }
+.chart-bars-animate rect:nth-child(10),
+.chart-bars-animate .bar:nth-child(10) { animation-delay: 0.45s; }
+.chart-bars-animate rect:nth-child(11),
+.chart-bars-animate .bar:nth-child(11) { animation-delay: 0.5s; }
+.chart-bars-animate rect:nth-child(12),
+.chart-bars-animate .bar:nth-child(12) { animation-delay: 0.55s; }
+
+/* Pie / Donut chart fill animation */
+@keyframes pieReveal {
+    from {
+        stroke-dashoffset: var(--circumference, 283);
+    }
+    to {
+        stroke-dashoffset: var(--target-offset, 0);
+    }
+}
+
+.chart-pie-animate circle {
+    animation: pieReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.chart-pie-animate circle:nth-child(1) { animation-delay: 0s; }
+.chart-pie-animate circle:nth-child(2) { animation-delay: 0.15s; }
+.chart-pie-animate circle:nth-child(3) { animation-delay: 0.3s; }
+.chart-pie-animate circle:nth-child(4) { animation-delay: 0.45s; }
+.chart-pie-animate circle:nth-child(5) { animation-delay: 0.6s; }
+
+/* Area chart reveal from bottom */
+@keyframes areaReveal {
+    from {
+        clip-path: inset(100% 0 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.chart-area-animate {
+    animation: areaReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Horizontal wipe reveal for charts */
+@keyframes chartWipeIn {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.chart-wipe-in {
+    animation: chartWipeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Chart grid fade-in */
+@keyframes gridFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.4;
+    }
+}
+
+.chart-grid-animate {
+    animation: gridFadeIn 0.6s ease-out forwards;
+}
+
+/* Gauge fill animation */
+@keyframes gaugeFill {
+    from {
+        stroke-dashoffset: var(--gauge-circumference, 251);
+    }
+    to {
+        stroke-dashoffset: var(--gauge-target, 0);
+    }
+}
+
+.gauge-animate circle.fill {
+    animation: gaugeFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+/* --------------------------------
+   4. SMOOTH PAGE TRANSITIONS
+   Fade between routes, slide pages
+   -------------------------------- */
+
+/* Route fade transition - apply to page wrapper */
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+.page-transition-enter {
+    animation: pageFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-transition-exit {
+    animation: pageFadeOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Crossfade variant - simpler, no transform */
+@keyframes pageCrossFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pageCrossFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.page-crossfade-enter {
+    animation: pageCrossFadeIn 0.3s ease-out both;
+}
+
+.page-crossfade-exit {
+    animation: pageCrossFadeOut 0.2s ease-in both;
+}
+
+/* Slide page transitions */
+@keyframes pageSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pageSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pageSlideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+@keyframes pageSlideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}
+
+.page-slide-enter-right {
+    animation: pageSlideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-slide-enter-left {
+    animation: pageSlideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-slide-exit-left {
+    animation: pageSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-slide-exit-right {
+    animation: pageSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Scale page transition for modals/overlays */
+@keyframes pageScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pageScaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+}
+
+.page-scale-enter {
+    animation: pageScaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-scale-exit {
+    animation: pageScaleOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Generic page wrapper that applies fade transition */
+.page-animated {
+    animation: pageFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* --------------------------------
+   5. SUBTLE PARALLAX READY CLASS
+   For landing hero sections
+   -------------------------------- */
+
+/* Parallax container */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+}
+
+/* Parallax background layer - moves slower */
+.parallax-bg {
+    position: absolute;
+    inset: -20%;
+    transform: translateZ(-1px) scale(1.5);
+    z-index: -1;
+    will-change: transform;
+}
+
+/* Parallax foreground stays normal */
+.parallax-fg {
+    position: relative;
+    transform: translateZ(0);
+    z-index: 1;
+}
+
+/* Subtle parallax using scroll-driven transform */
+.parallax-subtle {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Parallax speed variants (controlled via JS with --parallax-y) */
+.parallax-slow {
+    transform: translateY(calc(var(--parallax-y, 0) * 0.3));
+    will-change: transform;
+}
+
+.parallax-medium {
+    transform: translateY(calc(var(--parallax-y, 0) * 0.5));
+    will-change: transform;
+}
+
+.parallax-fast {
+    transform: translateY(calc(var(--parallax-y, 0) * 0.7));
+    will-change: transform;
+}
+
+/* Landing hero parallax elements */
+.hero-parallax {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.hero-parallax__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    will-change: transform;
+    transform: translateY(var(--scroll-offset, 0));
+    transition: transform 0.05s linear;
+}
+
+.hero-parallax__content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Floating elements with parallax-like effect */
+@keyframes parallaxFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(-1deg);
+    }
+}
+
+.parallax-float {
+    animation: parallaxFloat 8s ease-in-out infinite;
+}
+
+.parallax-float--slow {
+    animation-duration: 12s;
+}
+
+.parallax-float--fast {
+    animation-duration: 5s;
+}
+
+/* Decorative parallax orbs for hero sections */
+.parallax-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.parallax-orb--teal {
+    background: var(--apex-teal, #06B6D4);
+}
+
+.parallax-orb--purple {
+    background: var(--apex-purple, #8B5CF6);
+}
+
+.parallax-orb--blue {
+    background: var(--apex-blue, #3B82F6);
+}
+
+/* --------------------------------
+   INTERSECTION OBSERVER ANIMATION TRIGGERS
+   Add .animate-on-scroll and elements
+   become visible when scrolled into view
+   -------------------------------- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll--scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-on-scroll--scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.animate-on-scroll--left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-on-scroll--left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-on-scroll--right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-on-scroll--right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --------------------------------
+   SKELETON LOADING ANIMATION REFINEMENT
+   -------------------------------- */
+@keyframes skeletonWave {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-wave {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonWave 1.8s ease-in-out infinite;
+}
+
+[data-theme="light"] .skeleton-wave {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.04) 0%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 100%
+    );
+    background-size: 200% 100%;
+}
+
+/* --------------------------------
+   MICRO-INTERACTION: CHECKBOX TICK
+   -------------------------------- */
+@keyframes checkTick {
+    0% {
+        stroke-dashoffset: 24;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.check-animate {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    animation: checkTick 0.3s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+/* --------------------------------
+   NOTIFICATION BADGE ENTRANCE
+   -------------------------------- */
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.badge-pop {
+    animation: badgePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* --------------------------------
+   TOOLTIP ENTRANCE
+   -------------------------------- */
+@keyframes tooltipIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.tooltip-animate {
+    animation: tooltipIn 0.2s ease-out both;
+}

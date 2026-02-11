@@ -440,6 +440,269 @@
     color: var(--apex-steel);
 }
 
+/* ===== Phase 4B: Network Comparison in Cards ===== */
+.cost-card__network-compare {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cost-card__network {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-md);
+}
+
+.cost-card__network--in {
+    background: rgba(0, 210, 190, 0.05);
+}
+
+.cost-card__network--out {
+    background: rgba(255, 149, 0, 0.05);
+}
+
+.cost-card__network-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: var(--apex-success);
+    font-weight: 500;
+}
+
+.cost-card__network-badge--out {
+    color: var(--apex-warning);
+}
+
+.cost-card__network-divider {
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.cost-card__network-divider span {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-weight: 500;
+}
+
+.cost-card__amount-oon {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-warning);
+    font-family: var(--font-mono);
+}
+
+/* Savings Recommendation in card */
+.cost-card__savings-rec {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 210, 190, 0.08);
+    border: 1px solid rgba(0, 210, 190, 0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    margin-bottom: var(--space-sm);
+}
+
+.cost-card__savings-rec strong {
+    color: var(--apex-teal);
+    font-weight: 700;
+}
+
+/* Historical cost in card */
+.cost-card__historical {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ===== Phase 4B: Detail Panel - Network Comparison ===== */
+.cost-detail__network-comparison {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.cost-detail__network-comparison h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.cost-detail__network-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.network-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.network-card--in {
+    background: rgba(0, 210, 190, 0.08);
+    border: 1px solid rgba(0, 210, 190, 0.2);
+}
+
+.network-card--out {
+    background: rgba(255, 149, 0, 0.08);
+    border: 1px solid rgba(255, 149, 0, 0.2);
+}
+
+.network-card__badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-success);
+}
+
+.network-card__badge--out {
+    color: var(--apex-warning);
+}
+
+.network-card__cost {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-teal);
+    font-family: var(--font-mono);
+}
+
+.network-card__cost--out {
+    color: var(--apex-warning);
+}
+
+.network-card__range {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+/* Savings Callout */
+.cost-detail__savings-callout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.1) 0%, rgba(0, 210, 190, 0.05) 100%);
+    border: 1px solid rgba(0, 210, 190, 0.25);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cost-detail__savings-callout:hover {
+    border-color: var(--apex-teal);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.15) 0%, rgba(0, 210, 190, 0.08) 100%);
+}
+
+.savings-callout__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--apex-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--apex-obsidian);
+    flex-shrink: 0;
+}
+
+.savings-callout__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.savings-callout__title {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-teal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.savings-callout__text {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.savings-callout__text strong {
+    color: var(--apex-teal);
+}
+
+.savings-callout__arrow {
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+/* Historical Cost in Detail */
+.cost-detail__historical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.cost-detail__historical h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+.cost-detail__historical-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--apex-electric-purple);
+}
+
+.cost-detail__historical-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cost-detail__historical-label {
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.cost-detail__historical-label strong {
+    color: var(--apex-white);
+}
+
+.cost-detail__historical-sub {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .cost-estimator__grid {
@@ -462,5 +725,18 @@
 
     .cost-estimator__category-select {
         width: 100%;
+    }
+
+    .cost-detail__network-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-card__network-compare {
+        flex-direction: column;
+    }
+
+    .cost-card__network-divider {
+        justify-content: center;
+        padding: 2px 0;
     }
 }

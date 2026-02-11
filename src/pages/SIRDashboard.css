@@ -3,63 +3,19 @@
 /* Dynamic, Interactive, AI-Native Analytics */
 
 /* ============================================================
-   DESIGN TOKENS
+   DESIGN TOKENS — Consolidated to --apex-* system (src/index.css)
+   
+   All --sir-* variables have been replaced with --apex-* equivalents:
+     Backgrounds: --apex-obsidian, --apex-obsidian-soft, --apex-obsidian-glass,
+                  --apex-obsidian-elevated, --apex-obsidian-card
+     Borders:     --glass-border, --glass-border-hover
+     Text:        --apex-white, --apex-silver, --apex-steel, --apex-muted
+     Accents:     --apex-sir-indigo, --apex-purple, --apex-teal,
+                  --apex-success, --apex-warning, --apex-sir-rose
+     Spacing:     --space-xs/sm/md/lg/xl/2xl (note: 12px used directly)
+     Radius:      --radius-xs/sm/md/lg/2xl (note: 6px used directly)
+     Typography:  --font-body, --font-mono
    ============================================================ */
-
-.sir-analytics {
-    --sir-bg-base: #0a0b0e;
-    --sir-bg-elevated: #111318;
-    --sir-bg-surface: #16181d;
-    --sir-bg-muted: #1c1f26;
-    --sir-bg-hover: #22262f;
-    --sir-bg-active: #2a2f3a;
-
-    --sir-border-subtle: rgba(255, 255, 255, 0.06);
-    --sir-border-default: rgba(255, 255, 255, 0.1);
-    --sir-border-strong: rgba(255, 255, 255, 0.15);
-
-    --sir-text-primary: #f1f5f9;
-    --sir-text-secondary: #94a3b8;
-    --sir-text-muted: #64748b;
-    --sir-text-dim: #475569;
-
-    /* Vibrant but refined accent palette */
-    --sir-accent-blue: #6366f1;
-    --sir-accent-purple: #8b5cf6;
-    --sir-accent-cyan: #06b6d4;
-    --sir-accent-emerald: #10b981;
-    --sir-accent-amber: #f59e0b;
-    --sir-accent-rose: #f43f5e;
-
-    /* Gradient definitions */
-    --sir-gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    --sir-gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-    --sir-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #f43f5e 100%);
-
-    /* Glow effects */
-    --sir-glow-blue: 0 0 20px rgba(99, 102, 241, 0.3);
-    --sir-glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
-
-    /* Spacing */
-    --sir-space-xs: 4px;
-    --sir-space-sm: 8px;
-    --sir-space-md: 12px;
-    --sir-space-lg: 16px;
-    --sir-space-xl: 24px;
-    --sir-space-2xl: 32px;
-    --sir-space-3xl: 48px;
-
-    /* Typography */
-    --sir-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --sir-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-
-    /* Radius */
-    --sir-radius-sm: 6px;
-    --sir-radius-md: 8px;
-    --sir-radius-lg: 12px;
-    --sir-radius-xl: 16px;
-    --sir-radius-2xl: 24px;
-}
 
 /* ============================================================
    PAGE CONTAINER
@@ -69,11 +25,11 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: var(--sir-bg-base);
-    font-family: var(--sir-font-sans);
-    padding: var(--sir-space-xl);
-    padding-top: var(--sir-space-lg);
-    gap: var(--sir-space-xl);
+    background: var(--apex-obsidian);
+    font-family: var(--font-body);
+    padding: var(--space-lg);
+    padding-top: var(--space-md);
+    gap: var(--space-lg);
     overflow-x: hidden;
 }
 
@@ -85,35 +41,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: var(--sir-space-lg);
-    border-bottom: 1px solid var(--sir-border-subtle);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .sir-analytics__header-left {
     display: flex;
     flex-direction: column;
-    gap: var(--sir-space-sm);
+    gap: var(--space-sm);
 }
 
 .sir-analytics__breadcrumb {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-sm);
+    gap: var(--space-sm);
     font-size: 0.75rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
 }
 
 .sir-analytics__breadcrumb--active {
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
 }
 
 .sir-analytics__title {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-md);
+    gap: 12px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     letter-spacing: -0.02em;
     margin: 0;
 }
@@ -124,10 +80,10 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: var(--sir-gradient-primary);
-    border-radius: var(--sir-radius-md);
+    background: linear-gradient(135deg, var(--apex-sir-indigo) 0%, var(--apex-purple) 100%);
+    border-radius: var(--radius-sm);
     color: white;
-    box-shadow: var(--sir-glow-blue);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
 .sir-analytics__title-icon svg {
@@ -138,68 +94,68 @@
 .sir-analytics__header-right {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-lg);
+    gap: var(--space-md);
 }
 
 .sir-analytics__period-selector {
     display: flex;
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
     padding: 3px;
 }
 
 .sir-analytics__period-btn {
-    padding: var(--sir-space-sm) var(--sir-space-md);
+    padding: var(--space-sm) 12px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     background: transparent;
     border: none;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__period-btn:hover {
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
 }
 
 .sir-analytics__period-btn.active {
-    background: var(--sir-accent-blue);
+    background: var(--apex-sir-indigo);
     color: white;
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
 }
 
 .sir-analytics__actions {
     display: flex;
-    gap: var(--sir-space-sm);
+    gap: var(--space-sm);
 }
 
 .sir-analytics__action-btn {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-sm);
-    padding: var(--sir-space-sm) var(--sir-space-md);
+    gap: var(--space-sm);
+    padding: var(--space-sm) 12px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--sir-text-secondary);
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-md);
+    color: var(--apex-silver);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__action-btn:hover {
-    background: var(--sir-bg-hover);
-    border-color: var(--sir-border-default);
-    color: var(--sir-text-primary);
+    background: var(--apex-obsidian-card);
+    border-color: var(--glass-border-hover);
+    color: var(--apex-white);
 }
 
 .sir-analytics__action-btn--primary {
-    background: var(--sir-accent-blue);
-    border-color: var(--sir-accent-blue);
+    background: var(--apex-sir-indigo);
+    border-color: var(--apex-sir-indigo);
     color: white;
 }
 
@@ -215,10 +171,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--sir-space-md) var(--sir-space-lg);
+    padding: 12px var(--space-md);
     background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
     border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: var(--sir-radius-lg);
+    border-radius: var(--radius-md);
     position: relative;
     overflow: hidden;
 }
@@ -244,13 +200,13 @@
 .sir-analytics__ai-banner-content {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-md);
+    gap: 12px;
     position: relative;
     z-index: 1;
 }
 
 .sir-analytics__ai-icon {
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
     animation: pulse-glow 2s infinite;
 }
 
@@ -268,24 +224,24 @@
 
 .sir-analytics__ai-text {
     font-size: 0.8125rem;
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
 }
 
 .sir-analytics__ai-text strong {
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
 }
 
 .sir-analytics__ai-banner-action {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-xs);
-    padding: var(--sir-space-sm) var(--sir-space-md);
+    gap: var(--space-xs);
+    padding: var(--space-sm) 12px;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
     background: rgba(139, 92, 246, 0.15);
     border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--sir-radius-md);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.15s ease;
     position: relative;
@@ -303,7 +259,7 @@
 .sir-analytics__kpis {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: var(--sir-space-lg);
+    gap: var(--space-md);
 }
 
 @media (max-width: 1400px) {
@@ -319,10 +275,10 @@
 }
 
 .sir-kpi-card {
-    background: var(--sir-bg-elevated);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-xl);
-    padding: var(--sir-space-lg);
+    background: var(--apex-obsidian-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
@@ -336,14 +292,14 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--sir-gradient-primary);
+    background: linear-gradient(135deg, var(--apex-sir-indigo) 0%, var(--apex-purple) 100%);
     opacity: 0;
     transition: opacity 0.2s ease;
 }
 
 .sir-kpi-card:hover {
-    background: var(--sir-bg-surface);
-    border-color: var(--sir-border-default);
+    background: var(--apex-obsidian-glass);
+    border-color: var(--glass-border-hover);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -355,13 +311,13 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: var(--sir-space-md);
+    margin-bottom: 12px;
 }
 
 .sir-kpi-card__label {
     font-size: 0.6875rem;
     font-weight: 500;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -373,7 +329,7 @@
     padding: 2px 6px;
     font-size: 0.625rem;
     font-weight: 600;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
 }
 
 .sir-kpi-card__badge--up {
@@ -394,15 +350,15 @@
 .sir-kpi-card__value {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     letter-spacing: -0.02em;
     font-feature-settings: 'tnum' 1;
-    margin-bottom: var(--sir-space-sm);
+    margin-bottom: var(--space-sm);
 }
 
 .sir-kpi-card__sparkline {
     height: 24px;
-    margin: var(--sir-space-sm) 0;
+    margin: var(--space-sm) 0;
     opacity: 0.8;
 }
 
@@ -410,18 +366,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--sir-space-sm);
-    border-top: 1px solid var(--sir-border-subtle);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--glass-border);
 }
 
 .sir-kpi-card__target {
     font-size: 0.625rem;
-    color: var(--sir-text-dim);
+    color: var(--apex-muted);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-kpi-card__drill {
-    color: var(--sir-text-dim);
+    color: var(--apex-muted);
     opacity: 0;
     transition: opacity 0.2s ease;
 }
@@ -437,7 +393,7 @@
 .sir-analytics__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sir-space-xl);
+    gap: var(--space-lg);
 }
 
 .sir-analytics__grid--with-panel {
@@ -453,7 +409,7 @@
 .sir-analytics__main {
     display: flex;
     flex-direction: column;
-    gap: var(--sir-space-xl);
+    gap: var(--space-lg);
 }
 
 /* ============================================================
@@ -461,9 +417,9 @@
    ============================================================ */
 
 .sir-analytics__panel {
-    background: var(--sir-bg-elevated);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-xl);
+    background: var(--apex-obsidian-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
 }
 
@@ -471,28 +427,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sir-space-lg) var(--sir-space-xl);
-    border-bottom: 1px solid var(--sir-border-subtle);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .sir-analytics__panel-title {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-md);
+    gap: 12px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
 }
 
 .sir-analytics__panel-title svg {
-    color: var(--sir-accent-blue);
+    color: var(--apex-sir-indigo);
 }
 
 .sir-analytics__panel-badge {
     font-size: 0.5625rem;
     font-weight: 600;
     padding: 2px 8px;
-    background: var(--sir-gradient-primary);
+    background: linear-gradient(135deg, var(--apex-sir-indigo) 0%, var(--apex-purple) 100%);
     color: white;
     border-radius: 20px;
     text-transform: uppercase;
@@ -502,10 +458,10 @@
 .sir-analytics__view-all {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-xs);
+    gap: var(--space-xs);
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--sir-accent-blue);
+    color: var(--apex-sir-indigo);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -513,15 +469,15 @@
 }
 
 .sir-analytics__view-all:hover {
-    gap: var(--sir-space-sm);
+    gap: var(--space-sm);
 }
 
 .sir-analytics__chart-controls {
     display: flex;
     gap: 4px;
-    background: var(--sir-bg-muted);
+    background: var(--apex-obsidian-elevated);
     padding: 3px;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
 }
 
 .sir-analytics__chart-btn {
@@ -530,21 +486,21 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     background: transparent;
     border: none;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__chart-btn:hover {
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
 }
 
 .sir-analytics__chart-btn.active {
-    background: var(--sir-bg-surface);
-    color: var(--sir-text-primary);
+    background: var(--apex-obsidian-glass);
+    color: var(--apex-white);
 }
 
 /* ============================================================
@@ -552,16 +508,16 @@
    ============================================================ */
 
 .sir-analytics__chart-container {
-    padding: var(--sir-space-xl);
-    padding-top: var(--sir-space-lg);
+    padding: var(--space-lg);
+    padding-top: var(--space-md);
 }
 
 .sir-analytics__chart-legend {
     display: flex;
-    gap: var(--sir-space-xl);
-    padding: 0 var(--sir-space-xl) var(--sir-space-lg);
+    gap: var(--space-lg);
+    padding: 0 var(--space-lg) var(--space-md);
     font-size: 0.6875rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
 }
 
 .sir-analytics__chart-legend .dot {
@@ -574,23 +530,23 @@
 
 /* Tooltip */
 .sir-tooltip {
-    background: var(--sir-bg-surface) !important;
-    border: 1px solid var(--sir-border-default) !important;
-    border-radius: var(--sir-radius-md) !important;
-    padding: var(--sir-space-md) !important;
+    background: var(--apex-obsidian-glass) !important;
+    border: 1px solid var(--glass-border-hover) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 12px !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
 }
 
 .sir-tooltip__label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
-    margin-bottom: var(--sir-space-sm);
+    color: var(--apex-white);
+    margin-bottom: var(--space-sm);
 }
 
 .sir-tooltip__value {
     font-size: 0.6875rem;
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -601,7 +557,7 @@
 .sir-analytics__split-panels {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--sir-space-xl);
+    gap: var(--space-lg);
 }
 
 @media (max-width: 1100px) {
@@ -612,7 +568,7 @@
 
 .sir-analytics__pie-container {
     position: relative;
-    padding: var(--sir-space-lg);
+    padding: var(--space-md);
 }
 
 .sir-analytics__pie-center {
@@ -627,28 +583,28 @@
     display: block;
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
 }
 
 .sir-analytics__pie-label {
     font-size: 0.625rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     text-transform: uppercase;
 }
 
 .sir-analytics__category-list {
-    padding: 0 var(--sir-space-lg) var(--sir-space-lg);
+    padding: 0 var(--space-md) var(--space-md);
     display: flex;
     flex-direction: column;
-    gap: var(--sir-space-sm);
+    gap: var(--space-sm);
 }
 
 .sir-analytics__category-item {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-md);
+    gap: 12px;
     font-size: 0.75rem;
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
 }
 
 .sir-analytics__category-dot {
@@ -663,7 +619,7 @@
 
 .sir-analytics__category-percent {
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -682,22 +638,22 @@
 
 /* Radial Chart */
 .sir-analytics__radial-container {
-    padding: var(--sir-space-lg);
+    padding: var(--space-md);
 }
 
 .sir-analytics__risk-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sir-space-md);
-    padding: 0 var(--sir-space-lg) var(--sir-space-lg);
+    gap: 12px;
+    padding: 0 var(--space-md) var(--space-md);
     font-size: 0.6875rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
 }
 
 .sir-analytics__risk-item {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-xs);
+    gap: var(--space-xs);
 }
 
 .sir-analytics__risk-dot {
@@ -708,7 +664,7 @@
 
 .sir-analytics__risk-count {
     font-weight: 600;
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
     margin-left: 4px;
 }
 
@@ -719,8 +675,8 @@
 .sir-analytics__members-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--sir-space-md);
-    padding: var(--sir-space-lg);
+    gap: 12px;
+    padding: var(--space-md);
 }
 
 @media (max-width: 1200px) {
@@ -732,32 +688,32 @@
 .sir-analytics__member-card {
     display: grid;
     grid-template-columns: auto 1fr auto auto auto;
-    gap: var(--sir-space-lg);
+    gap: var(--space-md);
     align-items: center;
-    padding: var(--sir-space-md) var(--sir-space-lg);
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-lg);
+    padding: 12px var(--space-md);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .sir-analytics__member-card:hover {
-    background: var(--sir-bg-hover);
-    border-color: var(--sir-border-default);
+    background: var(--apex-obsidian-card);
+    border-color: var(--glass-border-hover);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .sir-analytics__member-card--critical {
-    border-left: 3px solid var(--sir-accent-rose);
+    border-left: 3px solid var(--apex-sir-rose);
 }
 
 .sir-analytics__member-card--high {
-    border-left: 3px solid var(--sir-accent-amber);
+    border-left: 3px solid var(--apex-warning);
 }
 
 .sir-analytics__member-card--rising {
-    border-left: 3px solid var(--sir-accent-blue);
+    border-left: 3px solid var(--apex-sir-indigo);
 }
 
 .sir-analytics__member-risk {
@@ -770,7 +726,7 @@
 .sir-analytics__member-score {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     font-feature-settings: 'tnum' 1;
 }
 
@@ -785,12 +741,12 @@
 
 .sir-analytics__member-card--critical .sir-analytics__member-level {
     background: rgba(244, 63, 94, 0.2);
-    color: var(--sir-accent-rose);
+    color: var(--apex-sir-rose);
 }
 
 .sir-analytics__member-card--high .sir-analytics__member-level {
     background: rgba(245, 158, 11, 0.2);
-    color: var(--sir-accent-amber);
+    color: var(--apex-warning);
 }
 
 .sir-analytics__member-info {
@@ -800,13 +756,13 @@
 .sir-analytics__member-id {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
-    font-family: var(--sir-font-mono);
+    color: var(--apex-white);
+    font-family: var(--font-mono);
 }
 
 .sir-analytics__member-condition {
     font-size: 0.6875rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -817,13 +773,13 @@
     align-items: center;
     gap: 4px;
     font-size: 0.5625rem;
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
     margin-top: 4px;
 }
 
 .sir-analytics__member-metrics {
     display: flex;
-    gap: var(--sir-space-lg);
+    gap: var(--space-md);
 }
 
 .sir-analytics__member-metric {
@@ -834,13 +790,13 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-analytics__member-metric .label {
     font-size: 0.5625rem;
-    color: var(--sir-text-dim);
+    color: var(--apex-muted);
     text-transform: uppercase;
 }
 
@@ -859,17 +815,17 @@
 
 .sir-analytics__member-status--enrolled {
     background: rgba(16, 185, 129, 0.15);
-    color: var(--sir-accent-emerald);
+    color: var(--apex-success);
 }
 
 .sir-analytics__member-status--referred {
     background: rgba(245, 158, 11, 0.15);
-    color: var(--sir-accent-amber);
+    color: var(--apex-warning);
 }
 
 .sir-analytics__member-status--active {
     background: rgba(99, 102, 241, 0.15);
-    color: var(--sir-accent-blue);
+    color: var(--apex-sir-indigo);
 }
 
 /* ============================================================
@@ -879,8 +835,8 @@
 .sir-analytics__stoploss-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--sir-space-lg);
-    padding: var(--sir-space-lg);
+    gap: var(--space-md);
+    padding: var(--space-md);
 }
 
 @media (max-width: 900px) {
@@ -890,31 +846,31 @@
 }
 
 .sir-analytics__stoploss-card {
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-lg);
-    padding: var(--sir-space-lg);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
 }
 
 .sir-analytics__stoploss-card--healthy {
-    border-top: 2px solid var(--sir-accent-emerald);
+    border-top: 2px solid var(--apex-success);
 }
 
 .sir-analytics__stoploss-card--warning {
-    border-top: 2px solid var(--sir-accent-amber);
+    border-top: 2px solid var(--apex-warning);
 }
 
 .sir-analytics__stoploss-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--sir-space-md);
+    margin-bottom: 12px;
 }
 
 .sir-analytics__stoploss-type {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
 }
 
 .sir-analytics__stoploss-util {
@@ -924,39 +880,39 @@
 }
 
 .sir-analytics__stoploss-util--healthy {
-    color: var(--sir-accent-emerald);
+    color: var(--apex-success);
 }
 
 .sir-analytics__stoploss-util--warning {
-    color: var(--sir-accent-amber);
+    color: var(--apex-warning);
 }
 
 .sir-analytics__stoploss-bar {
     height: 6px;
-    background: var(--sir-bg-muted);
+    background: var(--apex-obsidian-elevated);
     border-radius: 3px;
     overflow: hidden;
-    margin-bottom: var(--sir-space-md);
+    margin-bottom: 12px;
 }
 
 .sir-analytics__stoploss-fill {
     height: 100%;
-    background: var(--sir-gradient-success);
+    background: linear-gradient(135deg, var(--apex-success) 0%, var(--apex-teal) 100%);
     border-radius: 3px;
 }
 
 .sir-analytics__stoploss-card--warning .sir-analytics__stoploss-fill {
-    background: var(--sir-gradient-warning);
+    background: linear-gradient(135deg, var(--apex-warning) 0%, var(--apex-sir-rose) 100%);
 }
 
 .sir-analytics__stoploss-trend {
-    margin-bottom: var(--sir-space-md);
+    margin-bottom: 12px;
 }
 
 .sir-analytics__stoploss-metrics {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--sir-space-md);
+    gap: 12px;
     text-align: center;
 }
 
@@ -964,13 +920,13 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-analytics__stoploss-metrics .label {
     font-size: 0.5625rem;
-    color: var(--sir-text-dim);
+    color: var(--apex-muted);
     text-transform: uppercase;
 }
 
@@ -981,9 +937,9 @@
 .sir-analytics__ai-panel {
     display: flex;
     flex-direction: column;
-    background: var(--sir-bg-elevated);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-xl);
+    background: var(--apex-obsidian-soft);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     max-height: calc(100vh - 200px);
 }
@@ -992,22 +948,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sir-space-lg) var(--sir-space-xl);
-    border-bottom: 1px solid var(--sir-border-subtle);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
     background: linear-gradient(90deg, rgba(139, 92, 246, 0.05) 0%, transparent 100%);
 }
 
 .sir-analytics__ai-title {
     display: flex;
     align-items: center;
-    gap: var(--sir-space-md);
+    gap: 12px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
 }
 
 .sir-analytics__ai-title svg {
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
 }
 
 .sir-analytics__ai-count {
@@ -1016,7 +972,7 @@
     justify-content: center;
     min-width: 24px;
     height: 24px;
-    background: var(--sir-accent-purple);
+    background: var(--apex-purple);
     color: white;
     font-size: 0.6875rem;
     font-weight: 600;
@@ -1027,8 +983,8 @@
 .sir-analytics__ai-list {
     display: flex;
     flex-direction: column;
-    gap: var(--sir-space-md);
-    padding: var(--sir-space-lg);
+    gap: 12px;
+    padding: var(--space-md);
     overflow-y: auto;
 }
 
@@ -1037,40 +993,40 @@
    ============================================================ */
 
 .sir-analytics__insight {
-    padding: var(--sir-space-md);
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-md);
+    padding: 12px;
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
 }
 
 .sir-analytics__insight:hover {
-    background: var(--sir-bg-hover);
+    background: var(--apex-obsidian-card);
 }
 
 .sir-analytics__insight--critical {
-    border-left-color: var(--sir-accent-rose);
+    border-left-color: var(--apex-sir-rose);
 }
 
 .sir-analytics__insight--high {
-    border-left-color: var(--sir-accent-amber);
+    border-left-color: var(--apex-warning);
 }
 
 .sir-analytics__insight--medium {
-    border-left-color: var(--sir-accent-blue);
+    border-left-color: var(--apex-sir-indigo);
 }
 
 .sir-analytics__insight--low {
-    border-left-color: var(--sir-accent-emerald);
+    border-left-color: var(--apex-success);
 }
 
 .sir-analytics__insight-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--sir-space-sm);
+    margin-bottom: var(--space-sm);
 }
 
 .sir-analytics__insight-type {
@@ -1080,47 +1036,47 @@
     font-size: 0.5625rem;
     font-weight: 600;
     padding: 2px 6px;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
     text-transform: uppercase;
 }
 
 .sir-analytics__insight-type--anomaly {
     background: rgba(244, 63, 94, 0.15);
-    color: var(--sir-accent-rose);
+    color: var(--apex-sir-rose);
 }
 
 .sir-analytics__insight-type--prediction {
     background: rgba(99, 102, 241, 0.15);
-    color: var(--sir-accent-blue);
+    color: var(--apex-sir-indigo);
 }
 
 .sir-analytics__insight-type--opportunity {
     background: rgba(16, 185, 129, 0.15);
-    color: var(--sir-accent-emerald);
+    color: var(--apex-success);
 }
 
 .sir-analytics__insight-type--trend {
     background: rgba(6, 182, 212, 0.15);
-    color: var(--sir-accent-cyan);
+    color: var(--apex-teal);
 }
 
 .sir-analytics__insight-confidence {
     font-size: 0.5625rem;
-    font-family: var(--sir-font-mono);
-    color: var(--sir-text-dim);
+    font-family: var(--font-mono);
+    color: var(--apex-muted);
 }
 
 .sir-analytics__insight-title {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
-    margin: 0 0 var(--sir-space-xs);
+    color: var(--apex-white);
+    margin: 0 0 var(--space-xs);
     line-height: 1.3;
 }
 
 .sir-analytics__insight-summary {
     font-size: 0.6875rem;
-    color: var(--sir-text-muted);
+    color: var(--apex-steel);
     line-height: 1.5;
     margin: 0;
 }
@@ -1128,34 +1084,34 @@
 .sir-analytics__insight-impact {
     font-size: 0.625rem;
     font-weight: 500;
-    color: var(--sir-accent-emerald);
-    margin-top: var(--sir-space-sm);
+    color: var(--apex-success);
+    margin-top: var(--space-sm);
 }
 
 .sir-analytics__insight-expanded {
-    margin-top: var(--sir-space-md);
-    padding-top: var(--sir-space-md);
-    border-top: 1px solid var(--sir-border-subtle);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--glass-border);
     overflow: hidden;
 }
 
 .sir-analytics__insight-models {
     font-size: 0.625rem;
-    color: var(--sir-text-dim);
-    margin-bottom: var(--sir-space-sm);
+    color: var(--apex-muted);
+    margin-bottom: var(--space-sm);
 }
 
 .sir-analytics__insight-action {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: var(--sir-space-sm) var(--sir-space-md);
+    padding: var(--space-sm) 12px;
     font-size: 0.6875rem;
     font-weight: 500;
     color: white;
-    background: var(--sir-accent-blue);
+    background: var(--apex-sir-indigo);
     border: none;
-    border-radius: var(--sir-radius-sm);
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s ease;
 }
@@ -1177,13 +1133,13 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    padding: var(--sir-space-xl);
+    padding: var(--space-lg);
 }
 
 .sir-analytics__modal {
-    background: var(--sir-bg-elevated);
-    border: 1px solid var(--sir-border-default);
-    border-radius: var(--sir-radius-xl);
+    background: var(--apex-obsidian-soft);
+    border: 1px solid var(--glass-border-hover);
+    border-radius: var(--radius-lg);
     width: 100%;
     max-width: 800px;
     max-height: 80vh;
@@ -1195,14 +1151,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sir-space-lg) var(--sir-space-xl);
-    border-bottom: 1px solid var(--sir-border-subtle);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .sir-analytics__modal-header h2 {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     margin: 0;
 }
 
@@ -1212,48 +1168,48 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-md);
-    color: var(--sir-text-muted);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--apex-steel);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .sir-analytics__modal-header button:hover {
-    background: var(--sir-bg-hover);
-    color: var(--sir-text-primary);
+    background: var(--apex-obsidian-card);
+    color: var(--apex-white);
 }
 
 .sir-analytics__modal-body {
-    padding: var(--sir-space-xl);
+    padding: var(--space-lg);
     overflow-y: auto;
 }
 
 .sir-analytics__member-detail {
     display: flex;
     flex-direction: column;
-    gap: var(--sir-space-xl);
+    gap: var(--space-lg);
 }
 
 .sir-analytics__detail-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--sir-space-lg);
+    gap: var(--space-md);
 }
 
 .sir-analytics__detail-card {
-    background: var(--sir-bg-surface);
-    border: 1px solid var(--sir-border-subtle);
-    border-radius: var(--sir-radius-lg);
-    padding: var(--sir-space-lg);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
 }
 
 .sir-analytics__detail-card h4 {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--sir-text-muted);
-    margin: 0 0 var(--sir-space-md);
+    color: var(--apex-steel);
+    margin: 0 0 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -1261,29 +1217,29 @@
 .sir-analytics__detail-score {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--sir-text-primary);
+    color: var(--apex-white);
     font-feature-settings: 'tnum' 1;
 }
 
 .sir-analytics__detail-ai {
     display: flex;
     align-items: flex-start;
-    gap: var(--sir-space-md);
-    padding: var(--sir-space-lg);
+    gap: 12px;
+    padding: var(--space-md);
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: var(--sir-radius-lg);
+    border-radius: var(--radius-md);
 }
 
 .sir-analytics__detail-ai svg {
-    color: var(--sir-accent-purple);
+    color: var(--apex-purple);
     flex-shrink: 0;
     margin-top: 2px;
 }
 
 .sir-analytics__detail-ai p {
     font-size: 0.8125rem;
-    color: var(--sir-text-secondary);
+    color: var(--apex-silver);
     margin: 0;
     line-height: 1.5;
 }
@@ -1317,16 +1273,16 @@
 }
 
 .sir-analytics ::-webkit-scrollbar-thumb {
-    background: var(--sir-border-default);
+    background: var(--glass-border-hover);
     border-radius: 3px;
 }
 
 .sir-analytics ::-webkit-scrollbar-thumb:hover {
-    background: var(--sir-text-dim);
+    background: var(--apex-muted);
 }
 
 /* Focus states */
 .sir-analytics button:focus-visible {
-    outline: 2px solid var(--sir-accent-blue);
+    outline: 2px solid var(--apex-sir-indigo);
     outline-offset: 2px;
 }

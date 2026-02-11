@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     User,
@@ -14,9 +14,11 @@ import {
     Pill,
     Eye,
     Activity,
-    ChevronRight
+    ChevronRight,
+    Search,
+    X
 } from 'lucide-react'
-import { GlassCard, Badge, Button } from '../components/common'
+import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
 import './CareTeam.css'
 
 interface CareProvider {
@@ -98,8 +100,38 @@ const mockCareTeam: CareProvider[] = [
     }
 ]
 
+// Specialty tag color mapping
+const specialtyColors: Record<string, { bg: string; text: string; border: string }> = {
+    'Family Medicine': { bg: 'rgba(6,182,212,0.12)', text: '#22d3ee', border: 'rgba(6,182,212,0.3)' },
+    'Cardiology': { bg: 'rgba(239,68,68,0.12)', text: '#f87171', border: 'rgba(239,68,68,0.3)' },
+    'Psychiatry': { bg: 'rgba(168,85,247,0.12)', text: '#c084fc', border: 'rgba(168,85,247,0.3)' },
+    'Optometry': { bg: 'rgba(34,197,94,0.12)', text: '#4ade80', border: 'rgba(34,197,94,0.3)' },
+    'Dental': { bg: 'rgba(251,191,36,0.12)', text: '#fbbf24', border: 'rgba(251,191,36,0.3)' },
+    'default': { bg: 'rgba(99,102,241,0.12)', text: '#a5b4fc', border: 'rgba(99,102,241,0.3)' },
+}
+
 export function CareTeam() {
     const [careTeam] = useState<CareProvider[]>(mockCareTeam)
+    const [loading, setLoading] = useState(true)
+    const [searchQuery, setSearchQuery] = useState('')
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
+
+    // Search filter logic
+    const filteredTeam = careTeam.filter(p => {
+        if (!searchQuery) return true
+        const q = searchQuery.toLowerCase()
+        return p.name.toLowerCase().includes(q) || p.specialty.toLowerCase().includes(q) || p.practice.toLowerCase().includes(q)
+    })
+    const filteredPrimaryCare = filteredTeam.find(p => p.role === 'primary')
+    const filteredSpecialists = filteredTeam.filter(p => p.role !== 'primary')
+
+    const getSpecialtyStyle = (specialty: string) => specialtyColors[specialty] || specialtyColors['default']
 
     const formatDate = (date: string) =>
         new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -129,9 +161,6 @@ export function CareTeam() {
         }
     }
 
-    const primaryCare = careTeam.find(p => p.role === 'primary')
-    const specialists = careTeam.filter(p => p.role !== 'primary')
-
     return (
         <div className="care-team-page">
             {/* Header */}
@@ -149,8 +178,41 @@ export function CareTeam() {
                 </div>
             </div>
 
+            {/* Search Bar */}
+            <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{
+                    display: 'flex', gap: '0.75rem', alignItems: 'center',
+                    padding: '0.85rem 1.25rem', borderRadius: '16px', marginBottom: '1.5rem',
+                    background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                }}
+            >
+                <Search size={16} style={{ color: 'rgba(255,255,255,0.4)', flexShrink: 0 }} />
+                <input
+                    type="text"
+                    placeholder="Search by name, specialty, or practice..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{
+                        flex: 1, padding: '0.35rem 0', border: 'none', background: 'transparent',
+                        color: '#fff', fontSize: '0.85rem', outline: 'none'
+                    }}
+                />
+                {searchQuery && (
+                    <button onClick={() => setSearchQuery('')} style={{
+                        background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', display: 'flex', padding: '4px'
+                    }}>
+                        <X size={14} />
+                    </button>
+                )}
+                <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', whiteSpace: 'nowrap' }}>
+                    {filteredTeam.length} provider{filteredTeam.length !== 1 ? 's' : ''}
+                </span>
+            </motion.div>
+
             {/* Primary Care */}
-            {primaryCare && (
+            {filteredPrimaryCare && (
                 <GlassCard className="primary-provider-card">
                     <div className="primary-provider-card__badge">
                         <Badge variant="teal">Primary Care Provider</Badge>
@@ -160,35 +222,55 @@ export function CareTeam() {
                             <Stethoscope size={32} />
                         </div>
                         <div className="primary-provider-card__info">
-                            <h2>{primaryCare.name}</h2>
-                            <span className="primary-provider-card__specialty">{primaryCare.specialty}</span>
-                            <span className="primary-provider-card__practice">{primaryCare.practice}</span>
+                            <h2>{filteredPrimaryCare.name}</h2>
+                            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', margin: '0.35rem 0' }}>
+                                <span style={{
+                                    display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+                                    padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 500,
+                                    background: getSpecialtyStyle(filteredPrimaryCare.specialty).bg,
+                                    color: getSpecialtyStyle(filteredPrimaryCare.specialty).text,
+                                    border: `1px solid ${getSpecialtyStyle(filteredPrimaryCare.specialty).border}`
+                                }}>
+                                    <Stethoscope size={10} /> {filteredPrimaryCare.specialty}
+                                </span>
+                                {filteredPrimaryCare.acceptingNewPatients && (
+                                    <span style={{
+                                        display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px',
+                                        fontSize: '0.72rem', fontWeight: 500, background: 'rgba(34,197,94,0.1)',
+                                        color: '#4ade80', border: '1px solid rgba(34,197,94,0.2)'
+                                    }}>Accepting Patients</span>
+                                )}
+                            </div>
+                            <span className="primary-provider-card__practice">{filteredPrimaryCare.practice}</span>
                             <div className="primary-provider-card__rating">
                                 <Star size={14} fill="currentColor" />
-                                {primaryCare.rating} ({primaryCare.reviewCount} reviews)
+                                {filteredPrimaryCare.rating} ({filteredPrimaryCare.reviewCount} reviews)
                             </div>
                         </div>
                         <div className="primary-provider-card__contact">
-                            <a href={`tel:${primaryCare.phone}`} className="contact-item">
-                                <Phone size={16} /> {primaryCare.phone}
+                            <a href={`tel:${filteredPrimaryCare.phone}`} className="contact-item">
+                                <Phone size={16} /> {filteredPrimaryCare.phone}
                             </a>
                             <span className="contact-item">
-                                <MapPin size={16} /> {primaryCare.address}
+                                <MapPin size={16} /> {filteredPrimaryCare.address}
                             </span>
                         </div>
                         <div className="primary-provider-card__actions">
-                            <Button variant="secondary" icon={<Calendar size={14} />}>
+                            <Button variant="primary" icon={<Calendar size={14} />}>
                                 Schedule
                             </Button>
                             <Button variant="secondary" icon={<MessageSquare size={14} />}>
                                 Message
                             </Button>
+                            <Button variant="ghost" icon={<Phone size={14} />}>
+                                Call
+                            </Button>
                         </div>
                     </div>
-                    {primaryCare.nextAppointment && (
+                    {filteredPrimaryCare.nextAppointment && (
                         <div className="primary-provider-card__next-apt">
                             <Calendar size={16} />
-                            <span>Next appointment: {formatDateTime(primaryCare.nextAppointment)}</span>
+                            <span>Next appointment: {formatDateTime(filteredPrimaryCare.nextAppointment)}</span>
                         </div>
                     )}
                 </GlassCard>
@@ -196,8 +278,20 @@ export function CareTeam() {
 
             {/* Specialists Grid */}
             <h3 className="care-team__section-title">Specialists & Other Providers</h3>
+            {filteredSpecialists.length === 0 && !filteredPrimaryCare && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{
+                    textAlign: 'center', padding: '2.5rem', color: 'rgba(255,255,255,0.4)', borderRadius: '16px',
+                    background: 'rgba(10,15,26,0.4)', border: '1px solid rgba(255,255,255,0.06)', marginBottom: '1.5rem'
+                }}>
+                    <Search size={28} style={{ marginBottom: '0.5rem', opacity: 0.5 }} />
+                    <p style={{ margin: 0, fontSize: '0.9rem' }}>No providers match "{searchQuery}"</p>
+                    <button onClick={() => setSearchQuery('')} style={{
+                        marginTop: '0.5rem', background: 'none', border: 'none', color: '#818cf8', cursor: 'pointer', fontSize: '0.85rem'
+                    }}>Clear search</button>
+                </motion.div>
+            )}
             <div className="specialists-grid">
-                {specialists.map((provider, index) => (
+                {filteredSpecialists.map((provider, index) => (
                     <motion.div
                         key={provider.id}
                         className="provider-card"
@@ -218,7 +312,18 @@ export function CareTeam() {
                         </div>
                         <div className="provider-card__info">
                             <h4>{provider.name}</h4>
-                            <span className="provider-card__specialty">{provider.specialty}</span>
+                            {/* Specialty Tag */}
+                            <span style={{
+                                display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+                                padding: '0.15rem 0.5rem', borderRadius: '5px', fontSize: '0.68rem', fontWeight: 500,
+                                background: getSpecialtyStyle(provider.specialty).bg,
+                                color: getSpecialtyStyle(provider.specialty).text,
+                                border: `1px solid ${getSpecialtyStyle(provider.specialty).border}`,
+                                margin: '0.3rem 0'
+                            }}>
+                                {getRoleIcon(provider.role) && <span style={{ display: 'flex' }}>{(() => { switch(provider.role) { case 'specialist': return <Heart size={9} />; case 'mental': return <Brain size={9} />; case 'vision': return <Eye size={9} />; default: return null } })()}</span>}
+                                {provider.specialty}
+                            </span>
                             <span className="provider-card__practice">{provider.practice}</span>
                         </div>
                         <div className="provider-card__rating">
@@ -233,12 +338,12 @@ export function CareTeam() {
                                 Last visit: {formatDate(provider.lastVisit)}
                             </div>
                         )}
-                        <div className="provider-card__actions">
-                            <Button variant="ghost" size="sm" icon={<Calendar size={14} />}>
-                                Schedule
-                            </Button>
-                            <Button variant="ghost" size="sm" icon={<MessageSquare size={14} />}>
+                        <div className="provider-card__actions" style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                            <Button variant="secondary" size="sm" icon={<MessageSquare size={13} />}>
                                 Message
+                            </Button>
+                            <Button variant="primary" size="sm" icon={<Calendar size={13} />}>
+                                Schedule
                             </Button>
                         </div>
                     </motion.div>
@@ -249,7 +354,7 @@ export function CareTeam() {
                     className="add-provider-card"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: specialists.length * 0.1 }}
+                    transition={{ delay: filteredSpecialists.length * 0.1 }}
                 >
                     <User size={32} />
                     <span>Add a Provider</span>

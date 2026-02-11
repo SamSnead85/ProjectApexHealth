@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Video,
@@ -22,7 +22,7 @@ import {
     CheckCircle2,
     Plus
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
 import './Telehealth.css'
 
 interface Provider {
@@ -150,6 +150,14 @@ export function Telehealth() {
     const [upcomingVisits] = useState<UpcomingVisit[]>(mockUpcomingVisits)
     const [activeTab, setActiveTab] = useState<'start-visit' | 'schedule' | 'history'>('start-visit')
     const [selectedVisitType, setSelectedVisitType] = useState<string | null>(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
 
     const formatDate = (date: string) =>
         new Date(date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })

@@ -278,7 +278,7 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
                                     <ClientRow
                                         key={client.id}
                                         client={client}
-                                        onClick={() => console.log('Navigate to client', client.id)}
+                                        onClick={() => void 0}
                                     />
                                 ))}
                             </div>

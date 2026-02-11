@@ -6,7 +6,8 @@ import './index.css'
 import './styles/light-mode.css'
 import './styles/premium-enhancements.css'
 import './styles/animations.css'
-
+import './styles/accessibility.css'
+import './styles/enterprise.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>

@@ -38,7 +38,8 @@ import {
     AlertTriangle,
     Archive,
     Workflow,
-    ShieldCheck
+    ShieldCheck,
+    X
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -61,6 +62,8 @@ interface SidebarProps {
     onNavigate: (path: string) => void
     collapsed?: boolean
     onToggleCollapse?: () => void
+    mobileOpen?: boolean
+    onMobileClose?: () => void
 }
 
 const portalNavigation: Record<string, NavGroup[]> = {
@@ -85,6 +88,9 @@ const portalNavigation: Record<string, NavGroup[]> = {
                 { id: 'claims-prediction', label: 'Claims Prediction', icon: <Activity size={20} />, path: '/admin/claims-prediction' },
                 { id: 'fraud-detection', label: 'Fraud Detection', icon: <Shield size={20} />, path: '/admin/fraud-detection' },
                 { id: 'benefit-calc', label: 'Benefit Calculator', icon: <CreditCard size={20} />, path: '/admin/benefit-calculator' },
+                { id: 'star-ratings', label: 'STAR Ratings', icon: <Target size={20} />, path: '/admin/star-ratings', badge: 'New' },
+                { id: 'denial-mgmt', label: 'Denial Management', icon: <AlertTriangle size={20} />, path: '/admin/denial-management', badge: 'New' },
+                { id: 'sdoh', label: 'Social Determinants', icon: <Map size={20} />, path: '/admin/social-determinants', badge: 'New' },
             ]
         },
         {
@@ -213,6 +219,52 @@ const portalNavigation: Record<string, NavGroup[]> = {
     ]
 }
 
+// ─── Memoized Nav Item to prevent re-renders on parent state changes ─────
+
+interface SidebarNavItemProps {
+    item: NavItem
+    isActive: boolean
+    isFocused: boolean
+    collapsed: boolean
+    itemIndex: number
+    onNavigate: (path: string) => void
+    onFocus: (index: number) => void
+}
+
+const SidebarNavItem = React.memo(function SidebarNavItem({
+    item, isActive, isFocused, collapsed, itemIndex, onNavigate, onFocus,
+}: SidebarNavItemProps) {
+    return (
+        <li role="listitem">
+            <button
+                className={`sidebar__item ${isActive ? 'sidebar__item--active' : ''} ${isFocused ? 'sidebar__item--focused' : ''}`}
+                onClick={() => onNavigate(item.path)}
+                onFocus={() => onFocus(itemIndex)}
+                title={collapsed ? item.label : undefined}
+                tabIndex={0}
+                aria-current={isActive ? 'page' : undefined}
+            >
+                <span className="sidebar__item-icon">{item.icon}</span>
+                <AnimatePresence>
+                    {!collapsed && (
+                        <motion.span
+                            className="sidebar__item-label"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -10 }}
+                        >
+                            {item.label}
+                        </motion.span>
+                    )}
+                </AnimatePresence>
+                {item.badge && !collapsed && (
+                    <span className="sidebar__item-badge">{item.badge}</span>
+                )}
+            </button>
+        </li>
+    )
+})
+
 const portalLabels: Record<string, { label: string; color: string }> = {
     admin: { label: 'Admin Console', color: '#0D9488' },
     broker: { label: 'Broker Nexus', color: '#0891B2' },
@@ -225,7 +277,9 @@ export function Sidebar({
     activePath,
     onNavigate,
     collapsed = false,
-    onToggleCollapse
+    onToggleCollapse,
+    mobileOpen = false,
+    onMobileClose
 }: SidebarProps) {
     const navigation = portalNavigation[activePortal] || []
     const portalInfo = portalLabels[activePortal]
@@ -302,10 +356,10 @@ export function Sidebar({
 
     return (
         <motion.aside
-            className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''}`}
+            className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''} ${mobileOpen ? 'sidebar--mobile-open' : ''}`}
             initial={false}
             animate={{ width: collapsed ? 72 : 260 }}
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
             {/* Portal Header */}
             <div className="sidebar__header">
@@ -336,6 +390,17 @@ export function Sidebar({
                         )}
                     </AnimatePresence>
                 </div>
+
+                {/* Mobile close button */}
+                {onMobileClose && (
+                    <button
+                        className="sidebar__mobile-close"
+                        onClick={onMobileClose}
+                        aria-label="Close navigation menu"
+                    >
+                        <X size={18} />
+                    </button>
+                )}
 
                 {onToggleCollapse && (
                     <button
@@ -393,37 +458,18 @@ export function Sidebar({
                                         style={{ overflow: 'hidden' }}
                                     >
                                         {group.items.map((item) => {
-                                            const isActive = activePath === item.path
                                             const itemIndex = flatItems.findIndex(i => i.id === item.id)
-                                            const isFocused = focusedIndex === itemIndex
                                             return (
-                                                <li key={item.id} role="listitem">
-                                                    <button
-                                                        className={`sidebar__item ${isActive ? 'sidebar__item--active' : ''} ${isFocused ? 'sidebar__item--focused' : ''}`}
-                                                        onClick={() => onNavigate(item.path)}
-                                                        onFocus={() => setFocusedIndex(itemIndex)}
-                                                        title={collapsed ? item.label : undefined}
-                                                        tabIndex={0}
-                                                        aria-current={isActive ? 'page' : undefined}
-                                                    >
-                                                        <span className="sidebar__item-icon">{item.icon}</span>
-                                                        <AnimatePresence>
-                                                            {!collapsed && (
-                                                                <motion.span
-                                                                    className="sidebar__item-label"
-                                                                    initial={{ opacity: 0, x: -10 }}
-                                                                    animate={{ opacity: 1, x: 0 }}
-                                                                    exit={{ opacity: 0, x: -10 }}
-                                                                >
-                                                                    {item.label}
-                                                                </motion.span>
-                                                            )}
-                                                        </AnimatePresence>
-                                                        {item.badge && !collapsed && (
-                                                            <span className="sidebar__item-badge">{item.badge}</span>
-                                                        )}
-                                                    </button>
-                                                </li>
+                                                <SidebarNavItem
+                                                    key={item.id}
+                                                    item={item}
+                                                    isActive={activePath === item.path}
+                                                    isFocused={focusedIndex === itemIndex}
+                                                    collapsed={collapsed}
+                                                    itemIndex={itemIndex}
+                                                    onNavigate={onNavigate}
+                                                    onFocus={setFocusedIndex}
+                                                />
                                             )
                                         })}
                                     </motion.ul>

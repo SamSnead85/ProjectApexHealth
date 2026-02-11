@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Shell } from './components/layout'
+import { ErrorBoundary } from './components/common/ErrorBoundary'
 import { ThemeProvider } from './context/ThemeContext'
 import { NavigationProvider } from './context/NavigationContext'
 import { AuthProvider } from './context/AuthContext'
@@ -9,6 +10,10 @@ import { lazyWithSkeleton } from './utils/performance'
 // Non-page components loaded eagerly (always visible in shell)
 import CommandPalette from './components/ui/CommandPalette'
 import AICopilot from './components/ai/AICopilot'
+import { DemoTour } from './components/common/DemoTour'
+import { OnboardingWelcome } from './components/common/OnboardingWelcome'
+import { CollaborationBar } from './components/common/CollaborationBar'
+import { KeyboardShortcuts } from './components/common/KeyboardShortcuts'
 
 // ═══════════════════════════════════════════════════════════════
 // Lazy-loaded page components - only loaded when navigated to.
@@ -155,6 +160,21 @@ const FHIRExplorer = lazyWithSkeleton(() => import('./pages/FHIRExplorer'))
 const ModuleLicensing = lazyWithSkeleton(() => import('./pages/ModuleLicensing'))
 const BreachResponse = lazyWithSkeleton(() => import('./pages/BreachResponse'))
 const DataRetention = lazyWithSkeleton(() => import('./pages/DataRetention'))
+// Premium Enhancement Modules
+const StarRatings = lazyWithSkeleton(() => import('./pages/StarRatings'))
+const DenialManagement = lazyWithSkeleton(() => import('./pages/DenialManagement'))
+const SocialDeterminants = lazyWithSkeleton(() => import('./pages/SocialDeterminants'))
+// Missing pages - now registered
+const CertificationHub = lazyWithSkeleton(() => import('./pages/CertificationHub'))
+const ROIDashboard = lazyWithSkeleton(() => import('./pages/ROIDashboard'))
+const RevenueAnalytics = lazyWithSkeleton(() => import('./pages/RevenueAnalytics'))
+const PayerContracts = lazyWithSkeleton(() => import('./pages/PayerContracts'))
+const ImagingResults = lazyWithSkeleton(() => import('./pages/ImagingResults'))
+const LabOrders = lazyWithSkeleton(() => import('./pages/LabOrders'))
+const ConsentManagement = lazyWithSkeleton(() => import('./pages/ConsentManagement'))
+const MedicalRecords = lazyWithSkeleton(() => import('./pages/MedicalRecords'))
+const DocumentUpload = lazyWithSkeleton(() => import('./pages/DocumentUpload'))
+const ScheduledReportsConfig = lazyWithSkeleton(() => import('./pages/ScheduledReportsConfig'))
 
 type PortalType = 'admin' | 'broker' | 'employer' | 'member'
 type AppState = 'landing' | 'authenticated'
@@ -164,13 +184,24 @@ function App() {
     const [activePortal, setActivePortal] = useState<PortalType>('admin')
     const [activePath, setActivePath] = useState('/admin')
     const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+    const [demoTourOpen, setDemoTourOpen] = useState(false)
+    const [shortcutsOpen, setShortcutsOpen] = useState(false)
+    const [onboardingOpen, setOnboardingOpen] = useState(() => {
+        return !localStorage.getItem('apex_onboarding_dismissed')
+    })
 
-    // Global keyboard shortcut for Command Palette (⌘+K)
+    // Global keyboard shortcut for Command Palette (⌘+K) and Shortcuts (?)
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault()
                 setCommandPaletteOpen(prev => !prev)
+            }
+            // '?' opens keyboard shortcuts dialog (only when not typing in an input)
+            const tag = (e.target as HTMLElement)?.tagName
+            if (e.key === '?' && !e.metaKey && !e.ctrlKey && tag !== 'INPUT' && tag !== 'TEXTAREA' && !(e.target as HTMLElement)?.isContentEditable) {
+                e.preventDefault()
+                setShortcutsOpen(prev => !prev)
             }
         }
         document.addEventListener('keydown', handleKeyDown)
@@ -179,7 +210,14 @@ function App() {
 
     const handleLogin = (portal: PortalType) => {
         setActivePortal(portal)
-        setActivePath(`/${portal}`)
+        // Check if there's a stored path from module navigation
+        const storedPath = sessionStorage.getItem('apex_initial_path')
+        if (storedPath) {
+            setActivePath(storedPath)
+            sessionStorage.removeItem('apex_initial_path')
+        } else {
+            setActivePath(`/${portal}`)
+        }
         setAppState('authenticated')
     }
 
@@ -201,7 +239,11 @@ function App() {
 
     // Landing Page
     if (appState === 'landing') {
-        return <Landing onLogin={handleLogin} />
+        return (
+            <ToastProvider>
+                <Landing onLogin={handleLogin} />
+            </ToastProvider>
+        )
     }
 
     // ============================================================
@@ -234,6 +276,16 @@ function App() {
 
     // Determine which page to render based on path
     const renderPage = () => {
+        // Premium Enhancement Modules
+        if (activePath.includes('/star-ratings') || activePath.includes('/hedis-dashboard')) {
+            return <StarRatings />
+        }
+        if (activePath.includes('/denial-management') || activePath.includes('/denials') || activePath.includes('/denial-center')) {
+            return <DenialManagement />
+        }
+        if (activePath.includes('/social-determinants') || activePath.includes('/sdoh') || activePath.includes('/social-risk')) {
+            return <SocialDeterminants />
+        }
         // Strategic Module Additions - Premium Implementation
         if (activePath.includes('/care-journey') || activePath.includes('/care-timeline') || activePath.includes('/journey')) {
             return <CareJourneyNavigator />
@@ -657,6 +709,37 @@ function App() {
         if (activePath.includes('/data-retention') || activePath.includes('/retention-policies')) {
             return <DataRetention />
         }
+        // Previously missing routes
+        if (activePath.includes('/certification') || activePath.includes('/certifications')) {
+            return <CertificationHub />
+        }
+        if (activePath.includes('/roi-dashboard') || activePath.includes('/roi')) {
+            return <ROIDashboard />
+        }
+        if (activePath.includes('/revenue-analytics') || activePath.includes('/revenue')) {
+            return <RevenueAnalytics />
+        }
+        if (activePath.includes('/payer-contracts') || activePath.includes('/payer')) {
+            return <PayerContracts />
+        }
+        if (activePath.includes('/imaging') || activePath.includes('/radiology')) {
+            return <ImagingResults />
+        }
+        if (activePath.includes('/lab-orders') || activePath.includes('/lab-results') || activePath.includes('/labs')) {
+            return <LabOrders />
+        }
+        if (activePath.includes('/consent') || activePath.includes('/consent-management')) {
+            return <ConsentManagement />
+        }
+        if (activePath.includes('/medical-records') || activePath.includes('/patient-records')) {
+            return <MedicalRecords />
+        }
+        if (activePath.includes('/document-upload') || activePath.includes('/upload')) {
+            return <DocumentUpload />
+        }
+        if (activePath.includes('/scheduled-reports-config') || activePath.includes('/report-schedule')) {
+            return <ScheduledReportsConfig />
+        }
         // Employer Portal Dashboard
         if (activePortal === 'employer' && (activePath === '/employer' || activePath.includes('/employer/dashboard'))) {
             return <EmployerAdmin />
@@ -686,11 +769,37 @@ function App() {
                             onNavigate={handleNavigate}
                             onSwitchPortal={handleSwitchPortal}
                         >
-                            <AnimatePresence mode="wait">
-                                {renderPage()}
-                            </AnimatePresence>
+                            <ErrorBoundary level="page" onReset={() => setActivePath(`/${activePortal}`)}>
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activePath}
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        {renderPage()}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </ErrorBoundary>
                         </Shell>
                         <AICopilot />
+                        <CollaborationBar />
+                        <DemoTour
+                            isOpen={demoTourOpen}
+                            onClose={() => setDemoTourOpen(false)}
+                            onNavigate={(path) => { handleNavigate(path); setDemoTourOpen(false) }}
+                        />
+                        <OnboardingWelcome
+                            isOpen={onboardingOpen}
+                            onClose={() => setOnboardingOpen(false)}
+                            onNavigate={handleNavigate}
+                            userRole={activePortal}
+                        />
+                        <KeyboardShortcuts
+                            isOpen={shortcutsOpen}
+                            onClose={() => setShortcutsOpen(false)}
+                        />
                     </NavigationProvider>
                 </ToastProvider>
             </AuthProvider>

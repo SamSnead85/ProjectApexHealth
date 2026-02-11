@@ -11,10 +11,13 @@ export * from './Tabs'
 export * from './Tooltip'
 export * from './Avatar'
 export * from './Skeleton'
+export * from './LoadingSkeleton'
 export * from './Dropdown'
 export * from './Drawer'
 export * from './Breadcrumb'
+export * from './Breadcrumbs'
 export * from './EmptyState'
+export * from './ErrorState'
 export * from './FormField'
 export * from './Divider'
 export * from './Alert'
@@ -62,6 +65,9 @@ export * from './TravelComponents'
 export * from './FoodDeliveryComponents'
 export * from './SportsAndFitnessComponents'
 export * from './EventComponents'
+
+// Error Boundary
+export { ErrorBoundary } from './ErrorBoundary'
 
 // Explicit re-export to avoid AlertBanner conflict with Alert module
 export { ErrorFallback, StatusPage, RetryButton, ValidationErrors, ConnectionLost } from './ErrorHandling'

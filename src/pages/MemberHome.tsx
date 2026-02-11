@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     Shield,
@@ -13,9 +14,18 @@ import {
     AlertCircle,
     CheckCircle2,
     DollarSign,
-    Activity
+    Activity,
+    Wallet,
+    Smartphone,
+    QrCode,
+    PiggyBank,
+    ArrowRight,
+    Stethoscope,
+    Pill,
+    Siren,
+    CircleDollarSign
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
 import { useNavigation } from '../context/NavigationContext'
 import './MemberHome.css'
 
@@ -132,7 +142,56 @@ const healthReminders: HealthReminder[] = [
     }
 ]
 
+// Phase 4A: Digital Health Wallet - Member ID Card data
+const memberCardData = {
+    name: 'Sarah Johnson',
+    memberId: 'APX-2024-78432',
+    groupNumber: 'GRP-APEX-2024',
+    planName: 'Platinum PPO Plus',
+    effectiveDate: '01/01/2024',
+    pcp: 'Dr. Sarah Chen',
+    rxBin: '004336',
+    rxPcn: 'ADV'
+}
+
+// Phase 4A: HSA/FSA Balances
+const accountBalances = {
+    hsa: { balance: 2847.50, contributed: 2847.50, annualLimit: 4150, spent: 1302.50 },
+    fsa: { balance: 1250.00, elected: 2850.00, spent: 1600.00 }
+}
+
+// Phase 4A: Benefits Usage
+const benefitsUsage = [
+    { label: 'Individual Deductible', used: 1200, total: 3000, color: 'teal' as const },
+    { label: 'Family Deductible', used: 2400, total: 6000, color: 'teal' as const },
+    { label: 'Out-of-Pocket Maximum', used: 3200, total: 8000, color: 'amber' as const }
+]
+
+// Phase 4A: Copay Quick Reference
+const copaySchedule = [
+    { label: 'PCP Visit', amount: 25, icon: <Stethoscope size={14} /> },
+    { label: 'Specialist', amount: 50, icon: <User size={14} /> },
+    { label: 'Urgent Care', amount: 75, icon: <Siren size={14} /> },
+    { label: 'ER', amount: 250, icon: <AlertCircle size={14} /> },
+    { label: 'Generic Rx', amount: 10, icon: <Pill size={14} /> },
+    { label: 'Brand Rx', amount: 35, icon: <Pill size={14} /> }
+]
+
+// Mock QR code pattern (8x8 grid, 1=dark, 0=light)
+const qrPattern = [
+    [1,1,1,1,1,1,1,0],
+    [1,0,0,0,0,0,1,0],
+    [1,0,1,1,1,0,1,0],
+    [1,0,1,1,1,0,1,1],
+    [1,0,1,1,1,0,1,0],
+    [1,0,0,0,0,0,1,1],
+    [1,1,1,1,1,1,1,0],
+    [0,0,0,1,0,1,0,1]
+]
+
 export function MemberHome() {
+    const [loading, setLoading] = useState(true)
+    useEffect(() => { const t = setTimeout(() => setLoading(false), 800); return () => clearTimeout(t) }, [])
     const { navigate } = useNavigation()
     const memberName = 'Sarah'
     const planName = 'Platinum PPO Plus'
@@ -164,6 +223,11 @@ export function MemberHome() {
         }
     }
 
+    const hsaPercent = (accountBalances.hsa.spent / accountBalances.hsa.annualLimit) * 100
+    const fsaPercent = (accountBalances.fsa.spent / accountBalances.fsa.elected) * 100
+
+    if (loading) return <PageSkeleton />
+
     return (
         <div className="member-home">
             {/* Welcome Header */}
@@ -179,9 +243,9 @@ export function MemberHome() {
                     </p>
                 </div>
                 <div className="member-home__notifications">
-                    <button className="notification-button">
+                    <button className="notification-button" aria-label="Notifications, 3 unread">
                         <Bell size={20} />
-                        <span className="notification-badge">3</span>
+                        <span className="notification-badge" aria-hidden="true">3</span>
                     </button>
                 </div>
             </motion.div>
@@ -232,6 +296,7 @@ export function MemberHome() {
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => navigate(action.path)}
+                            aria-label={`${action.label}: ${action.description}`}
                         >
                             <div className="quick-action__icon">{action.icon}</div>
                             <div className="quick-action__content">
@@ -246,6 +311,246 @@ export function MemberHome() {
                     ))}
                 </div>
             </GlassCard>
+
+            {/* Phase 4A: Digital Health Wallet Section */}
+            <motion.div
+                className="member-home__wallet-section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+            >
+                <div className="wallet-section__header">
+                    <h2><Wallet size={20} /> Digital Health Wallet</h2>
+                    <Badge variant="info" icon={<QrCode size={10} />}>Phase 4A</Badge>
+                </div>
+
+                <div className="wallet-section__grid">
+                    {/* Digital ID Card with QR Code */}
+                    <GlassCard className="digital-id-card">
+                        <div className="digital-id-card__inner">
+                            <div className="digital-id-card__front">
+                                <div className="digital-id-card__top">
+                                    <div className="digital-id-card__branding">
+                                        <span className="digital-id-card__logo">Apex Health</span>
+                                        <span className="digital-id-card__plan-badge">{memberCardData.planName}</span>
+                                    </div>
+                                    <div className="digital-id-card__qr">
+                                        <div className="qr-code-mock">
+                                            {qrPattern.map((row, ri) => (
+                                                <div key={ri} className="qr-row">
+                                                    {row.map((cell, ci) => (
+                                                        <div
+                                                            key={ci}
+                                                            className={`qr-cell ${cell ? 'qr-cell--dark' : 'qr-cell--light'}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="digital-id-card__member-info">
+                                    <span className="digital-id-card__name">{memberCardData.name}</span>
+                                    <span className="digital-id-card__member-id">
+                                        ID: {memberCardData.memberId}
+                                    </span>
+                                </div>
+
+                                <div className="digital-id-card__details-grid">
+                                    <div className="digital-id-card__field">
+                                        <span className="digital-id-card__field-label">Group #</span>
+                                        <span className="digital-id-card__field-value">{memberCardData.groupNumber}</span>
+                                    </div>
+                                    <div className="digital-id-card__field">
+                                        <span className="digital-id-card__field-label">Effective</span>
+                                        <span className="digital-id-card__field-value">{memberCardData.effectiveDate}</span>
+                                    </div>
+                                    <div className="digital-id-card__field">
+                                        <span className="digital-id-card__field-label">PCP</span>
+                                        <span className="digital-id-card__field-value">{memberCardData.pcp}</span>
+                                    </div>
+                                    <div className="digital-id-card__field">
+                                        <span className="digital-id-card__field-label">Rx BIN / PCN</span>
+                                        <span className="digital-id-card__field-value">{memberCardData.rxBin} / {memberCardData.rxPcn}</span>
+                                    </div>
+                                </div>
+
+                                <div className="digital-id-card__wallet-buttons">
+                                    <motion.button
+                                        className="wallet-btn wallet-btn--apple"
+                                        whileHover={{ scale: 1.03 }}
+                                        whileTap={{ scale: 0.97 }}
+                                        aria-label="Add insurance ID card to Apple Wallet"
+                                    >
+                                        <Smartphone size={16} />
+                                        Add to Apple Wallet
+                                    </motion.button>
+                                    <motion.button
+                                        className="wallet-btn wallet-btn--google"
+                                        whileHover={{ scale: 1.03 }}
+                                        whileTap={{ scale: 0.97 }}
+                                        aria-label="Add insurance ID card to Google Pay"
+                                    >
+                                        <Wallet size={16} />
+                                        Add to Google Pay
+                                    </motion.button>
+                                </div>
+                            </div>
+                        </div>
+                    </GlassCard>
+
+                    {/* HSA/FSA Balance Display */}
+                    <div className="wallet-section__accounts">
+                        <GlassCard className="hsa-fsa-card">
+                            <div className="hsa-fsa-card__header">
+                                <h3><PiggyBank size={18} /> Account Balances</h3>
+                            </div>
+
+                            <div className="hsa-fsa-card__accounts">
+                                {/* HSA */}
+                                <div className="account-balance">
+                                    <div className="account-balance__info">
+                                        <span className="account-balance__label">HSA Balance</span>
+                                        <span className="account-balance__amount">{formatCurrency(accountBalances.hsa.balance)}</span>
+                                        <span className="account-balance__sub">
+                                            of ${accountBalances.hsa.annualLimit.toLocaleString()} annual limit
+                                        </span>
+                                    </div>
+                                    <div className="account-balance__donut">
+                                        <svg viewBox="0 0 80 80">
+                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
+                                            <circle
+                                                cx="40" cy="40" r="32" fill="none"
+                                                stroke="var(--apex-teal)" strokeWidth="8"
+                                                strokeDasharray={`${(hsaPercent / 100) * 201} 201`}
+                                                strokeLinecap="round"
+                                                transform="rotate(-90 40 40)"
+                                            />
+                                            <text x="40" y="38" textAnchor="middle" fill="var(--apex-white)" fontSize="12" fontWeight="600">
+                                                {Math.round(hsaPercent)}%
+                                            </text>
+                                            <text x="40" y="50" textAnchor="middle" fill="var(--apex-steel)" fontSize="8">
+                                                spent
+                                            </text>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                {/* FSA */}
+                                <div className="account-balance">
+                                    <div className="account-balance__info">
+                                        <span className="account-balance__label">FSA Balance</span>
+                                        <span className="account-balance__amount">{formatCurrency(accountBalances.fsa.balance)}</span>
+                                        <span className="account-balance__sub">
+                                            of ${accountBalances.fsa.elected.toLocaleString()} elected
+                                        </span>
+                                    </div>
+                                    <div className="account-balance__donut">
+                                        <svg viewBox="0 0 80 80">
+                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
+                                            <circle
+                                                cx="40" cy="40" r="32" fill="none"
+                                                stroke="var(--apex-electric-purple)" strokeWidth="8"
+                                                strokeDasharray={`${(fsaPercent / 100) * 201} 201`}
+                                                strokeLinecap="round"
+                                                transform="rotate(-90 40 40)"
+                                            />
+                                            <text x="40" y="38" textAnchor="middle" fill="var(--apex-white)" fontSize="12" fontWeight="600">
+                                                {Math.round(fsaPercent)}%
+                                            </text>
+                                            <text x="40" y="50" textAnchor="middle" fill="var(--apex-steel)" fontSize="8">
+                                                spent
+                                            </text>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                icon={<ArrowRight size={14} />}
+                                className="hsa-fsa-card__view-btn"
+                            >
+                                View Transactions
+                            </Button>
+                        </GlassCard>
+
+                        {/* Copay Quick Reference */}
+                        <GlassCard className="copay-card">
+                            <div className="copay-card__header">
+                                <h3><CircleDollarSign size={18} /> Copay Quick Reference</h3>
+                            </div>
+                            <div className="copay-card__grid">
+                                {copaySchedule.map((item) => (
+                                    <div key={item.label} className="copay-item">
+                                        <div className="copay-item__icon">{item.icon}</div>
+                                        <span className="copay-item__label">{item.label}</span>
+                                        <span className="copay-item__amount">${item.amount}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </GlassCard>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Phase 4B: Benefits Usage Progress */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+            >
+                <GlassCard className="benefits-usage-card">
+                    <div className="benefits-usage-card__header">
+                        <h2><Activity size={20} /> Benefits Usage</h2>
+                        <Badge variant="info">2024 Plan Year</Badge>
+                    </div>
+                    <div className="benefits-usage-card__bars">
+                        {benefitsUsage.map((benefit, index) => {
+                            const pct = Math.round((benefit.used / benefit.total) * 100)
+                            const isApproaching = benefit.color === 'amber'
+                            return (
+                                <motion.div
+                                    key={benefit.label}
+                                    className="benefit-bar"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.3 + index * 0.1 }}
+                                >
+                                    <div className="benefit-bar__header">
+                                        <span className="benefit-bar__label">{benefit.label}</span>
+                                        <span className="benefit-bar__values">
+                                            <span className={`benefit-bar__used ${isApproaching ? 'benefit-bar__used--amber' : ''}`}>
+                                                ${benefit.used.toLocaleString()}
+                                            </span>
+                                            {' / '}
+                                            <span className="benefit-bar__total">${benefit.total.toLocaleString()}</span>
+                                        </span>
+                                    </div>
+                                    <div className="benefit-bar__track" role="progressbar" aria-valuenow={benefit.used} aria-valuemin={0} aria-valuemax={benefit.total} aria-label={`${benefit.label}: ${pct}% used`}>
+                                        <motion.div
+                                            className={`benefit-bar__fill benefit-bar__fill--${benefit.color}`}
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${pct}%` }}
+                                            transition={{ duration: 1, delay: 0.4 + index * 0.1, ease: 'easeOut' }}
+                                        />
+                                    </div>
+                                    <div className="benefit-bar__footer">
+                                        <span className={`benefit-bar__pct ${isApproaching ? 'benefit-bar__pct--amber' : ''}`}>
+                                            {pct}% used
+                                        </span>
+                                        <span className="benefit-bar__remaining">
+                                            ${(benefit.total - benefit.used).toLocaleString()} remaining
+                                        </span>
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </GlassCard>
+            </motion.div>
 
             {/* Two Column Layout */}
             <div className="member-home__grid">

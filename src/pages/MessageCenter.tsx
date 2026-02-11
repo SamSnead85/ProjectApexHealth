@@ -134,7 +134,6 @@ export function MessageCenter() {
     const handleSend = () => {
         if (newMessage.trim() && selectedConversation) {
             // In production, this would send to backend
-            console.log('Sending:', newMessage)
             setNewMessage('')
         }
     }

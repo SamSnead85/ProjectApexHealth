@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     CreditCard,
@@ -8,12 +8,32 @@ import {
     Shield,
     Smartphone,
     Download,
-    Heart
+    Heart,
+    Mail,
+    FileDown,
+    Copy,
+    Check
 } from 'lucide-react'
+import { PageSkeleton, Button } from '../components/common'
 import './DigitalIDCard.css'
 
 export default function DigitalIDCard() {
     const [isFlipped, setIsFlipped] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [copied, setCopied] = useState(false)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    const handleCopyId = () => {
+        navigator.clipboard?.writeText('APX-87429-001')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    if (loading) return <PageSkeleton />
 
     return (
         <div className="digital-id-card">
@@ -56,7 +76,22 @@ export default function DigitalIDCard() {
 
                             <div className="member-info">
                                 <div className="member-name">John A. Smith</div>
-                                <div className="member-id">Member ID: APX-87429-001</div>
+                                <div className="member-id" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                    Member ID: APX-87429-001
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); handleCopyId() }}
+                                        style={{
+                                            background: 'none', border: 'none', cursor: 'pointer',
+                                            color: copied ? '#4ade80' : 'rgba(255,255,255,0.5)', display: 'flex', padding: '2px'
+                                        }}
+                                        title="Copy Member ID"
+                                    >
+                                        {copied ? <Check size={12} /> : <Copy size={12} />}
+                                    </button>
+                                </div>
+                                <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.15rem' }}>
+                                    Dependent: Self
+                                </div>
                             </div>
 
                             <div className="card-details">
@@ -86,7 +121,24 @@ export default function DigitalIDCard() {
 
                         {/* Back */}
                         <div className="card-back">
-                            <div className="back-header">Pharmacy Benefits</div>
+                            <div className="back-header">
+                                <span>Plan & Pharmacy Information</span>
+                            </div>
+
+                            <div className="rxbin-group">
+                                <div className="rxbin-item">
+                                    <label>Group #</label>
+                                    <span>ACME-2024</span>
+                                </div>
+                                <div className="rxbin-item">
+                                    <label>Payer ID</label>
+                                    <span>APX00612</span>
+                                </div>
+                                <div className="rxbin-item">
+                                    <label>Plan Type</label>
+                                    <span>PPO Gold</span>
+                                </div>
+                            </div>
 
                             <div className="rxbin-group">
                                 <div className="rxbin-item">
@@ -105,11 +157,11 @@ export default function DigitalIDCard() {
 
                             <div className="rxbin-group">
                                 <div className="rxbin-item">
-                                    <label>Copay Generic</label>
+                                    <label>Generic Copay</label>
                                     <span>$10</span>
                                 </div>
                                 <div className="rxbin-item">
-                                    <label>Brand</label>
+                                    <label>Brand Copay</label>
                                     <span>$35</span>
                                 </div>
                                 <div className="rxbin-item">
@@ -122,6 +174,7 @@ export default function DigitalIDCard() {
                                 <p><strong>Member Services:</strong> 1-800-555-APEX</p>
                                 <p><strong>Provider Services:</strong> 1-800-555-PROV</p>
                                 <p><strong>24/7 Nurse Line:</strong> 1-800-555-NURS</p>
+                                <p><strong>Behavioral Health:</strong> 1-800-555-MIND</p>
                             </div>
                         </div>
                     </div>
@@ -137,13 +190,43 @@ export default function DigitalIDCard() {
                         </button>
                     </div>
 
+                    {/* Share & Download Actions */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        style={{
+                            display: 'flex', gap: '0.6rem', justifyContent: 'center',
+                            marginTop: '1rem', flexWrap: 'wrap'
+                        }}
+                    >
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            icon={<Mail size={14} />}
+                            onClick={() => {
+                                window.location.href = 'mailto:?subject=My%20Apex%20Health%20ID%20Card&body=Here%20is%20my%20digital%20insurance%20ID%20card%20information.%0A%0AMember%20ID:%20APX-87429-001%0APlan:%20PPO%20Gold%0AGroup:%20ACME-2024%0APayer%20ID:%20APX00612'
+                            }}
+                        >
+                            Share via Email
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            icon={<FileDown size={14} />}
+                            onClick={() => alert('Generating PDF of your ID card... Download will start shortly.')}
+                        >
+                            Download PDF
+                        </Button>
+                    </motion.div>
+
                     <p style={{
                         textAlign: 'center',
                         fontSize: '0.75rem',
                         color: 'var(--text-tertiary)',
-                        marginTop: '1rem'
+                        marginTop: '0.75rem'
                     }}>
-                        Click card to flip
+                        Click card to flip &bull; Front shows coverage, back shows pharmacy & contact details
                     </p>
                 </motion.div>
 

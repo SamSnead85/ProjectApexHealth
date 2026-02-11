@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, useCallback } from 'react'
-import { Search, Bell, User, ChevronDown, Shield, BarChart3, Building2, Users, Map } from 'lucide-react'
+import { Search, Bell, User, ChevronDown, Shield, BarChart3, Building2, Users, Map, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Sidebar from './Sidebar'
 import { ThemeToggleCompact } from '../ThemeToggle'
@@ -34,12 +34,34 @@ export function Shell({
     userRole = 'Administrator'
 }: ShellProps) {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
     const [showUserMenu, setShowUserMenu] = useState(false)
     const [showNotifications, setShowNotifications] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const [showSearchResults, setShowSearchResults] = useState(false)
     const [showCommandPalette, setShowCommandPalette] = useState(false)
     const [showTour, setShowTour] = useState(false)
+
+    // Close mobile sidebar on window resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setMobileSidebarOpen(false)
+            }
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    // Prevent body scroll when mobile sidebar is open
+    useEffect(() => {
+        if (mobileSidebarOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => { document.body.style.overflow = '' }
+    }, [mobileSidebarOpen])
 
     // Global ⌘K keyboard shortcut
     useEffect(() => {
@@ -56,6 +78,12 @@ export function Shell({
     const handleCommandPaletteNavigate = useCallback((path: string) => {
         onNavigate(path)
         setShowCommandPalette(false)
+    }, [onNavigate])
+
+    // Wrap onNavigate to close mobile sidebar on navigation
+    const handleNavigateWithMobileClose = useCallback((path: string) => {
+        onNavigate(path)
+        setMobileSidebarOpen(false)
     }, [onNavigate])
 
     // Search items for quick navigation
@@ -107,13 +135,22 @@ export function Shell({
 
     return (
         <div className={`shell ${sidebarCollapsed ? 'shell--sidebar-collapsed' : ''}`}>
+            {/* Mobile Sidebar Overlay */}
+            <div
+                className={`sidebar-overlay ${mobileSidebarOpen ? 'sidebar-overlay--visible' : ''}`}
+                onClick={() => setMobileSidebarOpen(false)}
+                aria-hidden="true"
+            />
+
             {/* Sidebar */}
             <Sidebar
                 activePortal={activePortal}
                 activePath={activePath}
-                onNavigate={onNavigate}
+                onNavigate={handleNavigateWithMobileClose}
                 collapsed={sidebarCollapsed}
                 onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+                mobileOpen={mobileSidebarOpen}
+                onMobileClose={() => setMobileSidebarOpen(false)}
             />
 
             {/* Main Content */}
@@ -121,6 +158,15 @@ export function Shell({
                 {/* Top Bar */}
                 <header className="shell__topbar">
                     <div className="shell__topbar-left">
+                        {/* Mobile Hamburger */}
+                        <button
+                            className="sidebar-hamburger"
+                            onClick={() => setMobileSidebarOpen(true)}
+                            aria-label="Open navigation menu"
+                        >
+                            <Menu size={20} />
+                        </button>
+
                         {/* Portal Switcher (Demo Mode) */}
                         {onSwitchPortal && (
                             <div className="portal-switcher">
@@ -264,7 +310,7 @@ export function Shell({
                             activePortal === 'broker' ? BROKER_TOUR_STEPS :
                                 ADMIN_TOUR_STEPS
                 }
-                onComplete={() => console.log('Tour completed!')}
+                onComplete={() => void 0}
             />
         </div>
     )

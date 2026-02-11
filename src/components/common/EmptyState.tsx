@@ -1,132 +1,125 @@
-import { ReactNode } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { Inbox, Search, FileX, AlertCircle, Plus, RefreshCw, ArrowLeft } from 'lucide-react'
-import './EmptyState.css'
+import { Inbox } from 'lucide-react'
+
+// ============================================================================
+// TYPES
+// ============================================================================
 
 interface EmptyStateProps {
-    icon?: ReactNode
-    title: string
-    description?: string
-    action?: {
-        label: string
-        onClick: () => void
-        icon?: ReactNode
-    }
-    secondaryAction?: {
-        label: string
-        onClick: () => void
-    }
-    variant?: 'default' | 'search' | 'error' | 'card'
-    className?: string
+  icon?: React.ReactNode
+  title: string
+  description: string
+  actionLabel?: string
+  onAction?: () => void
 }
+
+// ============================================================================
+// EMPTY STATE COMPONENT
+// ============================================================================
 
 export function EmptyState({
-    icon,
-    title,
-    description,
-    action,
-    secondaryAction,
-    variant = 'default',
-    className = ''
+  icon,
+  title,
+  description,
+  actionLabel,
+  onAction,
 }: EmptyStateProps) {
-    const getDefaultIcon = () => {
-        switch (variant) {
-            case 'search': return <Search size={48} />
-            case 'error': return <AlertCircle size={48} />
-            default: return <Inbox size={48} />
-        }
-    }
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '56px 24px',
+        textAlign: 'center',
+        minHeight: 300,
+      }}
+    >
+      {/* Circular icon container */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.1, duration: 0.35, ease: 'easeOut' }}
+        style={{
+          width: 88,
+          height: 88,
+          borderRadius: '50%',
+          background: 'rgba(255, 255, 255, 0.03)',
+          border: '1px solid var(--glass-border, rgba(255, 255, 255, 0.08))',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 24,
+          color: 'var(--apex-steel, #71717A)',
+        }}
+      >
+        {icon || <Inbox size={36} strokeWidth={1.5} />}
+      </motion.div>
 
-    return (
-        <motion.div
-            className={`empty-state empty-state--${variant} ${className}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      {/* Title */}
+      <motion.h3
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.18, duration: 0.3 }}
+        style={{
+          margin: '0 0 8px',
+          fontSize: 18,
+          fontWeight: 600,
+          color: 'var(--apex-white, #FFFFFF)',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        {title}
+      </motion.h3>
+
+      {/* Description */}
+      <motion.p
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.24, duration: 0.3 }}
+        style={{
+          margin: 0,
+          fontSize: 14,
+          lineHeight: 1.6,
+          color: 'var(--apex-silver, #A1A1AA)',
+          maxWidth: 380,
+        }}
+      >
+        {description}
+      </motion.p>
+
+      {/* Optional action button */}
+      {actionLabel && onAction && (
+        <motion.button
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.32, duration: 0.3 }}
+          whileHover={{ scale: 1.04, boxShadow: '0 0 20px rgba(6, 182, 212, 0.25)' }}
+          whileTap={{ scale: 0.97 }}
+          onClick={onAction}
+          style={{
+            marginTop: 24,
+            padding: '10px 24px',
+            fontSize: 14,
+            fontWeight: 500,
+            color: '#fff',
+            background: 'var(--apex-teal, #06B6D4)',
+            border: 'none',
+            borderRadius: 8,
+            cursor: 'pointer',
+            transition: 'background 0.15s ease',
+          }}
         >
-            <div className="empty-state__icon">
-                {icon || getDefaultIcon()}
-            </div>
-            <h3 className="empty-state__title">{title}</h3>
-            {description && (
-                <p className="empty-state__description">{description}</p>
-            )}
-            {(action || secondaryAction) && (
-                <div className="empty-state__actions">
-                    {action && (
-                        <motion.button
-                            className="empty-state__action"
-                            onClick={action.onClick}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            {action.icon || <Plus size={16} />}
-                            {action.label}
-                        </motion.button>
-                    )}
-                    {secondaryAction && (
-                        <button
-                            className="empty-state__secondary-action"
-                            onClick={secondaryAction.onClick}
-                        >
-                            {secondaryAction.label}
-                        </button>
-                    )}
-                </div>
-            )}
-        </motion.div>
-    )
-}
-
-// No search results
-export function NoSearchResults({
-    query,
-    onClear
-}: {
-    query: string
-    onClear: () => void
-}) {
-    return (
-        <EmptyState
-            icon={<Search size={48} />}
-            title="No results found"
-            description={`We couldn't find anything matching "${query}". Try a different search term.`}
-            action={{ label: 'Clear search', onClick: onClear, icon: <RefreshCw size={16} /> }}
-            variant="search"
-        />
-    )
-}
-
-// Error state
-export function ErrorState({
-    title = 'Something went wrong',
-    description = 'An unexpected error occurred. Please try again.',
-    onRetry
-}: {
-    title?: string
-    description?: string
-    onRetry?: () => void
-}) {
-    return (
-        <EmptyState
-            icon={<AlertCircle size={48} />}
-            title={title}
-            description={description}
-            action={onRetry ? { label: 'Try again', onClick: onRetry, icon: <RefreshCw size={16} /> } : undefined}
-            variant="error"
-        />
-    )
-}
-
-// Not found state
-export function NotFoundState({ onGoBack }: { onGoBack?: () => void }) {
-    return (
-        <EmptyState
-            icon={<FileX size={48} />}
-            title="Page not found"
-            description="The page you're looking for doesn't exist or has been moved."
-            action={onGoBack ? { label: 'Go back', onClick: onGoBack, icon: <ArrowLeft size={16} /> } : undefined}
-        />
-    )
+          {actionLabel}
+        </motion.button>
+      )}
+    </motion.div>
+  )
 }
 
 export default EmptyState

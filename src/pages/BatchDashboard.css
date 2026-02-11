@@ -81,6 +81,260 @@
     color: var(--text-tertiary);
 }
 
+.bd-stat-sub {
+    font-size: 0.625rem;
+    font-weight: 500;
+    margin-top: 0.125rem;
+}
+
+/* Batch Timeline Chart */
+.bd-timeline-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bd-timeline-card h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.bd-chart-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    margin-left: auto;
+}
+
+.bd-chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.688rem;
+    color: var(--text-secondary);
+}
+
+.bd-chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.bd-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Active Job Count Badge */
+.bd-active-count {
+    font-size: 0.688rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    margin-left: auto;
+}
+
+/* Progress Enhancement */
+.bd-progress-pct {
+    font-weight: 600;
+    color: #818cf8;
+}
+
+.bd-progress-pulse {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    animation: bd-pulse-move 1.5s ease-in-out infinite;
+}
+
+@keyframes bd-pulse-move {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Error Log */
+.bd-error-log {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bd-error-log h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.bd-error-count {
+    font-size: 0.688rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    margin-left: auto;
+}
+
+.bd-error-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.bd-error-item {
+    background: rgba(239, 68, 68, 0.04);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.bd-error-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.bd-error-header:hover {
+    background: rgba(239, 68, 68, 0.06);
+}
+
+.bd-error-icon {
+    color: #ef4444;
+    flex-shrink: 0;
+}
+
+.bd-error-summary {
+    flex: 1;
+    min-width: 0;
+}
+
+.bd-error-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.125rem;
+}
+
+.bd-error-msg {
+    font-size: 0.75rem;
+    color: #ef4444;
+    opacity: 0.8;
+}
+
+.bd-error-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+    flex-shrink: 0;
+}
+
+.bd-error-time {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.bd-error-records {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+}
+
+.bd-error-expand {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+}
+
+.bd-error-details {
+    overflow: hidden;
+}
+
+.bd-error-details-inner {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0 1.25rem 0.75rem 1.25rem;
+    border-top: 1px solid rgba(239, 68, 68, 0.1);
+    padding-top: 0.75rem;
+}
+
+.bd-error-details-inner svg {
+    color: #f59e0b;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.bd-error-details-inner pre {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+    margin: 0;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.bd-error-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0 1.25rem 1rem 1.25rem;
+}
+
+.bd-error-retry-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bd-error-retry-btn:hover {
+    background: rgba(99, 102, 241, 0.25);
+}
+
+.bd-error-dismiss-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-tertiary);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bd-error-dismiss-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
 /* Active Jobs */
 .active-jobs {
     background: var(--card-bg);
@@ -175,6 +429,7 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
+    position: relative;
 }
 
 .progress-fill {

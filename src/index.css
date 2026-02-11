@@ -27,6 +27,11 @@
   --apex-blue: #3B82F6;
   --apex-cyan: #06B6D4;
 
+  /* Named Accent Aliases (theme-aware) */
+  --apex-amber: #F59E0B;
+  --apex-red: #EF4444;
+  --apex-green: #22c55e;
+
   /* Semantic Intelligence */
   --apex-success: #10B981;
   --apex-success-soft: rgba(16, 185, 129, 0.15);
@@ -122,6 +127,10 @@
   --apex-hipaa-green: #059669;
   --apex-cms-blue: #1d4ed8;
   --apex-regulatory-indigo: #4f46e5;
+
+  /* SIR Dashboard Unique Accents (no generic --apex-* equivalent) */
+  --apex-sir-indigo: #6366f1;
+  --apex-sir-rose: #f43f5e;
 }
 
 /* ================================
@@ -992,6 +1001,695 @@ button {
   :root {
     --text-5xl: 1.75rem;
     --text-4xl: 1.5rem;
+  }
+}
+
+/* ============================================
+   MOBILE-FIRST RESPONSIVE ENHANCEMENTS
+   Comprehensive responsive rules for healthcare
+   platform: tablet (1024px), mobile (768px, 480px)
+   ============================================ */
+
+/* --------------------------------
+   TOUCH-FRIENDLY TARGETS
+   Global 44px minimum on touch devices
+   -------------------------------- */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  a,
+  select,
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Nav items need comfortable tap sizing */
+  .nav-item,
+  .shell__nav-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Tab items need comfortable sizing */
+  .tabs__tab,
+  .enterprise-tabs__item {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  /* Filter chips and badges */
+  .badge,
+  .compliance-badge,
+  .filter-chip {
+    min-height: 36px;
+    padding: 8px 12px;
+  }
+}
+
+/* --------------------------------
+   RESPONSIVE DATA TABLES → CARD VIEW
+   Tables convert to stacked card layout on mobile
+   -------------------------------- */
+@media (max-width: 768px) {
+  /* Standard table → card conversion */
+  .responsive-table,
+  .exec-table.responsive-table,
+  .enterprise-grid.responsive-table {
+    display: block;
+  }
+
+  .responsive-table thead {
+    display: none;
+  }
+
+  .responsive-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .responsive-table tr {
+    display: flex;
+    flex-direction: column;
+    background: var(--glass-bg-card, rgba(34, 34, 48, 0.6));
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    gap: var(--space-xs);
+  }
+
+  .responsive-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: var(--text-sm);
+  }
+
+  .responsive-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Show the column header as a label via data-label */
+  .responsive-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--apex-steel, #71717A);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    margin-right: var(--space-md);
+  }
+
+  /* Light mode card table */
+  [data-theme="light"] .responsive-table tr {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  [data-theme="light"] .responsive-table td {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+  }
+
+  /* Enterprise grid as cards */
+  .enterprise-grid__header {
+    display: none;
+  }
+
+  .enterprise-grid__body-row {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-xs);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+  }
+
+  .enterprise-grid__cell {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-xs) 0;
+  }
+
+  .enterprise-grid__cell--numeric,
+  .enterprise-grid__cell--currency {
+    text-align: left;
+  }
+}
+
+/* --------------------------------
+   TABLET LAYOUT (1024px)
+   Two-column grids, adjusted spacing
+   -------------------------------- */
+@media (max-width: 1024px) {
+  /* Reduce page padding */
+  .shell__main,
+  .page-content,
+  .dashboard-content {
+    padding: var(--space-md);
+  }
+
+  /* KPI grids to 2 columns */
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  /* Enterprise KPI cards tighter */
+  .enterprise-kpi {
+    padding: var(--space-md);
+  }
+
+  .enterprise-kpi__value {
+    font-size: 1.5rem;
+  }
+
+  /* Enterprise panels */
+  .enterprise-panel__header {
+    padding: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .enterprise-panel__body {
+    padding: var(--space-md);
+  }
+
+  /* Page header stacks */
+  .enterprise-page-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .enterprise-page-header__actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* Professional header adjusts */
+  .professional-header {
+    padding: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  /* Chart containers tighter */
+  .chart-container {
+    padding: var(--space-md);
+  }
+
+  /* Chart legends wrap */
+  .enterprise-chart__legend,
+  .chart-container__legend {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  /* Toast narrower on tablet */
+  .toast-container {
+    max-width: 360px;
+    right: var(--space-md);
+    top: var(--space-md);
+  }
+
+  /* Stat cards adjust */
+  .stat-card__value {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* --------------------------------
+   MOBILE LAYOUT (768px)
+   Single column, compact cards, stacked
+   -------------------------------- */
+@media (max-width: 768px) {
+  /* Base spacing reduction */
+  .shell__main,
+  .page-content,
+  .dashboard-content {
+    padding: var(--space-sm);
+  }
+
+  /* All grids to single column */
+  .kpi-grid,
+  .netflix-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  /* KPI cards compact */
+  .kpi-card {
+    padding: var(--space-md);
+  }
+
+  .kpi-card__value {
+    font-size: var(--text-2xl);
+  }
+
+  /* Enterprise KPI compact */
+  .enterprise-kpi {
+    padding: var(--space-md);
+  }
+
+  .enterprise-kpi__value {
+    font-size: 1.25rem;
+  }
+
+  .enterprise-kpi__header {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Page headers compact */
+  .enterprise-page-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .enterprise-page-header__title {
+    font-size: 1.25rem;
+  }
+
+  .enterprise-page-header__breadcrumb {
+    font-size: 0.6875rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Panels compact */
+  .enterprise-panel__header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .enterprise-panel__body {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .enterprise-panel__title-text {
+    font-size: 0.8125rem;
+  }
+
+  /* Tabs scroll horizontally */
+  .enterprise-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .enterprise-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .enterprise-tabs__item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* Search bar full width */
+  .enterprise-search {
+    width: 100%;
+  }
+
+  /* Buttons stack in groups */
+  .enterprise-page-header__actions {
+    flex-direction: column;
+  }
+
+  .enterprise-page-header__actions .enterprise-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Chart containers minimal padding */
+  .chart-container {
+    padding: var(--space-sm);
+  }
+
+  .chart-container__header {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Bar chart columns thinner */
+  .enterprise-bar-chart__bar {
+    min-width: 4px;
+    max-width: 20px;
+  }
+
+  /* Stat cards compact */
+  .stat-card {
+    padding: var(--space-md);
+  }
+
+  .stat-card__value {
+    font-size: var(--text-xl);
+  }
+
+  /* Toast full width on mobile */
+  .toast-container {
+    left: var(--space-sm);
+    right: var(--space-sm);
+    max-width: none;
+  }
+
+  .toast {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Portal switcher scrolls */
+  .portal-switcher {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .portal-switcher__btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* Netflix card adjustments */
+  .netflix-card {
+    padding: var(--space-md);
+  }
+
+  .netflix-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* Reduce hover lift on touch */
+  .interactive-lift:hover,
+  .premium-card:hover,
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Stack flex layouts */
+  .flex.mobile-stack {
+    flex-direction: column;
+  }
+
+  /* Hide desktop-only elements */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Gauge circular smaller */
+  .enterprise-gauge-circular {
+    width: 48px;
+    height: 48px;
+  }
+
+  .enterprise-gauge-circular__value {
+    font-size: 0.75rem;
+  }
+
+  /* Table action buttons compact */
+  .enterprise-btn--sm {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.6875rem;
+  }
+
+  /* Filter dropdowns full width */
+  .enterprise-filter-dropdown {
+    width: 100%;
+  }
+
+  .enterprise-filter-dropdown__trigger {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* --------------------------------
+   MEMBER PORTAL - MOBILE OPTIMIZED
+   Compact cards, stacked layouts, thumb-friendly
+   -------------------------------- */
+@media (max-width: 768px) {
+  /* Member home compact */
+  .member-home {
+    padding: var(--space-sm);
+  }
+
+  .member-home__welcome h1 {
+    font-size: var(--text-xl);
+  }
+
+  .member-home__welcome {
+    padding: var(--space-md);
+  }
+
+  /* Member ID card scales down */
+  .id-card-3d {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+
+  /* Quick action cards horizontal scroll on mobile */
+  .quick-actions-grid,
+  .member-quick-actions {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .quick-actions-grid::-webkit-scrollbar,
+  .member-quick-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quick-actions-grid > *,
+  .member-quick-actions > * {
+    flex: 0 0 75%;
+    max-width: 280px;
+    scroll-snap-align: start;
+  }
+
+  /* Activity feed compact */
+  .member-home__activity {
+    padding: var(--space-sm);
+  }
+
+  /* Prescription cards stacked */
+  .prescription-card,
+  .pharmacy-card {
+    padding: var(--space-md);
+  }
+
+  /* Wellness cards compact */
+  .wellness-card {
+    padding: var(--space-md);
+  }
+
+  /* Benefits coverage cards */
+  .coverage-card,
+  .benefit-card {
+    padding: var(--space-md);
+  }
+
+  /* Claims list compact */
+  .claim-item,
+  .claims-card {
+    padding: var(--space-md);
+  }
+
+  /* Provider search results */
+  .provider-card {
+    padding: var(--space-md);
+  }
+
+  /* Cost estimator compact */
+  .cost-estimate-card {
+    padding: var(--space-md);
+  }
+}
+
+/* --------------------------------
+   SMALL MOBILE (480px)
+   Maximum compactness, essential info only
+   -------------------------------- */
+@media (max-width: 480px) {
+  /* Further reduce spacing */
+  .shell__main,
+  .page-content {
+    padding: var(--space-xs);
+  }
+
+  /* Typography scale down */
+  h1, .text-h1 { font-size: 1.25rem; }
+  h2, .text-h2 { font-size: 1.125rem; }
+  h3, .text-h3 { font-size: 1rem; }
+
+  .text-display {
+    font-size: 1.5rem;
+  }
+
+  /* Card padding minimal */
+  .netflix-card,
+  .glass-card,
+  .metric-card,
+  .stat-card,
+  .kpi-card,
+  .premium-card,
+  .enterprise-kpi,
+  .enterprise-panel {
+    border-radius: var(--radius-md);
+  }
+
+  /* KPI values tight */
+  .kpi-card__value,
+  .enterprise-kpi__value,
+  .stat-card__value,
+  .exec-stat__value {
+    font-size: 1.25rem;
+  }
+
+  /* Navigation compact */
+  .portal-switcher__btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.6875rem;
+  }
+
+  /* Badges smaller */
+  .exec-badge,
+  .compliance-badge {
+    padding: 4px 8px;
+    font-size: 0.5625rem;
+  }
+
+  /* Button full width by default */
+  .enterprise-btn,
+  .exec-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Search compact */
+  .enterprise-search {
+    padding: var(--space-sm);
+  }
+
+  /* Chart legend stacks vertically */
+  .enterprise-chart__legend {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  /* Progress bars thinner */
+  .progress-bar {
+    height: 4px;
+  }
+
+  .enterprise-gauge__track {
+    height: 4px;
+  }
+
+  /* Quick actions single column on smallest screens */
+  .quick-actions-grid > *,
+  .member-quick-actions > * {
+    flex: 0 0 85%;
+  }
+
+  /* Toast minimal */
+  .toast-container {
+    left: var(--space-xs);
+    right: var(--space-xs);
+    top: var(--space-xs);
+  }
+
+  .toast {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* --------------------------------
+   LANDSCAPE MOBILE
+   Side-by-side layouts when landscape
+   -------------------------------- */
+@media (max-width: 768px) and (orientation: landscape) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-actions-grid > *,
+  .member-quick-actions > * {
+    flex: 0 0 48%;
+  }
+}
+
+/* --------------------------------
+   SAFE AREA INSETS (notched phones)
+   -------------------------------- */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .shell__main {
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+  }
+
+  .toast-container {
+    bottom: calc(var(--space-lg) + env(safe-area-inset-bottom));
+  }
+
+  .a11y-help-link {
+    bottom: calc(var(--space-lg) + env(safe-area-inset-bottom));
+    right: calc(var(--space-lg) + env(safe-area-inset-right));
+  }
+}
+
+/* --------------------------------
+   RESPONSIVE VISIBILITY UTILITIES
+   -------------------------------- */
+.show-tablet-only {
+  display: none;
+}
+
+.show-mobile-only {
+  display: none;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .show-tablet-only {
+    display: block;
+  }
+
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .show-mobile-only {
+    display: block;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .tablet-only {
+    display: none !important;
   }
 }
 

@@ -242,3 +242,350 @@
         color: #666;
     }
 }
+
+/* ============================================
+   WCAG 2.2 AA COMPLIANCE ENHANCEMENTS
+   Minimum 4.5:1 contrast, enhanced focus,
+   touch targets, skip navigation
+   ============================================ */
+
+/* --------------------------------
+   ENHANCED FOCUS-VISIBLE INDICATORS
+   Standardized 2px solid cyan outline
+   -------------------------------- */
+*:focus-visible {
+    outline: 2px solid #06B6D4;
+    outline-offset: 2px;
+}
+
+/* Ensure buttons & form controls have visible focus */
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid #06B6D4;
+    outline-offset: 2px;
+    border-radius: var(--radius-sm, 8px);
+}
+
+/* Double-ring focus for critical healthcare actions */
+.focus-ring-critical:focus-visible {
+    outline: 3px solid var(--apex-critical, #EF4444);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.2);
+}
+
+/* --------------------------------
+   WCAG 2.2 CONTRAST-SAFE CUSTOM PROPERTIES
+   Minimum 4.5:1 on dark backgrounds,
+   3:1 for large text / UI components
+   -------------------------------- */
+:root {
+    /* High-contrast text tokens for dark backgrounds */
+    --a11y-text-primary: #F1F5F9;      /* ~15.4:1 on #0D0D12 */
+    --a11y-text-secondary: #CBD5E1;    /* ~10.8:1 on #0D0D12 */
+    --a11y-text-tertiary: #94A3B8;     /* ~6.7:1 on #0D0D12 */
+    --a11y-text-muted: #64748B;        /* ~4.5:1 on #0D0D12 - minimum AA */
+
+    /* High-contrast accent tokens */
+    --a11y-teal-on-dark: #22D3EE;      /* ~10.2:1 on #0D0D12 */
+    --a11y-success-on-dark: #34D399;   /* ~9.6:1 on #0D0D12 */
+    --a11y-warning-on-dark: #FBBF24;   /* ~12.8:1 on #0D0D12 */
+    --a11y-critical-on-dark: #F87171;  /* ~6.6:1 on #0D0D12 */
+    --a11y-info-on-dark: #60A5FA;      /* ~6.8:1 on #0D0D12 */
+
+    /* High-contrast tokens for light backgrounds */
+    --a11y-teal-on-light: #0E7490;     /* ~5.9:1 on #FFFFFF */
+    --a11y-success-on-light: #047857;  /* ~5.5:1 on #FFFFFF */
+    --a11y-warning-on-light: #92400E;  /* ~6.1:1 on #FFFFFF */
+    --a11y-critical-on-light: #B91C1C; /* ~5.7:1 on #FFFFFF */
+    --a11y-info-on-light: #1D4ED8;     /* ~7.1:1 on #FFFFFF */
+
+    /* Link colors meeting 3:1 against surrounding text */
+    --a11y-link-on-dark: #22D3EE;
+    --a11y-link-on-light: #0E7490;
+
+    /* Focus indicator color */
+    --a11y-focus-color: #06B6D4;
+    --a11y-focus-width: 2px;
+    --a11y-focus-offset: 2px;
+}
+
+/* --------------------------------
+   ENHANCED SKIP-TO-CONTENT LINK
+   WCAG 2.4.1 - Bypass Blocks
+   -------------------------------- */
+.skip-to-content {
+    position: absolute;
+    top: -100vh;
+    left: var(--space-md, 16px);
+    padding: 12px 24px;
+    background: #06B6D4;
+    color: #0D0D12;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 0 0 var(--radius-md, 12px) var(--radius-md, 12px);
+    z-index: 10000;
+    transition: top 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+}
+
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+    top: 0;
+    outline: none;
+}
+
+/* Additional skip links for complex layouts */
+.skip-to-nav:focus,
+.skip-to-sidebar:focus {
+    top: 0;
+}
+
+/* --------------------------------
+   TOUCH TARGET MINIMUM SIZE (WCAG 2.5.8)
+   44x44px minimum for all interactive elements
+   -------------------------------- */
+/* Always enforce minimum touch targets on coarse pointers (touch) */
+@media (pointer: coarse) {
+    button,
+    [role="button"],
+    [role="tab"],
+    [role="menuitem"],
+    [role="option"],
+    a:not(.skip-to-content),
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"],
+    select,
+    summary {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Inline links inside text don't need width sizing */
+    p a,
+    li a,
+    td a,
+    span a {
+        min-width: auto;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Ensure small buttons have adequate padding */
+    .btn--sm,
+    .enterprise-btn--sm,
+    .exec-btn--sm {
+        min-height: 44px;
+        padding-left: var(--space-md, 16px);
+        padding-right: var(--space-md, 16px);
+    }
+
+    /* Icon-only buttons must maintain touch target */
+    .btn--icon,
+    .enterprise-btn--icon-only,
+    [aria-label]:not(div):not(section):not(nav) {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* For fine pointers, still enforce 24px min (WCAG 2.5.8 level AA) */
+@media (pointer: fine) {
+    button,
+    [role="button"],
+    a {
+        min-height: 24px;
+    }
+}
+
+/* --------------------------------
+   TARGET SIZE SPACING (WCAG 2.5.8)
+   Ensure adjacent targets have spacing
+   -------------------------------- */
+.a11y-target-spacing {
+    gap: 8px;
+}
+
+.a11y-target-spacing > button,
+.a11y-target-spacing > a,
+.a11y-target-spacing > [role="button"] {
+    margin: 4px;
+}
+
+/* --------------------------------
+   FOCUS-NOT-OBSCURED (WCAG 2.4.11)
+   Ensure focused elements are visible
+   -------------------------------- */
+:focus-visible {
+    scroll-margin: 8px;
+    scroll-padding: 8px;
+}
+
+/* Sticky headers should not obscure focus */
+[role="banner"],
+.shell__header,
+.professional-header {
+    z-index: var(--z-sticky, 200);
+}
+
+:focus-visible {
+    z-index: 1;
+    position: relative;
+}
+
+/* --------------------------------
+   DRAGGING MOVEMENTS (WCAG 2.5.7)
+   Provide alternatives to drag
+   -------------------------------- */
+.drag-alternative-notice {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+}
+
+.drag-alternative-notice:focus {
+    position: static;
+    clip: auto;
+    width: auto;
+    height: auto;
+    padding: var(--space-sm, 8px) var(--space-md, 16px);
+    background: var(--a11y-focus-color, #06B6D4);
+    color: #0D0D12;
+    border-radius: var(--radius-md, 12px);
+    font-weight: 600;
+}
+
+/* --------------------------------
+   CONSISTENT HELP (WCAG 3.2.6)
+   Help mechanisms in consistent locations
+   -------------------------------- */
+.a11y-help-link {
+    position: fixed;
+    bottom: var(--space-lg, 24px);
+    right: var(--space-lg, 24px);
+    z-index: var(--z-toast, 400);
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full, 9999px);
+    background: var(--apex-teal, #06B6D4);
+    color: #0D0D12;
+    box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.a11y-help-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.4);
+}
+
+/* --------------------------------
+   ARIA LANDMARK ROLES - VISUAL HELPERS
+   Debug mode borders for landmarks
+   -------------------------------- */
+.a11y-debug [role="main"],
+.a11y-debug main {
+    outline: 2px dashed var(--a11y-info-on-dark, #60A5FA);
+    outline-offset: 4px;
+}
+
+.a11y-debug [role="navigation"],
+.a11y-debug nav {
+    outline: 2px dashed var(--a11y-success-on-dark, #34D399);
+    outline-offset: 4px;
+}
+
+.a11y-debug [role="complementary"],
+.a11y-debug aside {
+    outline: 2px dashed var(--a11y-warning-on-dark, #FBBF24);
+    outline-offset: 4px;
+}
+
+/* --------------------------------
+   VISIBLE LABELS (WCAG 2.5.3)
+   Ensure programmatic labels are visible
+   -------------------------------- */
+label {
+    display: block;
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 500;
+    color: var(--apex-silver, #A1A1AA);
+    margin-bottom: var(--space-xs, 4px);
+}
+
+/* Required field indicator */
+label[aria-required="true"]::after,
+label.required::after {
+    content: " *";
+    color: var(--apex-critical, #EF4444);
+    font-weight: 700;
+}
+
+/* --------------------------------
+   ERROR IDENTIFICATION (WCAG 3.3.1)
+   Consistent error styling
+   -------------------------------- */
+.field-error {
+    color: var(--a11y-critical-on-dark, #F87171);
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 500;
+    margin-top: var(--space-xs, 4px);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs, 4px);
+}
+
+.field-error::before {
+    content: "⚠";
+    font-size: 0.875rem;
+}
+
+[data-theme="light"] .field-error {
+    color: var(--a11y-critical-on-light, #B91C1C);
+}
+
+/* --------------------------------
+   TEXT SPACING (WCAG 1.4.12)
+   Ensure content works with user text spacing
+   -------------------------------- */
+.a11y-text-spacing {
+    line-height: 1.5 !important;
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+}
+
+.a11y-text-spacing p {
+    margin-bottom: 2em !important;
+}
+
+/* --------------------------------
+   PREFERS-COLOR-SCHEME AUTO
+   System color scheme awareness
+   -------------------------------- */
+@media (prefers-color-scheme: dark) {
+    .a11y-system-theme {
+        color-scheme: dark;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .a11y-system-theme {
+        color-scheme: light;
+    }
+}

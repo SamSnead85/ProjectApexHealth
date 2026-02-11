@@ -18,64 +18,108 @@ import './WorkflowBuilder.css'
 // Node types for workflow builder
 const nodeTypes = {
     triggers: [
-        { type: 'claim_submitted', label: 'Claim Submitted', icon: FileText, color: 'cyan' },
-        { type: 'prior_auth_request', label: 'Prior Auth Request', icon: Shield, color: 'cyan' },
-        { type: 'member_enrolled', label: 'Member Enrolled', icon: Users, color: 'cyan' },
-        { type: 'scheduled', label: 'Scheduled', icon: Timer, color: 'cyan' },
-        { type: 'webhook', label: 'Webhook Trigger', icon: Zap, color: 'cyan' },
+        { type: 'claim_submitted', label: 'Claim Submitted', icon: FileText, color: 'cyan', description: 'When a new claim is submitted' },
+        { type: 'prior_auth_request', label: 'Prior Auth Request', icon: Shield, color: 'cyan', description: 'When prior auth is requested' },
+        { type: 'member_enrolled', label: 'Member Enrolled', icon: Users, color: 'cyan', description: 'When a member enrolls' },
+        { type: 'scheduled', label: 'Scheduled', icon: Timer, color: 'cyan', description: 'Run on a schedule' },
+        { type: 'webhook', label: 'Webhook Trigger', icon: Zap, color: 'cyan', description: 'Triggered via webhook' },
     ],
     conditions: [
-        { type: 'if_condition', label: 'If/Then', icon: GitBranch, color: 'amber' },
-        { type: 'filter', label: 'Filter', icon: Filter, color: 'amber' },
-        { type: 'switch', label: 'Switch/Case', icon: Repeat, color: 'amber' },
-        { type: 'threshold', label: 'Threshold Check', icon: AlertTriangle, color: 'amber' },
+        { type: 'if_condition', label: 'If/Then', icon: GitBranch, color: 'amber', description: 'Branch based on condition' },
+        { type: 'filter', label: 'Filter', icon: Filter, color: 'amber', description: 'Filter records by criteria' },
+        { type: 'switch', label: 'Switch/Case', icon: Repeat, color: 'amber', description: 'Multi-path branching' },
+        { type: 'threshold', label: 'Threshold Check', icon: AlertTriangle, color: 'amber', description: 'Check numeric threshold' },
     ],
     actions: [
-        { type: 'auto_approve', label: 'Auto Approve', icon: CheckCircle, color: 'emerald' },
-        { type: 'auto_deny', label: 'Auto Deny', icon: XCircle, color: 'rose' },
-        { type: 'assign_reviewer', label: 'Assign Reviewer', icon: Users, color: 'violet' },
-        { type: 'send_notification', label: 'Send Notification', icon: Bell, color: 'violet' },
-        { type: 'send_email', label: 'Send Email', icon: Mail, color: 'violet' },
-        { type: 'update_record', label: 'Update Record', icon: Database, color: 'violet' },
-        { type: 'call_api', label: 'Call API', icon: Code, color: 'violet' },
-        { type: 'ai_review', label: 'AI Review', icon: Brain, color: 'violet' },
+        { type: 'auto_approve', label: 'Auto Approve', icon: CheckCircle, color: 'emerald', description: 'Automatically approve the request' },
+        { type: 'auto_deny', label: 'Auto Deny', icon: XCircle, color: 'rose', description: 'Automatically deny the request' },
+        { type: 'assign_reviewer', label: 'Assign Reviewer', icon: Users, color: 'violet', description: 'Route to human reviewer' },
+        { type: 'send_notification', label: 'Send Notification', icon: Bell, color: 'violet', description: 'Push notification to user' },
+        { type: 'send_email', label: 'Send Email', icon: Mail, color: 'amber', description: 'Send email to stakeholder' },
+        { type: 'update_record', label: 'Update Record', icon: Database, color: 'violet', description: 'Update a database record' },
+        { type: 'call_api', label: 'Call API', icon: Code, color: 'cyan', description: 'Call external API endpoint' },
+        { type: 'ai_decision', label: 'AI Decision', icon: Brain, color: 'purple', description: 'Use AI to make routing decisions' },
     ],
     utilities: [
-        { type: 'delay', label: 'Delay', icon: Clock, color: 'slate' },
-        { type: 'log', label: 'Log Event', icon: FileText, color: 'slate' },
-        { type: 'flag', label: 'Set Flag', icon: Flag, color: 'slate' },
+        { type: 'delay', label: 'Delay', icon: Clock, color: 'gray', description: 'Wait for specified time period' },
+        { type: 'log', label: 'Log Event', icon: FileText, color: 'slate', description: 'Log an event for auditing' },
+        { type: 'flag', label: 'Set Flag', icon: Flag, color: 'slate', description: 'Set a workflow flag' },
+        { type: 'api_call', label: 'API Call', icon: Zap, color: 'cyan', description: 'Call external API endpoint' },
+        { type: 'email_notification', label: 'Email Notification', icon: Mail, color: 'amber', description: 'Send email to stakeholder' },
     ]
+}
+
+// All trigger types for category lookup
+const triggerTypes = new Set(nodeTypes.triggers.map(n => n.type))
+const actionTypes = new Set([
+    ...nodeTypes.actions.map(n => n.type),
+    ...nodeTypes.utilities.map(n => n.type),
+])
+
+// Helper to find a node definition by type across all categories
+function findNodeDef(type: string) {
+    for (const category of Object.values(nodeTypes)) {
+        const found = category.find(n => n.type === type)
+        if (found) return found
+    }
+    return null
 }
 
 // Sample workflow templates
 const workflowTemplates = [
     {
-        id: 'prior-auth',
-        name: 'Prior Authorization',
-        description: 'Automate prior auth decisions with AI review',
-        nodes: 4,
-        status: 'active'
+        id: 'claims-auto-adj',
+        name: 'Claims Auto-Adjudication',
+        description: 'Automatically adjudicate claims using AI-powered rules and threshold checks',
+        icon: FileText,
+        nodes: 7,
+        status: 'active' as const,
+        previewNodes: ['claim_submitted', 'threshold', 'ai_decision', 'auto_approve', 'auto_deny', 'send_email', 'log']
     },
     {
-        id: 'claims-adj',
-        name: 'Claims Adjudication',
-        description: 'End-to-end claims processing workflow',
-        nodes: 8,
-        status: 'active'
-    },
-    {
-        id: 'appeals',
-        name: 'Appeals Processing',
-        description: 'Dispute resolution and escalation',
-        nodes: 6,
-        status: 'draft'
-    },
-    {
-        id: 'enrollment',
-        name: 'Member Enrollment',
-        description: 'New member onboarding automation',
+        id: 'prior-auth-review',
+        name: 'Prior Auth Review',
+        description: 'Route prior authorization requests through AI review and human oversight',
+        icon: Shield,
         nodes: 5,
-        status: 'active'
+        status: 'active' as const,
+        previewNodes: ['prior_auth_request', 'ai_decision', 'if_condition', 'auto_approve', 'assign_reviewer']
+    },
+    {
+        id: 'fraud-alert',
+        name: 'Fraud Alert',
+        description: 'Detect anomalous claims patterns and escalate suspicious activity',
+        icon: AlertTriangle,
+        nodes: 6,
+        status: 'active' as const,
+        previewNodes: ['claim_submitted', 'ai_decision', 'threshold', 'flag', 'send_notification', 'assign_reviewer']
+    },
+    {
+        id: 'member-welcome',
+        name: 'Member Welcome',
+        description: 'Automated onboarding flow for newly enrolled members',
+        icon: Users,
+        nodes: 5,
+        status: 'active' as const,
+        previewNodes: ['member_enrolled', 'delay', 'send_email', 'send_notification', 'log']
+    },
+    {
+        id: 'provider-credentialing',
+        name: 'Provider Credentialing',
+        description: 'Verify and credential new healthcare providers in the network',
+        icon: Lock,
+        nodes: 6,
+        status: 'draft' as const,
+        previewNodes: ['webhook', 'call_api', 'if_condition', 'assign_reviewer', 'auto_approve', 'send_email']
+    },
+    {
+        id: 'denial-appeal',
+        name: 'Denial Appeal',
+        description: 'Process and route denial appeals through review stages',
+        icon: Flag,
+        nodes: 6,
+        status: 'draft' as const,
+        previewNodes: ['webhook', 'filter', 'ai_decision', 'assign_reviewer', 'send_email', 'update_record']
     },
 ]
 
@@ -105,15 +149,16 @@ function PaletteItem({ node, onDragStart }: { node: typeof nodeTypes.triggers[0]
 }
 
 // Workflow Node Component
-function WorkflowNode({ node, isSelected, onSelect, onDelete }: {
+function WorkflowNodeComponent({ node, isSelected, isInvalid, onSelect, onDelete }: {
     node: WorkflowNode,
     isSelected: boolean,
+    isInvalid?: boolean,
     onSelect: () => void,
     onDelete: () => void
 }) {
     return (
         <motion.div
-            className={`wf-node wf-node--${node.color} ${isSelected ? 'wf-node--selected' : ''}`}
+            className={`wf-node wf-node--${node.color} ${isSelected ? 'wf-node--selected' : ''} ${isInvalid ? 'wf-node--invalid' : ''}`}
             onClick={onSelect}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -147,37 +192,75 @@ function WorkflowNode({ node, isSelected, onSelect, onDelete }: {
 }
 
 // Workflow Template Card
-function TemplateCard({ template, onSelect }: { template: typeof workflowTemplates[0], onSelect: () => void }) {
+function TemplateCard({ template, onSelect, onApply }: {
+    template: typeof workflowTemplates[0],
+    onSelect: () => void,
+    onApply: () => void
+}) {
+    const IconComponent = template.icon
     return (
-        <motion.button
+        <motion.div
             className="wf-template-card"
             onClick={onSelect}
             whileHover={{ y: -4, scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
         >
             <div className="wf-template-card__header">
-                <Workflow size={20} />
+                <div className="wf-template-card__icon-wrap">
+                    <IconComponent size={20} />
+                </div>
                 <Badge variant={template.status === 'active' ? 'success' : 'secondary'}>
                     {template.status}
                 </Badge>
             </div>
             <h4 className="wf-template-card__name">{template.name}</h4>
             <p className="wf-template-card__desc">{template.description}</p>
+            <div className="wf-template-card__preview">
+                {template.previewNodes.slice(0, 4).map((nodeType, idx) => {
+                    const def = findNodeDef(nodeType)
+                    if (!def) return null
+                    const NodeIcon = def.icon
+                    return (
+                        <span key={idx} className={`wf-template-card__preview-icon wf-template-card__preview-icon--${def.color}`} title={def.label}>
+                            <NodeIcon size={12} />
+                        </span>
+                    )
+                })}
+                {template.previewNodes.length > 4 && (
+                    <span className="wf-template-card__preview-more">
+                        +{template.previewNodes.length - 4}
+                    </span>
+                )}
+            </div>
             <div className="wf-template-card__meta">
                 <span>{template.nodes} nodes</span>
-                <ChevronRight size={14} />
+                <button
+                    className="wf-template-card__apply"
+                    onClick={(e) => { e.stopPropagation(); onApply(); }}
+                >
+                    Apply Template
+                    <ChevronRight size={14} />
+                </button>
             </div>
-        </motion.button>
+        </motion.div>
     )
 }
 
+// Validation error interface
+interface ValidationError {
+    message: string
+    nodeIds?: string[]
+}
+
 export function WorkflowBuilder() {
-    const [workflows, setWorkflows] = useState(workflowTemplates)
+    const [workflows] = useState(workflowTemplates)
     const [selectedWorkflow, setSelectedWorkflow] = useState<string | null>(null)
     const [nodes, setNodes] = useState<WorkflowNode[]>([])
     const [selectedNode, setSelectedNode] = useState<string | null>(null)
     const [isRunning, setIsRunning] = useState(false)
     const [paletteSection, setPaletteSection] = useState<string>('triggers')
+    const [validationErrors, setValidationErrors] = useState<ValidationError[]>([])
+    const [invalidNodeIds, setInvalidNodeIds] = useState<Set<string>>(new Set())
     const canvasRef = useRef<HTMLDivElement>(null)
 
     // Handle drag and drop
@@ -200,16 +283,67 @@ export function WorkflowBuilder() {
             config: {}
         }
         setNodes(prev => [...prev, newNode])
+        // Clear validation when nodes change
+        setValidationErrors([])
+        setInvalidNodeIds(new Set())
     }
 
     const deleteNode = (nodeId: string) => {
         setNodes(prev => prev.filter(n => n.id !== nodeId))
         if (selectedNode === nodeId) setSelectedNode(null)
+        setValidationErrors([])
+        setInvalidNodeIds(new Set())
     }
 
     const handleRunWorkflow = () => {
         setIsRunning(true)
         setTimeout(() => setIsRunning(false), 3000)
+    }
+
+    // Validation system
+    const validateWorkflow = () => {
+        const errors: ValidationError[] = []
+        const badNodeIds = new Set<string>()
+
+        const hasTrigger = nodes.some(n => triggerTypes.has(n.type))
+        const hasAction = nodes.some(n => actionTypes.has(n.type))
+
+        if (nodes.length === 0) {
+            errors.push({ message: 'Workflow is empty. Add at least a trigger and an action node.' })
+        } else {
+            if (!hasTrigger) {
+                errors.push({ message: 'Workflow must have at least one trigger node.' })
+                // Highlight first node as it should be a trigger
+                if (nodes.length > 0) badNodeIds.add(nodes[0].id)
+            }
+            if (!hasAction) {
+                errors.push({ message: 'Workflow must have at least one action node.' })
+            }
+        }
+
+        setValidationErrors(errors)
+        setInvalidNodeIds(badNodeIds)
+
+        return errors.length === 0
+    }
+
+    // Apply a template to the canvas
+    const applyTemplate = (template: typeof workflowTemplates[0]) => {
+        const newNodes: WorkflowNode[] = template.previewNodes.map((type, idx) => {
+            const def = findNodeDef(type)
+            return {
+                id: `node-${Date.now()}-${idx}`,
+                type: def?.type || type,
+                label: def?.label || type,
+                icon: def?.icon || Workflow,
+                color: def?.color || 'slate',
+                config: {}
+            }
+        })
+        setNodes(newNodes)
+        setSelectedWorkflow(template.id)
+        setValidationErrors([])
+        setInvalidNodeIds(new Set())
     }
 
     return (
@@ -234,6 +368,13 @@ export function WorkflowBuilder() {
                     </Button>
                     <Button variant="secondary" icon={<Save size={16} />}>
                         Save Draft
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        icon={<CheckCircle size={16} />}
+                        onClick={validateWorkflow}
+                    >
+                        Validate
                     </Button>
                     <Button
                         variant="primary"
@@ -261,6 +402,7 @@ export function WorkflowBuilder() {
                                     key={wf.id}
                                     template={wf}
                                     onSelect={() => setSelectedWorkflow(wf.id)}
+                                    onApply={() => applyTemplate(wf)}
                                 />
                             ))}
                         </div>
@@ -326,6 +468,33 @@ export function WorkflowBuilder() {
                         </div>
                     </div>
 
+                    {/* Validation Error Banner */}
+                    <AnimatePresence>
+                        {validationErrors.length > 0 && (
+                            <motion.div
+                                className="wf-validation-banner"
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                            >
+                                <div className="wf-validation-banner__icon">
+                                    <AlertTriangle size={18} />
+                                </div>
+                                <div className="wf-validation-banner__content">
+                                    <strong>Workflow Validation Failed</strong>
+                                    <ul>
+                                        {validationErrors.map((err, idx) => (
+                                            <li key={idx}>{err.message}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <button className="wf-validation-banner__close" onClick={() => { setValidationErrors([]); setInvalidNodeIds(new Set()); }}>
+                                    <XCircle size={16} />
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     <div
                         ref={canvasRef}
                         className="wf-canvas"
@@ -359,14 +528,22 @@ export function WorkflowBuilder() {
                                     onReorder={setNodes}
                                     className="wf-node-list"
                                 >
-                                    {nodes.map((node) => (
+                                    {nodes.map((node, idx) => (
                                         <Reorder.Item key={node.id} value={node}>
-                                            <WorkflowNode
+                                            <WorkflowNodeComponent
                                                 node={node}
                                                 isSelected={selectedNode === node.id}
+                                                isInvalid={invalidNodeIds.has(node.id)}
                                                 onSelect={() => setSelectedNode(node.id)}
                                                 onDelete={() => deleteNode(node.id)}
                                             />
+                                            {/* Connection line between nodes */}
+                                            {idx < nodes.length - 1 && (
+                                                <div className="wf-connection">
+                                                    <div className="wf-connection__line" />
+                                                    <ChevronDown size={14} className="wf-connection__chevron" />
+                                                </div>
+                                            )}
                                         </Reorder.Item>
                                     ))}
                                 </Reorder.Group>

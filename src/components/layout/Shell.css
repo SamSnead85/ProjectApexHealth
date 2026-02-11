@@ -310,6 +310,7 @@
 
     .shell__topbar {
         padding: 0 var(--space-md);
+        height: 60px;
     }
 
     .shell__search {
@@ -317,7 +318,51 @@
         max-width: 200px;
     }
 
+    .shell__search-shortcut {
+        display: none;
+    }
+
     .shell__content {
         padding: var(--space-md);
+    }
+
+    /* Hide portal switcher on mobile - too crowded */
+    .portal-switcher {
+        display: none;
+    }
+
+    /* Hide tour and user info on mobile */
+    .shell__tour-btn {
+        display: none;
+    }
+
+    .shell__user-info {
+        display: none;
+    }
+
+    .shell__user-chevron {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .shell__topbar {
+        padding: 0 var(--space-sm);
+        gap: var(--space-xs);
+    }
+
+    .shell__search {
+        max-width: 140px;
+        height: 36px;
+        padding: 0 var(--space-sm);
+    }
+
+    .shell__topbar-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .shell__content {
+        padding: var(--space-sm);
     }
 }

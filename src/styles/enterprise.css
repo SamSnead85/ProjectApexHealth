@@ -7,46 +7,22 @@
    ============================================================ */
 
 :root {
-    /* Institutional Color Tokens - Deep Noir Palette */
-    --enterprise-obsidian: #0a0f1a;
-    --enterprise-slate-900: #0f172a;
-    --enterprise-slate-800: #1e293b;
-    --enterprise-slate-700: #334155;
-    --enterprise-slate-600: #475569;
-    --enterprise-slate-500: #64748b;
-    --enterprise-slate-400: #94a3b8;
-    --enterprise-slate-300: #cbd5e1;
-    --enterprise-slate-200: #e2e8f0;
+    /* =======================================================================
+       Enterprise CSS — Consolidated to --apex-* system (src/index.css)
+       
+       Removed redundant variables. Mapping:
+         --enterprise-primary       → --apex-blue
+         --enterprise-primary-muted → --apex-cms-blue
+         --enterprise-primary-subtle→ --apex-info-soft
+         --enterprise-slate-800     → --apex-obsidian-elevated
+         --enterprise-slate-200     → --apex-white-soft
+         --clinical-critical        → --apex-critical  / --apex-critical-soft
+         --clinical-warning         → --apex-warning   / --apex-warning-soft
+         --clinical-success         → --apex-success   / --apex-success-soft
+         --clinical-info            → --apex-teal-muted / --apex-teal-glow
+       ======================================================================= */
 
-    /* Institutional Accent - Muted, Professional */
-    --enterprise-primary: #2563eb;
-    --enterprise-primary-muted: #1d4ed8;
-    --enterprise-primary-subtle: rgba(37, 99, 235, 0.08);
-
-    /* Healthcare Status Colors - Clinical Precision */
-    --clinical-critical: #dc2626;
-    --clinical-critical-bg: rgba(220, 38, 38, 0.06);
-    --clinical-warning: #d97706;
-    --clinical-warning-bg: rgba(217, 119, 6, 0.06);
-    --clinical-success: #059669;
-    --clinical-success-bg: rgba(5, 150, 105, 0.06);
-    --clinical-info: #0891b2;
-    --clinical-info-bg: rgba(8, 145, 178, 0.06);
-
-    /* Typography Scale - Institutional Precision */
-    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-
-    /* Z-Index Scale - Enterprise Layering */
-    --z-base: 0;
-    --z-elevated: 10;
-    --z-dropdown: 100;
-    --z-sticky: 200;
-    --z-modal: 300;
-    --z-overlay: 400;
-    --z-top: 500;
-
-    /* Shadow Scale - Institutional Depth (Subtle, Not Flashy) */
+    /* Shadow Scale - Enterprise-specific depth tokens (unique, not in --apex-*) */
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -54,7 +30,7 @@
     --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.04);
     --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 
-    /* Border Tokens - Minimal, Institutional */
+    /* Border Tokens - Enterprise-specific borders (unique, not in --apex-*) */
     --border-hairline: 1px solid rgba(0, 0, 0, 0.06);
     --border-subtle: 1px solid rgba(0, 0, 0, 0.08);
     --border-defined: 1px solid rgba(0, 0, 0, 0.12);
@@ -194,7 +170,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--enterprise-primary);
+    background: var(--apex-blue);
     opacity: 0;
     transition: opacity 0.2s ease;
 }
@@ -236,13 +212,13 @@
 }
 
 .enterprise-kpi__change--positive {
-    color: var(--clinical-success);
-    background: var(--clinical-success-bg);
+    color: var(--apex-success);
+    background: var(--apex-success-soft);
 }
 
 .enterprise-kpi__change--negative {
-    color: var(--clinical-critical);
-    background: var(--clinical-critical-bg);
+    color: var(--apex-critical);
+    background: var(--apex-critical-soft);
 }
 
 .enterprise-kpi__change--neutral {
@@ -362,23 +338,23 @@
 }
 
 .enterprise-status--critical {
-    color: var(--clinical-critical);
-    background: var(--clinical-critical-bg);
+    color: var(--apex-critical);
+    background: var(--apex-critical-soft);
 }
 
 .enterprise-status--warning {
-    color: var(--clinical-warning);
-    background: var(--clinical-warning-bg);
+    color: var(--apex-warning);
+    background: var(--apex-warning-soft);
 }
 
 .enterprise-status--success {
-    color: var(--clinical-success);
-    background: var(--clinical-success-bg);
+    color: var(--apex-success);
+    background: var(--apex-success-soft);
 }
 
 .enterprise-status--info {
-    color: var(--clinical-info);
-    background: var(--clinical-info-bg);
+    color: var(--apex-teal-muted);
+    background: var(--apex-teal-glow);
 }
 
 .enterprise-status--neutral {
@@ -395,19 +371,19 @@
 }
 
 .enterprise-status-dot--critical {
-    background: var(--clinical-critical);
+    background: var(--apex-critical);
 }
 
 .enterprise-status-dot--warning {
-    background: var(--clinical-warning);
+    background: var(--apex-warning);
 }
 
 .enterprise-status-dot--success {
-    background: var(--clinical-success);
+    background: var(--apex-success);
 }
 
 .enterprise-status-dot--info {
-    background: var(--clinical-info);
+    background: var(--apex-teal-muted);
 }
 
 .enterprise-status-dot--neutral {
@@ -456,9 +432,9 @@
 
 .enterprise-gauge__fill--gradient {
     background: linear-gradient(90deg,
-            var(--clinical-success) 0%,
-            var(--clinical-warning) 70%,
-            var(--clinical-critical) 100%);
+            var(--apex-success) 0%,
+            var(--apex-warning) 70%,
+            var(--apex-critical) 100%);
 }
 
 .enterprise-gauge__markers {
@@ -474,7 +450,7 @@
 
 .enterprise-gauge__marker--accent {
     font-weight: 600;
-    color: var(--enterprise-primary);
+    color: var(--apex-blue);
 }
 
 /* Circular Gauge */
@@ -656,8 +632,8 @@
 }
 
 .enterprise-search:focus-within {
-    border-color: var(--enterprise-primary);
-    box-shadow: 0 0 0 2px var(--enterprise-primary-subtle);
+    border-color: var(--apex-blue);
+    box-shadow: 0 0 0 2px var(--apex-info-soft);
 }
 
 .enterprise-search__icon {
@@ -722,8 +698,8 @@
     position: absolute;
     z-index: var(--z-dropdown);
     padding: var(--space-2) var(--space-3);
-    background: var(--enterprise-slate-800);
-    color: var(--enterprise-slate-200);
+    background: var(--apex-obsidian-elevated);
+    color: var(--apex-white-soft);
     font-size: 0.75rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -742,7 +718,7 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    background: var(--enterprise-slate-800);
+    background: var(--apex-obsidian-elevated);
     transform: rotate(45deg);
 }
 
@@ -817,12 +793,12 @@
 }
 
 .enterprise-btn--primary {
-    background: var(--enterprise-primary);
+    background: var(--apex-blue);
     color: white;
 }
 
 .enterprise-btn--primary:hover {
-    background: var(--enterprise-primary-muted);
+    background: var(--apex-cms-blue);
 }
 
 .enterprise-btn--secondary {

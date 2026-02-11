@@ -454,6 +454,308 @@
     color: var(--apex-steel);
 }
 
+/* ====== Phase 5 Compliance Cards Row ====== */
+.prior-auth__phase5-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.pa-phase5-card {
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.pa-phase5-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.pa-phase5-card-header h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.pa-phase5-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Turnaround Compliance */
+.pa-turnaround-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.pa-turnaround-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.pa-turnaround-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pa-turnaround-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--apex-silver);
+}
+
+.pa-turnaround-bar-track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.pa-turnaround-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+.pa-turnaround-sub {
+    font-size: 0.625rem;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Auto-Decision Ring */
+.pa-auto-decision {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.pa-auto-decision-ring {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.pa-ring-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.pa-ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.pa-ring-value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    line-height: 1;
+}
+
+.pa-ring-label {
+    font-size: 0.563rem;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.pa-auto-legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.pa-auto-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+}
+
+.pa-auto-legend-item strong {
+    margin-left: auto;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+}
+
+.pa-auto-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Public Reporting Metrics */
+.pa-public-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.pa-public-metric {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+}
+
+.pa-public-metric-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pa-public-metric-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pa-public-metric-value {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    line-height: 1.2;
+}
+
+.pa-public-metric-label {
+    font-size: 0.625rem;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* AI Clinical Review Card */
+.pa-ai-card {
+    border-color: rgba(139, 92, 246, 0.15);
+    background: linear-gradient(135deg, var(--apex-obsidian-glass) 0%, rgba(139, 92, 246, 0.04) 100%);
+}
+
+.pa-ai-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.pa-ai-confidence {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.pa-ai-confidence-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+    font-weight: 500;
+}
+
+.pa-ai-confidence-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+}
+
+.pa-ai-confidence-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--apex-white);
+    font-family: var(--font-mono);
+    line-height: 1;
+}
+
+.pa-ai-confidence-tag {
+    font-size: 0.625rem;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.pa-ai-bar-track {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.pa-ai-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+}
+
+.pa-ai-criteria {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.pa-ai-criteria-title {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--apex-steel);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pa-ai-criteria-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.pa-ai-criteria-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    padding: 0.2rem 0;
+}
+
+.pa-ai-criteria-item.matched {
+    color: #22c55e;
+}
+
+.pa-ai-criteria-item.pending {
+    color: #f59e0b;
+}
+
+.pa-ai-criteria-item span {
+    color: var(--apex-silver);
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .prior-auth__grid {
@@ -461,6 +763,10 @@
     }
 
     .prior-auth__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prior-auth__phase5-row {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -476,5 +782,14 @@
 
     .prior-auth__status-filters {
         flex-wrap: wrap;
+    }
+
+    .prior-auth__phase5-row {
+        grid-template-columns: 1fr;
+    }
+
+    .pa-auto-decision {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

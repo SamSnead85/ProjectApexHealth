@@ -308,6 +308,359 @@
     color: #f59e0b;
 }
 
+/* ====== Real-Time Transaction Flow ====== */
+.edi-txn-flow-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.edi-txn-flow-section h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.edi-txn-pipeline {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.edi-txn-node {
+    position: relative;
+    flex: 1;
+    min-width: 120px;
+    padding: 0.875rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-top: 2px solid;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.edi-txn-node:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.edi-txn-node-header {
+    margin-bottom: 0.5rem;
+}
+
+.edi-txn-code {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+}
+
+.edi-txn-name {
+    display: block;
+    font-size: 0.688rem;
+    color: var(--text-tertiary);
+    margin-top: 0.1rem;
+}
+
+.edi-txn-node-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.edi-txn-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.edi-txn-stat-value {
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono, monospace);
+}
+
+.edi-txn-stat-label {
+    font-size: 0.563rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.edi-txn-direction {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.edi-txn-arrow {
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* ====== Trading Partner Scorecards ====== */
+.edi-partners-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.edi-partners-section h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.edi-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+}
+
+.edi-partner-card {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.edi-partner-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.edi-partner-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.edi-partner-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.edi-partner-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.688rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.edi-partner-status.healthy {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+}
+
+.edi-partner-status.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+}
+
+.edi-partner-metrics {
+    display: flex;
+    gap: 1rem;
+}
+
+.edi-partner-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.edi-partner-metric-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.edi-partner-metric-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono, monospace);
+}
+
+/* ====== Failed Transaction Queue ====== */
+.edi-failed-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.edi-failed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.edi-failed-header h3 {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.edi-failed-count {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    padding: 0.3rem 0.75rem;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.edi-failed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edi-failed-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.edi-failed-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.edi-failed-item.severity-high {
+    border-left-color: #ef4444;
+}
+
+.edi-failed-item.severity-medium {
+    border-left-color: #f59e0b;
+}
+
+.edi-failed-item.severity-low {
+    border-left-color: #3b82f6;
+}
+
+.edi-failed-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.edi-failed-id-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.edi-failed-id {
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: var(--font-mono, monospace);
+}
+
+.edi-failed-type {
+    font-size: 0.688rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    background: rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+    border-radius: 4px;
+}
+
+.edi-failed-partner {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.edi-failed-time {
+    font-size: 0.688rem;
+    color: var(--text-tertiary);
+}
+
+.edi-failed-error {
+    font-size: 0.813rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.edi-failed-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.edi-failed-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.edi-failed-btn.retry {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.25);
+    color: #60a5fa;
+}
+
+.edi-failed-btn.retry:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.edi-failed-btn.resolve {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.25);
+    color: #4ade80;
+}
+
+.edi-failed-btn.resolve:hover {
+    background: rgba(34, 197, 94, 0.2);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .edi-manager {
@@ -320,5 +673,31 @@
 
     .file-table {
         min-width: 700px;
+    }
+
+    .edi-txn-pipeline {
+        flex-wrap: wrap;
+    }
+
+    .edi-txn-node {
+        min-width: calc(50% - 0.5rem);
+    }
+
+    .edi-txn-arrow {
+        display: none;
+    }
+
+    .edi-failed-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .edi-failed-actions {
+        width: 100%;
+    }
+
+    .edi-failed-btn {
+        flex: 1;
+        justify-content: center;
     }
 }

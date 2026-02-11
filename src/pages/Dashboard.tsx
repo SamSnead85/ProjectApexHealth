@@ -41,7 +41,7 @@ const smartActions = [
 ]
 
 // Animated Sparkline component
-const Sparkline = ({ data, color = '#0D9488' }: { data: number[], color?: string }) => {
+const Sparkline = ({ data, color = 'var(--apex-teal, #0D9488)' }: { data: number[], color?: string }) => {
     const max = Math.max(...data)
     const min = Math.min(...data)
     const range = max - min || 1
@@ -97,7 +97,7 @@ const ConfidenceRing = ({ score }: { score: number }) => {
                     cy="35"
                     r={radius}
                     fill="none"
-                    stroke="#0D9488"
+                    stroke="var(--apex-teal, #0D9488)"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeDasharray={circumference}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     DollarSign,
@@ -14,9 +14,14 @@ import {
     AlertCircle,
     CheckCircle2,
     HelpCircle,
-    FileText
+    FileText,
+    ShieldCheck,
+    ShieldAlert,
+    Clock,
+    Lightbulb,
+    ArrowRight
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
 import './CostEstimator.css'
 
 // Price Transparency: CMS requires 300 shoppable services
@@ -27,9 +32,11 @@ interface ShoppableService {
     category: string
     averageCost: number
     yourCost: number
+    yourCostOON: number // Phase 4B: Out-of-network estimated cost
     inNetworkRange: { min: number; max: number }
     outOfNetworkRange: { min: number; max: number }
     commonWith: string[] // Bundled services
+    historicalCost?: { amount: number; date: string; provider: string } // Phase 4B: Historical cost
 }
 
 interface CostBreakdown {
@@ -61,6 +68,7 @@ const mockServices: ShoppableService[] = [
         category: 'Orthopedic Surgery',
         averageCost: 35000,
         yourCost: 28500,
+        yourCostOON: 52000,
         inNetworkRange: { min: 22000, max: 45000 },
         outOfNetworkRange: { min: 40000, max: 75000 },
         commonWith: ['Physical Therapy (6 weeks)', 'Pre-op Labs', 'Anesthesia']
@@ -72,9 +80,11 @@ const mockServices: ShoppableService[] = [
         category: 'Imaging',
         averageCost: 1200,
         yourCost: 850,
+        yourCostOON: 2200,
         inNetworkRange: { min: 500, max: 1800 },
         outOfNetworkRange: { min: 1500, max: 3500 },
-        commonWith: ['Radiologist Reading Fee']
+        commonWith: ['Radiologist Reading Fee'],
+        historicalCost: { amount: 780, date: '2023-09-14', provider: 'Metro Imaging Center' }
     },
     {
         id: 'srv-003',
@@ -83,6 +93,7 @@ const mockServices: ShoppableService[] = [
         category: 'Gastroenterology',
         averageCost: 4500,
         yourCost: 3200,
+        yourCostOON: 7500,
         inNetworkRange: { min: 2500, max: 6000 },
         outOfNetworkRange: { min: 5000, max: 10000 },
         commonWith: ['Facility Fee', 'Anesthesia', 'Pathology']
@@ -94,6 +105,7 @@ const mockServices: ShoppableService[] = [
         category: 'Obstetrics',
         averageCost: 12000,
         yourCost: 8500,
+        yourCostOON: 22000,
         inNetworkRange: { min: 7000, max: 18000 },
         outOfNetworkRange: { min: 15000, max: 30000 },
         commonWith: ['Prenatal Care', 'Hospital Stay', 'Newborn Care']
@@ -105,9 +117,11 @@ const mockServices: ShoppableService[] = [
         category: 'Primary Care',
         averageCost: 150,
         yourCost: 25,
+        yourCostOON: 185,
         inNetworkRange: { min: 75, max: 200 },
         outOfNetworkRange: { min: 150, max: 350 },
-        commonWith: []
+        commonWith: [],
+        historicalCost: { amount: 25, date: '2024-01-10', provider: 'Premier Medical Associates' }
     },
     {
         id: 'srv-006',
@@ -116,6 +130,7 @@ const mockServices: ShoppableService[] = [
         category: 'Imaging',
         averageCost: 2800,
         yourCost: 1950,
+        yourCostOON: 4800,
         inNetworkRange: { min: 1200, max: 4000 },
         outOfNetworkRange: { min: 3500, max: 7000 },
         commonWith: ['Radiologist Reading Fee', 'Contrast Material']
@@ -127,9 +142,11 @@ const mockServices: ShoppableService[] = [
         category: 'Gastroenterology',
         averageCost: 3800,
         yourCost: 0,
+        yourCostOON: 6200,
         inNetworkRange: { min: 2000, max: 5500 },
         outOfNetworkRange: { min: 4500, max: 9000 },
-        commonWith: ['Facility Fee', 'Anesthesia', 'Pathology']
+        commonWith: ['Facility Fee', 'Anesthesia', 'Pathology'],
+        historicalCost: { amount: 0, date: '2023-03-20', provider: 'City GI Associates' }
     }
 ]
 
@@ -147,6 +164,14 @@ export function CostEstimator() {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedService, setSelectedService] = useState<ShoppableService | null>(null)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
 
     const categories = [...new Set(services.map(s => s.category))]
 
@@ -283,18 +308,40 @@ export function CostEstimator() {
                                 <ChevronRight size={16} className="cost-card__chevron" />
                             </div>
 
-                            <div className="cost-card__prices">
-                                <div className="cost-card__your-cost">
-                                    <span className="cost-card__label">Your Estimated Cost</span>
+                            {/* Phase 4B: In-Network vs Out-of-Network Comparison */}
+                            <div className="cost-card__network-compare">
+                                <div className="cost-card__network cost-card__network--in">
+                                    <div className="cost-card__network-badge">
+                                        <ShieldCheck size={12} />
+                                        <span>In-Network</span>
+                                    </div>
                                     <span className="cost-card__amount">
-                                        {service.yourCost === 0 ? 'Covered 100%' : formatCurrency(service.yourCost)}
+                                        {service.yourCost === 0 ? '$0' : formatCurrency(service.yourCost)}
                                     </span>
                                 </div>
-                                <div className="cost-card__average">
-                                    <span className="cost-card__label">Area Average</span>
-                                    <span className="cost-card__amount-muted">{formatCurrency(service.averageCost)}</span>
+                                <div className="cost-card__network-divider">
+                                    <span>vs</span>
+                                </div>
+                                <div className="cost-card__network cost-card__network--out">
+                                    <div className="cost-card__network-badge cost-card__network-badge--out">
+                                        <ShieldAlert size={12} />
+                                        <span>Out-of-Network</span>
+                                    </div>
+                                    <span className="cost-card__amount-oon">
+                                        {formatCurrency(service.yourCostOON)}
+                                    </span>
                                 </div>
                             </div>
+
+                            {/* Phase 4B: Savings Recommendation */}
+                            {service.yourCostOON > service.yourCost && service.yourCost > 0 && (
+                                <div className="cost-card__savings-rec">
+                                    <Lightbulb size={14} />
+                                    <span>
+                                        Save <strong>{formatCurrency(service.yourCostOON - service.yourCost)}</strong> by using an in-network provider
+                                    </span>
+                                </div>
+                            )}
 
                             {service.yourCost > 0 && service.yourCost < service.averageCost && (
                                 <div className="cost-card__savings">
@@ -307,6 +354,18 @@ export function CostEstimator() {
                                 <div className="cost-card__preventive">
                                     <CheckCircle2 size={14} />
                                     <span>Preventive care - No cost share</span>
+                                </div>
+                            )}
+
+                            {/* Phase 4B: Historical Cost */}
+                            {service.historicalCost && (
+                                <div className="cost-card__historical">
+                                    <Clock size={12} />
+                                    <span>
+                                        You paid {service.historicalCost.amount === 0 ? '$0' : formatCurrency(service.historicalCost.amount)} on{' '}
+                                        {new Date(service.historicalCost.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                                        {' at '}{service.historicalCost.provider}
+                                    </span>
                                 </div>
                             )}
                         </motion.div>
@@ -376,6 +435,88 @@ export function CostEstimator() {
                                         </div>
                                     )
                                 })()}
+
+                                {/* Phase 4B: Network vs OON Side-by-Side Detail */}
+                                <div className="cost-detail__network-comparison">
+                                    <h3>Network Cost Comparison</h3>
+                                    <div className="cost-detail__network-cards">
+                                        <div className="network-card network-card--in">
+                                            <div className="network-card__badge">
+                                                <ShieldCheck size={14} />
+                                                In-Network
+                                            </div>
+                                            <span className="network-card__cost">
+                                                {selectedService.yourCost === 0 ? '$0' : formatCurrency(selectedService.yourCost)}
+                                            </span>
+                                            <span className="network-card__range">
+                                                Range: {formatCurrency(selectedService.inNetworkRange.min)} – {formatCurrency(selectedService.inNetworkRange.max)}
+                                            </span>
+                                        </div>
+                                        <div className="network-card network-card--out">
+                                            <div className="network-card__badge network-card__badge--out">
+                                                <ShieldAlert size={14} />
+                                                Out-of-Network
+                                            </div>
+                                            <span className="network-card__cost network-card__cost--out">
+                                                {formatCurrency(selectedService.yourCostOON)}
+                                            </span>
+                                            <span className="network-card__range">
+                                                Range: {formatCurrency(selectedService.outOfNetworkRange.min)} – {formatCurrency(selectedService.outOfNetworkRange.max)}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Savings Recommendation Callout */}
+                                    {selectedService.yourCostOON > selectedService.yourCost && (
+                                        <motion.div
+                                            className="cost-detail__savings-callout"
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ delay: 0.2 }}
+                                        >
+                                            <div className="savings-callout__icon">
+                                                <Lightbulb size={18} />
+                                            </div>
+                                            <div className="savings-callout__content">
+                                                <span className="savings-callout__title">Savings Recommendation</span>
+                                                <span className="savings-callout__text">
+                                                    Use an in-network provider to save{' '}
+                                                    <strong>{formatCurrency(selectedService.yourCostOON - selectedService.yourCost)}</strong>
+                                                    {' '}on this procedure.
+                                                </span>
+                                            </div>
+                                            <ArrowRight size={16} className="savings-callout__arrow" />
+                                        </motion.div>
+                                    )}
+                                </div>
+
+                                {/* Phase 4B: Historical Cost */}
+                                {selectedService.historicalCost && (
+                                    <div className="cost-detail__historical">
+                                        <h3>Your History</h3>
+                                        <div className="cost-detail__historical-card">
+                                            <Clock size={16} />
+                                            <div className="cost-detail__historical-info">
+                                                <span className="cost-detail__historical-label">
+                                                    You paid <strong>
+                                                        {selectedService.historicalCost.amount === 0
+                                                            ? '$0'
+                                                            : formatCurrency(selectedService.historicalCost.amount)
+                                                        }
+                                                    </strong> last time
+                                                </span>
+                                                <span className="cost-detail__historical-sub">
+                                                    {new Date(selectedService.historicalCost.date).toLocaleDateString('en-US', {
+                                                        month: 'long',
+                                                        day: 'numeric',
+                                                        year: 'numeric'
+                                                    })}
+                                                    {' at '}{selectedService.historicalCost.provider}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Price Range Comparison */}
                                 <div className="cost-detail__ranges">

@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
     Home, Search, Heart, FileText, CreditCard, Calendar, Video, Pill,
     User, Bell, Settings, LogOut, ChevronRight, MapPin, Phone, Clock,
     DollarSign, Shield, Activity, Star, CheckCircle, AlertCircle,
-    Wallet, Download, ExternalLink, HelpCircle, MessageSquare
+    Wallet, Download, ExternalLink, HelpCircle, MessageSquare,
+    Zap, Stethoscope, Eye
 } from 'lucide-react'
-import { GlassCard, Badge, Button } from '../components/common'
+import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
 import './MemberPortal.css'
 
 // ============================================================================
@@ -41,6 +42,21 @@ const quickActions = [
     { id: 'virtual-care', label: 'Virtual Care', icon: Video, desc: 'Start a telehealth visit', color: 'pink' },
     { id: 'pharmacy', label: 'Pharmacy', icon: Pill, desc: 'Rx refills & drug search', color: 'amber' },
     { id: 'make-payment', label: 'Make Payment', icon: Wallet, desc: 'Pay bills & set autopay', color: 'rose' },
+]
+
+// Notification / action items
+const actionItems = [
+    { id: 'n1', text: 'Claim CLM-9802 needs your review', type: 'claim', urgent: true },
+    { id: 'n2', text: 'Annual eye exam is overdue', type: 'care', urgent: false },
+    { id: 'n3', text: 'Rx Metformin refill due Feb 10', type: 'rx', urgent: true },
+]
+
+// Top quick-access shortcuts
+const topQuickActions = [
+    { id: 'file-claim', label: 'File a Claim', icon: FileText, color: '#06B6D4', bg: 'rgba(6,182,212,0.12)' },
+    { id: 'find-provider', label: 'Find Provider', icon: Search, color: '#8B5CF6', bg: 'rgba(139,92,246,0.12)' },
+    { id: 'view-benefits', label: 'View Benefits', icon: Shield, color: '#10B981', bg: 'rgba(16,185,129,0.12)' },
+    { id: 'id-card', label: 'ID Card', icon: CreditCard, color: '#F59E0B', bg: 'rgba(245,158,11,0.12)' },
 ]
 
 interface MemberPortalProps {
@@ -86,15 +102,29 @@ function ProgressRing({ value, max, label, color }: { value: number, max: number
     )
 }
 
-// Quick Action Card
-function QuickActionCard({ action, onClick }: { action: typeof quickActions[0], onClick: () => void }) {
+// Quick Action Card with optional notification badge
+function QuickActionCard({ action, onClick, badgeCount }: { action: typeof quickActions[0], onClick: () => void, badgeCount?: number }) {
     return (
         <motion.button
             className={`mp-action-card mp-action-card--${action.color}`}
             onClick={onClick}
             whileHover={{ y: -4, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            style={{ position: 'relative' }}
         >
+            {badgeCount && badgeCount > 0 && (
+                <span style={{
+                    position: 'absolute', top: '-6px', right: '-6px',
+                    minWidth: '20px', height: '20px', borderRadius: '10px',
+                    background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                    color: '#fff', fontSize: '0.68rem', fontWeight: 700,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    padding: '0 5px', boxShadow: '0 2px 8px rgba(239,68,68,0.4)',
+                    border: '2px solid rgba(10,15,26,0.8)'
+                }}>
+                    {badgeCount}
+                </span>
+            )}
             <div className="mp-action-card__icon">
                 <action.icon size={24} />
             </div>
@@ -124,6 +154,14 @@ function ClaimRow({ claim }: { claim: typeof recentClaims[0] }) {
 
 export function MemberPortal({ onLogout }: MemberPortalProps) {
     const [activeTab, setActiveTab] = useState('dashboard')
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (loading) return <PageSkeleton />
 
     return (
         <div className="member-portal">
@@ -198,6 +236,106 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                     </div>
                 </section>
 
+                {/* Top Quick Actions Row */}
+                <motion.section
+                    className="mp-top-actions"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                    style={{
+                        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem',
+                        marginBottom: '1.5rem'
+                    }}
+                >
+                    {topQuickActions.map((item, idx) => (
+                        <motion.button
+                            key={item.id}
+                            onClick={() => void 0}
+                            whileHover={{ y: -3, scale: 1.02 }}
+                            whileTap={{ scale: 0.97 }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 + idx * 0.05 }}
+                            style={{
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+                                padding: '1.15rem 0.75rem', borderRadius: '16px', cursor: 'pointer',
+                                background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)',
+                                transition: 'border-color 0.2s'
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${item.color}33`)}
+                            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')}
+                        >
+                            <div style={{
+                                width: '44px', height: '44px', borderRadius: '12px', display: 'flex',
+                                alignItems: 'center', justifyContent: 'center', background: item.bg
+                            }}>
+                                <item.icon size={22} style={{ color: item.color }} />
+                            </div>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
+                                {item.label}
+                            </span>
+                        </motion.button>
+                    ))}
+                </motion.section>
+
+                {/* Action Items / Notifications */}
+                {actionItems.length > 0 && (
+                    <motion.section
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        style={{
+                            borderRadius: '16px', marginBottom: '1.5rem', overflow: 'hidden',
+                            background: 'rgba(10,15,26,0.6)', border: '1px solid rgba(255,255,255,0.06)'
+                        }}
+                    >
+                        <div style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                            padding: '0.85rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,0.06)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                                <Bell size={16} style={{ color: '#f59e0b' }} />
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'rgba(255,255,255,0.9)' }}>
+                                    Action Items
+                                </span>
+                                <span style={{
+                                    minWidth: '20px', height: '20px', borderRadius: '10px',
+                                    background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                                    color: '#fff', fontSize: '0.68rem', fontWeight: 700,
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                                    padding: '0 6px'
+                                }}>
+                                    {actionItems.filter(a => a.urgent).length}
+                                </span>
+                            </div>
+                            <button style={{ background: 'none', border: 'none', color: '#818cf8', cursor: 'pointer', fontSize: '0.82rem' }}>
+                                View All
+                            </button>
+                        </div>
+                        <div style={{ padding: '0.5rem 0' }}>
+                            {actionItems.map(item => (
+                                <div key={item.id} style={{
+                                    display: 'flex', alignItems: 'center', gap: '0.75rem',
+                                    padding: '0.65rem 1.25rem', cursor: 'pointer',
+                                    transition: 'background 0.15s'
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                                onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                                >
+                                    <div style={{
+                                        width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0,
+                                        background: item.urgent ? '#ef4444' : 'rgba(255,255,255,0.2)'
+                                    }} />
+                                    <span style={{ flex: 1, fontSize: '0.83rem', color: 'rgba(255,255,255,0.75)' }}>
+                                        {item.text}
+                                    </span>
+                                    <ChevronRight size={14} style={{ color: 'rgba(255,255,255,0.3)' }} />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+                )}
+
                 {/* Coverage Summary */}
                 <section className="mp-coverage">
                     <div className="mp-coverage__header">
@@ -247,13 +385,18 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                 <section className="mp-quick-actions">
                     <h2>Quick Actions</h2>
                     <div className="mp-actions-grid">
-                        {quickActions.map(action => (
-                            <QuickActionCard
-                                key={action.id}
-                                action={action}
-                                onClick={() => console.log('Navigate to', action.id)}
-                            />
-                        ))}
+                        {quickActions.map(action => {
+                            // Add notification badges to relevant actions
+                            const badgeCount = action.id === 'pharmacy' ? 1 : action.id === 'find-doctor' ? undefined : undefined
+                            return (
+                                <QuickActionCard
+                                    key={action.id}
+                                    action={action}
+                                    onClick={() => void 0}
+                                    badgeCount={badgeCount}
+                                />
+                            )
+                        })}
                     </div>
                 </section>
 

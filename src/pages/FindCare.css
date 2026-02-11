@@ -227,7 +227,367 @@
     flex-shrink: 0;
 }
 
+/* ====================== */
+/* Section Header          */
+/* ====================== */
+.find-care__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.find-care__section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+}
+
+/* ====================== */
+/* Virtual Visit Launcher  */
+/* ====================== */
+.find-care__quick-actions {
+    margin-bottom: var(--space-xl);
+}
+
+.find-care__virtual-visit {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-lg) var(--space-xl);
+    background: linear-gradient(135deg, rgba(0, 210, 190, 0.12) 0%, rgba(59, 130, 246, 0.12) 100%);
+    border: 1px solid rgba(0, 210, 190, 0.25);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.find-care__virtual-visit::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 210, 190, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.virtual-visit__icon-wrapper {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 210, 190, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--apex-teal);
+    flex-shrink: 0;
+}
+
+.virtual-visit__icon-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--apex-teal);
+    opacity: 0;
+    animation: virtualPulse 2s ease-in-out infinite;
+}
+
+@keyframes virtualPulse {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.3); }
+}
+
+.virtual-visit__info {
+    flex: 1;
+}
+
+.virtual-visit__title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--apex-white);
+    margin-bottom: 2px;
+}
+
+.virtual-visit__subtitle {
+    font-size: var(--text-sm);
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+}
+
+.virtual-visit__availability {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.virtual-visit__availability strong {
+    color: var(--apex-teal);
+}
+
+.virtual-visit__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.virtual-visit__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-shrink: 0;
+}
+
+.virtual-visit__cost {
+    font-size: var(--text-xs);
+    color: #22c55e;
+    font-weight: 500;
+}
+
+/* ====================== */
+/* Care Team Dashboard     */
+/* ====================== */
+.find-care__care-team-section {
+    margin-bottom: var(--space-xl);
+}
+
+.care-team__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.care-team__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--apex-obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.care-team__card:hover {
+    border-color: var(--glass-border-hover);
+    background: var(--apex-obsidian-elevated);
+}
+
+.care-team__card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+}
+
+.care-team__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.care-team__member-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.care-team__name {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--apex-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.care-team__role {
+    font-size: var(--text-xs);
+    color: var(--apex-teal);
+    margin-bottom: 1px;
+}
+
+.care-team__specialty {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.care-team__visits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+}
+
+.care-team__visit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.care-team__visit-label {
+    font-size: var(--text-xs);
+    color: var(--apex-steel);
+}
+
+.care-team__visit-date {
+    font-size: var(--text-xs);
+    color: var(--apex-silver);
+    font-weight: 500;
+}
+
+.care-team__visit-date--upcoming {
+    color: var(--apex-teal);
+}
+
+.care-team__actions {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.care-team__actions button {
+    flex: 1;
+}
+
+/* ====================== */
+/* Appointment Booking     */
+/* ====================== */
+.find-care__booking-section {
+    margin-bottom: var(--space-xl);
+}
+
+.booking__card {
+    padding: var(--space-xl);
+}
+
+.booking__date-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    color: var(--apex-teal);
+}
+
+.booking__date-label {
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--apex-white);
+}
+
+.booking__period {
+    margin-bottom: var(--space-lg);
+}
+
+.booking__period-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-steel);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.booking__slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-xs);
+}
+
+.booking__slot {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--apex-silver);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.booking__slot:hover:not(:disabled) {
+    border-color: var(--apex-teal-border);
+    color: var(--apex-teal);
+    background: rgba(0, 210, 190, 0.08);
+}
+
+.booking__slot--selected {
+    background: rgba(0, 210, 190, 0.15) !important;
+    border-color: var(--apex-teal) !important;
+    color: var(--apex-teal) !important;
+    box-shadow: 0 0 12px rgba(0, 210, 190, 0.2);
+}
+
+.booking__slot--unavailable {
+    opacity: 0.3;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.booking__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.booking__selected-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--apex-silver);
+}
+
+.booking__selected-info strong {
+    color: var(--apex-teal);
+}
+
+.booking__hint {
+    color: var(--apex-steel);
+    font-style: italic;
+}
+
+.booking__confirmed {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: var(--radius-md);
+    color: #22c55e;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
 /* Responsive */
+@media (max-width: 1200px) {
+    .care-team__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .find-care__search-bar {
         flex-direction: column;
@@ -253,5 +613,27 @@
 
     .find-care__provider-actions button {
         flex: 1;
+    }
+
+    .find-care__virtual-visit {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .virtual-visit__action {
+        width: 100%;
+    }
+
+    .care-team__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .booking__slots-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+
+    .booking__footer {
+        flex-direction: column;
+        gap: var(--space-md);
     }
 }
