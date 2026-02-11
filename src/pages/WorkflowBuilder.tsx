@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { motion, AnimatePresence, Reorder } from 'framer-motion'
 import {
     Workflow, Plus, Play, Pause, Save, Upload, Download, Trash2, Copy,
@@ -8,6 +8,8 @@ import {
     Timer, Flag, Shield, Search, MoreVertical, Eye, Edit2, Lock
 } from 'lucide-react'
 import { GlassCard, Badge, Button, Input } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './WorkflowBuilder.css'
 
 // ============================================================================
@@ -127,38 +129,48 @@ interface WorkflowNode {
     id: string
     type: string
     label: string
+    description?: string
     icon: any
     color: string
     config?: Record<string, any>
 }
 
 // Node Palette Item
-function PaletteItem({ node, onDragStart }: { node: typeof nodeTypes.triggers[0], onDragStart: (node: any) => void }) {
+function PaletteItem({ node, onDragStart, onClick }: {
+    node: typeof nodeTypes.triggers[0],
+    onDragStart: (e: React.DragEvent, node: any) => void,
+    onClick: () => void
+}) {
     return (
-        <motion.div
-            className={`wf-palette-item wf-palette-item--${node.color}`}
+        <div
             draggable
-            onDragStart={() => onDragStart(node)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            onDragStart={(e) => onDragStart(e, node)}
         >
-            <node.icon size={16} />
-            <span>{node.label}</span>
-        </motion.div>
+            <motion.div
+                className={`wf-palette-item wf-palette-item--${node.color}`}
+                onClick={onClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                <node.icon size={16} />
+                <span>{node.label}</span>
+            </motion.div>
+        </div>
     )
 }
 
 // Workflow Node Component
-function WorkflowNodeComponent({ node, isSelected, isInvalid, onSelect, onDelete }: {
+function WorkflowNodeComponent({ node, isSelected, isInvalid, isExecuting, onSelect, onDelete }: {
     node: WorkflowNode,
     isSelected: boolean,
     isInvalid?: boolean,
+    isExecuting?: boolean,
     onSelect: () => void,
     onDelete: () => void
 }) {
     return (
         <motion.div
-            className={`wf-node wf-node--${node.color} ${isSelected ? 'wf-node--selected' : ''} ${isInvalid ? 'wf-node--invalid' : ''}`}
+            className={`wf-node wf-node--${node.color} ${isSelected ? 'wf-node--selected' : ''} ${isInvalid ? 'wf-node--invalid' : ''} ${isExecuting ? 'wf-node--executing' : ''}`}
             onClick={onSelect}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -253,6 +265,7 @@ interface ValidationError {
 }
 
 export function WorkflowBuilder() {
+    const { addToast } = useToast()
     const [workflows] = useState(workflowTemplates)
     const [selectedWorkflow, setSelectedWorkflow] = useState<string | null>(null)
     const [nodes, setNodes] = useState<WorkflowNode[]>([])
@@ -261,17 +274,43 @@ export function WorkflowBuilder() {
     const [paletteSection, setPaletteSection] = useState<string>('triggers')
     const [validationErrors, setValidationErrors] = useState<ValidationError[]>([])
     const [invalidNodeIds, setInvalidNodeIds] = useState<Set<string>>(new Set())
+    const [draggedNodeType, setDraggedNodeType] = useState<string | null>(null)
+    const [executingNodeId, setExecutingNodeId] = useState<string | null>(null)
+    const [isDragOver, setIsDragOver] = useState(false)
+    const [showPreview, setShowPreview] = useState(false)
     const canvasRef = useRef<HTMLDivElement>(null)
 
     // Handle drag and drop
-    const handleDragStart = useCallback((node: any) => {
-        // Store node data for drop
-    }, [])
+    const handleDragStart = (e: React.DragEvent, node: any) => {
+        setDraggedNodeType(node.type)
+        e.dataTransfer.setData('text/plain', node.type)
+        e.dataTransfer.effectAllowed = 'copy'
+    }
 
-    const handleDrop = useCallback((e: React.DragEvent) => {
+    const handleDrop = (e: React.DragEvent) => {
         e.preventDefault()
-        // Add node to canvas
-    }, [])
+        setIsDragOver(false)
+        const nodeType = e.dataTransfer.getData('text/plain') || draggedNodeType
+        if (nodeType) {
+            const def = findNodeDef(nodeType)
+            if (def) {
+                addNode(def)
+            }
+            setDraggedNodeType(null)
+        }
+    }
+
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault()
+        e.dataTransfer.dropEffect = 'copy'
+        if (!isDragOver) setIsDragOver(true)
+    }
+
+    const handleDragLeave = (e: React.DragEvent) => {
+        if (e.currentTarget === e.target || !e.currentTarget.contains(e.relatedTarget as Node)) {
+            setIsDragOver(false)
+        }
+    }
 
     const addNode = (nodeType: typeof nodeTypes.triggers[0]) => {
         const newNode: WorkflowNode = {
@@ -295,9 +334,42 @@ export function WorkflowBuilder() {
         setInvalidNodeIds(new Set())
     }
 
-    const handleRunWorkflow = () => {
+    const updateNode = (nodeId: string, updates: Partial<WorkflowNode>) => {
+        setNodes(prev => prev.map(n => n.id === nodeId ? { ...n, ...updates } : n))
+    }
+
+    const handleDuplicateNode = () => {
+        if (!selectedNode) return
+        const node = nodes.find(n => n.id === selectedNode)
+        if (!node) return
+        const newNode: WorkflowNode = {
+            ...node,
+            id: `node-${Date.now()}`,
+            label: `${node.label} (Copy)`,
+        }
+        setNodes(prev => [...prev, newNode])
+    }
+
+    const handleClearCanvas = () => {
+        if (nodes.length === 0) return
+        if (window.confirm('Are you sure you want to clear all nodes? This cannot be undone.')) {
+            setNodes([])
+            setSelectedNode(null)
+            setValidationErrors([])
+            setInvalidNodeIds(new Set())
+        }
+    }
+
+    const handleRunWorkflow = async () => {
+        if (nodes.length === 0) return
+        if (!validateWorkflow()) return
         setIsRunning(true)
-        setTimeout(() => setIsRunning(false), 3000)
+        for (let i = 0; i < nodes.length; i++) {
+            setExecutingNodeId(nodes[i].id)
+            await new Promise(r => setTimeout(r, 1000 + Math.random() * 500))
+        }
+        setExecutingNodeId(null)
+        setIsRunning(false)
     }
 
     // Validation system
@@ -363,7 +435,16 @@ export function WorkflowBuilder() {
                     <Button variant="secondary" icon={<Upload size={16} />}>
                         Import
                     </Button>
-                    <Button variant="secondary" icon={<Download size={16} />}>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(workflows.map(w => ({
+                            'ID': w.id,
+                            'Name': w.name,
+                            'Description': w.description,
+                            'Nodes': w.nodes,
+                            'Status': w.status,
+                        })), 'workflows_export')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Workflow data exported to CSV', duration: 3000 })
+                    }}>
                         Export
                     </Button>
                     <Button variant="secondary" icon={<Save size={16} />}>
@@ -433,6 +514,7 @@ export function WorkflowBuilder() {
                                     key={node.type}
                                     node={node}
                                     onDragStart={handleDragStart}
+                                    onClick={() => addNode(node)}
                                 />
                             ))}
                         </div>
@@ -453,15 +535,15 @@ export function WorkflowBuilder() {
                             <span>{nodes.length} nodes</span>
                         </div>
                         <div className="wf-canvas-header__actions">
-                            <button className="wf-canvas-action">
+                            <button className="wf-canvas-action" onClick={() => setShowPreview(true)} disabled={nodes.length === 0}>
                                 <Eye size={16} />
                                 Preview
                             </button>
-                            <button className="wf-canvas-action">
+                            <button className="wf-canvas-action" onClick={handleDuplicateNode} disabled={!selectedNode}>
                                 <Copy size={16} />
                                 Duplicate
                             </button>
-                            <button className="wf-canvas-action wf-canvas-action--danger">
+                            <button className="wf-canvas-action wf-canvas-action--danger" onClick={handleClearCanvas} disabled={nodes.length === 0}>
                                 <Trash2 size={16} />
                                 Clear
                             </button>
@@ -497,8 +579,9 @@ export function WorkflowBuilder() {
 
                     <div
                         ref={canvasRef}
-                        className="wf-canvas"
-                        onDragOver={(e) => e.preventDefault()}
+                        className={`wf-canvas ${isDragOver ? 'wf-canvas--drag-over' : ''}`}
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
                     >
                         {nodes.length === 0 ? (
@@ -534,6 +617,7 @@ export function WorkflowBuilder() {
                                                 node={node}
                                                 isSelected={selectedNode === node.id}
                                                 isInvalid={invalidNodeIds.has(node.id)}
+                                                isExecuting={executingNodeId === node.id}
                                                 onSelect={() => setSelectedNode(node.id)}
                                                 onDelete={() => deleteNode(node.id)}
                                             />
@@ -562,32 +646,147 @@ export function WorkflowBuilder() {
                             </button>
                         </div>
                         <div className="wf-properties__content">
-                            {nodes.find(n => n.id === selectedNode) && (
-                                <>
-                                    <div className="wf-prop-group">
-                                        <label>Node Name</label>
-                                        <Input
-                                            value={nodes.find(n => n.id === selectedNode)?.label || ''}
-                                            onChange={() => { }}
-                                            fullWidth
-                                        />
-                                    </div>
-                                    <div className="wf-prop-group">
-                                        <label>Description</label>
-                                        <textarea placeholder="Add a description..."></textarea>
-                                    </div>
-                                    <div className="wf-prop-group">
-                                        <label>Conditions</label>
-                                        <Button variant="secondary" size="sm" icon={<Plus size={14} />} fullWidth>
-                                            Add Condition
-                                        </Button>
-                                    </div>
-                                </>
-                            )}
+                            {(() => {
+                                const node = nodes.find(n => n.id === selectedNode)
+                                if (!node) return null
+                                return (
+                                    <>
+                                        <div className="wf-prop-group">
+                                            <label>Node Name</label>
+                                            <Input
+                                                value={node.label}
+                                                onChange={(e) => updateNode(node.id, { label: (e.target as HTMLInputElement).value })}
+                                                fullWidth
+                                            />
+                                        </div>
+                                        <div className="wf-prop-group">
+                                            <label>Type</label>
+                                            <div className="wf-prop-type-badge">
+                                                <node.icon size={14} />
+                                                <span>{node.type.replace(/_/g, ' ')}</span>
+                                            </div>
+                                        </div>
+                                        <div className="wf-prop-group">
+                                            <label>Description</label>
+                                            <textarea
+                                                placeholder="Add a description..."
+                                                value={node.description || ''}
+                                                onChange={(e) => updateNode(node.id, { description: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="wf-prop-group">
+                                            <label>Conditions</label>
+                                            <Button variant="secondary" size="sm" icon={<Plus size={14} />} fullWidth>
+                                                Add Condition
+                                            </Button>
+                                        </div>
+                                        <div className="wf-prop-group wf-prop-group--actions">
+                                            <Button
+                                                variant="secondary"
+                                                size="sm"
+                                                icon={<Copy size={14} />}
+                                                fullWidth
+                                                onClick={handleDuplicateNode}
+                                            >
+                                                Duplicate Node
+                                            </Button>
+                                            <Button
+                                                variant="secondary"
+                                                size="sm"
+                                                icon={<Trash2 size={14} />}
+                                                fullWidth
+                                                onClick={() => deleteNode(node.id)}
+                                            >
+                                                Delete Node
+                                            </Button>
+                                        </div>
+                                    </>
+                                )
+                            })()}
                         </div>
                     </aside>
                 )}
             </div>
+
+            {/* Preview Modal */}
+            <AnimatePresence>
+                {showPreview && (
+                    <motion.div
+                        className="wf-preview-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowPreview(false)}
+                    >
+                        <motion.div
+                            className="wf-preview-modal"
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="wf-preview-modal__header">
+                                <h3><Eye size={18} /> Workflow Preview</h3>
+                                <button onClick={() => setShowPreview(false)}>
+                                    <XCircle size={18} />
+                                </button>
+                            </div>
+                            <div className="wf-preview-modal__content">
+                                {nodes.length === 0 ? (
+                                    <p className="wf-preview-modal__empty">No nodes in the workflow yet.</p>
+                                ) : (
+                                    <div className="wf-preview-modal__flow">
+                                        {nodes.map((node, idx) => {
+                                            const category = triggerTypes.has(node.type)
+                                                ? 'Trigger'
+                                                : actionTypes.has(node.type)
+                                                    ? 'Action'
+                                                    : 'Condition'
+                                            return (
+                                                <div key={node.id} className="wf-preview-modal__node">
+                                                    <div className={`wf-preview-modal__node-icon wf-preview-modal__node-icon--${node.color}`}>
+                                                        <node.icon size={16} />
+                                                    </div>
+                                                    <div className="wf-preview-modal__node-info">
+                                                        <span className="wf-preview-modal__node-label">{node.label}</span>
+                                                        <span className="wf-preview-modal__node-category">{category} &middot; Step {idx + 1}</span>
+                                                    </div>
+                                                    {idx < nodes.length - 1 && (
+                                                        <div className="wf-preview-modal__arrow">
+                                                            <ChevronDown size={14} />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="wf-preview-modal__footer">
+                                <span>{nodes.length} node{nodes.length !== 1 ? 's' : ''} in workflow</span>
+                                <Button variant="secondary" size="sm" onClick={() => setShowPreview(false)}>
+                                    Close
+                                </Button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Run Success Toast */}
+            <AnimatePresence>
+                {isRunning && executingNodeId && (
+                    <motion.div
+                        className="wf-run-toast"
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 40 }}
+                    >
+                        <div className="wf-run-toast__pulse" />
+                        <span>Executing: {nodes.find(n => n.id === executingNodeId)?.label || '...'}</span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

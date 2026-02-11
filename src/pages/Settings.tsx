@@ -14,6 +14,7 @@ import {
     LogOut
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
 
 const settingsSections = [
     { id: 'profile', label: 'Profile', icon: User, description: 'Manage your account details' },
@@ -25,7 +26,9 @@ const settingsSections = [
 ]
 
 export function Settings() {
+    const { addToast } = useToast()
     const [activeSection, setActiveSection] = useState('profile')
+    const [saving, setSaving] = useState(false)
 
     return (
         <div style={{ padding: 'var(--space-2xl)', background: 'var(--apex-obsidian)', minHeight: '100vh' }}>
@@ -120,9 +123,15 @@ export function Settings() {
                             </div>
 
                             <div style={{ marginTop: 'var(--space-xl)', display: 'flex', justifyContent: 'flex-end' }}>
-                                <Button variant="primary" size="sm">
+                                <Button variant="primary" size="sm" disabled={saving} onClick={() => {
+                                    setSaving(true)
+                                    setTimeout(() => {
+                                        setSaving(false)
+                                        addToast({ type: 'success', title: 'Settings Saved', message: 'Your profile settings have been updated successfully.', duration: 3000 })
+                                    }, 800)
+                                }}>
                                     <Save size={16} />
-                                    Save Changes
+                                    {saving ? 'Saving...' : 'Save Changes'}
                                 </Button>
                             </div>
                         </div>
@@ -151,7 +160,7 @@ export function Settings() {
                                         <div style={{ color: 'var(--apex-white)', fontWeight: 500 }}>Password</div>
                                         <div style={{ color: 'var(--apex-steel)', fontSize: 'var(--text-sm)' }}>Last changed 30 days ago</div>
                                     </div>
-                                    <Button variant="ghost" size="sm">Change</Button>
+                                    <Button variant="ghost" size="sm" onClick={() => addToast({ type: 'info', title: 'Password Reset', message: 'A password reset link has been sent to your email.', duration: 4000 })}>Change</Button>
                                 </div>
                                 <div style={{ padding: 'var(--space-lg)', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 'var(--radius-lg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
@@ -161,7 +170,7 @@ export function Settings() {
                                             <div style={{ color: '#10B981', fontSize: 'var(--text-sm)' }}>Enabled</div>
                                         </div>
                                     </div>
-                                    <Button variant="ghost" size="sm">Manage</Button>
+                                    <Button variant="ghost" size="sm" onClick={() => addToast({ type: 'info', title: '2FA Settings', message: 'Two-factor authentication management panel opening...', duration: 3000 })}>Manage</Button>
                                 </div>
                             </div>
                         </div>

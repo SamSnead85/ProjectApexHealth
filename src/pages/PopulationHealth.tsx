@@ -27,6 +27,8 @@ import {
     Award
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './PopulationHealth.css'
 
 // Types
@@ -270,6 +272,7 @@ const StarRatingCard = ({ rating, index }: { rating: StarRating; index: number }
 )
 
 export function PopulationHealth() {
+    const { addToast } = useToast()
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -308,7 +311,20 @@ export function PopulationHealth() {
                         <Award size={20} />
                         <span>Overall Rating: <strong>{overallStarRating} ★</strong></span>
                     </div>
-                    <Button variant="secondary" icon={<Download size={16} />}>Export</Button>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(hedisMeasures.map(m => ({
+                            'Measure': m.name,
+                            'Abbreviation': m.abbreviation,
+                            'Category': m.category,
+                            'Performance': `${m.performance}%`,
+                            'Benchmark': `${m.benchmark}%`,
+                            'Target': `${m.target}%`,
+                            'Trend': `${m.trend > 0 ? '+' : ''}${m.trend}%`,
+                            'Care Gaps': m.gapCount,
+                            'Status': m.status,
+                        })), 'population_health')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Population health data exported to CSV', duration: 3000 })
+                    }}>Export</Button>
                 </div>
             </div>
 

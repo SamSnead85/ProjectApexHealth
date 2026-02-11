@@ -19,6 +19,8 @@ import {
     Loader2
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './Claims.css'
 
 interface Claim {
@@ -225,6 +227,7 @@ async function fetchClaims(params?: { status?: string; type?: string; query?: st
 }
 
 export function Claims() {
+    const { addToast } = useToast()
     const [claims, setClaims] = useState<Claim[]>(mockClaims)
     const [isLoading, setIsLoading] = useState(false)
     const [dataSource, setDataSource] = useState<'api' | 'mock'>('mock')
@@ -319,8 +322,20 @@ export function Claims() {
                     <p className="claims__subtitle">View, process, and manage all claims</p>
                 </div>
                 <div className="claims__header-actions">
-                    <Button variant="ghost" icon={<RefreshCw size={16} />}>Refresh</Button>
-                    <Button variant="ghost" icon={<Download size={16} />}>Export</Button>
+                    <Button variant="ghost" icon={<RefreshCw size={16} />} onClick={loadClaims}>Refresh</Button>
+                    <Button variant="ghost" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(claims.map(c => ({
+                            'Claim ID': c.id,
+                            'Type': c.type,
+                            'Status': c.status,
+                            'Member': c.memberName,
+                            'Provider': c.providerName,
+                            'Service Date': c.serviceDate,
+                            'Amount': c.amount,
+                            'Paid': c.totalPaidAmount ?? 0,
+                        })), 'claims_export')
+                        addToast({ type: 'success', title: 'Export Complete', message: `${claims.length} claims exported to CSV`, duration: 3000 })
+                    }}>Export</Button>
                     <Button variant="primary" icon={<FileText size={16} />}>New Claim</Button>
                 </div>
             </div>

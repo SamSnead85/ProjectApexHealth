@@ -13,6 +13,7 @@ import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
     ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts'
+import { exportToCSV } from '../utils/exportData'
 import './CallCenterDashboard.css'
 
 // ============================================================================
@@ -89,22 +90,72 @@ const escalations: EscalationLog[] = [
     { id: 'ESC-399', caller: 'Dr. Patel', reason: 'Urgent emergency pre-certification', agent: 'Jennifer Lee', time: '12 min ago', priority: 'high', status: 'assigned' },
     { id: 'ESC-398', caller: 'Robert Chen', reason: 'Network adequacy complaint', agent: 'Mike Torres', time: '18 min ago', priority: 'medium', status: 'assigned' },
     { id: 'ESC-397', caller: 'Karen Davis', reason: 'Prescription coverage appeal', agent: 'David Kim', time: '25 min ago', priority: 'medium', status: 'resolved' },
+    { id: 'ESC-396', caller: 'Maria Gonzalez', reason: 'Translation service unavailable during call', agent: 'AI Agent - Sophia', time: '32 min ago', priority: 'low', status: 'resolved' },
+    { id: 'ESC-395', caller: 'Thomas Wright', reason: 'Emergency room pre-auth timeout', agent: 'Sarah Johnson', time: '45 min ago', priority: 'high', status: 'resolved' },
+    { id: 'ESC-394', caller: 'Lisa Park', reason: 'Duplicate billing charges on EOB', agent: 'Mike Torres', time: '1 hr ago', priority: 'medium', status: 'resolved' },
+    { id: 'ESC-393', caller: 'Dr. Williams', reason: 'Formulary exception request', agent: 'Jennifer Lee', time: '1.5 hr ago', priority: 'medium', status: 'resolved' },
+    { id: 'ESC-392', caller: 'Susan Miller', reason: 'Provider directory inaccuracy', agent: 'David Kim', time: '2 hr ago', priority: 'low', status: 'resolved' },
 ]
 
 export default function CallCenterDashboard() {
-    const [totalCallsToday, setTotalCallsToday] = useState(1847)
+    const initialMetrics = {
+        totalCallsToday: 1847,
+        activeCalls: 24,
+        waitingQueue: 8,
+        avgWaitTime: '0:12',
+        avgHandleTime: '4:32',
+        abandonRate: 2.3,
+        csatScore: 4.7,
+        resolution: 87.5
+    }
+
+    const [metrics, setMetrics] = useState(initialMetrics)
     const [refreshing, setRefreshing] = useState(false)
+    const [agentList, setAgentList] = useState<AgentStatus[]>(agents)
+    const [selectedAgent, setSelectedAgent] = useState<AgentStatus | null>(null)
+    const [showAllEscalations, setShowAllEscalations] = useState(false)
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTotalCallsToday(prev => prev + Math.floor(Math.random() * 3))
-        }, 5000)
+            setMetrics(prev => ({
+                ...prev,
+                totalCallsToday: prev.totalCallsToday + Math.floor(Math.random() * 3),
+                activeCalls: Math.max(10, prev.activeCalls + Math.floor(Math.random() * 3) - 1),
+                waitingQueue: Math.max(0, prev.waitingQueue + Math.floor(Math.random() * 3) - 1),
+                abandonRate: +(Math.max(0.5, prev.abandonRate + (Math.random() - 0.5) * 0.3)).toFixed(1),
+                csatScore: +(Math.min(5, Math.max(4.0, prev.csatScore + (Math.random() - 0.5) * 0.1))).toFixed(1),
+                resolution: +(Math.min(100, Math.max(80, prev.resolution + (Math.random() - 0.5) * 0.5))).toFixed(1)
+            }))
+        }, 3000)
         return () => clearInterval(interval)
     }, [])
 
     const handleRefresh = () => {
         setRefreshing(true)
+        setMetrics(initialMetrics)
+        setAgentList(agents)
+        setSelectedAgent(null)
         setTimeout(() => setRefreshing(false), 1500)
+    }
+
+    const handleExportReport = () => {
+        const reportData = agentList.map(a => ({
+            ID: a.id,
+            Name: a.name,
+            Role: a.role,
+            Status: a.status,
+            'Calls Handled': a.callsHandled,
+            'Avg Handle Time': a.avgHandleTime,
+            CSAT: a.satisfaction
+        }))
+        exportToCSV(reportData, 'call-center-report')
+    }
+
+    const handleSetAgentStatus = (agentId: string, newStatus: AgentStatus['status']) => {
+        setAgentList(prev => prev.map(a =>
+            a.id === agentId ? { ...a, status: newStatus } : a
+        ))
+        setSelectedAgent(prev => prev?.id === agentId ? { ...prev, status: newStatus } : prev)
     }
 
     const getStatusIcon = (status: AgentStatus['status']) => {
@@ -142,11 +193,13 @@ export default function CallCenterDashboard() {
     }
 
     const agentStatusCounts = {
-        available: agents.filter(a => a.status === 'available').length,
-        onCall: agents.filter(a => a.status === 'on_call').length,
-        onBreak: agents.filter(a => a.status === 'break').length,
-        offline: agents.filter(a => a.status === 'offline').length,
+        available: agentList.filter(a => a.status === 'available').length,
+        onCall: agentList.filter(a => a.status === 'on_call').length,
+        onBreak: agentList.filter(a => a.status === 'break').length,
+        offline: agentList.filter(a => a.status === 'offline').length,
     }
+
+    const displayedEscalations = showAllEscalations ? escalations : escalations.slice(0, 5)
 
     // SLA compliance calculation
     const slaCompliance = 94.7
@@ -176,22 +229,29 @@ export default function CallCenterDashboard() {
                         >
                             Refresh
                         </Button>
-                        <Button variant="primary" icon={<Download size={16} />}>Export Report</Button>
+                        <Button variant="primary" icon={<Download size={16} />} onClick={handleExportReport}>Export Report</Button>
                     </div>
                 </div>
 
+                {/* Refresh Loading Indicator */}
+                {refreshing && (
+                    <div className="ccd-refresh-indicator">
+                        <div className="ccd-refresh-bar" />
+                    </div>
+                )}
+
                 {/* KPI Cards */}
-                <div className="ccd-kpis">
+                <div className={`ccd-kpis ${refreshing ? 'ccd-fading' : ''}`}>
                     <MetricCard
                         label="Total Calls Today"
-                        value={totalCallsToday.toLocaleString()}
+                        value={metrics.totalCallsToday.toLocaleString()}
                         icon={<Phone size={20} />}
                         change={12.3}
                         subtitle="vs 1,645 yesterday"
                     />
                     <MetricCard
                         label="Avg Wait Time"
-                        value="0:12"
+                        value={metrics.avgWaitTime}
                         icon={<Timer size={20} />}
                         change={-22}
                         subtitle="Target: 0:15"
@@ -199,26 +259,26 @@ export default function CallCenterDashboard() {
                     />
                     <MetricCard
                         label="Avg Handle Time"
-                        value="4:32"
+                        value={metrics.avgHandleTime}
                         icon={<Clock size={20} />}
                         change={-8}
                         subtitle="5:01 last week"
                     />
                     <MetricCard
                         label="Abandonment Rate"
-                        value="2.3%"
+                        value={`${metrics.abandonRate}%`}
                         icon={<PhoneOff size={20} />}
                         change={-0.8}
                         subtitle="Target: < 5%"
-                        variant="success"
+                        variant={metrics.abandonRate < 5 ? 'success' : undefined}
                     />
                     <MetricCard
                         label="CSAT Score"
-                        value="4.7/5"
+                        value={`${metrics.csatScore}/5`}
                         icon={<Star size={20} />}
                         change={3.2}
-                        subtitle="94% satisfaction"
-                        variant="success"
+                        subtitle={`${Math.round(metrics.csatScore / 5 * 100)}% satisfaction`}
+                        variant={metrics.csatScore >= 4.5 ? 'success' : undefined}
                     />
                 </div>
 
@@ -237,13 +297,15 @@ export default function CallCenterDashboard() {
                         </div>
                     </div>
                     <div className="ccd-agent-grid">
-                        {agents.map((agent, index) => (
+                        {agentList.map((agent, index) => (
                             <motion.div
                                 key={agent.id}
-                                className={`ccd-agent-card ${agent.status}`}
+                                className={`ccd-agent-card ${agent.status} ${selectedAgent?.id === agent.id ? 'selected' : ''}`}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.05 }}
+                                onClick={() => setSelectedAgent(selectedAgent?.id === agent.id ? null : agent)}
+                                style={{ cursor: 'pointer' }}
                             >
                                 <div className="ccd-agent-top">
                                     <div className="ccd-agent-avatar">
@@ -273,6 +335,97 @@ export default function CallCenterDashboard() {
                         ))}
                     </div>
                 </GlassCard>
+
+                {/* Agent Detail Panel */}
+                {selectedAgent && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <GlassCard className="ccd-agent-detail">
+                            <div className="ccd-detail-header">
+                                <div className="ccd-detail-identity">
+                                    <div className="ccd-detail-avatar">
+                                        {selectedAgent.name.startsWith('AI') ? <Activity size={24} /> : <Users size={24} />}
+                                    </div>
+                                    <div>
+                                        <h3 className="ccd-detail-name">{selectedAgent.name}</h3>
+                                        <span className="ccd-detail-role">{selectedAgent.role}</span>
+                                    </div>
+                                    {getStatusBadge(selectedAgent.status)}
+                                </div>
+                                <div className="ccd-detail-actions">
+                                    <span className="ccd-detail-label">Change Status:</span>
+                                    {(['available', 'on_call', 'break', 'offline'] as AgentStatus['status'][]).map(s => (
+                                        <button
+                                            key={s}
+                                            className={`ccd-status-btn ${s} ${selectedAgent.status === s ? 'active' : ''}`}
+                                            onClick={(e) => { e.stopPropagation(); handleSetAgentStatus(selectedAgent.id, s) }}
+                                        >
+                                            {getStatusIcon(s)}
+                                            {s === 'on_call' ? 'On Call' : s.charAt(0).toUpperCase() + s.slice(1)}
+                                        </button>
+                                    ))}
+                                    <Button variant="ghost" size="sm" onClick={() => setSelectedAgent(null)}>
+                                        <XCircle size={16} />
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className="ccd-detail-metrics">
+                                <div className="ccd-detail-metric">
+                                    <Phone size={16} />
+                                    <div>
+                                        <span className="ccd-dm-value">{selectedAgent.callsHandled}</span>
+                                        <span className="ccd-dm-label">Calls Handled</span>
+                                    </div>
+                                </div>
+                                <div className="ccd-detail-metric">
+                                    <Clock size={16} />
+                                    <div>
+                                        <span className="ccd-dm-value">{selectedAgent.avgHandleTime}</span>
+                                        <span className="ccd-dm-label">Avg Handle Time</span>
+                                    </div>
+                                </div>
+                                <div className="ccd-detail-metric">
+                                    <Star size={16} />
+                                    <div>
+                                        <span className="ccd-dm-value">{selectedAgent.satisfaction > 0 ? selectedAgent.satisfaction : '—'}</span>
+                                        <span className="ccd-dm-label">CSAT Score</span>
+                                    </div>
+                                </div>
+                                <div className="ccd-detail-metric">
+                                    <Timer size={16} />
+                                    <div>
+                                        <span className="ccd-dm-value">{selectedAgent.activeSince}</span>
+                                        <span className="ccd-dm-label">Active Since</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="ccd-detail-history">
+                                <h4>Recent Call History</h4>
+                                <div className="ccd-history-list">
+                                    {selectedAgent.callsHandled > 0 ? [
+                                        { time: '2 min ago', caller: 'John Martinez', duration: '4:23', outcome: 'Resolved' },
+                                        { time: '12 min ago', caller: 'Patricia Lee', duration: '6:45', outcome: 'Escalated' },
+                                        { time: '22 min ago', caller: 'Richard Brown', duration: '3:11', outcome: 'Resolved' },
+                                        { time: '35 min ago', caller: 'Emily Davis', duration: '5:02', outcome: 'Resolved' },
+                                    ].map((call, i) => (
+                                        <div key={i} className="ccd-history-item">
+                                            <span className="ccd-hi-time">{call.time}</span>
+                                            <span className="ccd-hi-caller">{call.caller}</span>
+                                            <span className="ccd-hi-duration">{call.duration}</span>
+                                            <Badge variant={call.outcome === 'Resolved' ? 'success' : 'warning'} size="sm">{call.outcome}</Badge>
+                                        </div>
+                                    )) : (
+                                        <p className="ccd-no-history">No calls handled yet today</p>
+                                    )}
+                                </div>
+                            </div>
+                        </GlassCard>
+                    </motion.div>
+                )}
 
                 {/* Charts Row */}
                 <div className="ccd-charts-row">
@@ -451,7 +604,9 @@ export default function CallCenterDashboard() {
                             <AlertTriangle size={18} />
                             Escalation Log
                         </h3>
-                        <Button variant="ghost" size="sm" icon={<Eye size={14} />}>View All</Button>
+                        <Button variant="ghost" size="sm" icon={<Eye size={14} />} onClick={() => setShowAllEscalations(!showAllEscalations)}>
+                            {showAllEscalations ? 'Show Less' : `View All (${escalations.length})`}
+                        </Button>
                     </div>
                     <div className="ccd-escalation-table">
                         <div className="ccd-esc-header">
@@ -463,7 +618,7 @@ export default function CallCenterDashboard() {
                             <span>Status</span>
                             <span>Time</span>
                         </div>
-                        {escalations.map((esc, index) => (
+                        {displayedEscalations.map((esc, index) => (
                             <motion.div
                                 key={esc.id}
                                 className="ccd-esc-row"

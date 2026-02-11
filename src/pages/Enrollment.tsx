@@ -27,6 +27,8 @@ import {
     Building2
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './Enrollment.css'
 
 // ============================================
@@ -74,6 +76,7 @@ const aiInsights = [
 // ============================================
 
 export function Enrollment() {
+    const { addToast } = useToast()
     const [searchQuery, setSearchQuery] = useState('')
     const progressPercent = Math.round((enrollmentStats.completed / enrollmentStats.total) * 100)
 
@@ -112,7 +115,19 @@ export function Enrollment() {
                     </div>
                 </div>
                 <div className="benefits-admin__actions">
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => {
+                        exportToCSV(employees.map(e => ({
+                            'ID': e.id,
+                            'Name': e.name,
+                            'Department': e.department,
+                            'Status': e.status,
+                            'Plan': e.plan,
+                            'Tier': e.planTier,
+                            'Monthly Cost': `$${e.cost}`,
+                            'Coverage Start': e.coverageStart,
+                        })), 'enrollment_census')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Enrollment census exported to CSV', duration: 3000 })
+                    }}>
                         <Download size={16} />
                         Export Census
                     </Button>

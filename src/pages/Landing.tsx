@@ -469,6 +469,7 @@ export function Landing({ onLogin }: LandingProps) {
     const [activeView, setActiveView] = useState<'hero' | 'modules'>('hero')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [emailError, setEmailError] = useState('')
 
     const handleComingSoon = useCallback(() => {
         addToast({
@@ -494,9 +495,15 @@ export function Landing({ onLogin }: LandingProps) {
 
     const handleLogin = useCallback((e: React.FormEvent) => {
         e.preventDefault()
+        setEmailError('')
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (email && !emailPattern.test(email)) {
+            setEmailError('Please enter a valid email address')
+            return
+        }
         setIsLoading(true)
         setTimeout(() => { onLogin('admin'); setIsLoading(false) }, 800)
-    }, [onLogin])
+    }, [onLogin, email])
 
     const handleNavigateToModule = useCallback((path: string) => {
         // Store the intended path for post-login navigation
@@ -586,9 +593,9 @@ export function Landing({ onLogin }: LandingProps) {
                                             <p className="landing__card-subtitle">Enterprise portal login</p>
                                         </div>
                                         <form onSubmit={handleLogin} className="landing__form">
-                                            <Input label="Email" type="email" placeholder="you@company.com" value={email} onChange={e => setEmail(e.target.value)} icon={<User size={18} />} fullWidth />
+                                            <Input label="Email" type="email" placeholder="you@company.com" value={email} onChange={e => { setEmail(e.target.value); setEmailError('') }} error={emailError} icon={<User size={18} />} fullWidth />
                                             <Input label="Password" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} icon={<Lock size={18} />} fullWidth />
-                                            <Button type="submit" fullWidth loading={isLoading}>Sign In</Button>
+                                            <Button type="submit" fullWidth loading={isLoading} disabled={isLoading}>{isLoading ? 'Signing in...' : 'Sign In'}</Button>
                                         </form>
                                         <div className="landing__sso"><div className="landing__sso-divider"><span>or continue as</span></div></div>
                                         <div className="landing__demo-personas">

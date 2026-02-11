@@ -6,6 +6,8 @@ import {
     Download, RefreshCw, Settings, ChevronRight, ArrowUpRight
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import { ExecStat, KpiCard, ProgressRing, AiInsight } from '../components/executive'
 import { CollapsibleWidget, StatusCard, Timeline } from '../components/widgets'
 import { DonutChart, ComparisonBar, StatGrid, InsightSpotlight } from '../components/dataviz'
@@ -78,6 +80,7 @@ const systemStatus = [
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 export function AdvancedAnalytics() {
+    const { addToast } = useToast()
     const [activeTab, setActiveTab] = useState('overview')
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [apiAnalytics, setApiAnalytics] = useState<any>(null)
@@ -131,6 +134,14 @@ export function AdvancedAnalytics() {
                     <Button
                         variant="secondary"
                         icon={<Download size={16} />}
+                        onClick={() => {
+                            exportToCSV(kpiData.map(k => ({
+                                'Metric': k.title,
+                                'Value': k.value,
+                                'Trend': `${k.trend.direction === 'up' ? '+' : '-'}${k.trend.value}%`,
+                            })), 'analytics_export')
+                            addToast({ type: 'success', title: 'Export Complete', message: 'Analytics data exported to CSV', duration: 3000 })
+                        }}
                     >
                         Export
                     </Button>

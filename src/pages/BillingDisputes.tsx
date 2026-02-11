@@ -22,6 +22,7 @@ import {
     Hash
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
 
 type DisputeStatus = 'open' | 'under_review' | 'escalated' | 'resolved' | 'denied'
 
@@ -129,17 +130,22 @@ const cardStyle: React.CSSProperties = {
 }
 
 export default function BillingDisputes() {
+    const { addToast } = useToast()
+    const [disputeList, setDisputeList] = useState<Dispute[]>(disputes)
     const [selectedDispute, setSelectedDispute] = useState<string | null>(null)
     const [showNewForm, setShowNewForm] = useState(false)
     const [filterStatus, setFilterStatus] = useState<'all' | DisputeStatus>('all')
+    const [newDispute, setNewDispute] = useState({ claimId: '', amount: '', provider: '', dateOfService: '', reason: '', description: '' })
+    const [disputeErrors, setDisputeErrors] = useState<Record<string, string>>({})
+    const [submittingDispute, setSubmittingDispute] = useState(false)
 
-    const openCount = disputes.filter(d => d.status === 'open' || d.status === 'under_review' || d.status === 'escalated').length
-    const resolvedCount = disputes.filter(d => d.status === 'resolved').length
-    const totalDisputed = disputes.filter(d => d.status !== 'resolved').reduce((s, d) => s + d.amount, 0)
+    const openCount = disputeList.filter(d => d.status === 'open' || d.status === 'under_review' || d.status === 'escalated').length
+    const resolvedCount = disputeList.filter(d => d.status === 'resolved').length
+    const totalDisputed = disputeList.filter(d => d.status !== 'resolved').reduce((s, d) => s + d.amount, 0)
     const avgResolutionDays = 32
 
-    const selectedDisputeData = disputes.find(d => d.id === selectedDispute)
-    const filteredDisputes = disputes.filter(d => filterStatus === 'all' || d.status === filterStatus)
+    const selectedDisputeData = disputeList.find(d => d.id === selectedDispute)
+    const filteredDisputes = disputeList.filter(d => filterStatus === 'all' || d.status === filterStatus)
 
     const kpis = [
         { label: 'Open Disputes', value: openCount, icon: <Clock size={22} />, color: 'var(--apex-warning)' },
@@ -196,70 +202,121 @@ export default function BillingDisputes() {
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
                                 {[
-                                    { label: 'Claim ID', placeholder: 'CLM-2024-XXXX', icon: <Hash size={14} /> },
-                                    { label: 'Disputed Amount', placeholder: '$0.00', icon: <DollarSign size={14} /> },
-                                    { label: 'Provider Name', placeholder: 'Enter provider name', icon: <User size={14} /> },
-                                    { label: 'Date of Service', placeholder: 'MM/DD/YYYY', icon: <Calendar size={14} /> }
+                                    { label: 'Claim ID', key: 'claimId', placeholder: 'CLM-2024-XXXX', icon: <Hash size={14} /> },
+                                    { label: 'Disputed Amount', key: 'amount', placeholder: '$0.00', icon: <DollarSign size={14} /> },
+                                    { label: 'Provider Name', key: 'provider', placeholder: 'Enter provider name', icon: <User size={14} /> },
+                                    { label: 'Date of Service', key: 'dateOfService', placeholder: 'MM/DD/YYYY', icon: <Calendar size={14} /> }
                                 ].map(field => (
                                     <div key={field.label}>
-                                        <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                                            {field.label}
+                                        <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: disputeErrors[field.key] ? '#f87171' : 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                                            {field.label} *
                                         </label>
                                         <div style={{
                                             display: 'flex', alignItems: 'center', gap: 8,
                                             padding: '10px 14px',
-                                            background: 'rgba(255,255,255,0.03)',
-                                            border: '1px solid rgba(255,255,255,0.08)',
+                                            background: disputeErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
+                                            border: disputeErrors[field.key] ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
                                             borderRadius: 10
                                         }}>
                                             <span style={{ color: 'var(--apex-steel)' }}>{field.icon}</span>
-                                            <input placeholder={field.placeholder} style={{ flex: 1, background: 'none', border: 'none', color: 'var(--apex-white)', outline: 'none', fontSize: 'var(--text-sm)' }} />
+                                            <input
+                                                placeholder={field.placeholder}
+                                                value={newDispute[field.key as keyof typeof newDispute]}
+                                                onChange={e => { setNewDispute(prev => ({ ...prev, [field.key]: e.target.value })); setDisputeErrors(prev => { const n = { ...prev }; delete n[field.key]; return n }) }}
+                                                style={{ flex: 1, background: 'none', border: 'none', color: 'var(--apex-white)', outline: 'none', fontSize: 'var(--text-sm)' }}
+                                            />
                                         </div>
+                                        {disputeErrors[field.key] && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 4, display: 'block' }}>{disputeErrors[field.key]}</span>}
                                     </div>
                                 ))}
                             </div>
                             <div style={{ marginBottom: 'var(--space-lg)' }}>
-                                <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                                    Reason for Dispute
+                                <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: disputeErrors.reason ? '#f87171' : 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                                    Reason for Dispute *
                                 </label>
-                                <select style={{
-                                    width: '100%', padding: '10px 14px',
-                                    background: 'rgba(255,255,255,0.03)',
-                                    border: '1px solid rgba(255,255,255,0.08)',
-                                    borderRadius: 10, color: 'var(--apex-silver)',
-                                    fontSize: 'var(--text-sm)', outline: 'none'
-                                }}>
+                                <select
+                                    value={newDispute.reason}
+                                    onChange={e => { setNewDispute(prev => ({ ...prev, reason: e.target.value })); setDisputeErrors(prev => { const n = { ...prev }; delete n.reason; return n }) }}
+                                    style={{
+                                        width: '100%', padding: '10px 14px',
+                                        background: disputeErrors.reason ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
+                                        border: disputeErrors.reason ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
+                                        borderRadius: 10, color: 'var(--apex-silver)',
+                                        fontSize: 'var(--text-sm)', outline: 'none'
+                                    }}
+                                >
                                     <option value="" style={{ background: '#0a0f1a' }}>Select a reason...</option>
-                                    <option value="incorrect-charge" style={{ background: '#0a0f1a' }}>Incorrect charge amount</option>
-                                    <option value="duplicate" style={{ background: '#0a0f1a' }}>Duplicate billing</option>
-                                    <option value="not-received" style={{ background: '#0a0f1a' }}>Service not received</option>
-                                    <option value="network" style={{ background: '#0a0f1a' }}>Out-of-network billed incorrectly</option>
-                                    <option value="preauth" style={{ background: '#0a0f1a' }}>Pre-authorization not honored</option>
-                                    <option value="other" style={{ background: '#0a0f1a' }}>Other</option>
+                                    <option value="Incorrect charge amount" style={{ background: '#0a0f1a' }}>Incorrect charge amount</option>
+                                    <option value="Duplicate billing" style={{ background: '#0a0f1a' }}>Duplicate billing</option>
+                                    <option value="Service not received" style={{ background: '#0a0f1a' }}>Service not received</option>
+                                    <option value="Out-of-network billed incorrectly" style={{ background: '#0a0f1a' }}>Out-of-network billed incorrectly</option>
+                                    <option value="Pre-authorization not honored" style={{ background: '#0a0f1a' }}>Pre-authorization not honored</option>
+                                    <option value="Other" style={{ background: '#0a0f1a' }}>Other</option>
                                 </select>
+                                {disputeErrors.reason && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 4, display: 'block' }}>{disputeErrors.reason}</span>}
                             </div>
                             <div style={{ marginBottom: 'var(--space-lg)' }}>
-                                <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                                    Description
+                                <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, color: disputeErrors.description ? '#f87171' : 'var(--apex-steel)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                                    Description *
                                 </label>
                                 <textarea
                                     placeholder="Describe the billing issue in detail..."
                                     rows={3}
+                                    value={newDispute.description}
+                                    onChange={e => { setNewDispute(prev => ({ ...prev, description: e.target.value })); setDisputeErrors(prev => { const n = { ...prev }; delete n.description; return n }) }}
                                     style={{
                                         width: '100%', padding: '10px 14px',
-                                        background: 'rgba(255,255,255,0.03)',
-                                        border: '1px solid rgba(255,255,255,0.08)',
+                                        background: disputeErrors.description ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.03)',
+                                        border: disputeErrors.description ? '1px solid rgba(248,113,113,0.4)' : '1px solid rgba(255,255,255,0.08)',
                                         borderRadius: 10, color: 'var(--apex-white)',
                                         fontSize: 'var(--text-sm)', outline: 'none',
                                         resize: 'vertical', fontFamily: 'inherit'
                                     }}
                                 />
+                                {disputeErrors.description && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 4, display: 'block' }}>{disputeErrors.description}</span>}
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Button variant="ghost" icon={<Upload size={14} />}>Attach Documents</Button>
                                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                                    <Button variant="secondary" onClick={() => setShowNewForm(false)}>Cancel</Button>
-                                    <Button variant="primary" icon={<Send size={14} />}>Submit Dispute</Button>
+                                    <Button variant="secondary" onClick={() => { setShowNewForm(false); setDisputeErrors({}); setNewDispute({ claimId: '', amount: '', provider: '', dateOfService: '', reason: '', description: '' }) }}>Cancel</Button>
+                                    <Button variant="primary" icon={<Send size={14} />} loading={submittingDispute} disabled={submittingDispute} onClick={() => {
+                                        const errors: Record<string, string> = {}
+                                        if (!newDispute.claimId.trim()) errors.claimId = 'Claim ID is required'
+                                        if (!newDispute.amount.trim()) errors.amount = 'Amount is required'
+                                        if (!newDispute.provider.trim()) errors.provider = 'Provider name is required'
+                                        if (!newDispute.dateOfService.trim()) errors.dateOfService = 'Date of service is required'
+                                        if (!newDispute.reason) errors.reason = 'Please select a reason'
+                                        if (!newDispute.description.trim()) errors.description = 'Description is required'
+                                        if (Object.keys(errors).length > 0) {
+                                            setDisputeErrors(errors)
+                                            addToast({ type: 'error', title: 'Validation Error', message: 'Please fill in all required fields', duration: 3000 })
+                                            return
+                                        }
+                                        setSubmittingDispute(true)
+                                        setTimeout(() => {
+                                            const parsedAmount = parseFloat(newDispute.amount.replace(/[$,]/g, '')) || 0
+                                            const newId = `DIS-${String(disputeList.length + 1).padStart(3, '0')}`
+                                            const newEntry: Dispute = {
+                                                id: newId,
+                                                claimId: newDispute.claimId,
+                                                date: new Date().toISOString().split('T')[0],
+                                                amount: parsedAmount,
+                                                reason: newDispute.reason,
+                                                description: newDispute.description,
+                                                status: 'open',
+                                                assignee: 'Unassigned',
+                                                provider: newDispute.provider,
+                                                lastUpdate: new Date().toISOString().split('T')[0],
+                                                timeline: [{ date: new Date().toISOString().split('T')[0], event: 'Dispute filed', by: 'Member' }]
+                                            }
+                                            setDisputeList(prev => [newEntry, ...prev])
+                                            setShowNewForm(false)
+                                            setNewDispute({ claimId: '', amount: '', provider: '', dateOfService: '', reason: '', description: '' })
+                                            setDisputeErrors({})
+                                            setSubmittingDispute(false)
+                                            addToast({ type: 'success', title: 'Dispute Filed', message: `Dispute ${newId} has been submitted for review.`, duration: 5000 })
+                                        }, 1000)
+                                    }}>{submittingDispute ? 'Submitting...' : 'Submit Dispute'}</Button>
                                 </div>
                             </div>
                         </div>

@@ -19,6 +19,7 @@ import {
     TestTube
 } from 'lucide-react'
 import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
+import { useToast } from '../components/common/Toast'
 import './Appointments.css'
 
 interface Appointment {
@@ -99,7 +100,8 @@ const pastAppointments: Appointment[] = [
 ]
 
 export function Appointments() {
-    const [upcoming] = useState<Appointment[]>(mockAppointments)
+    const { addToast } = useToast()
+    const [upcoming, setUpcoming] = useState<Appointment[]>(mockAppointments)
     const [past] = useState<Appointment[]>(pastAppointments)
     const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming')
     const [loading, setLoading] = useState(true)
@@ -109,6 +111,8 @@ export function Appointments() {
     const [showFilters, setShowFilters] = useState(false)
     const [showBookForm, setShowBookForm] = useState(false)
     const [bookForm, setBookForm] = useState({ provider: '', specialty: '', type: 'in-person' as Appointment['type'], date: '', time: '', notes: '' })
+    const [bookingLoading, setBookingLoading] = useState(false)
+    const [bookErrors, setBookErrors] = useState<Record<string, string>>({})
 
     useEffect(() => {
         const t = setTimeout(() => setLoading(false), 800)
@@ -307,18 +311,20 @@ export function Appointments() {
                                     { label: 'Time', key: 'time', placeholder: '', type: 'time' },
                                 ].map(field => (
                                     <div key={field.key}>
-                                        <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>{field.label}</label>
+                                        <label style={{ fontSize: '0.75rem', fontWeight: 600, color: bookErrors[field.key] ? '#f87171' : 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>{field.label} *</label>
                                         <input
                                             type={field.type}
                                             placeholder={field.placeholder}
                                             value={bookForm[field.key as keyof typeof bookForm]}
-                                            onChange={(e) => setBookForm({ ...bookForm, [field.key]: e.target.value })}
+                                            onChange={(e) => { setBookForm({ ...bookForm, [field.key]: e.target.value }); setBookErrors(prev => { const n = { ...prev }; delete n[field.key]; return n }) }}
                                             style={{
                                                 width: '100%', padding: '0.6rem 0.75rem', borderRadius: '10px',
-                                                border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.04)',
+                                                border: bookErrors[field.key] ? '1px solid rgba(248,113,113,0.5)' : '1px solid rgba(255,255,255,0.08)',
+                                                background: bookErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(255,255,255,0.04)',
                                                 color: '#fff', fontSize: '0.85rem', outline: 'none'
                                             }}
                                         />
+                                        {bookErrors[field.key] && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: '0.25rem', display: 'block' }}>{bookErrors[field.key]}</span>}
                                     </div>
                                 ))}
                                 <div>
@@ -353,12 +359,39 @@ export function Appointments() {
                                 </div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.25rem' }}>
-                                <Button variant="ghost" onClick={() => setShowBookForm(false)}>Cancel</Button>
-                                <Button variant="primary" icon={<Check size={14} />} onClick={() => {
-                                    alert(`Appointment booked with ${bookForm.provider || 'provider'} on ${bookForm.date || 'TBD'}!`)
-                                    setShowBookForm(false)
-                                    setBookForm({ provider: '', specialty: '', type: 'in-person', date: '', time: '', notes: '' })
-                                }}>Confirm Booking</Button>
+                                <Button variant="ghost" onClick={() => { setShowBookForm(false); setBookErrors({}) }}>Cancel</Button>
+                                <Button variant="primary" icon={<Check size={14} />} loading={bookingLoading} disabled={bookingLoading} onClick={() => {
+                                    const errors: Record<string, string> = {}
+                                    if (!bookForm.provider.trim()) errors.provider = 'Provider is required'
+                                    if (!bookForm.specialty.trim()) errors.specialty = 'Specialty is required'
+                                    if (!bookForm.date) errors.date = 'Date is required'
+                                    if (!bookForm.time) errors.time = 'Time is required'
+                                    if (Object.keys(errors).length > 0) {
+                                        setBookErrors(errors)
+                                        addToast({ type: 'error', title: 'Validation Error', message: 'Please fill in all required fields', duration: 3000 })
+                                        return
+                                    }
+                                    setBookErrors({})
+                                    setBookingLoading(true)
+                                    setTimeout(() => {
+                                        const newAppointment: Appointment = {
+                                            id: `apt-${Date.now()}`,
+                                            provider: bookForm.provider,
+                                            specialty: bookForm.specialty,
+                                            type: bookForm.type,
+                                            date: bookForm.date,
+                                            time: bookForm.time,
+                                            duration: 30,
+                                            status: 'pending',
+                                            notes: bookForm.notes || undefined,
+                                        }
+                                        setUpcoming(prev => [newAppointment, ...prev])
+                                        setShowBookForm(false)
+                                        setBookForm({ provider: '', specialty: '', type: 'in-person', date: '', time: '', notes: '' })
+                                        setBookingLoading(false)
+                                        addToast({ type: 'success', title: 'Appointment Booked', message: `Appointment with ${newAppointment.provider} on ${new Date(newAppointment.date).toLocaleDateString()} confirmed.`, duration: 5000 })
+                                    }, 800)
+                                }}>{bookingLoading ? 'Booking...' : 'Confirm Booking'}</Button>
                             </div>
                         </GlassCard>
                     </motion.div>

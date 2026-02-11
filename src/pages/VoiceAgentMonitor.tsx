@@ -8,6 +8,8 @@ import {
     Timer, Star, Bot, UserCheck, Search
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './VoiceAgentMonitor.css'
 
 // ============================================================================
@@ -84,10 +86,12 @@ const sentimentData = [
 ]
 
 export default function VoiceAgentMonitor() {
+    const { addToast } = useToast()
     const [liveCallCount, setLiveCallCount] = useState(247)
     const [selectedCall, setSelectedCall] = useState<string | null>('C-4821')
     const [searchQuery, setSearchQuery] = useState('')
     const [refreshing, setRefreshing] = useState(false)
+    const [lastRefreshed, setLastRefreshed] = useState(new Date())
 
     // Animate the live call counter
     useEffect(() => {
@@ -99,8 +103,28 @@ export default function VoiceAgentMonitor() {
 
     const handleRefresh = useCallback(() => {
         setRefreshing(true)
-        setTimeout(() => setRefreshing(false), 1500)
-    }, [])
+        setTimeout(() => {
+            setLiveCallCount(prev => prev + Math.floor(Math.random() * 10) - 3)
+            setLastRefreshed(new Date())
+            setRefreshing(false)
+            addToast({ type: 'success', title: 'Data Refreshed', message: `Dashboard updated at ${new Date().toLocaleTimeString()}`, duration: 2500 })
+        }, 1500)
+    }, [addToast])
+
+    const handleExportReport = useCallback(() => {
+        const reportData = completedCalls.map(c => ({
+            'Call ID': c.id,
+            'Caller': c.caller,
+            'Agent Type': c.agentType,
+            'Topic': c.topic,
+            'Duration': c.duration,
+            'Outcome': c.outcome,
+            'Satisfaction': c.satisfaction > 0 ? `${c.satisfaction}/5` : 'N/A',
+            'Time': c.timestamp,
+        }))
+        exportToCSV(reportData, 'voice_agent_report')
+        addToast({ type: 'success', title: 'Report Exported', message: 'Voice agent report has been downloaded as CSV', duration: 3000 })
+    }, [addToast])
 
     const getSentimentIcon = (sentiment: string) => {
         switch (sentiment) {
@@ -171,7 +195,7 @@ export default function VoiceAgentMonitor() {
                         >
                             Refresh
                         </Button>
-                        <Button variant="primary" icon={<BarChart3 size={16} />}>
+                        <Button variant="primary" icon={<BarChart3 size={16} />} onClick={handleExportReport}>
                             Full Report
                         </Button>
                     </div>
@@ -412,7 +436,7 @@ export default function VoiceAgentMonitor() {
                             <PhoneOff size={18} />
                             Recent Completed Calls
                         </h3>
-                        <Button variant="ghost" size="sm" icon={<Eye size={14} />}>View All</Button>
+                        <Button variant="ghost" size="sm" icon={<Eye size={14} />} onClick={handleExportReport}>Export All</Button>
                     </div>
                     <div className="vam-completed-table">
                         <div className="vam-table-header">

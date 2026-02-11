@@ -28,6 +28,7 @@ import {
     Sliders
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
 import './ProviderDirectory.css'
 
 // ============================================================================
@@ -347,7 +348,9 @@ function getMatchLabel(score: number): { label: string; variant: 'teal' | 'succe
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 export function ProviderDirectory() {
+    const { addToast } = useToast()
     const [providers, setProviders] = useState<Provider[]>(mockProviders)
+    const [compareList, setCompareList] = useState<string[]>([])
 
     // Fetch providers from API with mock fallback
     useEffect(() => {
@@ -848,14 +851,33 @@ export function ProviderDirectory() {
                                     </div>
 
                                     <div className="provider-detail__actions">
-                                        <Button variant="primary" icon={<Calendar size={16} />}>
+                                        <Button variant="primary" icon={<Calendar size={16} />} onClick={() => {
+                                            addToast({ type: 'success', title: 'Appointment Request Sent', message: `Scheduling request sent to ${selectedProvider.name}'s office. You'll receive a confirmation shortly.`, duration: 4000 })
+                                        }}>
                                             Schedule Appointment
                                         </Button>
                                         {selectedProvider.telehealth && (
-                                            <Button variant="secondary" icon={<Video size={16} />}>
+                                            <Button variant="secondary" icon={<Video size={16} />} onClick={() => {
+                                                addToast({ type: 'success', title: 'Telehealth Booked', message: `Virtual visit request sent to ${selectedProvider.name}. Check your email for the link.`, duration: 4000 })
+                                            }}>
                                                 Book Telehealth
                                             </Button>
                                         )}
+                                        <Button
+                                            variant={compareList.includes(selectedProvider.id) ? 'primary' : 'ghost'}
+                                            size="sm"
+                                            onClick={() => {
+                                                setCompareList(prev =>
+                                                    prev.includes(selectedProvider.id)
+                                                        ? prev.filter(id => id !== selectedProvider.id)
+                                                        : prev.length < 3
+                                                            ? [...prev, selectedProvider.id]
+                                                            : (addToast({ type: 'warning', title: 'Compare Limit', message: 'You can compare up to 3 providers at a time', duration: 3000 }), prev)
+                                                )
+                                            }}
+                                        >
+                                            {compareList.includes(selectedProvider.id) ? 'Remove from Compare' : 'Add to Compare'}
+                                        </Button>
                                     </div>
                                 </GlassCard>
                             </motion.div>
@@ -873,6 +895,50 @@ export function ProviderDirectory() {
                     </AnimatePresence>
                 </div>
             </div>
+
+            {/* Compare Providers Floating Bar */}
+            <AnimatePresence>
+                {compareList.length > 0 && (
+                    <motion.div
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 100, opacity: 0 }}
+                        transition={{ type: 'spring', damping: 20 }}
+                        style={{
+                            position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+                            background: 'rgba(10,15,26,0.95)', border: '1px solid rgba(6,182,212,0.3)',
+                            borderRadius: 16, padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 16,
+                            backdropFilter: 'blur(20px)', zIndex: 50, boxShadow: '0 8px 32px rgba(0,0,0,0.4)'
+                        }}
+                    >
+                        <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
+                            Comparing {compareList.length} provider{compareList.length > 1 ? 's' : ''}:
+                        </span>
+                        <div style={{ display: 'flex', gap: 8 }}>
+                            {compareList.map(id => {
+                                const p = providers.find(prov => prov.id === id)
+                                return p ? (
+                                    <Badge key={id} variant="teal" size="sm">{p.name}</Badge>
+                                ) : null
+                            })}
+                        </div>
+                        <Button variant="primary" size="sm" disabled={compareList.length < 2} onClick={() => {
+                            const compared = compareList.map(id => providers.find(p => p.id === id)!).filter(Boolean)
+                            addToast({
+                                type: 'info',
+                                title: 'Provider Comparison',
+                                message: compared.map(p => `${p.name}: ★${p.rating} • ${p.distance}mi • ${p.networkStatus.replace('_', '-')}`).join(' | '),
+                                duration: 8000
+                            })
+                        }}>
+                            Compare Now
+                        </Button>
+                        <button onClick={() => setCompareList([])} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', padding: 4 }}>
+                            <X size={16} />
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

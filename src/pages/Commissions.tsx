@@ -18,6 +18,8 @@ import {
     Award
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './Commissions.css'
 
 // Mock data
@@ -45,6 +47,7 @@ const formatCurrency = (value: number): string => {
 
 export function Commissions() {
     const { navigate } = useNavigation()
+    const { addToast } = useToast()
     const [period, setPeriod] = useState('ytd')
 
     const ytdCommission = commissionStatements.reduce((sum, s) => sum + s.amount, 0)
@@ -73,7 +76,16 @@ export function Commissions() {
                         <Calendar size={16} />
                         Schedule
                     </Button>
-                    <Button variant="primary" size="sm">
+                    <Button variant="primary" size="sm" onClick={() => {
+                        exportToCSV(commissionStatements.map(s => ({
+                            'Month': s.month,
+                            'Amount': `$${s.amount.toLocaleString()}`,
+                            'Groups': s.groups,
+                            'Status': s.status,
+                            'Paid Date': s.paidDate ?? 'Pending',
+                        })), 'commissions_export')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Commission data exported to CSV', duration: 3000 })
+                    }}>
                         <Download size={16} />
                         Export All
                     </Button>

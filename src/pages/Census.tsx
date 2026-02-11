@@ -18,6 +18,8 @@ import {
     Building2
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './Census.css'
 
 // Mock census data
@@ -32,6 +34,7 @@ const employees = [
 
 export function Census() {
     const { navigate } = useNavigation()
+    const { addToast } = useToast()
     const [searchQuery, setSearchQuery] = useState('')
 
     const filteredEmployees = employees.filter(emp =>
@@ -63,7 +66,18 @@ export function Census() {
                         <Upload size={16} />
                         Import CSV
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => {
+                        exportToCSV(employees.map(e => ({
+                            'Name': e.name,
+                            'Email': e.email,
+                            'Department': e.department,
+                            'Dependents': e.dependents,
+                            'Hire Date': e.hireDate,
+                            'Status': e.status,
+                            'Enrolled': e.enrolled ? 'Yes' : 'No',
+                        })), 'census_export')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Census data exported to CSV', duration: 3000 })
+                    }}>
                         <Download size={16} />
                         Export
                     </Button>

@@ -15,6 +15,8 @@ import {
     ArrowUpRight
 } from 'lucide-react'
 import { GlassCard, Button, Badge } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './Billing.css'
 
 // Mock data
@@ -28,6 +30,7 @@ const invoices = [
 
 export function Billing() {
     const { navigate } = useNavigation()
+    const { addToast } = useToast()
 
     return (
         <div className="billing-center">
@@ -48,7 +51,16 @@ export function Billing() {
                     </div>
                 </div>
                 <div className="bl__header-actions">
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => {
+                        exportToCSV(invoices.map(inv => ({
+                            'Invoice ID': inv.id,
+                            'Period': inv.period,
+                            'Amount': `$${inv.amount.toLocaleString()}`,
+                            'Due Date': inv.dueDate,
+                            'Status': inv.status,
+                        })), 'billing_invoices')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Invoice data exported to CSV', duration: 3000 })
+                    }}>
                         <Download size={16} />
                         Export
                     </Button>

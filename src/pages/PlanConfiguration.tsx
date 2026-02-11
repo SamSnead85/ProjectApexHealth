@@ -18,6 +18,7 @@ import {
     AlertCircle
 } from 'lucide-react'
 import { GlassCard, Button, Badge, MetricCard } from '../components/common'
+import { useToast } from '../components/common/Toast'
 
 // Mock plan catalog data
 const plans = [
@@ -40,6 +41,7 @@ const configSections = [
 ]
 
 export function PlanConfiguration() {
+    const { addToast } = useToast()
     const [activeSection, setActiveSection] = useState('intake')
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -54,11 +56,11 @@ export function PlanConfiguration() {
                     </p>
                 </div>
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => addToast({ type: 'info', title: 'Import Plans', message: 'Plan import wizard opening. Supported formats: CSV, XLSX, EDI 834.', duration: 4000 })}>
                         <Upload size={16} />
                         Import Plans
                     </Button>
-                    <Button variant="primary" size="sm">
+                    <Button variant="primary" size="sm" onClick={() => addToast({ type: 'info', title: 'New Plan', message: 'Plan configuration wizard started. Select a product type to begin.', duration: 4000 })}>
                         <Plus size={16} />
                         New Plan
                     </Button>

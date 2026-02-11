@@ -18,6 +18,8 @@ import {
     Briefcase
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './ComplianceDashboard.css'
 
 interface ComplianceItem {
@@ -56,6 +58,7 @@ const auditItems: AuditItem[] = [
 ]
 
 export function ComplianceDashboard() {
+    const { addToast } = useToast()
     const [compliance] = useState<ComplianceItem[]>(complianceItems)
     const [audits] = useState<AuditItem[]>(auditItems)
 
@@ -105,7 +108,19 @@ export function ComplianceDashboard() {
                     </p>
                 </div>
                 <div className="compliance__actions">
-                    <Button variant="secondary" icon={<Download size={16} />}>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(compliance.map(c => ({
+                            'ID': c.id,
+                            'Category': c.category,
+                            'Requirement': c.requirement,
+                            'Status': c.status,
+                            'Due Date': c.dueDate,
+                            'Owner': c.owner,
+                            'Last Review': c.lastReview,
+                            'Evidence Items': c.evidence,
+                        })), 'compliance_report')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Compliance report exported to CSV', duration: 3000 })
+                    }}>
                         Export Report
                     </Button>
                     <Button variant="primary" icon={<FileText size={16} />}>

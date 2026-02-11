@@ -21,6 +21,8 @@ import {
     Wallet
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './HSAWallet.css'
 
 interface Transaction {
@@ -129,6 +131,7 @@ const mockTransactions: Transaction[] = [
 ]
 
 export function HSAWallet() {
+    const { addToast } = useToast()
     const [account] = useState<Account>(mockAccount)
     const [transactions] = useState<Transaction[]>(mockTransactions)
     const [activeTab, setActiveTab] = useState<'all' | 'expenses' | 'contributions'>('all')
@@ -177,7 +180,19 @@ export function HSAWallet() {
                     </p>
                 </div>
                 <div className="hsa-wallet__actions">
-                    <Button variant="secondary" icon={<Download size={16} />}>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(transactions.map(t => ({
+                            'Date': t.date,
+                            'Description': t.description,
+                            'Merchant': t.merchant,
+                            'Category': t.category,
+                            'Amount': `$${Math.abs(t.amount).toFixed(2)}`,
+                            'Type': t.type,
+                            'Status': t.status,
+                            'Eligible': t.eligible ? 'Yes' : 'No',
+                        })), 'hsa_transactions')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'HSA transactions exported to CSV', duration: 3000 })
+                    }}>
                         Export
                     </Button>
                     <Button variant="primary" icon={<Plus size={16} />}>

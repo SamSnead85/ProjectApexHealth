@@ -62,8 +62,8 @@
 
 .premium-card:hover {
     border-color: var(--glass-border-hover);
-    box-shadow: var(--card-3d-lift), var(--card-3d-glow);
-    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
 }
 
 /* Premium Card Variants */
@@ -180,12 +180,12 @@
     background: linear-gradient(135deg, #0D9488 0%, #06B6D4 100%);
     color: white;
     border: none;
-    box-shadow: 0 4px 20px rgba(13, 148, 136, 0.25);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.15);
 }
 
 .exec-btn--primary:hover {
-    box-shadow: 0 8px 30px rgba(13, 148, 136, 0.4);
-    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.25);
+    transform: translateY(-1px);
 }
 
 .exec-btn--secondary {
@@ -419,7 +419,7 @@
 }
 
 .hover-glow:hover {
-    box-shadow: 0 0 30px rgba(13, 148, 136, 0.2);
+    box-shadow: 0 0 12px rgba(13, 148, 136, 0.1);
 }
 
 .press-effect {
@@ -454,7 +454,7 @@
 .section-divider--glow {
     background: linear-gradient(90deg,
             transparent 0%,
-            rgba(13, 148, 136, 0.3) 50%,
+            rgba(13, 148, 136, 0.15) 50%,
             transparent 100%);
 }
 

@@ -495,7 +495,545 @@
     flex-shrink: 0;
 }
 
-/* Responsive */
+/* ============================
+   TOAST NOTIFICATION
+   ============================ */
+.telehealth-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: #EDF0F4;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 560px;
+}
+
+.telehealth-toast--success {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.telehealth-toast--success svg {
+    color: #10B981;
+    flex-shrink: 0;
+}
+
+.telehealth-toast--error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.telehealth-toast--error svg {
+    color: #EF4444;
+    flex-shrink: 0;
+}
+
+.telehealth-toast__close {
+    background: none;
+    border: none;
+    color: rgba(237, 240, 244, 0.5);
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.telehealth-toast__close:hover {
+    color: #EDF0F4;
+}
+
+/* ============================
+   CAMERA ERROR BANNER
+   ============================ */
+.telehealth-camera-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    margin-bottom: var(--space-lg);
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: #FCA5A5;
+    overflow: hidden;
+}
+
+.telehealth-camera-error svg:first-child {
+    flex-shrink: 0;
+    color: #EF4444;
+}
+
+.telehealth-camera-error span {
+    flex: 1;
+}
+
+.telehealth-camera-error button {
+    background: none;
+    border: none;
+    color: rgba(252, 165, 165, 0.6);
+    cursor: pointer;
+    padding: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.telehealth-camera-error button:hover {
+    color: #FCA5A5;
+}
+
+/* ============================
+   VIDEO CALL OVERLAY
+   ============================ */
+.video-call-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    background: #0a0c14;
+}
+
+.video-call__main {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-call__feed {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0c14;
+}
+
+.video-call__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.video-call__feed.video-off .video-call__video {
+    opacity: 0;
+}
+
+.video-call__video-off-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #111422 0%, #0a0c14 100%);
+    color: rgba(237, 240, 244, 0.3);
+    font-size: var(--text-sm);
+}
+
+/* Provider info floating badge */
+.video-call__provider-info {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(36, 40, 56, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    z-index: 10;
+}
+
+.video-call__provider-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: #0D7C8C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EDF0F4;
+}
+
+.video-call__provider-name {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #EDF0F4;
+}
+
+.video-call__provider-specialty {
+    display: block;
+    font-size: var(--text-xs);
+    color: rgba(237, 240, 244, 0.5);
+}
+
+/* Call timer */
+.video-call__timer {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(36, 40, 56, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: #EDF0F4;
+    z-index: 10;
+}
+
+.video-call__timer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #EF4444;
+    animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Controls bar */
+.video-call__controls {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: rgba(36, 40, 56, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 60px;
+    z-index: 10;
+}
+
+.video-call__control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: #EDF0F4;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0;
+    min-width: 64px;
+}
+
+.video-call__control-btn span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: rgba(237, 240, 244, 0.6);
+}
+
+.video-call__control-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.video-call__control-btn.active {
+    background: rgba(13, 124, 140, 0.3);
+    border-color: rgba(13, 124, 140, 0.5);
+    color: #0D7C8C;
+}
+
+.video-call__control-btn.active span {
+    color: #0D7C8C;
+}
+
+.video-call__control-btn--end {
+    background: rgba(239, 68, 68, 0.2) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #EF4444 !important;
+}
+
+.video-call__control-btn--end span {
+    color: #EF4444 !important;
+}
+
+.video-call__control-btn--end:hover {
+    background: rgba(239, 68, 68, 0.35) !important;
+}
+
+/* ============================
+   CHAT SIDEBAR
+   ============================ */
+.video-call__chat {
+    display: flex;
+    flex-direction: column;
+    background: rgba(36, 40, 56, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.video-call__chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.video-call__chat-header h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #EDF0F4;
+}
+
+.video-call__chat-header button {
+    background: none;
+    border: none;
+    color: rgba(237, 240, 244, 0.4);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.video-call__chat-header button:hover {
+    color: #EDF0F4;
+}
+
+.video-call__chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.video-call__chat-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+}
+
+.video-call__chat-msg--doctor {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom-left-radius: 4px;
+}
+
+.video-call__chat-msg--you {
+    align-self: flex-end;
+    background: rgba(13, 124, 140, 0.25);
+    border: 1px solid rgba(13, 124, 140, 0.3);
+    border-bottom-right-radius: 4px;
+}
+
+.video-call__chat-msg-text {
+    display: block;
+    color: #EDF0F4;
+}
+
+.video-call__chat-msg-time {
+    display: block;
+    font-size: 10px;
+    color: rgba(237, 240, 244, 0.35);
+    margin-top: 4px;
+}
+
+.video-call__chat-msg--you .video-call__chat-msg-time {
+    text-align: right;
+}
+
+.video-call__chat-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.video-call__chat-input input {
+    flex: 1;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    font-size: var(--text-sm);
+    color: #EDF0F4;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.video-call__chat-input input::placeholder {
+    color: rgba(237, 240, 244, 0.3);
+}
+
+.video-call__chat-input input:focus {
+    border-color: rgba(13, 124, 140, 0.5);
+}
+
+.video-call__chat-input button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #0D7C8C;
+    border: none;
+    color: #EDF0F4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.video-call__chat-input button:hover:not(:disabled) {
+    background: #0a6672;
+}
+
+.video-call__chat-input button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ============================
+   SCHEDULE FORM ENHANCEMENTS
+   ============================ */
+.schedule-form__field .required {
+    color: #EF4444;
+}
+
+.schedule-form__field.has-error select,
+.schedule-form__field.has-error input,
+.schedule-form__field.has-error textarea {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.04);
+}
+
+.schedule-form__error {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--text-xs);
+    color: #FCA5A5;
+    margin-top: 2px;
+}
+
+.schedule-form__error svg {
+    flex-shrink: 0;
+}
+
+/* Schedule Success */
+.schedule-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+}
+
+.schedule-success svg {
+    color: #10B981;
+}
+
+.schedule-success h4 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: #EDF0F4;
+}
+
+.schedule-success p {
+    font-size: var(--text-sm);
+    color: rgba(237, 240, 244, 0.6);
+    max-width: 360px;
+    line-height: 1.6;
+}
+
+/* ============================
+   COLOR PALETTE UPDATE
+   ============================ */
+.telehealth__quick-stats {
+    background: linear-gradient(135deg, rgba(13, 124, 140, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
+}
+
+.upcoming-visit {
+    background: rgba(13, 124, 140, 0.1);
+    border-color: rgba(13, 124, 140, 0.2);
+}
+
+.upcoming-visit__icon {
+    background: #0D7C8C;
+}
+
+.quick-stat svg {
+    color: #0D7C8C;
+}
+
+.visit-type-card__icon {
+    background: linear-gradient(135deg, #0D7C8C 0%, #8A2BE2 100%);
+}
+
+.visit-type-card:hover {
+    border-color: #0D7C8C;
+}
+
+.visit-type-card.selected {
+    background: rgba(13, 124, 140, 0.08);
+    border-color: #0D7C8C;
+}
+
+.visit-type-card__copay {
+    color: #0D7C8C;
+}
+
+.telehealth__tab.active {
+    background: #0D7C8C;
+}
+
+.how-it-works__number {
+    background: linear-gradient(135deg, #0D7C8C 0%, #8A2BE2 100%);
+}
+
+.provider-card__next.available {
+    color: #10B981;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
 @media (max-width: 1200px) {
     .visit-types__grid {
         grid-template-columns: repeat(2, 1fr);
@@ -532,5 +1070,36 @@
 
     .how-it-works__arrow {
         transform: rotate(90deg);
+    }
+
+    .video-call__controls {
+        bottom: 16px;
+        padding: 10px 14px;
+        gap: 8px;
+        border-radius: 24px;
+    }
+
+    .video-call__control-btn {
+        padding: 10px 12px;
+        min-width: 52px;
+    }
+
+    .video-call__chat {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 20;
+    }
+
+    .video-call__provider-info {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+    }
+
+    .video-call__timer {
+        top: 12px;
+        right: 12px;
     }
 }

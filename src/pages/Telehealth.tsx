@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     Video,
@@ -12,6 +12,8 @@ import {
     Mic,
     MicOff,
     VideoOff,
+    Camera,
+    CameraOff,
     MessageSquare,
     FileText,
     Stethoscope,
@@ -20,9 +22,13 @@ import {
     Activity,
     Shield,
     CheckCircle2,
-    Plus
+    Plus,
+    PhoneOff,
+    Send,
+    X,
+    AlertCircle
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
+import { GlassCard, Badge, Button, PageSkeleton } from '../components/common'
 import './Telehealth.css'
 
 interface Provider {
@@ -145,6 +151,28 @@ const mockUpcomingVisits: UpcomingVisit[] = [
     }
 ]
 
+interface ChatMessage {
+    id: string
+    sender: 'you' | 'doctor'
+    text: string
+    time: string
+}
+
+interface ScheduleForm {
+    visitType: string
+    provider: string
+    date: string
+    time: string
+    reason: string
+}
+
+interface ScheduleErrors {
+    visitType?: string
+    date?: string
+    time?: string
+    reason?: string
+}
+
 export function Telehealth() {
     const [providers] = useState<Provider[]>(mockProviders)
     const [upcomingVisits] = useState<UpcomingVisit[]>(mockUpcomingVisits)
@@ -152,10 +180,171 @@ export function Telehealth() {
     const [selectedVisitType, setSelectedVisitType] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
 
+    // Video call state
+    const [inCall, setInCall] = useState(false)
+    const [stream, setStream] = useState<MediaStream | null>(null)
+    const [isMuted, setIsMuted] = useState(false)
+    const [isVideoOff, setIsVideoOff] = useState(false)
+    const [callDuration, setCallDuration] = useState(0)
+    const [callProvider, setCallProvider] = useState<{ name: string; specialty: string }>({
+        name: 'Dr. Amanda Foster',
+        specialty: 'Family Medicine'
+    })
+    const [chatOpen, setChatOpen] = useState(false)
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+        { id: '1', sender: 'doctor', text: 'Hello! I can see you now. How can I help you today?', time: '0:05' }
+    ])
+    const [chatInput, setChatInput] = useState('')
+    const [cameraError, setCameraError] = useState<string | null>(null)
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const callTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+    const chatEndRef = useRef<HTMLDivElement>(null)
+
+    // Schedule form state
+    const [scheduleForm, setScheduleForm] = useState<ScheduleForm>({
+        visitType: '', provider: '', date: '', time: '', reason: ''
+    })
+    const [scheduleErrors, setScheduleErrors] = useState<ScheduleErrors>({})
+    const [scheduleSuccess, setScheduleSuccess] = useState(false)
+
+    // Toast state
+    const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+
     useEffect(() => {
         const t = setTimeout(() => setLoading(false), 800)
         return () => clearTimeout(t)
     }, [])
+
+    // Call timer
+    useEffect(() => {
+        if (inCall) {
+            callTimerRef.current = setInterval(() => {
+                setCallDuration(d => d + 1)
+            }, 1000)
+        }
+        return () => {
+            if (callTimerRef.current) clearInterval(callTimerRef.current)
+        }
+    }, [inCall])
+
+    // Scroll chat to bottom
+    useEffect(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [chatMessages])
+
+    // Auto-dismiss toast
+    useEffect(() => {
+        if (toast) {
+            const t = setTimeout(() => setToast(null), 4000)
+            return () => clearTimeout(t)
+        }
+    }, [toast])
+
+    const showToast = (message: string, type: 'success' | 'error') => {
+        setToast({ message, type })
+    }
+
+    const formatDuration = (seconds: number) => {
+        const m = Math.floor(seconds / 60)
+        const s = seconds % 60
+        return `${m}:${s.toString().padStart(2, '0')}`
+    }
+
+    const startCall = useCallback(async (providerName?: string, providerSpecialty?: string) => {
+        setCameraError(null)
+        try {
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            setStream(mediaStream)
+            setInCall(true)
+            setCallDuration(0)
+            setIsMuted(false)
+            setIsVideoOff(false)
+            if (providerName && providerSpecialty) {
+                setCallProvider({ name: providerName, specialty: providerSpecialty })
+            }
+            // Attach stream to video after a tick so the ref is mounted
+            requestAnimationFrame(() => {
+                if (videoRef.current) {
+                    videoRef.current.srcObject = mediaStream
+                }
+            })
+        } catch (err) {
+            console.error('Camera access error:', err)
+            setCameraError('Camera or microphone access was denied. Please allow permissions and try again.')
+            showToast('Camera access denied. Please check your browser permissions.', 'error')
+        }
+    }, [])
+
+    const endCall = useCallback(() => {
+        stream?.getTracks().forEach(t => t.stop())
+        setStream(null)
+        setInCall(false)
+        setCallDuration(0)
+        setChatOpen(false)
+        if (callTimerRef.current) {
+            clearInterval(callTimerRef.current)
+            callTimerRef.current = null
+        }
+        showToast('Call ended. Visit summary will be available in your history.', 'success')
+    }, [stream])
+
+    const toggleMute = useCallback(() => {
+        stream?.getAudioTracks().forEach(t => { t.enabled = !t.enabled })
+        setIsMuted(m => !m)
+    }, [stream])
+
+    const toggleVideo = useCallback(() => {
+        stream?.getVideoTracks().forEach(t => { t.enabled = !t.enabled })
+        setIsVideoOff(v => !v)
+    }, [stream])
+
+    const sendChatMessage = () => {
+        if (!chatInput.trim()) return
+        const now = formatDuration(callDuration)
+        setChatMessages(prev => [
+            ...prev,
+            { id: `msg-${Date.now()}`, sender: 'you', text: chatInput.trim(), time: now }
+        ])
+        setChatInput('')
+        // Simulate doctor reply after a short delay
+        setTimeout(() => {
+            setChatMessages(prev => [
+                ...prev,
+                { id: `msg-${Date.now()}-reply`, sender: 'doctor', text: 'Thank you for sharing that. Let me take a look.', time: formatDuration(callDuration + 3) }
+            ])
+        }, 2500)
+    }
+
+    // Schedule form logic
+    const validateScheduleForm = (): boolean => {
+        const errors: ScheduleErrors = {}
+        if (!scheduleForm.visitType) errors.visitType = 'Please select a visit type'
+        if (!scheduleForm.date) errors.date = 'Please select a date'
+        if (!scheduleForm.time) errors.time = 'Please select a time'
+        if (!scheduleForm.reason.trim()) errors.reason = 'Please describe your reason for visiting'
+        setScheduleErrors(errors)
+        return Object.keys(errors).length === 0
+    }
+
+    const handleScheduleSubmit = () => {
+        if (!validateScheduleForm()) return
+        setScheduleSuccess(true)
+        showToast('Visit scheduled successfully! You will receive a confirmation email shortly.', 'success')
+        // Reset form after brief display
+        setTimeout(() => {
+            setScheduleForm({ visitType: '', provider: '', date: '', time: '', reason: '' })
+            setScheduleErrors({})
+            setScheduleSuccess(false)
+        }, 3000)
+    }
+
+    const updateScheduleField = (field: keyof ScheduleForm, value: string) => {
+        setScheduleForm(prev => ({ ...prev, [field]: value }))
+        // Clear error for this field when user types
+        if (scheduleErrors[field as keyof ScheduleErrors]) {
+            setScheduleErrors(prev => ({ ...prev, [field]: undefined }))
+        }
+    }
 
     if (loading) return <PageSkeleton />
 
@@ -164,6 +353,173 @@ export function Telehealth() {
 
     return (
         <div className="telehealth-page">
+            {/* Toast Notification */}
+            <AnimatePresence>
+                {toast && (
+                    <motion.div
+                        className={`telehealth-toast telehealth-toast--${toast.type}`}
+                        initial={{ opacity: 0, y: -40, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0, x: '-50%' }}
+                        exit={{ opacity: 0, y: -40, x: '-50%' }}
+                    >
+                        {toast.type === 'success' ? <CheckCircle2 size={18} /> : <AlertCircle size={18} />}
+                        <span>{toast.message}</span>
+                        <button className="telehealth-toast__close" onClick={() => setToast(null)}>
+                            <X size={14} />
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Camera Error Banner */}
+            <AnimatePresence>
+                {cameraError && !inCall && (
+                    <motion.div
+                        className="telehealth-camera-error"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                    >
+                        <AlertCircle size={18} />
+                        <span>{cameraError}</span>
+                        <button onClick={() => setCameraError(null)}><X size={14} /></button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ========== VIDEO CALL OVERLAY ========== */}
+            <AnimatePresence>
+                {inCall && (
+                    <motion.div
+                        className="video-call-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        {/* Video Feed */}
+                        <div className="video-call__main">
+                            <div className={`video-call__feed ${isVideoOff ? 'video-off' : ''}`}>
+                                <video
+                                    ref={videoRef}
+                                    autoPlay
+                                    playsInline
+                                    muted
+                                    className="video-call__video"
+                                />
+                                {isVideoOff && (
+                                    <div className="video-call__video-off-placeholder">
+                                        <CameraOff size={48} />
+                                        <span>Camera is off</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Provider Info (floating) */}
+                            <div className="video-call__provider-info">
+                                <div className="video-call__provider-avatar">
+                                    <User size={16} />
+                                </div>
+                                <div>
+                                    <span className="video-call__provider-name">{callProvider.name}</span>
+                                    <span className="video-call__provider-specialty">{callProvider.specialty}</span>
+                                </div>
+                            </div>
+
+                            {/* Call Timer */}
+                            <div className="video-call__timer">
+                                <span className="video-call__timer-dot" />
+                                {formatDuration(callDuration)}
+                            </div>
+
+                            {/* Controls Bar */}
+                            <div className="video-call__controls">
+                                <button
+                                    className={`video-call__control-btn ${isMuted ? 'active' : ''}`}
+                                    onClick={toggleMute}
+                                    title={isMuted ? 'Unmute' : 'Mute'}
+                                >
+                                    {isMuted ? <MicOff size={22} /> : <Mic size={22} />}
+                                    <span>{isMuted ? 'Unmute' : 'Mute'}</span>
+                                </button>
+
+                                <button
+                                    className={`video-call__control-btn ${isVideoOff ? 'active' : ''}`}
+                                    onClick={toggleVideo}
+                                    title={isVideoOff ? 'Turn camera on' : 'Turn camera off'}
+                                >
+                                    {isVideoOff ? <CameraOff size={22} /> : <Camera size={22} />}
+                                    <span>{isVideoOff ? 'Start Video' : 'Stop Video'}</span>
+                                </button>
+
+                                <button
+                                    className={`video-call__control-btn ${chatOpen ? 'active' : ''}`}
+                                    onClick={() => setChatOpen(o => !o)}
+                                    title="Chat"
+                                >
+                                    <MessageSquare size={22} />
+                                    <span>Chat</span>
+                                </button>
+
+                                <button
+                                    className="video-call__control-btn video-call__control-btn--end"
+                                    onClick={endCall}
+                                    title="End call"
+                                >
+                                    <PhoneOff size={22} />
+                                    <span>End</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Chat Sidebar */}
+                        <AnimatePresence>
+                            {chatOpen && (
+                                <motion.div
+                                    className="video-call__chat"
+                                    initial={{ width: 0, opacity: 0 }}
+                                    animate={{ width: 360, opacity: 1 }}
+                                    exit={{ width: 0, opacity: 0 }}
+                                    transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                                >
+                                    <div className="video-call__chat-header">
+                                        <h4>In-Call Chat</h4>
+                                        <button onClick={() => setChatOpen(false)}>
+                                            <X size={18} />
+                                        </button>
+                                    </div>
+
+                                    <div className="video-call__chat-messages">
+                                        {chatMessages.map(msg => (
+                                            <div
+                                                key={msg.id}
+                                                className={`video-call__chat-msg video-call__chat-msg--${msg.sender}`}
+                                            >
+                                                <span className="video-call__chat-msg-text">{msg.text}</span>
+                                                <span className="video-call__chat-msg-time">{msg.time}</span>
+                                            </div>
+                                        ))}
+                                        <div ref={chatEndRef} />
+                                    </div>
+
+                                    <div className="video-call__chat-input">
+                                        <input
+                                            type="text"
+                                            placeholder="Type a message..."
+                                            value={chatInput}
+                                            onChange={e => setChatInput(e.target.value)}
+                                            onKeyDown={e => e.key === 'Enter' && sendChatMessage()}
+                                        />
+                                        <button onClick={sendChatMessage} disabled={!chatInput.trim()}>
+                                            <Send size={18} />
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Header */}
             <div className="telehealth__header">
                 <div>
@@ -173,7 +529,11 @@ export function Telehealth() {
                     </p>
                 </div>
                 <div className="telehealth__actions">
-                    <Button variant="primary" icon={<Video size={16} />}>
+                    <Button
+                        variant="primary"
+                        icon={<Video size={16} />}
+                        onClick={() => startCall()}
+                    >
                         Start Video Visit
                     </Button>
                 </div>
@@ -220,7 +580,12 @@ export function Telehealth() {
                                 <Badge variant="success" icon={<CheckCircle2 size={10} />}>
                                     {visit.status}
                                 </Badge>
-                                <Button variant="primary" size="sm" icon={<Play size={14} />}>
+                                <Button
+                                    variant="primary"
+                                    size="sm"
+                                    icon={<Play size={14} />}
+                                    onClick={() => startCall(visit.provider, visit.specialty)}
+                                >
                                     Join
                                 </Button>
                             </div>
@@ -343,6 +708,14 @@ export function Telehealth() {
                                             variant={provider.available ? 'primary' : 'secondary'}
                                             size="sm"
                                             icon={provider.available ? <Video size={14} /> : <Calendar size={14} />}
+                                            onClick={() => {
+                                                if (provider.available) {
+                                                    startCall(provider.name, provider.specialty)
+                                                } else {
+                                                    setActiveTab('schedule')
+                                                    updateScheduleField('provider', provider.id)
+                                                }
+                                            }}
                                         >
                                             {provider.available ? 'Start Visit' : 'Schedule'}
                                         </Button>
@@ -367,50 +740,105 @@ export function Telehealth() {
                                 Choose a date and time that works for you
                             </p>
 
-                            <div className="schedule-form">
-                                <div className="schedule-form__field">
-                                    <label>Visit Type</label>
-                                    <select>
-                                        <option>Select visit type...</option>
-                                        {visitTypes.map(type => (
-                                            <option key={type.id} value={type.id}>{type.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="schedule-form__field">
-                                    <label>Preferred Provider (optional)</label>
-                                    <select>
-                                        <option>Any available provider</option>
-                                        {providers.map(prov => (
-                                            <option key={prov.id} value={prov.id}>{prov.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="schedule-form__row">
-                                    <div className="schedule-form__field">
-                                        <label>Date</label>
-                                        <input type="date" />
+                            {scheduleSuccess ? (
+                                <motion.div
+                                    className="schedule-success"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                >
+                                    <CheckCircle2 size={48} />
+                                    <h4>Visit Scheduled!</h4>
+                                    <p>You will receive a confirmation email with your visit details and a link to join.</p>
+                                </motion.div>
+                            ) : (
+                                <div className="schedule-form">
+                                    <div className={`schedule-form__field ${scheduleErrors.visitType ? 'has-error' : ''}`}>
+                                        <label>Visit Type <span className="required">*</span></label>
+                                        <select
+                                            value={scheduleForm.visitType}
+                                            onChange={e => updateScheduleField('visitType', e.target.value)}
+                                        >
+                                            <option value="">Select visit type...</option>
+                                            {visitTypes.map(type => (
+                                                <option key={type.id} value={type.id}>{type.name}</option>
+                                            ))}
+                                        </select>
+                                        {scheduleErrors.visitType && (
+                                            <span className="schedule-form__error">
+                                                <AlertCircle size={12} /> {scheduleErrors.visitType}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="schedule-form__field">
-                                        <label>Time</label>
-                                        <select>
-                                            <option>9:00 AM</option>
-                                            <option>10:00 AM</option>
-                                            <option>11:00 AM</option>
-                                            <option>1:00 PM</option>
-                                            <option>2:00 PM</option>
-                                            <option>3:00 PM</option>
+                                        <label>Preferred Provider (optional)</label>
+                                        <select
+                                            value={scheduleForm.provider}
+                                            onChange={e => updateScheduleField('provider', e.target.value)}
+                                        >
+                                            <option value="">Any available provider</option>
+                                            {providers.map(prov => (
+                                                <option key={prov.id} value={prov.id}>{prov.name}</option>
+                                            ))}
                                         </select>
                                     </div>
+                                    <div className="schedule-form__row">
+                                        <div className={`schedule-form__field ${scheduleErrors.date ? 'has-error' : ''}`}>
+                                            <label>Date <span className="required">*</span></label>
+                                            <input
+                                                type="date"
+                                                value={scheduleForm.date}
+                                                onChange={e => updateScheduleField('date', e.target.value)}
+                                                min={new Date().toISOString().split('T')[0]}
+                                            />
+                                            {scheduleErrors.date && (
+                                                <span className="schedule-form__error">
+                                                    <AlertCircle size={12} /> {scheduleErrors.date}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className={`schedule-form__field ${scheduleErrors.time ? 'has-error' : ''}`}>
+                                            <label>Time <span className="required">*</span></label>
+                                            <select
+                                                value={scheduleForm.time}
+                                                onChange={e => updateScheduleField('time', e.target.value)}
+                                            >
+                                                <option value="">Select time...</option>
+                                                <option value="9:00 AM">9:00 AM</option>
+                                                <option value="10:00 AM">10:00 AM</option>
+                                                <option value="11:00 AM">11:00 AM</option>
+                                                <option value="1:00 PM">1:00 PM</option>
+                                                <option value="2:00 PM">2:00 PM</option>
+                                                <option value="3:00 PM">3:00 PM</option>
+                                            </select>
+                                            {scheduleErrors.time && (
+                                                <span className="schedule-form__error">
+                                                    <AlertCircle size={12} /> {scheduleErrors.time}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className={`schedule-form__field ${scheduleErrors.reason ? 'has-error' : ''}`}>
+                                        <label>Reason for visit <span className="required">*</span></label>
+                                        <textarea
+                                            placeholder="Describe your symptoms or reason for visit..."
+                                            value={scheduleForm.reason}
+                                            onChange={e => updateScheduleField('reason', e.target.value)}
+                                        />
+                                        {scheduleErrors.reason && (
+                                            <span className="schedule-form__error">
+                                                <AlertCircle size={12} /> {scheduleErrors.reason}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <Button
+                                        variant="primary"
+                                        icon={<Calendar size={16} />}
+                                        onClick={handleScheduleSubmit}
+                                    >
+                                        Schedule Visit
+                                    </Button>
                                 </div>
-                                <div className="schedule-form__field">
-                                    <label>Reason for visit</label>
-                                    <textarea placeholder="Describe your symptoms or reason for visit..."></textarea>
-                                </div>
-                                <Button variant="primary" icon={<Calendar size={16} />}>
-                                    Schedule Visit
-                                </Button>
-                            </div>
+                            )}
                         </GlassCard>
                     </motion.div>
                 )}
@@ -428,7 +856,11 @@ export function Telehealth() {
                             <div className="history-empty">
                                 <Video size={48} />
                                 <p>No past telehealth visits</p>
-                                <Button variant="secondary" icon={<Video size={16} />}>
+                                <Button
+                                    variant="secondary"
+                                    icon={<Video size={16} />}
+                                    onClick={() => startCall()}
+                                >
                                     Start Your First Visit
                                 </Button>
                             </div>

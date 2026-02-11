@@ -1,490 +1,645 @@
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-    Mic, Phone, Users, MessageSquare, Shield, Zap, Play, Save,
-    Rocket, GripVertical, Plus, Trash2, Settings, Volume2,
-    Globe, SmilePlus, ChevronRight, CheckCircle2, AlertTriangle,
-    Clock, Activity, Star, Bot, PhoneCall, PhoneOff, ArrowRight,
-    UserCheck, Brain, HeadphonesIcon, Send, RotateCcw
+    Phone, PhoneOff, Mic, MicOff, Volume2, Settings,
+    MessageSquare, Clock, Activity, User, Bot
 } from 'lucide-react'
-import { GlassCard, Badge, Button, MetricCard } from '../components/common'
 import './VoiceAgentBuilder.css'
 
 // ============================================================================
-// VOICE AGENT BUILDER - Visual Voice Agent Flow Designer
-// Build, configure and deploy AI voice agents for healthcare operations
+// VOICE AGENT BUILDER — Functional Voice Agent with Web Speech API
+// Real mic input, real text-to-speech, healthcare response tree
 // ============================================================================
 
-type AgentType = 'member_service' | 'provider_service' | 'outreach'
-type NodeType = 'greeting' | 'verification' | 'intent' | 'action' | 'escalation' | 'closing'
+declare global {
+    interface Window {
+        SpeechRecognition: typeof SpeechRecognition
+        webkitSpeechRecognition: typeof SpeechRecognition
+    }
+}
 
-interface FlowNode {
+interface TranscriptMessage {
     id: string
-    type: NodeType
-    label: string
-    config: Record<string, string>
-    connected: boolean
-}
-
-interface SimMessage {
-    role: 'agent' | 'caller'
+    role: 'caller' | 'agent'
     text: string
+    timestamp: Date
+    sentiment: 'positive' | 'neutral' | 'negative'
 }
 
-const agentTypes: { id: AgentType; label: string; description: string; icon: typeof Mic; color: string }[] = [
-    { id: 'member_service', label: 'Member Service', description: 'Handle member inquiries, benefits, and claims', icon: Users, color: '#14b8a6' },
-    { id: 'provider_service', label: 'Provider Service', description: 'Provider status checks, auth, and claims', icon: HeadphonesIcon, color: '#8b5cf6' },
-    { id: 'outreach', label: 'Outreach', description: 'Proactive member outreach and campaigns', icon: PhoneCall, color: '#f59e0b' },
-]
+interface AgentConfig {
+    name: string
+    greeting: string
+    voiceIndex: number
+    speed: number
+}
 
-const nodeTemplates: { type: NodeType; label: string; icon: typeof Mic; color: string; description: string }[] = [
-    { type: 'greeting', label: 'Greeting', icon: SmilePlus, color: '#22c55e', description: 'Welcome message and introduction' },
-    { type: 'verification', label: 'Identity Verification', icon: UserCheck, color: '#3b82f6', description: 'Verify caller identity (DOB, Member ID)' },
-    { type: 'intent', label: 'Intent Detection', icon: Brain, color: '#8b5cf6', description: 'AI-powered intent classification' },
-    { type: 'action', label: 'Action', icon: Zap, color: '#f59e0b', description: 'Execute task (eligibility, claim status, etc.)' },
-    { type: 'escalation', label: 'Escalation', icon: PhoneOff, color: '#ef4444', description: 'Transfer to human agent' },
-    { type: 'closing', label: 'Closing', icon: CheckCircle2, color: '#14b8a6', description: 'Wrap up and satisfaction survey' },
-]
+// ── Response tree for healthcare scenarios ──────────────────────────────
+function matchResponse(input: string): string {
+    const lower = input.toLowerCase()
+    if (/\b(claim|claims)\b/.test(lower))
+        return "I can help you with your claim. Can you provide your claim number so I can look that up for you?"
+    if (/\b(appointment|schedule|visit)\b/.test(lower))
+        return "I'd be happy to help schedule an appointment. What type of visit do you need — primary care, specialist, or urgent care?"
+    if (/\b(prescription|refill|medication|medicine)\b/.test(lower))
+        return "Let me look up your prescription information. Can you confirm your member ID so I can pull up your records?"
+    if (/\b(bill|billing|statement|payment|pay)\b/.test(lower))
+        return "I can help with billing questions. Are you calling about a specific statement or a recent charge?"
+    if (/\b(coverage|covered|benefits|plan)\b/.test(lower))
+        return "I can check your coverage details. Could you tell me the service or procedure you're asking about?"
+    if (/\b(referral|refer)\b/.test(lower))
+        return "I can assist with referrals. Do you already have a provider in mind, or would you like recommendations?"
+    if (/\b(emergency|urgent)\b/.test(lower))
+        return "If this is a medical emergency, please hang up and dial 911. Otherwise, I can help locate an urgent care facility near you."
+    if (/\b(thank|thanks|bye|goodbye)\b/.test(lower))
+        return "You're welcome! Is there anything else I can help you with before we end the call?"
+    if (/\b(yes|yeah|sure|okay|ok)\b/.test(lower))
+        return "Great. Please go ahead and I'll do my best to assist you."
+    if (/\b(no|nope|nothing|that's all|that's it)\b/.test(lower))
+        return "Alright, thank you for calling Apex Health. Have a wonderful day!"
+    return "I understand. Let me connect you with a specialist who can help with that. One moment please."
+}
 
-const defaultFlow: FlowNode[] = [
-    { id: 'n1', type: 'greeting', label: 'Welcome Greeting', config: { message: 'Welcome to Apex Health. How can I help you today?' }, connected: true },
-    { id: 'n2', type: 'verification', label: 'Verify Identity', config: { method: 'DOB + Member ID' }, connected: true },
-    { id: 'n3', type: 'intent', label: 'Detect Intent', config: { model: 'apex-intent-v3' }, connected: true },
-    { id: 'n4', type: 'action', label: 'Check Eligibility', config: { api: '/api/eligibility/check' }, connected: true },
-    { id: 'n5', type: 'escalation', label: 'Transfer to Agent', config: { queue: 'tier-2-support' }, connected: false },
-    { id: 'n6', type: 'closing', label: 'Call Wrap-Up', config: { survey: 'enabled' }, connected: true },
-]
+function detectSentiment(text: string): 'positive' | 'neutral' | 'negative' {
+    const lower = text.toLowerCase()
+    if (/\b(thank|thanks|great|good|happy|appreciate|wonderful|love|excellent|perfect)\b/.test(lower)) return 'positive'
+    if (/\b(angry|upset|frustrated|terrible|horrible|worst|bad|hate|ridiculous|unacceptable)\b/.test(lower)) return 'negative'
+    return 'neutral'
+}
 
-const simulationScript: SimMessage[] = [
-    { role: 'agent', text: 'Welcome to Apex Health! My name is Aria. How can I assist you today?' },
-    { role: 'caller', text: 'Hi, I need to check if my upcoming surgery is covered under my plan.' },
-    { role: 'agent', text: 'I\'d be happy to help you with that. For verification, could you please provide your date of birth and member ID?' },
-    { role: 'caller', text: 'Sure, my DOB is March 15, 1985, and my member ID is AXP-847291.' },
-    { role: 'agent', text: 'Thank you, Sarah. I\'ve verified your identity. Let me check your coverage for the upcoming procedure. Could you tell me the procedure name or CPT code?' },
-    { role: 'caller', text: 'It\'s an arthroscopic knee surgery, I think the code is 29881.' },
-    { role: 'agent', text: 'I\'ve found the details. CPT 29881 - Arthroscopic meniscectomy is covered under your Gold PPO plan with a $250 copay and 80/20 coinsurance after deductible. Your remaining deductible is $450. Would you like me to initiate a prior authorization?' },
-    { role: 'caller', text: 'Yes, please start the prior auth.' },
-    { role: 'agent', text: 'I\'ve submitted the prior authorization request #PA-2026-4821. You\'ll receive a determination within 5 business days. Is there anything else I can help with?' },
-    { role: 'caller', text: 'No, that\'s all. Thank you!' },
-    { role: 'agent', text: 'You\'re welcome, Sarah! I hope your procedure goes well. Have a great day! On a scale of 1-5, how would you rate this interaction?' },
-]
+function detectTopics(messages: TranscriptMessage[]): string[] {
+    const topics = new Set<string>()
+    const text = messages.map(m => m.text).join(' ').toLowerCase()
+    if (/claim/.test(text)) topics.add('Claims')
+    if (/appointment|schedule|visit/.test(text)) topics.add('Appointments')
+    if (/prescription|refill|medication/.test(text)) topics.add('Prescriptions')
+    if (/bill|billing|payment/.test(text)) topics.add('Billing')
+    if (/coverage|benefits|plan/.test(text)) topics.add('Coverage')
+    if (/referral/.test(text)) topics.add('Referrals')
+    if (topics.size === 0) topics.add('General Inquiry')
+    return Array.from(topics)
+}
 
+function formatTime(seconds: number): string {
+    const m = Math.floor(seconds / 60)
+    const s = seconds % 60
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
+}
+
+function formatTimestamp(date: Date): string {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+}
+
+// ── Main Component ──────────────────────────────────────────────────────
 export default function VoiceAgentBuilder() {
-    const [selectedAgent, setSelectedAgent] = useState<AgentType>('member_service')
-    const [flowNodes, setFlowNodes] = useState<FlowNode[]>(defaultFlow)
-    const [selectedNode, setSelectedNode] = useState<string | null>(null)
-    const [isSimulating, setIsSimulating] = useState(false)
-    const [simMessages, setSimMessages] = useState<SimMessage[]>([])
-    const [simIndex, setSimIndex] = useState(0)
-    const [deploying, setDeploying] = useState(false)
-    const [deployed, setDeployed] = useState(false)
+    // Agent configuration
+    const [config, setConfig] = useState<AgentConfig>({
+        name: 'Aria',
+        greeting: 'Thank you for calling Apex Health. How can I help you today?',
+        voiceIndex: 0,
+        speed: 0.95,
+    })
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
 
-    // Personality config
-    const [greeting, setGreeting] = useState('Welcome to Apex Health! My name is Aria. How can I assist you today?')
-    const [voice, setVoice] = useState('aria-warm')
-    const [language, setLanguage] = useState('en-US')
+    // Call state
+    const [callActive, setCallActive] = useState(false)
+    const [muted, setMuted] = useState(false)
+    const [volume, setVolume] = useState(80)
+    const [callDuration, setCallDuration] = useState(0)
+    const [agentSpeaking, setAgentSpeaking] = useState(false)
+    const [listening, setListening] = useState(false)
 
-    const addNode = useCallback((type: NodeType) => {
-        const template = nodeTemplates.find(t => t.type === type)
-        if (!template) return
-        const newNode: FlowNode = {
-            id: `n${Date.now()}`,
-            type,
-            label: template.label,
-            config: {},
-            connected: true
+    // Transcript
+    const [messages, setMessages] = useState<TranscriptMessage[]>([])
+    const [interimText, setInterimText] = useState('')
+
+    // Refs
+    const recognitionRef = useRef<SpeechRecognition | null>(null)
+    const synthRef = useRef(typeof window !== 'undefined' ? window.speechSynthesis : null)
+    const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+    const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+    const transcriptEndRef = useRef<HTMLDivElement | null>(null)
+    const messagesRef = useRef<TranscriptMessage[]>([])
+
+    // Keep messagesRef in sync
+    useEffect(() => { messagesRef.current = messages }, [messages])
+
+    // ── Load voices ─────────────────────────────────────────────────────
+    useEffect(() => {
+        const loadVoices = () => {
+            const v = window.speechSynthesis.getVoices()
+            if (v.length > 0) setVoices(v)
         }
-        setFlowNodes(prev => [...prev, newNode])
+        loadVoices()
+        window.speechSynthesis.onvoiceschanged = loadVoices
     }, [])
 
-    const removeNode = useCallback((id: string) => {
-        setFlowNodes(prev => prev.filter(n => n.id !== id))
-        if (selectedNode === id) setSelectedNode(null)
-    }, [selectedNode])
+    // ── Auto-scroll transcript ──────────────────────────────────────────
+    useEffect(() => {
+        transcriptEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [messages, interimText])
 
-    const startSimulation = useCallback(() => {
-        setIsSimulating(true)
-        setSimMessages([])
-        setSimIndex(0)
-    }, [])
-
-    const advanceSimulation = useCallback(() => {
-        if (simIndex < simulationScript.length) {
-            setSimMessages(prev => [...prev, simulationScript[simIndex]])
-            setSimIndex(prev => prev + 1)
+    // ── Call duration timer ─────────────────────────────────────────────
+    useEffect(() => {
+        if (callActive) {
+            timerRef.current = setInterval(() => setCallDuration(d => d + 1), 1000)
         }
-    }, [simIndex])
+        return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    }, [callActive])
 
-    const resetSimulation = useCallback(() => {
-        setIsSimulating(false)
-        setSimMessages([])
-        setSimIndex(0)
+    // ── Speak function ──────────────────────────────────────────────────
+    const speak = useCallback((text: string) => {
+        if (!synthRef.current) return
+        synthRef.current.cancel()
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.rate = config.speed
+        utterance.pitch = 1.0
+        utterance.volume = volume / 100
+        if (voices.length > 0 && voices[config.voiceIndex]) {
+            utterance.voice = voices[config.voiceIndex]
+        }
+        utterance.onstart = () => setAgentSpeaking(true)
+        utterance.onend = () => {
+            setAgentSpeaking(false)
+            // Resume listening after agent finishes speaking
+            if (recognitionRef.current && !muted) {
+                try { recognitionRef.current.start() } catch { /* already started */ }
+            }
+        }
+        // Pause recognition while agent speaks
+        if (recognitionRef.current) {
+            try { recognitionRef.current.stop() } catch { /* ok */ }
+        }
+        synthRef.current.speak(utterance)
+    }, [config.speed, config.voiceIndex, volume, voices, muted])
+
+    // ── Add a message helper ────────────────────────────────────────────
+    const addMessage = useCallback((role: 'caller' | 'agent', text: string) => {
+        const msg: TranscriptMessage = {
+            id: `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            role,
+            text,
+            timestamp: new Date(),
+            sentiment: detectSentiment(text),
+        }
+        setMessages(prev => [...prev, msg])
+        return msg
     }, [])
 
-    const handleDeploy = useCallback(() => {
-        setDeploying(true)
+    // ── Start call ──────────────────────────────────────────────────────
+    const startCall = useCallback(() => {
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+        if (!SR) {
+            alert('Speech Recognition is not supported in this browser. Please use Chrome or Edge.')
+            return
+        }
+
+        const recognition = new SR()
+        recognition.continuous = true
+        recognition.interimResults = true
+        recognition.lang = 'en-US'
+
+        recognition.onresult = (event: SpeechRecognitionEvent) => {
+            let interim = ''
+            let finalTranscript = ''
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript
+                } else {
+                    interim += transcript
+                }
+            }
+
+            setInterimText(interim)
+
+            if (finalTranscript.trim()) {
+                setInterimText('')
+                addMessage('caller', finalTranscript.trim())
+
+                // Clear any existing silence timer
+                if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
+
+                // Wait a brief moment after caller stops, then respond
+                silenceTimerRef.current = setTimeout(() => {
+                    const response = matchResponse(finalTranscript.trim())
+                    addMessage('agent', response)
+                    speak(response)
+                }, 800)
+            }
+        }
+
+        recognition.onstart = () => setListening(true)
+        recognition.onend = () => {
+            setListening(false)
+            // Auto-restart if call is still active and not muted
+        }
+        recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+            if (event.error !== 'aborted' && event.error !== 'no-speech') {
+                console.error('Speech recognition error:', event.error)
+            }
+        }
+
+        recognitionRef.current = recognition
+
+        // Activate call
+        setCallActive(true)
+        setCallDuration(0)
+        setMessages([])
+        setInterimText('')
+        setMuted(false)
+
+        // Agent greeting
+        const greetingMsg = config.greeting
         setTimeout(() => {
-            setDeploying(false)
-            setDeployed(true)
-        }, 2000)
+            addMessage('agent', greetingMsg)
+            speak(greetingMsg)
+        }, 500)
+    }, [config.greeting, addMessage, speak])
+
+    // ── End call ────────────────────────────────────────────────────────
+    const endCall = useCallback(() => {
+        if (recognitionRef.current) {
+            try { recognitionRef.current.stop() } catch { /* ok */ }
+            recognitionRef.current = null
+        }
+        if (synthRef.current) synthRef.current.cancel()
+        if (timerRef.current) clearInterval(timerRef.current)
+        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current)
+        setCallActive(false)
+        setAgentSpeaking(false)
+        setListening(false)
+        setInterimText('')
     }, [])
 
-    const getNodeIcon = (type: NodeType) => {
-        const template = nodeTemplates.find(t => t.type === type)
-        return template ? template.icon : Zap
-    }
+    // ── Toggle mute ─────────────────────────────────────────────────────
+    const toggleMute = useCallback(() => {
+        if (!recognitionRef.current) return
+        if (muted) {
+            try { recognitionRef.current.start() } catch { /* ok */ }
+        } else {
+            try { recognitionRef.current.stop() } catch { /* ok */ }
+        }
+        setMuted(m => !m)
+    }, [muted])
 
-    const getNodeColor = (type: NodeType) => {
-        const template = nodeTemplates.find(t => t.type === type)
-        return template ? template.color : '#64748b'
-    }
+    // ── Analytics computations ──────────────────────────────────────────
+    const callerWords = messages.filter(m => m.role === 'caller').reduce((sum, m) => sum + m.text.split(/\s+/).length, 0)
+    const agentWords = messages.filter(m => m.role === 'agent').reduce((sum, m) => sum + m.text.split(/\s+/).length, 0)
+    const topics = detectTopics(messages)
+    const sentimentCounts = messages.reduce(
+        (acc, m) => { acc[m.sentiment]++; return acc },
+        { positive: 0, neutral: 0, negative: 0 } as Record<string, number>
+    )
+
+    // ── Waveform bars ───────────────────────────────────────────────────
+    const waveformBars = Array.from({ length: 24 }, (_, i) => i)
 
     return (
-        <div className="voice-agent-builder">
+        <div className="va-page">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                className="va-container"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
             >
-                {/* Header */}
-                <div className="vab-header">
-                    <div>
-                        <h1 className="vab-title">
-                            <Bot size={28} />
-                            Voice Agent Builder
-                            <Badge variant="purple" icon={<Mic size={10} />}>AI Voice</Badge>
+                {/* ── Header ─────────────────────────────────────────── */}
+                <div className="va-header">
+                    <div className="va-header-left">
+                        <h1 className="va-title">
+                            <Bot size={24} />
+                            Voice Agent
                         </h1>
-                        <p className="vab-subtitle">Design, configure, and deploy intelligent voice agents</p>
+                        <span className="va-subtitle">Real-time healthcare voice assistant</span>
                     </div>
-                    <div className="vab-header-actions">
-                        <Button variant="secondary" icon={<Save size={16} />}>Save Draft</Button>
-                        <Button
-                            variant="primary"
-                            icon={deployed ? <CheckCircle2 size={16} /> : <Rocket size={16} />}
-                            loading={deploying}
-                            onClick={handleDeploy}
-                        >
-                            {deployed ? 'Deployed' : 'Deploy Agent'}
-                        </Button>
+                    <div className="va-header-right">
+                        {callActive && (
+                            <motion.div
+                                className="va-call-badge"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                            >
+                                <span className="va-call-dot" />
+                                <Clock size={13} />
+                                <span>{formatTime(callDuration)}</span>
+                            </motion.div>
+                        )}
                     </div>
                 </div>
 
-                {/* Metrics Sidebar + Main Content */}
-                <div className="vab-layout">
-                    {/* Main Builder Area */}
-                    <div className="vab-main">
-                        {/* Agent Type Selection */}
-                        <GlassCard className="vab-agent-selector">
-                            <h3 className="vab-section-title">
-                                <Phone size={18} />
-                                Select Agent Type
-                            </h3>
-                            <div className="vab-agent-types">
-                                {agentTypes.map((agent) => {
-                                    const Icon = agent.icon
-                                    return (
-                                        <motion.div
-                                            key={agent.id}
-                                            className={`vab-agent-card ${selectedAgent === agent.id ? 'active' : ''}`}
-                                            onClick={() => setSelectedAgent(agent.id)}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            style={{ '--agent-color': agent.color } as React.CSSProperties}
-                                        >
-                                            <div className="vab-agent-icon" style={{ background: `${agent.color}20`, color: agent.color }}>
-                                                <Icon size={22} />
-                                            </div>
-                                            <div className="vab-agent-info">
-                                                <span className="vab-agent-name">{agent.label}</span>
-                                                <span className="vab-agent-desc">{agent.description}</span>
-                                            </div>
-                                            {selectedAgent === agent.id && (
-                                                <CheckCircle2 size={18} style={{ color: agent.color }} />
-                                            )}
-                                        </motion.div>
-                                    )
-                                })}
-                            </div>
-                        </GlassCard>
+                {/* ── 3-column layout ────────────────────────────────── */}
+                <div className="va-layout">
 
-                        {/* Personality Configuration */}
-                        <GlassCard className="vab-personality">
-                            <h3 className="vab-section-title">
-                                <Settings size={18} />
-                                Agent Personality
-                            </h3>
-                            <div className="vab-personality-grid">
-                                <div className="vab-field">
-                                    <label>Greeting Message</label>
-                                    <textarea
-                                        value={greeting}
-                                        onChange={(e) => setGreeting(e.target.value)}
-                                        rows={2}
-                                    />
-                                </div>
-                                <div className="vab-field-row">
-                                    <div className="vab-field">
-                                        <label>
-                                            <Volume2 size={14} /> Voice
-                                        </label>
-                                        <select value={voice} onChange={(e) => setVoice(e.target.value)}>
-                                            <option value="aria-warm">Aria (Warm, Female)</option>
-                                            <option value="marcus-pro">Marcus (Professional, Male)</option>
-                                            <option value="sophia-friendly">Sophia (Friendly, Female)</option>
-                                            <option value="james-calm">James (Calm, Male)</option>
-                                        </select>
-                                    </div>
-                                    <div className="vab-field">
-                                        <label>
-                                            <Globe size={14} /> Language
-                                        </label>
-                                        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-                                            <option value="en-US">English (US)</option>
-                                            <option value="es-US">Spanish (US)</option>
-                                            <option value="fr-CA">French (CA)</option>
-                                            <option value="zh-CN">Mandarin</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </GlassCard>
+                    {/* ── LEFT: Agent Config ────────────────────────── */}
+                    <aside className="va-panel va-config">
+                        <div className="va-panel-header">
+                            <Settings size={16} />
+                            <span>Agent Configuration</span>
+                        </div>
 
-                        {/* Flow Builder */}
-                        <GlassCard className="vab-flow-builder">
-                            <div className="vab-flow-header">
-                                <h3 className="vab-section-title">
-                                    <Activity size={18} />
-                                    Conversation Flow
-                                </h3>
-                                <div className="vab-node-palette">
-                                    {nodeTemplates.map((tmpl) => (
-                                        <motion.button
-                                            key={tmpl.type}
-                                            className="vab-add-node-btn"
-                                            onClick={() => addNode(tmpl.type)}
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            title={`Add ${tmpl.label}`}
-                                            style={{ '--node-color': tmpl.color } as React.CSSProperties}
-                                        >
-                                            <tmpl.icon size={14} />
-                                            <Plus size={10} />
-                                        </motion.button>
-                                    ))}
-                                </div>
+                        <div className="va-config-body">
+                            <label className="va-label">Agent Name</label>
+                            <input
+                                className="va-input"
+                                value={config.name}
+                                onChange={e => setConfig(c => ({ ...c, name: e.target.value }))}
+                            />
+
+                            <label className="va-label">Voice</label>
+                            <select
+                                className="va-select"
+                                value={config.voiceIndex}
+                                onChange={e => setConfig(c => ({ ...c, voiceIndex: Number(e.target.value) }))}
+                            >
+                                {voices.length === 0 && <option value={0}>Default</option>}
+                                {voices.map((v, i) => (
+                                    <option key={i} value={i}>{v.name} ({v.lang})</option>
+                                ))}
+                            </select>
+
+                            <label className="va-label">Speed ({config.speed.toFixed(2)}x)</label>
+                            <input
+                                type="range"
+                                className="va-range"
+                                min={0.5}
+                                max={1.5}
+                                step={0.05}
+                                value={config.speed}
+                                onChange={e => setConfig(c => ({ ...c, speed: Number(e.target.value) }))}
+                            />
+
+                            <label className="va-label">Greeting Message</label>
+                            <textarea
+                                className="va-textarea"
+                                rows={3}
+                                value={config.greeting}
+                                onChange={e => setConfig(c => ({ ...c, greeting: e.target.value }))}
+                            />
+
+                            <label className="va-label">Volume ({volume}%)</label>
+                            <div className="va-volume-row">
+                                <Volume2 size={14} />
+                                <input
+                                    type="range"
+                                    className="va-range"
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                    value={volume}
+                                    onChange={e => setVolume(Number(e.target.value))}
+                                />
                             </div>
 
-                            <div className="vab-flow-canvas">
-                                {flowNodes.map((node, index) => {
-                                    const NodeIcon = getNodeIcon(node.type)
-                                    const color = getNodeColor(node.type)
-                                    return (
-                                        <motion.div
-                                            key={node.id}
-                                            className={`vab-flow-node ${selectedNode === node.id ? 'selected' : ''}`}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.05 }}
-                                            onClick={() => setSelectedNode(node.id)}
-                                            style={{ '--node-color': color } as React.CSSProperties}
-                                        >
-                                            <div className="vab-node-grip">
-                                                <GripVertical size={14} />
-                                            </div>
-                                            <div className="vab-node-icon" style={{ background: `${color}20`, color }}>
-                                                <NodeIcon size={16} />
-                                            </div>
-                                            <div className="vab-node-content">
-                                                <span className="vab-node-label">{node.label}</span>
-                                                <span className="vab-node-type">{node.type.replace('_', ' ')}</span>
-                                            </div>
-                                            <div className="vab-node-actions">
-                                                <Badge
-                                                    variant={node.connected ? 'success' : 'warning'}
-                                                    size="sm"
-                                                >
-                                                    {node.connected ? 'Connected' : 'Disconnected'}
-                                                </Badge>
-                                                <button
-                                                    className="vab-node-delete"
-                                                    onClick={(e) => { e.stopPropagation(); removeNode(node.id) }}
-                                                >
-                                                    <Trash2 size={14} />
-                                                </button>
-                                            </div>
-                                            {index < flowNodes.length - 1 && (
-                                                <div className="vab-node-connector">
-                                                    <ArrowRight size={14} />
-                                                </div>
-                                            )}
-                                        </motion.div>
-                                    )
-                                })}
-                                {flowNodes.length === 0 && (
-                                    <div className="vab-flow-empty">
-                                        <Plus size={32} />
-                                        <p>Add nodes from the palette above to build your conversation flow</p>
-                                    </div>
-                                )}
-                            </div>
-                        </GlassCard>
+                            <div className="va-divider" />
 
-                        {/* Simulation Panel */}
-                        <GlassCard className="vab-simulation">
-                            <div className="vab-sim-header">
-                                <h3 className="vab-section-title">
-                                    <MessageSquare size={18} />
-                                    Test Simulation
-                                </h3>
-                                <div className="vab-sim-controls">
-                                    {!isSimulating ? (
-                                        <Button variant="primary" size="sm" icon={<Play size={14} />} onClick={startSimulation}>
-                                            Start Test
-                                        </Button>
-                                    ) : (
-                                        <>
-                                            <Button
-                                                variant="secondary"
-                                                size="sm"
-                                                icon={<Send size={14} />}
-                                                onClick={advanceSimulation}
-                                                disabled={simIndex >= simulationScript.length}
-                                            >
-                                                Next
-                                            </Button>
-                                            <Button variant="ghost" size="sm" icon={<RotateCcw size={14} />} onClick={resetSimulation}>
-                                                Reset
-                                            </Button>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="vab-sim-chat">
-                                {!isSimulating && simMessages.length === 0 && (
-                                    <div className="vab-sim-empty">
-                                        <Bot size={32} />
-                                        <p>Click "Start Test" to simulate a conversation with your voice agent</p>
+                            <label className="va-label">Response Templates</label>
+                            <div className="va-templates">
+                                {[
+                                    { trigger: '"claim"', response: 'Claim assistance flow' },
+                                    { trigger: '"appointment"', response: 'Scheduling flow' },
+                                    { trigger: '"prescription"', response: 'Rx lookup flow' },
+                                    { trigger: '"billing"', response: 'Billing inquiry flow' },
+                                    { trigger: '"coverage"', response: 'Benefits check flow' },
+                                ].map((t, i) => (
+                                    <div key={i} className="va-template-item">
+                                        <span className="va-template-trigger">{t.trigger}</span>
+                                        <span className="va-template-arrow">&rarr;</span>
+                                        <span className="va-template-resp">{t.response}</span>
                                     </div>
-                                )}
-                                <AnimatePresence>
-                                    {simMessages.map((msg, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className={`vab-sim-message ${msg.role}`}
-                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="vab-sim-avatar">
-                                                {msg.role === 'agent' ? <Bot size={14} /> : <Users size={14} />}
-                                            </div>
-                                            <div className="vab-sim-bubble">
-                                                <span className="vab-sim-role">{msg.role === 'agent' ? 'Aria (AI Agent)' : 'Caller'}</span>
-                                                <p>{msg.text}</p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </AnimatePresence>
-                                {isSimulating && simIndex >= simulationScript.length && (
+                                ))}
+                            </div>
+                        </div>
+                    </aside>
+
+                    {/* ── CENTER: Call + Transcript ─────────────────── */}
+                    <main className="va-panel va-center">
+                        {/* Waveform + call controls */}
+                        <div className="va-call-area">
+                            <div className="va-waveform">
+                                {waveformBars.map(i => (
                                     <motion.div
-                                        className="vab-sim-complete"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
+                                        key={i}
+                                        className={`va-wave-bar ${(listening || agentSpeaking) && callActive ? 'active' : ''}`}
+                                        animate={
+                                            (listening || agentSpeaking) && callActive
+                                                ? { scaleY: [0.3, 0.6 + Math.random() * 0.8, 0.3], transition: { duration: 0.4 + Math.random() * 0.4, repeat: Infinity, repeatType: 'reverse' as const } }
+                                                : { scaleY: 0.15 }
+                                        }
+                                        style={{
+                                            background: agentSpeaking ? '#0D7C8C' : listening ? '#4A6FA5' : '#6B7585',
+                                        }}
+                                    />
+                                ))}
+                            </div>
+
+                            <div className="va-status-text">
+                                {!callActive && 'Ready to start a call'}
+                                {callActive && agentSpeaking && `${config.name} is speaking...`}
+                                {callActive && listening && !agentSpeaking && 'Listening...'}
+                                {callActive && !listening && !agentSpeaking && (muted ? 'Microphone muted' : 'Processing...')}
+                            </div>
+
+                            <div className="va-controls">
+                                {!callActive ? (
+                                    <motion.button
+                                        className="va-btn va-btn-call"
+                                        onClick={startCall}
+                                        whileHover={{ scale: 1.04 }}
+                                        whileTap={{ scale: 0.96 }}
                                     >
-                                        <CheckCircle2 size={20} />
-                                        <span>Simulation complete - All conversation nodes executed successfully</span>
-                                    </motion.div>
+                                        <Phone size={18} />
+                                        Start Call
+                                    </motion.button>
+                                ) : (
+                                    <>
+                                        <motion.button
+                                            className={`va-btn va-btn-mute ${muted ? 'muted' : ''}`}
+                                            onClick={toggleMute}
+                                            whileHover={{ scale: 1.04 }}
+                                            whileTap={{ scale: 0.96 }}
+                                        >
+                                            {muted ? <MicOff size={16} /> : <Mic size={16} />}
+                                            {muted ? 'Unmute' : 'Mute'}
+                                        </motion.button>
+                                        <motion.button
+                                            className="va-btn va-btn-end"
+                                            onClick={endCall}
+                                            whileHover={{ scale: 1.04 }}
+                                            whileTap={{ scale: 0.96 }}
+                                        >
+                                            <PhoneOff size={16} />
+                                            End Call
+                                        </motion.button>
+                                    </>
                                 )}
                             </div>
-                        </GlassCard>
-                    </div>
+                        </div>
 
-                    {/* Metrics Sidebar */}
-                    <div className="vab-sidebar">
-                        <GlassCard className="vab-metrics">
-                            <h3 className="vab-section-title">
-                                <Activity size={18} />
-                                Agent Metrics
-                            </h3>
-                            <div className="vab-metric-items">
-                                <div className="vab-metric-item">
-                                    <div className="vab-metric-icon" style={{ background: 'rgba(20, 184, 166, 0.15)', color: '#14b8a6' }}>
-                                        <PhoneCall size={18} />
-                                    </div>
-                                    <div className="vab-metric-info">
-                                        <span className="vab-metric-value">1,247</span>
-                                        <span className="vab-metric-label">Active Calls</span>
-                                    </div>
-                                    <Badge variant="success" size="sm" pulse>Live</Badge>
+                        {/* Transcript */}
+                        <div className="va-transcript-header">
+                            <MessageSquare size={15} />
+                            <span>Live Transcript</span>
+                            {messages.length > 0 && (
+                                <span className="va-msg-count">{messages.length} messages</span>
+                            )}
+                        </div>
+                        <div className="va-transcript">
+                            {messages.length === 0 && !callActive && (
+                                <div className="va-transcript-empty">
+                                    <Mic size={28} />
+                                    <p>Start a call to begin the conversation</p>
                                 </div>
-                                <div className="vab-metric-item">
-                                    <div className="vab-metric-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' }}>
-                                        <Clock size={18} />
-                                    </div>
-                                    <div className="vab-metric-info">
-                                        <span className="vab-metric-value">4:32</span>
-                                        <span className="vab-metric-label">Avg Duration</span>
-                                    </div>
-                                    <Badge variant="info" size="sm">-12%</Badge>
+                            )}
+                            {messages.length === 0 && callActive && !agentSpeaking && (
+                                <div className="va-transcript-empty">
+                                    <Bot size={28} />
+                                    <p>Connecting...</p>
                                 </div>
-                                <div className="vab-metric-item">
-                                    <div className="vab-metric-icon" style={{ background: 'rgba(139, 92, 246, 0.15)', color: '#8b5cf6' }}>
-                                        <Star size={18} />
+                            )}
+                            <AnimatePresence>
+                                {messages.map(msg => (
+                                    <motion.div
+                                        key={msg.id}
+                                        className={`va-msg ${msg.role}`}
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.25 }}
+                                    >
+                                        <div className="va-msg-avatar">
+                                            {msg.role === 'agent' ? <Bot size={14} /> : <User size={14} />}
+                                        </div>
+                                        <div className="va-msg-body">
+                                            <div className="va-msg-meta">
+                                                <span className="va-msg-role">
+                                                    {msg.role === 'agent' ? config.name : 'Caller'}
+                                                </span>
+                                                <span className="va-msg-time">{formatTimestamp(msg.timestamp)}</span>
+                                                <span className={`va-sentiment va-sentiment-${msg.sentiment}`}>
+                                                    {msg.sentiment === 'positive' ? '+' : msg.sentiment === 'negative' ? '−' : '•'}
+                                                </span>
+                                            </div>
+                                            <p className="va-msg-text">{msg.text}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+
+                            {interimText && (
+                                <div className="va-msg caller interim">
+                                    <div className="va-msg-avatar">
+                                        <User size={14} />
                                     </div>
-                                    <div className="vab-metric-info">
-                                        <span className="vab-metric-value">4.7/5</span>
-                                        <span className="vab-metric-label">Satisfaction</span>
+                                    <div className="va-msg-body">
+                                        <p className="va-msg-text va-interim">{interimText}</p>
                                     </div>
-                                    <Badge variant="success" size="sm">+0.3</Badge>
                                 </div>
-                                <div className="vab-metric-item">
-                                    <div className="vab-metric-icon" style={{ background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e' }}>
-                                        <CheckCircle2 size={18} />
-                                    </div>
-                                    <div className="vab-metric-info">
-                                        <span className="vab-metric-value">89%</span>
-                                        <span className="vab-metric-label">Resolution Rate</span>
-                                    </div>
-                                    <Badge variant="success" size="sm">+5%</Badge>
+                            )}
+                            <div ref={transcriptEndRef} />
+                        </div>
+                    </main>
+
+                    {/* ── RIGHT: Analytics ──────────────────────────── */}
+                    <aside className="va-panel va-analytics">
+                        <div className="va-panel-header">
+                            <Activity size={16} />
+                            <span>Call Analytics</span>
+                        </div>
+
+                        <div className="va-analytics-body">
+                            <div className="va-stat">
+                                <div className="va-stat-icon" style={{ background: 'rgba(13,124,140,0.12)', color: '#0D7C8C' }}>
+                                    <Clock size={16} />
                                 </div>
-                                <div className="vab-metric-item">
-                                    <div className="vab-metric-icon" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>
-                                        <AlertTriangle size={18} />
-                                    </div>
-                                    <div className="vab-metric-info">
-                                        <span className="vab-metric-value">7.2%</span>
-                                        <span className="vab-metric-label">Escalation Rate</span>
-                                    </div>
-                                    <Badge variant="warning" size="sm">-2%</Badge>
+                                <div>
+                                    <div className="va-stat-value">{formatTime(callDuration)}</div>
+                                    <div className="va-stat-label">Duration</div>
                                 </div>
                             </div>
-                        </GlassCard>
 
-                        <GlassCard className="vab-deployment-status">
-                            <h3 className="vab-section-title">
-                                <Shield size={18} />
-                                Deployment Status
-                            </h3>
-                            <div className="vab-deploy-items">
-                                <div className="vab-deploy-item">
-                                    <span>Member Service</span>
-                                    <Badge variant="success" dot pulse>Active</Badge>
+                            <div className="va-stat">
+                                <div className="va-stat-icon" style={{ background: 'rgba(74,111,165,0.12)', color: '#4A6FA5' }}>
+                                    <User size={16} />
                                 </div>
-                                <div className="vab-deploy-item">
-                                    <span>Provider Service</span>
-                                    <Badge variant="success" dot pulse>Active</Badge>
-                                </div>
-                                <div className="vab-deploy-item">
-                                    <span>Outreach</span>
-                                    <Badge variant="warning" dot>Paused</Badge>
-                                </div>
-                                <div className="vab-deploy-item">
-                                    <span>After Hours</span>
-                                    <Badge variant="info" dot>Scheduled</Badge>
+                                <div>
+                                    <div className="va-stat-value">{callerWords}</div>
+                                    <div className="va-stat-label">Caller Words</div>
                                 </div>
                             </div>
-                        </GlassCard>
-                    </div>
+
+                            <div className="va-stat">
+                                <div className="va-stat-icon" style={{ background: 'rgba(13,124,140,0.12)', color: '#0D7C8C' }}>
+                                    <Bot size={16} />
+                                </div>
+                                <div>
+                                    <div className="va-stat-value">{agentWords}</div>
+                                    <div className="va-stat-label">Agent Words</div>
+                                </div>
+                            </div>
+
+                            <div className="va-divider" />
+
+                            <label className="va-label">Sentiment Trend</label>
+                            <div className="va-sentiment-bars">
+                                <div className="va-sbar">
+                                    <span className="va-sbar-label">Positive</span>
+                                    <div className="va-sbar-track">
+                                        <motion.div
+                                            className="va-sbar-fill positive"
+                                            animate={{ width: `${messages.length ? (sentimentCounts.positive / messages.length) * 100 : 0}%` }}
+                                        />
+                                    </div>
+                                    <span className="va-sbar-count">{sentimentCounts.positive}</span>
+                                </div>
+                                <div className="va-sbar">
+                                    <span className="va-sbar-label">Neutral</span>
+                                    <div className="va-sbar-track">
+                                        <motion.div
+                                            className="va-sbar-fill neutral"
+                                            animate={{ width: `${messages.length ? (sentimentCounts.neutral / messages.length) * 100 : 0}%` }}
+                                        />
+                                    </div>
+                                    <span className="va-sbar-count">{sentimentCounts.neutral}</span>
+                                </div>
+                                <div className="va-sbar">
+                                    <span className="va-sbar-label">Negative</span>
+                                    <div className="va-sbar-track">
+                                        <motion.div
+                                            className="va-sbar-fill negative"
+                                            animate={{ width: `${messages.length ? (sentimentCounts.negative / messages.length) * 100 : 0}%` }}
+                                        />
+                                    </div>
+                                    <span className="va-sbar-count">{sentimentCounts.negative}</span>
+                                </div>
+                            </div>
+
+                            <div className="va-divider" />
+
+                            <label className="va-label">Topics Detected</label>
+                            <div className="va-topics">
+                                {topics.map(topic => (
+                                    <span key={topic} className="va-topic-tag">{topic}</span>
+                                ))}
+                            </div>
+
+                            <div className="va-divider" />
+
+                            <label className="va-label">Messages</label>
+                            <div className="va-msg-breakdown">
+                                <div className="va-breakdown-row">
+                                    <span>Caller</span>
+                                    <span>{messages.filter(m => m.role === 'caller').length}</span>
+                                </div>
+                                <div className="va-breakdown-row">
+                                    <span>Agent</span>
+                                    <span>{messages.filter(m => m.role === 'agent').length}</span>
+                                </div>
+                                <div className="va-breakdown-row total">
+                                    <span>Total</span>
+                                    <span>{messages.length}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
             </motion.div>
         </div>

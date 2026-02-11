@@ -27,6 +27,8 @@ import {
     Target
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './PharmacyAnalytics.css'
 
 // Types
@@ -313,6 +315,7 @@ const BiosimilarOpportunities = () => (
 )
 
 export function PharmacyAnalytics() {
+    const { addToast } = useToast()
     const [selectedPeriod, setSelectedPeriod] = useState('ytd')
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -336,7 +339,18 @@ export function PharmacyAnalytics() {
                 </div>
                 <div className="pbm-page__header-actions">
                     <Button variant="ghost" icon={<RefreshCw size={16} />}>Refresh</Button>
-                    <Button variant="secondary" icon={<Download size={16} />}>Export</Button>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(topDrugs.map(d => ({
+                            'Drug': d.name,
+                            'Therapeutic Class': d.therapeuticClass,
+                            'Spend': `$${d.spend.toLocaleString()}`,
+                            'Claims': d.claims,
+                            'Members': d.members,
+                            'Trend': `${d.trend > 0 ? '+' : ''}${d.trend}%`,
+                            'Tier': d.tier,
+                        })), 'pharmacy_analytics')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Pharmacy data exported to CSV', duration: 3000 })
+                    }}>Export</Button>
                 </div>
             </div>
 

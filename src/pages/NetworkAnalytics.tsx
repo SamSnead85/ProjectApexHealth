@@ -32,6 +32,8 @@ import {
     Phone
 } from 'lucide-react'
 import { GlassCard, Badge, Button } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { exportToCSV } from '../utils/exportData'
 import './NetworkAnalytics.css'
 
 // Types
@@ -252,6 +254,7 @@ const CoverageRow = ({ coverage, index }: { coverage: GeographicCoverage; index:
 )
 
 export function NetworkAnalytics() {
+    const { addToast } = useToast()
     const [searchTerm, setSearchTerm] = useState('')
     const [tierFilter, setTierFilter] = useState('all')
 
@@ -280,7 +283,22 @@ export function NetworkAnalytics() {
                     <p>Provider Performance • Network Adequacy • Cost Optimization</p>
                 </div>
                 <div className="network-analytics__header-actions">
-                    <Button variant="secondary" icon={<Download size={16} />}>Export</Button>
+                    <Button variant="secondary" icon={<Download size={16} />} onClick={() => {
+                        exportToCSV(providers.map(p => ({
+                            'ID': p.id,
+                            'Name': p.name,
+                            'Specialty': p.specialty,
+                            'Tier': p.tier,
+                            'Location': p.location,
+                            'Quality Score': p.qualityScore,
+                            'Cost Index': p.costIndex,
+                            'Utilization': `${p.utilizationRate}%`,
+                            'Patients': p.patientCount,
+                            'Avg Reimbursement': `$${p.avgReimbursement}`,
+                            'Status': p.status,
+                        })), 'network_analytics')
+                        addToast({ type: 'success', title: 'Export Complete', message: 'Network data exported to CSV', duration: 3000 })
+                    }}>Export</Button>
                     <Button variant="primary" icon={<RefreshCw size={16} />}>Refresh Data</Button>
                 </div>
             </div>
