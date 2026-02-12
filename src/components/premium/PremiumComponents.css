@@ -11,7 +11,7 @@
 
 .accordion-item {
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -78,7 +78,7 @@
     position: absolute;
     padding: var(--space-xs) var(--space-sm);
     background: var(--apex-surface);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-xs);
@@ -126,7 +126,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--apex-obsidian);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     z-index: 301;
     max-height: 90vh;
@@ -152,7 +152,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .modal-header h2 {
@@ -278,7 +278,7 @@
     padding: var(--space-xs);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
 }
 
 .tab-trigger {
@@ -337,7 +337,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.04);
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
     font-weight: 600;
@@ -364,7 +364,7 @@
 .step-connector {
     flex: 1;
     height: 2px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     margin: 0 var(--space-md);
 }
 

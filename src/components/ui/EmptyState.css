@@ -30,7 +30,7 @@
     width: 100px;
     height: 100px;
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-2xl);
     color: var(--apex-teal);
 }

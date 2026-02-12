@@ -49,7 +49,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #E5E7EB;
+    border: 2px solid var(--border-default);
 }
 
 .avatar__initials {
@@ -60,7 +60,7 @@
     justify-content: center;
     border-radius: 50%;
     font-weight: 600;
-    border: 2px solid #E5E7EB;
+    border: 2px solid var(--border-default);
 }
 
 /* Status */
@@ -73,7 +73,7 @@
     min-width: 8px;
     min-height: 8px;
     border-radius: 50%;
-    border: 2px solid #FFFFFF;
+    border: 2px solid var(--bg-elevated);
 }
 
 .avatar__status--online {
@@ -82,7 +82,7 @@
 }
 
 .avatar__status--offline {
-    background: #9CA3AF;
+    background: var(--text-muted);
 }
 
 .avatar__status--away {
@@ -104,7 +104,7 @@
 
 .avatar-group .avatar {
     margin-left: -8px;
-    border: 2px solid #FFFFFF;
+    border: 2px solid var(--bg-elevated);
     transition: all 0.2s ease;
 }
 
@@ -119,8 +119,8 @@
 
 /* Overflow count */
 .avatar--overflow {
-    background: #F3F5F8;
-    border: 2px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 2px solid var(--border-default);
 }
 
 .avatar__count {

@@ -1,7 +1,7 @@
 .shell {
     display: flex;
     min-height: 100vh;
-    background: #F3F5F8;
+    background: var(--bg-card);
     position: relative;
     overflow-x: hidden;
 }
@@ -27,8 +27,8 @@
     justify-content: space-between;
     height: 56px;
     padding: 0 var(--space-xl);
-    background: #FFFFFF;
-    border-bottom: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-default);
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
@@ -54,8 +54,8 @@
     width: 320px;
     height: 40px;
     padding: 0 var(--space-md);
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
 }
@@ -66,7 +66,7 @@
 }
 
 .shell__search-icon {
-    color: #9CA3AF;
+    color: var(--text-muted);
     flex-shrink: 0;
 }
 
@@ -76,17 +76,17 @@
     border: none;
     outline: none;
     font-size: var(--text-sm);
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .shell__search-input::placeholder {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .shell__search-shortcut {
     font-size: 11px;
     font-family: var(--font-mono);
-    color: #9CA3AF;
+    color: var(--text-muted);
     padding: 2px 6px;
     background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-xs);
@@ -99,8 +99,8 @@
     left: 0;
     right: 0;
     margin-top: var(--space-xs);
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -115,8 +115,8 @@
     padding: var(--space-sm) var(--space-md);
     background: transparent;
     border: none;
-    border-bottom: 1px solid #F3F4F6;
-    color: #111827;
+    border-bottom: 1px solid var(--bg-hover);
+    color: var(--text-primary);
     font-size: var(--text-sm);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -137,14 +137,14 @@
 
 .shell__search-result-path {
     font-size: var(--text-xs);
-    color: #6B7280;
+    color: var(--text-tertiary);
     font-family: var(--font-mono);
 }
 
 .shell__search-no-results {
     padding: var(--space-md);
     text-align: center;
-    color: #6B7280;
+    color: var(--text-tertiary);
     font-size: var(--text-sm);
 }
 
@@ -161,7 +161,7 @@
     width: 40px;
     height: 40px;
     border-radius: var(--radius-sm);
-    color: #6B7280;
+    color: var(--text-tertiary);
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
@@ -169,9 +169,9 @@
 }
 
 .shell__topbar-btn:hover {
-    color: #111827;
-    background: #F3F5F8;
-    border-color: #E5E7EB;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border-color: var(--border-default);
 }
 
 .shell__notification-dot {
@@ -182,7 +182,7 @@
     height: 8px;
     background: #EF4444;
     border-radius: var(--radius-full);
-    border: 2px solid #FFFFFF;
+    border: 2px solid var(--bg-elevated);
 }
 
 /* Tour Button */
@@ -239,8 +239,8 @@
 }
 
 .shell__user-trigger:hover {
-    background: #F3F5F8;
-    border-color: #E5E7EB;
+    background: var(--bg-card);
+    border-color: var(--border-default);
 }
 
 .shell__user-avatar {
@@ -252,7 +252,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 .shell__user-info {
@@ -265,18 +265,18 @@
 .shell__user-name {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: #111827;
+    color: var(--text-primary);
     line-height: 1.2;
 }
 
 .shell__user-role {
     font-size: var(--text-xs);
-    color: #6B7280;
+    color: var(--text-tertiary);
     line-height: 1.2;
 }
 
 .shell__user-chevron {
-    color: #6B7280;
+    color: var(--text-tertiary);
 }
 
 /* Content */
@@ -356,8 +356,8 @@
         height: 40px;
         border-radius: var(--radius-sm);
         background: transparent;
-        border: 1px solid #E5E7EB;
-        color: #6B7280;
+        border: 1px solid var(--border-default);
+        color: var(--text-tertiary);
         cursor: pointer;
         transition: all var(--transition-fast);
         flex-shrink: 0;
@@ -365,9 +365,9 @@
     }
 
     .sidebar-hamburger:hover {
-        color: #111827;
-        background: #F3F5F8;
-        border-color: #D1D5DB;
+        color: var(--text-primary);
+        background: var(--bg-card);
+        border-color: var(--border-default);
     }
 
     /* Portal switcher scrolls horizontally on mobile */
@@ -495,7 +495,7 @@
 
 /* Shell background */
 [data-theme="dark"] .shell {
-    background: var(--apex-obsidian, #0F1419);
+    background: var(--apex-obsidian);
 }
 
 /* Top Bar */
@@ -602,7 +602,7 @@
 
 /* Content Area */
 [data-theme="dark"] .shell__content {
-    background: var(--apex-obsidian, #0F1419);
+    background: var(--apex-obsidian);
 }
 
 /* Portal Switcher in Dark Mode */
@@ -621,6 +621,6 @@
 }
 
 [data-theme="dark"] .portal-switcher__btn--active {
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     background: #3B82F6;
 }

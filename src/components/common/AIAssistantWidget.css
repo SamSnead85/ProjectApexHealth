@@ -10,7 +10,7 @@
     background: linear-gradient(135deg, var(--apex-teal), #0D9488);
     border: none;
     border-radius: var(--radius-full);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     font-weight: 600;
     font-size: var(--text-sm);
     cursor: pointer;
@@ -73,7 +73,7 @@
     justify-content: center;
     background: linear-gradient(135deg, var(--apex-teal), #0D9488);
     border-radius: var(--radius-md);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 .ai-widget__title {
@@ -173,7 +173,7 @@
 
 .ai-widget__message--user .ai-widget__message-content {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 /* Typing Indicator */
@@ -278,7 +278,7 @@
     background: var(--apex-teal);
     border: none;
     border-radius: var(--radius-full);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     cursor: pointer;
     transition: all var(--transition-fast);
 }

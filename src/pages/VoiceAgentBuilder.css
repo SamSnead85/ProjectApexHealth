@@ -79,8 +79,8 @@
 
 /* ── Panel (shared) ────────────────────────────────────────────────────── */
 .va-panel {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 14px;
     overflow: hidden;
 }
@@ -90,7 +90,7 @@
     align-items: center;
     gap: 0.45rem;
     padding: 0.85rem 1rem;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--apex-silver);
@@ -121,7 +121,7 @@
     width: 100%;
     padding: 0.5rem 0.65rem;
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     color: var(--apex-white);
     font-size: 0.82rem;
@@ -151,7 +151,7 @@
     height: 4px;
     -webkit-appearance: none;
     appearance: none;
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: 4px;
     outline: none;
     cursor: pointer;
@@ -179,7 +179,7 @@
 
 .va-divider {
     height: 1px;
-    background: #E5E7EB;
+    background: var(--border-default);
     margin: 0.55rem 0;
 }
 
@@ -227,7 +227,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1.75rem 1.5rem 1.25rem;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
     gap: 0.85rem;
 }
 
@@ -277,7 +277,7 @@
 
 .va-btn-call {
     background: #2563EB;
-    color: #fff;
+    color: var(--text-on-accent);
 }
 .va-btn-call:hover {
     background: #0a6a78;
@@ -310,7 +310,7 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.7rem 1rem;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--apex-silver);
@@ -340,7 +340,7 @@
     width: 4px;
 }
 .va-transcript::-webkit-scrollbar-thumb {
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: 4px;
 }
 
@@ -575,7 +575,7 @@
 }
 
 .va-breakdown-row.total {
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
     padding-top: 0.4rem;
     margin-top: 0.15rem;
 }

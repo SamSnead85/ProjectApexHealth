@@ -229,20 +229,20 @@ const interventionOutcomesPie = [
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const cardStyle: React.CSSProperties = {
-    background: '#FFFFFF',
-    border: '1px solid #E5E7EB',
+    background: 'var(--bg-elevated)',
+    border: '1px solid var(--border-default)',
     borderRadius: '16px',
     padding: '24px',
     boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
 }
 
 const tooltipStyle: React.CSSProperties = {
-    background: '#FFFFFF',
-    border: '1px solid #E5E7EB',
+    background: 'var(--bg-elevated)',
+    border: '1px solid var(--border-default)',
     borderRadius: '12px',
     boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
     fontSize: '12px',
-    color: '#111827',
+    color: 'var(--text-primary)',
 }
 
 const thStyle: React.CSSProperties = {
@@ -253,7 +253,7 @@ const thStyle: React.CSSProperties = {
     color: 'var(--apex-steel, #8892a4)',
     textTransform: 'uppercase',
     letterSpacing: '0.06em',
-    borderBottom: '1px solid #E5E7EB',
+    borderBottom: '1px solid var(--border-default)',
 }
 
 const tdStyle: React.CSSProperties = {
@@ -345,7 +345,7 @@ export default function SocialDeterminants() {
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}
             >
                 <div>
-                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '12px', margin: 0 }}>
                         <Heart size={28} style={{ color: 'var(--apex-teal, #0D9488)', filter: 'drop-shadow(0 0 8px rgba(13,148,136,0.5))' }} />
                         Social Determinants of Health
                     </h1>
@@ -404,7 +404,7 @@ export default function SocialDeterminants() {
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                             <div style={{ fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.3px' }}>{kpi.label}</div>
-                            <div style={{ fontSize: '26px', fontWeight: 700, color: '#111827', lineHeight: 1.2 }}>{kpi.value}</div>
+                            <div style={{ fontSize: '26px', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>{kpi.value}</div>
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', marginTop: '2px' }}>{kpi.subtitle}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '4px', fontSize: '11px', color: 'var(--apex-success, #10B981)' }}>
                                 <TrendingUp size={11} />
@@ -424,7 +424,7 @@ export default function SocialDeterminants() {
                     transition={{ delay: 0.3, duration: 0.5 }}
                     style={cardStyle}
                 >
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Activity size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                         SDOH Risk Categories
                         <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>% of screened members affected</span>
@@ -437,13 +437,13 @@ export default function SocialDeterminants() {
                                 margin={{ top: 0, right: 30, left: 20, bottom: 0 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" horizontal={false} />
-                                <XAxis type="number" domain={[0, 30]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} unit="%" />
+                                <XAxis type="number" domain={[0, 30]} axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 11 }} unit="%" />
                                 <YAxis
                                     type="category"
                                     dataKey="category"
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: '#94A3B8', fontSize: 12 }}
+                                    tick={{ fill: 'var(--text-muted)', fontSize: 12 }}
                                     width={160}
                                 />
                                 <Tooltip
@@ -469,7 +469,7 @@ export default function SocialDeterminants() {
                                     display: 'inline-flex', alignItems: 'center', gap: '6px',
                                     padding: '5px 12px', borderRadius: '8px', fontSize: '11px', fontWeight: 500,
 background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0.04)',
-                                                    border: selectedCategory === cat.category ? `1px solid ${cat.color}40` : '1px solid #E5E7EB',
+                                                    border: selectedCategory === cat.category ? `1px solid ${cat.color}40` : '1px solid var(--border-default)',
                                     color: selectedCategory === cat.category ? cat.color : 'var(--apex-steel, #94A3B8)',
                                     cursor: 'pointer', transition: 'all 0.2s',
                                 }}
@@ -488,7 +488,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                     transition={{ delay: 0.35, duration: 0.5 }}
                     style={cardStyle}
                 >
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Target size={18} style={{ color: 'var(--apex-success, #10B981)' }} />
                         Intervention Outcomes
                     </h3>
@@ -516,7 +516,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                             position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
                             textAlign: 'center', pointerEvents: 'none',
                         }}>
-                            <span style={{ display: 'block', fontSize: '28px', fontWeight: 700, color: '#111827' }}>76%</span>
+                            <span style={{ display: 'block', fontSize: '28px', fontWeight: 700, color: 'var(--text-primary)' }}>76%</span>
                             <span style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)' }}>Positive</span>
                         </div>
                     </div>
@@ -526,7 +526,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                             <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                 <div style={{ width: '10px', height: '10px', borderRadius: '3px', background: item.color, flexShrink: 0 }} />
                                 <span style={{ flex: 1, fontSize: '13px', color: 'var(--apex-silver, #b0b8c8)' }}>{item.name}</span>
-                                <span style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{item.value}%</span>
+                                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>{item.value}%</span>
                             </div>
                         ))}
                     </div>
@@ -541,7 +541,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 style={cardStyle}
             >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <MapPin size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                         Geospatial SDOH Risk Distribution
                     </h3>
@@ -581,17 +581,17 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                         boxShadow: hoveredZip === cell.zip ? `0 4px 20px ${getRiskColor(cell.risk)}40` : 'none',
                                     }}
                                 >
-                                    <span style={{ fontSize: '11px', fontWeight: 600, color: '#111827', opacity: 0.9 }}>{cell.zip}</span>
+                                    <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.9 }}>{cell.zip}</span>
                                     <span style={{ fontSize: '10px', color: 'rgba(0,0,0,0.5)' }}>Score: {cell.score}</span>
                                     {hoveredZip === cell.zip && (
                                         <div style={{
                                             position: 'absolute', bottom: '110%', left: '50%', transform: 'translateX(-50%)',
-                                            background: '#FFFFFF',
-                                            border: '1px solid #E5E7EB', borderRadius: '10px',
+                                            background: 'var(--bg-elevated)',
+                                            border: '1px solid var(--border-default)', borderRadius: '10px',
                                             padding: '10px 14px', whiteSpace: 'nowrap', zIndex: 100,
                                             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                                         }}>
-                                            <div style={{ fontSize: '12px', fontWeight: 600, color: '#111827', marginBottom: '4px' }}>ZIP {cell.zip}</div>
+                                            <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>ZIP {cell.zip}</div>
                                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #94A3B8)' }}>Risk Score: {cell.score} · {cell.members} members</div>
                                             <div style={{ fontSize: '11px', color: getRiskColor(cell.risk), fontWeight: 600, marginTop: '2px', textTransform: 'capitalize' }}>{cell.risk} Risk</div>
                                         </div>
@@ -613,7 +613,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45, duration: 0.5 }}
             >
-                <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#111827', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Users size={20} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Member SDOH Profiles
                     <span style={{ marginLeft: 'auto', fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>Showing high-priority members</span>
@@ -642,10 +642,10 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '16px' }}>
                                 <div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                                        <span style={{ fontSize: '15px', fontWeight: 600, color: '#111827' }}>{member.name}</span>
+                                        <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)' }}>{member.name}</span>
                                         <span style={{
                                             fontSize: '11px', fontWeight: 500, padding: '2px 8px', borderRadius: '6px',
-                                            background: 'rgba(0,0,0,0.04)', color: '#6B7280',
+                                            background: 'rgba(0,0,0,0.04)', color: 'var(--text-tertiary)',
                                             fontFamily: 'monospace',
                                         }}>
                                             {member.id}
@@ -700,7 +700,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                             {/* Intervention Status & Actions */}
                             <div style={{
                                 padding: '12px', borderRadius: '10px',
-                                background: 'rgba(0,0,0,0.02)', border: '1px solid #E5E7EB',
+                                background: 'rgba(0,0,0,0.02)', border: '1px solid var(--border-default)',
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                                     <span style={{ fontSize: '11px', fontWeight: 500, color: 'var(--apex-steel, #94A3B8)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
@@ -739,7 +739,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 transition={{ delay: 0.55, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Building2 size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Community Resource Directory
                     <span style={{ marginLeft: 'auto', fontSize: '12px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>{communityResources.length} active partners</span>
@@ -760,7 +760,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                         <tbody>
                             {communityResources.map((resource) => (
                                 <tr key={resource.name} style={{ transition: 'background 0.15s' }}>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{resource.name}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: 'var(--text-primary)' }}>{resource.name}</td>
                                     <td style={tdStyle}>
                                         <span style={{
                                             display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -776,7 +776,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                             {resource.location}
                                         </span>
                                     </td>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{resource.referrals.toLocaleString()}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: 'var(--text-primary)' }}>{resource.referrals.toLocaleString()}</td>
                                     <td style={tdStyle}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                             <div style={{ flex: 1, height: '6px', background: 'rgba(0,0,0,0.06)', borderRadius: '3px', overflow: 'hidden', maxWidth: '80px' }}>
@@ -820,7 +820,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 transition={{ delay: 0.6, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <FileText size={18} style={{ color: 'var(--apex-purple, #8B5CF6)' }} />
                     ICD-10 Z-Code Tracking
                     <span style={{
@@ -852,7 +852,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                             display: 'inline-flex', alignItems: 'center',
                                             padding: '3px 10px', background: 'rgba(0,0,0,0.04)',
                                             borderRadius: '6px', fontSize: '12px', fontWeight: 600,
-                                            fontFamily: 'monospace', color: '#111827',
+                                            fontFamily: 'monospace', color: 'var(--text-primary)',
                                         }}>
                                             {zCode.code}
                                         </span>
@@ -867,7 +867,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                             {zCode.category}
                                         </span>
                                     </td>
-                                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827', fontSize: '14px' }}>{zCode.count.toLocaleString()}</td>
+                                    <td style={{ ...tdStyle, fontWeight: 600, color: 'var(--text-primary)', fontSize: '14px' }}>{zCode.count.toLocaleString()}</td>
                                     <td style={tdStyle}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                             {zCode.trend === 'up' && <TrendingUp size={14} style={{ color: 'var(--apex-red, #EF4444)' }} />}
@@ -886,8 +886,8 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                             {zCode.topSubcodes.map((sub, i) => (
                                                 <span key={i} style={{
                                                     fontSize: '10px', padding: '2px 7px', borderRadius: '4px',
-                                                    background: 'rgba(0,0,0,0.04)', color: '#6B7280',
-                                                    border: '1px solid #E5E7EB',
+                                                    background: 'rgba(0,0,0,0.04)', color: 'var(--text-tertiary)',
+                                                    border: '1px solid var(--border-default)',
                                                 }}>
                                                     {sub}
                                                 </span>
@@ -908,7 +908,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 transition={{ delay: 0.65, duration: 0.5 }}
                 style={cardStyle}
             >
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Shield size={18} style={{ color: 'var(--apex-teal, #0D9488)' }} />
                     Impact on Clinical Outcomes
                     <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'var(--apex-steel, #94A3B8)', fontWeight: 400 }}>
@@ -931,12 +931,12 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                                     dataKey="metric"
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: '#64748b', fontSize: 10 }}
+                                    tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                                     angle={-15}
                                     textAnchor="end"
                                     height={60}
                                 />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
                                 <Tooltip contentStyle={tooltipStyle} />
                                 <Legend
                                     wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }}
@@ -960,7 +960,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                             <div key={outcome.label} style={{
                                 display: 'flex', alignItems: 'center', gap: '14px',
                                 padding: '14px 16px', borderRadius: '12px',
-                                background: 'rgba(0,0,0,0.02)', border: '1px solid #E5E7EB',
+                                background: 'rgba(0,0,0,0.02)', border: '1px solid var(--border-default)',
                             }}>
                                 <div style={{
                                     width: '36px', height: '36px', borderRadius: '10px',
@@ -983,7 +983,7 @@ background: selectedCategory === cat.category ? `${cat.color}20` : 'rgba(0,0,0,0
                 {/* AI Insight Footer */}
                 <div style={{
                     marginTop: '20px', padding: '14px 18px', borderRadius: '12px',
-                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), #FFFFFF)',
+                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), var(--bg-elevated))',
                     border: '1px solid rgba(139, 92, 246, 0.18)',
                     display: 'flex', alignItems: 'center', gap: '12px',
                 }}>

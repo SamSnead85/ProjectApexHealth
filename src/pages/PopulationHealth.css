@@ -113,7 +113,7 @@
 }
 
 .star-rating-card__stars svg {
-    color: #D1D5DB;
+    color: var(--border-default);
 }
 
 .star-rating-card__stars svg.filled {

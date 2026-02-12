@@ -8,7 +8,7 @@
     height: calc(100vh - 120px);
     min-height: 600px;
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -17,7 +17,7 @@
 .conversations-panel {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-right: 1px solid var(--border-subtle);
 }
 
 .conversations-header {
@@ -25,7 +25,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .conversations-header h2 {
@@ -42,7 +42,7 @@
     padding: var(--space-sm) var(--space-md);
     margin: var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
@@ -115,7 +115,7 @@
     width: 10px;
     height: 10px;
     background: var(--apex-success);
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
     border-radius: var(--radius-full);
 }
 
@@ -163,7 +163,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .back-btn {
@@ -318,7 +318,7 @@
     align-items: flex-end;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .input-action {
@@ -342,7 +342,7 @@
 .input-field {
     flex: 1;
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     padding: var(--space-sm) var(--space-md);
 }

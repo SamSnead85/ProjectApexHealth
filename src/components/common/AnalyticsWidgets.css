@@ -7,7 +7,7 @@
 .kpi-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -67,7 +67,7 @@
 .metric-comparison {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -162,7 +162,7 @@
 .goal-tracker {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -237,7 +237,7 @@
     gap: var(--space-sm);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -290,7 +290,7 @@
     position: relative;
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -359,7 +359,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 

@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     transition: all 0.2s ease;
 }
@@ -19,7 +19,7 @@
 
 .card--clickable:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
 }
 
 /* Variants */
@@ -34,7 +34,7 @@
 
 .card--outlined {
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
 }
 
 .card--interactive:hover {
@@ -66,7 +66,7 @@
     justify-content: space-between;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .card-header__content {
@@ -117,7 +117,7 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .card-footer--left {
@@ -143,7 +143,7 @@
     gap: var(--space-md);
     padding: var(--space-lg);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     transition: all 0.2s ease;
 }
@@ -230,7 +230,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     text-decoration: none;
     transition: all 0.2s ease;

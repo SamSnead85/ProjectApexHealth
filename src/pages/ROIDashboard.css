@@ -22,7 +22,7 @@
 .roi-dashboard__title {
     font-size: 32px;
     font-weight: 700;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -83,7 +83,7 @@
 .roi-metric-card__value {
     font-size: 28px;
     font-weight: 700;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .roi-metric-card__unit {
@@ -113,7 +113,7 @@
 .calculator__title-row h2 {
     font-size: 20px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -147,7 +147,7 @@
     background: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     font-size: 16px;
     font-weight: 600;
     outline: none;
@@ -192,7 +192,7 @@
     gap: 12px;
     font-size: 20px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0 0 24px 0;
 }
 
@@ -248,7 +248,7 @@
 .value-prop-card__title {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .value-prop-card__description {
@@ -293,7 +293,7 @@
 .case-study-card__company {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .case-study-card__metrics {
@@ -311,7 +311,7 @@
 .case-study-card__metric-value {
     font-size: 20px;
     font-weight: 700;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .case-study-card__metric-label {
@@ -356,7 +356,7 @@
 .cta__content h2 {
     font-size: 24px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 

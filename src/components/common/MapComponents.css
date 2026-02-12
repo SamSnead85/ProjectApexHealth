@@ -10,7 +10,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -128,7 +128,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-full);
 }
 
@@ -164,7 +164,7 @@
     display: flex;
     flex-direction: column;
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -187,14 +187,14 @@
 
 .map-controls__divider {
     height: 1px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
 }
 
 /* Transport Mode Selector */
 .transport-mode-selector {
     display: flex;
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-full);
     padding: 4px;
 }
@@ -224,14 +224,14 @@
 /* Directions Panel */
 .directions-panel {
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
 
 .directions-panel__header {
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .directions-panel__route {
@@ -285,7 +285,7 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .directions-panel__step-num {
@@ -317,7 +317,7 @@
 .map-legend {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 

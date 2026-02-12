@@ -10,7 +10,7 @@
     align-items: center;
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -44,7 +44,7 @@
 .health-bar__track {
     flex: 1;
     height: 8px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -67,7 +67,7 @@
 .xp-progress {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -83,7 +83,7 @@
 
 .xp-progress__bar {
     height: 8px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: 4px;
@@ -105,7 +105,7 @@
 .game-stats-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -267,7 +267,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 

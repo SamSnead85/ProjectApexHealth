@@ -83,7 +83,7 @@
 
 .cost-meter__bar {
     height: 10px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -134,7 +134,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     min-width: 240px;
 }
@@ -229,7 +229,7 @@
 .benefit-card__details {
     padding: var(--space-lg);
     padding-top: 0;
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .coverage-comparison {
@@ -274,7 +274,7 @@
     display: flex;
     justify-content: space-between;
     padding: var(--space-xs) 0;
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .coverage-item:last-child {

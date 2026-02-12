@@ -8,7 +8,7 @@
 .privacy-settings {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -75,7 +75,7 @@
     position: relative;
     width: 48px;
     height: 28px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
@@ -113,7 +113,7 @@
 .privacy-settings select {
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -123,7 +123,7 @@
 .theme-selector {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -140,14 +140,14 @@
     gap: var(--space-sm);
     padding: var(--space-md);
     background: transparent;
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .theme-selector__option:hover {
-    border-color: var(--border-strong, #C4C9D2);
+    border-color: var(--border-strong);
 }
 
 .theme-selector__option.active {
@@ -163,7 +163,7 @@
 }
 
 .theme-selector__preview--light {
-    background: #f8fafc;
+    background: var(--bg-card);
 }
 
 .theme-selector__preview--dark {
@@ -171,7 +171,7 @@
 }
 
 .theme-selector__preview--system {
-    background: linear-gradient(135deg, #f8fafc 50%, #0f172a 50%);
+    background: linear-gradient(135deg, var(--bg-card) 50%, #0f172a 50%);
 }
 
 .theme-selector__preview-header {
@@ -218,7 +218,7 @@
     right: 0;
     padding: var(--space-md) var(--space-lg);
     background: rgba(15, 23, 42, 0.95);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     backdrop-filter: blur(10px);
     transition: bottom 0.3s ease;
     z-index: 100;
@@ -274,7 +274,7 @@
 }
 
 .settings-action-bar__btn--cancel:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
 }
 
 .settings-action-bar__btn--save {

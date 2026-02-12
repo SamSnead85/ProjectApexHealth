@@ -34,7 +34,7 @@
 }
 
 .node-toolbar__btn:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 

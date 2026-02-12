@@ -2,7 +2,7 @@
     width: 280px;
     height: 100%;
     background: linear-gradient(180deg, rgba(18, 18, 24, 0.98), rgba(12, 12, 16, 0.99));
-    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-right: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -11,7 +11,7 @@
 /* Header */
 .node-palette__header {
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     background: rgba(0, 0, 0, 0.3);
 }
 
@@ -57,7 +57,7 @@
     height: 40px;
     padding: 0 var(--space-md) 0 40px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -184,7 +184,7 @@ button.node-palette__section-header:hover {
 /* Hover State - Lift Effect */
 .node-palette__item:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     transform: translateX(4px);
     box-shadow:
         -4px 0 12px rgba(0, 0, 0, 0.2),
@@ -222,7 +222,7 @@ button.node-palette__section-header:hover {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     flex-shrink: 0;
     color: var(--item-color, var(--apex-teal));
@@ -316,7 +316,7 @@ button.node-palette__section-header:hover {
 }
 
 .node-palette__content::-webkit-scrollbar-thumb {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
 }
 
@@ -333,7 +333,7 @@ button.node-palette__section-header:hover {
     font-size: 11px;
     color: var(--apex-steel);
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 /* Quick Start Section */

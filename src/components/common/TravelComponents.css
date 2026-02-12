@@ -10,7 +10,7 @@
     gap: var(--space-lg);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -156,7 +156,7 @@
 /* Hotel Card */
 .hotel-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -253,7 +253,7 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .hotel-card__price {}
@@ -291,7 +291,7 @@
 .trip-summary {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -358,7 +358,7 @@
 
 .trip-summary__totals {
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .trip-summary__row {
@@ -371,7 +371,7 @@
 
 .trip-summary__row--total {
     padding-top: var(--space-sm);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     font-size: var(--text-lg);
     font-weight: 600;
     color: var(--apex-white);
@@ -381,7 +381,7 @@
 .passenger-form {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -409,7 +409,7 @@
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -424,7 +424,7 @@
 /* Itinerary Day */
 .itinerary-day {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -468,7 +468,7 @@
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .itinerary-day__event:last-child {

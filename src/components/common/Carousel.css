@@ -37,7 +37,7 @@
     width: 40px;
     height: 40px;
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 50%;
     color: var(--apex-white);
     cursor: pointer;
@@ -96,7 +96,7 @@
 /* Progress */
 .carousel__progress {
     height: 3px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     margin-top: var(--space-md);
     overflow: hidden;

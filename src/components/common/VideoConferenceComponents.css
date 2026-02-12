@@ -155,7 +155,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -210,7 +210,7 @@
 .participant-list {
     width: 280px;
     background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -220,7 +220,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--apex-white);
@@ -269,7 +269,7 @@
     width: 8px;
     height: 8px;
     background: var(--apex-teal);
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
     border-radius: 50%;
 }
 
@@ -381,7 +381,7 @@
     gap: var(--space-lg);
     padding: var(--space-xl);
     background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -422,7 +422,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -441,7 +441,7 @@
 .pre-call-setup__cancel {
     padding: var(--space-sm) var(--space-xl);
     background: transparent;
-    border: 1px solid var(--border-strong, #C4C9D2);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);

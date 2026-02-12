@@ -199,11 +199,11 @@ export function Appointments() {
                 style={{
                     display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap',
                     padding: '1rem 1.25rem', borderRadius: '16px', marginBottom: '1.5rem',
-                    background: '#FFFFFF', border: '1px solid #E5E7EB'
+                    background: 'var(--bg-elevated)', border: '1px solid var(--border-default)'
                 }}
             >
                 <div style={{ position: 'relative', flex: 1, minWidth: '200px' }}>
-                    <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#9CA3AF' }} />
+                    <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                     <input
                         type="text"
                         placeholder="Search by provider, specialty, or notes..."
@@ -211,8 +211,8 @@ export function Appointments() {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         style={{
                             width: '100%', padding: '0.6rem 0.75rem 0.6rem 2.25rem', borderRadius: '10px',
-                            border: '1px solid #E5E7EB', background: 'rgba(0,0,0,0.02)',
-                            color: '#111827', fontSize: '0.85rem', outline: 'none'
+                            border: '1px solid var(--border-default)', background: 'rgba(0,0,0,0.02)',
+                            color: 'var(--text-primary)', fontSize: '0.85rem', outline: 'none'
                         }}
                     />
                 </div>
@@ -220,7 +220,7 @@ export function Appointments() {
                     onClick={() => setShowFilters(!showFilters)}
                     style={{
                         display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.6rem 1rem',
-                        borderRadius: '10px',                         border: showFilters ? '1px solid rgba(99,102,241,0.3)' : '1px solid #E5E7EB',
+                        borderRadius: '10px',                         border: showFilters ? '1px solid rgba(99,102,241,0.3)' : '1px solid var(--border-default)',
                         background: showFilters ? 'rgba(99,102,241,0.08)' : 'rgba(0,0,0,0.02)',
                         color: showFilters ? '#818cf8' : '#4B5563', cursor: 'pointer', fontSize: '0.85rem'
                     }}
@@ -250,17 +250,17 @@ export function Appointments() {
                         exit={{ opacity: 0, height: 0 }}
                         style={{
                             overflow: 'hidden', marginBottom: '1.25rem', padding: '1rem 1.25rem',
-                            borderRadius: '16px', background: '#FFFFFF', border: '1px solid #E5E7EB'
+                            borderRadius: '16px', background: 'var(--bg-elevated)', border: '1px solid var(--border-default)'
                         }}
                     >
                         <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
                             <div>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>Type</span>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>Type</span>
                                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                                     {([['all', 'All'], ['in-person', 'In-Person'], ['video', 'Telehealth'], ['phone', 'Phone']] as const).map(([val, label]) => (
                                         <button key={val} onClick={() => setFilterType(val as typeof filterType)} style={{
                                             padding: '0.35rem 0.75rem', borderRadius: '8px', fontSize: '0.8rem', cursor: 'pointer',
-                                            border: filterType === val ? '1px solid rgba(99,102,241,0.4)' : '1px solid #E5E7EB',
+                                            border: filterType === val ? '1px solid rgba(99,102,241,0.4)' : '1px solid var(--border-default)',
                                             background: filterType === val ? 'rgba(99,102,241,0.08)' : 'rgba(0,0,0,0.02)',
                                             color: filterType === val ? '#6366f1' : '#4B5563'
                                         }}>
@@ -270,12 +270,12 @@ export function Appointments() {
                                 </div>
                             </div>
                             <div>
-                                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>Status</span>
+                                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'block' }}>Status</span>
                                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                                     {([['all', 'All'], ['confirmed', 'Upcoming'], ['completed', 'Past'], ['cancelled', 'Cancelled'], ['pending', 'Pending']] as const).map(([val, label]) => (
                                         <button key={val} onClick={() => setFilterStatus(val as typeof filterStatus)} style={{
                                             padding: '0.35rem 0.75rem', borderRadius: '8px', fontSize: '0.8rem', cursor: 'pointer',
-                                            border: filterStatus === val ? '1px solid rgba(99,102,241,0.4)' : '1px solid #E5E7EB',
+                                            border: filterStatus === val ? '1px solid rgba(99,102,241,0.4)' : '1px solid var(--border-default)',
                                             background: filterStatus === val ? 'rgba(99,102,241,0.08)' : 'rgba(0,0,0,0.02)',
                                             color: filterStatus === val ? '#6366f1' : '#4B5563'
                                         }}>
@@ -301,7 +301,7 @@ export function Appointments() {
                         <GlassCard style={{ borderRadius: '16px', padding: '1.5rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                                 <h3 style={{ margin: 0, fontSize: '1.1rem' }}>Book New Appointment</h3>
-                                <button onClick={() => setShowBookForm(false)} style={{ background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer' }}><X size={18} /></button>
+                                <button onClick={() => setShowBookForm(false)} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}><X size={18} /></button>
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                                 {[
@@ -311,7 +311,7 @@ export function Appointments() {
                                     { label: 'Time', key: 'time', placeholder: '', type: 'time' },
                                 ].map(field => (
                                     <div key={field.key}>
-                                        <label style={{ fontSize: '0.75rem', fontWeight: 600, color: bookErrors[field.key] ? '#f87171' : '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>{field.label} *</label>
+                                        <label style={{ fontSize: '0.75rem', fontWeight: 600, color: bookErrors[field.key] ? '#f87171' : 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>{field.label} *</label>
                                         <input
                                             type={field.type}
                                             placeholder={field.placeholder}
@@ -319,22 +319,22 @@ export function Appointments() {
                                             onChange={(e) => { setBookForm({ ...bookForm, [field.key]: e.target.value }); setBookErrors(prev => { const n = { ...prev }; delete n[field.key]; return n }) }}
                                             style={{
                                                 width: '100%', padding: '0.6rem 0.75rem', borderRadius: '10px',
-                                                border: bookErrors[field.key] ? '1px solid rgba(248,113,113,0.5)' : '1px solid #E5E7EB',
+                                                border: bookErrors[field.key] ? '1px solid rgba(248,113,113,0.5)' : '1px solid var(--border-default)',
                                                 background: bookErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
-                                                color: '#111827', fontSize: '0.85rem', outline: 'none'
+                                                color: 'var(--text-primary)', fontSize: '0.85rem', outline: 'none'
                                             }}
                                         />
                                         {bookErrors[field.key] && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: '0.25rem', display: 'block' }}>{bookErrors[field.key]}</span>}
                                     </div>
                                 ))}
                                 <div>
-                                    <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>Visit Type</label>
+                                    <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>Visit Type</label>
                                     <div style={{ display: 'flex', gap: '0.4rem' }}>
                                         {([['in-person', 'In-Person', MapPin], ['video', 'Telehealth', Video], ['phone', 'Phone', Phone]] as const).map(([val, label, Icon]) => (
                                             <button key={val} onClick={() => setBookForm({ ...bookForm, type: val })} style={{
                                                 flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.3rem',
                                                 padding: '0.55rem 0.5rem', borderRadius: '8px', fontSize: '0.78rem', cursor: 'pointer',
-                                                border: bookForm.type === val ? '1px solid rgba(6,182,212,0.4)' : '1px solid #E5E7EB',
+                                                border: bookForm.type === val ? '1px solid rgba(6,182,212,0.4)' : '1px solid var(--border-default)',
                                                 background: bookForm.type === val ? 'rgba(6,182,212,0.08)' : 'rgba(0,0,0,0.02)',
                                                 color: bookForm.type === val ? '#0891b2' : '#4B5563'
                                             }}>
@@ -344,7 +344,7 @@ export function Appointments() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>Notes</label>
+                                    <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'block' }}>Notes</label>
                                     <input
                                         type="text"
                                         placeholder="Reason for visit..."
@@ -352,8 +352,8 @@ export function Appointments() {
                                         onChange={(e) => setBookForm({ ...bookForm, notes: e.target.value })}
                                         style={{
                                             width: '100%', padding: '0.6rem 0.75rem', borderRadius: '10px',
-                                            border: '1px solid #E5E7EB', background: 'rgba(0,0,0,0.02)',
-                                            color: '#111827', fontSize: '0.85rem', outline: 'none'
+                                            border: '1px solid var(--border-default)', background: 'rgba(0,0,0,0.02)',
+                                            color: 'var(--text-primary)', fontSize: '0.85rem', outline: 'none'
                                         }}
                                     />
                                 </div>
@@ -443,8 +443,8 @@ export function Appointments() {
             <div className="appointments__list">
                 {filterAppointments(activeTab === 'upcoming' ? upcoming : past).length === 0 && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{
-                        textAlign: 'center', padding: '3rem', color: '#9CA3AF', borderRadius: '16px',
-                        background: '#F9FAFB', border: '1px solid #E5E7EB'
+                        textAlign: 'center', padding: '3rem', color: 'var(--text-muted)', borderRadius: '16px',
+                        background: 'var(--bg-hover)', border: '1px solid var(--border-default)'
                     }}>
                         <Search size={32} style={{ marginBottom: '0.75rem', opacity: 0.5 }} />
                         <p style={{ margin: 0, fontSize: '0.95rem' }}>No appointments match your filters</p>

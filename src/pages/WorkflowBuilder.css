@@ -18,8 +18,8 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-xl);
-    background: #FFFFFF;
-    border-bottom: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-default);
 }
 
 .wf-header__left {
@@ -71,8 +71,8 @@
    SIDEBAR
 ============================================ */
 .wf-sidebar {
-    background: #FFFFFF;
-    border-right: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border-right: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -80,7 +80,7 @@
 
 .wf-sidebar__section {
     padding: var(--space-lg);
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
 }
 
 .wf-sidebar__title {
@@ -112,7 +112,7 @@
     gap: var(--space-xs);
     padding: var(--space-md);
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     text-align: left;
     cursor: pointer;
@@ -173,7 +173,7 @@
     justify-content: center;
     border-radius: var(--radius-sm);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
 }
 
 .wf-template-card__preview-icon--cyan { color: #2563EB; }
@@ -183,7 +183,7 @@
 .wf-template-card__preview-icon--violet { color: #8B5CF6; }
 .wf-template-card__preview-icon--slate { color: #64748B; }
 .wf-template-card__preview-icon--purple { color: #A855F7; }
-.wf-template-card__preview-icon--gray { color: #6B7280; }
+.wf-template-card__preview-icon--gray { color: var(--text-tertiary); }
 
 .wf-template-card__preview-more {
     font-size: 10px;
@@ -266,7 +266,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -308,7 +308,7 @@
 }
 
 .wf-palette-item--gray svg {
-    color: #6B7280;
+    color: var(--text-tertiary);
 }
 
 .wf-palette__add-hint {
@@ -335,7 +335,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
 }
 
 .wf-canvas-header__info {
@@ -466,7 +466,7 @@
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -474,7 +474,7 @@
 }
 
 .wf-node:hover {
-    background: #E5E7EB;
+    background: var(--border-default);
 }
 
 .wf-node--selected {
@@ -535,7 +535,7 @@
 
 .wf-node--gray .wf-node__icon {
     background: rgba(107, 114, 128, 0.15);
-    color: #6B7280;
+    color: var(--text-tertiary);
 }
 
 .wf-node__content {
@@ -715,8 +715,8 @@
 ============================================ */
 .wf-properties {
     width: 280px;
-    background: #FFFFFF;
-    border-left: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--border-default);
     padding: var(--space-lg);
 }
 
@@ -762,7 +762,7 @@
     width: 100%;
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -823,7 +823,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -841,7 +841,7 @@
     gap: var(--space-xs);
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
 }
 
 /* ============================================
@@ -863,8 +863,8 @@
     max-height: 80vh;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl, 16px);
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
 }
@@ -874,7 +874,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-lg);
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
 }
 
 .wf-preview-modal__header h3 {
@@ -929,7 +929,7 @@
     width: 100%;
     padding: var(--space-md);
     background: rgba(0, 0, 0, 0.02);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     position: relative;
 }
@@ -951,7 +951,7 @@
 .wf-preview-modal__node-icon--violet { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
 .wf-preview-modal__node-icon--slate { background: rgba(100, 116, 139, 0.15); color: #64748B; }
 .wf-preview-modal__node-icon--purple { background: rgba(168, 85, 247, 0.15); color: #A855F7; }
-.wf-preview-modal__node-icon--gray { background: rgba(107, 114, 128, 0.15); color: #6B7280; }
+.wf-preview-modal__node-icon--gray { background: rgba(107, 114, 128, 0.15); color: var(--text-tertiary); }
 
 .wf-preview-modal__node-info {
     display: flex;
@@ -992,7 +992,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
     font-size: var(--text-xs);
     color: var(--apex-steel);
 }
@@ -1010,7 +1010,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-lg);
-    background: #FFFFFF;
+    background: var(--bg-elevated);
     border: 1px solid rgba(13, 124, 140, 0.4);
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);

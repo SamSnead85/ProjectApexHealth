@@ -42,7 +42,7 @@
 
 .level-badge svg {
     position: absolute;
-    color: var(--text-muted, #9CA3AF);
+    color: var(--text-muted);
 }
 
 .level-number {
@@ -68,7 +68,7 @@
 .level-progress {
     width: 200px;
     height: 8px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -224,7 +224,7 @@
 
 .goal-progress {
     height: 6px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -308,7 +308,7 @@
 .challenge-progress__bar {
     flex: 1;
     height: 6px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

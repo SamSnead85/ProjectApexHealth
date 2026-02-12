@@ -56,7 +56,7 @@
 }
 
 .status-indicator__dot--neutral {
-    background: #9CA3AF;
+    background: var(--text-muted);
 }
 
 .status-indicator__dot--pulse {
@@ -145,12 +145,12 @@
 }
 
 .status-badge--neutral {
-    background: #F3F5F8;
+    background: var(--bg-card);
     color: #4B5563;
 }
 
 .status-badge--neutral .status-badge__dot {
-    background: #9CA3AF;
+    background: var(--text-muted);
 }
 
 /* Traffic Light */
@@ -165,7 +165,7 @@
     height: 8px;
     border-radius: var(--radius-full);
     overflow: hidden;
-    background: #E5E7EB;
+    background: var(--border-default);
 }
 
 .traffic-light__segment {

@@ -179,7 +179,7 @@ function DrilldownPanel({ kpi, onClose }: { kpi: KPI; onClose: () => void }) {
 
                 {/* Threshold indicator */}
                 {kpi.threshold && (
-                    <div style={{ marginTop: 20, padding: 16, background: 'rgba(0,0,0,0.03)', borderRadius: 12, border: '1px solid #E5E7EB' }}>
+                    <div style={{ marginTop: 20, padding: 16, background: 'rgba(0,0,0,0.03)', borderRadius: 12, border: '1px solid var(--border-default)' }}>
                         <div style={{ fontSize: 12, color: 'var(--apex-steel)', marginBottom: 8 }}>Threshold Status</div>
                         <div style={{ height: 8, background: 'rgba(0,0,0,0.06)', borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
                             <div style={{
@@ -351,24 +351,24 @@ export default function ExecutiveDashboard() {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 12 }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} tickFormatter={(v) => `$${v}M`} />
+                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 11 }} tickFormatter={(v) => `$${v}M`} />
                                 <Tooltip
                                     contentStyle={{
-                                        background: '#FFFFFF',
-                                        border: '1px solid #E5E7EB', borderRadius: '12px',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: '#111827'
+                                        background: 'var(--bg-elevated)',
+                                        border: '1px solid var(--border-default)', borderRadius: '12px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: 'var(--text-primary)'
                                     }}
                                     formatter={(value: number) => [`$${value}M`, '']}
                                 />
                                 <Area type="monotone" dataKey="revenue" stroke="#10b981" fill="url(#revenueGradient)" strokeWidth={3} name="Revenue"
-                                    dot={{ fill: '#10b981', strokeWidth: 2, stroke: '#FFFFFF', r: 4 }}
+                                    dot={{ fill: '#10b981', strokeWidth: 2, stroke: 'var(--bg-elevated)', r: 4 }}
                                     activeDot={{ r: 7, fill: '#10b981', stroke: 'rgba(16,185,129,0.3)', strokeWidth: 6 }} />
                                 <Area type="monotone" dataKey="claims" stroke="#f59e0b" fill="url(#claimsGradient)" strokeWidth={3} name="Claims"
-                                    dot={{ fill: '#f59e0b', strokeWidth: 2, stroke: '#FFFFFF', r: 4 }}
+                                    dot={{ fill: '#f59e0b', strokeWidth: 2, stroke: 'var(--bg-elevated)', r: 4 }}
                                     activeDot={{ r: 7, fill: '#f59e0b', stroke: 'rgba(245,158,11,0.3)', strokeWidth: 6 }} />
                                 {comparison === 'vs Budget' && (
-                                    <Area type="monotone" dataKey="budget" stroke="#64748b" fill="none" strokeWidth={2} strokeDasharray="6 4" name="Budget" dot={false} />
+                                    <Area type="monotone" dataKey="budget" stroke="var(--text-muted)" fill="none" strokeWidth={2} strokeDasharray="6 4" name="Budget" dot={false} />
                                 )}
                                 <Brush dataKey="month" height={24} stroke="rgba(13,148,136,0.3)" fill="rgba(243,245,248,0.9)"
                                     tickFormatter={() => ''} />
@@ -399,9 +399,9 @@ export default function ExecutiveDashboard() {
                                 </Pie>
                                 <Tooltip
                                     contentStyle={{
-                                        background: '#FFFFFF',
-                                        border: '1px solid #E5E7EB', borderRadius: '12px',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: '#111827'
+                                        background: 'var(--bg-elevated)',
+                                        border: '1px solid var(--border-default)', borderRadius: '12px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)', color: 'var(--text-primary)'
                                     }}
                                     formatter={(value: number) => [`${value}%`, '']}
                                 />

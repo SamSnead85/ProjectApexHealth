@@ -291,13 +291,13 @@
 }
 
 .calendar-quick-view__day.disabled {
-    color: var(--text-muted, #9CA3AF);
+    color: var(--text-muted);
     cursor: not-allowed;
 }
 
 .calendar-quick-view__day.today {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     font-weight: 600;
 }
 

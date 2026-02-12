@@ -50,7 +50,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: 2px;
 }
 

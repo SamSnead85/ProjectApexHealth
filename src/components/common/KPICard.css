@@ -9,7 +9,7 @@
     gap: var(--space-sm);
     padding: var(--space-lg);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.01));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -21,7 +21,7 @@
 
 .kpi-card--clickable:hover {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02));
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 

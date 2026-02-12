@@ -157,18 +157,18 @@ export default function BatchDashboard() {
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                         <XAxis
                             dataKey="hour"
-                            tick={{ fill: '#64748b', fontSize: 10 }}
-                            axisLine={{ stroke: '#E5E7EB' }}
+                            tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                            axisLine={{ stroke: 'var(--border-default)' }}
                             tickLine={false}
                             interval={2}
                         />
                         <YAxis
-                            tick={{ fill: '#64748b', fontSize: 10 }}
-                            axisLine={{ stroke: '#E5E7EB' }}
+                            tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                            axisLine={{ stroke: 'var(--border-default)' }}
                             tickLine={false}
                         />
                         <Tooltip
-                            contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', fontSize: '0.75rem', color: '#111827' }}
+                            contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', fontSize: '0.75rem', color: 'var(--text-primary)' }}
                             formatter={(value: number, name: string) => [value, name === 'batches' ? 'Successful' : 'Failed']}
                         />
                         <Bar dataKey="batches" fill="url(#batchBarGradient)" radius={[4, 4, 0, 0]} />

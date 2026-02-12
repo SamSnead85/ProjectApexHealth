@@ -20,9 +20,9 @@
     width: 80px;
     height: 80px;
     margin-bottom: var(--space-lg);
-    background: #F3F5F8;
+    background: var(--bg-card);
     border-radius: 50%;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .empty-state--error .empty-state__icon {
@@ -38,13 +38,13 @@
 .empty-state__title {
     font-size: var(--text-lg);
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0 0 var(--space-xs);
 }
 
 .empty-state__description {
     font-size: var(--text-sm);
-    color: #9CA3AF;
+    color: var(--text-muted);
     margin: 0;
     max-width: 360px;
     line-height: 1.5;
@@ -79,7 +79,7 @@
 .empty-state__secondary-action {
     padding: var(--space-sm) var(--space-lg);
     background: transparent;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: #4B5563;
     font-size: var(--text-sm);
@@ -89,14 +89,14 @@
 }
 
 .empty-state__secondary-action:hover {
-    background: #F3F5F8;
-    border-color: #D1D5DB;
-    color: #111827;
+    background: var(--bg-card);
+    border-color: var(--border-default);
+    color: var(--text-primary);
 }
 
 /* Card variant */
 .empty-state--card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }

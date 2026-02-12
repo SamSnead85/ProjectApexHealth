@@ -359,9 +359,9 @@ export function Reports() {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                                <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
+                                <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} />
                                 <YAxis
-                                    stroke="#94A3B8"
+                                    stroke="var(--text-muted)"
                                     fontSize={12}
                                     tickFormatter={(value) => `$${value / 1000}K`}
                                 />
@@ -432,7 +432,7 @@ export function Reports() {
                                 </Pie>
                                 <Tooltip
                                     formatter={(value: number, name: string) => [`${value}%`, name]}
-                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                    contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                                 />
                             </PieChart>
                         </ResponsiveContainer>
@@ -531,16 +531,16 @@ export function Reports() {
                         <ResponsiveContainer width="100%" height={250}>
                             <BarChart data={providerPerformance} layout="vertical" barSize={16}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" horizontal={false} />
-                                <XAxis type="number" stroke="#94A3B8" fontSize={12} domain={[0, 100]} />
+                                <XAxis type="number" stroke="var(--text-muted)" fontSize={12} domain={[0, 100]} />
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    stroke="#94A3B8"
+                                    stroke="var(--text-muted)"
                                     fontSize={12}
                                     width={120}
                                 />
                                 <Tooltip
-                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                    contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                                 />
                                 <Legend />
                                 <Bar dataKey="quality" name="Quality" fill="#10B981" radius={[0, 4, 4, 0]} />

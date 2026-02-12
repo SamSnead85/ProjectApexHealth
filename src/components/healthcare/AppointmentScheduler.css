@@ -133,7 +133,7 @@
 
 .calendar-day.selected {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     font-weight: 600;
 }
 

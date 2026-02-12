@@ -97,10 +97,10 @@ const DataVisualizationStudio = () => {
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={sampleData}>
                             {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
-                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
-                            <YAxis stroke="#94A3B8" fontSize={12} />
+                            <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} />
+                            <YAxis stroke="var(--text-muted)" fontSize={12} />
                             <Tooltip
-                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                             />
                             {showLegend && <Legend />}
                             <Area
@@ -118,10 +118,10 @@ const DataVisualizationStudio = () => {
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={sampleData}>
                             {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
-                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
-                            <YAxis stroke="#94A3B8" fontSize={12} />
+                            <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} />
+                            <YAxis stroke="var(--text-muted)" fontSize={12} />
                             <Tooltip
-                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                             />
                             {showLegend && <Legend />}
                             <Bar dataKey="claims" fill={colorPalettes[selectedColor][0]} radius={[4, 4, 0, 0]} />
@@ -133,10 +133,10 @@ const DataVisualizationStudio = () => {
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={sampleData}>
                             {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
-                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
-                            <YAxis stroke="#94A3B8" fontSize={12} />
+                            <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} />
+                            <YAxis stroke="var(--text-muted)" fontSize={12} />
                             <Tooltip
-                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                             />
                             {showLegend && <Legend />}
                             <Line
@@ -167,7 +167,7 @@ const DataVisualizationStudio = () => {
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                             />
                             {showLegend && <Legend />}
                         </PieChart>

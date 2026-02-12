@@ -124,8 +124,8 @@ const statusConfig: Record<DisputeStatus, { label: string; variant: string; icon
 }
 
 const cardStyle: React.CSSProperties = {
-    background: '#FFFFFF',
-    border: '1px solid #E5E7EB',
+    background: 'var(--bg-elevated)',
+    border: '1px solid var(--border-default)',
     borderRadius: 16
 }
 
@@ -190,7 +190,7 @@ export default function BillingDisputes() {
                             ...cardStyle,
                             padding: 'var(--space-xl)',
                             border: '1px solid rgba(0, 200, 180, 0.15)',
-                            background: 'linear-gradient(135deg, rgba(0, 200, 180, 0.04), #FFFFFF)'
+                            background: 'linear-gradient(135deg, rgba(0, 200, 180, 0.04), var(--bg-elevated))'
                         }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)' }}>
                                 <h2 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--apex-white)' }}>
@@ -215,7 +215,7 @@ export default function BillingDisputes() {
                                             display: 'flex', alignItems: 'center', gap: 8,
                                             padding: '10px 14px',
                                             background: disputeErrors[field.key] ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
-                                            border: disputeErrors[field.key] ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
+                                            border: disputeErrors[field.key] ? '1px solid rgba(248,113,113,0.4)' : '1px solid var(--border-default)',
                                             borderRadius: 10
                                         }}>
                                             <span style={{ color: 'var(--apex-steel)' }}>{field.icon}</span>
@@ -240,18 +240,18 @@ export default function BillingDisputes() {
                                     style={{
                                         width: '100%', padding: '10px 14px',
                                         background: disputeErrors.reason ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
-                                        border: disputeErrors.reason ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
+                                        border: disputeErrors.reason ? '1px solid rgba(248,113,113,0.4)' : '1px solid var(--border-default)',
                                         borderRadius: 10, color: 'var(--apex-silver)',
                                         fontSize: 'var(--text-sm)', outline: 'none'
                                     }}
                                 >
-                                    <option value="" style={{ background: '#FFFFFF' }}>Select a reason...</option>
-                                    <option value="Incorrect charge amount" style={{ background: '#FFFFFF' }}>Incorrect charge amount</option>
-                                    <option value="Duplicate billing" style={{ background: '#FFFFFF' }}>Duplicate billing</option>
-                                    <option value="Service not received" style={{ background: '#FFFFFF' }}>Service not received</option>
-                                    <option value="Out-of-network billed incorrectly" style={{ background: '#FFFFFF' }}>Out-of-network billed incorrectly</option>
-                                    <option value="Pre-authorization not honored" style={{ background: '#FFFFFF' }}>Pre-authorization not honored</option>
-                                    <option value="Other" style={{ background: '#FFFFFF' }}>Other</option>
+                                    <option value="" style={{ background: 'var(--bg-elevated)' }}>Select a reason...</option>
+                                    <option value="Incorrect charge amount" style={{ background: 'var(--bg-elevated)' }}>Incorrect charge amount</option>
+                                    <option value="Duplicate billing" style={{ background: 'var(--bg-elevated)' }}>Duplicate billing</option>
+                                    <option value="Service not received" style={{ background: 'var(--bg-elevated)' }}>Service not received</option>
+                                    <option value="Out-of-network billed incorrectly" style={{ background: 'var(--bg-elevated)' }}>Out-of-network billed incorrectly</option>
+                                    <option value="Pre-authorization not honored" style={{ background: 'var(--bg-elevated)' }}>Pre-authorization not honored</option>
+                                    <option value="Other" style={{ background: 'var(--bg-elevated)' }}>Other</option>
                                 </select>
                                 {disputeErrors.reason && <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: 4, display: 'block' }}>{disputeErrors.reason}</span>}
                             </div>
@@ -267,7 +267,7 @@ export default function BillingDisputes() {
                                     style={{
                                         width: '100%', padding: '10px 14px',
                                         background: disputeErrors.description ? 'rgba(248,113,113,0.05)' : 'rgba(0,0,0,0.02)',
-                                        border: disputeErrors.description ? '1px solid rgba(248,113,113,0.4)' : '1px solid #E5E7EB',
+                                        border: disputeErrors.description ? '1px solid rgba(248,113,113,0.4)' : '1px solid var(--border-default)',
                                         borderRadius: 10, color: 'var(--apex-white)',
                                         fontSize: 'var(--text-sm)', outline: 'none',
                                         resize: 'vertical', fontFamily: 'inherit'
@@ -365,7 +365,7 @@ export default function BillingDisputes() {
                         onClick={() => setFilterStatus(status)}
                         style={{
                             padding: '5px 12px', borderRadius: 8,
-                            border: filterStatus === status ? '1px solid var(--apex-teal)' : '1px solid #E5E7EB',
+                            border: filterStatus === status ? '1px solid var(--apex-teal)' : '1px solid var(--border-default)',
                             background: filterStatus === status ? 'rgba(0, 200, 180, 0.1)' : 'rgba(0,0,0,0.02)',
                             color: filterStatus === status ? 'var(--apex-teal)' : 'var(--apex-silver)',
                             cursor: 'pointer', fontSize: 'var(--text-xs)', fontWeight: 500
@@ -386,7 +386,7 @@ export default function BillingDisputes() {
                     <div style={{ ...cardStyle, padding: 0, overflow: 'hidden' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                             <thead>
-                                <tr style={{ borderBottom: '1px solid #E5E7EB' }}>
+                                <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
                                     {['Dispute ID', 'Date Filed', 'Reason', 'Amount', 'Status', 'Assignee'].map(header => (
                                         <th key={header} style={{
                                             textAlign: header === 'Amount' ? 'right' : 'left',
@@ -447,7 +447,7 @@ export default function BillingDisputes() {
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                                                     <div style={{
                                                         width: 24, height: 24, borderRadius: 6,
-                                                        background: '#E5E7EB',
+                                                        background: 'var(--border-default)',
                                                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                                                         fontSize: 'var(--text-xs)', color: 'var(--apex-silver)', fontWeight: 600
                                                     }}>
@@ -534,7 +534,7 @@ export default function BillingDisputes() {
                                         {/* Vertical line */}
                                         <div style={{
                                             position: 'absolute', left: 5, top: 6, bottom: 6,
-                                            width: 2, background: '#E5E7EB'
+                                            width: 2, background: 'var(--border-default)'
                                         }} />
                                         {selectedDisputeData.timeline.map((event, i) => (
                                             <div key={i} style={{ position: 'relative', marginBottom: i < selectedDisputeData.timeline.length - 1 ? 'var(--space-md)' : 0 }}>

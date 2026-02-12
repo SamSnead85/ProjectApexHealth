@@ -535,7 +535,7 @@
 [data-theme="dark"] .ibnr-page__card,
 [data-theme="dark"] .ibnr-page__notes {
     background: rgba(30, 41, 59, 0.5);
-    border-color: #E5E7EB;
+    border-color: var(--border-default);
 }
 
 [data-theme="dark"] .ibnr-reserve-card,

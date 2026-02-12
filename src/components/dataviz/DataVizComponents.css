@@ -108,7 +108,7 @@
 .comparison-bar__track {
     position: relative;
     height: 8px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

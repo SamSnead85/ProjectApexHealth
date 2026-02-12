@@ -10,7 +10,7 @@
     width: 260px;
     height: 100%;
     background: rgba(15, 23, 42, 0.98);
-    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-right: 1px solid var(--border-subtle);
     transition: width 0.3s ease;
 }
 
@@ -20,7 +20,7 @@
 
 .side-nav__header {
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .side-nav__content {
@@ -151,7 +151,7 @@
     height: 28px;
     margin: var(--space-sm) auto;
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
     cursor: pointer;
@@ -159,13 +159,13 @@
 }
 
 .side-nav__toggle:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
 .side-nav__footer {
     padding: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 /* Bottom Navigation (Mobile) */
@@ -176,7 +176,7 @@
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     padding: var(--space-xs) var(--space-sm);
     backdrop-filter: blur(10px);
     z-index: 100;

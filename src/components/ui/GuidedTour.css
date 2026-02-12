@@ -40,8 +40,8 @@
     width: 360px;
     max-width: calc(100vw - 32px);
     padding: var(--space-lg);
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.12),
@@ -105,17 +105,17 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
-    color: #9CA3AF;
+    color: var(--text-muted);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
 .guided-tour__close:hover {
-    background: #E5E7EB;
-    color: #111827;
+    background: var(--border-default);
+    color: var(--text-primary);
 }
 
 /* Content */
@@ -127,7 +127,7 @@
     font-family: var(--font-display);
     font-size: var(--text-lg);
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
@@ -149,7 +149,7 @@
 .guided-tour__dot {
     width: 8px;
     height: 8px;
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: var(--radius-full);
     transition: all var(--transition-fast);
 }
@@ -169,12 +169,12 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
 }
 
 .guided-tour__step-count {
     font-size: var(--text-xs);
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .guided-tour__buttons {

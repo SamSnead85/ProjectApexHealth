@@ -116,7 +116,7 @@
     font-size: 10px;
     font-weight: 700;
     color: var(--apex-white);
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
 }
 
 .workflow-node__status--running {
@@ -155,7 +155,7 @@
     margin-top: var(--space-sm);
     position: relative;
     height: 4px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

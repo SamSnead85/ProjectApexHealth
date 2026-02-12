@@ -63,8 +63,8 @@ const statusConfig: Record<PaymentStatus, { color: string; variant: string; icon
 const paymentTypes: PaymentType[] = ['all', 'Premium', 'Copay', 'Deductible', 'Coinsurance', 'Refund']
 
 const cardStyle: React.CSSProperties = {
-    background: '#FFFFFF',
-    border: '1px solid #E5E7EB',
+    background: 'var(--bg-elevated)',
+    border: '1px solid var(--border-default)',
     borderRadius: 16
 }
 
@@ -221,7 +221,7 @@ export default function PaymentHistory() {
                                 onClick={() => setFilterType(type)}
                                 style={{
                                     padding: '5px 12px', borderRadius: 8,
-                                    border: filterType === type ? '1px solid var(--apex-teal)' : '1px solid #E5E7EB',
+                                    border: filterType === type ? '1px solid var(--apex-teal)' : '1px solid var(--border-default)',
                                     background: filterType === type ? 'rgba(0, 200, 180, 0.1)' : 'rgba(0,0,0,0.02)',
                                     color: filterType === type ? 'var(--apex-teal)' : 'var(--apex-silver)',
                                     cursor: 'pointer', fontSize: 'var(--text-xs)', fontWeight: 500,
@@ -239,7 +239,7 @@ export default function PaymentHistory() {
                                 onClick={() => setDateRange(range)}
                                 style={{
                                     padding: '5px 12px', borderRadius: 8,
-                                    border: dateRange === range ? '1px solid var(--apex-teal)' : '1px solid #E5E7EB',
+                                    border: dateRange === range ? '1px solid var(--apex-teal)' : '1px solid var(--border-default)',
                                     background: dateRange === range ? 'rgba(0, 200, 180, 0.1)' : 'rgba(0,0,0,0.02)',
                                     color: dateRange === range ? 'var(--apex-teal)' : 'var(--apex-silver)',
                                     cursor: 'pointer', fontSize: 'var(--text-xs)', fontWeight: 500
@@ -263,7 +263,7 @@ export default function PaymentHistory() {
                     display: 'flex', alignItems: 'center', gap: 'var(--space-sm)',
                     padding: '10px var(--space-md)',
                     background: 'rgba(0,0,0,0.02)',
-                    border: '1px solid #E5E7EB',
+                    border: '1px solid var(--border-default)',
                     borderRadius: 12
                 }}>
                     <Search size={16} style={{ color: 'var(--apex-steel)' }} />
@@ -286,7 +286,7 @@ export default function PaymentHistory() {
                     <div style={{
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                         padding: 'var(--space-md) var(--space-lg)',
-                        borderBottom: '1px solid #E5E7EB'
+                        borderBottom: '1px solid var(--border-default)'
                     }}>
                         <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--apex-white)' }}>
                             {filteredPayments.length} transaction{filteredPayments.length !== 1 ? 's' : ''}
@@ -306,7 +306,7 @@ export default function PaymentHistory() {
 
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
-                            <tr style={{ borderBottom: '1px solid #E5E7EB' }}>
+                            <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
                                 {['Date', 'Description', 'Type', 'Method', 'Amount', 'Status'].map(header => (
                                     <th key={header} style={{
                                         textAlign: header === 'Amount' ? 'right' : 'left',

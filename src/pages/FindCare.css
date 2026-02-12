@@ -98,7 +98,7 @@
 }
 
 .find-care__filter-chip--active {
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     background: var(--apex-teal);
     border-color: var(--apex-teal);
 }

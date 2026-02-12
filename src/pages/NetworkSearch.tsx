@@ -62,8 +62,8 @@ const filterChips: { key: FilterKey; label: string; icon: React.ReactNode }[] = 
 const specialties = ['All Specialties', 'Family Medicine', 'Cardiology', 'Urgent Care', 'Dermatology', 'Pediatrics', 'Orthopedics', 'Internal Medicine', 'Psychiatry']
 
 const cardStyle: React.CSSProperties = {
-    background: '#FFFFFF',
-    border: '1px solid #E5E7EB',
+    background: 'var(--bg-elevated)',
+    border: '1px solid var(--border-default)',
     borderRadius: 16
 }
 
@@ -147,7 +147,7 @@ export default function NetworkSearch() {
                         padding: '10px var(--space-md)',
                         background: 'rgba(0,0,0,0.02)',
                         borderRadius: 10,
-                        border: '1px solid #E5E7EB'
+                        border: '1px solid var(--border-default)'
                     }}>
                         <Search size={16} style={{ color: 'var(--apex-steel)', flexShrink: 0 }} />
                         <input
@@ -167,7 +167,7 @@ export default function NetworkSearch() {
                         padding: '10px var(--space-md)',
                         background: 'rgba(0,0,0,0.02)',
                         borderRadius: 10,
-                        border: '1px solid #E5E7EB',
+                        border: '1px solid var(--border-default)',
                         minWidth: 200
                     }}>
                         <Stethoscope size={16} style={{ color: 'var(--apex-steel)', flexShrink: 0 }} />
@@ -180,7 +180,7 @@ export default function NetworkSearch() {
                                 fontSize: 'var(--text-sm)', cursor: 'pointer'
                             }}
                         >
-                            {specialties.map(s => <option key={s} value={s} style={{ background: '#FFFFFF', color: '#111827' }}>{s}</option>)}
+                            {specialties.map(s => <option key={s} value={s} style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>{s}</option>)}
                         </select>
                     </div>
                     <Button variant="primary" icon={<Search size={14} />}>Search</Button>
@@ -199,7 +199,7 @@ export default function NetworkSearch() {
                                 borderRadius: 20,
                                 border: activeFilters.has(chip.key)
                                     ? '1px solid var(--apex-teal)'
-                                    : '1px solid #E5E7EB',
+                                    : '1px solid var(--border-default)',
                                 background: activeFilters.has(chip.key)
                                     ? 'rgba(0, 200, 180, 0.1)'
                                     : 'rgba(0,0,0,0.02)',
@@ -240,7 +240,7 @@ export default function NetworkSearch() {
                                         ? '1px solid var(--apex-teal)'
                                         : compareList.includes(provider.id)
                                             ? '1px solid rgba(0, 200, 180, 0.3)'
-                                            : '1px solid #E5E7EB',
+                                            : '1px solid var(--border-default)',
                                     transition: 'all 0.2s',
                                     position: 'relative'
                                 }}>
@@ -375,7 +375,7 @@ export default function NetworkSearch() {
                                                 key={i}
                                                 size={14}
                                                 style={{
-                                                    color: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : '#E5E7EB',
+                                                    color: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : 'var(--border-default)',
                                                     fill: i <= Math.floor(selectedProviderData.rating) ? '#FFD700' : 'none'
                                                 }}
                                             />

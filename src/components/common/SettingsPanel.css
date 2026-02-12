@@ -18,7 +18,7 @@
     max-width: 90vw;
     height: 100vh;
     background: rgba(15, 23, 42, 0.98);
-    border-left: 1px solid var(--border-default, #D5D9E0);
+    border-left: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
     z-index: 10000;
@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .settings-panel__header h2 {
@@ -43,7 +43,7 @@
     width: 32px;
     height: 32px;
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: 20px;
     color: var(--apex-steel);
@@ -65,7 +65,7 @@
 .settings-panel__nav {
     width: 200px;
     padding: var(--space-md);
-    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-right: 1px solid var(--border-subtle);
     overflow-y: auto;
 }
 
@@ -106,7 +106,7 @@
     justify-content: flex-end;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .settings-panel__btn {
@@ -133,7 +133,7 @@
 
 .settings-panel__btn--secondary {
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     color: var(--apex-silver);
 }
 
@@ -177,7 +177,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-subtle, #E2E5EB);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
 }
 
@@ -213,7 +213,7 @@
     gap: 6px;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-steel);
@@ -222,7 +222,7 @@
 }
 
 .theme-picker__option:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -260,7 +260,7 @@
 .language-selector {
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -274,7 +274,7 @@
 /* Toggle Switch */
 .toggle-switch {
     position: relative;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: var(--radius-full);
     cursor: pointer;

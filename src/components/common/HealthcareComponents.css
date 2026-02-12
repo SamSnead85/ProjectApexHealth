@@ -7,7 +7,7 @@
 .vital-signs-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -84,7 +84,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -173,7 +173,7 @@
 .health-metric {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -213,7 +213,7 @@
     position: relative;
     height: 6px;
     margin: var(--space-md) 0;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: visible;
 }
@@ -262,7 +262,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -342,7 +342,7 @@
 .appointment-card__actions button {
     padding: var(--space-xs) var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
     color: var(--apex-silver);
@@ -423,7 +423,7 @@
     align-items: center;
     gap: 4px;
     padding: var(--space-sm) var(--space-md);
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
@@ -438,7 +438,7 @@
     gap: var(--space-lg);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 

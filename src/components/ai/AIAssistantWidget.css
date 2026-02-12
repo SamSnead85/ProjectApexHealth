@@ -63,7 +63,7 @@
     width: 400px;
     max-height: 600px;
     background: linear-gradient(180deg, #0A0A0C 0%, #0D0D10 100%);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 16px;
     box-shadow:
         0 24px 48px rgba(0, 0, 0, 0.4),
@@ -86,7 +86,7 @@
     justify-content: space-between;
     padding: 16px 20px;
     background: linear-gradient(180deg, rgba(13, 148, 136, 0.15) 0%, transparent 100%);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .ai-assistant__header-info {
@@ -115,7 +115,7 @@
 .ai-assistant__name {
     font-size: 14px;
     font-weight: 600;
-    color: #F8FAFC;
+    color: var(--bg-card);
 }
 
 .ai-assistant__status {
@@ -159,7 +159,7 @@
 }
 
 .ai-assistant__action:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: white;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .ai-assistant__messages::-webkit-scrollbar-thumb {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: 3px;
 }
 
@@ -220,7 +220,7 @@
 }
 
 .ai-assistant__message--user .ai-assistant__message-avatar {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -241,7 +241,7 @@
 
 .ai-assistant__message--assistant .ai-assistant__message-content {
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     color: #E2E8F0;
 }
 
@@ -294,7 +294,7 @@
     gap: 6px;
     padding: 8px 12px;
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 20px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
@@ -313,7 +313,7 @@
     display: flex;
     gap: 8px;
     padding: 16px 20px;
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     background: rgba(0, 0, 0, 0.2);
 }
 
@@ -321,9 +321,9 @@
     flex: 1;
     padding: 12px 16px;
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 10px;
-    color: #F8FAFC;
+    color: var(--bg-card);
     font-size: 13px;
     outline: none;
     transition: all 0.2s ease;
@@ -349,7 +349,7 @@
     justify-content: center;
     gap: 6px;
     padding: 10px;
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     font-size: 11px;
     color: rgba(255, 255, 255, 0.3);
 }

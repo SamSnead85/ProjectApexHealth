@@ -6,7 +6,7 @@
 /* Property Card */
 .property-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
     cursor: pointer;
@@ -180,7 +180,7 @@
     gap: var(--space-md);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -252,7 +252,7 @@
     gap: 6px;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -323,7 +323,7 @@
 .mortgage-calculator {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -352,7 +352,7 @@
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -361,7 +361,7 @@
 
 .mortgage-calculator__result {
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .mortgage-calculator__monthly {
@@ -405,7 +405,7 @@
 /* Property Comparison */
 .property-comparison {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -419,7 +419,7 @@
 .property-comparison td {
     padding: var(--space-md);
     text-align: center;
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .property-comparison th {
@@ -477,7 +477,7 @@
 .schedule-tour {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -501,7 +501,7 @@
     gap: 6px;
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-steel);
@@ -527,7 +527,7 @@
     align-items: center;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     cursor: pointer;
     min-width: 60px;
@@ -564,7 +564,7 @@
 .schedule-tour__times button {
     padding: var(--space-xs) var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: var(--apex-steel);

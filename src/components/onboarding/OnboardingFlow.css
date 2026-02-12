@@ -16,8 +16,8 @@
 .onboarding-container {
     width: 100%;
     max-width: 900px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 24px;
     box-shadow:
         0 0 0 1px rgba(0, 0, 0, 0.03),
@@ -31,7 +31,7 @@
 /* Progress Bar */
 .onboarding-progress {
     height: 4px;
-    background: #E5E7EB;
+    background: var(--border-default);
     position: relative;
     overflow: hidden;
 }
@@ -108,7 +108,7 @@
 .step-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #9CA3AF;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 0.25rem;
@@ -117,22 +117,22 @@
 .step-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .step-skip {
     padding: 0.5rem 1rem;
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
-    color: #9CA3AF;
+    color: var(--text-muted);
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .step-skip:hover {
-    background: #E5E7EB;
+    background: var(--border-default);
     color: #4B5563;
 }
 
@@ -159,8 +159,8 @@
 
 .feature-card {
     padding: 1.5rem;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -198,13 +198,13 @@
 .feature-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 0.35rem;
 }
 
 .feature-desc {
     font-size: 0.85rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
     line-height: 1.5;
 }
 
@@ -224,11 +224,11 @@
 .input-field {
     width: 100%;
     padding: 0.875rem 1rem;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 10px;
     font-size: 1rem;
-    color: #111827;
+    color: var(--text-primary);
     transition: all 0.2s ease;
 }
 
@@ -239,7 +239,7 @@
 }
 
 .input-field::placeholder {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 /* Checklist */
@@ -254,15 +254,15 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .checklist-item:hover {
-    background: #F9FAFB;
+    background: var(--bg-hover);
 }
 
 .checklist-item.checked {
@@ -277,8 +277,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    background: #F3F5F8;
-    border: 2px solid #D1D5DB;
+    background: var(--bg-card);
+    border: 2px solid var(--border-default);
     transition: all 0.2s ease;
 }
 
@@ -294,7 +294,7 @@
 .checklist-text {
     flex: 1;
     font-size: 0.95rem;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 /* Footer */
@@ -303,8 +303,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 3rem;
-    border-top: 1px solid #E5E7EB;
-    background: #F9FAFB;
+    border-top: 1px solid var(--border-default);
+    background: var(--bg-hover);
 }
 
 .step-indicators {
@@ -316,13 +316,13 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #E5E7EB;
+    background: var(--border-default);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .step-dot:hover {
-    background: #D1D5DB;
+    background: var(--border-default);
 }
 
 .step-dot.active {
@@ -345,8 +345,8 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 10px;
     color: #4B5563;
     font-size: 0.95rem;
@@ -356,8 +356,8 @@
 }
 
 .btn-secondary:hover {
-    background: #F3F5F8;
-    color: #111827;
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .btn-primary {
@@ -426,7 +426,7 @@
 .welcome-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
 }
 
@@ -474,7 +474,7 @@
 .completion-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
 }
 

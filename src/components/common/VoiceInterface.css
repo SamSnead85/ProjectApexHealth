@@ -10,7 +10,7 @@
     justify-content: center;
     gap: var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 50%;
     color: var(--apex-steel);
     cursor: pointer;
@@ -33,7 +33,7 @@
 }
 
 .voice-button:hover:not(:disabled) {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -120,13 +120,13 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     transition: all 0.2s ease;
 }
 
 .voice-input:focus-within {
-    border-color: var(--border-strong, #C4C9D2);
+    border-color: var(--border-strong);
 }
 
 .voice-input--active {
@@ -161,7 +161,7 @@
 }
 
 .voice-input__clear:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -180,7 +180,7 @@
 }
 
 .voice-input__mic:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -195,7 +195,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
     cursor: pointer;
@@ -218,7 +218,7 @@
 }
 
 .speak-button:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 

@@ -105,7 +105,7 @@
 }
 
 .widget__control:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -486,8 +486,8 @@
 
 .notification-banner__action {
     padding: 6px 12px;
-    background: var(--bg-hover, #E4E7EC);
-    border: 1px solid var(--border-strong, #C4C9D2);
+    background: var(--bg-hover);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-xs);
@@ -515,7 +515,7 @@
 }
 
 .notification-banner__dismiss:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 

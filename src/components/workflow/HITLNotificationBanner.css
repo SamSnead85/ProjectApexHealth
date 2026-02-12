@@ -9,8 +9,8 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 200;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     min-width: 400px;
@@ -36,7 +36,7 @@
 }
 
 .hitl-banner__header:hover {
-    background: #F9FAFB;
+    background: var(--bg-hover);
 }
 
 .hitl-banner__icon {
@@ -78,12 +78,12 @@
 .hitl-banner__title {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .hitl-banner__subtitle {
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .hitl-banner__actions {
@@ -100,17 +100,17 @@
     width: 28px;
     height: 28px;
     background: none;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: 6px;
-    color: #9CA3AF;
+    color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .hitl-banner__expand:hover,
 .hitl-banner__dismiss:hover {
-    background: #F3F5F8;
-    color: #111827;
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .hitl-banner__chevron--open {
@@ -122,7 +122,7 @@
    ============================================ */
 
 .hitl-banner__content {
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
     max-height: 400px;
     overflow-y: auto;
 }
@@ -133,7 +133,7 @@
 
 .hitl-item {
     padding: 1rem;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
     position: relative;
 }
 
@@ -148,7 +148,7 @@
     top: 0;
     bottom: 0;
     width: 3px;
-    background: #9CA3AF;
+    background: var(--text-muted);
 }
 
 .hitl-item.hitl-priority--high::before {
@@ -179,12 +179,12 @@
 .hitl-item__workflow-name {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .hitl-item__node {
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .hitl-item__priority {
@@ -240,7 +240,7 @@
 .hitl-item__claim-amount {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .hitl-item__ai {
@@ -276,7 +276,7 @@
 
 .hitl-item__confidence {
     font-size: 0.625rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .hitl-item__reason {
@@ -297,11 +297,11 @@
     align-items: center;
     gap: 0.375rem;
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .hitl-item__deadline svg {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .hitl-item__review-btn {

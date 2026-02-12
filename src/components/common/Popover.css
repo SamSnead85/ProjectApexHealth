@@ -17,7 +17,7 @@
     min-width: 120px;
     padding: var(--space-sm);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     z-index: 100;
@@ -48,7 +48,7 @@
 }
 
 .popover-menu__item:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 

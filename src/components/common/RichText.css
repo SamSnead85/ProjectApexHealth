@@ -60,7 +60,7 @@
 /* Code Block */
 .code-block {
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -71,7 +71,7 @@
     justify-content: space-between;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .code-block__language {
@@ -95,7 +95,7 @@
 }
 
 .code-block__copy:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -147,14 +147,14 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     text-decoration: none;
     transition: all 0.15s ease;
 }
 
 .link-preview:hover {
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
 }
 
 .link-preview__image {

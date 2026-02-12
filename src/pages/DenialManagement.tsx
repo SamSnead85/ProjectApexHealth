@@ -125,7 +125,7 @@ const styles = {
     title: {
         fontSize: '28px',
         fontWeight: 700,
-        color: '#111827',
+        color: 'var(--text-primary)',
         margin: 0,
         letterSpacing: '-0.02em',
     } as React.CSSProperties,
@@ -159,16 +159,16 @@ const styles = {
     } as React.CSSProperties,
 
     card: {
-        background: '#FFFFFF',
-        border: '1px solid #E5E7EB',
+        background: 'var(--bg-elevated)',
+        border: '1px solid var(--border-default)',
         borderRadius: '16px',
         padding: '24px',
         boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
     } as React.CSSProperties,
 
     kpiCard: {
-        background: '#FFFFFF',
-        border: '1px solid #E5E7EB',
+        background: 'var(--bg-elevated)',
+        border: '1px solid var(--border-default)',
         borderRadius: '16px',
         padding: '20px 24px',
         boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
@@ -193,7 +193,7 @@ const styles = {
     kpiValue: {
         fontSize: '32px',
         fontWeight: 700,
-        color: '#111827',
+        color: 'var(--text-primary)',
         letterSpacing: '-0.02em',
         lineHeight: 1.1,
     } as React.CSSProperties,
@@ -219,7 +219,7 @@ const styles = {
         gap: '10px',
         fontSize: '16px',
         fontWeight: 600,
-        color: '#111827',
+        color: 'var(--text-primary)',
         margin: '0 0 20px 0',
     } as React.CSSProperties,
 
@@ -245,7 +245,7 @@ const styles = {
         color: 'var(--apex-steel, #8892a4)',
         textTransform: 'uppercase' as const,
         letterSpacing: '0.06em',
-        borderBottom: '1px solid #E5E7EB',
+        borderBottom: '1px solid var(--border-default)',
     } as React.CSSProperties,
 
     td: {
@@ -264,7 +264,7 @@ const styles = {
         fontSize: '12px',
         fontWeight: 600,
         fontFamily: 'monospace',
-        color: '#111827',
+        color: 'var(--text-primary)',
     } as React.CSSProperties,
 
     aiRecBadge: {
@@ -281,7 +281,7 @@ const styles = {
     } as React.CSSProperties,
 
     appealCard: {
-        background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), #FFFFFF)',
+        background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), var(--bg-elevated))',
         border: '1px solid rgba(139, 92, 246, 0.18)',
         borderRadius: '16px',
         padding: '28px',
@@ -291,7 +291,7 @@ const styles = {
 
     appealPreview: {
         background: 'rgba(0, 0, 0, 0.03)',
-        border: '1px solid #E5E7EB',
+        border: '1px solid var(--border-default)',
         borderRadius: '12px',
         padding: '20px',
         margin: '16px 0',
@@ -331,7 +331,7 @@ const styles = {
         background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)',
         border: 'none',
         borderRadius: '10px',
-        color: '#ffffff',
+        color: 'var(--text-on-accent)',
         fontSize: '13px',
         fontWeight: 600,
         cursor: 'pointer',
@@ -344,7 +344,7 @@ const styles = {
         gap: '8px',
         padding: '10px 20px',
         background: 'rgba(0, 0, 0, 0.04)',
-        border: '1px solid #E5E7EB',
+        border: '1px solid var(--border-default)',
         borderRadius: '10px',
         color: '#4B5563',
         fontSize: '13px',
@@ -359,9 +359,9 @@ const styles = {
         gap: '8px',
         padding: '10px 20px',
         background: 'transparent',
-        border: '1px solid #E5E7EB',
+        border: '1px solid var(--border-default)',
         borderRadius: '10px',
-        color: '#6B7280',
+        color: 'var(--text-tertiary)',
         fontSize: '13px',
         fontWeight: 500,
         cursor: 'pointer',
@@ -398,7 +398,7 @@ const styles = {
     pipelineCount: {
         fontSize: '20px',
         fontWeight: 700,
-        color: '#111827',
+        color: 'var(--text-primary)',
     } as React.CSSProperties,
 
     pipelineLabel: {
@@ -427,7 +427,7 @@ const styles = {
         padding: '16px',
         background: 'rgba(0, 0, 0, 0.02)',
         borderRadius: '12px',
-        border: '1px solid #E5E7EB',
+        border: '1px solid var(--border-default)',
     } as React.CSSProperties,
 
     financialLabel: {
@@ -439,7 +439,7 @@ const styles = {
     financialValue: {
         fontSize: '22px',
         fontWeight: 700,
-        color: '#111827',
+        color: 'var(--text-primary)',
     } as React.CSSProperties,
 
     bottomRow: {
@@ -457,7 +457,7 @@ const styles = {
         borderRadius: '10px',
         background: 'rgba(0, 0, 0, 0.02)',
         marginBottom: '10px',
-        border: '1px solid #E5E7EB',
+        border: '1px solid var(--border-default)',
     } as React.CSSProperties,
 
     riskBadge: (risk: 'High' | 'Medium' | 'Low') => ({
@@ -478,10 +478,10 @@ const styles = {
         alignItems: 'center',
         gap: '8px',
         padding: '14px 0 0 0',
-        borderTop: '1px solid #E5E7EB',
+        borderTop: '1px solid var(--border-default)',
         marginTop: '12px',
         fontSize: '12px',
-        color: '#6B7280',
+        color: 'var(--text-tertiary)',
     } as React.CSSProperties,
 
     progressBarOuter: {
@@ -518,7 +518,7 @@ const styles = {
     pieCenterValue: {
         fontSize: '22px',
         fontWeight: 700,
-        color: '#111827',
+        color: 'var(--text-primary)',
         display: 'block',
     } as React.CSSProperties,
 
@@ -534,12 +534,12 @@ const styles = {
 
 const tooltipStyle = {
     contentStyle: {
-        background: '#FFFFFF',
-        border: '1px solid #E5E7EB',
+        background: 'var(--bg-elevated)',
+        border: '1px solid var(--border-default)',
         borderRadius: '12px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
         fontSize: '12px',
-        color: '#111827',
+        color: 'var(--text-primary)',
     },
 }
 
@@ -577,7 +577,7 @@ export default function DenialManagement() {
             </motion.div>
 
             {/* ========== TAB BAR ========== */}
-            <div style={{ display: 'flex', gap: '4px', marginBottom: '28px', background: 'rgba(0,0,0,0.03)', borderRadius: '12px', padding: '4px', border: '1px solid #E5E7EB', width: 'fit-content' }}>
+            <div style={{ display: 'flex', gap: '4px', marginBottom: '28px', background: 'rgba(0,0,0,0.03)', borderRadius: '12px', padding: '4px', border: '1px solid var(--border-default)', width: 'fit-content' }}>
                 {([
                     { key: 'overview' as const, label: 'Overview', icon: <Activity size={14} /> },
                     { key: 'analytics' as const, label: 'Analytics', icon: <TrendingUp size={14} /> },
@@ -593,7 +593,7 @@ export default function DenialManagement() {
                             padding: '8px 18px',
                             fontSize: '13px',
                             fontWeight: activeTab === tab.key ? 600 : 500,
-                            color: activeTab === tab.key ? '#111827' : '#6B7280',
+                            color: activeTab === tab.key ? 'var(--text-primary)' : 'var(--text-tertiary)',
                             background: activeTab === tab.key ? 'rgba(245, 158, 11, 0.15)' : 'transparent',
                             border: activeTab === tab.key ? '1px solid rgba(245, 158, 11, 0.3)' : '1px solid transparent',
                             borderRadius: '8px',
@@ -670,12 +670,12 @@ export default function DenialManagement() {
                                     dataKey="month"
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: '#64748b', fontSize: 12 }}
+                                    tick={{ fill: 'var(--text-muted)', fontSize: 12 }}
                                 />
                                 <YAxis
                                     axisLine={false}
                                     tickLine={false}
-                                    tick={{ fill: '#64748b', fontSize: 11 }}
+                                    tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
                                     tickFormatter={(v) => `${v}%`}
                                     domain={[0, 16]}
                                 />
@@ -689,7 +689,7 @@ export default function DenialManagement() {
                                     stroke="#F59E0B"
                                     fill="url(#denialGradient)"
                                     strokeWidth={3}
-                                    dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: '#FFFFFF', r: 4 }}
+                                    dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: 'var(--bg-elevated)', r: 4 }}
                                     activeDot={{ r: 7, fill: '#F59E0B', stroke: 'rgba(245, 158, 11, 0.3)', strokeWidth: 6 }}
                                 />
                             </AreaChart>
@@ -755,7 +755,7 @@ export default function DenialManagement() {
                             <div key={cat.name} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px' }}>
                                 <span style={styles.legendDot(cat.color)} />
                                 <span style={{ color: 'var(--apex-silver, #b0b8c8)', flex: 1 }}>{cat.name}</span>
-                                <span style={{ color: '#111827', fontWeight: 600 }}>{cat.value}%</span>
+                                <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{cat.value}%</span>
                             </div>
                         ))}
                     </div>
@@ -804,10 +804,10 @@ export default function DenialManagement() {
                                             {reason.type}
                                         </span>
                                     </td>
-                                    <td style={{ ...styles.td, color: '#111827', maxWidth: '240px' }}>
+                                    <td style={{ ...styles.td, color: 'var(--text-primary)', maxWidth: '240px' }}>
                                         {reason.description}
                                     </td>
-                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: 600, color: '#111827', fontVariantNumeric: 'tabular-nums' }}>
+                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: 600, color: 'var(--text-primary)', fontVariantNumeric: 'tabular-nums' }}>
                                         {reason.count.toLocaleString()}
                                     </td>
                                     <td style={{ ...styles.td, textAlign: 'center' }}>
@@ -885,10 +885,10 @@ export default function DenialManagement() {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 12 }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} tickFormatter={(v) => `${v}%`} domain={[0, 16]} />
+                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: 'var(--text-muted)', fontSize: 11 }} tickFormatter={(v) => `${v}%`} domain={[0, 16]} />
                                 <Tooltip {...tooltipStyle} formatter={(value: number) => [`${value}%`, 'Denial Rate']} />
-                                <Area type="monotone" dataKey="rate" stroke="#F59E0B" fill="url(#denialGradientAnalytics)" strokeWidth={3} dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: '#FFFFFF', r: 4 }} activeDot={{ r: 7, fill: '#F59E0B', stroke: 'rgba(245, 158, 11, 0.3)', strokeWidth: 6 }} />
+                                <Area type="monotone" dataKey="rate" stroke="#F59E0B" fill="url(#denialGradientAnalytics)" strokeWidth={3} dot={{ fill: '#F59E0B', strokeWidth: 2, stroke: 'var(--bg-elevated)', r: 4 }} activeDot={{ r: 7, fill: '#F59E0B', stroke: 'rgba(245, 158, 11, 0.3)', strokeWidth: 6 }} />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -905,8 +905,8 @@ export default function DenialManagement() {
                                     <tr key={reason.code}>
                                         <td style={styles.td}><span style={styles.codeBadge}>{reason.code}</span></td>
                                         <td style={styles.td}><span style={{ fontSize: '11px', fontWeight: 600, color: reason.type === 'CARC' ? 'var(--apex-teal, #0D9488)' : 'var(--apex-purple, #8B5CF6)', padding: '2px 8px', background: reason.type === 'CARC' ? 'rgba(13, 148, 136, 0.12)' : 'rgba(139, 92, 246, 0.12)', borderRadius: '4px' }}>{reason.type}</span></td>
-                                        <td style={{ ...styles.td, color: '#111827', maxWidth: '240px' }}>{reason.description}</td>
-                                        <td style={{ ...styles.td, textAlign: 'right', fontWeight: 600, color: '#111827', fontVariantNumeric: 'tabular-nums' }}>{reason.count.toLocaleString()}</td>
+                                        <td style={{ ...styles.td, color: 'var(--text-primary)', maxWidth: '240px' }}>{reason.description}</td>
+                                        <td style={{ ...styles.td, textAlign: 'right', fontWeight: 600, color: 'var(--text-primary)', fontVariantNumeric: 'tabular-nums' }}>{reason.count.toLocaleString()}</td>
                                         <td style={{ ...styles.td, textAlign: 'right', fontWeight: 600, color: reason.recovery >= 80 ? 'var(--apex-success, #10B981)' : reason.recovery >= 60 ? 'var(--apex-amber, #F59E0B)' : 'var(--apex-red, #EF4444)' }}>{reason.recovery}%</td>
                                     </tr>
                                 ))}
@@ -1002,7 +1002,7 @@ export default function DenialManagement() {
                 {/* Stats footer */}
                 <div style={styles.statFooter}>
                     <Zap size={14} style={{ color: 'var(--apex-purple, #8B5CF6)' }} />
-                    <span><strong style={{ color: '#111827' }}>847</strong> appeals auto-generated this month</span>
+                    <span><strong style={{ color: 'var(--text-primary)' }}>847</strong> appeals auto-generated this month</span>
                     <span style={{ margin: '0 8px', opacity: 0.3 }}>|</span>
                     <span><strong style={{ color: 'var(--apex-success, #10B981)' }}>78%</strong> success rate</span>
                 </div>
@@ -1080,7 +1080,7 @@ export default function DenialManagement() {
                     {/* Total Denials Value */}
                     <div style={{ marginBottom: '20px' }}>
                         <div style={{ fontSize: '12px', color: 'var(--apex-steel, #8892a4)', marginBottom: '6px' }}>Total Denials Value</div>
-                        <div style={{ fontSize: '28px', fontWeight: 700, color: '#111827' }}>$8.2M</div>
+                        <div style={{ fontSize: '28px', fontWeight: 700, color: 'var(--text-primary)' }}>$8.2M</div>
                     </div>
 
                     {/* Stacked Recovery Bar */}
@@ -1136,10 +1136,10 @@ export default function DenialManagement() {
                     </div>
 
                     {/* Cost & ROI */}
-                    <div style={{ display: 'flex', gap: '20px', paddingTop: '16px', borderTop: '1px solid #E5E7EB' }}>
+                    <div style={{ display: 'flex', gap: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-default)' }}>
                         <div style={{ flex: 1 }}>
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #8892a4)', marginBottom: '4px' }}>Cost to Recover</div>
-                            <div style={{ fontSize: '18px', fontWeight: 700, color: '#111827' }}>$142<span style={{ fontSize: '12px', fontWeight: 400, color: 'var(--apex-steel, #8892a4)' }}> / claim</span></div>
+                            <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)' }}>$142<span style={{ fontSize: '12px', fontWeight: 400, color: 'var(--apex-steel, #8892a4)' }}> / claim</span></div>
                         </div>
                         <div style={{ flex: 1 }}>
                             <div style={{ fontSize: '11px', color: 'var(--apex-steel, #8892a4)', marginBottom: '4px' }}>Recovery ROI</div>
@@ -1179,7 +1179,7 @@ export default function DenialManagement() {
                             >
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                                        <span style={{ fontSize: '12px', fontWeight: 600, color: '#111827', fontFamily: 'monospace' }}>
+                                        <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'monospace' }}>
                                             {claim.claimId}
                                         </span>
                                         <span style={styles.riskBadge(claim.risk)}>

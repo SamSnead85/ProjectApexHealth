@@ -82,7 +82,7 @@
 
 .ai-assistant__message--user .ai-assistant__message-content {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     border-radius: var(--radius-md) var(--radius-md) 0 var(--radius-md);
 }
 
@@ -177,7 +177,7 @@
 
 .ai-assistant__quick-btn:hover {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 /* Input Area */

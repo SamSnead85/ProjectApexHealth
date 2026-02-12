@@ -120,7 +120,7 @@ function QuickActionCard({ action, onClick, badgeCount }: { action: typeof quick
                     color: '#fff', fontSize: '0.68rem', fontWeight: 700,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     padding: '0 5px', boxShadow: '0 2px 8px rgba(239,68,68,0.4)',
-                    border: '2px solid #FFFFFF'
+                    border: '2px solid var(--bg-elevated)'
                 }}>
                     {badgeCount}
                 </span>
@@ -259,11 +259,11 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                             style={{
                                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
                                 padding: '1.15rem 0.75rem', borderRadius: '16px', cursor: 'pointer',
-                                background: '#FFFFFF', border: '1px solid #E5E7EB',
+                                background: 'var(--bg-elevated)', border: '1px solid var(--border-default)',
                                 transition: 'border-color 0.2s'
                             }}
                             onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${item.color}33`)}
-                            onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E5E7EB')}
+                            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border-default)')}
                         >
                             <div style={{
                                 width: '44px', height: '44px', borderRadius: '12px', display: 'flex',
@@ -286,16 +286,16 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                         transition={{ delay: 0.2 }}
                         style={{
                             borderRadius: '16px', marginBottom: '1.5rem', overflow: 'hidden',
-                            background: '#FFFFFF', border: '1px solid #E5E7EB'
+                            background: 'var(--bg-elevated)', border: '1px solid var(--border-default)'
                         }}
                     >
                         <div style={{
                             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                            padding: '0.85rem 1.25rem', borderBottom: '1px solid #E5E7EB'
+                            padding: '0.85rem 1.25rem', borderBottom: '1px solid var(--border-default)'
                         }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                                 <Bell size={16} style={{ color: '#f59e0b' }} />
-                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#111827' }}>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
                                     Action Items
                                 </span>
                                 <span style={{
@@ -326,10 +326,10 @@ export function MemberPortal({ onLogout }: MemberPortalProps) {
                                         width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0,
                                         background: item.urgent ? '#ef4444' : 'rgba(0,0,0,0.15)'
                                     }} />
-                                    <span style={{ flex: 1, fontSize: '0.83rem', color: '#374151' }}>
+                                    <span style={{ flex: 1, fontSize: '0.83rem', color: 'var(--text-secondary)' }}>
                                         {item.text}
                                     </span>
-                                    <ChevronRight size={14} style={{ color: '#9CA3AF' }} />
+                                    <ChevronRight size={14} style={{ color: 'var(--text-muted)' }} />
                                 </div>
                             ))}
                         </div>

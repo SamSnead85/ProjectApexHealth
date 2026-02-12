@@ -6,7 +6,7 @@
 .advanced-analytics {
     padding: var(--space-xl);
     min-height: 100vh;
-    background: var(--page-bg, #F3F5F8);
+    background: var(--bg-card);
 }
 
 /* --------------------------------
@@ -36,13 +36,13 @@
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 
 .analytics-header__subtitle {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
     margin: 0;
 }
 
@@ -134,7 +134,7 @@
     font-family: var(--font-display);
     font-size: var(--text-base);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -174,14 +174,14 @@
 .analytics-legend__label {
     flex: 1;
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .analytics-legend__value {
     font-family: var(--font-display);
     font-size: var(--text-sm);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 /* --------------------------------

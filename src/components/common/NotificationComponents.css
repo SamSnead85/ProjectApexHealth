@@ -12,7 +12,7 @@
     max-width: 420px;
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
@@ -76,7 +76,7 @@
 .toast__action {
     padding: var(--space-xs) var(--space-sm);
     background: transparent;
-    border: 1px solid var(--border-strong, #C4C9D2);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: var(--apex-silver);
@@ -99,7 +99,7 @@
 .notification-center {
     width: 380px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -109,7 +109,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .notification-center__header h3 {
@@ -169,7 +169,7 @@
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     cursor: pointer;
 }
 
@@ -324,7 +324,7 @@
 }
 
 .notification-bell:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
 }
 
 .notification-bell__badge {
@@ -413,7 +413,7 @@
 
 .inline-alert__action {
     padding: var(--space-xs) var(--space-sm);
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);

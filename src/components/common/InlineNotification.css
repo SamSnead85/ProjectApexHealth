@@ -8,8 +8,8 @@
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
@@ -60,14 +60,14 @@
     display: block;
     font-size: var(--text-sm);
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .inline-notification__message {
     display: block;
     margin-top: 4px;
     font-size: var(--text-sm);
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .inline-notification__action {
@@ -75,7 +75,7 @@
     align-items: center;
     gap: 4px;
     padding: 6px 12px;
-    background: #F3F5F8;
+    background: var(--bg-card);
     border: none;
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
@@ -99,15 +99,15 @@
     background: transparent;
     border: none;
     border-radius: var(--radius-md);
-    color: #9CA3AF;
+    color: var(--text-muted);
     cursor: pointer;
     transition: all 0.15s ease;
     flex-shrink: 0;
 }
 
 .inline-notification__dismiss:hover {
-    background: #F3F5F8;
-    color: #111827;
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 /* Notification Stack */
@@ -159,8 +159,8 @@
 /* Progress Notification */
 .progress-notification {
     padding: var(--space-md);
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     min-width: 280px;
 }
@@ -175,7 +175,7 @@
 .progress-notification__title {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .progress-notification__percent {
@@ -186,7 +186,7 @@
 
 .progress-notification__bar {
     height: 4px;
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -209,15 +209,15 @@
     margin-top: var(--space-sm);
     padding: 4px 12px;
     background: transparent;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
-    color: #9CA3AF;
+    color: var(--text-muted);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .progress-notification__cancel:hover {
-    background: #F9FAFB;
-    color: #111827;
+    background: var(--bg-hover);
+    color: var(--text-primary);
 }

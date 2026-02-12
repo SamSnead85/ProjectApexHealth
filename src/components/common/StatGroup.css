@@ -41,12 +41,12 @@
     gap: var(--space-xs);
     padding: var(--space-lg);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.01));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
 .stat:hover {
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
 }
 
 .stat__header {

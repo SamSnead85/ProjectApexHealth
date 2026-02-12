@@ -91,6 +91,14 @@
   --glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   --glass-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.07);
 
+  /* ── Premium Glass Surfaces ── */
+  --surface-glass: rgba(255, 255, 255, 0.7);
+  --surface-glass-hover: rgba(255, 255, 255, 0.85);
+  --surface-glass-border: rgba(0, 0, 0, 0.06);
+  --glow-color: rgba(37, 99, 235, 0.12);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+
   /* ── Card Effects ── */
   --card-3d-depth: 0 1px 2px rgba(0, 0, 0, 0.05);
   --card-3d-lift: 0 4px 8px rgba(0, 0, 0, 0.07);
@@ -203,6 +211,14 @@
 
   --border-default: #2A3548;
   --border-subtle: #1F2937;
+
+  /* Glass surfaces for dark mode */
+  --surface-glass: rgba(255, 255, 255, 0.04);
+  --surface-glass-hover: rgba(255, 255, 255, 0.07);
+  --surface-glass-border: rgba(255, 255, 255, 0.06);
+  --glow-color: rgba(59, 130, 246, 0.2);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.3);
   --border-strong: #3B4A63;
 
   /* Legacy aliases */
@@ -875,8 +891,8 @@ button {
 /* Base Card */
 .netflix-card {
   position: relative;
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: var(--space-lg);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -908,7 +924,7 @@ button {
 
 /* Premium Card - with subtle accent */
 .netflix-card--premium {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
   border-color: rgba(37, 99, 235, 0.2);
 }
 
@@ -985,15 +1001,15 @@ button {
    BASE CARD & GLASS CARD
    -------------------------------- */
 .card {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .glass-card {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: all var(--transition-base);
@@ -1006,8 +1022,8 @@ button {
 
 /* Base Metric Card */
 .metric-card {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: all var(--transition-base);
@@ -1054,8 +1070,8 @@ button {
 }
 
 .badge--neutral {
-  background: #F3F4F6;
-  color: #374151;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
 }
 
 /* Portal Switcher (Admin demo mode) */
@@ -1063,9 +1079,9 @@ button {
   display: flex;
   gap: 4px;
   padding: 4px;
-  background: #F3F5F8;
+  background: var(--bg-card);
   border-radius: 9999px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--border-default);
 }
 
 .portal-switcher__btn {
@@ -1085,12 +1101,12 @@ button {
 }
 
 .portal-switcher__btn:hover {
-  color: #111827;
-  background: #FFFFFF;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
 }
 
 .portal-switcher__btn--active {
-  color: #FFFFFF;
+  color: var(--text-on-accent);
   background: #2563EB;
   box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
 }
@@ -1218,8 +1234,8 @@ button {
   .responsive-table tr {
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     gap: var(--space-xs);
@@ -1231,7 +1247,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: var(--space-xs) 0;
-    border-bottom: 1px solid #F3F4F6;
+    border-bottom: 1px solid var(--bg-hover);
     font-size: var(--text-sm);
   }
 
@@ -1253,13 +1269,13 @@ button {
 
   /* Light mode card table - base is already light, this is a safety net */
   [data-theme="light"] .responsive-table tr {
-    background: #FFFFFF;
-    border-color: #E5E7EB;
+    background: var(--bg-elevated);
+    border-color: var(--border-default);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   [data-theme="light"] .responsive-table td {
-    border-bottom-color: #F3F4F6;
+    border-bottom-color: var(--bg-hover);
   }
 
   /* Enterprise grid as cards */
@@ -1272,7 +1288,7 @@ button {
     flex-direction: column;
     padding: var(--space-md);
     gap: var(--space-xs);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-sm);
   }
@@ -1849,7 +1865,7 @@ button {
   background:
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
     radial-gradient(ellipse 60% 40% at 80% 100%, rgba(13, 148, 136, 0.03) 0%, transparent 50%),
-    linear-gradient(180deg, #F3F5F8 0%, #EEF1F5 100%);
+    linear-gradient(180deg, var(--bg-card) 0%, var(--bg-page) 100%);
 }
 
 [data-theme="light"] .apex-atmosphere::before {
@@ -1864,8 +1880,8 @@ button {
 
 /* Light regulatory footer */
 [data-theme="light"] .regulatory-footer {
-  background: #F8FAFC;
-  border-top-color: #E5E7EB;
+  background: var(--bg-card);
+  border-top-color: var(--border-default);
 }
 
 /* Light nav items */
@@ -1875,7 +1891,7 @@ button {
 
 [data-theme="light"] .nav-item:hover {
   color: #334155;
-  background: #F3F4F6;
+  background: var(--bg-hover);
 }
 
 [data-theme="light"] .nav-item.active {
@@ -1920,8 +1936,8 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--space-xl);
-  background: #FFFFFF;
-  border-bottom: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-default);
 }
 
 .professional-header__logo {
@@ -1979,28 +1995,28 @@ button {
 table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   overflow: hidden;
 }
 
 th {
-  background: #F9FAFB;
-  color: #374151;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
   font-weight: 600;
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: var(--space-sm) var(--space-md);
   text-align: left;
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid var(--border-default);
 }
 
 td {
   padding: var(--space-sm) var(--space-md);
-  color: #111827;
+  color: var(--text-primary);
   font-size: var(--text-sm);
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid var(--border-default);
 }
 
 tr:last-child td {
@@ -2008,7 +2024,7 @@ tr:last-child td {
 }
 
 tbody tr:hover td {
-  background: #F3F5F8;
+  background: var(--bg-card);
 }
 
 /* ================================
@@ -2028,8 +2044,8 @@ tbody tr:hover td {
 
 .modal,
 .dialog {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   max-width: 560px;
@@ -2045,19 +2061,19 @@ tbody tr:hover td {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-lg);
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid var(--border-default);
 }
 
 .modal__header h2,
 .dialog__header h2 {
   font-size: var(--text-lg);
-  color: #111827;
+  color: var(--text-primary);
 }
 
 .modal__body,
 .dialog__body {
   padding: var(--space-lg);
-  color: #374151;
+  color: var(--text-secondary);
 }
 
 .modal__footer,
@@ -2067,7 +2083,7 @@ tbody tr:hover td {
   justify-content: flex-end;
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-lg);
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid var(--border-default);
 }
 
 /* ================================
@@ -2075,8 +2091,8 @@ tbody tr:hover td {
    ================================ */
 .dropdown,
 .dropdown-menu {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: var(--space-xs) 0;
@@ -2091,7 +2107,7 @@ tbody tr:hover td {
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  color: #374151;
+  color: var(--text-secondary);
   font-size: var(--text-sm);
   cursor: pointer;
   transition: background var(--transition-fast);
@@ -2099,8 +2115,8 @@ tbody tr:hover td {
 
 .dropdown-item:hover,
 .dropdown-menu-item:hover {
-  background: #F3F4F6;
-  color: #111827;
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .dropdown-item--active,
@@ -2111,7 +2127,7 @@ tbody tr:hover td {
 
 .dropdown-divider {
   height: 1px;
-  background: #E5E7EB;
+  background: var(--border-default);
   margin: var(--space-xs) 0;
 }
 
@@ -2175,8 +2191,8 @@ tbody tr:hover td {
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-md) var(--space-lg);
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   animation: slideInRight 0.3s ease forwards;
@@ -2241,7 +2257,7 @@ tbody tr:hover td {
 }
 
 .toast__close:hover {
-  background: #F3F4F6;
+  background: var(--bg-hover);
   color: var(--apex-white);
 }
 
@@ -2345,7 +2361,7 @@ tbody tr:hover td {
 .progress-bar {
   width: 100%;
   height: 6px;
-  background: #E5E7EB;
+  background: var(--border-default);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
@@ -2380,7 +2396,7 @@ tbody tr:hover td {
 
 .progress-circle__track {
   fill: none;
-  stroke: #E5E7EB;
+  stroke: var(--border-default);
   stroke-width: 6;
 }
 
@@ -2444,7 +2460,7 @@ tbody tr:hover td {
 
 .focus-ring-premium:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #2563EB;
+  box-shadow: 0 0 0 2px var(--bg-elevated), 0 0 0 4px var(--apex-teal);
 }
 
 /* ================================
@@ -2452,8 +2468,8 @@ tbody tr:hover td {
    Premium dashboard stat cards
    ================================ */
 .stat-card {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: var(--space-lg);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -2547,10 +2563,10 @@ select,
 textarea {
   width: 100%;
   padding: var(--space-md);
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
-  color: #111827;
+  color: var(--text-primary);
   font-size: var(--text-sm);
   font-family: var(--font-body);
   transition: all var(--transition-fast);
@@ -2559,7 +2575,7 @@ textarea {
 .input-premium::placeholder,
 input::placeholder,
 textarea::placeholder {
-  color: #9CA3AF;
+  color: var(--text-muted);
 }
 
 .input-premium:focus,
@@ -2617,4 +2633,23 @@ textarea:hover:not(:focus) {
   .mobile-p-sm {
     padding: var(--space-sm) !important;
   }
+}
+
+/* ================================
+   Premium Glass Card Utility
+   Reusable glass morphism card class
+   ================================ */
+.glass-card-premium {
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-smooth);
+}
+
+.glass-card-premium:hover {
+  background: var(--surface-glass-hover);
+  box-shadow: var(--shadow-card-hover);
 }

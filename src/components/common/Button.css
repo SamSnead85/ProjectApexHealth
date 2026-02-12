@@ -51,7 +51,7 @@
 /* Primary Variant */
 .apex-btn--primary {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     border-color: var(--apex-teal);
 }
 
@@ -105,7 +105,7 @@
 /* Success Variant */
 .apex-btn--success {
     background: var(--apex-success);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     border-color: var(--apex-success);
 }
 
@@ -118,13 +118,13 @@
 .apex-btn--glass {
     background: rgba(0, 0, 0, 0.04);
     color: var(--apex-silver);
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     backdrop-filter: blur(12px);
 }
 
 .apex-btn--glass:hover:not(:disabled) {
-    background: var(--bg-hover, #E4E7EC);
-    border-color: var(--border-strong, #C4C9D2);
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
     color: var(--apex-white);
 }
 

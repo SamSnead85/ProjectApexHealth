@@ -19,7 +19,7 @@
 .form-wizard__progress-bar {
     flex: 1;
     height: 4px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -58,7 +58,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.04);
-    border: 2px solid var(--border-default, #D5D9E0);
+    border: 2px solid var(--border-default);
     border-radius: 50%;
     font-size: var(--text-sm);
     font-weight: 600;
@@ -90,7 +90,7 @@
 .form-wizard__step-connector {
     flex: 1;
     height: 2px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     margin: 0 var(--space-sm);
 }
 
@@ -102,7 +102,7 @@
 .form-wizard__content {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.3);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     min-height: 200px;
 }
@@ -162,13 +162,13 @@
 
 .form-wizard__btn--secondary {
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     color: var(--apex-silver);
 }
 
 .form-wizard__btn--secondary:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: var(--border-strong, #C4C9D2);
+    border-color: var(--border-strong);
 }
 
 .form-wizard__btn--ghost {

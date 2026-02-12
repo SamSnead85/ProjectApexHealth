@@ -202,25 +202,25 @@ export default function SystemHealth() {
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                             <XAxis
                                 dataKey="hour"
-                                tick={{ fill: '#6B7280', fontSize: 10 }}
-                                axisLine={{ stroke: '#E5E7EB' }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                                axisLine={{ stroke: 'var(--border-default)' }}
                                 tickLine={false}
                                 interval={5}
                             />
                             <YAxis
                                 domain={[99, 100]}
-                                tick={{ fill: '#6B7280', fontSize: 10 }}
-                                axisLine={{ stroke: '#E5E7EB' }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                                axisLine={{ stroke: 'var(--border-default)' }}
                                 tickLine={false}
                                 tickFormatter={(v) => `${v}%`}
                             />
                             <Tooltip
                                 contentStyle={{
-                                    background: '#FFFFFF',
-                                    border: '1px solid #E5E7EB',
+                                    background: 'var(--bg-elevated)',
+                                    border: '1px solid var(--border-default)',
                                     borderRadius: '8px',
                                     fontSize: '0.75rem',
-                                    color: '#111827'
+                                    color: 'var(--text-primary)'
                                 }}
                                 formatter={(value: number) => [`${value.toFixed(2)}%`, 'Uptime']}
                             />
@@ -251,24 +251,24 @@ export default function SystemHealth() {
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                             <XAxis
                                 dataKey="hour"
-                                tick={{ fill: '#6B7280', fontSize: 10 }}
-                                axisLine={{ stroke: '#E5E7EB' }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                                axisLine={{ stroke: 'var(--border-default)' }}
                                 tickLine={false}
                                 interval={5}
                             />
                             <YAxis
-                                tick={{ fill: '#6B7280', fontSize: 10 }}
-                                axisLine={{ stroke: '#E5E7EB' }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                                axisLine={{ stroke: 'var(--border-default)' }}
                                 tickLine={false}
                                 tickFormatter={(v) => `${v}ms`}
                             />
                             <Tooltip
                                 contentStyle={{
-                                    background: '#FFFFFF',
-                                    border: '1px solid #E5E7EB',
+                                    background: 'var(--bg-elevated)',
+                                    border: '1px solid var(--border-default)',
                                     borderRadius: '8px',
                                     fontSize: '0.75rem',
-                                    color: '#111827'
+                                    color: 'var(--text-primary)'
                                 }}
                                 formatter={(value: number) => [`${value.toFixed(1)}ms`]}
                             />

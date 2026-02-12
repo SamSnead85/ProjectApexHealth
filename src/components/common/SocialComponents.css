@@ -7,7 +7,7 @@
 .user-profile-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -90,7 +90,7 @@
 
 .user-profile-card__follow.following {
     background: transparent;
-    border: 1px solid var(--border-strong, #C4C9D2);
+    border: 1px solid var(--border-strong);
     color: var(--apex-silver);
 }
 
@@ -136,7 +136,7 @@
     margin-top: var(--space-md);
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -148,7 +148,7 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .social-post:hover {
@@ -360,7 +360,7 @@
 .comment-item__replies {
     margin-top: var(--space-sm);
     margin-left: var(--space-md);
-    border-left: 2px solid var(--border-default, #D5D9E0);
+    border-left: 2px solid var(--border-default);
     padding-left: var(--space-md);
 }
 
@@ -368,7 +368,7 @@
 .follower-suggestions {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -448,7 +448,7 @@
 .trending-topics {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 

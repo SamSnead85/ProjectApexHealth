@@ -52,8 +52,8 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--bg-hover, #E4E7EC);
-    border: 2px solid var(--border-strong, #C4C9D2);
+    background: var(--bg-hover);
+    border: 2px solid var(--border-strong);
     color: var(--apex-steel);
     font-size: var(--text-sm);
     font-weight: 600;
@@ -89,7 +89,7 @@
 
 .stepper__step--upcoming .stepper__indicator {
     background: transparent;
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     color: var(--apex-steel);
 }
 
@@ -138,7 +138,7 @@
     height: 2px;
     min-width: 24px;
     margin: 0 var(--space-sm);
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     position: relative;
     overflow: hidden;
 }

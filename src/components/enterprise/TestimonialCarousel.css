@@ -62,7 +62,7 @@
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-xl);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     color: var(--apex-steel);
     font-weight: 500;
@@ -72,7 +72,7 @@
 
 .client-logo:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     color: var(--apex-white);
 }
 
@@ -104,7 +104,7 @@
     width: 48px;
     height: 48px;
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-full);
     color: var(--apex-silver);
     cursor: pointer;
@@ -113,8 +113,8 @@
 }
 
 .carousel-nav:hover {
-    background: var(--bg-hover, #E4E7EC);
-    border-color: var(--border-strong, #C4C9D2);
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
     color: var(--apex-white);
     transform: scale(1.05);
 }
@@ -204,7 +204,7 @@
     justify-content: center;
     gap: var(--space-xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .testimonial-metric {
@@ -375,7 +375,7 @@
     flex-wrap: wrap;
     padding: var(--space-xl);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
-    border: 1px solid var(--border-subtle, #E2E5EB);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
 }
 

@@ -10,15 +10,15 @@
     flex-direction: column;
     padding: 24px;
     border-radius: 20px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .premium-metric-card:hover {
     transform: translateY(-4px);
-    border-color: #D1D5DB;
+    border-color: var(--border-default);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
@@ -90,8 +90,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     color: #4B5563;
     transition: all 0.3s;
@@ -123,8 +123,8 @@
 }
 
 .premium-metric-card__trend--neutral {
-    background: #F3F5F8;
-    color: #9CA3AF;
+    background: var(--bg-card);
+    color: var(--text-muted);
 }
 
 /* Content */
@@ -137,7 +137,7 @@
     font-family: var(--font-display, 'Inter', sans-serif);
     font-size: 36px;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
     line-height: 1.1;
     margin-bottom: 4px;
@@ -146,7 +146,7 @@
 .premium-metric-card__label {
     font-size: 14px;
     font-weight: 500;
-    color: #9CA3AF;
+    color: var(--text-muted);
     letter-spacing: 0.01em;
 }
 
@@ -180,9 +180,9 @@
 .premium-metric-card--loading .premium-metric-card__value,
 .premium-metric-card--loading .premium-metric-card__label {
     background: linear-gradient(90deg,
-            #F3F5F8 25%,
-            #E5E7EB 50%,
-            #F3F5F8 75%);
+            var(--bg-card) 25%,
+            var(--border-default) 50%,
+            var(--bg-card) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 4px;

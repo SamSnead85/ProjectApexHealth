@@ -239,7 +239,7 @@
 .id-card-3d__carrier-name {
     font-size: 21px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-on-accent);
     margin: 0 0 20px 0;
     letter-spacing: -0.3px;
 }
@@ -262,7 +262,7 @@
 .id-card-3d__member-name {
     font-size: 17px;
     font-weight: 500;
-    color: #ffffff;
+    color: var(--text-on-accent);
 }
 
 /* IDs Row */
@@ -281,7 +281,7 @@
     font-size: 14px;
     font-weight: 500;
     font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    color: #ffffff;
+    color: var(--text-on-accent);
     letter-spacing: 0.3px;
 }
 
@@ -342,7 +342,7 @@
     font-size: 15px;
     font-weight: 600;
     font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    color: #ffffff;
+    color: var(--text-on-accent);
 }
 
 .id-card-3d__contact {
@@ -360,7 +360,7 @@
 
 .id-card-3d__contact p {
     font-size: 14px;
-    color: #ffffff;
+    color: var(--text-on-accent);
     margin: 0 0 4px 0;
 }
 
@@ -384,8 +384,8 @@
     gap: var(--space-md);
     width: 100%;
     padding: 14px 18px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -438,8 +438,8 @@
 }
 
 .id-card-quick-action--status:hover {
-    background: #FFFFFF;
-    border-color: #E5E7EB;
+    background: var(--bg-elevated);
+    border-color: var(--border-default);
 }
 
 /* ============================================
@@ -564,7 +564,7 @@
 }
 
 [data-theme="light"] .quick-action-card {
-    background: #FFFFFF;
+    background: var(--bg-elevated);
     border: 1px solid rgba(0, 0, 0, 0.06);
 }
 

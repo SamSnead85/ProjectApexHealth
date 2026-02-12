@@ -127,14 +127,14 @@
     top: 0;
     bottom: 0;
     background: rgba(15, 23, 42, 0.98);
-    border-left: 1px solid var(--border-subtle, #E2E5EB);
+    border-left: 1px solid var(--border-subtle);
     z-index: 101;
 }
 
 .side-panel--left {
     left: 0;
     border-left: none;
-    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-right: 1px solid var(--border-subtle);
 }
 
 .side-panel--right {
@@ -146,7 +146,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .side-panel__header h3 {

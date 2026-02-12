@@ -55,7 +55,7 @@
 
 .provider-card:hover {
     transform: translateY(-2px);
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
 }
 
 .provider-card.selected {
@@ -154,7 +154,7 @@
     display: flex;
     gap: var(--space-sm);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .provider-action {
@@ -164,7 +164,7 @@
     width: 36px;
     height: 36px;
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
     cursor: pointer;
@@ -172,8 +172,8 @@
 }
 
 .provider-action:hover {
-    background: var(--bg-hover, #E4E7EC);
-    border-color: var(--border-default, #D5D9E0);
+    background: var(--bg-hover);
+    border-color: var(--border-default);
     color: var(--apex-white);
 }
 
@@ -243,8 +243,8 @@
     gap: var(--space-lg);
     padding: var(--space-lg) 0;
     margin-bottom: var(--space-lg);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .provider-detail__item {

@@ -5,7 +5,7 @@
 
 .filter-panel {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -15,7 +15,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--apex-white);
@@ -45,7 +45,7 @@
 }
 
 .filter-panel__filter {
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .filter-panel__filter:last-child {
@@ -138,7 +138,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
@@ -187,7 +187,7 @@
     flex: 1;
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-steel);
@@ -196,7 +196,7 @@
 }
 
 .filter-panel__boolean button:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
 }
 
 .filter-panel__boolean button.active {

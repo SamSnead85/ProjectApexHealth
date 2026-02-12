@@ -232,10 +232,10 @@ export default function APIManagement() {
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={usageData}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                                <XAxis dataKey="day" stroke="#6b7280" />
-                                <YAxis stroke="#6b7280" tickFormatter={(v) => `${v / 1000}k`} />
+                                <XAxis dataKey="day" stroke="var(--text-muted)" />
+                                <YAxis stroke="var(--text-muted)" tickFormatter={(v) => `${v / 1000}k`} />
                                 <Tooltip
-                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                    contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                                 />
                                 <Area
                                     type="monotone"

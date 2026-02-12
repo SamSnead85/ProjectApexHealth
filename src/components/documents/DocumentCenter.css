@@ -45,7 +45,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     flex: 1;
     max-width: 400px;
@@ -169,7 +169,7 @@
 .storage-info {
     padding: var(--space-md);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -183,7 +183,7 @@
 
 .storage-bar {
     height: 6px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

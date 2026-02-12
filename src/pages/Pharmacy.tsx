@@ -261,7 +261,7 @@ export function Pharmacy() {
                     transition={{ delay: 0.1 }}
                     style={{
                         borderRadius: '16px', marginBottom: '1.25rem', overflow: 'hidden',
-                        background: '#FFFFFF', border: '1px solid #E5E7EB'
+                        background: 'var(--bg-elevated)', border: '1px solid var(--border-default)'
                     }}
                 >
                     <div style={{
@@ -277,7 +277,7 @@ export function Pharmacy() {
                             <Badge variant="critical" size="sm">{drugInteractions.length}</Badge>
                         </div>
                         <button onClick={() => setShowInteractions(false)} style={{
-                            background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer', display: 'flex', padding: '4px'
+                            background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', padding: '4px'
                         }}>
                             <X size={16} />
                         </button>
@@ -297,7 +297,7 @@ export function Pharmacy() {
                                 }
                                 <div style={{ flex: 1 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
-                                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: '#111827' }}>
+                                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text-primary)' }}>
                                             {interaction.drugs.join(' + ')}
                                         </span>
                                         <Badge
@@ -307,7 +307,7 @@ export function Pharmacy() {
                                             {interaction.severity}
                                         </Badge>
                                     </div>
-                                    <p style={{ margin: 0, fontSize: '0.78rem', color: '#6B7280', lineHeight: 1.5 }}>
+                                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
                                         {interaction.description}
                                     </p>
                                 </div>

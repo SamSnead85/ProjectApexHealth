@@ -218,7 +218,7 @@ const BenchmarkAnalytics = () => {
                                 Your Cost
                             </div>
                             <div className="legend-item">
-                                <div className="legend-dot" style={{ background: '#6B7280' }} />
+                                <div className="legend-dot" style={{ background: 'var(--text-tertiary)' }} />
                                 Benchmark
                             </div>
                             <div className="legend-item">
@@ -231,16 +231,16 @@ const BenchmarkAnalytics = () => {
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={trendData}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                                <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
-                                <YAxis stroke="#94A3B8" fontSize={12} domain={[300, 550]} />
+                                <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} />
+                                <YAxis stroke="var(--text-muted)" fontSize={12} domain={[300, 550]} />
                                 <Tooltip
-                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
+                                    contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)', borderRadius: '8px', color: 'var(--text-primary)' }}
                                 />
                                 <Area
                                     type="monotone"
                                     dataKey="benchmark"
-                                    stroke="#6B7280"
-                                    fill="#6B7280"
+                                    stroke="var(--text-tertiary)"
+                                    fill="var(--text-tertiary)"
                                     fillOpacity={0.1}
                                     strokeDasharray="5 5"
                                 />
@@ -338,7 +338,7 @@ const BenchmarkAnalytics = () => {
                                 <td>
                                     {metric.trend === 'positive' && <TrendingUp size={16} color="#10B981" />}
                                     {metric.trend === 'negative' && <TrendingDown size={16} color="#EF4444" />}
-                                    {metric.trend === 'neutral' && <Minus size={16} color="#6B7280" />}
+                                    {metric.trend === 'neutral' && <Minus size={16} color="var(--text-tertiary)" />}
                                 </td>
                             </tr>
                         ))}

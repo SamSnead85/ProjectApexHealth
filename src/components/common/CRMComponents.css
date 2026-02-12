@@ -10,13 +10,13 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     transition: all 0.15s ease;
 }
 
 .contact-card:hover {
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
 }
 
 .contact-card--compact {
@@ -119,7 +119,7 @@
 }
 
 .contact-card__menu-btn:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -129,7 +129,7 @@
     right: 0;
     min-width: 120px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     overflow: hidden;
     z-index: 10;
@@ -177,7 +177,7 @@
     flex: 1;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
@@ -205,7 +205,7 @@
     gap: 4px;
     padding: var(--space-xs) var(--space-sm);
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
     color: var(--apex-steel);
@@ -228,7 +228,7 @@
     display: flex;
     align-items: center;
     padding: var(--space-sm);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     cursor: pointer;
 }
 
@@ -285,7 +285,7 @@
 
 .deal-pipeline__stage-count {
     padding: 2px 8px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     font-size: var(--text-xs);
     color: var(--apex-steel);
@@ -308,7 +308,7 @@
 .deal-pipeline__deal {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -357,7 +357,7 @@
 .deal-pipeline__deal-probability-bar {
     flex: 1;
     height: 4px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -384,7 +384,7 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md) 0;
-    border-left: 2px solid var(--border-default, #D5D9E0);
+    border-left: 2px solid var(--border-default);
     margin-left: 12px;
     padding-left: var(--space-lg);
     cursor: pointer;

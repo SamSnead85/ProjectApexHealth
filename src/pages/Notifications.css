@@ -58,7 +58,7 @@
 
 .notifications__tab.active {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 .notifications__tab-badge {
@@ -353,7 +353,7 @@
 .preferences-toggle.active {
     background: var(--apex-teal);
     border-color: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 .preferences-save-btn {

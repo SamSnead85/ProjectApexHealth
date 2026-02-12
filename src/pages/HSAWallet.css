@@ -273,7 +273,7 @@
 
 .transactions__tab.active {
     background: var(--apex-teal);
-    color: #FFFFFF;
+    color: var(--text-on-accent);
 }
 
 .transactions__list {

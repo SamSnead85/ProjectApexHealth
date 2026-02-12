@@ -21,7 +21,7 @@
     max-width: 420px;
     padding: var(--space-md);
     background: var(--apex-obsidian-soft);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     pointer-events: auto;

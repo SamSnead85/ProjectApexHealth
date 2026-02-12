@@ -59,7 +59,7 @@
 .chart-controls select {
     padding: var(--space-xs) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);

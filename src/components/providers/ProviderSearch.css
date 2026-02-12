@@ -44,7 +44,7 @@
     min-width: 200px;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
@@ -75,7 +75,7 @@
 .specialty-select {
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -109,7 +109,7 @@
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.03);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-full);
     color: var(--apex-steel);
     font-size: var(--text-sm);

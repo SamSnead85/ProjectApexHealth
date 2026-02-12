@@ -2,9 +2,9 @@
    APEX LIGHT MODE
    
    Light mode is now the DEFAULT theme (see :root in index.css).
-   - Page backgrounds: #F3F5F8
-   - Card backgrounds: #FFFFFF
-   - Text: #111827 (primary), #4B5563 (secondary)
+   - Page backgrounds: var(--bg-card)
+   - Card backgrounds: var(--bg-elevated)
+   - Text: var(--text-primary), var(--text-secondary)
    - Accent: #2563EB (blue)
    - Sidebar: dark navy (#1B2332)
    

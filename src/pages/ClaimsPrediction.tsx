@@ -366,13 +366,13 @@ export default function ClaimsPrediction() {
                                 dataKey="month"
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: '#64748b', fontSize: 12 }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 12 }}
                                 dy={10}
                             />
                             <YAxis
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: '#64748b', fontSize: 11 }}
+                                tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
                                 tickFormatter={formatCurrency}
                                 dx={-10}
                             />
@@ -401,7 +401,7 @@ export default function ClaimsPrediction() {
                                         dot={{
                                             fill: '#06b6d4',
                                             strokeWidth: 3,
-                                            stroke: '#0a0a12',
+                                            stroke: 'var(--bg-elevated)',
                                             r: 5
                                         }}
                                         activeDot={{
@@ -426,7 +426,7 @@ export default function ClaimsPrediction() {
                                     dot={{
                                         fill: '#8b5cf6',
                                         strokeWidth: 3,
-                                        stroke: '#0a0a12',
+                                        stroke: 'var(--bg-elevated)',
                                         r: 5
                                     }}
                                     activeDot={{

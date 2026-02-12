@@ -24,7 +24,7 @@
     position: fixed;
     width: 320px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     z-index: 10002;
@@ -36,7 +36,7 @@
     width: 12px;
     height: 12px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     transform: rotate(45deg);
 }
 
@@ -77,7 +77,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .guided-tour__header svg {
@@ -105,7 +105,7 @@
 }
 
 .guided-tour__close:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -142,7 +142,7 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .guided-tour__btn {
@@ -169,7 +169,7 @@
 
 .guided-tour__btn--secondary {
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     color: var(--apex-silver);
 }
 
@@ -193,7 +193,7 @@
     position: absolute;
     padding: var(--space-xs) var(--space-sm);
     background: rgba(15, 23, 42, 0.95);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
     color: var(--apex-silver);
@@ -256,7 +256,7 @@
     width: 32px;
     height: 32px;
     background: transparent;
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 50%;
     color: var(--apex-steel);
     cursor: pointer;
@@ -282,7 +282,7 @@
     margin-top: var(--space-sm);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     z-index: 100;
@@ -307,7 +307,7 @@
     gap: var(--space-xs);
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .help-button__links a {

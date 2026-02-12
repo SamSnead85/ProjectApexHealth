@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -112,7 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: var(--radius-sm);
     color: var(--apex-silver);
@@ -265,7 +265,7 @@
 /* Media Card */
 .media-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -377,7 +377,7 @@
 }
 
 .media-card__actions button:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -385,7 +385,7 @@
 .playlist {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 

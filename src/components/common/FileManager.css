@@ -18,7 +18,7 @@
     gap: var(--space-sm);
     padding: var(--space-xl);
     background: rgba(15, 23, 42, 0.3);
-    border: 2px dashed var(--border-default, #D5D9E0);
+    border: 2px dashed var(--border-default);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -60,7 +60,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
@@ -91,7 +91,7 @@
 
 .file-uploader__progress {
     height: 3px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: var(--radius-full);
     margin-top: 4px;
     overflow: hidden;
@@ -148,7 +148,7 @@
 }
 
 .file-uploader__item-remove:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -169,7 +169,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -235,7 +235,7 @@
 }
 
 .file-preview__actions button:hover {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-white);
 }
 
@@ -300,7 +300,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: white;

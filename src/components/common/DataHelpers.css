@@ -16,7 +16,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     max-width: 300px;
 }
@@ -42,7 +42,7 @@
 .data-table-helper__table-wrapper {
     overflow-x: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
 }
 
 .data-table-helper__table {
@@ -57,7 +57,7 @@
     font-weight: 600;
     color: var(--apex-steel);
     background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .data-table-helper__table th.sortable {
@@ -82,7 +82,7 @@
 .data-table-helper__table td {
     padding: var(--space-sm) var(--space-md);
     color: var(--apex-silver);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .data-table-helper__table tbody tr:hover {

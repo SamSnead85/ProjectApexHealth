@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     padding: 1.25rem;
     overflow: hidden;
@@ -34,7 +34,7 @@
 .audit-trail-panel__title h2 {
     font-size: 1rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -64,8 +64,8 @@
 
 .audit-trail-panel__workflow-info {
     padding: 0.75rem;
-    background: #F9FAFB;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     margin-bottom: 1rem;
 }
@@ -76,17 +76,17 @@
     gap: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #111827;
+    color: var(--text-primary);
     margin-bottom: 0.25rem;
 }
 
 .audit-trail-panel__workflow-name svg {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .audit-trail-panel__execution-id {
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
     font-family: 'SF Mono', Monaco, monospace;
 }
 
@@ -106,13 +106,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: 6px;
 }
 
 .audit-trail-panel__search svg {
-    color: #9CA3AF;
+    color: var(--text-muted);
     flex-shrink: 0;
 }
 
@@ -120,19 +120,19 @@
     flex: 1;
     background: none;
     border: none;
-    color: #111827;
+    color: var(--text-primary);
     font-size: 0.8125rem;
     outline: none;
 }
 
 .audit-trail-panel__search input::placeholder {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .audit-trail-panel__filter {
     padding: 0.5rem 0.75rem;
-    background: #F3F5F8;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
     border-radius: 6px;
     color: #4B5563;
     font-size: 0.8125rem;
@@ -141,7 +141,7 @@
 }
 
 .audit-trail-panel__filter:hover {
-    border-color: #D1D5DB;
+    border-color: var(--border-default);
 }
 
 /* ============================================
@@ -172,8 +172,8 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #E5E7EB;
-    border: 2px solid #FFFFFF;
+    background: var(--border-default);
+    border: 2px solid var(--bg-elevated);
     z-index: 1;
 }
 
@@ -196,14 +196,14 @@
 .audit-entry__line {
     flex: 1;
     width: 2px;
-    background: #E5E7EB;
+    background: var(--border-default);
     margin-top: -2px;
 }
 
 .audit-entry__content {
     flex: 1;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     padding: 0.75rem;
     cursor: pointer;
@@ -211,12 +211,12 @@
 }
 
 .audit-entry__content:hover {
-    background: #F9FAFB;
-    border-color: #D1D5DB;
+    background: var(--bg-hover);
+    border-color: var(--border-default);
 }
 
 .audit-entry--expanded .audit-entry__content {
-    background: #F9FAFB;
+    background: var(--bg-hover);
     border-color: rgba(8, 145, 178, 0.3);
 }
 
@@ -235,14 +235,14 @@
 
 .audit-entry__time {
     font-size: 0.625rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
     font-family: 'SF Mono', Monaco, monospace;
 }
 
 .audit-entry__action {
     font-size: 0.8125rem;
     font-weight: 500;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .audit-entry__node {
@@ -250,7 +250,7 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.75rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
 }
 
@@ -316,7 +316,7 @@
 .audit-entry__details {
     margin-top: 0.75rem;
     padding-top: 0.75rem;
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -336,11 +336,11 @@
     font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .audit-detail__label svg {
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .audit-detail__value {
@@ -352,7 +352,7 @@
 .audit-detail__value strong {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .audit-detail__value span {
@@ -362,7 +362,7 @@
 
 .audit-detail__section {
     font-style: italic;
-    color: #9CA3AF !important;
+    color: var(--text-muted) !important;
 }
 
 .audit-detail__confidence {
@@ -370,7 +370,7 @@
     align-items: center;
     gap: 0.5rem;
     height: 16px;
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -384,7 +384,7 @@
 .audit-detail__confidence span {
     font-size: 0.75rem;
     font-weight: 500;
-    color: #111827;
+    color: var(--text-primary);
     padding-right: 0.5rem;
 }
 
@@ -398,7 +398,7 @@
     gap: 0.75rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid var(--border-default);
 }
 
 .audit-stat {
@@ -411,7 +411,7 @@
 .audit-stat__value {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .audit-stat__value--success {
@@ -426,5 +426,5 @@
     font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }

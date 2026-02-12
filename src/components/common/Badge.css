@@ -24,7 +24,7 @@
 
 /* Variants */
 .apex-badge--default {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-silver);
 }
 
@@ -65,12 +65,12 @@
 
 .apex-badge--subtle {
     background: rgba(0, 0, 0, 0.03);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .apex-badge--secondary {
-    background: var(--bg-hover, #E4E7EC);
-    color: var(--text-secondary, #374151);
+    background: var(--bg-hover);
+    color: var(--text-secondary);
 }
 
 /* Dot Indicator */

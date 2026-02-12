@@ -264,7 +264,7 @@
 .mockup-header {
     text-align: center;
     padding: 1rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border-default);
     margin-bottom: 1rem;
 }
 
@@ -278,13 +278,13 @@
 
 .mockup-title {
     font-size: 0.75rem;
-    color: #374151;
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
 .mockup-date {
     font-size: 0.625rem;
-    color: #9ca3af;
+    color: var(--text-muted);
 }
 
 .mockup-content {
@@ -295,14 +295,14 @@
 
 .mockup-chart {
     height: 60px;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    background: linear-gradient(135deg, var(--bg-hover), var(--border-default));
     border-radius: 6px;
 }
 
 .mockup-table {
     grid-column: span 2;
     height: 40px;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    background: linear-gradient(135deg, var(--bg-hover), var(--border-default));
     border-radius: 6px;
     margin-top: 0.5rem;
 }

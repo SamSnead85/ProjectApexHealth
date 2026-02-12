@@ -23,7 +23,7 @@
 .certification-hub__header h1 {
     font-size: 32px;
     font-weight: 700;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -84,7 +84,7 @@
     gap: 12px;
     font-size: 20px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0 0 24px 0;
 }
 
@@ -149,7 +149,7 @@
 .certification-card__name {
     font-size: 18px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .certification-card__issuer {
@@ -219,7 +219,7 @@
 .compliance-area__name {
     font-size: 14px;
     font-weight: 500;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .compliance-area__meta {
@@ -307,7 +307,7 @@
 .audit-event__title {
     font-size: 14px;
     font-weight: 500;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .audit-event__meta {
@@ -332,7 +332,7 @@
 .actions__content h3 {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin: 0;
 }
 

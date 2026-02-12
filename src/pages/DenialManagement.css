@@ -14,13 +14,13 @@
 .denial__title {
     font-size: var(--text-3xl);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin-bottom: var(--space-xs);
 }
 
 .denial__subtitle {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .denial__stats {
@@ -57,12 +57,12 @@
     display: block;
     font-size: var(--text-xl);
     font-weight: 700;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .stat-label {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .denial__filters {
@@ -79,10 +79,10 @@
 
 .filter-btn {
     padding: var(--space-sm) var(--space-md);
-    background: #FFFFFF;
-    border: 1px solid var(--border-primary, #E5E7EB);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
     font-size: var(--text-sm);
     cursor: pointer;
     text-transform: capitalize;
@@ -90,7 +90,7 @@
 }
 
 .filter-btn:hover {
-    background: #F9FAFB;
+    background: var(--bg-hover);
 }
 
 .filter-btn.active {
@@ -104,19 +104,19 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: #FFFFFF;
-    border: 1px solid var(--border-primary, #E5E7EB);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
 
 .search-box svg {
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .search-box input {
     background: none;
     border: none;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     font-size: var(--text-sm);
     outline: none;
 }
@@ -130,7 +130,7 @@
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-primary, #E5E7EB);
+    border-bottom: 1px solid var(--border-default);
     transition: all var(--transition-fast);
 }
 
@@ -139,7 +139,7 @@
 }
 
 .denial-item:hover {
-    background: #F9FAFB;
+    background: var(--bg-hover);
 }
 
 .denial-item__content {
@@ -177,17 +177,17 @@
 
 .patient-name {
     font-size: var(--text-sm);
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .payer {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .denial-reason {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
     line-height: 1.4;
 }
 
@@ -206,7 +206,7 @@
 
 .date {
     font-size: var(--text-xs);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .denial-item__actions {

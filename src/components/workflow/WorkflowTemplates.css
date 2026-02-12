@@ -19,7 +19,7 @@
     max-width: 1100px;
     max-height: 85vh;
     background: linear-gradient(180deg, rgba(18, 18, 24, 0.98), rgba(10, 10, 14, 0.99));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 24px;
     overflow: hidden;
     display: flex;
@@ -35,7 +35,7 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 2rem 2.5rem;
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent);
 }
 
@@ -58,7 +58,7 @@
 
 .workflow-templates__close {
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     color: var(--text-tertiary);
     width: 40px;
     height: 40px;
@@ -83,7 +83,7 @@
     display: flex;
     gap: 1rem;
     align-items: center;
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     flex-wrap: wrap;
     background: rgba(0, 0, 0, 0.2);
 }
@@ -93,7 +93,7 @@
     align-items: center;
     gap: 0.75rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     padding: 0.75rem 1.25rem;
     flex: 1;
@@ -141,7 +141,7 @@
     gap: 0.5rem;
     padding: 0.625rem 1.125rem;
     background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 10px;
     color: var(--text-tertiary);
     font-size: 0.875rem;
@@ -176,7 +176,7 @@
 /* Premium Template Card */
 .workflow-templates__card {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.01));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: 16px;
     padding: 1.5rem;
     cursor: pointer;
@@ -208,7 +208,7 @@
 
 .workflow-templates__card:hover {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02));
-    border-color: var(--card-color, var(--border-strong, #C4C9D2));
+    border-color: var(--card-color, var(--border-strong));
     transform: translateY(-4px) scale(1.01);
     box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.4),
@@ -228,7 +228,7 @@
     height: 52px;
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,7 +294,7 @@
 
 .workflow-templates__card-actions {
     padding-top: 1rem;
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
     margin-top: auto;
     position: relative;
     z-index: 1;

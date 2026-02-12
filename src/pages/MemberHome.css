@@ -104,7 +104,7 @@
 }
 
 .quick-action:hover {
-    background: #E5E7EB;
+    background: var(--border-default);
     border-color: var(--apex-teal);
 }
 
@@ -295,7 +295,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: var(--text-on-accent);
     flex-shrink: 0;
 }
 
@@ -499,7 +499,7 @@
     flex-direction: column;
     gap: 2px;
     padding: 6px;
-    background: #FFFFFF;
+    background: var(--bg-elevated);
     border-radius: var(--radius-sm);
 }
 
@@ -525,7 +525,7 @@
 .digital-id-card__member-info {
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
 }
 
 .digital-id-card__name {
@@ -645,7 +645,7 @@
     padding: var(--space-md);
     background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
 }
 
 .account-balance__info {
@@ -703,12 +703,12 @@
     padding: var(--space-md) var(--space-sm);
     background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--border-default);
     transition: all var(--transition-fast);
 }
 
 .copay-item:hover {
-    background: #E5E7EB;
+    background: var(--border-default);
     border-color: var(--apex-teal);
 }
 
@@ -802,7 +802,7 @@
 
 .benefit-bar__track {
     height: 10px;
-    background: #E5E7EB;
+    background: var(--border-default);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

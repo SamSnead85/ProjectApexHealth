@@ -38,7 +38,7 @@
     width: 360px;
     height: 500px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -67,7 +67,7 @@
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
     background: rgba(6, 182, 212, 0.1);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .chat-widget__header-info {
@@ -222,14 +222,14 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .chat-widget__input input {
     flex: 1;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -273,7 +273,7 @@
     flex-direction: column;
     height: 400px;
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -322,14 +322,14 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .inline-chat__input input {
     flex: 1;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);

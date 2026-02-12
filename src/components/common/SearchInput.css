@@ -9,13 +9,13 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     transition: all 0.2s ease;
 }
 
 .search-input:hover {
-    border-color: var(--border-strong, #C4C9D2);
+    border-color: var(--border-strong);
 }
 
 .search-input--focused {
@@ -55,7 +55,7 @@
     width: 20px;
     height: 20px;
     padding: 0;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border: none;
     border-radius: 50%;
     color: var(--apex-steel);

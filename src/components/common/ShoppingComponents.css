@@ -7,14 +7,14 @@
 .product-card {
     position: relative;
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
     transition: all 0.2s ease;
 }
 
 .product-card:hover {
-    border-color: var(--border-default, #D5D9E0);
+    border-color: var(--border-default);
     transform: translateY(-2px);
 }
 
@@ -166,7 +166,7 @@
 }
 
 .product-card__add--disabled {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-steel);
     cursor: not-allowed;
 }
@@ -179,7 +179,7 @@
     align-items: center;
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
 }
 
@@ -225,7 +225,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
     color: var(--apex-silver);
     cursor: pointer;
@@ -272,7 +272,7 @@
 .cart-summary {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -303,8 +303,8 @@
 
 .cart-summary__promo {
     padding: var(--space-md) 0;
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .cart-summary__promo>button {
@@ -329,7 +329,7 @@
     flex: 1;
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -378,7 +378,7 @@
 .shipping-status {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
 }
 
@@ -424,7 +424,7 @@
     top: 5px;
     bottom: 5px;
     width: 2px;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
 }
 
 .shipping-status__step {
@@ -441,7 +441,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     border-radius: 50%;
 }
 
@@ -545,7 +545,7 @@
     width: 90%;
     max-height: 90vh;
     background: var(--apex-obsidian);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -615,7 +615,7 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
     color: var(--apex-silver);
     cursor: pointer;
@@ -638,7 +638,7 @@
 }
 
 .quick-view__add:disabled {
-    background: var(--bg-hover, #E4E7EC);
+    background: var(--bg-hover);
     color: var(--apex-steel);
     cursor: not-allowed;
 }

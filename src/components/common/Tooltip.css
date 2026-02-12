@@ -12,7 +12,7 @@
     position: absolute;
     padding: var(--space-xs) var(--space-sm);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
     color: var(--apex-white);
@@ -58,7 +58,7 @@
     width: 8px;
     height: 8px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     transform: rotate(45deg);
 }
 

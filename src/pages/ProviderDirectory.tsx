@@ -906,7 +906,7 @@ export function ProviderDirectory() {
                         transition={{ type: 'spring', damping: 20 }}
                         style={{
                             position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
-                            background: 'rgba(255,255,255,0.97)', border: '1px solid #E5E7EB',
+                            background: 'rgba(255,255,255,0.97)', border: '1px solid var(--border-default)',
                             borderRadius: 16, padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 16,
                             backdropFilter: 'blur(20px)', zIndex: 50, boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
                         }}
@@ -933,7 +933,7 @@ export function ProviderDirectory() {
                         }}>
                             Compare Now
                         </Button>
-                        <button onClick={() => setCompareList([])} style={{ background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer', padding: 4 }}>
+                        <button onClick={() => setCompareList([])} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: 4 }}>
                             <X size={16} />
                         </button>
                     </motion.div>

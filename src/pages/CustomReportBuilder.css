@@ -131,7 +131,7 @@
 }
 
 .rb-select option {
-    background: #FFFFFF;
+    background: var(--bg-elevated);
     color: var(--apex-white);
 }
 
@@ -169,7 +169,7 @@
 
 .rb-source-btn:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: #E5E7EB;
+    border-color: var(--border-default);
 }
 
 .rb-source-btn.active {
@@ -377,8 +377,8 @@
 
 /* ── Custom Tooltip ── */
 .rb-tooltip {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-lg);
     padding: 12px 16px;
     min-width: 180px;
@@ -391,7 +391,7 @@
     color: var(--apex-white);
     margin-bottom: 8px;
     padding-bottom: 6px;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-default);
 }
 
 .rb-tooltip__row {

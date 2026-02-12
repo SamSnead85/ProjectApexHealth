@@ -180,7 +180,7 @@
 
 /* Results Table */
 .lab-panel__results {
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .results-table {
@@ -205,7 +205,7 @@
     grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle);
     align-items: center;
     transition: background 0.2s ease;
 }

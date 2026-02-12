@@ -244,7 +244,7 @@
 .medication-card__details {
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-subtle, #E2E5EB);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .medication-detail-grid {
@@ -312,7 +312,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
-    border: 1px solid var(--border-default, #D5D9E0);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     transition: all 0.2s ease;
 }

@@ -30,7 +30,7 @@
 
 /* Subtle variant (default) */
 .tag--subtle.tag--gray {
-    background: #F3F5F8;
+    background: var(--bg-card);
     color: #4B5563;
 }
 
@@ -66,7 +66,7 @@
 
 /* Solid variant */
 .tag--solid.tag--gray {
-    background: #6b7280;
+    background: var(--text-tertiary);
     color: white;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .tag--outline.tag--gray {
-    border-color: #D1D5DB;
+    border-color: var(--border-default);
     color: #4B5563;
 }
 
@@ -177,8 +177,8 @@
     align-items: center;
     gap: 6px;
     padding: 6px 14px;
-    background: #F9FAFB;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-full);
     color: #4B5563;
     font-size: var(--text-sm);
@@ -188,9 +188,9 @@
 }
 
 .chip:hover {
-    background: #F3F5F8;
-    border-color: #D1D5DB;
-    color: #111827;
+    background: var(--bg-card);
+    border-color: var(--border-default);
+    color: var(--text-primary);
 }
 
 .chip--selected {

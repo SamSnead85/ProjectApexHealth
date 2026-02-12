@@ -15,13 +15,13 @@
 .analytics__title {
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     margin-bottom: var(--space-xs);
 }
 
 .analytics__subtitle {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .analytics__controls {
@@ -32,8 +32,8 @@
 
 .analytics__time-selector {
     display: flex;
-    background: var(--card-bg-hover, #F9FAFB);
-    border: 1px solid var(--border-primary, #E5E7EB);
+    background: var(--bg-hover);
+    border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     padding: 2px;
 }
@@ -42,7 +42,7 @@
     padding: var(--space-xs) var(--space-md);
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
     background: transparent;
     border: none;
     border-radius: var(--radius-sm);
@@ -51,12 +51,12 @@
 }
 
 .analytics__time-btn:hover {
-    color: var(--text-secondary, #374151);
+    color: var(--text-secondary);
 }
 
 .analytics__time-btn--active {
     background: var(--apex-teal);
-    color: var(--page-bg, #F3F5F8);
+    color: var(--bg-card);
 }
 
 /* Metrics Grid */
@@ -80,14 +80,14 @@
 
 .analytics__metric-label {
     font-size: var(--text-sm);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 .analytics__metric-value {
     display: block;
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     font-family: var(--font-display);
     margin-bottom: var(--space-md);
 }
@@ -135,12 +135,12 @@
     gap: var(--space-sm);
     font-size: var(--text-base);
     font-weight: 600;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .analytics__card-meta {
     font-size: var(--text-xs);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 /* Funnel */
@@ -178,7 +178,7 @@
 
 .analytics__funnel-label {
     font-size: var(--text-sm);
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .analytics__funnel-value {
@@ -204,7 +204,7 @@
 
 .analytics__ai-metric-label {
     font-size: var(--text-sm);
-    color: var(--text-secondary, #374151);
+    color: var(--text-secondary);
 }
 
 .analytics__ai-metric-value {
@@ -239,13 +239,13 @@
     top: -4px;
     bottom: -4px;
     width: 2px;
-    background: var(--text-primary, #111827);
+    background: var(--text-primary);
     border-radius: 1px;
 }
 
 .analytics__ai-metric-target-label {
     font-size: var(--text-xs);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
     margin-top: var(--space-xs);
 }
 
@@ -293,13 +293,13 @@
 .analytics__pie-legend-label {
     flex: 1;
     font-size: var(--text-sm);
-    color: var(--text-secondary, #374151);
+    color: var(--text-secondary);
 }
 
 .analytics__pie-legend-value {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
     font-family: var(--font-mono);
 }
 
@@ -316,8 +316,8 @@
     gap: var(--space-sm);
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    background: #F9FAFB;
-    border: 1px solid var(--border-primary, #E5E7EB);
+    background: var(--bg-hover);
+    border: 1px solid var(--border-default);
 }
 
 .analytics__alert--warning {
@@ -353,12 +353,12 @@
 
 .analytics__alert-title {
     font-size: var(--text-sm);
-    color: var(--text-primary, #111827);
+    color: var(--text-primary);
 }
 
 .analytics__alert-meta {
     font-size: var(--text-xs);
-    color: var(--text-tertiary, #6B7280);
+    color: var(--text-tertiary);
 }
 
 /* Responsive */

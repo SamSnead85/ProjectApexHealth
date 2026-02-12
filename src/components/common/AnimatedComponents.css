@@ -121,7 +121,7 @@
 
     .shimmer {
         animation: none;
-        background: var(--bg-hover, #E4E7EC);
+        background: var(--bg-hover);
     }
 
     .typewriter__cursor {

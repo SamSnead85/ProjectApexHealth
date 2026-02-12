@@ -31,16 +31,16 @@
     --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 
     /* Border Tokens - Enterprise-specific borders */
-    --border-hairline: 1px solid #F3F4F6;
-    --border-subtle: 1px solid #E5E7EB;
-    --border-defined: 1px solid #D1D5DB;
+    --border-hairline: 1px solid var(--bg-hover);
+    --border-subtle: 1px solid var(--border-default);
+    --border-defined: 1px solid var(--border-default);
 }
 
 /* Dark Mode Enterprise Tokens */
 [data-theme="dark"] {
     --border-hairline: 1px solid rgba(255, 255, 255, 0.04);
     --border-subtle: 1px solid rgba(255, 255, 255, 0.06);
-    --border-defined: 1px solid var(--border-default, #D5D9E0);
+    --border-defined: 1px solid var(--border-default);
 
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -699,7 +699,7 @@
     z-index: var(--z-dropdown);
     padding: var(--space-2) var(--space-3);
     background: #1F2937;
-    color: #F9FAFB;
+    color: var(--bg-hover);
     font-size: 0.75rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
