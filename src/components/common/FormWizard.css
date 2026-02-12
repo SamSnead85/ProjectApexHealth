@@ -168,7 +168,7 @@
 
 .form-wizard__btn--secondary:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .form-wizard__btn--ghost {

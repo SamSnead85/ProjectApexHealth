@@ -135,7 +135,7 @@
     width: 28px;
     height: 28px;
     background: transparent;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border: 1px dashed var(--border-strong, #C4C9D2);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
     cursor: pointer;
@@ -166,7 +166,7 @@
 }
 
 .kanban-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .kanban-card__labels {
@@ -232,7 +232,7 @@
     justify-content: center;
     padding: var(--space-xl);
     background: rgba(15, 23, 42, 0.3);
-    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border: 2px dashed var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -240,7 +240,7 @@
 
 .dropzone:hover {
     background: rgba(15, 23, 42, 0.5);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .dropzone--active {

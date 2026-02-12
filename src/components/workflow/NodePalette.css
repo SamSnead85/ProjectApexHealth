@@ -321,7 +321,7 @@ button.node-palette__section-header:hover {
 }
 
 .node-palette__content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 /* Instruction Hint at Bottom */

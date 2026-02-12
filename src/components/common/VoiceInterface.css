@@ -126,7 +126,7 @@
 }
 
 .voice-input:focus-within {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .voice-input--active {

@@ -224,7 +224,7 @@
 .color-picker__swatch {
     width: 28px;
     height: 28px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--border-strong, #C4C9D2);
     border-radius: var(--radius-sm);
     cursor: pointer;
 }

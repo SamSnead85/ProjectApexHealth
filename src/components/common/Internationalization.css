@@ -24,7 +24,7 @@
 
 .language-selector__trigger:hover {
     background: var(--bg-hover, #E4E7EC);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .language-selector__trigger svg.rotated {
@@ -92,7 +92,7 @@
 }
 
 .language-selector__inline-btn:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
     color: var(--apex-silver);
 }
 
@@ -125,7 +125,7 @@
 
 .language-selector__grid-item:hover {
     background: rgba(15, 23, 42, 0.8);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .language-selector__grid-item--active {

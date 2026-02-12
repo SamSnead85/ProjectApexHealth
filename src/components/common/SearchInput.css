@@ -15,7 +15,7 @@
 }
 
 .search-input:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .search-input--focused {
@@ -65,7 +65,7 @@
 }
 
 .search-input__clear:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-white);
 }
 

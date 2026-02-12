@@ -117,7 +117,7 @@
 }
 
 .stopwatch__btn--reset:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 /* Timer Input */
@@ -205,5 +205,5 @@
 }
 
 .timer-input__btn--reset:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
 }

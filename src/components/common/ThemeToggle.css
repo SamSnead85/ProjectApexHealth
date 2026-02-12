@@ -26,7 +26,7 @@
 .theme-toggle__button:hover {
     background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .theme-toggle__label {
@@ -58,7 +58,7 @@
 
 .theme-selector__option:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .theme-selector__option--active {

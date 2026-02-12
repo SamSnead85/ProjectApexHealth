@@ -114,7 +114,7 @@
 
 .carousel-nav:hover {
     background: var(--bg-hover, #E4E7EC);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
     color: var(--apex-white);
     transform: scale(1.05);
 }
@@ -239,14 +239,14 @@
     width: 10px;
     height: 10px;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.08);
     border: none;
     cursor: pointer;
     transition: all 0.25s ease;
 }
 
 .carousel-dot:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.15);
 }
 
 .carousel-dot.active {

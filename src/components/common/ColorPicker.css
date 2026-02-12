@@ -43,7 +43,7 @@
 }
 
 .color-picker__trigger:hover:not(:disabled) {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .color-picker__trigger:focus {
@@ -117,7 +117,7 @@
 
 .color-picker__preset--selected {
     border-color: white;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
 }
 
 /* Native color picker */

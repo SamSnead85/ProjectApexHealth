@@ -253,7 +253,7 @@
 
 .accent-color-picker__swatch--active {
     border-color: var(--apex-white);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
 }
 
 /* Language Selector */

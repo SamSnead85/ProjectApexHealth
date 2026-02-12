@@ -24,14 +24,14 @@
 
 .offline-banner__badge {
     padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-full);
     font-size: var(--text-xs);
 }
 
 .offline-banner button {
     padding: 4px 12px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.08);
     border: none;
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
@@ -41,7 +41,7 @@
 }
 
 .offline-banner button:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.12);
 }
 
 .offline-banner .spin {
@@ -157,7 +157,7 @@
 
 .network-quality__bars span {
     width: 4px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 1px;
 }
 

@@ -208,7 +208,7 @@
 
 .workflow-templates__card:hover {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02));
-    border-color: var(--card-color, rgba(255, 255, 255, 0.2));
+    border-color: var(--card-color, var(--border-strong, #C4C9D2));
     transform: translateY(-4px) scale(1.01);
     box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.4),
@@ -345,12 +345,12 @@
 }
 
 .workflow-templates__grid::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 4px;
 }
 
 .workflow-templates__grid::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive */

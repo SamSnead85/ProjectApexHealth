@@ -94,7 +94,7 @@
 
 .health-metric-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .health-metric-card.selected {

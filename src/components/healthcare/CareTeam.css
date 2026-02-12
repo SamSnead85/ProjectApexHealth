@@ -55,7 +55,7 @@
 
 .provider-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .provider-card.selected {
@@ -173,7 +173,7 @@
 
 .provider-action:hover {
     background: var(--bg-hover, #E4E7EC);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-default, #D5D9E0);
     color: var(--apex-white);
 }
 

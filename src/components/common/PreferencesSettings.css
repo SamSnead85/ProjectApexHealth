@@ -147,7 +147,7 @@
 }
 
 .theme-selector__option:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-strong, #C4C9D2);
 }
 
 .theme-selector__option.active {

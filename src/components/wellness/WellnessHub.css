@@ -42,7 +42,7 @@
 
 .level-badge svg {
     position: absolute;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted, #9CA3AF);
 }
 
 .level-number {

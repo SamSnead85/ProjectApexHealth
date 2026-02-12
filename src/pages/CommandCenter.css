@@ -470,7 +470,7 @@
 
 .cc-hero-card__subtitle-lg {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
     font-weight: 500;
 }
@@ -603,8 +603,8 @@
     inset: 0;
     background: linear-gradient(180deg,
             rgba(255, 255, 255, 0.6) 0%,
-            rgba(0, 0, 0, 0.06) 40%,
-            rgba(255, 255, 255, 0.5) 100%);
+            rgba(0, 0, 0, 0.12) 40%,
+            rgba(0, 0, 0, 0.15) 100%);
 }
 
 /* Central Icon */

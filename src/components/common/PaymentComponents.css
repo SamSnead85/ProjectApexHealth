@@ -51,7 +51,7 @@
     display: block;
     font-size: 10px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.2);
 }
 
 .payment-card-input__details p {
@@ -178,7 +178,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--border-strong, #C4C9D2);
     border-radius: 50%;
     color: var(--apex-teal);
 }
@@ -239,7 +239,7 @@
     gap: 6px;
     padding: var(--space-md);
     background: transparent;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border: 1px dashed var(--border-strong, #C4C9D2);
     border-radius: var(--radius-lg);
     font-size: var(--text-sm);
     color: var(--apex-silver);

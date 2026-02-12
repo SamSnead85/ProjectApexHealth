@@ -14,7 +14,7 @@
 }
 
 .product-card:hover {
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--border-default, #D5D9E0);
     transform: translateY(-2px);
 }
 

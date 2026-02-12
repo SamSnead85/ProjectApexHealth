@@ -164,7 +164,7 @@
 }
 
 .video-controls-bar__btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .video-controls-bar__btn.off {
@@ -441,7 +441,7 @@
 .pre-call-setup__cancel {
     padding: var(--space-sm) var(--space-xl);
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-strong, #C4C9D2);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);

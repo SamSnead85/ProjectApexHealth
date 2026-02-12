@@ -291,7 +291,7 @@
 }
 
 .calendar-quick-view__day.disabled {
-    color: var(--apex-obsidian-elevated);
+    color: var(--text-muted, #9CA3AF);
     cursor: not-allowed;
 }
 

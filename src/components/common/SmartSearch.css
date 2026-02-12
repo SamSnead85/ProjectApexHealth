@@ -82,7 +82,7 @@
 }
 
 .smart-search__clear:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-white);
 }
 

@@ -150,7 +150,7 @@
 /* Workflow Connection */
 .workflow-connection__line {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.2);
+    stroke: var(--border-strong, #C4C9D2);
     stroke-width: 2;
 }
 
@@ -179,7 +179,7 @@
 }
 
 .workflow-connection__arrow {
-    fill: rgba(255, 255, 255, 0.2);
+    fill: rgba(0, 0, 0, 0.08);
 }
 
 .workflow-connection.active .workflow-connection__arrow {

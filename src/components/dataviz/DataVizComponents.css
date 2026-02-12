@@ -118,7 +118,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
 }
 
