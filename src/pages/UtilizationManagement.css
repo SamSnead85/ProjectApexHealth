@@ -153,7 +153,7 @@
 }
 
 .service-categories__table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .service-categories__table .service-name {
@@ -166,7 +166,7 @@
 }
 
 .service-categories__table tfoot td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-top: 2px solid var(--glass-border);
 }
 

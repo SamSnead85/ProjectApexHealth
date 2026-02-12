@@ -59,10 +59,10 @@
     border-radius: 16px;
     padding: 1.5rem;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow:
         0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 0 rgba(0, 0, 0, 0.06);
 }
 
 .card-back {
@@ -194,7 +194,7 @@
 }
 
 .contact-info {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     padding-top: 1rem;
     font-size: 0.75rem;
     color: var(--text-secondary);

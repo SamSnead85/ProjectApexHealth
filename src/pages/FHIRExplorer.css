@@ -73,7 +73,7 @@
 
 .fe-conf-item {
     padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 8px;
 }
 
@@ -107,7 +107,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 0.75rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     cursor: pointer;
@@ -116,12 +116,12 @@
 }
 
 .fe-resource-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .fe-resource-card.active {
     border-color: var(--resource-color, var(--accent-teal));
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     box-shadow: 0 0 20px rgba(20, 184, 166, 0.08);
 }
 
@@ -174,7 +174,7 @@
 .fe-search-field input {
     width: 100%;
     padding: 0.5rem 0.75rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.03);
     border: 1px solid var(--border-primary);
     border-radius: 8px;
     color: var(--text-primary);
@@ -234,7 +234,7 @@
 
 .fe-result-item {
     padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid transparent;
     border-radius: 10px;
     cursor: pointer;
@@ -242,7 +242,7 @@
 }
 
 .fe-result-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .fe-result-item.selected {
@@ -312,7 +312,7 @@
 }
 
 .fe-json-code {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--border-primary);
     border-radius: 10px;
     padding: 1rem;
@@ -360,7 +360,7 @@
 .fe-query-input input {
     flex: 1;
     padding: 0.5rem 0.75rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.03);
     border: 1px solid var(--border-primary);
     border-radius: 8px;
     color: var(--text-primary);
@@ -403,14 +403,14 @@
 
 .fe-davinci-card {
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 10px;
     border: 1px solid var(--border-primary);
     transition: background 0.2s ease;
 }
 
 .fe-davinci-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .fe-davinci-header {
@@ -447,15 +447,15 @@
 
 .fe-cms-api-card {
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     transition: all 0.2s ease;
 }
 
 .fe-cms-api-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
 }
 
 .fe-cms-api-header {
@@ -557,14 +557,14 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     transition: all 0.2s ease;
 }
 
 .fe-health-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .fe-health-icon {
@@ -641,7 +641,7 @@
     font-family: var(--font-mono);
     min-width: 42px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.03);
     border-radius: 8px;
     padding: 0.2rem 0.5rem;
 }

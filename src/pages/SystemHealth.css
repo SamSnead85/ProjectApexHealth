@@ -233,7 +233,7 @@
 }
 
 .sh-metric-card:hover {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 0, 0, 0.08);
 }
 
 .sh-metric-header {
@@ -268,7 +268,7 @@
 .sh-gauge-track {
     flex: 1;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     overflow: hidden;
 }

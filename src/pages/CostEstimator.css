@@ -49,7 +49,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
 }
@@ -74,7 +74,7 @@
 
 .cost-estimator__category-select {
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
@@ -237,7 +237,7 @@
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -328,7 +328,7 @@
 .cost-detail__range-bar {
     position: relative;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: visible;
 }
@@ -446,10 +446,10 @@
     align-items: stretch;
     gap: 0;
     margin-bottom: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .cost-card__network {
@@ -486,7 +486,7 @@
     display: flex;
     align-items: center;
     padding: 0 2px;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .cost-card__network-divider span {
@@ -529,7 +529,7 @@
     font-size: var(--text-xs);
     color: var(--apex-steel);
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* ===== Phase 4B: Detail Panel - Network Comparison ===== */

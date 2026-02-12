@@ -129,7 +129,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     font-size: var(--text-xs);
@@ -262,7 +262,7 @@
 
 .dh__integration-card {
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     cursor: pointer;
@@ -270,7 +270,7 @@
 }
 
 .dh__integration-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border-color: rgba(6, 182, 212, 0.3);
     transform: translateY(-2px);
 }
@@ -384,7 +384,7 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .dh__integration-sync {
@@ -440,13 +440,13 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     transition: background var(--transition-fast);
 }
 
 .dh__sync-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .dh__sync-item--failed {
@@ -524,7 +524,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     color: var(--apex-silver);

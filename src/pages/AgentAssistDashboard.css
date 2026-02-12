@@ -42,7 +42,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
@@ -64,7 +64,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-full);
     font-size: var(--text-md);
     font-weight: 600;
@@ -215,7 +215,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
 }
 
@@ -315,7 +315,7 @@
 
 .suggestion-card {
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     position: relative;
@@ -413,7 +413,7 @@
 }
 
 .feedback-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -452,7 +452,7 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
 }
 
@@ -477,7 +477,7 @@
 .note-input input {
     flex: 1;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);

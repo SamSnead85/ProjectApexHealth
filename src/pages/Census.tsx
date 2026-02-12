@@ -138,7 +138,7 @@ export function Census() {
                                 style={{
                                     padding: '8px 12px 8px 36px',
                                     background: 'rgba(0,0,0,0.2)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    border: '1px solid var(--card-border, rgba(0,0,0,0.1))',
                                     borderRadius: 'var(--radius-md)',
                                     color: 'var(--apex-white)',
                                     fontSize: 'var(--text-sm)',

@@ -96,15 +96,11 @@ const DataVisualizationStudio = () => {
                 return (
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={sampleData}>
-                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />}
-                            <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                            <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
+                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
+                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
+                            <YAxis stroke="#94A3B8" fontSize={12} />
                             <Tooltip
-                                contentStyle={{
-                                    background: 'rgba(20,22,26,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    borderRadius: '8px'
-                                }}
+                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                             />
                             {showLegend && <Legend />}
                             <Area
@@ -121,15 +117,11 @@ const DataVisualizationStudio = () => {
                 return (
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={sampleData}>
-                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />}
-                            <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                            <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
+                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
+                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
+                            <YAxis stroke="#94A3B8" fontSize={12} />
                             <Tooltip
-                                contentStyle={{
-                                    background: 'rgba(20,22,26,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    borderRadius: '8px'
-                                }}
+                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                             />
                             {showLegend && <Legend />}
                             <Bar dataKey="claims" fill={colorPalettes[selectedColor][0]} radius={[4, 4, 0, 0]} />
@@ -140,15 +132,11 @@ const DataVisualizationStudio = () => {
                 return (
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={sampleData}>
-                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />}
-                            <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                            <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
+                            {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />}
+                            <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
+                            <YAxis stroke="#94A3B8" fontSize={12} />
                             <Tooltip
-                                contentStyle={{
-                                    background: 'rgba(20,22,26,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    borderRadius: '8px'
-                                }}
+                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                             />
                             {showLegend && <Legend />}
                             <Line
@@ -179,11 +167,7 @@ const DataVisualizationStudio = () => {
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{
-                                    background: 'rgba(20,22,26,0.95)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    borderRadius: '8px'
-                                }}
+                                contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                             />
                             {showLegend && <Legend />}
                         </PieChart>

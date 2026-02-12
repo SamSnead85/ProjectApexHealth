@@ -33,7 +33,7 @@
     gap: var(--space-sm);
     margin: var(--space-md);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
 }
@@ -109,7 +109,7 @@
 }
 
 .conversation-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .conversation-item.active {
@@ -265,7 +265,7 @@
 }
 
 .chat__action-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
     border-color: var(--apex-teal);
 }
@@ -359,7 +359,7 @@
 .chat__input-area input {
     flex: 1;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);

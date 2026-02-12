@@ -249,7 +249,7 @@
     font-family: var(--font-mono);
     color: var(--apex-silver);
     padding: 4px 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
 }
 
@@ -319,7 +319,7 @@
 .confidence-score__bar {
     flex: 1;
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

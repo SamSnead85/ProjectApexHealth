@@ -154,27 +154,21 @@ export default function BatchDashboard() {
                                 <stop offset="100%" stopColor="#818cf8" stopOpacity={0.4} />
                             </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                         <XAxis
                             dataKey="hour"
-                            tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                            axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                            tick={{ fill: '#64748b', fontSize: 10 }}
+                            axisLine={{ stroke: '#E5E7EB' }}
                             tickLine={false}
                             interval={2}
                         />
                         <YAxis
-                            tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
-                            axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                            tick={{ fill: '#64748b', fontSize: 10 }}
+                            axisLine={{ stroke: '#E5E7EB' }}
                             tickLine={false}
                         />
                         <Tooltip
-                            contentStyle={{
-                                background: 'rgba(15,15,20,0.95)',
-                                border: '1px solid rgba(255,255,255,0.1)',
-                                borderRadius: '8px',
-                                fontSize: '0.75rem',
-                                color: '#fff'
-                            }}
+                            contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', fontSize: '0.75rem', color: '#111827' }}
                             formatter={(value: number, name: string) => [value, name === 'batches' ? 'Successful' : 'Failed']}
                         />
                         <Bar dataKey="batches" fill="url(#batchBarGradient)" radius={[4, 4, 0, 0]} />

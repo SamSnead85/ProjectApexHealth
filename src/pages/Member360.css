@@ -267,7 +267,7 @@
 }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 10px;
     padding: 1rem;
@@ -321,7 +321,7 @@
 }
 
 .life-event-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1rem;
@@ -469,7 +469,7 @@
 }
 
 .dependent-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1rem 1.25rem;
@@ -563,7 +563,7 @@
 }
 
 .aca-metric-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1rem;

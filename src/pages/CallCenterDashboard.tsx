@@ -14,6 +14,7 @@ import {
     ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts'
 import { exportToCSV } from '../utils/exportData'
+import { PageSkeleton } from '../components/common/LoadingSkeleton'
 import './CallCenterDashboard.css'
 
 // ============================================================================
@@ -98,6 +99,13 @@ const escalations: EscalationLog[] = [
 ]
 
 export default function CallCenterDashboard() {
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
+
     const initialMetrics = {
         totalCallsToday: 1847,
         activeCalls: 24,
@@ -203,6 +211,8 @@ export default function CallCenterDashboard() {
 
     // SLA compliance calculation
     const slaCompliance = 94.7
+
+    if (loading) return <PageSkeleton />
 
     return (
         <div className="call-center-dashboard">
@@ -438,16 +448,11 @@ export default function CallCenterDashboard() {
                         <div className="ccd-chart-container">
                             <ResponsiveContainer width="100%" height={280}>
                                 <BarChart data={hourlyVolume} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
                                     <XAxis dataKey="hour" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                                     <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                                     <Tooltip
-                                        contentStyle={{
-                                            background: 'linear-gradient(180deg, rgba(25,25,40,0.98), rgba(15,15,25,0.98))',
-                                            border: '1px solid rgba(255,255,255,0.1)',
-                                            borderRadius: '12px',
-                                            boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
-                                        }}
+                                        contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                     />
                                     <Bar dataKey="ai" name="AI Handled" fill="#14b8a6" radius={[4, 4, 0, 0]} stackId="a" />
                                     <Bar dataKey="human" name="Human Handled" fill="#8b5cf6" radius={[4, 4, 0, 0]} stackId="a" />
@@ -481,11 +486,7 @@ export default function CallCenterDashboard() {
                                         ))}
                                     </Pie>
                                     <Tooltip
-                                        contentStyle={{
-                                            background: 'linear-gradient(180deg, rgba(25,25,40,0.98), rgba(15,15,25,0.98))',
-                                            border: '1px solid rgba(255,255,255,0.1)',
-                                            borderRadius: '12px',
-                                        }}
+                                        contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                         formatter={(value: number) => [`${value}%`, '']}
                                     />
                                 </PieChart>
@@ -520,15 +521,11 @@ export default function CallCenterDashboard() {
                                             <stop offset="100%" stopColor="#06b6d4" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
                                     <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                                     <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
                                     <Tooltip
-                                        contentStyle={{
-                                            background: 'linear-gradient(180deg, rgba(25,25,40,0.98), rgba(15,15,25,0.98))',
-                                            border: '1px solid rgba(255,255,255,0.1)',
-                                            borderRadius: '12px',
-                                        }}
+                                        contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                     />
                                     <Area
                                         type="monotone"
@@ -556,7 +553,7 @@ export default function CallCenterDashboard() {
                         <div className="ccd-sla-gauge">
                             <div className="ccd-sla-ring">
                                 <svg viewBox="0 0 120 120">
-                                    <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="10" />
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="10" />
                                     <motion.circle
                                         cx="60" cy="60" r="50"
                                         fill="none"

@@ -102,7 +102,7 @@
 
 .agency-portal__filter-btn:hover {
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .agency-portal__filter-btn.active {
@@ -166,7 +166,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -249,7 +249,7 @@
 }
 
 .agency-portal__leaderboard-row:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .agency-portal__leaderboard-rank {

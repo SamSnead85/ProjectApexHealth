@@ -4,6 +4,7 @@ import {
     Phone, PhoneOff, Mic, MicOff, Volume2, Settings,
     MessageSquare, Clock, Activity, User, Bot
 } from 'lucide-react'
+import { PageSkeleton } from '../components/common/LoadingSkeleton'
 import './VoiceAgentBuilder.css'
 
 // ============================================================================
@@ -11,10 +12,14 @@ import './VoiceAgentBuilder.css'
 // Real mic input, real text-to-speech, healthcare response tree
 // ============================================================================
 
+// Web Speech API type declarations
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SpeechRecognitionType = any
+
 declare global {
     interface Window {
-        SpeechRecognition: typeof SpeechRecognition
-        webkitSpeechRecognition: typeof SpeechRecognition
+        SpeechRecognition: SpeechRecognitionType
+        webkitSpeechRecognition: SpeechRecognitionType
     }
 }
 
@@ -113,12 +118,20 @@ export default function VoiceAgentBuilder() {
     const [interimText, setInterimText] = useState('')
 
     // Refs
-    const recognitionRef = useRef<SpeechRecognition | null>(null)
+    const recognitionRef = useRef<any>(null)
     const synthRef = useRef(typeof window !== 'undefined' ? window.speechSynthesis : null)
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
     const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const transcriptEndRef = useRef<HTMLDivElement | null>(null)
     const messagesRef = useRef<TranscriptMessage[]>([])
+
+    // ── Loading state ──────────────────────────────────────────────────
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
 
     // Keep messagesRef in sync
     useEffect(() => { messagesRef.current = messages }, [messages])
@@ -198,7 +211,7 @@ export default function VoiceAgentBuilder() {
         recognition.interimResults = true
         recognition.lang = 'en-US'
 
-        recognition.onresult = (event: SpeechRecognitionEvent) => {
+        recognition.onresult = (event: any) => {
             let interim = ''
             let finalTranscript = ''
 
@@ -234,7 +247,7 @@ export default function VoiceAgentBuilder() {
             setListening(false)
             // Auto-restart if call is still active and not muted
         }
-        recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+        recognition.onerror = (event: any) => {
             if (event.error !== 'aborted' && event.error !== 'no-speech') {
                 console.error('Speech recognition error:', event.error)
             }
@@ -294,6 +307,8 @@ export default function VoiceAgentBuilder() {
 
     // ── Waveform bars ───────────────────────────────────────────────────
     const waveformBars = Array.from({ length: 24 }, (_, i) => i)
+
+    if (loading) return <PageSkeleton />
 
     return (
         <div className="va-page">
@@ -426,7 +441,7 @@ export default function VoiceAgentBuilder() {
                                                 : { scaleY: 0.15 }
                                         }
                                         style={{
-                                            background: agentSpeaking ? '#0D7C8C' : listening ? '#4A6FA5' : '#6B7585',
+                                            background: agentSpeaking ? '#2563EB' : listening ? '#3B82F6' : '#6B7585',
                                         }}
                                     />
                                 ))}
@@ -547,7 +562,7 @@ export default function VoiceAgentBuilder() {
 
                         <div className="va-analytics-body">
                             <div className="va-stat">
-                                <div className="va-stat-icon" style={{ background: 'rgba(13,124,140,0.12)', color: '#0D7C8C' }}>
+                                <div className="va-stat-icon" style={{ background: 'rgba(37,99,235,0.12)', color: '#2563EB' }}>
                                     <Clock size={16} />
                                 </div>
                                 <div>
@@ -557,7 +572,7 @@ export default function VoiceAgentBuilder() {
                             </div>
 
                             <div className="va-stat">
-                                <div className="va-stat-icon" style={{ background: 'rgba(74,111,165,0.12)', color: '#4A6FA5' }}>
+                                <div className="va-stat-icon" style={{ background: 'rgba(59,130,246,0.12)', color: '#3B82F6' }}>
                                     <User size={16} />
                                 </div>
                                 <div>
@@ -567,7 +582,7 @@ export default function VoiceAgentBuilder() {
                             </div>
 
                             <div className="va-stat">
-                                <div className="va-stat-icon" style={{ background: 'rgba(13,124,140,0.12)', color: '#0D7C8C' }}>
+                                <div className="va-stat-icon" style={{ background: 'rgba(37,99,235,0.12)', color: '#2563EB' }}>
                                     <Bot size={16} />
                                 </div>
                                 <div>

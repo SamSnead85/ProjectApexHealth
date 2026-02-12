@@ -51,7 +51,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
@@ -61,7 +61,7 @@
 }
 
 .type-option:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .type-option.active {
@@ -78,7 +78,7 @@
     padding: var(--space-3xl);
     border: 2px dashed var(--glass-border);
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(0, 0, 0, 0.01);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -164,7 +164,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
 }
@@ -193,13 +193,13 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .upload-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .upload-item__icon {
@@ -239,7 +239,7 @@
     width: 28px;
     height: 28px;
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     color: var(--apex-steel);
     cursor: pointer;
@@ -250,7 +250,7 @@
 }
 
 .action-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-white);
 }
 

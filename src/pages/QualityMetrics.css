@@ -91,7 +91,7 @@
 .category-rating {
     text-align: center;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -164,7 +164,7 @@
 }
 
 .quality-measures__table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .measure-name {

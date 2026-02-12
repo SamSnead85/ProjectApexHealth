@@ -160,13 +160,14 @@ function PaletteItem({ node, onDragStart, onClick }: {
 }
 
 // Workflow Node Component
-function WorkflowNodeComponent({ node, isSelected, isInvalid, isExecuting, onSelect, onDelete }: {
+function WorkflowNodeComponent({ node, isSelected, isInvalid, isExecuting, onSelect, onDelete, onSettingsClick }: {
     node: WorkflowNode,
     isSelected: boolean,
     isInvalid?: boolean,
     isExecuting?: boolean,
     onSelect: () => void,
-    onDelete: () => void
+    onDelete: () => void,
+    onSettingsClick?: () => void
 }) {
     return (
         <motion.div
@@ -189,7 +190,7 @@ function WorkflowNodeComponent({ node, isSelected, isInvalid, isExecuting, onSel
                 <span className="wf-node__type">{node.type.replace(/_/g, ' ')}</span>
             </div>
             <div className="wf-node__actions">
-                <button className="wf-node__action" onClick={(e) => { e.stopPropagation(); }}>
+                <button className="wf-node__action" onClick={(e) => { e.stopPropagation(); onSettingsClick?.(); }}>
                     <Settings size={14} />
                 </button>
                 <button className="wf-node__action wf-node__action--danger" onClick={(e) => { e.stopPropagation(); onDelete(); }}>
@@ -278,6 +279,7 @@ export function WorkflowBuilder() {
     const [executingNodeId, setExecutingNodeId] = useState<string | null>(null)
     const [isDragOver, setIsDragOver] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
+    const [isSavingDraft, setIsSavingDraft] = useState(false)
     const canvasRef = useRef<HTMLDivElement>(null)
 
     // Handle drag and drop
@@ -447,7 +449,23 @@ export function WorkflowBuilder() {
                     }}>
                         Export
                     </Button>
-                    <Button variant="secondary" icon={<Save size={16} />}>
+                    <Button 
+                        variant="secondary" 
+                        icon={<Save size={16} />}
+                        onClick={async () => {
+                            setIsSavingDraft(true)
+                            // Simulate save operation
+                            await new Promise(resolve => setTimeout(resolve, 1000))
+                            setIsSavingDraft(false)
+                            addToast({ 
+                                type: 'success', 
+                                title: 'Draft Saved', 
+                                message: 'Workflow saved as draft', 
+                                duration: 3000 
+                            })
+                        }}
+                        loading={isSavingDraft}
+                    >
                         Save Draft
                     </Button>
                     <Button
@@ -620,6 +638,14 @@ export function WorkflowBuilder() {
                                                 isExecuting={executingNodeId === node.id}
                                                 onSelect={() => setSelectedNode(node.id)}
                                                 onDelete={() => deleteNode(node.id)}
+                                                onSettingsClick={() => {
+                                                    addToast({ 
+                                                        type: 'info', 
+                                                        title: 'Settings Panel', 
+                                                        message: 'Settings panel coming soon', 
+                                                        duration: 3000 
+                                                    })
+                                                }}
                                             />
                                             {/* Connection line between nodes */}
                                             {idx < nodes.length - 1 && (

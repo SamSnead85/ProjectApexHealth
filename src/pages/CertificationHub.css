@@ -29,7 +29,7 @@
 
 .certification-hub__header p {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.55);
     margin: 0;
 }
 
@@ -68,7 +68,7 @@
 
 .score-ring__label {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.55);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -103,8 +103,8 @@
     display: flex;
     gap: 20px;
     padding: 24px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.02) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -154,12 +154,12 @@
 
 .certification-card__issuer {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.55);
 }
 
 .certification-card__description {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.55);
     margin: 0;
     line-height: 1.5;
 }
@@ -177,7 +177,7 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.55);
 }
 
 .certification-card__score {
@@ -201,13 +201,13 @@
     justify-content: space-between;
     gap: 24px;
     padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 12px;
     transition: background 0.2s ease;
 }
 
 .compliance-area:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .compliance-area__info {
@@ -230,7 +230,7 @@
 
 .compliance-area__audit {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(0, 0, 0, 0.45);
 }
 
 .compliance-area__score {
@@ -243,7 +243,7 @@
 .compliance-area__bar {
     flex: 1;
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 3px;
     overflow: hidden;
 }
@@ -278,7 +278,7 @@
     align-items: center;
     gap: 16px;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .audit-event:last-child {
@@ -312,7 +312,7 @@
 
 .audit-event__meta {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.55);
 }
 
 /* Actions */
@@ -338,7 +338,7 @@
 
 .actions__content p {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.55);
     margin: 0;
 }
 

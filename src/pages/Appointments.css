@@ -100,14 +100,14 @@
     display: flex;
     gap: var(--space-lg);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     transition: all var(--transition-fast);
 }
 
 .appointment-card:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-color: var(--apex-teal);
 }
 
@@ -139,7 +139,7 @@
 .appointment-card__month {
     font-size: var(--text-xs);
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.7);
     text-transform: uppercase;
 }
 
@@ -242,7 +242,7 @@
     width: 28px;
     height: 28px;
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     color: var(--apex-silver);
     cursor: pointer;
@@ -253,7 +253,7 @@
 }
 
 .calendar-quick-view__nav button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-teal);
 }
 
@@ -287,7 +287,7 @@
 }
 
 .calendar-quick-view__day:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .calendar-quick-view__day.disabled {

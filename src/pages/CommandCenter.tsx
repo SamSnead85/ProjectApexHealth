@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { Badge, Button } from '../components/common'
 import { PremiumMetricCard, type CardVariant, type TrendDirection } from '../components/ui/PremiumMetricCard'
+import { PageSkeleton } from '../components/common/LoadingSkeleton'
 import './CommandCenter.css'
 
 // ============================================================================
@@ -243,7 +244,13 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 export function CommandCenter({ portal, userName = 'Demo User', onLogout }: CommandCenterProps) {
     const { navigate } = useNavigation()
+    const [loading, setLoading] = useState(true)
     const [systemStatus, setSystemStatus] = useState<any>(null)
+
+    useEffect(() => {
+        const t = setTimeout(() => setLoading(false), 800)
+        return () => clearTimeout(t)
+    }, [])
 
     // Fetch real-time system health from API
     useEffect(() => {
@@ -260,6 +267,8 @@ export function CommandCenter({ portal, userName = 'Demo User', onLogout }: Comm
     }, []);
     const [searchQuery, setSearchQuery] = useState('')
     const [activeCategory, setActiveCategory] = useState('claims')
+
+    if (loading) return <PageSkeleton />
 
     const handleModuleClick = (path: string) => navigate(path)
 

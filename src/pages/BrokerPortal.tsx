@@ -7,7 +7,9 @@ import {
     AlertCircle, PieChart, BarChart3, Target, Shield, Phone,
     MessageSquare, Star, Activity, Wallet, HelpCircle
 } from 'lucide-react'
-import { GlassCard, Badge, Button, Input } from '../components/common'
+import { GlassCard, Badge, Button, Input, PageSkeleton } from '../components/common'
+import { useToast } from '../components/common/Toast'
+import { useNavigation } from '../context/NavigationContext'
 import './BrokerPortal.css'
 
 // ============================================================================
@@ -98,7 +100,7 @@ function ClientRow({ client, onClick }: { client: typeof clients[0], onClick: ()
         <motion.div
             className="bp-client-row"
             onClick={onClick}
-            whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.04)' }}
+            whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.04)' }}
         >
             <div className="bp-client-row__name">
                 <Building2 size={18} />
@@ -154,6 +156,17 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
     const [searchQuery, setSearchQuery] = useState('')
     const [activeTab, setActiveTab] = useState('dashboard')
     const [apiBrokerData, setApiBrokerData] = useState<any>(null)
+    const [loading, setLoading] = useState(true)
+    const { addToast } = useToast()
+    const { navigate } = useNavigation()
+
+    // Show loading skeleton for first 800ms
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false)
+        }, 800)
+        return () => clearTimeout(timer)
+    }, [])
 
     // Fetch broker dashboard data from API with mock fallback
     useEffect(() => {
@@ -169,6 +182,64 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
         })();
     }, []);
 
+    // Handle New Quote button click
+    const handleNewQuote = () => {
+        addToast({
+            type: 'info',
+            title: 'Opening quoting wizard...',
+            message: 'Redirecting to quote engine',
+            duration: 3000
+        })
+        // Navigate to quoting page after a short delay
+        setTimeout(() => {
+            navigate('/quoting')
+        }, 500)
+    }
+
+    // Handle client row click
+    const handleClientClick = (client: typeof clients[0]) => {
+        addToast({
+            type: 'info',
+            title: `Viewing ${client.name}`,
+            message: `${client.lives.toLocaleString()} lives • Premium: $${(client.premium / 1000000).toFixed(2)}M • Renewal: ${new Date(client.renewal).toLocaleDateString()}`,
+            duration: 4000
+        })
+    }
+
+    // Handle quick action buttons
+    const handleQuickAction = (action: string) => {
+        const actions: Record<string, { title: string; message: string }> = {
+            'create-quote': {
+                title: 'Opening new quote...',
+                message: 'Redirecting to quote creation wizard'
+            },
+            'add-client': {
+                title: 'Adding new client...',
+                message: 'Opening client enrollment form'
+            },
+            'commission-statement': {
+                title: 'Downloading commission statement...',
+                message: 'Your statement will be available shortly'
+            },
+            'contact-support': {
+                title: 'Contacting support...',
+                message: 'Opening support ticket form'
+            }
+        }
+
+        const actionInfo = actions[action]
+        if (actionInfo) {
+            addToast({
+                type: 'info',
+                title: actionInfo.title,
+                message: actionInfo.message,
+                duration: 3000
+            })
+        }
+    }
+
+    if (loading) return <PageSkeleton />
+
     return (
         <div className="broker-portal">
             {/* Header */}
@@ -177,8 +248,8 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
                     <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="bpLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#0D7C8C" />
-                        <stop offset="100%" stopColor="#096672" />
+                        <stop offset="0%" stopColor="#2563EB" />
+                        <stop offset="100%" stopColor="#1D4ED8" />
                             </linearGradient>
                         </defs>
                         <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#bpLogoGrad)" />
@@ -204,7 +275,7 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
                 </nav>
 
                 <div className="bp-header__actions">
-                    <Button variant="primary" size="sm" icon={<Plus size={16} />}>
+                    <Button variant="primary" size="sm" icon={<Plus size={16} />} onClick={handleNewQuote}>
                         New Quote
                     </Button>
                     <button className="bp-header__icon-btn">
@@ -278,7 +349,7 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
                                     <ClientRow
                                         key={client.id}
                                         client={client}
-                                        onClick={() => void 0}
+                                        onClick={() => handleClientClick(client)}
                                     />
                                 ))}
                             </div>
@@ -304,19 +375,19 @@ export function BrokerPortal({ onLogout, isAdmin = false }: BrokerPortalProps) {
                         <div className="bp-sidebar-card">
                             <h3>Quick Actions</h3>
                             <div className="bp-quick-actions">
-                                <button className="bp-quick-action">
+                                <button className="bp-quick-action" onClick={() => handleQuickAction('create-quote')}>
                                     <FileText size={18} />
                                     <span>Create Quote</span>
                                 </button>
-                                <button className="bp-quick-action">
+                                <button className="bp-quick-action" onClick={() => handleQuickAction('add-client')}>
                                     <Users size={18} />
                                     <span>Add Client</span>
                                 </button>
-                                <button className="bp-quick-action">
+                                <button className="bp-quick-action" onClick={() => handleQuickAction('commission-statement')}>
                                     <Download size={18} />
                                     <span>Commission Statement</span>
                                 </button>
-                                <button className="bp-quick-action">
+                                <button className="bp-quick-action" onClick={() => handleQuickAction('contact-support')}>
                                     <Phone size={18} />
                                     <span>Contact Support</span>
                                 </button>

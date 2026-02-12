@@ -115,7 +115,7 @@
 
 .column-count {
     padding: 0.25rem 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 10px;
     font-size: 0.75rem;
     color: var(--text-secondary);

@@ -231,15 +231,11 @@ export default function APIManagement() {
                     <div className="chart-container">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={usageData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                                 <XAxis dataKey="day" stroke="#6b7280" />
                                 <YAxis stroke="#6b7280" tickFormatter={(v) => `${v / 1000}k`} />
                                 <Tooltip
-                                    contentStyle={{
-                                        background: 'rgba(17, 24, 39, 0.95)',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: '8px'
-                                    }}
+                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                 />
                                 <Area
                                     type="monotone"

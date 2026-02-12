@@ -201,11 +201,11 @@ export default function UserManagement() {
                                     </Pie>
                                     <Tooltip
                                         contentStyle={{
-                                            background: 'rgba(15,15,20,0.95)',
-                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            background: '#FFFFFF',
+                                            border: '1px solid #E5E7EB',
                                             borderRadius: '8px',
                                             fontSize: '0.75rem',
-                                            color: '#fff'
+                                            color: '#111827'
                                         }}
                                     />
                                 </PieChart>

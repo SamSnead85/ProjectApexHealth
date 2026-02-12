@@ -73,7 +73,7 @@
     background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
     border-radius: 12px;
     border: 1px solid rgba(6, 182, 212, 0.3);
-    color: #06B6D4;
+    color: #2563EB;
 }
 
 .reports__title {
@@ -122,7 +122,7 @@
 
 .reports__view-btn.active {
     background: rgba(6, 182, 212, 0.15);
-    color: #06B6D4;
+    color: #2563EB;
 }
 
 .reports__date-selector {
@@ -334,7 +334,7 @@
 .reports__chart-action-btn:hover {
     background: rgba(6, 182, 212, 0.1);
     border-color: rgba(6, 182, 212, 0.3);
-    color: #06B6D4;
+    color: #2563EB;
 }
 
 .reports__chart-container {
@@ -576,7 +576,7 @@
 
 .reports__insight-icon--trend {
     background: rgba(6, 182, 212, 0.15);
-    color: #06B6D4;
+    color: #2563EB;
 }
 
 .reports__insight-content {
@@ -701,7 +701,7 @@
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #06B6D4;
+    color: #2563EB;
     background: rgba(6, 182, 212, 0.1);
     padding: 0.125rem 0.5rem;
     border-radius: 4px;

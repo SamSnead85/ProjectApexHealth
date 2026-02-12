@@ -134,7 +134,7 @@
     width: 64px;
     height: 64px;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,7 +162,7 @@
 
 .file-type {
     padding: 0.35rem 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 20px;
     font-size: 0.688rem;
     color: var(--text-secondary);
@@ -209,7 +209,7 @@
 }
 
 .file-filter:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .file-filter.active {
@@ -236,7 +236,7 @@
     letter-spacing: 0.05em;
     color: var(--text-secondary);
     font-weight: 500;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .file-table td {
@@ -338,7 +338,7 @@
     flex: 1;
     min-width: 120px;
     padding: 0.875rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-top: 2px solid;
     border-radius: 10px;
@@ -347,7 +347,7 @@
 }
 
 .edi-txn-node:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .edi-txn-node-header {
@@ -436,15 +436,15 @@
 
 .edi-partner-card {
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     transition: all 0.2s ease;
 }
 
 .edi-partner-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
 }
 
 .edi-partner-header {
@@ -553,7 +553,7 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 0.875rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-left: 3px solid;
     border-radius: 10px;
@@ -561,7 +561,7 @@
 }
 
 .edi-failed-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .edi-failed-item.severity-high {

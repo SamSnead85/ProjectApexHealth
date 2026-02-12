@@ -74,8 +74,8 @@ const categories: { key: DocCategory; label: string; count: number }[] = [
 ]
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: 'var(--card-bg, #ffffff)',
+    border: '1px solid var(--card-border, rgba(0,0,0,0.08))',
     borderRadius: 16
 }
 
@@ -158,8 +158,8 @@ export default function PlanDocuments() {
                     <div style={{
                         flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-sm)',
                         padding: '10px var(--space-md)',
-                        background: 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        background: 'rgba(0,0,0,0.03)',
+                        border: '1px solid rgba(0,0,0,0.08)',
                         borderRadius: 12
                     }}>
                         <Search size={16} style={{ color: 'var(--apex-steel)', flexShrink: 0 }} />
@@ -187,10 +187,10 @@ export default function PlanDocuments() {
                                 borderRadius: 8,
                                 border: activeCategory === cat.key
                                     ? '1px solid var(--apex-teal)'
-                                    : '1px solid rgba(255,255,255,0.08)',
+                                    : '1px solid rgba(0,0,0,0.08)',
                                 background: activeCategory === cat.key
                                     ? 'rgba(0, 200, 180, 0.1)'
-                                    : 'rgba(255,255,255,0.03)',
+                                    : 'rgba(0,0,0,0.03)',
                                 color: activeCategory === cat.key
                                     ? 'var(--apex-teal)'
                                     : 'var(--apex-silver)',
@@ -204,7 +204,7 @@ export default function PlanDocuments() {
                             <span style={{
                                 fontSize: 'var(--text-xs)',
                                 opacity: 0.7,
-                                background: 'rgba(255,255,255,0.06)',
+                                background: 'rgba(0,0,0,0.06)',
                                 padding: '1px 6px',
                                 borderRadius: 4
                             }}>
@@ -226,7 +226,7 @@ export default function PlanDocuments() {
                         <div style={{
                             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                             padding: 'var(--space-md) var(--space-lg)',
-                            borderBottom: '1px solid rgba(255,255,255,0.06)'
+                            borderBottom: '1px solid rgba(0,0,0,0.06)'
                         }}>
                             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--apex-white)' }}>
                                 {filteredDocs.length} document{filteredDocs.length !== 1 ? 's' : ''}
@@ -248,17 +248,17 @@ export default function PlanDocuments() {
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: 'var(--space-md)',
                                         padding: 'var(--space-md) var(--space-lg)',
-                                        borderBottom: '1px solid rgba(255,255,255,0.04)',
+                                        borderBottom: '1px solid rgba(0,0,0,0.04)',
                                         cursor: 'pointer',
                                         background: previewDoc === doc.id ? 'rgba(0, 200, 180, 0.03)' : 'transparent',
                                         transition: 'background 0.2s'
                                     }}
-                                    onMouseEnter={e => { if (previewDoc !== doc.id) (e.currentTarget.style.background = 'rgba(255,255,255,0.02)') }}
+                                    onMouseEnter={e => { if (previewDoc !== doc.id) (e.currentTarget.style.background = 'rgba(0,0,0,0.02)') }}
                                     onMouseLeave={e => { if (previewDoc !== doc.id) (e.currentTarget.style.background = 'transparent') }}
                                 >
                                     <div style={{
                                         width: 44, height: 44, borderRadius: 10,
-                                        background: doc.important ? 'rgba(0, 200, 180, 0.12)' : 'rgba(255,255,255,0.04)',
+                                        background: doc.important ? 'rgba(0, 200, 180, 0.12)' : 'rgba(0,0,0,0.04)',
                                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                                         color: doc.important ? 'var(--apex-teal)' : 'var(--apex-silver)',
                                         flexShrink: 0
@@ -324,8 +324,8 @@ export default function PlanDocuments() {
                                     style={{
                                         padding: 'var(--space-sm)',
                                         borderRadius: 10,
-                                        border: '1px solid rgba(255,255,255,0.04)',
-                                        background: 'rgba(255,255,255,0.02)',
+                                        border: '1px solid rgba(0,0,0,0.06)',
+                                        background: 'rgba(0,0,0,0.02)',
                                         cursor: 'pointer'
                                     }}
                                 >
@@ -360,8 +360,8 @@ export default function PlanDocuments() {
                             width: '100%', marginTop: 'var(--space-md)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                             padding: 'var(--space-sm)',
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.06)',
+                            background: 'rgba(0,0,0,0.03)',
+                            border: '1px solid rgba(0,0,0,0.06)',
                             borderRadius: 8,
                             color: 'var(--apex-teal)',
                             cursor: 'pointer',

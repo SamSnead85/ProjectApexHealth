@@ -294,7 +294,7 @@ export function SIRDashboard() {
                                             <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
                                     <XAxis dataKey="month" stroke="#64748b" fontSize={11} tickLine={false} />
                                     <YAxis stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(v) => `$${v}M`} />
                                     <Tooltip content={<CustomTooltip />} />
@@ -344,7 +344,7 @@ export function SIRDashboard() {
                                         </Pie>
                                         <Tooltip
                                             formatter={(value: number) => [`$${(value / 1000000).toFixed(2)}M`, 'Amount']}
-                                            contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 8 }}
+                                            contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                         />
                                     </PieChart>
                                 </ResponsiveContainer>
@@ -391,12 +391,12 @@ export function SIRDashboard() {
                                         endAngle={0}
                                     >
                                         <RadialBar
-                                            background={{ fill: 'rgba(255,255,255,0.03)' }}
+                                            background={{ fill: 'rgba(0,0,0,0.04)' }}
                                             dataKey="value"
                                             cornerRadius={4}
                                         />
                                         <Tooltip
-                                            contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 8 }}
+                                            contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                         />
                                     </RadialBarChart>
                                 </ResponsiveContainer>

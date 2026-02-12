@@ -56,16 +56,16 @@ import './Reports.css'
 
 // Premium color palette
 const COLORS = {
-    primary: '#06B6D4',
-    secondary: '#8B5CF6',
-    success: '#10B981',
-    warning: '#F59E0B',
-    danger: '#EF4444',
+    primary: '#2563EB',
+    secondary: '#0D9488',
+    success: '#059669',
+    warning: '#D97706',
+    danger: '#DC2626',
     info: '#3B82F6',
-    gradient: ['#06B6D4', '#8B5CF6'],
+    gradient: ['#2563EB', '#0D9488'],
 }
 
-const CHART_COLORS = ['#06B6D4', '#8B5CF6', '#10B981', '#F59E0B', '#EF4444', '#3B82F6']
+const CHART_COLORS = ['#2563EB', '#0D9488', '#059669', '#D97706', '#DC2626', '#7C3AED']
 
 // Executive KPIs
 const executiveKPIs = [
@@ -77,7 +77,7 @@ const executiveKPIs = [
         target: '$2.6M',
         progress: 92,
         icon: DollarSign,
-        color: '#06B6D4',
+        color: '#2563EB',
         sparkline: [45, 52, 48, 55, 60, 58, 52, 48, 45, 42, 38, 35]
     },
     {
@@ -358,10 +358,10 @@ export function Reports() {
                                         <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                                <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={12} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+                                <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
                                 <YAxis
-                                    stroke="rgba(255,255,255,0.4)"
+                                    stroke="#94A3B8"
                                     fontSize={12}
                                     tickFormatter={(value) => `$${value / 1000}K`}
                                 />
@@ -432,11 +432,7 @@ export function Reports() {
                                 </Pie>
                                 <Tooltip
                                     formatter={(value: number, name: string) => [`${value}%`, name]}
-                                    contentStyle={{
-                                        background: 'rgba(10, 10, 14, 0.95)',
-                                        border: '1px solid rgba(6, 182, 212, 0.3)',
-                                        borderRadius: '8px',
-                                    }}
+                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                 />
                             </PieChart>
                         </ResponsiveContainer>
@@ -534,21 +530,17 @@ export function Reports() {
                     <div className="reports__chart-container">
                         <ResponsiveContainer width="100%" height={250}>
                             <BarChart data={providerPerformance} layout="vertical" barSize={16}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" horizontal={false} />
-                                <XAxis type="number" stroke="rgba(255,255,255,0.4)" fontSize={12} domain={[0, 100]} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" horizontal={false} />
+                                <XAxis type="number" stroke="#94A3B8" fontSize={12} domain={[0, 100]} />
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    stroke="rgba(255,255,255,0.4)"
+                                    stroke="#94A3B8"
                                     fontSize={12}
                                     width={120}
                                 />
                                 <Tooltip
-                                    contentStyle={{
-                                        background: 'rgba(10, 10, 14, 0.95)',
-                                        border: '1px solid rgba(6, 182, 212, 0.3)',
-                                        borderRadius: '8px',
-                                    }}
+                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                 />
                                 <Legend />
                                 <Bar dataKey="quality" name="Quality" fill="#10B981" radius={[0, 4, 4, 0]} />

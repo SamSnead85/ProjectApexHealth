@@ -71,7 +71,7 @@
 
 .wellness__progress-bar {
     height: 12px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-sm);
@@ -112,7 +112,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     text-align: center;
@@ -195,14 +195,14 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .program-card:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .program-card.completed {
@@ -362,7 +362,7 @@
 .health-score__item-bar {
     flex: 1;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -405,7 +405,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -413,7 +413,7 @@
 }
 
 .preventive-care__item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .preventive-care__item--completed {
@@ -486,7 +486,7 @@
 }
 
 .preventive-care__status-badge--not-due {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-steel);
 }
 
@@ -553,7 +553,7 @@
 
 .rewards__next-bar {
     height: 10px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -589,7 +589,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
@@ -597,7 +597,7 @@
 }
 
 .rewards__reward-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .rewards__reward-item--redeemable {
@@ -632,14 +632,14 @@
     flex-direction: column;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     transition: all var(--transition-fast);
 }
 
 .challenge-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border-color: var(--glass-border-hover);
 }
 
@@ -701,7 +701,7 @@
 
 .challenge-card__bar {
     height: 10px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

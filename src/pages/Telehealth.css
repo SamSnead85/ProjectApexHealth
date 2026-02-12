@@ -666,7 +666,7 @@
     width: 32px;
     height: 32px;
     border-radius: var(--radius-full);
-    background: #0D7C8C;
+    background: #2563EB;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -767,11 +767,11 @@
 .video-call__control-btn.active {
     background: rgba(13, 124, 140, 0.3);
     border-color: rgba(13, 124, 140, 0.5);
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .video-call__control-btn.active span {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .video-call__control-btn--end {
@@ -907,7 +907,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #0D7C8C;
+    background: #2563EB;
     border: none;
     color: #EDF0F4;
     cursor: pointer;
@@ -994,36 +994,36 @@
 }
 
 .upcoming-visit__icon {
-    background: #0D7C8C;
+    background: #2563EB;
 }
 
 .quick-stat svg {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .visit-type-card__icon {
-    background: linear-gradient(135deg, #0D7C8C 0%, #8A2BE2 100%);
+    background: linear-gradient(135deg, #2563EB 0%, #8A2BE2 100%);
 }
 
 .visit-type-card:hover {
-    border-color: #0D7C8C;
+    border-color: #2563EB;
 }
 
 .visit-type-card.selected {
     background: rgba(13, 124, 140, 0.08);
-    border-color: #0D7C8C;
+    border-color: #2563EB;
 }
 
 .visit-type-card__copay {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .telehealth__tab.active {
-    background: #0D7C8C;
+    background: #2563EB;
 }
 
 .how-it-works__number {
-    background: linear-gradient(135deg, #0D7C8C 0%, #8A2BE2 100%);
+    background: linear-gradient(135deg, #2563EB 0%, #8A2BE2 100%);
 }
 
 .provider-card__next.available {

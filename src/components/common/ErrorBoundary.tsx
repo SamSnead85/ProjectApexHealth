@@ -72,9 +72,9 @@ function ErrorDisplay({
                 textAlign: 'center',
                 gap: isCompact ? '0.75rem' : '1.25rem',
                 ...levelStyles[level],
-                background: level === 'page' ? 'rgba(10,15,26,0.98)' : 'rgba(10,15,26,0.6)',
+                background: level === 'page' ? 'var(--page-bg, #f8fafc)' : 'var(--card-bg, #ffffff)',
                 borderRadius: level === 'page' ? 0 : '12px',
-                border: level === 'page' ? 'none' : '1px solid rgba(255,255,255,0.06)',
+                border: level === 'page' ? 'none' : '1px solid var(--card-border, rgba(0,0,0,0.08))',
             }}
         >
             {/* Error Icon */}
@@ -102,7 +102,7 @@ function ErrorDisplay({
                     margin: 0,
                     fontSize: headingSizes[level],
                     fontWeight: 600,
-                    color: '#f1f5f9',
+                    color: 'var(--text-primary, #1e293b)',
                     letterSpacing: '-0.01em',
                 }}
             >
@@ -116,12 +116,12 @@ function ErrorDisplay({
                         maxWidth: '520px',
                         width: '100%',
                         padding: '0.75rem 1rem',
-                        background: 'rgba(0,0,0,0.4)',
+                        background: 'rgba(0,0,0,0.04)',
                         borderRadius: '8px',
-                        border: '1px solid rgba(255,255,255,0.06)',
+                        border: '1px solid rgba(0,0,0,0.08)',
                         fontFamily: 'ui-monospace, "Cascadia Code", "Fira Code", monospace',
                         fontSize: '0.8rem',
-                        color: '#94a3b8',
+                        color: 'var(--text-secondary, #64748b)',
                         textAlign: 'left',
                         wordBreak: 'break-word',
                         lineHeight: 1.6,
@@ -177,20 +177,20 @@ function ErrorDisplay({
                             padding: '0.6rem 1.25rem',
                             fontSize: '0.875rem',
                             fontWeight: 500,
-                            color: '#94a3b8',
-                            background: 'rgba(255,255,255,0.05)',
-                            border: '1px solid rgba(255,255,255,0.1)',
+                            color: 'var(--text-secondary, #64748b)',
+                            background: 'rgba(0,0,0,0.04)',
+                            border: '1px solid rgba(0,0,0,0.1)',
                             borderRadius: '8px',
                             cursor: 'pointer',
                             transition: 'all 0.2s',
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
-                            e.currentTarget.style.color = '#f1f5f9'
+                            e.currentTarget.style.background = 'rgba(0,0,0,0.08)'
+                            e.currentTarget.style.color = '#1e293b'
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-                            e.currentTarget.style.color = '#94a3b8'
+                            e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+                            e.currentTarget.style.color = '#64748b'
                         }}
                     >
                         <Home size={16} />

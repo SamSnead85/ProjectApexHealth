@@ -219,7 +219,7 @@
     flex-direction: column;
     gap: var(--space-xs);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -280,7 +280,7 @@
 }
 
 .eob-line-item__header:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .eob-line-item__main {
@@ -339,7 +339,7 @@
     flex-direction: column;
     gap: var(--space-xs);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-top: 1px solid var(--glass-border);
     overflow: hidden;
 }
@@ -402,7 +402,7 @@
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -453,7 +453,7 @@
 /* Help */
 .eob-detail__help {
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     text-align: center;
 }

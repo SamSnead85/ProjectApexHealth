@@ -113,7 +113,7 @@
 }
 
 .st__nav-item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     color: var(--apex-white);
 }
 
@@ -133,8 +133,8 @@
 /* Section */
 .st__section {
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-xl);
 }
 
@@ -169,7 +169,7 @@
     max-width: 400px;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -188,7 +188,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-sm);
 }
@@ -213,7 +213,7 @@
     position: relative;
     width: 44px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     cursor: pointer;
     transition: all 0.2s ease;

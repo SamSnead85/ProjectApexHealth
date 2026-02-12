@@ -341,21 +341,21 @@ function App() {
         if (activePath.includes('/api-management') || activePath.includes('/developer') || activePath.includes('/api-keys')) {
             return <APIManagement />
         }
-        if (activePath.includes('/audit') || activePath.includes('/security-log') || activePath.includes('/activity-log')) {
+        if (activePath === '/audit-dashboard' || activePath === '/audit' || activePath === '/security-log' || activePath === '/activity-log') {
             return <AuditDashboard />
         }
-        if (activePath.includes('/care-management') || activePath.includes('/care-coordination') || activePath.includes('/patient-care')) {
+        if (activePath === '/care-management' || activePath.includes('/patient-care')) {
             return <CareManagement />
         }
         // Boardroom Ready Features
-        if (activePath.includes('/executive') || activePath.includes('/c-suite') || activePath.includes('/exec-dashboard')) {
+        if (activePath === '/executive' || activePath.includes('/c-suite')) {
             return <ExecutiveDashboard />
         }
-        if (activePath.includes('/board-report') || activePath.includes('/report-generator') || activePath.includes('/reports')) {
+        if (activePath === '/board-report' || activePath === '/report-generator') {
             return <BoardReportGenerator />
         }
-        // Operational Completeness
-        if (activePath.includes('/notifications') || activePath.includes('/alerts') || activePath.includes('/notification-center')) {
+        // Operational Completeness (exact matches to avoid catching /notifications)
+        if (activePath === '/notification-center' || activePath === '/alerts') {
             return <NotificationCenter />
         }
         if (activePath.includes('/task-queue') || activePath.includes('/work-queue') || activePath.includes('/tasks')) {
@@ -365,13 +365,13 @@ function App() {
             return <UserManagement />
         }
         // System Monitoring
-        if (activePath.includes('/system-health') || activePath.includes('/status') || activePath.includes('/health')) {
+        if (activePath.includes('/system-health') || activePath === '/status') {
             return <SystemHealth />
         }
-        if (activePath.includes('/batch') || activePath.includes('/jobs') || activePath.includes('/processing')) {
+        if (activePath.includes('/batch') || activePath === '/jobs') {
             return <BatchDashboard />
         }
-        if (activePath.includes('/activity-feed') || activePath.includes('/activity') || activePath.includes('/feed')) {
+        if (activePath.includes('/activity-feed') || activePath === '/activity') {
             return <ActivityFeed />
         }
         // Data Integration & Member Experience
@@ -395,19 +395,19 @@ function App() {
             return <BenchmarkAnalytics />
         }
         // SIR Analytics Command Center
-        if (activePath.includes('/sir') || activePath.includes('/self-insured') || activePath.includes('/sir-analytics')) {
+        if (activePath.includes('/sir') || activePath.includes('/self-insured')) {
             return <SIRDashboard />
         }
-        // IBNR & Actuarial Engine
-        if (activePath.includes('/ibnr') || activePath.includes('/actuarial') || activePath.includes('/reserves')) {
+        // IBNR & Actuarial Engine (specific: /ibnr only; /actuarial and /reserves go to ActuarialTools)
+        if (activePath.includes('/ibnr')) {
             return <IBNRActuarial />
         }
         // Pharmacy & PBM Analytics
         if (activePath.includes('/pharmacy-analytics') || activePath.includes('/pbm') || activePath.includes('/drug-spend')) {
             return <PharmacyAnalytics />
         }
-        // Population Health & Quality
-        if (activePath.includes('/population-health') || activePath.includes('/hedis') || activePath.includes('/quality')) {
+        // Population Health (specific path only; /hedis and /quality go to QualityMetrics)
+        if (activePath.includes('/population-health')) {
             return <PopulationHealth />
         }
         // Advanced Analytics - Premium Executive Dashboard
@@ -418,8 +418,8 @@ function App() {
         if (activePath.includes('/workflows')) {
             return <WorkflowBuilder />
         }
-        // Analytics
-        if (activePath.includes('/analytics') || activePath.includes('/insights')) {
+        // Analytics (exact /analytics match to avoid catching /network-analytics, /revenue-analytics, etc.)
+        if (activePath === '/analytics' || activePath.includes('/insights')) {
             return <Analytics />
         }
         // Claims
@@ -430,16 +430,16 @@ function App() {
         if (activePath.includes('/plans') || activePath.includes('/plan-config')) {
             return <PlanConfiguration />
         }
-        // Audit Trail
-        if (activePath.includes('/audit')) {
+        // Audit Trail (exact matches — /admin/audit from sidebar, /audit-trail direct)
+        if (activePath === '/audit-trail' || activePath === '/admin/audit') {
             return <AuditTrail />
         }
         // Find Care / Provider Directory
         if (activePath.includes('/providers') || activePath.includes('/find-care') || activePath.includes('/findcare')) {
             return <ProviderDirectory />
         }
-        // Network Analytics & Optimization
-        if (activePath.includes('/network-analytics') || activePath.includes('/network-optimization') || activePath.includes('/network-adequacy')) {
+        // Network Analytics & Optimization (removed /network-adequacy — routed to NetworkAdequacy below)
+        if (activePath.includes('/network-analytics') || activePath.includes('/network-optimization')) {
             return <NetworkAnalytics />
         }
         // Cost Estimator
@@ -494,12 +494,12 @@ function App() {
         if (activePath.includes('/messages')) {
             return <MessageCenter />
         }
-        // Notifications (All portals)
-        if (activePath.includes('/notifications')) {
+        // Notifications (exact match — /member/notifications handled in member section below)
+        if (activePath === '/notifications') {
             return <Notifications />
         }
-        // Reports (All portals)
-        if (activePath.includes('/reports')) {
+        // Reports (exact matches — /broker/reports handled in broker section below)
+        if (activePath === '/reports' || activePath === '/admin/reports') {
             return <Reports />
         }
         // HSA Wallet (Member)
@@ -518,8 +518,8 @@ function App() {
         if (activePath.includes('/documents') || activePath.includes('/files')) {
             return <Documents />
         }
-        // Care Team
-        if (activePath.includes('/care-team') || activePath.includes('/my-doctors') || activePath.includes('/providers')) {
+        // Care Team (removed /providers — already caught by ProviderDirectory above)
+        if (activePath.includes('/care-team') || activePath.includes('/my-doctors')) {
             return <CareTeam />
         }
         // Wellness
@@ -527,11 +527,11 @@ function App() {
             return <Wellness />
         }
         // Appointments
-        if (activePath.includes('/appointments') || activePath.includes('/schedule')) {
+        if (activePath.includes('/appointments') || activePath === '/schedule') {
             return <Appointments />
         }
-        // Benefits Summary
-        if (activePath.includes('/benefits') || activePath.includes('/coverage') || activePath.includes('/plan-details')) {
+        // Benefits Summary (endsWith prevents catching /coverage-comparison)
+        if (activePath.includes('/benefits') || activePath.endsWith('/coverage') || activePath.includes('/plan-details')) {
             return <BenefitsSummary />
         }
         // Appeals & Grievances
@@ -542,8 +542,8 @@ function App() {
         if (activePath.includes('/payment-processing') || activePath.includes('/payments')) {
             return <PaymentProcessing />
         }
-        // Network Management
-        if (activePath.includes('/network') || activePath.includes('/network-management')) {
+        // Network Management (endsWith('/network') catches /admin/network from sidebar; exact /network-management for direct)
+        if (activePath === '/network-management' || activePath === '/network' || activePath.endsWith('/network')) {
             return <NetworkManagement />
         }
         // Provider Credentialing
@@ -563,11 +563,11 @@ function App() {
             return <UtilizationManagement />
         }
         // Care Coordination
-        if (activePath.includes('/care-coordination') || activePath.includes('/care-gaps')) {
+        if (activePath.includes('/care-coordination')) {
             return <CareCoordination />
         }
-        // Quality Metrics
-        if (activePath.includes('/quality') || activePath.includes('/hedis') || activePath.includes('/star-ratings')) {
+        // Quality Metrics (exact matches to avoid conflict with /hedis-dashboard → StarRatings, /quality-measures → VBC)
+        if (activePath === '/quality-metrics' || activePath === '/quality' || activePath === '/hedis') {
             return <QualityMetrics />
         }
         // Compliance Dashboard
@@ -582,8 +582,8 @@ function App() {
         if (activePath.includes('/premium-billing') || activePath.includes('/invoices')) {
             return <PremiumBilling />
         }
-        // Actuarial Tools
-        if (activePath.includes('/actuarial') || activePath.includes('/mlr') || activePath.includes('/reserves')) {
+        // Actuarial Tools (exact /actuarial match to avoid conflict with /ibnr-actuarial → IBNRActuarial)
+        if (activePath === '/actuarial' || activePath === '/actuarial-tools' || activePath.includes('/mlr') || activePath.includes('/reserves')) {
             return <ActuarialTools />
         }
         // Group Enrollment
@@ -726,6 +726,11 @@ function App() {
             return <EmployerAdmin />
         }
 
+        // ── Admin Portal Default ──
+        if (activePath === '/admin' || activePath === '/admin/dashboard') {
+            return <Dashboard portalType={activePortal} />
+        }
+
         // ── Broker Portal Routes ──
         if (activePortal === 'broker') {
             if (activePath === '/broker' || activePath.includes('/broker/dashboard')) {
@@ -742,6 +747,9 @@ function App() {
             }
             if (activePath.includes('/broker/reports')) {
                 return <Reports />
+            }
+            if (activePath.includes('/broker/renewals')) {
+                return <BrokerPortal onLogout={handleLogout} />
             }
             return <BrokerPortal onLogout={handleLogout} />
         }

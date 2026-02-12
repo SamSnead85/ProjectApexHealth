@@ -2,6 +2,8 @@
     display: flex;
     min-height: 100vh;
     background: #F3F5F8;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .shell__main {
@@ -10,6 +12,8 @@
     flex-direction: column;
     margin-left: 260px;
     transition: margin-left var(--transition-base);
+    min-width: 0;
+    width: 100%;
 }
 
 .shell--sidebar-collapsed .shell__main {
@@ -288,8 +292,13 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+/* Tablet (768px - 1024px) - Icons-only sidebar */
+@media (max-width: 1024px) and (min-width: 769px) {
     .shell__main {
+        margin-left: 72px;
+    }
+
+    .shell--sidebar-collapsed .shell__main {
         margin-left: 72px;
     }
 
@@ -300,21 +309,96 @@
     .shell__user-info {
         display: none;
     }
+
+    .shell__content {
+        padding: var(--space-lg);
+    }
+
+    /* Hamburger hidden on tablet - icons-only sidebar is always visible */
+    .sidebar-hamburger {
+        display: none !important;
+    }
 }
 
+/* Mobile (< 768px) - Full overlay sidebar */
 @media (max-width: 768px) {
     .shell__main {
-        margin-left: 0;
+        margin-left: 0 !important;
+        width: 100%;
+    }
+
+    .shell--sidebar-collapsed .shell__main {
+        margin-left: 0 !important;
     }
 
     .shell__topbar {
         padding: 0 var(--space-md);
         height: 60px;
+        position: relative;
+        z-index: var(--z-sticky);
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .shell__topbar-left {
+        gap: var(--space-sm);
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    /* Hamburger button visible on mobile */
+    .sidebar-hamburger {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        background: transparent;
+        border: 1px solid #E5E7EB;
+        color: #6B7280;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        flex-shrink: 0;
+        margin-right: var(--space-sm);
+    }
+
+    .sidebar-hamburger:hover {
+        color: #111827;
+        background: #F3F5F8;
+        border-color: #D1D5DB;
+    }
+
+    /* Portal switcher scrolls horizontally on mobile */
+    .portal-switcher {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 4px;
+        padding: 4px;
+        max-width: min(calc(100vw - 180px), 280px);
+        min-width: 0;
+    }
+
+    .portal-switcher::-webkit-scrollbar {
+        display: none;
+    }
+
+    .portal-switcher__btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 0 10px;
     }
 
     .shell__search {
         width: 100%;
-        max-width: 200px;
+        max-width: 180px;
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     .shell__search-shortcut {
@@ -323,11 +407,8 @@
 
     .shell__content {
         padding: var(--space-md);
-    }
-
-    /* Hide portal switcher on mobile - too crowded */
-    .portal-switcher {
-        display: none;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     /* Hide tour and user info on mobile */
@@ -342,16 +423,52 @@
     .shell__user-chevron {
         display: none;
     }
+
+    /* Ensure topbar right items don't overflow */
+    .shell__topbar-right {
+        gap: var(--space-xs);
+        flex-shrink: 0;
+    }
+
+    /* User trigger compact on mobile */
+    .shell__user-trigger {
+        padding: var(--space-xs);
+    }
+
+    .shell__user-avatar {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 @media (max-width: 480px) {
     .shell__topbar {
         padding: 0 var(--space-sm);
         gap: var(--space-xs);
+        height: 56px;
+    }
+
+    .shell__topbar-left {
+        gap: var(--space-xs);
+    }
+
+    .sidebar-hamburger {
+        width: 36px;
+        height: 36px;
+        margin-right: var(--space-xs);
+    }
+
+    .portal-switcher {
+        max-width: calc(100vw - 100px);
+    }
+
+    .portal-switcher__btn {
+        padding: 0 8px;
+        font-size: 10px;
     }
 
     .shell__search {
-        max-width: 140px;
+        max-width: 120px;
         height: 36px;
         padding: 0 var(--space-sm);
     }
@@ -361,7 +478,149 @@
         height: 36px;
     }
 
+    .shell__user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
     .shell__content {
         padding: var(--space-sm);
     }
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   Activated via [data-theme="dark"] on <html>
+   ============================================ */
+
+/* Shell background */
+[data-theme="dark"] .shell {
+    background: var(--apex-obsidian, #0F1419);
+}
+
+/* Top Bar */
+[data-theme="dark"] .shell__topbar {
+    background: #151B24;
+    border-bottom-color: #2A3548;
+}
+
+/* Search */
+[data-theme="dark"] .shell__search {
+    background: #1A2030;
+    border-color: #2A3548;
+}
+
+[data-theme="dark"] .shell__search:focus-within {
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="dark"] .shell__search-icon {
+    color: #64748B;
+}
+
+[data-theme="dark"] .shell__search-input {
+    color: #E8ECF1;
+}
+
+[data-theme="dark"] .shell__search-input::placeholder {
+    color: #64748B;
+}
+
+[data-theme="dark"] .shell__search-shortcut {
+    color: #64748B;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Search Results Dropdown */
+[data-theme="dark"] .shell__search-results {
+    background: #1A2030;
+    border-color: #2A3548;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .shell__search-result {
+    color: #CBD5E1;
+    border-bottom-color: #232D3F;
+}
+
+[data-theme="dark"] .shell__search-result:hover {
+    background: #232D3F;
+}
+
+[data-theme="dark"] .shell__search-result:first-child {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .shell__search-result-path {
+    color: #64748B;
+}
+
+[data-theme="dark"] .shell__search-no-results {
+    color: #64748B;
+}
+
+/* Top Bar Buttons */
+[data-theme="dark"] .shell__topbar-btn {
+    color: #94A3B8;
+}
+
+[data-theme="dark"] .shell__topbar-btn:hover {
+    color: #E8ECF1;
+    background: #1A2030;
+    border-color: #2A3548;
+}
+
+[data-theme="dark"] .shell__notification-dot {
+    border-color: #151B24;
+}
+
+/* Tour Button */
+[data-theme="dark"] .shell__tour-btn:hover {
+    color: #60A5FA;
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* User Trigger */
+[data-theme="dark"] .shell__user-trigger:hover {
+    background: #1A2030;
+    border-color: #2A3548;
+}
+
+[data-theme="dark"] .shell__user-name {
+    color: #E8ECF1;
+}
+
+[data-theme="dark"] .shell__user-role {
+    color: #64748B;
+}
+
+[data-theme="dark"] .shell__user-chevron {
+    color: #64748B;
+}
+
+/* Content Area */
+[data-theme="dark"] .shell__content {
+    background: var(--apex-obsidian, #0F1419);
+}
+
+/* Portal Switcher in Dark Mode */
+[data-theme="dark"] .portal-switcher {
+    background: #1A2030;
+    border-color: #2A3548;
+}
+
+[data-theme="dark"] .portal-switcher__btn {
+    color: #94A3B8;
+}
+
+[data-theme="dark"] .portal-switcher__btn:hover {
+    color: #E8ECF1;
+    background: #232D3F;
+}
+
+[data-theme="dark"] .portal-switcher__btn--active {
+    color: #FFFFFF;
+    background: #3B82F6;
 }

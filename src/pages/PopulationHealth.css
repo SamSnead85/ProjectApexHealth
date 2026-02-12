@@ -497,7 +497,7 @@
 [data-theme="dark"] .star-rating-card,
 [data-theme="dark"] .population-health-page__card {
     background: rgba(30, 41, 59, 0.5);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] .hedis-measure-card {

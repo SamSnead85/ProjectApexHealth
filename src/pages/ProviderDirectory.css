@@ -68,7 +68,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     transition: all var(--transition-normal);
@@ -102,7 +102,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
@@ -173,7 +173,7 @@
 
 .provider-directory__filter-group select {
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-sm);
     font-size: var(--text-sm);
@@ -217,7 +217,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
@@ -249,7 +249,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
@@ -371,7 +371,7 @@
     align-items: center;
     justify-content: center;
     background: conic-gradient(var(--apex-teal) calc(var(--score) * 3.6deg),
-            rgba(255, 255, 255, 0.1) calc(var(--score) * 3.6deg));
+            rgba(0, 0, 0, 0.06) calc(var(--score) * 3.6deg));
     border-radius: 50%;
     position: relative;
 }
@@ -478,7 +478,7 @@
     align-items: center;
     gap: 4px;
     padding: 2px var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: var(--apex-steel);

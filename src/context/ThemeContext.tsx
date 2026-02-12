@@ -12,9 +12,9 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [theme, setThemeState] = useState<Theme>(() => {
-        // Check localStorage first, default to dark
+        // Check localStorage first, default to light
         const stored = localStorage.getItem('apex-theme')
-        return (stored as Theme) || 'dark'
+        return (stored as Theme) || 'light'
     })
 
     useEffect(() => {

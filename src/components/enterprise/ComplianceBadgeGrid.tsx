@@ -225,7 +225,7 @@ export function ComplianceBadgeGrid() {
                                 cy="50"
                                 r="45"
                                 fill="none"
-                                stroke="rgba(255,255,255,0.1)"
+                                stroke="rgba(0,0,0,0.08)"
                                 strokeWidth="8"
                             />
                             <motion.circle

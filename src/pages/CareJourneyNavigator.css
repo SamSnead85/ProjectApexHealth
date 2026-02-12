@@ -99,7 +99,7 @@
     align-items: center;
     justify-content: center;
     background: conic-gradient(var(--apex-teal) calc(var(--score) * 3.6deg),
-            rgba(255, 255, 255, 0.1) calc(var(--score) * 3.6deg));
+            rgba(0, 0, 0, 0.06) calc(var(--score) * 3.6deg));
     border-radius: 50%;
     position: relative;
 }
@@ -206,7 +206,7 @@
 
 .care-journey__tab:hover {
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .care-journey__tab.active {
@@ -252,7 +252,7 @@
 }
 
 .timeline-event:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .timeline-event.selected {
@@ -412,7 +412,7 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 
@@ -527,7 +527,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 

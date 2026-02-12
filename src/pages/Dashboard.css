@@ -99,14 +99,14 @@
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
     transition: background var(--transition-fast);
     cursor: pointer;
 }
 
 .dashboard__insight:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .dashboard__insight-icon {
@@ -224,7 +224,7 @@
 
 .dashboard__stat-bar-track {
     height: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -289,7 +289,7 @@
     position: absolute;
     inset: 0;
     border-radius: var(--radius-sm);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.02), transparent);
     opacity: 0;
     transition: opacity var(--transition-base);
 }
@@ -313,7 +313,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
     transform: translateX(-100%);
     animation: statBarShimmer 2s infinite ease-in-out;
 }
@@ -339,7 +339,7 @@
 }
 
 .dashboard__activity-item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .dashboard__activity-dot {
@@ -388,7 +388,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
     transform: translateX(-100%);
     transition: transform 0.4s ease;
 }
@@ -587,7 +587,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     border-left: 3px solid transparent;
     cursor: pointer;
@@ -595,7 +595,7 @@
 }
 
 .dashboard__action-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     transform: translateX(4px);
 }
 
@@ -618,7 +618,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-silver);
     flex-shrink: 0;
 }
@@ -669,7 +669,7 @@
     gap: var(--space-md);
     margin-top: var(--space-xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .dashboard__kpi {

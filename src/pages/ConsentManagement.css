@@ -103,7 +103,7 @@
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -111,7 +111,7 @@
 }
 
 .consent-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border-color: var(--apex-teal-border);
 }
 

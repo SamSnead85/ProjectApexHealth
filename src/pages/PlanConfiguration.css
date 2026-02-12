@@ -93,8 +93,8 @@
 /* Section */
 .pc__section {
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-xl);
 }
 
@@ -103,7 +103,7 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     margin-bottom: var(--space-lg);
 }
 
@@ -134,7 +134,7 @@
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -151,7 +151,7 @@
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -164,7 +164,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-sm);
 }
@@ -200,7 +200,7 @@
 .pc__slider {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     appearance: none;
 }

@@ -68,14 +68,14 @@
 
 .raf-score-card {
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .raf-score-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border-color: var(--apex-teal-border);
 }
 
@@ -128,7 +128,7 @@
 .score-block {
     text-align: center;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
 }
 
@@ -213,13 +213,13 @@
     gap: var(--space-md);
     align-items: center;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .hcc-gap-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .hcc-gap-item__main {
@@ -270,7 +270,7 @@
 .hcc-gap-item__bar {
     width: 80px;
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -313,7 +313,7 @@
 .revenue-metric {
     text-align: center;
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
 }
 

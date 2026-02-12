@@ -258,9 +258,10 @@ export default function ValueBasedCare() {
                                 <Tooltip
                                     formatter={(value: number) => formatCurrency(value)}
                                     contentStyle={{
-                                        background: 'rgba(17, 24, 39, 0.95)',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: '8px'
+                                        background: '#FFFFFF',
+                                        border: '1px solid #E5E7EB',
+                                        borderRadius: '8px',
+                                        color: '#111827'
                                     }}
                                 />
                             </PieChart>

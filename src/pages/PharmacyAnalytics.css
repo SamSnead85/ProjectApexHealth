@@ -552,5 +552,5 @@
 [data-theme="dark"] .pbm-page__card,
 [data-theme="dark"] .pbm-page__insights {
     background: rgba(30, 41, 59, 0.5);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
 }

@@ -115,8 +115,8 @@ const comparisonRows = [
 ]
 
 const cardStyle: React.CSSProperties = {
-    background: 'rgba(10, 15, 26, 0.6)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: 'var(--card-bg, #ffffff)',
+    border: '1px solid var(--card-border, rgba(0,0,0,0.08))',
     borderRadius: 16,
     padding: 'var(--space-lg)'
 }
@@ -177,7 +177,7 @@ export default function CoverageComparison() {
                                 ...cardStyle,
                                 border: plan.current
                                     ? '2px solid var(--apex-teal)'
-                                    : '1px solid rgba(255,255,255,0.06)',
+                                    : '1px solid var(--card-border, rgba(0,0,0,0.08))',
                                 position: 'relative',
                                 overflow: 'hidden'
                             }}
@@ -217,7 +217,7 @@ export default function CoverageComparison() {
                                         <div key={row.key} style={{
                                             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                                             padding: '6px 0',
-                                            borderBottom: '1px solid rgba(255,255,255,0.03)'
+                                            borderBottom: '1px solid var(--card-border, rgba(0,0,0,0.06))'
                                         }}>
                                             <span style={{ fontSize: 'var(--text-sm)', color: 'var(--apex-silver)' }}>{row.label}</span>
                                             <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--apex-white)' }}>
@@ -264,7 +264,7 @@ export default function CoverageComparison() {
                                                 </div>
                                                 <div style={{
                                                     height: 6, borderRadius: 3,
-                                                    background: 'rgba(255,255,255,0.06)', overflow: 'hidden'
+                                                    background: 'rgba(0,0,0,0.06)', overflow: 'hidden'
                                                 }}>
                                                     <motion.div
                                                         initial={{ width: 0 }}
@@ -363,10 +363,10 @@ export default function CoverageComparison() {
                                         borderRadius: 8,
                                         border: selectedScenario === scenario
                                             ? '1px solid var(--apex-teal)'
-                                            : '1px solid rgba(255,255,255,0.1)',
+                                            : '1px solid rgba(0,0,0,0.1)',
                                         background: selectedScenario === scenario
                                             ? 'rgba(0, 200, 180, 0.1)'
-                                            : 'rgba(255,255,255,0.03)',
+                                            : 'rgba(0,0,0,0.03)',
                                         color: selectedScenario === scenario
                                             ? 'var(--apex-teal)'
                                             : 'var(--apex-silver)',

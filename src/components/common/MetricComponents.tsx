@@ -119,7 +119,7 @@ export function GaugeChart({ value, max = 100, label, showValue = true, size = 1
         <div className={`gauge-chart ${className}`} style={{ width: size, height: size / 2 + 20 }}>
             <svg width={size} height={size / 2 + 10} viewBox={`0 0 ${size} ${size / 2 + 10}`}>
                 <path d={`M ${thickness / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - thickness / 2} ${size / 2}`}
-                    fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={thickness} strokeLinecap="round" />
+                    fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth={thickness} strokeLinecap="round" />
                 <path d={`M ${thickness / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - thickness / 2} ${size / 2}`}
                     fill="none" stroke={getColor()} strokeWidth={thickness} strokeLinecap="round"
                     strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} style={{ transition: 'stroke-dashoffset 0.5s ease' }} />
@@ -169,7 +169,7 @@ export function ProgressRing({ value, max = 100, size = 80, thickness = 8, label
     return (
         <div className={`progress-ring ${className}`} style={{ width: size, height: size }}>
             <svg width={size} height={size}>
-                <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth={thickness} />
+                <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth={thickness} />
                 <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={thickness}
                     strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
                     transform={`rotate(-90 ${size / 2} ${size / 2})`} style={{ transition: 'stroke-dashoffset 0.5s ease' }} />

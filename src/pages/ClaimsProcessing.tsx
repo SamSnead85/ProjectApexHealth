@@ -33,6 +33,7 @@ import {
     Check
 } from 'lucide-react'
 import { GlassCard, Badge, Button, MetricCard, PageSkeleton } from '../components/common'
+import { useToast } from '../components/common/Toast'
 import { exportToCSV } from '../utils/exportData'
 import './ClaimsProcessing.css'
 
@@ -870,6 +871,7 @@ export function ClaimsProcessing() {
     const [claims, setClaims] = useState<Claim[]>(mockClaims)
     const [selectedClaim, setSelectedClaim] = useState<Claim | null>(null)
     const [statusFilter, setStatusFilter] = useState<ClaimStatus | 'all'>('all')
+    const { addToast } = useToast()
 
     // Fetch claims from API with mock fallback
     useEffect(() => {
@@ -1583,13 +1585,58 @@ export function ClaimsProcessing() {
                                 {/* Actions */}
                                 {(selectedClaim.status === 'pending' || selectedClaim.status === 'in_review') && (
                                     <div className="claims-processing__actions">
-                                        <Button variant="primary" icon={<CheckCircle2 size={16} />}>
+                                        <Button 
+                                            variant="primary" 
+                                            icon={<CheckCircle2 size={16} />}
+                                            onClick={() => {
+                                                setClaims(prev => prev.map(c => 
+                                                    c.id === selectedClaim.id 
+                                                        ? { ...c, status: 'approved' as ClaimStatus }
+                                                        : c
+                                                ))
+                                                addToast({ 
+                                                    type: 'success', 
+                                                    title: 'Claim Approved', 
+                                                    message: `Claim ${selectedClaim.id} has been approved successfully.`,
+                                                    duration: 3000 
+                                                })
+                                                setSelectedClaim(null)
+                                            }}
+                                        >
                                             Approve Claim
                                         </Button>
-                                        <Button variant="secondary" icon={<XCircle size={16} />}>
+                                        <Button 
+                                            variant="secondary" 
+                                            icon={<XCircle size={16} />}
+                                            onClick={() => {
+                                                setClaims(prev => prev.map(c => 
+                                                    c.id === selectedClaim.id 
+                                                        ? { ...c, status: 'denied' as ClaimStatus }
+                                                        : c
+                                                ))
+                                                addToast({ 
+                                                    type: 'warning', 
+                                                    title: 'Claim Denied', 
+                                                    message: `Claim ${selectedClaim.id} has been denied.`,
+                                                    duration: 3000 
+                                                })
+                                                setSelectedClaim(null)
+                                            }}
+                                        >
                                             Deny Claim
                                         </Button>
-                                        <Button variant="ghost" icon={<Eye size={16} />}>
+                                        <Button 
+                                            variant="ghost" 
+                                            icon={<Eye size={16} />}
+                                            onClick={() => {
+                                                addToast({ 
+                                                    type: 'info', 
+                                                    title: 'Information Request Sent', 
+                                                    message: 'Information request sent to provider',
+                                                    duration: 3000 
+                                                })
+                                            }}
+                                        >
                                             Request Info
                                         </Button>
                                     </div>
@@ -1626,19 +1673,96 @@ export function ClaimsProcessing() {
                             <span>{selectedClaimIds.size} claim{selectedClaimIds.size > 1 ? 's' : ''} selected</span>
                         </div>
                         <div className="claims-processing__bulk-actions">
-                            <button className="claims-processing__bulk-btn claims-processing__bulk-btn--approve" aria-label="Approve selected claims">
+                            <button 
+                                className="claims-processing__bulk-btn claims-processing__bulk-btn--approve" 
+                                aria-label="Approve selected claims"
+                                onClick={() => {
+                                    const count = selectedClaimIds.size
+                                    setClaims(prev => prev.map(c => 
+                                        selectedClaimIds.has(c.id) 
+                                            ? { ...c, status: 'approved' as ClaimStatus }
+                                            : c
+                                    ))
+                                    addToast({ 
+                                        type: 'success', 
+                                        title: 'Bulk Approval Complete', 
+                                        message: `${count} claim${count > 1 ? 's' : ''} approved successfully.`,
+                                        duration: 3000 
+                                    })
+                                    setSelectedClaimIds(new Set())
+                                }}
+                            >
                                 <CheckCircle2 size={14} />
                                 Approve Selected
                             </button>
-                            <button className="claims-processing__bulk-btn claims-processing__bulk-btn--deny" aria-label="Deny selected claims">
+                            <button 
+                                className="claims-processing__bulk-btn claims-processing__bulk-btn--deny" 
+                                aria-label="Deny selected claims"
+                                onClick={() => {
+                                    const count = selectedClaimIds.size
+                                    setClaims(prev => prev.map(c => 
+                                        selectedClaimIds.has(c.id) 
+                                            ? { ...c, status: 'denied' as ClaimStatus }
+                                            : c
+                                    ))
+                                    addToast({ 
+                                        type: 'warning', 
+                                        title: 'Bulk Denial Complete', 
+                                        message: `${count} claim${count > 1 ? 's' : ''} denied.`,
+                                        duration: 3000 
+                                    })
+                                    setSelectedClaimIds(new Set())
+                                }}
+                            >
                                 <XCircle size={14} />
                                 Deny Selected
                             </button>
-                            <button className="claims-processing__bulk-btn" aria-label="Assign selected claims">
+                            <button 
+                                className="claims-processing__bulk-btn" 
+                                aria-label="Assign selected claims"
+                                onClick={() => {
+                                    const count = selectedClaimIds.size
+                                    addToast({ 
+                                        type: 'info', 
+                                        title: 'Assignment Feature', 
+                                        message: `Assignment feature for ${count} claim${count > 1 ? 's' : ''} coming soon.`,
+                                        duration: 3000 
+                                    })
+                                }}
+                            >
                                 <Users size={14} />
                                 Assign To
                             </button>
-                            <button className="claims-processing__bulk-btn" aria-label="Export selected claims">
+                            <button 
+                                className="claims-processing__bulk-btn" 
+                                aria-label="Export selected claims"
+                                onClick={() => {
+                                    const selectedClaims = claims.filter(c => selectedClaimIds.has(c.id))
+                                    exportToCSV(selectedClaims.map(c => ({
+                                        'Claim ID': c.id,
+                                        'Member': c.memberName,
+                                        'Member ID': c.memberId,
+                                        'Provider': c.providerName,
+                                        'Service Date': c.serviceDate,
+                                        'Received Date': c.receivedDate,
+                                        'Claim Type': c.claimType,
+                                        'Status': c.status,
+                                        'Billed Amount': c.billedAmount,
+                                        'Allowed Amount': c.allowedAmount,
+                                        'Paid Amount': c.paidAmount,
+                                        'Patient Responsibility': c.patientResponsibility,
+                                        'Network Status': c.networkStatus,
+                                        'Adjudication Method': c.adjudicationMethod,
+                                    })), `claims_bulk_export_${new Date().toISOString().split('T')[0]}`)
+                                    addToast({ 
+                                        type: 'success', 
+                                        title: 'Export Complete', 
+                                        message: `${selectedClaims.length} claim${selectedClaims.length > 1 ? 's' : ''} exported to CSV.`,
+                                        duration: 3000 
+                                    })
+                                    setSelectedClaimIds(new Set())
+                                }}
+                            >
                                 <Download size={14} />
                                 Export
                             </button>

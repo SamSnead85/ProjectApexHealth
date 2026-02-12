@@ -182,7 +182,7 @@ export function HealthScoreWidget() {
                             cy="100"
                             r="85"
                             fill="none"
-                            stroke="rgba(255,255,255,0.08)"
+                            stroke="rgba(0,0,0,0.08)"
                             strokeWidth="12"
                         />
                         {/* Score ring */}

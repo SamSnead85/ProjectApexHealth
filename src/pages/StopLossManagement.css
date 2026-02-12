@@ -86,7 +86,7 @@
 
 .gauge-bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(0, 0, 0, 0.06);
     stroke-width: 16;
     stroke-linecap: round;
 }
@@ -220,7 +220,7 @@
 .laser-progress-bar {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 4px;
     overflow: hidden;
     position: relative;
@@ -306,7 +306,7 @@
 }
 
 .window-tab:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .window-tab.active {
@@ -322,7 +322,7 @@
 }
 
 .projection-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1.25rem;
@@ -460,7 +460,7 @@
 }
 
 .claimant-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1.25rem;

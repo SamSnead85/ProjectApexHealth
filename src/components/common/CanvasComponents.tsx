@@ -161,7 +161,7 @@ export function GridOverlay({ size = 20, visible = true, className = '' }: GridO
         <div className={`grid-overlay ${className}`}
             style={{
                 backgroundSize: `${size}px ${size}px`,
-                backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)`
+                backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)`
             }}
         />
     )

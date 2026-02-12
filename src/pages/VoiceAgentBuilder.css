@@ -52,7 +52,7 @@
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #0D7C8C;
+    color: #2563EB;
     font-variant-numeric: tabular-nums;
 }
 
@@ -162,7 +162,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #0D7C8C;
+    background: #2563EB;
     cursor: pointer;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .va-template-trigger {
-    color: #0D7C8C;
+    color: #2563EB;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -276,7 +276,7 @@
 }
 
 .va-btn-call {
-    background: #0D7C8C;
+    background: #2563EB;
     color: #fff;
 }
 .va-btn-call:hover {
@@ -379,7 +379,7 @@
     justify-content: center;
     flex-shrink: 0;
     background: rgba(13, 124, 140, 0.12);
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .va-msg.caller .va-msg-avatar {
@@ -549,7 +549,7 @@
     border: 1px solid rgba(13, 124, 140, 0.15);
     border-radius: 6px;
     font-size: 0.7rem;
-    color: #0D7C8C;
+    color: #2563EB;
     font-weight: 500;
 }
 

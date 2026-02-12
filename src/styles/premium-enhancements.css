@@ -13,7 +13,7 @@
             rgba(59, 130, 246, 0.04) 25%,
             rgba(139, 92, 246, 0.04) 50%,
             rgba(37, 99, 235, 0.05) 75%,
-            rgba(8, 145, 178, 0.04) 100%);
+            rgba(37, 99, 235, 0.04) 100%);
     background-size: 400% 400%;
     animation: auroraFlow 15s ease infinite;
 }
@@ -412,7 +412,7 @@
 }
 
 .hover-lift:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 }
 
 .hover-glow {
@@ -420,7 +420,7 @@
 }
 
 .hover-glow:hover {
-    box-shadow: 0 0 12px rgba(37, 99, 235, 0.08);
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.05);
 }
 
 .press-effect {
@@ -490,9 +490,9 @@
 }
 
 .icon-container--teal {
-    background: rgba(8, 145, 178, 0.08);
-    color: #0891B2;
-    border: 1px solid rgba(8, 145, 178, 0.15);
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563EB;
+    border: 1px solid rgba(37, 99, 235, 0.15);
 }
 
 .icon-container--purple {
@@ -558,8 +558,8 @@
 
 .kpi-card:hover {
     border-color: rgba(37, 99, 235, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .kpi-card__header {

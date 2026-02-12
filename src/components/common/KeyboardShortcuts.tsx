@@ -215,7 +215,7 @@ export function KeyboardShortcuts({ isOpen, onClose }: KeyboardShortcutsProps) {
               <div style={styles.headerLeft}>
                 <Keyboard
                   size={18}
-                  style={{ color: 'var(--apex-teal, #06B6D4)' }}
+                  style={{ color: 'var(--apex-teal, #2563EB)' }}
                 />
                 <h3 style={styles.title}>Keyboard Shortcuts</h3>
               </div>

@@ -101,7 +101,7 @@ export function TreeView({
                     className={`tree-view__node ${isSelected ? 'tree-view__node--selected' : ''}`}
                     style={{ paddingLeft: `${depth * 20 + 8}px` }}
                     onClick={() => handleSelect(node)}
-                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                    whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
                     whileTap={{ scale: 0.99 }}
                 >
                     {hasChildren ? (

@@ -108,7 +108,7 @@ export function EmptyState({
             fontSize: 14,
             fontWeight: 500,
             color: '#fff',
-            background: 'var(--apex-teal, #06B6D4)',
+            background: 'var(--apex-teal, #2563EB)',
             border: 'none',
             borderRadius: 8,
             cursor: 'pointer',

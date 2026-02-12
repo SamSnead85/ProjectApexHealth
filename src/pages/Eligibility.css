@@ -39,7 +39,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-md);
@@ -154,7 +154,7 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-xl);
 }
@@ -174,7 +174,7 @@
 
 .eligibility__tab:hover {
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .eligibility__tab.active {
@@ -211,13 +211,13 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
 }
 
 .quick-benefit:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .quick-benefit__icon {
@@ -348,7 +348,7 @@
     font-size: var(--text-xs);
     color: var(--apex-silver);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
     font-style: italic;
 }
@@ -373,7 +373,7 @@
 
 .accumulator__bar {
     height: 12px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-sm);

@@ -52,7 +52,7 @@
 }
 
 .filter-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .filter-btn.active {
@@ -163,7 +163,7 @@
 }
 
 .activity-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 .activity-header {
@@ -231,7 +231,7 @@
 
 .activity-tag {
     padding: 0.25rem 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     font-size: 0.625rem;
     color: var(--text-tertiary);

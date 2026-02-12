@@ -181,7 +181,7 @@ export function SecureMessaging() {
                             key={conv.id}
                             className={`conversation-item ${selectedConversation?.id === conv.id ? 'active' : ''}`}
                             onClick={() => setSelectedConversation(conv)}
-                            whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.04)' }}
+                            whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.04)' }}
                         >
                             <div className="conversation-avatar">
                                 <span>{conv.participant.name.split(' ').map(n => n[0]).join('')}</span>

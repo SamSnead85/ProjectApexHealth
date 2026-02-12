@@ -228,7 +228,7 @@
 }
 
 .feed-item {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1.25rem;
@@ -407,7 +407,7 @@
 }
 
 .month-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--text-primary);
 }
 
@@ -441,7 +441,7 @@
 }
 
 .calendar-day:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .calendar-day.today {

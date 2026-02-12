@@ -170,7 +170,7 @@
 
 .frequency-badge {
     padding: 0.25rem 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     font-size: 0.688rem;
     color: var(--text-tertiary);
@@ -225,7 +225,7 @@
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     color: var(--text-tertiary);
     cursor: pointer;
@@ -236,7 +236,7 @@
 }
 
 .action-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--text-secondary);
 }
 

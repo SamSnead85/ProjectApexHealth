@@ -45,7 +45,7 @@
 }
 
 .benchmark-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1.25rem;
@@ -207,7 +207,7 @@
 }
 
 .prudence-content {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 10px;
     padding: 1rem;
@@ -256,7 +256,7 @@
 }
 
 .vault-category {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 1.25rem;
@@ -356,7 +356,7 @@
 
 .score-bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(0, 0, 0, 0.06);
     stroke-width: 8;
 }
 
@@ -403,7 +403,7 @@
 .score-bar {
     flex: 1;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 4px;
     overflow: hidden;
 }

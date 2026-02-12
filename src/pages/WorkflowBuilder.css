@@ -176,7 +176,7 @@
     border: 1px solid #E5E7EB;
 }
 
-.wf-template-card__preview-icon--cyan { color: #0D7C8C; }
+.wf-template-card__preview-icon--cyan { color: #2563EB; }
 .wf-template-card__preview-icon--amber { color: #F59E0B; }
 .wf-template-card__preview-icon--emerald { color: #10B981; }
 .wf-template-card__preview-icon--rose { color: #F43F5E; }
@@ -250,7 +250,7 @@
 }
 
 .wf-palette__tab--active {
-    color: #0D7C8C;
+    color: #2563EB;
     background: rgba(13, 124, 140, 0.12);
 }
 
@@ -280,7 +280,7 @@
 }
 
 .wf-palette-item--cyan svg {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .wf-palette-item--amber svg {
@@ -432,7 +432,7 @@
     border: 1px solid rgba(13, 124, 140, 0.35);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
-    color: #0D7C8C;
+    color: #2563EB;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -478,7 +478,7 @@
 }
 
 .wf-node--selected {
-    border-color: #0D7C8C;
+    border-color: #2563EB;
     box-shadow: 0 0 0 3px rgba(13, 124, 140, 0.25);
 }
 
@@ -500,7 +500,7 @@
 
 .wf-node--cyan .wf-node__icon {
     background: rgba(13, 124, 140, 0.18);
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .wf-node--amber .wf-node__icon {
@@ -787,13 +787,13 @@
    EXECUTING NODE (TEST RUN)
 ============================================ */
 .wf-node--executing {
-    border-color: #0D7C8C !important;
+    border-color: #2563EB !important;
     box-shadow: 0 0 0 3px rgba(13, 124, 140, 0.3), 0 0 20px rgba(13, 124, 140, 0.15);
     animation: wf-execute-pulse 1.2s ease-in-out infinite;
 }
 
 .wf-node--executing .wf-node__label {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 @keyframes wf-execute-pulse {
@@ -831,7 +831,7 @@
 }
 
 .wf-prop-type-badge svg {
-    color: #0D7C8C;
+    color: #2563EB;
     flex-shrink: 0;
 }
 
@@ -888,7 +888,7 @@
 }
 
 .wf-preview-modal__header h3 svg {
-    color: #0D7C8C;
+    color: #2563EB;
 }
 
 .wf-preview-modal__header button {
@@ -944,7 +944,7 @@
     flex-shrink: 0;
 }
 
-.wf-preview-modal__node-icon--cyan { background: rgba(13, 124, 140, 0.15); color: #0D7C8C; }
+.wf-preview-modal__node-icon--cyan { background: rgba(13, 124, 140, 0.15); color: #2563EB; }
 .wf-preview-modal__node-icon--amber { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
 .wf-preview-modal__node-icon--emerald { background: rgba(16, 185, 129, 0.15); color: #10B981; }
 .wf-preview-modal__node-icon--rose { background: rgba(244, 63, 94, 0.15); color: #F43F5E; }
@@ -1024,7 +1024,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #0D7C8C;
+    background: #2563EB;
     animation: wf-toast-pulse 1s ease-in-out infinite;
 }
 

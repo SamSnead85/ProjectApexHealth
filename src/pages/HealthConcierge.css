@@ -134,7 +134,7 @@
 }
 
 .message.user .message__avatar {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     color: var(--apex-silver);
 }
 
@@ -152,7 +152,7 @@
 }
 
 .message.assistant .message__bubble {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     color: var(--apex-white);
 }
@@ -206,7 +206,7 @@
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     margin-top: var(--space-sm);
@@ -283,7 +283,7 @@
     flex-direction: column;
     gap: 2px;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
 }
 
@@ -353,7 +353,7 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
 }
@@ -389,7 +389,7 @@
 
 .voice-button:hover,
 .send-button:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 

@@ -190,7 +190,7 @@
 }
 
 .audit-entry__dot.audit-badge--info {
-    background: #0891B2;
+    background: #2563EB;
 }
 
 .audit-entry__line {
@@ -305,7 +305,7 @@
 
 .audit-badge--info {
     background: rgba(8, 145, 178, 0.1);
-    color: #0891B2;
+    color: #2563EB;
     border: 1px solid rgba(8, 145, 178, 0.2);
 }
 
@@ -377,7 +377,7 @@
 
 .audit-detail__confidence-bar {
     height: 100%;
-    background: linear-gradient(90deg, #059669, #0891B2);
+    background: linear-gradient(90deg, #059669, #2563EB);
     border-radius: 4px;
 }
 
@@ -419,7 +419,7 @@
 }
 
 .audit-stat__value--info {
-    color: #0891B2;
+    color: #2563EB;
 }
 
 .audit-stat__label {

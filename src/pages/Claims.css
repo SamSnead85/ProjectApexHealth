@@ -165,7 +165,7 @@
 }
 
 .claims__row:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .claims__id {
@@ -260,7 +260,7 @@
 }
 
 .claims__action-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -320,7 +320,7 @@
 }
 
 .claims__detail-header button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -414,7 +414,7 @@
 
 .claims__detail-ai-confidence {
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-xs);
@@ -518,7 +518,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
     transform: translateX(-100%);
     animation: aiBarShine 2.5s infinite ease-in-out;
 }
@@ -562,7 +562,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
     animation: shimmer 2s infinite;
 }
 
@@ -576,7 +576,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.06), transparent);
     opacity: 0;
     transition: opacity var(--transition-fast);
 }

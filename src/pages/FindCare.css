@@ -432,7 +432,7 @@
     flex-direction: column;
     gap: var(--space-xs);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: var(--radius-sm);
 }
 
@@ -516,7 +516,7 @@
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     cursor: pointer;

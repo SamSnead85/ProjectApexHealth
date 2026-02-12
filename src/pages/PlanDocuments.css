@@ -93,8 +93,8 @@
 
 .pd__category-tab {
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-full);
     color: var(--apex-steel);
     font-size: var(--text-sm);
@@ -104,7 +104,7 @@
 }
 
 .pd__category-tab:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -123,8 +123,8 @@
 
 .pd__document-card {
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01));
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-xl);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -132,7 +132,7 @@
 
 .pd__document-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -172,14 +172,14 @@
     gap: var(--space-sm);
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Upload Zone */
 .pd__upload-zone {
     padding: var(--space-2xl);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
-    border: 2px dashed rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), transparent);
+    border: 2px dashed rgba(0, 0, 0, 0.08);
     border-radius: var(--radius-xl);
     text-align: center;
     cursor: pointer;

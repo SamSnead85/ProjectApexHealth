@@ -139,7 +139,7 @@ const ProgressRing = ({ value, label, color, size = 120 }: { value: number; labe
                     cy={size / 2}
                     r={radius}
                     fill="none"
-                    stroke="rgba(255,255,255,0.05)"
+                    stroke="rgba(0,0,0,0.06)"
                     strokeWidth="8"
                 />
                 <motion.circle
@@ -359,7 +359,7 @@ export default function ClaimsPrediction() {
                             </defs>
                             <CartesianGrid
                                 strokeDasharray="3 3"
-                                stroke="rgba(255,255,255,0.04)"
+                                stroke="rgba(0,0,0,0.06)"
                                 vertical={false}
                             />
                             <XAxis

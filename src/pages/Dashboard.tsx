@@ -89,7 +89,7 @@ const ConfidenceRing = ({ score }: { score: number }) => {
                     cy="35"
                     r={radius}
                     fill="none"
-                    stroke="rgba(255,255,255,0.1)"
+                    stroke="rgba(0,0,0,0.08)"
                     strokeWidth="4"
                 />
                 <motion.circle

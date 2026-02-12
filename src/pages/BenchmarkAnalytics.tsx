@@ -230,15 +230,11 @@ const BenchmarkAnalytics = () => {
                     <div className="chart-area">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={trendData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                                <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                                <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} domain={[300, 550]} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+                                <XAxis dataKey="month" stroke="#94A3B8" fontSize={12} />
+                                <YAxis stroke="#94A3B8" fontSize={12} domain={[300, 550]} />
                                 <Tooltip
-                                    contentStyle={{
-                                        background: 'rgba(20,22,26,0.95)',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: '8px'
-                                    }}
+                                    contentStyle={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }}
                                 />
                                 <Area
                                     type="monotone"

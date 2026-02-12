@@ -226,7 +226,7 @@ export function Wellness() {
                 <div className="health-score__display">
                     <div className="health-score__circle">
                         <svg viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="8" />
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="8" />
                             <motion.circle
                                 cx="50" cy="50" r="45"
                                 fill="none"
@@ -485,7 +485,7 @@ export function Wellness() {
                         </div>
                         <div className="goal-card__ring">
                             <svg viewBox="0 0 36 36">
-                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
+                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="3" />
                                 <motion.circle
                                     cx="18" cy="18" r="15.9"
                                     fill="none"
@@ -528,7 +528,7 @@ export function Wellness() {
                             ) : (
                                 <div className="program-card__progress-ring">
                                     <svg viewBox="0 0 36 36">
-                                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
+                                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="2" />
                                         <circle
                                             cx="18" cy="18" r="15.9"
                                             fill="none"

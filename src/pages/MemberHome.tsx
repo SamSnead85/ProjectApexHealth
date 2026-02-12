@@ -419,7 +419,7 @@ export function MemberHome() {
                                     </div>
                                     <div className="account-balance__donut">
                                         <svg viewBox="0 0 80 80">
-                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
+                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="8" />
                                             <circle
                                                 cx="40" cy="40" r="32" fill="none"
                                                 stroke="var(--apex-teal)" strokeWidth="8"
@@ -448,7 +448,7 @@ export function MemberHome() {
                                     </div>
                                     <div className="account-balance__donut">
                                         <svg viewBox="0 0 80 80">
-                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
+                                            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="8" />
                                             <circle
                                                 cx="40" cy="40" r="32" fill="none"
                                                 stroke="var(--apex-electric-purple)" strokeWidth="8"

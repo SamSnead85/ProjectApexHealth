@@ -219,7 +219,7 @@ export function AdvancedTable<T extends Record<string, any>>({
                                         key={String(row[keyField])}
                                         className={`advanced-table__row ${selectedRows.has(row[keyField]) ? 'advanced-table__row--selected' : ''} ${onRowClick ? 'advanced-table__row--clickable' : ''}`}
                                         onClick={() => onRowClick?.(row)}
-                                        whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                                        whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.02)' }}
                                     >
                                         {selectable && (
                                             <td className="advanced-table__td advanced-table__td--checkbox" onClick={e => e.stopPropagation()}>
