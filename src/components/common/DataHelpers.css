@@ -16,7 +16,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     max-width: 300px;
 }
@@ -42,7 +42,7 @@
 .data-table-helper__table-wrapper {
     overflow-x: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
 }
 
 .data-table-helper__table {
@@ -57,7 +57,7 @@
     font-weight: 600;
     color: var(--apex-steel);
     background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .data-table-helper__table th.sortable {
@@ -82,11 +82,11 @@
 .data-table-helper__table td {
     padding: var(--space-sm) var(--space-md);
     color: var(--apex-silver);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .data-table-helper__table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .data-table-helper__footer {
@@ -156,7 +156,7 @@
     justify-content: center;
     width: 64px;
     height: 64px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 50%;
     color: var(--apex-steel);
     margin-bottom: var(--space-md);
@@ -195,7 +195,7 @@
 /* Skeleton */
 .skeleton {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
 }
 
@@ -226,7 +226,7 @@
     inset: 0;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.1),
+            rgba(0, 0, 0, 0.1),
             transparent);
     animation: skeleton-wave 1.5s ease-in-out infinite;
 }

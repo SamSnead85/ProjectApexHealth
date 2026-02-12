@@ -5,7 +5,7 @@
 
 .filter-panel {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -15,7 +15,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--apex-white);
@@ -45,7 +45,7 @@
 }
 
 .filter-panel__filter {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .filter-panel__filter:last-child {
@@ -68,7 +68,7 @@
 }
 
 .filter-panel__filter-header:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .filter-panel__filter-header span:first-child {
@@ -114,7 +114,7 @@
 }
 
 .filter-panel__option:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-silver);
 }
 
@@ -126,7 +126,7 @@
 .filter-panel__count {
     margin-left: auto;
     padding: 2px 6px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
 }
@@ -138,7 +138,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
 }
 
@@ -186,8 +186,8 @@
 .filter-panel__boolean button {
     flex: 1;
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-steel);
@@ -196,7 +196,7 @@
 }
 
 .filter-panel__boolean button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .filter-panel__boolean button.active {

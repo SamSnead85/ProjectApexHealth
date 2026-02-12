@@ -372,7 +372,7 @@
 
 /* Dashboard Header Animation */
 .dashboard__title {
-    background: linear-gradient(90deg, var(--apex-white), var(--apex-silver));
+    background: linear-gradient(135deg, var(--apex-teal), var(--apex-teal-muted));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

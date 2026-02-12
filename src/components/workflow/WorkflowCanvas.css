@@ -36,12 +36,12 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(20px);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.4),
-        0 1px 0 rgba(255, 255, 255, 0.05) inset;
+        0 1px 0 rgba(0, 0, 0, 0.05) inset;
 }
 
 .workflow-canvas__toolbar-group {
@@ -63,7 +63,7 @@
 
 .workflow-canvas__controls {
     background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--border-default, #D5D9E0) !important;
     border-radius: var(--radius-lg) !important;
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
@@ -72,7 +72,7 @@
 .workflow-canvas__controls button {
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB) !important;
     color: var(--apex-steel) !important;
     width: 36px !important;
     height: 36px !important;
@@ -98,7 +98,7 @@
 
 .workflow-canvas__minimap {
     background: linear-gradient(180deg, rgba(20, 20, 25, 0.95), rgba(12, 12, 16, 0.98)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--border-default, #D5D9E0) !important;
     border-radius: var(--radius-lg) !important;
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
@@ -212,7 +212,7 @@
     padding: var(--space-3xl);
     pointer-events: all;
     background: linear-gradient(180deg, rgba(20, 20, 25, 0.6), rgba(12, 12, 16, 0.8));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-2xl);
     backdrop-filter: blur(20px);
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
@@ -229,7 +229,7 @@
     font-weight: 700;
     color: var(--apex-white);
     margin-bottom: var(--space-sm);
-    background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-silver) 100%);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-teal-muted) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

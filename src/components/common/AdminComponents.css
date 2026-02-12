@@ -6,7 +6,7 @@
 /* User Management */
 .user-management {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -16,7 +16,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .user-management__search {
@@ -27,7 +27,7 @@
     max-width: 300px;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
 }
 
@@ -52,7 +52,7 @@
 .user-management__filters select {
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -67,7 +67,7 @@
     grid-template-columns: 2fr 1fr 1fr 1fr 100px;
     align-items: center;
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .user-management__row--header {
@@ -124,7 +124,7 @@
 .user-management__cell select {
     padding: 4px 8px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
 }
@@ -152,7 +152,7 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: var(--radius-sm);
     color: var(--apex-silver);
@@ -160,7 +160,7 @@
 }
 
 .user-management__actions button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .user-management__actions button.danger:hover {
@@ -170,7 +170,7 @@
 
 .user-management__footer {
     padding: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
     font-size: var(--text-xs);
     color: var(--apex-steel);
     text-align: center;
@@ -179,7 +179,7 @@
 /* Permission Matrix */
 .permission-matrix {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow-x: auto;
 }
@@ -190,7 +190,7 @@
 
 .permission-matrix__row {
     display: flex;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .permission-matrix__row--header {
@@ -238,8 +238,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     color: var(--apex-steel);
     cursor: pointer;
@@ -260,7 +260,7 @@
 .api-key-manager {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -302,7 +302,7 @@
 .api-key-manager__item {
     padding: var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -380,8 +380,8 @@
     align-items: center;
     gap: 4px;
     padding: var(--space-xs) var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-xs);
     color: var(--apex-silver);
@@ -400,7 +400,7 @@
 .audit-log {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 

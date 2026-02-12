@@ -58,8 +58,8 @@
 
 .chart-controls select {
     padding: var(--space-xs) var(--space-md);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     color: var(--apex-white);
     font-size: var(--text-sm);
@@ -207,7 +207,7 @@
 
 .item-bar {
     height: 6px;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

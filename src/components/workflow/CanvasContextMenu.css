@@ -91,7 +91,7 @@
 }
 
 .canvas-context-menu__item:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -130,7 +130,7 @@
     color: var(--apex-muted);
     font-family: var(--font-mono);
     padding: 2px 6px;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-xs);
 }
 

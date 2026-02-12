@@ -8,7 +8,7 @@
     position: relative;
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -61,7 +61,7 @@
 }
 
 .stat-card__refresh:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -102,7 +102,7 @@
 .progress-card {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -126,7 +126,7 @@
 
 .progress-card__bar {
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -159,7 +159,7 @@
 }
 
 .activity-feed__item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .activity-feed__icon {
@@ -168,7 +168,7 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 50%;
     color: var(--apex-steel);
     flex-shrink: 0;
@@ -219,7 +219,7 @@
     padding: var(--space-sm);
     margin-top: var(--space-xs);
     background: transparent;
-    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border: 1px dashed var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-teal);
@@ -235,7 +235,7 @@
 /* Widget */
 .widget {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
@@ -245,7 +245,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .widget__title-group {
@@ -285,7 +285,7 @@
 }
 
 .widget__action:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 

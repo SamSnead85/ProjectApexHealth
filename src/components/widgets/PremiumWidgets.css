@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-bottom: 1px solid var(--glass-border);
     cursor: pointer;
     user-select: none;
@@ -105,7 +105,7 @@
 }
 
 .widget__control:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -182,7 +182,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
 }
@@ -486,7 +486,7 @@
 
 .notification-banner__action {
     padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     color: var(--apex-white);
@@ -515,7 +515,7 @@
 }
 
 .notification-banner__dismiss:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 

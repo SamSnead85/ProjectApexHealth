@@ -1735,7 +1735,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.01) 45%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.01) 55%, transparent 60%);
+    background: linear-gradient(105deg, transparent 40%, rgba(0, 0, 0, 0.01) 45%, rgba(0, 0, 0, 0.02) 50%, rgba(0, 0, 0, 0.01) 55%, transparent 60%);
     background-size: 250% 100%;
     animation: previewShimmer 12s ease-in-out infinite;
     pointer-events: none;

@@ -14,8 +14,8 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
     cursor: pointer;
@@ -23,7 +23,7 @@
 }
 
 .notification-bell__trigger:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -53,7 +53,7 @@
     width: 360px;
     max-height: 480px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
@@ -66,7 +66,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .notification-bell__title {
@@ -120,13 +120,13 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .notification-bell__item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .notification-bell__item--read {
@@ -209,14 +209,14 @@
 }
 
 .notification-bell__item-close:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
 /* Footer */
 .notification-bell__footer {
     padding: var(--space-sm) var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .notification-bell__view-all {
@@ -246,7 +246,7 @@
 }
 
 .notification-bell__list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: 2px;
 }
 

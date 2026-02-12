@@ -27,8 +27,8 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
+    border: 2px solid var(--border-default, #D5D9E0);
     border-radius: 50%;
     color: var(--apex-steel);
     flex-shrink: 0;
@@ -54,7 +54,7 @@
     left: 13px;
     width: 2px;
     height: calc(100% - 28px);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .timeline__step--completed .timeline__connector {
@@ -106,7 +106,7 @@
 .progress-timeline__track {
     position: relative;
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -138,8 +138,8 @@
     justify-content: center;
     width: 24px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
+    border: 2px solid var(--border-default, #D5D9E0);
     border-radius: 50%;
     color: var(--apex-steel);
 }

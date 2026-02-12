@@ -55,7 +55,7 @@
     font-weight: 700;
     color: var(--apex-white);
     font-family: var(--font-mono);
-    background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-teal) 100%);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-teal-muted) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -273,7 +273,7 @@
 
 .transactions__tab.active {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
 }
 
 .transactions__list {

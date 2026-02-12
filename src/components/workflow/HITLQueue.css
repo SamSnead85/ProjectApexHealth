@@ -45,7 +45,7 @@
 
 .hitl-queue__filter:hover {
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .hitl-queue__filter--active {
@@ -115,7 +115,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-md);
 }
 
@@ -246,7 +246,7 @@
 }
 
 .hitl-queue__detail-close:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -315,7 +315,7 @@
 
 .hitl-queue__ai-confidence-bar {
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-xs);

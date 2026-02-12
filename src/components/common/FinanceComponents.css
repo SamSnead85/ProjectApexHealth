@@ -7,7 +7,7 @@
 .account-balance-card {
     padding: var(--space-lg);
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-lg);
     color: var(--apex-teal);
 }
@@ -113,7 +113,7 @@
 }
 
 .transaction-row:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .transaction-row--pending {
@@ -200,7 +200,7 @@
 .budget-progress {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -234,7 +234,7 @@
 .budget-progress__bar {
     position: relative;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-xs);
@@ -274,7 +274,7 @@
     gap: var(--space-lg);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -353,7 +353,7 @@
 .investment-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -424,7 +424,7 @@
     display: flex;
     gap: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .investment-card__stat {
@@ -466,7 +466,7 @@
 .quick-transfer {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -497,7 +497,7 @@
 }
 
 .quick-transfer__recipient:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .quick-transfer__recipient.selected {
@@ -541,8 +541,8 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 

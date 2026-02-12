@@ -10,7 +10,7 @@
     gap: var(--space-lg);
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     cursor: pointer;
     transition: all 0.15s ease;
@@ -107,7 +107,7 @@
     align-items: center;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.1) 80%, transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, transparent);
     position: relative;
 }
 
@@ -156,7 +156,7 @@
 /* Hotel Card */
 .hotel-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -241,7 +241,7 @@
     align-items: center;
     gap: 4px;
     padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
     font-size: 10px;
     color: var(--apex-steel);
@@ -253,7 +253,7 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .hotel-card__price {}
@@ -291,7 +291,7 @@
 .trip-summary {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -313,7 +313,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-radius: var(--radius-md);
 }
 
@@ -358,7 +358,7 @@
 
 .trip-summary__totals {
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .trip-summary__row {
@@ -371,7 +371,7 @@
 
 .trip-summary__row--total {
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
     font-size: var(--text-lg);
     font-weight: 600;
     color: var(--apex-white);
@@ -381,7 +381,7 @@
 .passenger-form {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -408,8 +408,8 @@
 .passenger-form__field select {
     width: 100%;
     padding: var(--space-sm) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -424,7 +424,7 @@
 /* Itinerary Day */
 .itinerary-day {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -435,7 +435,7 @@
     justify-content: space-between;
     width: 100%;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border: none;
     text-align: left;
     cursor: pointer;
@@ -468,7 +468,7 @@
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .itinerary-day__event:last-child {

@@ -94,6 +94,6 @@
 }
 
 [data-theme="light"] .theme-toggle-compact__thumb.dark {
-    background: var(--apex-white);
+    background: var(--bg-card);
     color: var(--apex-steel);
 }

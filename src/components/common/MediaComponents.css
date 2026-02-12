@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: none;
     border-radius: 50%;
     color: var(--apex-white);
@@ -112,7 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: none;
     border-radius: var(--radius-sm);
     color: var(--apex-silver);
@@ -265,7 +265,7 @@
 /* Media Card */
 .media-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -369,7 +369,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: 50%;
     color: var(--apex-steel);
@@ -377,7 +377,7 @@
 }
 
 .media-card__actions button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -385,7 +385,7 @@
 .playlist {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -410,7 +410,7 @@
 }
 
 .playlist__item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .playlist__item.playing {
@@ -491,7 +491,7 @@
     bottom: 0;
     left: 50%;
     width: 2px;
-    background: var(--apex-white);
+    background: var(--bg-card);
     transform: translateX(-50%);
 }
 
@@ -504,7 +504,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--apex-white);
+    background: var(--bg-card);
     border-radius: 50%;
     color: var(--apex-noir);
     transform: translate(-50%, -50%);

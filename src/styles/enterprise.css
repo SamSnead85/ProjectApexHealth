@@ -38,8 +38,8 @@
 
 /* Dark Mode Enterprise Tokens */
 [data-theme="dark"] {
-    --border-hairline: 1px solid rgba(255, 255, 255, 0.04);
-    --border-subtle: 1px solid rgba(255, 255, 255, 0.06);
+    --border-hairline: 1px solid rgba(0, 0, 0, 0.04);
+    --border-subtle: 1px solid rgba(0, 0, 0, 0.06);
     --border-defined: 1px solid rgba(255, 255, 255, 0.10);
 
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -859,12 +859,12 @@
 
 [data-theme="dark"] .enterprise-panel {
     background: rgba(30, 41, 59, 0.6);
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 [data-theme="dark"] .enterprise-kpi {
     background: rgba(30, 41, 59, 0.6);
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 [data-theme="dark"] .enterprise-grid__header-row {
@@ -885,12 +885,12 @@
 
 [data-theme="dark"] .enterprise-search {
     background: rgba(15, 23, 42, 0.6);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 [data-theme="dark"] .enterprise-btn--secondary {
     background: rgba(30, 41, 59, 0.6);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 [data-theme="dark"] .enterprise-btn--secondary:hover {

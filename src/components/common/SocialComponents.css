@@ -7,7 +7,7 @@
 .user-profile-card {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -135,8 +135,8 @@
     width: 100%;
     margin-top: var(--space-md);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -148,11 +148,11 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .social-post:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .social-post__avatar {
@@ -360,7 +360,7 @@
 .comment-item__replies {
     margin-top: var(--space-sm);
     margin-left: var(--space-md);
-    border-left: 2px solid rgba(255, 255, 255, 0.06);
+    border-left: 2px solid var(--border-default, #D5D9E0);
     padding-left: var(--space-md);
 }
 
@@ -368,7 +368,7 @@
 .follower-suggestions {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -393,7 +393,7 @@
 }
 
 .follower-suggestions__item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .follower-suggestions__avatar {
@@ -448,7 +448,7 @@
 .trending-topics {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -473,7 +473,7 @@
 }
 
 .trending-topics__item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .trending-topics__rank {
@@ -560,7 +560,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: 50%;
     font-size: var(--text-xs);
     color: var(--apex-silver);

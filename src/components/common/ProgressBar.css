@@ -14,7 +14,7 @@
 .progress-bar__track {
     flex: 1;
     position: relative;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -38,7 +38,7 @@
 }
 
 .progress-bar__fill--default {
-    background: linear-gradient(90deg, var(--apex-silver), var(--apex-white));
+    background: linear-gradient(90deg, var(--apex-teal), var(--apex-teal-soft));
 }
 
 .progress-bar__fill--success {
@@ -85,7 +85,7 @@
 
 .circular-progress__track {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(0, 0, 0, 0.1);
 }
 
 .circular-progress__fill {

@@ -118,7 +118,7 @@
 }
 
 .premium-modal__close:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
     border-color: var(--glass-border-hover);
 }
@@ -344,7 +344,7 @@
 }
 
 .slide-over__close:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 

@@ -6,7 +6,7 @@
 /* Calendar View */
 .calendar-view {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .calendar-view__header h3 {
@@ -32,7 +32,7 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: var(--radius-md);
     color: var(--apex-steel);
@@ -40,14 +40,14 @@
 }
 
 .calendar-view__header button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
 .calendar-view__weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .calendar-view__weekday {
@@ -66,8 +66,8 @@
 .calendar-view__day {
     min-height: 100px;
     padding: var(--space-xs);
-    border-right: 1px solid rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-right: 1px solid var(--border-subtle, #E2E5EB);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
     cursor: pointer;
     transition: background 0.15s ease;
 }
@@ -77,7 +77,7 @@
 }
 
 .calendar-view__day:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .calendar-view__day--empty {
@@ -133,7 +133,7 @@
 .time-slot-picker {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -157,8 +157,8 @@
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);
@@ -189,7 +189,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     transition: all 0.15s ease;
 }
@@ -255,7 +255,7 @@
 }
 
 .event-card__menu-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -265,7 +265,7 @@
     right: 0;
     min-width: 100px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     overflow: hidden;
     z-index: 10;
@@ -286,7 +286,7 @@
 }
 
 .event-card__menu button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .event-card__menu button.danger {
@@ -303,7 +303,7 @@
 .agenda-view__day {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -330,7 +330,7 @@
 .quick-add-event {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
 }
 
@@ -338,7 +338,7 @@
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-white);
@@ -359,7 +359,7 @@
     flex: 1;
     padding: var(--space-xs) var(--space-sm);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-silver);

@@ -9,7 +9,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     transition: all 0.2s ease;
 }
@@ -55,7 +55,7 @@
     width: 20px;
     height: 20px;
     padding: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: none;
     border-radius: 50%;
     color: var(--apex-steel);

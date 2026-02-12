@@ -49,7 +49,7 @@
     width: 64px;
     height: 64px;
     background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     font-size: var(--text-2xl);
     font-weight: 700;
@@ -112,7 +112,7 @@
 }
 
 .stopwatch__btn--reset {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -142,8 +142,8 @@
 
 .timer-input__preset {
     padding: var(--space-xs) var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-full);
     font-size: var(--text-xs);
     color: var(--apex-steel);
@@ -152,7 +152,7 @@
 }
 
 .timer-input__preset:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -200,7 +200,7 @@
 }
 
 .timer-input__btn--reset {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 

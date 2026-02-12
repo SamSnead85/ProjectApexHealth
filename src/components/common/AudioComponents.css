@@ -7,7 +7,7 @@
 .audio-player {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -130,7 +130,7 @@
 .audio-player__progress input[type="range"] {
     flex: 1;
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: 2px;
     -webkit-appearance: none;
 }
@@ -160,7 +160,7 @@
 .audio-player__volume input[type="range"] {
     width: 80px;
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: 2px;
     -webkit-appearance: none;
 }
@@ -169,7 +169,7 @@
     -webkit-appearance: none;
     width: 10px;
     height: 10px;
-    background: var(--apex-silver);
+    background: var(--bg-hover);
     border-radius: 50%;
     cursor: pointer;
 }
@@ -191,7 +191,7 @@
 }
 
 .track-list__item:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
 }
 
 .track-list__item.playing {
@@ -215,7 +215,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-sm);
     color: var(--apex-steel);
     overflow: hidden;
@@ -300,7 +300,7 @@
 .equalizer {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -341,7 +341,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 

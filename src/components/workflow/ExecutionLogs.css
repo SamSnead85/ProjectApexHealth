@@ -147,7 +147,7 @@
 }
 
 .execution-logs__item-header:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .execution-logs__item-expand {

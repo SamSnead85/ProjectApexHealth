@@ -87,7 +87,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
 }
 
 .upcoming-visit__info {
@@ -157,7 +157,7 @@
 
 .telehealth__tab.active {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
 }
 
 /* Visit Types */
@@ -306,7 +306,7 @@
     height: 12px;
     border-radius: var(--radius-full);
     background: var(--apex-success);
-    border: 2px solid var(--apex-obsidian);
+    border: 2px solid var(--border-default, #D5D9E0);
 }
 
 .provider-card__info {

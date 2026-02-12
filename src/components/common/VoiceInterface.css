@@ -9,8 +9,8 @@
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: 50%;
     color: var(--apex-steel);
     cursor: pointer;
@@ -33,7 +33,7 @@
 }
 
 .voice-button:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -120,7 +120,7 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     transition: all 0.2s ease;
 }
@@ -161,7 +161,7 @@
 }
 
 .voice-input__clear:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -171,7 +171,7 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: 50%;
     color: var(--apex-steel);
@@ -180,7 +180,7 @@
 }
 
 .voice-input__mic:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -194,8 +194,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
     cursor: pointer;
@@ -218,7 +218,7 @@
 }
 
 .speak-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 

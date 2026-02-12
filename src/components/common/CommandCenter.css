@@ -19,7 +19,7 @@
     width: 560px;
     max-height: 60vh;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     overflow: hidden;
@@ -31,7 +31,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .command-palette__header svg {
@@ -54,8 +54,8 @@
 
 .command-palette__header kbd {
     padding: 4px 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: var(--text-xs);
@@ -104,7 +104,7 @@
 
 .command-palette__item:hover,
 .command-palette__item--selected {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .command-palette__item--selected {
@@ -117,7 +117,7 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-md);
     color: var(--apex-steel);
     flex-shrink: 0;
@@ -146,8 +146,8 @@
 
 .command-palette__item-shortcut kbd {
     padding: 2px 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 10px;
@@ -160,15 +160,15 @@
     justify-content: center;
     gap: var(--space-lg);
     padding: var(--space-sm) var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
     font-size: var(--text-xs);
     color: var(--apex-steel);
 }
 
 .command-palette__footer kbd {
     padding: 2px 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 10px;
@@ -182,15 +182,15 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
 .quick-action:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: var(--border-default, #D5D9E0);
 }
 
 .quick-action__icon {
@@ -212,8 +212,8 @@
 
 .quick-action__shortcut kbd {
     padding: 2px 5px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 10px;

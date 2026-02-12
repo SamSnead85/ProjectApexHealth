@@ -19,7 +19,7 @@
     width: 100%;
     max-width: 640px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -31,7 +31,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .command-palette__search-icon {
@@ -56,7 +56,7 @@
     display: inline-flex;
     align-items: center;
     padding: 4px 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: 10px;
@@ -109,7 +109,7 @@
 
 .command-palette__item:hover,
 .command-palette__item--selected {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .command-palette__item--selected {
@@ -122,7 +122,7 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
 }
@@ -153,7 +153,7 @@
 .command-palette__item-shortcut {
     display: inline-flex;
     padding: 3px 6px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: 10px;
@@ -176,7 +176,7 @@
     justify-content: center;
     gap: var(--space-lg);
     padding: var(--space-sm) var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
     font-size: var(--text-xs);
     color: var(--apex-steel);
 }
@@ -185,7 +185,7 @@
     display: inline-flex;
     align-items: center;
     padding: 2px 5px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: 10px;
@@ -203,6 +203,6 @@
 }
 
 .command-palette__content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: 2px;
 }

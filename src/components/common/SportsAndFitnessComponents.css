@@ -10,7 +10,7 @@
     gap: var(--space-md);
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: background 0.15s ease;
@@ -90,7 +90,7 @@
 
 .exercise-timer__bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(0, 0, 0, 0.1);
     stroke-width: 8;
 }
 
@@ -125,8 +125,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: 50%;
     color: var(--apex-silver);
     cursor: pointer;
@@ -159,7 +159,7 @@
 
 .activity-ring__bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(0, 0, 0, 0.1);
     stroke-width: 8;
 }
 
@@ -201,7 +201,7 @@
 .leaderboard-list {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -348,7 +348,7 @@
 .challenge-card__progress {
     position: relative;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
     margin-bottom: var(--space-sm);
@@ -403,7 +403,7 @@
 .fitness-class-card {
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -485,7 +485,7 @@
     align-items: center;
     justify-content: space-between;
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .fitness-class-card__spots {

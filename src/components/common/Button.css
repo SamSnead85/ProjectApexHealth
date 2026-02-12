@@ -51,7 +51,7 @@
 /* Primary Variant */
 .apex-btn--primary {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     border-color: var(--apex-teal);
 }
 
@@ -86,7 +86,7 @@
 }
 
 .apex-btn--ghost:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -105,7 +105,7 @@
 /* Success Variant */
 .apex-btn--success {
     background: var(--apex-success);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     border-color: var(--apex-success);
 }
 
@@ -116,14 +116,14 @@
 
 /* Glass Variant - Premium Glassmorphism */
 .apex-btn--glass {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-silver);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-default, #D5D9E0);
     backdrop-filter: blur(12px);
 }
 
 .apex-btn--glass:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     border-color: rgba(255, 255, 255, 0.2);
     color: var(--apex-white);
 }

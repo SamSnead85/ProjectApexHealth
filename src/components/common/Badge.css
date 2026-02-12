@@ -24,7 +24,7 @@
 
 /* Variants */
 .apex-badge--default {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-silver);
 }
 
@@ -64,12 +64,12 @@
 }
 
 .apex-badge--subtle {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.03);
     color: rgba(255, 255, 255, 0.6);
 }
 
 .apex-badge--secondary {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     color: rgba(255, 255, 255, 0.7);
 }
 

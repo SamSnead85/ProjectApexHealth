@@ -89,7 +89,7 @@
 }
 
 .alert__dismiss:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 

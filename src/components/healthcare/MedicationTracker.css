@@ -103,7 +103,7 @@
     display: flex;
     gap: var(--space-sm);
     padding: var(--space-xs);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-lg);
 }
 
@@ -203,7 +203,7 @@
 .timing-badge {
     font-size: var(--text-xs);
     color: var(--apex-steel);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     padding: 2px 8px;
     border-radius: var(--radius-sm);
 }
@@ -219,7 +219,7 @@
     height: 48px;
     border-radius: var(--radius-full);
     background: conic-gradient(var(--apex-success) calc(var(--adherence) * 1%),
-            rgba(255, 255, 255, 0.1) 0);
+            rgba(0, 0, 0, 0.1) 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,7 +244,7 @@
 .medication-card__details {
     margin-top: var(--space-md);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .medication-detail-grid {
@@ -311,8 +311,8 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     transition: all 0.2s ease;
 }

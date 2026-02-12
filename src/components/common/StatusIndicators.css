@@ -153,7 +153,7 @@
 
 .server-health__bar {
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -217,7 +217,7 @@
 }
 
 .status-badge--neutral {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-steel);
 }
 
@@ -231,7 +231,7 @@
     align-items: center;
     gap: 6px;
     padding: 4px 10px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-full);
 }
 
@@ -298,7 +298,7 @@
 .sync-status__btn {
     padding: 2px 8px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-sm);
     font-size: 10px;
     color: var(--apex-teal);

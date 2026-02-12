@@ -71,7 +71,7 @@
 }
 
 .mini-calendar__header button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -112,7 +112,7 @@
 }
 
 .calendar-day:hover:not(.empty):not(.past):not(:disabled) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -133,7 +133,7 @@
 
 .calendar-day.selected {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     font-weight: 600;
 }
 
@@ -301,7 +301,7 @@
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-radius: var(--radius-md);
     margin-bottom: var(--space-md);
 }

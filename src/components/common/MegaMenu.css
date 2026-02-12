@@ -6,7 +6,7 @@
 .mega-menu {
     position: relative;
     background: rgba(15, 23, 42, 0.98);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
     z-index: 1000;
 }
 
@@ -52,7 +52,7 @@
 
 .mega-menu__trigger:hover,
 .mega-menu__trigger-wrapper--active .mega-menu__trigger {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -64,7 +64,7 @@
     min-width: 600px;
     margin-top: var(--space-sm);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -109,7 +109,7 @@
 }
 
 .mega-menu__item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .mega-menu__item-icon {
@@ -156,14 +156,14 @@
 .mega-menu__featured {
     min-width: 200px;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-lg);
 }
 
 .mega-menu__dropdown-footer {
     padding: var(--space-md) var(--space-lg);
     background: rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .mega-menu__actions {
@@ -187,7 +187,7 @@
 }
 
 .mega-menu__action:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -218,7 +218,7 @@
 
     .mega-menu__mobile {
         padding: var(--space-md);
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid var(--border-subtle, #E2E5EB);
     }
 
     .mega-menu__mobile-trigger {

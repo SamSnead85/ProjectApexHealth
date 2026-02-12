@@ -29,8 +29,8 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-2xl);
     color: var(--apex-teal);
 }

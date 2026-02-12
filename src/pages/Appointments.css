@@ -297,7 +297,7 @@
 
 .calendar-quick-view__day.today {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     font-weight: 600;
 }
 

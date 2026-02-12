@@ -68,7 +68,7 @@
 .level-progress {
     width: 200px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -89,7 +89,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-xl);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-xl);
 }
 
@@ -224,7 +224,7 @@
 
 .goal-progress {
     height: 6px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -308,7 +308,7 @@
 .challenge-progress__bar {
     flex: 1;
     height: 6px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
@@ -369,7 +369,7 @@
     align-items: center;
     text-align: center;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-lg);
 }
 

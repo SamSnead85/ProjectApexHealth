@@ -12,7 +12,7 @@
     max-width: 420px;
     padding: var(--space-md);
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
@@ -99,7 +99,7 @@
 .notification-center {
     width: 380px;
     background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
@@ -109,7 +109,7 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .notification-center__header h3 {
@@ -169,12 +169,12 @@
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-subtle, #E2E5EB);
     cursor: pointer;
 }
 
 .notification-center__item:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
 }
 
 .notification-center__item.unread {
@@ -316,7 +316,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: 50%;
     color: var(--apex-silver);
@@ -324,7 +324,7 @@
 }
 
 .notification-bell:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .notification-bell__badge {
@@ -413,7 +413,7 @@
 
 .inline-alert__action {
     padding: var(--space-xs) var(--space-sm);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border: none;
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);

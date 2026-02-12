@@ -20,7 +20,7 @@
     width: 100%;
     max-width: 420px;
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -46,7 +46,7 @@
 }
 
 .onboarding__close:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     color: var(--apex-white);
 }
 
@@ -143,12 +143,12 @@
 
 .onboarding__btn--secondary {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     color: var(--apex-silver);
 }
 
 .onboarding__btn--secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: var(--apex-white);
 }
 
@@ -184,7 +184,7 @@
     max-width: 480px;
     padding: var(--space-xl);
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     z-index: 1000;
@@ -217,7 +217,7 @@
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-lg);
 }
 

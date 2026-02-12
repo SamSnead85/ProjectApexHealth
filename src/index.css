@@ -8,12 +8,33 @@
    CSS CUSTOM PROPERTIES (TOKENS)
    -------------------------------- */
 :root {
-  /* ── Page & Content (Light, Clean, Clinical) ── */
-  --apex-obsidian: #F3F5F8;
-  --apex-obsidian-soft: #EEF1F5;
-  --apex-obsidian-glass: #FFFFFF;
-  --apex-obsidian-elevated: #FFFFFF;
-  --apex-obsidian-card: #FFFFFF;
+  /* ══════════════════════════════════════════════════
+     SEMANTIC DESIGN TOKENS (use these in new code)
+     ══════════════════════════════════════════════════ */
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-tertiary: #6B7280;
+  --text-muted: #9CA3AF;
+  --text-on-accent: #FFFFFF;
+  --text-on-dark: #F1F5F9;
+
+  --bg-page: #EAECF0;
+  --bg-card: #F5F6F8;
+  --bg-elevated: #FFFFFF;
+  --bg-hover: #E4E7EC;
+  --bg-subtle: rgba(0, 0, 0, 0.03);
+  --bg-active: rgba(37, 99, 235, 0.06);
+
+  --border-default: #D5D9E0;
+  --border-subtle: #E2E5EB;
+  --border-strong: #C4C9D2;
+
+  /* ── Legacy Aliases (map to semantic tokens) ── */
+  --apex-obsidian: var(--bg-page);
+  --apex-obsidian-soft: #E4E7EC;
+  --apex-obsidian-glass: var(--bg-elevated);
+  --apex-obsidian-elevated: var(--bg-elevated);
+  --apex-obsidian-card: var(--bg-card);
 
   /* ── Sidebar (Dark Navy-Slate) ── */
   --sidebar-bg: #1B2332;
@@ -24,16 +45,16 @@
   --sidebar-border: #2A3548;
   --sidebar-accent: #2563EB;
 
-  /* ── Primary Accent - Modern Blue (trust + modernity) ── */
+  /* ── Primary Accent - Modern Blue ── */
   --apex-teal: #2563EB;
   --apex-teal-soft: #3B82F6;
   --apex-teal-muted: #1D4ED8;
-  --apex-teal-glow: rgba(37, 99, 235, 0.12);
-  --apex-teal-border: rgba(37, 99, 235, 0.3);
+  --apex-teal-glow: rgba(37, 99, 235, 0.10);
+  --apex-teal-border: rgba(37, 99, 235, 0.25);
 
   /* ── Secondary Accent - Healthcare Teal ── */
   --apex-purple: #0D9488;
-  --apex-purple-glow: rgba(13, 148, 136, 0.1);
+  --apex-purple-glow: rgba(13, 148, 136, 0.08);
   --apex-blue: #2563EB;
   --apex-cyan: #0D9488;
 
@@ -52,34 +73,34 @@
   --apex-info: #2563EB;
   --apex-info-soft: rgba(37, 99, 235, 0.08);
 
-  /* ── Typography (dark text on light background) ── */
-  --apex-white: #111827;
-  --apex-white-soft: #1F2937;
-  --apex-silver: #4B5563;
-  --apex-steel: #6B7280;
-  --apex-muted: #9CA3AF;
+  /* ── Typography Legacy (mapped to semantic tokens) ── */
+  --apex-white: var(--text-primary);
+  --apex-white-soft: var(--text-secondary);
+  --apex-silver: var(--text-secondary);
+  --apex-steel: var(--text-tertiary);
+  --apex-muted: var(--text-muted);
 
-  /* ── Surface & Card System (borders, not shadows) ── */
+  /* ── Surface & Card System ── */
   --glass-blur: 12px;
   --glass-blur-strong: 24px;
-  --glass-bg: rgba(255, 255, 255, 0.95);
-  --glass-bg-light: rgba(255, 255, 255, 0.9);
-  --glass-bg-card: rgba(255, 255, 255, 1);
-  --glass-border: #E5E7EB;
-  --glass-border-hover: #D1D5DB;
-  --glass-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --glass-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --glass-bg: var(--bg-elevated);
+  --glass-bg-light: var(--bg-card);
+  --glass-bg-card: var(--bg-card);
+  --glass-border: var(--border-default);
+  --glass-border-hover: var(--border-strong);
+  --glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --glass-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.07);
 
-  /* ── Card Effects (subtle, professional) ── */
-  --card-3d-depth: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --card-3d-lift: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* ── Card Effects ── */
+  --card-3d-depth: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --card-3d-lift: 0 4px 8px rgba(0, 0, 0, 0.07);
   --card-3d-glow: none;
   --card-perspective: 1000px;
 
-  /* ── Gradients (nearly invisible tints) ── */
+  /* ── Gradients ── */
   --gradient-premium: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(37, 99, 235, 0.01) 100%);
   --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0) 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.03) 0%, transparent 70%);
   --gradient-aurora: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
 
   /* Chart Colors - Rich but professional on light backgrounds */
@@ -166,6 +187,25 @@
    Refined navy-charcoal, never pitch black
    ================================ */
 [data-theme="dark"] {
+  /* Semantic token overrides for dark mode */
+  --text-primary: #E8ECF1;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
+  --text-muted: #64748B;
+  --text-on-accent: #FFFFFF;
+
+  --bg-page: #0F1419;
+  --bg-card: #1A2030;
+  --bg-elevated: #232D3F;
+  --bg-hover: #2A3548;
+  --bg-subtle: rgba(255, 255, 255, 0.03);
+  --bg-active: rgba(59, 130, 246, 0.12);
+
+  --border-default: #2A3548;
+  --border-subtle: #1F2937;
+  --border-strong: #3B4A63;
+
+  /* Legacy aliases */
   --apex-obsidian: #0F1419;
   --apex-obsidian-soft: #151B24;
   --apex-obsidian-glass: #1A2030;
@@ -215,7 +255,7 @@
   --card-3d-glow: none;
 
   --gradient-premium: linear-gradient(135deg, rgba(59, 130, 246, 0.06) 0%, rgba(59, 130, 246, 0.02) 100%);
-  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
+  --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
   --gradient-glow: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
   --gradient-aurora: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
 
@@ -412,7 +452,7 @@ button {
    -------------------------------- */
 ::selection {
   background: var(--apex-teal);
-  color: var(--apex-obsidian);
+  color: var(--text-on-accent);
 }
 
 /* --------------------------------
@@ -2264,7 +2304,7 @@ tbody tr:hover td {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
   transform: translateX(-100%);
   transition: transform 0.5s ease;
 }

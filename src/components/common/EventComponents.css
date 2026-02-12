@@ -6,7 +6,7 @@
 /* Event Card */
 .event-card {
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
     overflow: hidden;
     cursor: pointer;
@@ -110,7 +110,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--border-subtle, #E2E5EB);
 }
 
 .event-card__location {
@@ -128,7 +128,7 @@
 .seat-selector {
     padding: var(--space-lg);
     background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-xl);
 }
 
@@ -171,7 +171,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--seat-color, rgba(255, 255, 255, 0.1));
+    background: var(--seat-color, rgba(0, 0, 0, 0.1));
     border: none;
     border-radius: 4px 4px 6px 6px;
     font-size: 8px;
@@ -180,7 +180,7 @@
 }
 
 .seat-selector__seat.unavailable {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     color: rgba(255, 255, 255, 0.2);
     cursor: not-allowed;
 }
@@ -216,7 +216,7 @@
 }
 
 .seat-selector__legend-color.unavailable {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .seat-selector__legend-color.selected {
@@ -235,7 +235,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-radius: var(--radius-lg);
 }
 
@@ -272,8 +272,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     color: var(--apex-silver);
     cursor: pointer;
@@ -345,7 +345,7 @@
     justify-content: center;
     gap: var(--space-xl);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-lg);
 }
 
@@ -557,8 +557,8 @@
     justify-content: center;
     gap: 4px;
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-default, #D5D9E0);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--apex-steel);

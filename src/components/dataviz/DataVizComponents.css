@@ -16,7 +16,7 @@
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--apex-white) 0%, var(--apex-teal) 100%);
+    background: linear-gradient(135deg, var(--apex-teal) 0%, var(--apex-teal-muted) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -108,7 +108,7 @@
 .comparison-bar__track {
     position: relative;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }

@@ -98,7 +98,7 @@
 }
 
 .find-care__filter-chip--active {
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     background: var(--apex-teal);
     border-color: var(--apex-teal);
 }
@@ -432,7 +432,7 @@
     flex-direction: column;
     gap: var(--space-xs);
     padding: var(--space-sm);
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
     border-radius: var(--radius-sm);
 }
 

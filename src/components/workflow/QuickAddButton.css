@@ -67,7 +67,7 @@
 }
 
 .quick-add-button__option:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .quick-add-button__option-icon {

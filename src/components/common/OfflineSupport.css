@@ -194,7 +194,7 @@
 }
 
 .network-quality--offline .network-quality__bars span {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
 }
 
 .network-quality__speed {

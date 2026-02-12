@@ -1293,9 +1293,9 @@
 [data-theme="dark"] .skeleton-wave {
     background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.04) 0%,
-        rgba(255, 255, 255, 0.08) 50%,
-        rgba(255, 255, 255, 0.04) 100%
+        rgba(0, 0, 0, 0.04) 0%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 100%
     );
     background-size: 200% 100%;
 }

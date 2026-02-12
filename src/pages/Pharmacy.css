@@ -71,7 +71,7 @@
 
 .pharmacy__tab.active {
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
 }
 
 /* Prescriptions */
@@ -384,7 +384,7 @@
     height: 32px;
     border-radius: var(--radius-full);
     background: var(--apex-teal);
-    color: var(--apex-obsidian);
+    color: #FFFFFF;
     font-size: var(--text-sm);
     font-weight: 600;
     display: flex;

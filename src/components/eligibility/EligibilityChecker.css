@@ -51,7 +51,7 @@
 .eligibility-checker__search-input {
     width: 100%;
     padding: var(--space-md) var(--space-md) var(--space-md) 44px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
@@ -157,7 +157,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.03));
     border-radius: var(--radius-md);
     margin-bottom: var(--space-md);
 }
@@ -246,7 +246,7 @@
 
 .eligibility-checker__category-tab:hover {
     color: var(--apex-silver);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .eligibility-checker__category-tab.active {
@@ -300,7 +300,7 @@
 
 .eligibility-checker__progress-track {
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #E4E7EC);
     border-radius: var(--radius-full);
     overflow: hidden;
 }
